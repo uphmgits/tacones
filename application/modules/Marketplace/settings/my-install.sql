@@ -1,0 +1,1 @@
+INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES  ('marketplace', 'Marketplace', 'Marketplace', '4.2.1', 1, 'extra') ;

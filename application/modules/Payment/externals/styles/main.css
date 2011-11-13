@@ -1,0 +1,34 @@
+
+/* $Id: main.css 9191 2011-08-20 00:00:03Z john $ */
+
+
+
+.payment_form_signup .package-container,
+.payment_form_settings .package-container
+{
+  display: block;
+  padding-left: 20px;
+}
+
+.payment_form_settings .package-label
+{
+  font-weight: bold;
+}
+
+.payment_form_settings .package-description
+{
+  padding-top: 2px;
+  clear: both;
+}
+
+.payment_form_signup .package-description
+{
+  padding-top: 2px;
+  clear: both;
+  padding-bottom: 4px;
+}
+
+.payment_form_signup .form-elements .form-label
+{
+  width: 100px;
+}
