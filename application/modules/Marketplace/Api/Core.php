@@ -1,6 +1,6 @@
 <?php
 /**
- * jfa: change w/ VIM remote access via wSCP 10_Nov_2011 BLAHHHHHHHHHHHHH 
+ * jfa: Edit w/ VIM remote access via wSCP 10_Nov_2011 - Git checkin test 
  *
  * @category   Application_Extensions
  * @package    Marketplace
