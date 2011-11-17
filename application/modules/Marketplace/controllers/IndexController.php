@@ -8,7 +8,7 @@
  * @copyright  Copyright 2010 
  * * 
  * @version    $Id: IndexController.php 7250 2010-09-01 07:42:35Z john $
- * 
+ *  
  */
 
 /**
@@ -133,11 +133,10 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
         $viewer = $this->_helper->api()->user()->getViewer();
         $marketplace = Engine_Api::_()->getItem('marketplace', $this->_getParam('marketplace_id'));
 
-        if (!$this->_helper->requireAuth()->setAuthParams($marketplace, null, 'view')->isValid())
-            return;
+        //if (!$this->_helper->requireAuth()->setAuthParams($marketplace, null, 'view')->isValid()) return;
 
         $can_edit = $this->view->can_edit = $this->_helper->requireAuth()->setAuthParams($marketplace, null, 'edit')->checkRequire();
-        $this->view->allowed_upload = ( $viewer && $viewer->getIdentity()
+	$this->view->allowed_upload = ( $viewer && $viewer->getIdentity() /* JFA TEST - edited Create.php also */
                 && Engine_Api::_()->authorization()->getPermission($viewer->level_id, 'marketplace', 'photo') );
 
         if ($marketplace) {
@@ -172,7 +171,6 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
                 $this->view->category = Engine_Api::_()->marketplace()->getCategory($marketplace->category_id);
             $this->view->userCategories = Engine_Api::_()->marketplace()->getUserCategories($this->view->marketplace->owner_id);
         }
-
         $this->view->paypalForm = $this->paypal()->form();
     }
 
@@ -181,16 +179,20 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
         $viewer = $this->_helper->api()->user()->getViewer();
         $marketplace = Engine_Api::_()->getItem('marketplace', $this->_getParam('marketplace_id'));
         if ($marketplace) {
-
             $this->view->owner = $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
         }
-        $user = $this->_helper->api()->user()->getUser($viewer->getIdentity());
         $paypal->setBusinessEmail($marketplace->business_email); //'owner_1293606948_biz@gmail.com');//"business@owner.com");
-        $paypal->setPayer($user->email, $viewer->getIdentity()); //$user->user_id);
+
+        if( $viewer->getIdentity() )
+          $paypal->setPayer($viewer->email, $viewer->getIdentity());
+        else
+          $paypal->setPayer($viewer->email, 1);
+
         $paypal->setAmount($marketplace->price); //"50");
         $paypal->setNumber($this->_getParam('marketplace_id') . ':' . $viewer->getIdentity());
         $paypal->addItem(array('item_name' => $marketplace->title . '(' . $marketplace->body . ')'));
         $paypal->setControllerUrl("http://" . $this->getRequest()->getHttpHost() . $this->view->url(array(), 'marketplace_extended', true) . '/payment'); //->url());
+
         return $paypal;
     }
 
