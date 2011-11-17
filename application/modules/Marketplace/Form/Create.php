@@ -87,9 +87,9 @@ class Marketplace_Form_Create extends Engine_Form
 
     $allowed_upload = Engine_Api::_()->authorization()->getPermission($user_level, 'marketplace', 'photo');
     if( $allowed_upload ) {
-    /*  $this->addElement('File', 'photo', array(
+      $this->addElement('File', 'photo', array(
         'label' => 'Main Photo'
-      )); */  /* TEST - edited IndexController.php also */
+      )); 
       $this->photo->addValidator('Extension', false, 'jpg,png,gif');
     }
 
