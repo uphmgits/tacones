@@ -53,7 +53,7 @@ endif; ?>
 
 		  <?php if ($this->marketplace->owner_id == $this->viewer->getIdentity()||$this->can_edit):?>
 			<li>
-			  <a href='<?php echo $this->url(array('marketplace_id' => $this->marketplace->marketplace_id), 'marketplace_edit', true) ?>' class='buttonlink icon_marketplace_edit'><?php echo $this->translate('Testing1.2...Edit This Listing');?></a>
+			  <a href='<?php echo $this->url(array('marketplace_id' => $this->marketplace->marketplace_id), 'marketplace_edit', true) ?>' class='buttonlink icon_marketplace_edit'><?php echo $this->translate('Edit This Listing');?></a>
 			</li>
 			<?php if( $this->allowed_upload ): ?>
 			<li>
