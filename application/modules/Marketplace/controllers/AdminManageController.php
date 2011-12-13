@@ -88,19 +88,14 @@ class Marketplace_AdminManageController extends Core_Controller_Action_Admin
     }
 
   }
-
   public function reportsAction() {
-        if( !$this->_helper->requireUser()->isValid() ) return;
-// $this->view->navigation = $navigation = Engine_Api::_()->getApi('menus', 'core')
-//      ->getNavigation('marketplace_admin_main', array(), 'marketplace_admin_main_categories');
-   // $this->view->navigation = $this->getNavigation();
-$this->view->navigation = $navigation = Engine_Api::_()->getApi('menus', 'core')
+	if( !$this->_helper->requireUser()->isValid() ) return;
+	$this->view->navigation = $navigation = Engine_Api::_()->getApi('menus', 'core')
       ->getNavigation('marketplace_admin_main', array(), 'marketplace_admin_main_reports');
     $page = $this->_getParam('page', 1);
 
 
     $this->view->formFilter = $formFilter = new Marketplace_Form_Filter();//User_Form_Admin_Manage_Filter();
-   // $page = $this->_getParam('page', 1);
 
     $viewer = $this->_helper->api()->user()->getViewer();
     $table = $this->_helper->api()->getDbtable('orders', 'marketplace');
@@ -125,24 +120,8 @@ $this->view->navigation = $navigation = Engine_Api::_()->getApi('menus', 'core')
 
     $this->view->assign($values);
 
-
-//    $values = array(//array_merge(array(
-//      'order' => 'order_id',
-//      'order_direction' => 'DESC',
-//    );//, $values);
-
-   // $this->view->assign($values);
-   // $select = '';
- //   $select->order(( !empty($values['order']) ? $values['order'] : 'order_id' ) . ' ' . ( !empty($values['order_direction']) ? $values['order_direction'] : 'DESC' ));
-
-//    if( !empty($values['level_id']) )
-//    {
-//      $select->where('level_id = ?', $values['level_id'] );
-//    }
-
-  //$select->where('owner_id = ?',  $viewer->getIdentity());
-  //
-  //$select->where('');
+    $select->order(( !empty($values['order']) ? ($values['order'] == 'summ'?'CAST('.$values['order'].' AS DECIMAL)':$values['order']) : 'order_id' ) . ' ' . ( !empty($values['order_direction']) ? $values['order_direction'] : 'ASC' ));
+	
     // Make paginator
     $this->view->paginator = $paginator = Zend_Paginator::factory($select);
     $this->view->paginator = $paginator->setCurrentPageNumber( $page );

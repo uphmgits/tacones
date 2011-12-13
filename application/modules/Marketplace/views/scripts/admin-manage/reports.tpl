@@ -104,6 +104,7 @@ function loginAsUser(id) {
         <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('user_id', 'DESC');"><?php echo $this->translate("Seller") ?></a></th>
         <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('owner_id', 'DESC');"><?php echo $this->translate("Who buy?") ?></a></th>
         <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('summ', 'DESC');"><?php echo $this->translate("Price") ?></a></th>
+        <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('count', 'DESC');"><?php echo $this->translate("Count") ?></a></th>
         <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('date', 'DESC');"><?php echo $this->translate("Date") ?></a></th>
 
       </tr>
@@ -113,21 +114,34 @@ function loginAsUser(id) {
         <?php foreach( $this->paginator as $item ): ?>
           <tr>
             <td><?php echo $item->order_id ?></td>
-            <td class='admin_table_user'><?php echo $this->htmlLink($this->item('marketplace', $item->marketplace_id)->getHref(), $this->item('marketplace', $item->marketplace_id)->title, array('target' => '_blank')) ?></td>
-                        <td class='admin_table_bold'>
+            <td class='admin_table_user'>
+              <?php $marketplace = $this->item('marketplace', $item->marketplace_id); ?>
+              <?php if($marketplace) : ?>
+                <?php echo $this->htmlLink($marketplace->getHref(), $marketplace->getTitle(), array('target' => '_blank')); ?>
+              <?php else : ?>
+                <?=$this->translate('Deleted');?>
+              <?php endif; ?>
+            </td>
+            <td class='admin_table_bold'>
               <?php
-                $display_name = $this->item('user', $item->owner_id)->getTitle();
-                echo $this->htmlLink($this->item('user', $item->owner_id)->getHref(), $display_name, array('target' => '_blank'))
+                  $display_name = $this->item('user', $item->owner_id)->getTitle();
+                  echo $this->htmlLink($this->item('user', $item->owner_id)->getHref(), $display_name, array('target' => '_blank'));
               ?>
             </td>
             <td class='admin_table_bold'>
               <?php
-                $display_name = $this->item('user', $item->user_id)->getTitle();
-                echo $this->htmlLink($this->item('user', $item->user_id)->getHref(), $display_name, array('target' => '_blank'))
+                if( $item->user_id ) {
+                  $display_name = $this->item('user', $item->user_id)->getTitle();
+                  echo $this->htmlLink($this->item('user', $item->user_id)->getHref(), $display_name, array('target' => '_blank'));
+                } else {
+                  echo $this->translate('Unregistered user');
+                  if( $item->contact_email ) echo "<div style='font-weight: normal; font-size: 10px;'>".$this->translate('Contact Email:')." ".$item->contact_email."</div>";
+                }
               ?>
             </td>
             
             <td><?php echo $item->summ; ?></td>
+            <td><?php echo $item->count; ?></td>
             <td><?php echo $item->date; ?></td>
           </tr>
         <?php endforeach; ?>

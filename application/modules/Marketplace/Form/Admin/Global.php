@@ -31,6 +31,28 @@ class Marketplace_Form_Admin_Global extends Engine_Form
       'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.page', 10),
     ));
 
+	if(Engine_Api::_()->marketplace()->authorizeIsActive()){
+		$this->addElement('Checkbox', 'marketplace_authorize_testmode', array(
+		  'label' => '',
+		  'description' => 'Authorize.net Test Mode',
+		  'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.authorize.testmode', '0'),
+		));
+	}
+
+	if(Engine_Api::_()->marketplace()->upsIsActive()){
+		$this->addElement('Text', 'marketplace_ups_license', array(
+		  'label' => 'Ups License Number',
+		  'description' => 'Please enter Ups License Number.',
+		  'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.ups.license', ''),
+		));
+
+		$this->addElement('Text', 'flat_shipping_rate', array(
+		  'label' => 'Flat Shipping Rate',
+		  'description' => 'Please enter Flat Shipping Rate without "$" sign. Only integer or float value.',
+		  'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('flat.shipping.rate', 0),
+		));
+	}
+
     // Add submit button
     $this->addElement('Button', 'submit', array(
       'label' => 'Save Changes',

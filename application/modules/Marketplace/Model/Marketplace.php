@@ -233,5 +233,16 @@ class Marketplace_Model_Marketplace extends Core_Model_Item_Abstract
     parent::_insert();
   }
 
+
+  protected function _delete()
+  {
+	if(Engine_Api::_()->marketplace()->cartIsActive()){
+		// Delete all child posts
+		$cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
+		$cartTable->delete(array('marketplace_id = ?' => $this->getIdentity()));
+	}
+
+    parent::_delete();
+  }
     
 }

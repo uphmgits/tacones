@@ -25,7 +25,6 @@ class Marketplace_Model_DbTable_Marketplaces extends Engine_Db_Table
 
     $table  = Engine_Api::_()->getDbTable('marketplaces', 'marketplace');
     $rName = $table->info('name');
-    //$table = Engine_Api::_()->getItemTable('marketplaces');
     $select = $table->select()
             ->from($rName)
       ->where('owner_id = ?', $user_id)
@@ -33,6 +32,6 @@ class Marketplace_Model_DbTable_Marketplaces extends Engine_Db_Table
       ->limit(1);
 
     $email = $table->fetchRow($select);
-    return $email;//['business_email'];
+    return $email;
   }
 }

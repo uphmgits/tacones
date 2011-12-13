@@ -5,3 +5,311 @@ Stack trace:
 #2 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
 #3 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
 #4 {main}
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/Form/Coupon/Edit.php (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: 50dcf1
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/Form/Coupon (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: 3a13ce
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/Model/Cart.php (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: ad854e
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/Model/Coupon.php (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: b67ea9
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/Model/Couponcart.php (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: ee907d
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/Model/DbTable/Cart.php (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: 1dc272
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/Model/DbTable/Couponcarts.php (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: bfc510
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/Model/DbTable/Coupons.php (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: 1c50b4
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/controllers/CouponController.php (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: 3c1f3b
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/externals/images/ss_button_bg.png (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: f604cb
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/settings/my-upgrade-4.2.4-4.2.5.sql (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: fbc6b3
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/views/scripts/coupon/create.tpl (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: 046519
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/views/scripts/coupon (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: 618add
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/addtocart.tpl (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: 21eebb
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/cart.tpl (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: 6b1e88
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/checkout.tpl (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: ab5412
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/deletefromcart.tpl (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: b1796f
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplace/...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/packages/module-marketplace-4.3.0.json (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: 7a6ec2
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/packages/module-mark...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/languages/en/marketplacecart.csv (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: 8036df
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/languages/en/marketp...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplacecart/Bootstrap.php (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: e4caa5
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplacec...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/modules/Marketplacecart (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: dbadb9
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/modules/Marketplacec...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2011-11-29T17:29:51+00:00 WARN (4): [2] stat() [<a href='function.stat'>function.stat</a>]: stat failed for /home/zapato/public_html/application/packages/module-marketplacecart-4.3.0.json (/home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: 6b55c0
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/home/zapato/public_html/applica...')
+#1 /home/zapato/public_html/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/packages/module-mark...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): ManageController->permsAction()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('permsAction')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /home/zapato/public_html/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(77): Zend_Controller_Front->dispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Application.php(358): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /home/zapato/public_html/install/index.php(87): Zend_Application->run()
+#9 {main}
+

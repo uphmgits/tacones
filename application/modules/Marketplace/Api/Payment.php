@@ -53,9 +53,7 @@ class Marketplace_Api_Payment {//extends Core_Api_Abstract {
                 $this->addFormField("quantity" . $i, $v['quantity']);
             }
         }
-        //$elt = $this->frm->createElement('submit', 'submitButton');
         $elt = $this->frm->createElement('image', 'submitButton');
-       // $elt->setLabel('PAY');
         $elt->setAttrib('src', 'https://www.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif');
         $this->frm->addElement($elt);
         return $this->frm;
@@ -105,23 +103,6 @@ class Marketplace_Api_Payment {//extends Core_Api_Abstract {
             throw new Exception('Invalid IPN wrong txn_type ');
         else
             return true;
-	/*
-        $client = new Zend_Http_Client($this->paypalData['url']);
-        $client->setMethod(Zend_Http_Client::POST);
-        $client->setParameterPost(array_merge(array('cmd' => '_notify-validate'), $arrPost));
-        $response = $client->request();
-
-        if ($response->getBody() != 'VERIFIED')
-            throw new Exception('Invalid IPN Transaction : ' . $response->getBody());
-        elseif ($arrPost["mc_gross"] == "")
-            throw new Exception('Invalid IPN mcgross : not set');
-        elseif ($arrPost["payment_status"] != "Completed")
-            throw new Exception('Invalid IPN payment_status : ' . $arrPost["payment_status"]);
-        elseif ($arrPost["txn_id"] == "")
-            throw new Exception('Invalid IPN txn_id : not set ');
-        else
-            return true;
-	*/
     }
 
     public function setBusinessEmail($businessEmail) {

@@ -14,8 +14,9 @@ return array(
     'package' => array(
     'type' => 'module',
     'title' => 'Marketplace',
+    'author' => 'SocialEngineMarket',
     'name' => 'marketplace',
-    'version' => '4.2.4.4',
+    'version' => '4.3.0',
     'revision' => '$Revision: 7260 $',
     'path' => 'application/modules/Marketplace',
     'repository' => 'socialengine.net',
@@ -24,6 +25,9 @@ return array(
       'description' => 'Marketplace',
       'author' => 'SocialEngineMarket',
       'changeLog' => array(
+        '4.2.5' => array(
+          'controllers/AdminManageController.php' => 'Full Version',
+        ),
       ),
     ),
     'actions' => array(
@@ -58,11 +62,26 @@ return array(
   // Items ---------------------------------------------------------------------
   'items' => array(
     'marketplace',
+    'marketplace_category',
     'marketplace_album',
-    'marketplace_photo'
+    'marketplace_photo',
+    'marketplace_cart',
+    'marketplace_couponcart',
+    'marketplace_coupon'
   ),
   // Routes --------------------------------------------------------------------
   'routes' => array(
+    'marketplace_coupon' => array(
+      'route' => 'marketplaces/coupon/:action/*',
+      'defaults' => array(
+        'module' => 'marketplaces',
+        'controller' => 'coupon',
+        'action' => 'index',
+      ),
+      'reqs' => array(
+        'action' => '(index|create|delete|edit)',
+      )
+    ),
     'marketplace_extended' => array(
       'route' => 'marketplaces/:controller/:action/*',
       'defaults' => array(
@@ -73,6 +92,17 @@ return array(
       'reqs' => array(
         'controller' => '\D+',
         'action' => '\D+',
+      )
+    ),
+    'marketplace_general' => array(
+      'route' => 'marketplaces/:action/*',
+      'defaults' => array(
+        'module' => 'marketplace',
+        'controller' => 'index',
+        'action' => 'index',
+      ),
+      'reqs' => array(
+        'action' => '(index|addtocart|deletefromcart|cart|checkout)',
       )
     ),
     // Public
@@ -188,21 +218,19 @@ return array(
     ),
 
       'marketplace_paymentnotify' => array(
-      'route' => 'marketplaces/paymentnotify/:page',//marketplace_id',
+      'route' => 'marketplaces/paymentnotify/*',//marketplace_id',
       'defaults' => array(
         'module' => 'marketplace',
         'controller' => 'index',
         'action' => 'paymentnotify',
-        'page'   => 0,
       )
     ),
       'marketplace_paymentreturn' => array(
-      'route' => 'marketplaces/paymentreturn/:page',//marketplace_id',
+      'route' => 'marketplaces/paymentreturn/*',//marketplace_id',
       'defaults' => array(
         'module' => 'marketplace',
         'controller' => 'index',
         'action' => 'paymentreturn',
-        'page'   => 0,
       )
     ),
     'marketplace_style' => array(

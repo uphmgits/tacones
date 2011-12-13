@@ -87,12 +87,6 @@
                   'class' => 'buttonlink icon_marketplace_photo_new'
               )) ?>
             <?php endif; ?>
-<!--
-            <?php if( !$item->closed ): ?>
-              <a href='<?php echo $this->url(array('marketplace_id' => $item->marketplace_id, 'closed' => 1), 'marketplace_close', true) ?>' class='buttonlink icon_marketplace_close'><?php echo $this->translate('Close Listing');?></a>
-            <?php else: ?>
-              <a href='<?php echo $this->url(array('marketplace_id' => $item->marketplace_id, 'closed' => 0), 'marketplace_close', true) ?>' class='buttonlink icon_marketplace_open'><?php echo $this->translate('Open Listing');?></a>
-            <?php endif; ?> -->
 
             <a href='<?php echo $this->url(array('marketplace_id' => $item->marketplace_id), 'marketplace_delete', true) ?>' class='buttonlink icon_marketplace_delete'><?php echo $this->translate('Delete Listing');?></a>
           </div>
@@ -105,16 +99,10 @@
                 <?php endif;?>
               </h3>
             </div>
-            <div class='marketplaces_browse_info_date'>
-            <!--  <?php echo $this->timestamp(strtotime($item->creation_date)) ?>
-              -
-              <?php echo $this->translate('posted by');?> <?php echo $this->htmlLink($item->getOwner()->getHref(), $item->getOwner()->getTitle()) ?>
-            --></div>
             <div class='marketplaces_browse_info_blurb'>
-              <?php //$fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($item)?> <span style="font-weight:bold;font-size:12px;">Price:</span> <span style="font-size:12px;">$<?php echo $item->price; ?></span>
+              <span style="font-weight:bold;font-size:12px;">Price:</span> <span style="font-size:12px;">$<?php echo $item->price; ?></span>
               <br />
               <?php
-            //  print_r($item);
                 // Not mbstring compat
                 echo substr(strip_tags($item->body), 0, 350); if (strlen($item->body)>349) echo "...";
               ?>

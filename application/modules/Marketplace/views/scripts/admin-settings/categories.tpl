@@ -78,13 +78,7 @@
         <?php echo $this->htmlLink(array('route' => 'admin_default', 'module' => 'marketplace', 'controller' => 'settings', 'action' => 'add-category','category_id'=>$this->category_id), $this->translate('Add New Category'), array(
           'class' => 'smoothbox buttonlink',
           'style' => 'background-image: url(application/modules/Core/externals/images/admin/new_category.png);')) ?>
-
-        <?php
-//        echo $this->htmlLink(array('route' => 'marketplace_addcategory',  'category_id' => $this->category_id), $this->translate('Add New Category'), array(
-//          'class' => 'smoothbox buttonlink',
-//          'style' => 'background-image: url(application/modules/Core/externals/images/admin/new_category.png);')) ?>
     </div>
     </form>
     </div>
   </div>
-     

@@ -66,18 +66,29 @@
 			<?php
 				$formErrors = $this->form->getMessages();
 			?>
+      <?php //echo "<pre>"; print_r($formErrors); echo "<pre>";?>
 			<?php if(!empty($formErrors)): ?>
 				<?php foreach($formErrors as $form_el_name => $error): ?>
 					<?php if(!empty($error)): ?>
 						<?php if(is_array($error)): ?>
-							<div class="tip">
-								<span>
-									<?php 
-										$keys = array_keys($error);
-										echo $this->form->$form_el_name->getLabel().' - '.$this->translate(array_shift($error));
-									?>
-								</span>
-							</div>
+						  <?php 
+                if( $form_el_name == 'fields' ) :
+                    foreach($error as $fieldName => $fieldError) : ?>
+                      <?php $keys = array_keys($fieldError); ?>
+				              <div class="tip">
+      								  <span>
+                          <?=$this->form->getSubForm('fields')->getElement($fieldName)->getLabel().' - '.$this->translate(array_shift($fieldError));?>
+                        </span>
+				              </div>
+                    <?php endforeach;
+                else : ?>
+                    <div class="tip">
+      								<span>
+							          <?php $keys = array_keys($error);?>
+                        <?=$this->form->$form_el_name->getLabel().' - '.$this->translate(array_shift($error));?>
+		            			</span>
+      							</div>
+                <?php endif; ?>
 						<?php else: ?>
 							<div class="tip">
 								<span>
@@ -88,9 +99,12 @@
 					<?php endif; ?>
 				<?php endforeach; ?>
 			<?php endif; ?>
+
 		  <div class="form-elements">
 			<?php
 				$formElements = $this->form->getElements();
+        $subformElements = $this->form->getSubForm('fields')->getElements();
+        $formElements = array_merge($formElements, $subformElements);
 				if(!empty($formElements)):
 					foreach($formElements as $formElement):
 						if($formElement->getName() != 'submit')
@@ -99,6 +113,7 @@
 				endif;
 			?>
 		  </div>
+
 		  <?php echo $this->form->marketplace_id; ?>
 		  <ul class='marketplaces_editphotos'>        
 			<?php foreach( $this->paginator as $photo ): ?>
@@ -125,6 +140,8 @@
     </div>
   </div>
 </form>
+
+
 
 
 <?php if( $this->paginator->count() > 0 ): ?>

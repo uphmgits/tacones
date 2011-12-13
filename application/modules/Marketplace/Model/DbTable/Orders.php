@@ -22,19 +22,13 @@ class Marketplace_Model_DbTable_Orders extends Engine_Db_Table
   protected $_name = 'marketplace_orders';
 
   public function getCountByUser($user_id) {
-        $table  = Engine_Api::_()->getDbTable('orders', 'marketplace');
+	$table  = Engine_Api::_()->getDbTable('orders', 'marketplace');
     $rName = $table->info('name');
-    //$table = Engine_Api::_()->getItemTable('marketplaces');
     $select = $table->select()
-            ->from($rName)
-      ->where('owner_id = ?', $user_id);
-           // ->order('modified_date DESC')
-     // ->limit(1);
-
-    //$email = $table-> fetchRow($select);
-   // return $email;//['business_email'];
-      $stmt = $this->getAdapter()->query($select);
-        $result = $stmt->rowCount();
-        return $result;
+		->from($rName)
+		->where('owner_id = ?', $user_id);
+	$stmt = $this->getAdapter()->query($select);
+	$result = $stmt->rowCount();
+	return $result;
   }
 }

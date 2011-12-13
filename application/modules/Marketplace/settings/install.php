@@ -30,6 +30,37 @@ class Marketplace_Installer extends Engine_Package_Installer_Module
     	return $this->_error('Please register your copy of plugin - <a class="smoothbox" href="http://socialenginemarket.com/user_product_register.php?plugin='.$plugin.'&server='.$server.'">Click Here</a>');  
     }
     
+
+    $db     = $this->getDb();
+    $select = new Zend_Db_Select($db);
+	$select = $select
+	  ->from('engine4_user_fields_meta')
+	  ->where('UPPER(label) = UPPER(?)', 'Zip Code')
+	  ->limit('1')
+	;
+	$field_meta_info = $select->query()->fetch();
+	if(empty($field_meta_info)){
+		$db->insert('engine4_user_fields_meta', array(
+			'type'        => 'zip_code',
+			'label'       => 'Zip Code',
+			'description' => '',
+			'alias'       => 'zip_code',
+			'required'    => '1',
+			'display'     => '1',
+			'publish'     => '0',
+			'search'      => '1',
+			'show'        => '1',
+			'order'       => '999',
+			'config'      => '[]'
+		));
+		$field_id = $db->lastInsertId();
+		$db->insert('engine4_user_fields_maps', array(
+			'field_id'      => '1',
+			'option_id'      => '1',
+			'child_id'      => $field_id,
+			'order'      => $field_id
+		));
+	}
     
     //
     // install content areas

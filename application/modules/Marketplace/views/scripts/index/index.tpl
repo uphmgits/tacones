@@ -110,10 +110,9 @@
              
             </div>
 <div class='marketplaces_browse_info_blurb'>
-              <?php //$fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($item)?> <span style="font-weight:bold;font-size:12px;">Price:</span> <span style="font-size:12px;">$<?php echo $item->price; ?></span>
+              <span style="font-weight:bold;font-size:12px;">Price:</span> <span style="font-size:12px;">$<?php echo $item->price; ?></span>
               <br />
               <?php
-            //  print_r($item);
                 // Not mbstring compat
                 echo substr(strip_tags($item->body), 0, 350); if (strlen($item->body)>349) echo "...";
               ?>
@@ -144,5 +143,3 @@
   <?php endif; ?>
   <?php echo $this->paginationControl($this->paginator, null, array("pagination/pagination.tpl","marketplace")); ?>
 </div>
-
-<?php //echo $this->le; ?>

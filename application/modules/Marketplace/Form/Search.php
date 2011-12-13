@@ -40,6 +40,8 @@ class Marketplace_Form_Search extends Fields_Form_Search
 
     // Generate
     $this->generate();
+	$this->removeElement('separator1');
+	$this->removeElement('separator2');
 
     foreach( $this->getFieldElements() as $fel ) {
       if( $fel instanceof Zend_Form_Element ) {
@@ -65,19 +67,19 @@ class Marketplace_Form_Search extends Fields_Form_Search
     $i = -1000;
 
     $this->addElement('Hidden', 'page', array(
-      'order' => 200,
+      'order' => 9999,
     ));
 
     $this->addElement('Hidden', 'tag', array(
-      'order' => 201,
+      'order' => 9999,
     ));
 
     $this->addElement('Hidden', 'start_date', array(
-      'order' => 202,
+      'order' => 9999,
     ));
 
     $this->addElement('Hidden', 'end_date', array(
-      'order' => 203,
+      'order' => 9999,
     ));
 
     $this->addElement('Text', 'search', array(

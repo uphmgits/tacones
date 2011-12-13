@@ -128,3 +128,19 @@
 2011-11-10T05:53:04+00:00 DEBUG (7): [System] (core_welcome) sueannwee@yahoo.com <- noreply@fashbay.com
 2011-11-11T21:03:36+00:00 DEBUG (7): [Zend] carlos.aldana@gmail.com <- noreply@fashbay.com
 2011-11-11T21:03:36+00:00 DEBUG (7): [System] (notify_friend_request) carlos.aldana@gmail.com <- noreply@fashbay.com
+2011-11-15T00:29:32+00:00 DEBUG (7): [Zend] elticochico@yahoo.com <- noreply@fashbay.com
+2011-11-15T00:29:32+00:00 DEBUG (7): [System] (notify_friend_accepted) elticochico@yahoo.com <- noreply@fashbay.com
+2011-11-15T15:58:21+00:00 DEBUG (7): [Zend] tester@tester.com <- noreply@fashbay.com
+2011-11-15T15:58:21+00:00 DEBUG (7): [System] (core_verification) tester@tester.com <- noreply@fashbay.com
+2011-11-17T01:13:02+00:00 DEBUG (7): [Zend] tester@tester.com <- noreply@fashbay.com
+2011-11-17T01:13:02+00:00 DEBUG (7): [System] (notify_friend_request) tester@tester.com <- noreply@fashbay.com
+2011-11-24T01:04:26+00:00 DEBUG (7): [Zend] zariet@yahoo.com <- noreply@fashbay.com
+2011-11-24T01:04:26+00:00 DEBUG (7): [System] (core_verification) zariet@yahoo.com <- noreply@fashbay.com
+2011-11-24T01:05:07+00:00 DEBUG (7): [Zend] zariet@yahoo.com <- noreply@fashbay.com
+2011-11-24T01:05:07+00:00 DEBUG (7): [System] (core_verification) zariet@yahoo.com <- noreply@fashbay.com
+2011-11-24T01:05:32+00:00 DEBUG (7): [Zend] zariet@yahoo.com <- noreply@fashbay.com
+2011-11-24T01:05:32+00:00 DEBUG (7): [System] (core_welcome) zariet@yahoo.com <- noreply@fashbay.com
+2011-12-03T03:20:14+00:00 DEBUG (7): [Zend] salsabor_01@yahoo.com <- noreply@fashbay.com
+2011-12-03T03:20:14+00:00 DEBUG (7): [System] (notify_marketplace_transaction_to_owner) salsabor_01@yahoo.com <- noreply@fashbay.com
+2011-12-03T03:20:14+00:00 DEBUG (7): [Zend] waldana@gmail.com <- noreply@fashbay.com
+2011-12-03T03:20:14+00:00 DEBUG (7): [System] (notify_marketplace_transaction_to_buyer) waldana@gmail.com <- noreply@fashbay.com

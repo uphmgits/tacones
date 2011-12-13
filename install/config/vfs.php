@@ -1,10 +1,7 @@
 <?php return array (
-  'adapter' => 'ftp',
+  'adapter' => 'system',
   'config' => 
   array (
-    'host' => '127.0.0.1:21',
-    'username' => 'zapato',
-    'path' => '/public_html',
-    'useSsl' => '',
+    'path' => '/home/zapato/public_html',
   ),
 )?>

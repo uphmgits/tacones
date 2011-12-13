@@ -1,10 +1,10 @@
 <?php
 /**
- * jfa: Edit w/ VIM remote access via wSCP 10_Nov_2011 - Git checkin test 
+ * 
  *
  * @category   Application_Extensions
  * @package    Marketplace
- * @copyright  Copyright 2006-jj
+ * @copyright  Copyright 2006-2010
  * * 
  * @version    $Id: Core.php 7244 2010-09-01 01:49:53Z john $
  * 
@@ -27,6 +27,176 @@ class Marketplace_Api_Core extends Core_Api_Abstract
   private $_temp = null;
   public $_arr = array();
   public $_inarr = array();
+	
+
+  public function moduleIsInstalled($module_name = 'marketplace'){
+    $db = Engine_Db_Table::getDefaultAdapter();
+    $select = $db->select()
+      ->from('engine4_core_modules')
+      ->where('name = ?', strtolower($module_name))
+      ->where('enabled = ?', 1);
+
+    $module = $db->fetchRow($select);
+	if($module){
+		return true;
+	}else{
+		return false;
+	}
+  }
+
+  public function cartIsActive(){
+	if(Engine_Api::_()->marketplace()->moduleIsInstalled('marketplacecart')){
+		return true;
+	}else{
+		return false;
+	}
+  }
+
+  public function upsIsActive(){
+	if(Engine_Api::_()->marketplace()->moduleIsInstalled('marketplaceups')){
+		return true;
+	}else{
+		return false;
+	}
+  }
+
+  public function couponIsActive(){
+	if(Engine_Api::_()->marketplace()->moduleIsInstalled('marketplacecoupons')){
+		return true;
+	}else{
+		return false;
+	}
+  }
+
+  public function authorizeIsActive(){
+	if(Engine_Api::_()->marketplace()->moduleIsInstalled('marketplaceauthorize')){
+		return true;
+	}else{
+		return false;
+	}
+  }
+
+  public function paymentGateway(){
+	if($this->authorizeIsActive()){
+		return 'authorize';
+	}else{
+		return 'paypal';
+	}
+  }
+
+  public function getDiscountPercentByOwner($owner_id = 0, $buyer_id = 0){
+	if(empty($owner_id) || empty($buyer_id))
+		return 0;
+	$buyer = Engine_Api::_()->getItem('user', $buyer_id);
+	$discount = 0;
+	if(Engine_Api::_()->marketplace()->couponIsActive()){
+		$couponTable = Engine_Api::_()->getDbTable('coupons', 'marketplace');
+		$couponTableName = $couponTable->info('name');
+		$couponcartTable = Engine_Api::_()->getDbTable('couponcarts', 'marketplace');
+		$couponcartTableName = $couponcartTable->info('name');
+		$coupon_select = $couponTable->getAdapter()
+			->select()
+			->from($couponcartTableName)
+			->joinLeft($couponTableName, "`{$couponTableName}`.coupon_id = `{$couponcartTableName}`.coupon_id")
+			->where("{$couponcartTableName}.user_id = ?", $buyer->getIdentity())
+			->where("{$couponTableName}.user_id = ?", $owner_id)
+		;
+		$this->view->coupon_res = $coupon_res = $couponTable->getAdapter()->fetchRow($coupon_select);
+		if($coupon_res){
+			$discount = intval($coupon_res['percent']);
+		}
+	}
+	return $discount;
+ }
+
+  public function getDiscount($marketplace_id = 0, $buyer_id = 0){
+	if(empty($owner_id) || empty($buyer_id))
+		return 0;
+	$buyer = Engine_Api::_()->getItem('user', $buyer_id);
+	$discount = 0;
+	if(Engine_Api::_()->marketplace()->couponIsActive()){
+		$marketplace = Engine_Api::_()->getItem('marketplace', $marketplace_id);
+		if(empty($marketplace))
+			return 0;
+		$couponTable = Engine_Api::_()->getDbTable('coupons', 'marketplace');
+		$couponTableName = $couponTable->info('name');
+		$couponcartTable = Engine_Api::_()->getDbTable('couponcarts', 'marketplace');
+		$couponcartTableName = $couponcartTable->info('name');
+		$coupon_select = $couponTable->getAdapter()
+			->select()
+			->from($couponcartTableName)
+			->joinLeft($couponTableName, "`{$couponTableName}`.coupon_id = `{$couponcartTableName}`.coupon_id")
+			->where("{$couponcartTableName}.user_id = ?", $buyer->getIdentity())
+			->where("{$couponTableName}.user_id = ?", $marketplace->getOwner()->getIdentity())
+		;
+		$this->view->coupon_res = $coupon_res = $couponTable->getAdapter()->fetchRow($coupon_select);
+		if($coupon_res){
+			$discount = intval($coupon_res['percent']);
+		}
+	}
+	return $marketplace->price * ($discount / 100);
+ }
+
+  public function getShipingFee($marketplace_id = 0, $buyer_id = 0){
+
+    if( !$this->upsIsActive() ) return 0; 
+
+	  $flat_shipping_rate = floatval(Engine_Api::_()->getApi('settings', 'core')->getSetting('flat.shipping.rate', 0));
+	  if(empty($marketplace_id) || empty($buyer_id)){
+		  return $flat_shipping_rate;
+	  }
+	  $buyer = Engine_Api::_()->getItem('user', $buyer_id);
+	  if($buyer->getIdentity()){
+		  $buyer_zip_code = $this->getUserFieldValueByTitle($buyer, 'zip code');
+	  }
+	  $marketplace = Engine_Api::_()->getItem('marketplace', $marketplace_id);
+	  if(empty($marketplace)){
+		  return $flat_shipping_rate;
+	  }
+	  if($marketplace->getOwner()->getIdentity()){
+		  $seller_zip = $this->getUserFieldValueByTitle($marketplace->getOwner(), 'zip code');
+	  }
+	  if(empty($buyer_zip_code) || empty($seller_zip))
+		  return $flat_shipping_rate;
+	  $rate = Engine_Api::_()->marketplaceups()->ups($buyer_zip_code, '03', floatval($marketplace->weight), floatval($marketplace->length), floatval($marketplace->width), floatval($marketplace->height), $seller_zip);
+	  if(floatval($rate)){
+		  return floatval($rate);
+	  }else{
+		  return $flat_shipping_rate;
+	  }
+  }
+
+  public function getUserFieldValueByTitle(User_Model_User $user, $field_title = '')
+  {
+    if(empty($field_title))
+		return null;
+	
+	$fieldMetaTable = Engine_Api::_()->fields()->getTable('user', 'meta');
+	$fieldValuesTable = Engine_Api::_()->fields()->getTable('user', 'values');
+	
+	$select = $fieldMetaTable->select()
+	  ->where('UPPER(label) = UPPER(?)', $field_title)
+	  ->limit('1')
+	;
+	$field_meta_info = $fieldMetaTable->fetchRow($select);
+	if(isset($field_meta_info) && $field_meta_info){
+		$field_meta_info = $field_meta_info->field_id;
+	}else{
+		return null;
+	}
+	
+	$select = $fieldValuesTable->select()
+	  ->where('item_id = ?', $user->getIdentity())
+	  ->where('field_id = ?', $field_meta_info)
+	  ->limit('1')
+	;
+	$viewer_field_info = $fieldMetaTable->fetchRow($select);
+	if(isset($viewer_field_info) && $viewer_field_info){
+		return $viewer_field_info->value;
+	}else{
+		return null;
+	}
+  }
 	
   // Select
   /**
@@ -63,27 +233,9 @@ class Marketplace_Api_Core extends Core_Api_Abstract
     $tmTable = Engine_Api::_()->getDbtable('TagMaps', 'core');
     $tmName = $tmTable->info('name');
 
-    //$searchTable = Engine_Api::_()->fields()->getTable('marketplace', 'search')->info('name');
-
     $select = $table->select()
       ->order( !empty($params['orderby']) ? $rName.'.'.$params['orderby'].' DESC' : $rName.'.creation_date DESC' );
     
-
-//    if(isset($customParams)){
-//      $select = $select
-//        ->setIntegrityCheck(false)
-//        ->from($rName)
-//        ->joinLeft($searchTable, "$searchTable.item_id = $rName.marketplace_id");
-//
-//
-//      $searchParts = Engine_Api::_()->fields()->getSearchQuery('marketplace', $customParams);
-//      foreach( $searchParts as $k => $v ) {
-//        $select->where("`{$searchTable}`.{$k}", $v);
-//      }
-//
-//
-//    }
-
     if( !empty($params['user_id']) && is_numeric($params['user_id']) )
     {
       $select->where($rName.'.owner_id = ?', $params['user_id']);
@@ -111,7 +263,6 @@ class Marketplace_Api_Core extends Core_Api_Abstract
 
     if( !empty($params['category']) )
     {
-		//$select->where($rName.'.category_id = ?', $params['category']);
         $select->where($rName.'.category_id in (?)', new Zend_Db_Expr($params['category']));
     }
 
@@ -251,12 +402,6 @@ function tree_list_load_level($k_parent)
 
 function tree_list_load_subtree($k_item)
 {
-  // $k_item - Идентификатор элемента, для которого следует загрузить поддерево
-
-  // Возвращает ложь в случае ошибки
-
- // if(empty($k_item)||!is_numeric($k_item)) return false;
-
   $a_tree=$this->tree_list_load_level($k_item);
   if($a_tree===false) return false;
 
@@ -339,72 +484,63 @@ function tree_select(&$a_tree,$level,$category_id) {
 
 }
 
-////////////////////
-    function tree_to_array($arr1) {
-        $this->_arr[] = array(
-               'k_item' => $arr1[0]['k_item'],
-               's_name' => $arr1[0]['s_name'],
-               'a_tree' => array()//array()//$arr1[0]['a_tree']
-        );
-        if (is_array($arr1[0]['a_tree']) && count($arr1[0]['a_tree'])>0)
-        $this->tree_to_array($arr1[0]['a_tree']);
+function tree_to_array($arr1) {
+	$this->_arr[] = array(
+		   'k_item' => $arr1[0]['k_item'],
+		   's_name' => $arr1[0]['s_name'],
+		   'a_tree' => array()//array()//$arr1[0]['a_tree']
+	);
+	if (is_array($arr1[0]['a_tree']) && count($arr1[0]['a_tree'])>0)
+	$this->tree_to_array($arr1[0]['a_tree']);
 
-        return $this->_arr;
-    }
-    
-    function tree_temp($path) {
+	return $this->_arr;
+}
 
-        $a_tree = array();
+function tree_temp($path) {
 
-        $a_tree[][] = $path[0];
+	$a_tree = array();
 
-        foreach ($path as $k) {
+	$a_tree[][] = $path[0];
 
-            $a_tree[] = $this->tree_list_load_level($k['k_item']);
+	foreach ($path as $k) {
 
-        }
-        //array_pop($a_tree);
+		$a_tree[] = $this->tree_list_load_level($k['k_item']);
 
-        while (count($a_tree)>1) {
-            //номер препоследнего элемента
-            $count = count($a_tree)-2;
-            //предпоследний элемент
-            $t1 = &$a_tree[$count];
-            // последний элемент
-            $t2 = array_pop($a_tree);
+	}
 
-            // определим в какой уровень объединять
-            $k_item = $path[$count]['k_item'];
-            foreach ($t2 as &$v) {
-                if ($v['k_item'] == $path[count($path)-1]['k_item']) {
-                    $v['status'] = 1;
-                    echo 'ok';
-                }
-            }
+	while (count($a_tree)>1) {
+		$count = count($a_tree)-2;
+		$t1 = &$a_tree[$count];
+		$t2 = array_pop($a_tree);
 
-            foreach($t1 as &$value) {
+		$k_item = $path[$count]['k_item'];
+		foreach ($t2 as &$v) {
+			if ($v['k_item'] == $path[count($path)-1]['k_item']) {
+				$v['status'] = 1;
+				echo 'ok';
+			}
+		}
 
-                if ($value['k_item'] == $k_item) {
+		foreach($t1 as &$value) {
 
-                    $value['s_name'] = $value['s_name'];//.' *';
-                    $value['status'] = 1;
-                    $value['a_tree'] = $t2;
-                }
-            }
+			if ($value['k_item'] == $k_item) {
 
-            array_pop($path);
-        }
+				$value['s_name'] = $value['s_name'];//.' *';
+				$value['status'] = 1;
+				$value['a_tree'] = $t2;
+			}
+		}
 
-      return $a_tree[0];
-    }
+		array_pop($path);
+	}
+
+  return $a_tree[0];
+}
 
  function tree_list_load_array($arr) {
         $ret_array = array();
-        // загружаем пути, пробежав по массиву
         $path_array = array();
         $i = 0;
-                // загружае главный уровень
-        //
         $level = $this->tree_list_load_level(0);
 
         array_diff($arr, array(''));
@@ -459,20 +595,8 @@ function tree_select(&$a_tree,$level,$category_id) {
 
 function tree_list_load_related($k_item)
 {
-  // $k_item - Идентификатор элемента, для которого следует загрузить часть дерева
-
-  // загружает путь, уровень, в котором находится элемент $k_item и всех
-  //   непосредственных детей вершины $k_item
-
-  // Возвращает ложь в случае ошибки
-
   if(empty($k_item)||!is_numeric($k_item)) return false;
 
-
-  //Узнаем идентификаторы вершины - родителя и вершины - прародителя
-  //  Вершина - родитель - что бы загрузить всех братьев вершины $k_item
-  //  Вершина - прародитель - что бы загрузить всех путь к вершине $k_item,
-  //     не включая саму вершину $k_item
   $r=mysql_query("
     select
       t1.k_parent as k1, #мама
@@ -488,14 +612,13 @@ function tree_list_load_related($k_item)
   if(!$r||!mysql_num_rows($r)) return false;
   $f=mysql_fetch_assoc($r);
 
-  //1. Загружаем всех непосредственных детей для $k_item
   $a1=tree_list_load_level($k_item);
 
   if(empty($f['k1']))
-    return $a1; //Аргумент - вершина верхнего (нулевого) уровня
+    return $a1;
 
   $a2=tree_list_load_level($f['k1']);
-  if(!$a2) return $a1; //ошибка?
+  if(!$a2) return $a1;
 
   for($i=0;$i<count($a2);$i++)
   {
@@ -506,13 +629,10 @@ function tree_list_load_related($k_item)
     }
   }
 
-  //Пра-родительской вершины может не быть, если в качестве аргумента
-  //  передан идентификатор вершины первого уровня
-
   if(empty($f['k2'])) return $a2;
 
   $a1=tree_list_load_path($f['k2']);
-  if(!$a1) return $a2; //ошибка?
+  if(!$a1) return $a2;
 
   $p=&$a1;
   while(count($p['a_tree']))

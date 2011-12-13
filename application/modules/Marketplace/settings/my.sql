@@ -79,12 +79,16 @@ CREATE TABLE IF NOT EXISTS `engine4_marketplace_marketplaces` (
   `closed` tinyint(4) NOT NULL DEFAULT '0',
   `price` decimal(16, 2) NOT NULL DEFAULT '0',
   `business_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `authorize_login` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `authorize_key` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `weight` float DEFAULT '0',
+  `length` float DEFAULT '0',
+  `width` float DEFAULT '0',
+  `height` float DEFAULT '0',
   PRIMARY KEY (`marketplace_id`),
   KEY `owner_id` (`owner_id`),
   KEY `search` (`search`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_unicode_ci ;
-
-
 
 -- --------------------------------------------------------
 --
@@ -351,7 +355,7 @@ INSERT INTO `engine4_marketplace_fields_options` (`option_id`, `field_id`, `labe
 (6,	2,	'Blue',	999);
 
 INSERT INTO `engine4_activity_notificationtypes` (`type`, `module`, `body`, `is_request`, `handler`) VALUES
-('marketplace_transaction_to_owner',	'marketplace',	'Your retrive payment for {item:$object:$label}.',	0,	'');
+('marketplace_transaction_to_owner',	'marketplace',	'You have received payment for {item:$object:$label}.',	0,	'');
 INSERT INTO `engine4_core_mailtemplates` (`type`, `module`, `vars`) VALUES
 ('notify_marketplace_transaction_to_owner',	'marketplace',	'[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]');
 

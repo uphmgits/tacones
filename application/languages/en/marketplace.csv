@@ -1,5 +1,6 @@
 "Marketplace";"Marketplace"
 "Marketplaces";"Marketplace"
+"Price start:";"Price start:"
 "marketplace";"marketplace";"marketplaces"
 "View All Listings";"View All Listings"
 "Marketplace Listings";"Marketplace Listings"
@@ -25,7 +26,7 @@
 "ACTIVITY_TYPE_LIKED_MARKETPLACE";"When someone comments on a marketplace posting I liked."
 "ACTIVITY_TYPE_MARKETPLACE_NEW";"When a new marketplace listing is posted."
 
-"ACTIVITY_TYPE_MARKETPLACE_TRANSACTION_TO_OWNER";"When user retrive payment for marketplace item."
+"ACTIVITY_TYPE_MARKETPLACE_TRANSACTION_TO_OWNER";"When user received payment for marketplace item."
 "ACTIVITY_TYPE_MARKETPLACE_TRANSACTION_TO_BUYER";"When user make payment for marketplace item."
 
 "Main Photo";"Main Photo"
@@ -199,7 +200,7 @@
 "Yes, allow creation of marketplaces.";"Yes, allow creation of marketplace items."
 "No, do not allow marketplaces to be created.";"No, do not allow marketplace to be created."
 
-"Allow Uploading of Photos?";"Allow Uploading of Photos?"
+"Allow Uploading of Photos?";"Allow Uploading of Photoss?"
 "Do you want to let members upload photos to a marketplace listing? If set to no, the option to upload photos will not appear.";"Do you want to let members upload photos to a marketplace listing? If set to no, the option to upload photos will not appear."
 "Yes, allow photo uploading to marketplaces.";"Yes, allow photo uploading to marketplace."
 "No, do not allow photo uploading.";"No, do not allow photo uploading."
@@ -243,7 +244,7 @@
 "Marketplaces Plugin";"Marketplace Plugin"
 
 "Allow Commenting on Marketplaces?";"Allow Commenting on Marketplace?"
-"Do you want to let members of this level comment on marketplaces?";"Do you want to let members of this level comment on marketplace?"
+"Do you want to let members of this level comment on marketplaces?";"Do you want to let members of this level omment on marketplace?"
 "Yes, allow members to comment on marketplaces.";"Yes, allow members to comment on marketplace."
 "No, do not allow members to comment on marketplaces.";"No, do not allow members to comment on marketplace."
 "Enter the maximum number of allowed marketplaces. The field must contain an integer, use zero for unlimited.";"Enter the maximum number of allowed marketplace items. The field must contain an integer, use zero for unlimited."
@@ -257,8 +258,8 @@
 
 # notify_marketplace_transaction_to_owner
 "_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_OWNER_TITLE";"Marketplace Sale Notification for Seller"
-"_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_OWNER_DESCRIPTION";"This email is sent to the member when retrive payment for marketplace item."
-"_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_OWNER_SUBJECT";"Your retrive payment for [object_title]."
+"_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_OWNER_DESCRIPTION";"This email is sent to the member when received payment for marketplace item."
+"_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_OWNER_SUBJECT";"You have received payment for [object_title]."
 "_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_OWNER_BODY";"[header]
 
 [sender_title] has buy ""[object_title]""

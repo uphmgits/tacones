@@ -20,6 +20,8 @@ class Core_IndexController extends Core_Controller_Action_Standard
 {
   public function indexAction()
   {
+    return $this->_helper->redirector->gotoRoute(array(), 'marketplace_browse', true);
+
     if( Engine_Api::_()->user()->getViewer()->getIdentity() )
     {
       return $this->_helper->redirector->gotoRoute(array('action' => 'home'), 'user_general', true);

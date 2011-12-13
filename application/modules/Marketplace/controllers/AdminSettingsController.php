@@ -44,43 +44,10 @@ class Marketplace_AdminSettingsController extends Core_Controller_Action_Admin
 	$this->view->category_id = $item;
     $this->view->categories = Engine_Api::_()->marketplace()->getCategoriesTree($item);//getCategories();
     $a_tree = Engine_Api::_()->marketplace()->tree_list_load_path($item);
-	//  print_r($a_tree);//Engine_Api::_()->marketplace()->tree_list_load_path($item));
 	$this->view->a_tree =  $a_tree;//
 	$this->view->url = $this->_helper->url;
-	//Engine_Api::_()->marketplace()->tree_print($a_tree,$this->_helper->url);
-
-	//$this->tree_print($a_tree);
-   
   }
 
-     
-
-//  public function tree_print(&$a_tree,$k_parent=0)
-//  {
-//    //условие завершения рекурсии
-//    //Условие, при котором функция никогда не вызывает сама себя
-//
-//    //функция empty() - вернет ложь во всех нужных нам случаях:
-//    // - элемент массива не определен
-//    // - элемент массива определен, но является пустым массивом
-//
-//    if(empty($a_tree[$k_parent])) return;
-//
-//    //echo "<ul>";
-//    for($i=0;$i<count($a_tree[$k_parent]);$i++)
-//    {
-//     // echo "<li>".$a_tree[$k_parent][$i]['s_name'];
-//      echo $a_tree[$k_parent][$i]['k_item']."_".$a_tree[$k_parent][$i]['s_name'].'=>';
-//      //рекурсивный вызов - список всех дочерних элементов нужно вставить
-//      //  именно в этом месте:
-//      //  <li>название
-//      //     ** тут список дочерних элементов, он показывается рекурсивным вызовом **
-//      //  </li>
-//      $this->tree_print($a_tree,$a_tree[$k_parent][$i]['k_item']);
-//     // echo "</li>";
-//    }
-//   // echo "</ul>";
-//  }
 
   public function addCategoryAction()
   {

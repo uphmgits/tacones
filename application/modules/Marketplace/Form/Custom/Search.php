@@ -60,7 +60,6 @@ class Marketplace_Form_Custom_Search extends Fields_Form_Search
             array('HtmlTag', array('tag' => 'div', 'class' => 'integer_field form-wrapper integer_field_unselected', 'id' =>'integer-wrapper'))
           )
         ));
-        //Engine_Form::enableForm($subform);
         unset($params['options']['label']);
         $params['options']['decorators'] = array('ViewHelper', array('HtmlTag', array('tag'=>'div', 'class'=>'form-element')));
 

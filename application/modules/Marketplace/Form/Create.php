@@ -89,29 +89,89 @@ class Marketplace_Form_Create extends Engine_Form
     if( $allowed_upload ) {
       $this->addElement('File', 'photo', array(
         'label' => 'Main Photo'
-      )); 
+      ));
       $this->photo->addValidator('Extension', false, 'jpg,png,gif');
     }
 
+	
+	if(Engine_Api::_()->marketplace()->authorizeIsActive()){
+		$this->addElement('Text', 'authorize_login', array(
+		  'label' => 'Authorize.net Login',
+		  'allowEmpty' => false,
+		  'required' => true,
+		  'filters' => array(
+			'StripTags',
+			new Engine_Filter_Censor(),
+			new Engine_Filter_StringLength(array('max' => '63')),
+		  ),
+		  'validators' => array(
+			array('NotEmpty', true),
+		   ),
+		));
+		$this->addElement('Text', 'authorize_key', array(
+		  'label' => 'Authorize.net Secret Key',
+		  'allowEmpty' => false,
+		  'required' => true,
+		  'filters' => array(
+			'StripTags',
+			new Engine_Filter_Censor(),
+			new Engine_Filter_StringLength(array('max' => '63')),
+		  ),
+		  'validators' => array(
+			array('NotEmpty', true),
+		   ),
+		));
+	}else{
+		$this->addElement('Text', 'business_email', array(
+		  'label' => 'Business Email',
+		  'allowEmpty' => false,
+		  'required' => true,
+		  'config'=>'{"unit":"USD"}',
+		  'filters' => array(
+			'StripTags',
+			new Engine_Filter_Censor(),
+			new Engine_Filter_StringLength(array('max' => '63')),
+		  ),
+			  'validators' => array(
+			array('NotEmpty', true),
+			array('EmailAddress', true),
+		   ),
+		));
+		$this->business_email->getDecorator('Description')->setOption('placement', 'append');
+	}
 
-
-      $this->addElement('Text', 'business_email', array(
-      'label' => 'Business Email',
+    $this->addElement('Text', 'weight', array(
+      'label' => 'Weight',
+      'description' => 'in lbs.',
       'allowEmpty' => false,
       'required' => true,
-      'config'=>'{"unit":"USD"}',
-      'filters' => array(
-        'StripTags',
-        new Engine_Filter_Censor(),
-        new Engine_Filter_StringLength(array('max' => '63')),
-      ),
-          'validators' => array(
-        array('NotEmpty', true),
-        array('EmailAddress', true),
-       ),
     ));
-     $this->business_email->getDecorator('Description')->setOption('placement', 'append');
+    $this->weight->getDecorator('Description')->setOption('placement', 'append');
 
+    $this->addElement('Text', 'length', array(
+      'label' => 'Length',
+      'description' => 'in inches.',
+      'allowEmpty' => false,
+      'required' => true,
+    ));
+    $this->length->getDecorator('Description')->setOption('placement', 'append');
+
+    $this->addElement('Text', 'width', array(
+      'label' => 'Width',
+      'description' => 'in inches.',
+      'allowEmpty' => false,
+      'required' => true,
+    ));
+    $this->width->getDecorator('Description')->setOption('placement', 'append');
+
+    $this->addElement('Text', 'height', array(
+      'label' => 'Height',
+      'description' => 'in inches.',
+      'allowEmpty' => false,
+      'required' => true,
+    ));
+    $this->height->getDecorator('Description')->setOption('placement', 'append');
+	
     // Privacy
     $availableLabels = array(
       'everyone' => 'Everyone',
@@ -128,7 +188,6 @@ class Marketplace_Form_Create extends Engine_Form
         'item' => $this->getItem()
       ));
     }
-
     $this->addSubForms(array(
       'fields' => $customFields
     ));

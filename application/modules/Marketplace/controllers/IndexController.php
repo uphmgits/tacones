@@ -8,7 +8,7 @@
  * @copyright  Copyright 2010 
  * * 
  * @version    $Id: IndexController.php 7250 2010-09-01 07:42:35Z john $
- *  
+ * 
  */
 
 /**
@@ -22,6 +22,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
     protected $_navigation;
     // true - sandbox, false - paypal original
     protected $_sandbox = false;
+    //protected $_sandbox = true;
 
     public function init() {
         if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'view')->isValid())
@@ -52,7 +53,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
 
         $categ = implode(', ', Engine_Api::_()->marketplace()->_inarr);
 
-        $a_tree = Engine_Api::_()->marketplace()->tree_list_load_array(array($id)); //Engine_Api::_()->marketplace()->tree_list_load_subtree('0');
+        $a_tree = Engine_Api::_()->marketplace()->tree_list_load_array(array($id));
 
         $this->view->a_tree = $a_tree;
         $this->view->urls = $this->_helper->url;
@@ -62,8 +63,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
         Engine_Api::_()->marketplace()->tree_select($a_tree, '', 1);
 
         $newcategories = Engine_Api::_()->marketplace()->gettemp();
-        foreach ($newcategories as $k => $e) {//$category )
-            $form->category->addMultiOption($k, $e); //$category->category_id, $category->category_name);
+        foreach ($newcategories as $category_id => $category_title) {
+            $form->category->addMultiOption($category_id, $category_title);
         }
 
         // Process form
@@ -110,7 +111,6 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
         $view = $this->view;
         $view->addHelperPath(APPLICATION_PATH . '/application/modules/Fields/View/Helper', 'Fields_View_Helper');
 
-        //$paginator = Engine_Api::_()->marketplace()->getMarketplacesPaginator($values, $customFieldValues);
         $paginator = Engine_Api::_()->marketplace()->getMarketplacesPaginator($values);
         $items_count = (int) Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.page', 10);
         $paginator->setItemCountPerPage($items_count);
@@ -126,17 +126,67 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
 
     public function viewAction() {
 
+		$viewer = Engine_Api::_()->user()->getViewer();
         $paypal = $this->_helper->api()->getApi('paypal', 'marketplace');
-
-        // $this->paypal_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-
-        $viewer = $this->_helper->api()->user()->getViewer();
         $marketplace = Engine_Api::_()->getItem('marketplace', $this->_getParam('marketplace_id'));
+		
+		if(empty($marketplace))
+			return;
 
-        //if (!$this->_helper->requireAuth()->setAuthParams($marketplace, null, 'view')->isValid()) return;
+		$this->view->discount_sum = $discount_sum = 0;
+		if(Engine_Api::_()->marketplace()->couponIsActive()){
+			$couponTable = Engine_Api::_()->getDbTable('coupons', 'marketplace');
+			$couponTableName = $couponTable->info('name');
+			$couponcartTable = Engine_Api::_()->getDbTable('couponcarts', 'marketplace');
+			$couponcartTableName = $couponcartTable->info('name');
+			
+			$postValues = $this->getRequest()->getPost();
+			if($postValues && !empty($postValues['coupon_code'])){
+				$coupon_code = $this->_getParam('coupon_code', '');
+				if($coupon_code){
+					$coupon_select = $couponTable->select()
+						->where('code = ?', $coupon_code)
+						->where('user_id = ?', $marketplace->getOwner()->getIdentity())
+					;
+					$coupon_res = $couponTable->fetchRow($coupon_select);
+					if($coupon_res->coupon_id && $coupon_res->user_id == $marketplace->getOwner()->getIdentity()){
+						$couponcartTable->delete(
+							array('user_id' => $viewer->getIdentity())
+						);
+						$couponcartTable->insert(array(
+							'coupon_id' => $coupon_res->coupon_id,
+							'user_id' => $viewer->getIdentity()
+						));
+						$this->view->coupon_error = 2;
+					}else{
+						$this->view->coupon_error = 1;
+					}
+				}
+			}
+			$coupon_select = $couponTable->getAdapter()
+				->select()
+				->from($couponcartTableName)
+				->joinLeft($couponTableName, "`{$couponTableName}`.coupon_id = `{$couponcartTableName}`.coupon_id")
+				->where("{$couponcartTableName}.user_id = ?", $viewer->getIdentity())
+				->where("{$couponTableName}.user_id = ?", $marketplace->getOwner()->getIdentity())
+			;
+			$this->view->coupon_res = $coupon_res = $couponTable->getAdapter()->fetchRow($coupon_select);
+			if($coupon_res){
+				$this->view->discount = intval($coupon_res['percent']);
+			}else{
+				$this->view->discount = 0;
+			}
+
+			if($this->view->discount){
+				$this->view->discount_sum = $discount_sum = $marketplace->price * ($this->view->discount / 100);
+			}
+		}
+		
+        if (!$this->_helper->requireAuth()->setAuthParams($marketplace, null, 'view')->isValid())
+            return;
 
         $can_edit = $this->view->can_edit = $this->_helper->requireAuth()->setAuthParams($marketplace, null, 'edit')->checkRequire();
-	$this->view->allowed_upload = ( $viewer && $viewer->getIdentity() /* JFA TEST - edited Create.php also */
+        $this->view->allowed_upload = ( $viewer && $viewer->getIdentity()
                 && Engine_Api::_()->authorization()->getPermission($viewer->level_id, 'marketplace', 'photo') );
 
         if ($marketplace) {
@@ -171,28 +221,90 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
                 $this->view->category = Engine_Api::_()->marketplace()->getCategory($marketplace->category_id);
             $this->view->userCategories = Engine_Api::_()->marketplace()->getUserCategories($this->view->marketplace->owner_id);
         }
-        $this->view->paypalForm = $this->paypal()->form();
+		$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $viewer->getIdentity());
+		$total_amount = floatval($marketplace->price - $discount_sum + $product_shipping_fee);
+		
+    $this->view->prepay = false;
+
+		if(Engine_Api::_()->marketplace()->authorizeIsActive()){
+			$authorize_login = ($marketplace->authorize_login?$marketplace->authorize_login:'7sBYqTp344eh');
+			$authorize_key = ($marketplace->authorize_key?$marketplace->authorize_key:'8sY8eUVj47M46dxA');
+			$testmode = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.authorize.testmode', '0');
+			$myAuthorize = new Marketplaceauthorize_Api_Authorize();
+			$myAuthorize->setUserInfo($authorize_login, $authorize_key);
+			$myAuthorize->addField('x_Receipt_Link_URL', 'http://'.$_SERVER['HTTP_HOST'].$this->view->baseUrl().'/marketplaces/paymentreturn/payment/authorize');
+			$myAuthorize->addField('x_Relay_URL', 'http://'.$_SERVER['HTTP_HOST'].$this->view->baseUrl().'/marketplaces/paymentnotify/payment/authorize');
+			$myAuthorize->addField('x_Description', $marketplace->getTitle());
+			$myAuthorize->addField('x_Amount', $total_amount);
+			$myAuthorize->addField('x_Invoice_num', $marketplace->getIdentity().':'.$viewer->getIdentity());
+			$myAuthorize->addField('x_product_id', $marketplace->getIdentity());
+			$myAuthorize->addField('x_user_id', $viewer->getIdentity());
+			$myAuthorize->enableTestMode();
+			$this->view->paymentForm = $myAuthorize->render();
+		}else{
+      if( $viewer->getIdentity() ) {
+		    $this->view->paymentForm = $this->paypal(array('discount_sum' => $discount_sum))->form();
+      }
+      else {
+        $request = $this->getRequest()->getPost();
+        if( isset($request['marketplaces_email']) and !empty($request['marketplaces_email']) ) {
+          $this->view->paymentForm = $this->paypal(array('anonymous_purchase' => $request['marketplaces_email']))->form();
+        }
+        else {
+          $this->view->paymentForm = new Marketplace_Form_Prepaypal();
+          $this->view->prepay = true;
+        }
+      }
+		}
+		
+		if(Engine_Api::_()->marketplace()->cartIsActive()){
+			$this->view->already_in_cart = array();
+			if($viewer->getIdentity()){
+				$cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
+				$cart_select = $cartTable->select()
+					->where('user_id = ?', $viewer->getIdentity())
+					->where('marketplace_id = ?', $marketplace->getIdentity())
+				;
+				$this->view->already_in_cart = $cartTable->fetchRow($cart_select);
+			}
+		}
+  }
+
+  public function authorize($params = array()) {
+	}
+	
+  public function paypal($params = array()) {
+		$discount_sum = floatval(($params['discount_sum']?$params['discount_sum']:0));
+    $anonymous_purchase = $params['anonymous_purchase'] ? $params['anonymous_purchase'] : null;
+
+    $paypal = new Marketplace_Api_Payment($this->_sandbox);//true);
+    $viewer = $this->_helper->api()->user()->getViewer();
+
+    $marketplace = Engine_Api::_()->getItem('marketplace', $this->_getParam('marketplace_id'));
+    if ($marketplace) {
+        $this->view->owner = $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+    }
+    $paypal->setBusinessEmail($marketplace->business_email);
+
+    if( !$anonymous_purchase ) {
+      $userID = $viewer->getIdentity();
+      $paypal->setPayer($viewer->email, $viewer->getIdentity());
+    }
+    else {
+      $userID = 0;
+      $paypal->setPayer($anonymous_purchase, $noUser);
+      $paypal->setCustom($anonymous_purchase);
     }
 
-    public function paypal() {
-        $paypal = new Marketplace_Api_Payment($this->_sandbox);//true);
-        $viewer = $this->_helper->api()->user()->getViewer();
-        $marketplace = Engine_Api::_()->getItem('marketplace', $this->_getParam('marketplace_id'));
-        if ($marketplace) {
-            $this->view->owner = $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
-        }
-        $paypal->setBusinessEmail($marketplace->business_email); //'owner_1293606948_biz@gmail.com');//"business@owner.com");
-
-        if( $viewer->getIdentity() )
-          $paypal->setPayer($viewer->email, $viewer->getIdentity());
-        else
-          $paypal->setPayer($viewer->email, 1);
-
-        $paypal->setAmount($marketplace->price); //"50");
-        $paypal->setNumber($this->_getParam('marketplace_id') . ':' . $viewer->getIdentity());
+		$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $viewer->getIdentity());
+		$final_amount = floatval($marketplace->price - $discount_sum + $product_shipping_fee);
+		if($final_amount < 0){
+			$final_amount = 0;
+		}
+        $paypal->setAmount($final_amount); //"50");
+        $paypal->setNumber($this->_getParam('marketplace_id') . ':' . $userID);
         $paypal->addItem(array('item_name' => $marketplace->title . '(' . $marketplace->body . ')'));
         $paypal->setControllerUrl("http://" . $this->getRequest()->getHttpHost() . $this->view->url(array(), 'marketplace_extended', true) . '/payment'); //->url());
-
         return $paypal;
     }
 
@@ -201,46 +313,352 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
     }
 
     public function paymentnotifyAction() {
-
-        $this->_helper->viewRenderer->setNoRender();
-        $this->_helper->layout->disableLayout();
-
-        $paypal = new Marketplace_Api_Payment(true);
-        $arrPost = $this->getRequest()->getPost();
-
-        if ($paypal->validateNotify($arrPost)) {
-            //xxx:yyy
-            // xxx - marketplace_id, yyy - user_id;
-
-            $order = explode(':', $arrPost['item_number']);
-
-            $marketplace = Engine_Api::_()->getItem('marketplace', $order[0]);
-            $values['user_id'] = $order[1];
-            $values['owner_id'] = $marketplace->owner_id;
-            $values['marketplace_id'] = $order[0];
-            $values['count'] = 1;
-            $values['summ'] = $arrPost['mc_gross'];
-            $values['date'] = date('Y.m.d H:i:s');
-            //$values['temp'] = $arrPost['payer_status'];
-            $table = Engine_Api::_()->getDbtable('orders', 'marketplace');
-            if ($marketplace->price == $arrPost['mc_gross'])
-                $table->insert($values);
+		$this->_helper->viewRenderer->setNoRender();
+		$this->_helper->layout->disableLayout();
+		if(Engine_Api::_()->marketplace()->cartIsActive()){
+			$cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
+		}
+		if(Engine_Api::_()->marketplace()->couponIsActive()){
+			$couponcartTable = Engine_Api::_()->getDbTable('couponcarts', 'marketplace');
+		}
+		if($this->_getParam('payment') == 'authorize'){
+			$myAuthorize_order = $_POST;
+			if(strstr($myAuthorize_order['x_product_id'], '-')){//few items
+				$order = explode(':', $myAuthorize_order['x_product_id']);
+				if(strstr($order, '|')){
+					$item_ids = explode('|', $order[0]);
+					$first_item_id = $item_ids[0];
+				}else{
+					$first_item_id = $order[0];
+				}
+				$item_id_info = explode('-', $first_item_id);
+				$item_id = $item_id_info[0];
+				$first_marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
+			}else{
+				$first_marketplace = Engine_Api::_()->getItem('marketplace', $order['x_product_id']);
+			}
+			ob_start();
+			print_r($first_marketplace->toArray());
+			$c = ob_get_clean();
+			file_put_contents(APPLICATION_PATH . '/temporary/log/post.log', $c, FILE_APPEND);
+			$authorize_login = ($first_marketplace->authorize_login?$first_marketplace->authorize_login:'7sBYqTp344eh');
+			$authorize_key = ($first_marketplace->authorize_key?$first_marketplace->authorize_key:'8sY8eUVj47M46dxA');
+			$testmode = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.authorize.testmode', '0');
+			$myAuthorize = new Marketplaceauthorize_Api_Authorize();
+			$myAuthorize->ipnLog = TRUE;
+			$myAuthorize->setUserInfo($authorize_login, $authorize_key);
+			$myAuthorize->enableTestMode();
+			if ($myAuthorize->validateIpn())
+			{
+				ob_start();
+				print_r($myAuthorize->ipnData);
+				$c = 'SUCCESS' . "\n" . ob_get_clean();
+				file_put_contents(APPLICATION_PATH . '/temporary/log/authorize.log', $c);
+				$myAuthorize_order = $myAuthorize->ipnData;
 				
-			$owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
-			$buyer = Engine_Api::_()->getItem('user', $order[1]);
-			$marketplace_item = Engine_Api::_()->getItem('marketplace', $order[0]);
-			
-			$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-			$notifyApi->addNotification($owner, $buyer, $marketplace_item, 'marketplace_transaction_to_owner');
-			$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-			$notifyApi->addNotification($buyer, $owner, $marketplace_item, 'marketplace_transaction_to_buyer');
-        }
+				if(strstr($myAuthorize_order['x_product_id'], '-')){//few items
+					$order = explode(':', $myAuthorize_order['x_product_id']);
+					$final_amount = 0;
+					$item_ids = explode('|', $order[0]);
+					$values = array();
+					$title_arr = array();
+					$ids_arr = array();
+					foreach($item_ids as $key => $item_count_id){
+						
+						$item_id_info = explode('-', $item_count_id);
+						$item_id = $item_id_info[0];
+						$item_count = $item_id_info[1];
+						
+						$marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
+						if(empty($marketplace))
+							return $this->_helper->redirector->gotoRoute(array('action' => 'manage', 'result' => 'error'), 'marketplace_paymentreturn', true);
+						$title_arr[] = $marketplace->title;
+						$ids_arr[] = $item_id;
+							
+						$owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+						$buyer = Engine_Api::_()->getItem('user', $myAuthorize_order['x_user_id']);
+						
+						////////////////////////////////////////////////////////////discount
+						$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($marketplace->marketplace_id,  $myAuthorize_order['x_user_id']);
+						$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $myAuthorize_order['x_user_id']);
+						$final_amount += ($marketplace->price + $product_shipping_fee - $coupon_discount) * $item_count;
+						////////////////////////////////////////////////////////////discount
+					}
+					if ($final_amount == $myAuthorize_order['x_amount']){
+						foreach($item_ids as $key => $item_count_id){
+							
+							$item_id_info = explode('-', $item_count_id);
+							$item_id = $item_id_info[0];
+							$item_count = $item_id_info[1];
+							
+							$marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
+							$owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+							$buyer = Engine_Api::_()->getItem('user', $myAuthorize_order['x_user_id']);
+							////////////////////////////////////////////////////////////discount
+							$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($marketplace->marketplace_id,  $myAuthorize_order['x_user_id']);
+							$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $myAuthorize_order['x_user_id']);
+							////////////////////////////////////////////////////////////discount
+							
+							$values['user_id'] = $myAuthorize_order['x_user_id'];
+							$values['owner_id'] = $marketplace->owner_id;
+							$values['marketplace_id'] = $item_id;
+							$values['count'] = $item_count;
+							$values['summ'] = $marketplace->price + $product_shipping_fee - $coupon_discount;
+							$values['date'] = date('Y-m-d H:i:s');
+						
+							$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+							$notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
+							$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+							$notifyApi->addNotification($buyer, $owner, $marketplace, 'marketplace_transaction_to_buyer');
+							
+							$table = Engine_Api::_()->getDbtable('orders', 'marketplace');
+							$table->insert($values);
+							if(Engine_Api::_()->marketplace()->cartIsActive()){
+								$cartTable->delete(array(
+									'user_id = ?' => $myAuthorize_order['x_user_id'],
+									'marketplace_id = ?' => $marketplace->getIdentity(),
+								));
+							}
+							if(Engine_Api::_()->marketplace()->couponIsActive()){
+								$couponcartTable->delete(array(
+									'user_id = ?' => $myAuthorize_order['x_user_id']
+								));
+							}
+						}
+					}
+				}elseif(!empty($order['x_product_id'])){//one item
+					$marketplace = Engine_Api::_()->getItem('marketplace', $order['x_product_id']);
+
+					if(empty($marketplace))
+						return $this->_helper->redirector->gotoRoute(array('action' => 'manage', 'result' => 'error'), 'marketplace_paymentreturn', true);
+					////////////////////////////////////////////////////////////discount
+					$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($cartitem->marketplace_id, $order[1]);
+					$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $order[1]);
+					$final_amount = $marketplace->price + $product_shipping_fee - $coupon_discount;
+					////////////////////////////////////////////////////////////discount
+
+					$values['user_id'] = $order['x_user_id'];
+					$values['owner_id'] = $marketplace->getOwner()->getIdentity();
+					$values['marketplace_id'] = $order['x_product_id'];
+					$values['count'] = 1;
+					$values['summ'] = $order['x_amount'];
+					$values['date'] = date('Y-m-d H:i:s');
+					$table = Engine_Api::_()->getDbtable('orders', 'marketplace');
+					if ($final_amount == $order['x_amount'])
+						$table->insert($values);
+						
+					$owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+					$buyer = Engine_Api::_()->getItem('user', $order['x_user_id']);
+					
+					$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+					$notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
+					$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+					$notifyApi->addNotification($buyer, $owner, $marketplace, 'marketplace_transaction_to_buyer');
+					if(Engine_Api::_()->marketplace()->couponIsActive()){
+						$couponcartTable->delete(array(
+							'user_id = ?' => $order['x_user_id']
+						));
+					}
+				}
+			}
+			else
+			{
+				ob_start();
+				print_r($myAuthorize->ipnData);
+				$c = 'FAILURE' . "\n" . ob_get_clean();
+				file_put_contents(APPLICATION_PATH . '/temporary/log/authorize.log', $c);
+			}
+			return $this->_helper->redirector->gotoRoute(array('action' => 'manage'), 'marketplace_paymentreturn', true);
+		}else{
+
+			$paypal = new Marketplace_Api_Payment(true);
+			$arrPost = $this->getRequest()->getPost();
+
+			if ($paypal->validateNotify($arrPost)) {
+
+				$order = explode(':', $arrPost['item_number']);
+				$user_id = $order[1];
+				if(strstr($order[0], '-')){//few items
+					$final_amount = 0;
+					$item_ids = explode('|', $order[0]);
+					$values = array();
+					$title_arr = array();
+					$ids_arr = array();
+					foreach($item_ids as $key => $item_count_id){
+						
+						$item_id_info = explode('-', $item_count_id);
+						$item_id = $item_id_info[0];
+						$item_count = $item_id_info[1];
+						
+						$marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
+						if(empty($marketplace))
+							return $this->_helper->redirector->gotoRoute(array('action' => 'manage', 'result' => 'error'), 'marketplace_paymentreturn', true);
+						$title_arr[] = $marketplace->title;
+						$ids_arr[] = $item_id;
+							
+						$owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+						$buyer = Engine_Api::_()->getItem('user', $order[1]);
+						
+						////////////////////////////////////////////////////////////discount
+						$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($marketplace->marketplace_id,  $order[1]);
+						$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $order[1]);
+						$final_amount += ($marketplace->price + $product_shipping_fee - $coupon_discount) * $item_count;
+						////////////////////////////////////////////////////////////discount
+					}
+
+					if ((string)$final_amount == (string)$arrPost['mc_gross']){
+
+						foreach($item_ids as $key => $item_count_id){
+							
+							$item_id_info = explode('-', $item_count_id);
+							$item_id = $item_id_info[0];
+							$item_count = $item_id_info[1];
+							
+							$marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
+							$owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+							$buyer = Engine_Api::_()->getItem('user', $order[1]);
+							////////////////////////////////////////////////////////////discount
+							$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($marketplace->marketplace_id,  $order[1]);
+							$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $order[1]);
+							////////////////////////////////////////////////////////////discount
+							
+							$values['user_id'] = $order[1];
+							$values['owner_id'] = $marketplace->owner_id;
+							$values['marketplace_id'] = $item_id;
+							$values['count'] = $item_count;
+							$values['summ'] = $marketplace->price + $product_shipping_fee - $coupon_discount;
+							$values['date'] = date('Y-m-d H:i:s');
+						
+							$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+							$notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
+							$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+							$notifyApi->addNotification($buyer, $owner, $marketplace, 'marketplace_transaction_to_buyer');
+							
+							$table = Engine_Api::_()->getDbtable('orders', 'marketplace');
+							$table->insert($values);
+							if(Engine_Api::_()->marketplace()->cartIsActive()){
+								$cartTable->delete(array(
+									'user_id = ?' => $order[1],
+									'marketplace_id = ?' => $marketplace->getIdentity(),
+								));
+							}
+							if(Engine_Api::_()->marketplace()->couponIsActive()){
+								$couponcartTable->delete(array(
+									'user_id = ?' => $order[1]
+								));
+							}
+						}
+					}
+					
+				}else{//one item
+				
+            
+          if( $user_id ) {
+  					////////////////////////////////////////////////////////////discount
+	  				$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($cartitem->marketplace_id, $user_id);
+	  				$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $user_id);
+	  				////////////////////////////////////////////////////////////discount
+          }
+
+					$marketplace = Engine_Api::_()->getItem('marketplace', $order[0]);
+					if(empty($marketplace) or (!$user_id and empty($arrPost['payer_email']) ))
+						return $this->_helper->redirector->gotoRoute(array('action' => 'manage', 'result' => 'error'), 'marketplace_paymentreturn', true);
+					$values['user_id'] = $user_id;
+					$values['owner_id'] = $marketplace->owner_id;
+					$values['marketplace_id'] = $order[0];
+					$values['count'] = 1;
+					$values['summ'] = $arrPost['mc_gross'];
+					$values['date'] = date('Y-m-d H:i:s');
+          $values['contact_email'] = $arrPost['custom'];
+					$table = Engine_Api::_()->getDbtable('orders', 'marketplace');
+					$final_amount = $marketplace->price + $product_shipping_fee - $coupon_discount;
+					if ($final_amount == $arrPost['mc_gross'])
+						$table->insert($values);
+						
+          $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+          $marketplace_item = Engine_Api::_()->getItem('marketplace', $order[0]);
+
+          if( $user_id != 0) { 
+    					$buyer = Engine_Api::_()->getItem('user', $user_id);
+          
+					    $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+					    $notifyApi->addNotification($owner, $buyer, $marketplace_item, 'marketplace_transaction_to_owner');
+					    $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+					    $notifyApi->addNotification($buyer, $owner, $marketplace_item, 'marketplace_transaction_to_buyer');
+					    if(Engine_Api::_()->marketplace()->couponIsActive()){
+						    $couponcartTable->delete(array(
+							    'user_id = ?' => $user_id
+						    ));
+					    }
+          } else { //mailing
+              if( $owner->getIdentity() and $marketplace_item->getIdentity() ) {
+
+                  $adminAddress = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.from', 'admin@' . $_SERVER['HTTP_HOST']);
+                  $adminName = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.name', 'Site Admin');
+
+                  $toOwnerAddress = $owner->email;
+                  $toBuyerAddress = $values['contact_email'];
+
+                  $toOwnerName = $owner->username;
+                  $toBuyerName = $this->view->translate('Unregistered user');
+
+                  $subjectTemplate = Zend_Registry::get('Zend_Translate')->_("New Order");
+
+                  $bodyAdmin = $this->view->translate('<strong>%1$s</strong> bought the "%2$s" from %3$s', $toBuyerAddress, $marketplace_item->getTitle(), $owner->username);
+                  $bodyOwner = $this->view->translate('<strong>%1$s</strong> bought the "%2$s"', $toBuyerAddress, $marketplace_item->getTitle());
+                  $bodyBuyer = $this->view->translate('You bought the "%1$s" from %2$s.', $marketplace_item->getTitle(), $owner->username);
+                  $bodyBuyer .= " ".$this->view->translate('Payment done, please proceed with delivery. Owner email: %1$s', $owner->email);
+
+                  // mail to admin
+                  $mail = Engine_Api::_()->getApi('mail', 'core')->create()
+                          ->addTo($adminAddress, $adminName)
+                          ->setFrom($adminAddress, $adminName)
+                          ->setSubject($subjectTemplate)
+                          ->setBodyHtml($bodyAdmin)
+                  ;
+                  Engine_Api::_()->getApi('mail', 'core')->sendRaw($mail);
+
+                  // mail to owner
+                  $mail = Engine_Api::_()->getApi('mail', 'core')->create()
+                          ->addTo($toOwnerAddress, $toOwnerName)
+                          ->setFrom($adminAddress, $adminName)
+                          ->setSubject($subjectTemplate)
+                          ->setBodyHtml($bodyOwner)
+                  ;
+                  Engine_Api::_()->getApi('mail', 'core')->sendRaw($mail);
+
+                  // mail to buyer
+                  $mail = Engine_Api::_()->getApi('mail', 'core')->create()
+                          ->addTo($toBuyerAddress, $toBuyerName)
+                          ->setFrom($adminAddress, $adminName)
+                          ->setSubject($subjectTemplate)
+                          ->setBodyHtml($bodyBuyer)
+                  ;
+                  Engine_Api::_()->getApi('mail', 'core')->sendRaw($mail);
+
+              }
+          } // user_id != 0
+				}
+			}
+		}
     }
 
     public function paymentreturnAction() {
 
         $viewer = $this->_helper->api()->user()->getViewer();
         $user = $this->_helper->api()->user()->getUser($viewer->getIdentity());
+		$this->view->result = $this->_getParam('result', 'success');
+		
+		if(Engine_Api::_()->marketplace()->cartIsActive()){
+			$cartTable  = Engine_Api::_()->getDbTable('cart', 'marketplace');
+			$select = $cartTable->select()
+				->where('user_id = ?', $viewer->getIdentity())
+				->limit(1);
+
+			$this->view->cartContent = $cartTable->fetchRow($select);
+		}else{
+			$this->view->cartContent = array();
+		}
     }
 
     // USER SPECIFIC METHODS
@@ -258,7 +676,6 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
         $form->removeElement('show');
 
         // Populate form
-       // $a_tree = Engine_Api::_()->marketplace()->tree_list_load_subtree('0');
         $a_tree = Engine_Api::_()->marketplace()->tree_list_load_array(array(0));
         $this->view->a_tree = $a_tree;
         $this->view->urls = $this->_helper->url;
@@ -310,7 +727,6 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
         // Make form
         $this->view->form = $form = new Marketplace_Form_Search();
         $form->removeElement('show');
-        //$form->removeElement('browse-separator');
 
         // Populate form
         $this->view->categories = $categories = Engine_Api::_()->marketplace()->getCategories();
@@ -339,7 +755,6 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
         if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'create')->isValid())
             return;
         $viewer = Engine_Api::_()->user()->getViewer();
-        //  $marketplace = Engine_Api::_()->getItem('marketplace', $this->_getParam('marketplace_id'));
         $this->view->navigation = $this->getNavigation();
         $this->view->form = $form = new Marketplace_Form_Create();
 
@@ -366,7 +781,12 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
             }
         }
 
-        $form->business_email->setValue($mark['business_email']);
+		if(Engine_Api::_()->marketplace()->authorizeIsActive()){
+			$form->authorize_login->setValue($mark['authorize_login']);
+			$form->authorize_key->setValue($mark['authorize_key']);
+		}else{
+			$form->business_email->setValue($mark['business_email']);
+		}
         // If not post or form not valid, return
         if (!$this->getRequest()->isPost()) {
             return;
@@ -452,11 +872,6 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
     public function editAction() {
         if (!$this->_helper->requireUser()->isValid())
             return;
-            
-       //  $a_tree = Engine_Api::_()->marketplace()->tree_list_load_array(array($id));
-        // $a_tree = Engine_Api::_()->marketplace()->tree_list_load_all();
-
-       ///  print_r($a_tree);
 
         $viewer = $this->_helper->api()->user()->getViewer();
         $this->view->marketplace = $marketplace = Engine_Api::_()->getItem('marketplace', $this->_getParam('marketplace_id'));
@@ -687,11 +1102,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
     }
 
     // Utility
-
     public function getNavigation($active = false) {
-
-
-        //$db->
         if (is_null($this->_navigation)) {
             $navigation = $this->_navigation = new Zend_Navigation();
 
@@ -712,6 +1123,12 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
                     'action' => 'manage',
                     'active' => $active
                 ));
+                if(Engine_Api::_()->marketplace()->couponIsActive()) {
+                  $navigation->addPage(array(
+                      'label' => Zend_Registry::get('Zend_Translate')->_('My Coupons'),
+                      'route' => 'marketplace_coupon',
+                  ));
+				        }
                 if ($this->_helper->requireAuth()->setAuthParams('marketplace', null, 'create')->checkRequire()) {
                     $navigation->addPage(array(
                         'label' => Zend_Registry::get('Zend_Translate')->_('Post a New Listing'),
@@ -722,6 +1139,14 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
                     ));
                 }
                 $ordersTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+					
+				if(Engine_Api::_()->marketplace()->cartIsActive()){
+					$navigation->addPage(array(
+						'label' => Zend_Registry::get('Zend_Translate')->_('My Cart'),
+						'route' => 'marketplace_general',
+						'action' => 'cart'
+					));
+				}
 
                 $count = $ordersTable->getCountByUser($this->_helper->api()->user()->getViewer()->getIdentity());
 
@@ -758,7 +1183,6 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
             if (false && $marketplace_date + 31536000 > $time) {
                 $date_start = mktime(0, 0, 0, $ltime["tm_mon"], 1, $ltime["tm_year"]);
                 $date_end = mktime(0, 0, 0, $ltime["tm_mon"] + 1, 1, $ltime["tm_year"]);
-                //$label = date('F Y', $marketplace_date);
                 $type = 'month';
 
                 $marketplaceDateObject = new Zend_Date($marketplace_date);
@@ -830,11 +1254,318 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
                         ), $values);
 
         $this->view->assign($values);
+		
+		$select = $select
+					->where("owner_id = ? OR user_id = ?", $viewer->getIdentity())
+					->order(($values['order'] == 'summ'?'CAST('.$values['order'].' AS DECIMAL)':$values['order']).' '.$values['order_direction']);
 
         // Make paginator
         $this->view->paginator = $paginator = Zend_Paginator::factory($select);
         $this->view->paginator = $paginator->setCurrentPageNumber($page);
     }
 
+    public function addtocartAction() {
+		if( !$this->_helper->requireUser()->isValid() || !Engine_Api::_()->marketplace()->cartIsActive() )
+		  return $this->_forward('success', 'utility', 'core', array(
+			'messages' => array(Zend_Registry::get('Zend_Translate')->_('Auth error')),
+			'layout' => 'default-simple',
+			'parentRefresh' => true,
+		  ));
+		
+		$marketplace_id = $this->_getParam('marketplace_id', 0);
+		
+		if(empty($marketplace_id))
+		  return $this->_forward('success', 'utility', 'core', array(
+			'messages' => array(Zend_Registry::get('Zend_Translate')->_('Marketplace Listing error')),
+			'layout' => 'default-simple',
+			'parentRefresh' => true,
+		  ));
+		
+		$marketplace = Engine_Api::_()->getItem('marketplace', $marketplace_id);
+		
+		if(empty($marketplace))
+		  return $this->_forward('success', 'utility', 'core', array(
+			'messages' => array(Zend_Registry::get('Zend_Translate')->_('Marketplace Listing error')),
+			'layout' => 'default-simple',
+			'parentRefresh' => true,
+		  ));
+
+		$viewer = Engine_Api::_()->user()->getViewer();
+		$cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
+		$db = $cartTable->getAdapter();
+		$db->beginTransaction();
+
+		try
+		{
+			$alreadyCartItem = $cartTable->productIsAlreadyInCart($viewer->getIdentity(), $marketplace_id);
+			if(!$alreadyCartItem){
+				$cartTable->insert(array(
+					'user_id' => $viewer->getIdentity(),
+					'marketplace_id' => $marketplace_id,
+					'count' => 1
+				));
+			}else{
+				$alreadyCartItem->count++;
+				$alreadyCartItem->save();
+			}
+			$db->commit();
+		}
+		catch( Exception $e )
+		{
+			$db->rollBack();
+			throw $e;
+		}
+
+		return $this->_forward('success', 'utility', 'core', array(
+			'messages' => array(Zend_Registry::get('Zend_Translate')->_('Listing has been added to cart')),
+			'layout' => 'default-simple',
+			'parentRedirect' => Zend_Controller_Front::getInstance()->getRouter()->assemble(array(
+								  'action' => 'cart'
+								), 'marketplace_general', true),
+		));
+	}
+	
+    public function deletefromcartAction() {
+		if( !$this->_helper->requireUser()->isValid() || !Engine_Api::_()->marketplace()->cartIsActive() )
+		  return $this->_forward('success', 'utility', 'core', array(
+			'messages' => array(Zend_Registry::get('Zend_Translate')->_('Auth error')),
+			'layout' => 'default-simple',
+			'parentRefresh' => true,
+		  ));
+		
+		$marketplace_id = $this->_getParam('marketplace_id', 0);
+		
+		if(empty($marketplace_id))
+		  return $this->_forward('success', 'utility', 'core', array(
+			'messages' => array(Zend_Registry::get('Zend_Translate')->_('Marketplace Listing error')),
+			'layout' => 'default-simple',
+			'parentRefresh' => true,
+		  ));
+		
+		$marketplace = Engine_Api::_()->getItem('marketplace', $marketplace_id);
+		$viewer = Engine_Api::_()->user()->getViewer();
+		$cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
+		$db = $cartTable->getAdapter();
+		$db->beginTransaction();
+
+		try
+		{
+			$alreadyCartItem = $cartTable->productIsAlreadyInCart($viewer->getIdentity(), $marketplace_id);
+			if($alreadyCartItem){
+				$cartTable->delete(array(
+					'user_id = ?' => $viewer->getIdentity(),
+					'marketplace_id = ?' => $marketplace_id
+				));
+			}else{
+				return $this->_forward('success', 'utility', 'core', array(
+					'messages' => array(Zend_Registry::get('Zend_Translate')->_('Marketplace Listing error')),
+					'layout' => 'default-simple',
+					'parentRefresh' => true,
+				));
+			}
+			$db->commit();
+		}
+		catch( Exception $e )
+		{
+			$db->rollBack();
+			throw $e;
+		}
+
+		return $this->_forward('success', 'utility', 'core', array(
+			'messages' => array(Zend_Registry::get('Zend_Translate')->_('Listing has been deleted from cart')),
+			'layout' => 'default-simple',
+			'parentRedirect' => Zend_Controller_Front::getInstance()->getRouter()->assemble(array(
+								  'action' => 'cart'
+								), 'marketplace_general', true),
+		));
+	}
+	
+    public function cartAction() {
+		if( !$this->_helper->requireUser()->isValid() ) return;
+		if( !Engine_Api::_()->marketplace()->cartIsActive() ) return $this->_forward('notfound', 'error', 'core');
+		$viewer = Engine_Api::_()->user()->getViewer();
+		$cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
+		$db = $cartTable->getAdapter();
+		
+		if( $this->getRequest()->isPost() )
+		{
+			$values = $this->getRequest()->getPost();
+			if($values['marketplaces_count']){
+				foreach($values['marketplaces_count'] as $marketplace_id => $m_count){
+					$m_count = intval($m_count);
+					if($m_count > 0){
+						$cartTable->update(array(
+							'count' => $m_count
+						),array(
+							'user_id = ?' => $viewer->getIdentity(),
+							'marketplace_id = ?' => $marketplace_id
+						));
+					}elseif($m_count == 0){
+						$cartTable->delete(array(
+							'user_id = ?' => $viewer->getIdentity(),
+							'marketplace_id = ?' => $marketplace_id
+						));
+					}
+				}
+			}
+			if(!empty($values['redirect']) && $values['redirect'] == '1'){
+				return $this->_helper->redirector->gotoRoute(array('action' => 'checkout'));
+			}elseif(!empty($values['redirect']) && $values['redirect'] == '2'){
+				return $this->_helper->redirector->gotoRoute(array('action' => 'index'));
+			}
+		}
+
+		$select = $cartTable->select()
+			->where('user_id = ?', $viewer->getIdentity())
+		;
+		$this->view->cartitems = $cartitems = $cartTable->fetchAll($select);
+		$this->view->flat_shipping_rate = $flat_shipping_rate = floatval(Engine_Api::_()->getApi('settings', 'core')->getSetting('flat.shipping.rate', 0)); 
+	}
+	
+    public function checkoutAction() {
+		if( !$this->_helper->requireUser()->isValid() ) return;
+		if( !Engine_Api::_()->marketplace()->cartIsActive() ) return $this->_forward('notfound', 'error', 'core');
+		$viewer = Engine_Api::_()->user()->getViewer();
+		
+		$cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
+		$db = $cartTable->getAdapter();
+		
+		$select = $cartTable->select()
+			->where('user_id = ?', $viewer->getIdentity())
+		;
+		$this->view->cartitems = $cartitems = $cartTable->fetchAll($select);
+		$this->view->flat_shipping_rate = $flat_shipping_rate = floatval(Engine_Api::_()->getApi('settings', 'core')->getSetting('flat.shipping.rate', 0));
+		
+		if(Engine_Api::_()->marketplace()->couponIsActive()){
+			$couponTable = Engine_Api::_()->getDbTable('coupons', 'marketplace');
+			$couponTableName = $couponTable->info('name');
+			$couponcartTable = Engine_Api::_()->getDbTable('couponcarts', 'marketplace');
+			$couponcartTableName = $couponcartTable->info('name');
+			
+			if($this->getRequest()->getPost() && $cartitems->toArray()){
+				$coupon_code = $this->_getParam('coupon_code', '');
+				$first_marketplace = Engine_Api::_()->getItem('marketplace', $cartitems[0]->marketplace_id);
+				if($coupon_code){
+					$coupon_select = $couponTable->select()->where('code = ?', $coupon_code);
+					$coupon_res = $couponTable->fetchRow($coupon_select);
+					
+					$seller_coupon = Engine_Api::_()->marketplace()->getDiscountPercentByOwner($coupon_res->user_id, $viewer->getIdentity());
+					if($coupon_res->coupon_id && empty($seller_coupon)){
+						if($coupon_res->user_id != $first_marketplace->getOwner()->getIdentity()){
+							$this->view->coupon_error = 1;//wrong coupon code
+						}else{
+							$couponcartTable->insert(array(
+								'coupon_id' => $coupon_res->coupon_id,
+								'user_id' => $viewer->getIdentity()
+							));
+							$this->view->coupon_error = 2;
+						}
+					}elseif(!empty($seller_coupon)){
+						$this->view->coupon_error = 3;
+					}else{
+						$this->view->coupon_error = 1;
+					}
+				}
+			}
+		}
+
+		if($cartitems->toArray()){
+			$first_marketplace = Engine_Api::_()->getItem('marketplace', $cartitems[0]->marketplace_id);
+			if(!$first_marketplace)
+				return;
+			$first_stage_owner = $first_marketplace->getOwner()->getIdentity();
+			
+			if(Engine_Api::_()->marketplace()->authorizeIsActive()){
+				$flat_shipping_rate = floatval(Engine_Api::_()->getApi('settings', 'core')->getSetting('flat.shipping.rate', 0));
+				$first_marketplace = Engine_Api::_()->getItem('marketplace', $cartitems[0]->marketplace_id);
+				$ids_arr = array();
+				$titles_arr = array();
+				$shipping_fee = 0;
+				$total_amount = 0;
+				$discount_amount = 0;
+				foreach($cartitems as $cartitem){
+					$current_marketplace = Engine_Api::_()->getItem('marketplace', $cartitem->marketplace_id);
+					if($first_stage_owner != $current_marketplace->getOwner()->getIdentity())
+						continue;
+					$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($cartitem->marketplace_id, $viewer->getIdentity());
+					$shipping_fee += ($product_shipping_fee?$product_shipping_fee:$flat_shipping_rate) * $cartitem->count;
+					$total_amount += $current_marketplace->price * $cartitem->count;
+							
+					$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($cartitem->marketplace_id, $viewer->getIdentity());
+					$discount_amount += $coupon_discount * $cartitem->count;
+					
+					$titles_arr[] = $current_marketplace->title;
+					$ids_arr[] = $current_marketplace->marketplace_id.'-'.$cartitem->count;
+				}
+				$total_amount_full = $total_amount + $shipping_fee - $discount_amount;
+				
+				if ($first_marketplace) {
+
+					$this->view->owner = $owner = Engine_Api::_()->getItem('user', $first_marketplace->owner_id);
+				}
+				
+				$authorize_login = ($first_marketplace->authorize_login?$first_marketplace->authorize_login:'7sBYqTp344eh');
+				$authorize_key = ($first_marketplace->authorize_key?$first_marketplace->authorize_key:'8sY8eUVj47M46dxA');
+				$testmode = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.authorize.testmode', '0');
+				$myAuthorize = new Marketplaceauthorize_Api_Authorize();
+				$myAuthorize->setUserInfo($authorize_login, $authorize_key);
+				$myAuthorize->addField('x_Receipt_Link_URL', 'http://'.$_SERVER['HTTP_HOST'].$this->view->baseUrl().'/marketplaces/paymentreturn/payment/authorize');
+				$myAuthorize->addField('x_Relay_URL', 'http://'.$_SERVER['HTTP_HOST'].$this->view->baseUrl().'/marketplaces/paymentnotify/payment/authorize');
+				$myAuthorize->addField('x_Description', join(', ', $titles_arr));
+				$myAuthorize->addField('x_Amount', number_format($total_amount_full, 2));
+				$myAuthorize->addField('x_Invoice_num', join('|', $ids_arr) . ':' . $viewer->getIdentity());
+				$myAuthorize->addField('x_product_id', join('|', $ids_arr) . ':' . $viewer->getIdentity());
+				$myAuthorize->addField('x_user_id', $viewer->getIdentity());
+				$myAuthorize->enableTestMode();
+				$this->view->paymentForm = $myAuthorize->render();
+			}else{
+				$this->view->paymentForm = $this->paypalcart($cartitems)->form();
+			}
+		}
+    }
+
+    public function paypalcart($cartitems) {
+        $paypal = new Marketplace_Api_Payment($this->_sandbox);//true);
+        $viewer = $this->_helper->api()->user()->getViewer();
+		$flat_shipping_rate = floatval(Engine_Api::_()->getApi('settings', 'core')->getSetting('flat.shipping.rate', 0));
+
+		$first_marketplace = Engine_Api::_()->getItem('marketplace', $cartitems[0]->marketplace_id);
+		$first_stage_owner = $first_marketplace->getOwner()->getIdentity();
+		
+		$ids_arr = array();
+		$titles_arr = array();
+		$shipping_fee = 0;
+		$total_amount = 0;
+		$discount_amount = 0;
+		foreach($cartitems as $cartitem){
+			$current_marketplace = Engine_Api::_()->getItem('marketplace', $cartitem->marketplace_id);
+			if($first_stage_owner != $current_marketplace->getOwner()->getIdentity())
+				continue;
+			$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($cartitem->marketplace_id, $viewer->getIdentity());
+			$shipping_fee += ($product_shipping_fee?$product_shipping_fee:$flat_shipping_rate) * $cartitem->count;
+			$total_amount += $current_marketplace->price * $cartitem->count;
+					
+			$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($cartitem->marketplace_id, $viewer->getIdentity());
+			$discount_amount += $coupon_discount * $cartitem->count;
+			
+			$titles_arr[] = $current_marketplace->title;
+			$ids_arr[] = $current_marketplace->marketplace_id.'-'.$cartitem->count;
+		}
+		$total_amount_full = $total_amount + $shipping_fee - $discount_amount;
+		
+        if ($first_marketplace) {
+
+            $this->view->owner = $owner = Engine_Api::_()->getItem('user', $first_marketplace->owner_id);
+        }
+        $user = $this->_helper->api()->user()->getUser($viewer->getIdentity());
+        $paypal->setBusinessEmail($first_marketplace->business_email);
+        $paypal->setPayer($user->email, $viewer->getIdentity());
+
+        $paypal->setAmount(number_format($total_amount_full, 2));
+        $paypal->setNumber(join('|', $ids_arr) . ':' . $viewer->getIdentity());
+        $paypal->addItem(array('item_name' => join(', ', $titles_arr)));
+        $paypal->setControllerUrl("http://" . $this->getRequest()->getHttpHost() . $this->view->url(array(), 'marketplace_extended', true) . '/payment'); //->url());
+        return $paypal;
+    }
 }
 

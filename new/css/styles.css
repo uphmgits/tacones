@@ -1,0 +1,93 @@
+@font-face {
+    font-family: Univers LT Std;
+    src: url(fonts/Univers-LT-Std.ttf);
+}
+@font-face {
+    font-family: Univers Bd Std;
+    src: url(fonts/Univers-Bold.ttf);
+}
+
+body{margin:0px; padding:0; background-color:#232323;}
+.outer-container{margin:0 auto; width:997px;}
+.clear{clear:both; margin:0; padding:0; list-style-type:none; font-size:0; line-height:0; list-style-type:none;}
+.header-container{ margin:0 auto; width:940px;}
+.logo{display:block; float:left; width:137px; padding:30px 0 10px 0;}
+.header-right{display:block; float:right; width:790px;}
+.profile-links{display:block; float:right; padding-top:30px;}
+.welcome-user{display:block; float:left; font-family:Univers LT Std; font-size:15px; color:#737373; padding-right:15px;}
+.profile-links ul{margin:0; padding:0; list-style-type:none; float:left;}
+.profile-links ul li{display:block; float:left; padding:0 15px;}
+.profile-links ul li a{ font-family:Univers LT Std; font-size:15px; color:#737373; text-decoration:none; padding-right:13px; background:url(../images/arrow-normal.jpg) no-repeat right;}
+.profile-links ul li a.select{background:url(../images/arrow-selected.jpg) no-repeat right; padding-right:13px;}
+.main-nav-container{display:block; float:right; padding-top:15px;}
+.main-nav-container ul{margin:0; padding:0; list-style-type:none; float:left;}
+.main-nav-container ul li{display:block; float:left; padding:0 8px;}
+.main-nav-container ul li a{color:#858485; font-family:Univers LT Std; font-size:19px; text-decoration:none;}
+.main-nav-container ul li a:hover{color:#cccccc;}
+.search-container{display:block; float:left; width:215px; padding-left:5px;}
+.search-field{display:block; float:left; width:200px; padding-top:3px;}
+.search-field input{border:1px solid #2b2b2b; background-color:#191919; width:193px; color:#949292; font-family:Univers LT Std; font-size:14px; padding-left:5px; height:20px; outline:none;}
+.search-butn{display:block; float:right; padding-top:6px;}
+.cart-container{display:block; float:left; padding-left:15px; color:#b4b4b4; font-family:Univers LT Std; font-size:19px;}
+.cart-container span{font-size:14px;}
+
+.banner-container{display:block; float:left; width:997px;}
+.previous-butn{display:block; float:left; width:11px; padding-right:16px; padding-top:50px;}
+.next-butn{display:block; float:right; width:11px; padding-left:16px; padding-top:50px;}
+.banner{display:block; float:left; width:942px;}
+.content-container{display:block; float:left; width:997px;}
+.product-links{width:940px; margin:0 auto; text-align:right; font-family:Univers LT Std; padding:10px 0;}
+.product-links span{color:#8c8d8b; padding-right:10px; font-size:14px;}
+.product-links ul{margin:0; padding:0; list-style-type:none; float:right;}
+.product-links ul li{display:block; float:left; padding:0 5px; font-family:Univers LT Std; color:#8c8d8b; font-size:14px;}
+.product-links ul li a{font-weight:bold; text-decoration:none; color:#8c8c8c; font-family:Univers Bd Std;}
+.product-links ul li a:hover, .product-links ul li a.active{color:#cccccc;}
+.main-contant-container{display:block; float:left; width:965px; margin-left:29px;}
+.left-container{display:block; float:left; width:160px;}
+.nav-left-container{display:block; float:left; width:120px; background-color:#4e0233; padding:20px; margin-bottom:35px;}
+.filter{display:block; float:left; font:15px Univers Bd Std; letter-spacing:1px; color:#a51c4b; width:120px;}
+.nav-left-container ul{margin:0; padding:0; list-style-type:none; width:120px;}
+.nav-left-container ul li{display:block; float:left; width:120px; padding:4px 0;}
+.nav-left-container ul li a{ font:14px Univers Bd Std; letter-spacing:1px; color:#a51c4b; text-decoration:none; text-transform:uppercase;}
+.nav-left-container ul li a:hover{color:#fc5a78;}
+
+.categories-outer{display:block; float:left; width:120px; background-color:#82114e; padding:20px;}
+.categories-outer ul{margin:0; padding:0; list-style-type:none; width:120px;}
+.categories-outer ul li{display:block; float:left; width:120px; padding:4px 0;}
+.categories-outer ul li a{ font:14px Univers Bd Std; letter-spacing:1px; color:#460519; text-decoration:none; text-transform:uppercase;}
+.categories-outer ul li a:hover{color:#3b0314;}
+
+.right-container{display:block; float:right; width:805px;}
+.product-columns{display:block; float:left; width:160px; padding-left:35px;}
+
+.product-outer{display:block; float:left; width:160px; padding-bottom:30px;}
+.pro-img{display:block; float:left; width:160px; padding-bottom:5px;}
+.love-info{display:block; float:left; width:160px; padding-bottom:3px;}
+.love-info span.love{padding-left:17px; background:url(../images/love.png) no-repeat left; font-family:Univers LT Std; color:#c20c0c; font-size:13px; padding-right:15px;}
+.love-info span.dress{padding-left:17px; background:url(../images/dress-icon.png) no-repeat left; font-family:Univers LT Std; color:#ff0078; font-size:13px; padding-right:15px;}
+.love-info span.we-love{float:right; padding-right:5px; padding-top:3px;}
+.pro-name-price{display:block; float:left; width:160px; color:#e3e2e2; font-family:Univers LT Std; color:#e3e2e2; font-size:14px; text-transform:uppercase;}
+.pro-size{display:block; float:left; width:160px; font-family:Univers LT Std; color:#9f9f9f; font-size:13px; padding-bottom:5px;}
+.profile-dtls{display:block; float:left; width:160px;}
+.profile-dtls .prof-img{display:block; float:left; width:23px; padding-right:10px; padding-top:5px;}
+.profile-dtls .dtls{display:block; float:right; width:125px;}
+.profile-dtls .dtls span.name{display:block; font-family:Univers LT Std; color:#7f7f7f; font-size:14px;}
+.profile-dtls .dtls span.items{display:block; font-family:Univers LT Std; color:#7f7f7f; font-size:13px;}
+
+.footer-container{margin:0 auto; width:940px; border-top:1px solid #666666; padding-top:30px; padding-bottom:20px;}
+.foot-links{display:block; float:left; width:410px;}
+.foot-links ul{margin:0; padding:0; list-style-type:none;}
+.foot-links ul li{display:block; float:left; padding-right:20px; color:#858585; font-family:Univers LT Std; font-size:14px;}
+.foot-links ul li a{color:#858585; font-family:Univers LT Std; font-size:14px; text-decoration:none;}
+.networks{display:block; float:left; width:150px; padding-left:20px;}
+.networks ul{margin:0; padding:0; list-style-type:none;}
+.networks ul li{display:block; float:left; padding-right:10px;}
+.copyright{display:block; float:right; color:#858585; font-family:Univers LT Std; font-size:14px;}
+.copyright span{font-size:15px; color:#999999;}
+
+
+
+
+
+
+

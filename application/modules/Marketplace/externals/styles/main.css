@@ -467,11 +467,10 @@ td.admin_table_options > a + span.sep
 }
 
 #navigation ul  {
-    width: 300px;
     margin: 0px;
     padding: 0px;
     position: relative;
-    left: 20px;
+    padding-left: 20px;
 }
 #navigation li   {
     list-style: square;
@@ -484,7 +483,7 @@ td.admin_table_options > a + span.sep
 	font-weight: bold;
     float: left;
     overflow: hidden;
-    width: 70px;
+    width: 100px;
 }
 .marketplace_fieldvalueloop > ul > li > span + span {
 	font-weight: normal;
@@ -500,4 +499,51 @@ td.admin_table_options > a + span.sep
 .layout_middle_left{
 	width: 500px;
 	float:left;
+}
+
+
+a.add_to_cart,
+a.marketplace_button
+{
+	+rounded(2px);
+	padding: 6px 5px;
+	font-weight: bold;
+	border: none;
+	background-color: #7EB6D5;
+	border: 1px solid #50809B;
+	color: #fff !important;
+	background-image: url(~/application/modules/Core/externals/images/buttonbg.png);
+	background-repeat: repeat-x;
+	height: 16px;
+}
+
+a.add_to_cart:hover,
+a.marketplace_button:hover
+{
+	background-image: none;
+	background-color: #7EB6D5;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+table.cart_table,
+table.cart_table tr,
+table.cart_table tr td{
+	margin: 4px;
+	padding: 4px;
+}
+
+
+.marketplaces_wrapper{
+	float: left;
+	width: 340px;
+	margin: 0 5px;
+}
+
+#coupon_code{
+	border: 1px solid #000;
+}
+
+*:first-child+html  .global_form div.form-wrapper{
+	margin-bottom: 10px;
 }

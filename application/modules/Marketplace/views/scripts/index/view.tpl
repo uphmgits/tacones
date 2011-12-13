@@ -17,10 +17,6 @@
 endif; ?>
 
 <link rel="stylesheet" href="application/modules/Marketplace/externals/milkbox/css/milkbox/milkbox.css" type="text/css" media="screen" />
-
-<!--
-<script type="text/javascript" src="application/modules/Marketplace/externals/milkbox/js/mootools-1.2.5-core-yc.js"></script>
--->
 <script type="text/javascript" src="application/modules/Marketplace/externals/milkbox/js/mootools-1.2.5.1-more.js"></script>
 <script type="text/javascript" src="application/modules/Marketplace/externals/milkbox/js/milkbox.js"></script>
 
@@ -134,6 +130,21 @@ endif; ?>
 		  <h2>
 			<?php echo $this->translate('%1$s\'s Marketplace Listing', $this->htmlLink($this->owner->getHref(), $this->owner->getTitle()))?>
 		  </h2>
+
+		  <?php if($this->coupon_error == 1): ?>
+			<div class="tip">
+			  <span>
+				<?php echo $this->translate('Wrong coupon code');?>
+			  </span>
+			</div>
+		  <?php elseif($this->coupon_error == 2): ?>
+			<div class="tip">
+			  <span>
+				<?php echo $this->translate('Coupon have been succesfully activated');?>
+			  </span>
+			</div>
+		  <?php endif; ?>
+
 		  <ul class='marketplaces_entrylist'>
 			<li>
 			  <h3>
@@ -175,7 +186,6 @@ endif; ?>
 				</ul>
 				
 			</li>
-		  </ul>
 		  <?php echo $this->action("list", "comment", "core", array("type"=>"marketplace", "id"=>$this->marketplace->getIdentity())) ?>
 		</div>
 		  <div class="marketplace_fieldvalueloop">
@@ -184,11 +194,62 @@ endif; ?>
 			<ul style="margin:15px 0;">
 				<li>
 					<span style="font-size:18px;">Price:</span>
-					<span style="font-size:18px;">$<?php echo $this->marketplace->price;?></span>
+					<span style="font-size:18px;">$<?php echo (($this->marketplace->price - $this->discount_sum) >= 0?$this->marketplace->price - $this->discount_sum:0);?></span>
 				</li>
+				<?php if(Engine_Api::_()->marketplace()->upsIsActive()): ?>
+					<?php
+						$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($this->marketplace->marketplace_id, $this->viewer()->getIdentity());
+					?>
+					<?php if($product_shipping_fee): ?>
+						<li>
+							<span style="font-size:13px;text-align: left;">Shipping Fee:</span>
+							<span style="font-size:13px;">$<?php echo number_format($product_shipping_fee, 2);?></span>
+						</li>
+					<?php endif; ?>
+				<?php endif; ?>
 			</ul>
-			<br /><br />
-			<?php echo $this->paypalForm; ?>
+			<?php if(Engine_Api::_()->marketplace()->cartIsActive() and $this->viewer()->getIdentity() ): ?>
+				<br /><br />
+				<?php if(!empty($this->already_in_cart)): ?>
+					<div class="tip">
+					  <span>
+						<?php echo $this->translate('Already in my cart');?>
+					  </span>
+					</div>
+				<?php endif; ?>
+				<div style="text-align: left;margin-bottom: 10px;">
+					<?=$this->htmlLink(array('route' => 'marketplace_general', 'action' => 'addtocart', 'marketplace_id' => $this->marketplace->getIdentity()), 'Add to Cart', array('class' => 'add_to_cart smoothbox'))?>
+				</div>
+			<?php else: ?>
+				<?php if(Engine_Api::_()->marketplace()->couponIsActive()): ?>
+					<br /><br />
+					<?php if(empty($this->coupon_res)): ?>
+						<div style="margin: 20px 0;">
+							<form method="post">
+								<?=$this->translate('Enter a coupon code: ')?> <input name="coupon_code" value="" style="border: 1px solid #000;" />
+								<br/><br/>
+								<button id="submit" type="submit" name="submit"><?=$this->translate('Apply')?></button>
+							</form>
+						</div>
+					<?php elseif(!empty($this->discount)): ?>
+						<?=$this->translate('Your discount: ').$this->discount.'%';?>
+					<?php endif; ?>
+				<?php endif; ?>
+				<br /><br />
+				<?php if( !$this->prepay ) : ?>
+          <?php //echo '<pre>'; print_r($this->paymentForm); echo '</pre>'; ?>
+          <?php echo $this->paymentForm?>
+  			<?php endif; ?>
+
+			<?php endif; ?>
+			<?php if( $this->prepay ) : ?>
+        <style>
+          #marketplaces_prepaypal .form-label { display: none; }
+          #marketplaces_prepaypal input#marketplaces_email { width: 160px; }
+          #marketplaces_prepaypal .form-elements { margin-top: 0; }
+        </style>
+        <?=$this->paymentForm->render($this)?>
+  		<?php endif; ?>
 		  </div>
 	</div>
 </div>

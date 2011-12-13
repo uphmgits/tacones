@@ -37,6 +37,3 @@
 <?php if ($this->page == 'ipn') : ?>
 
 <?php endif; ?>
-
-
-
