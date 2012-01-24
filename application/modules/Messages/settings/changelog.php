@@ -6,26 +6,10 @@
  * @package    Messages
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: changelog.php 9381 2011-10-14 00:37:49Z john $
+ * @version    $Id: changelog.php 9140 2011-08-03 23:47:47Z john $
  * @author     John
  */
 return array(
-  '4.1.8' => array(
-    'Api/Core.php' => 'Removed deprecated code',
-    'controllers/MessagesController.php' => 'Added pages to the layout editor',
-    'externals/.htaccess' => 'Updated with far-future expires headers for static resources',
-    'settings/changelog.php' => 'Incremented version',
-    'settings/content.php' => 'Added pages to the layout editor',
-    'settings/install.php' => 'Added',
-    'settings/manifest.php' => 'Incremented version',
-    'settings/my.sql' => 'Incremented version',
-    'views/scripts/messages/compose.tpl' => 'Added static base URL for CDN support',
-    'views/scripts/messages/inbox.tpl' => 'Added pages to the layout editor',
-    'views/scripts/messages/outbox.tpl' => 'Added pages to the layout editor',
-    'views/scripts/messages/view.tpl' => 'Added static base URL for CDN support',
-    'widgets/menu/Controller.php' => 'Added',
-    'widgets/menu/index.tpl' => 'Added',
-  ),
   '4.1.7' => array(
     'controllers/MessagesController.php' => 'Fixed issue with page not redirecting properly when deleting messages',
     'Plugin/Menus.php' => 'Fixed issue where a link to send a message would be displayed when not allowed by level settings',

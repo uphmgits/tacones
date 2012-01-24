@@ -6,18 +6,18 @@
  * @package    Storage
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: upload.tpl 9395 2011-10-18 00:16:27Z shaun $
+ * @version    $Id: upload.tpl 7731 2010-11-02 18:55:28Z shaun $
  * @author     Sami
  */
 ?>
 
 <?php
   $this->headScript()
-    ->appendFile($this->layout()->staticBaseUrl . 'externals/fancyupload/Swiff.Uploader.js')
-    ->appendFile($this->layout()->staticBaseUrl . 'externals/fancyupload/Fx.ProgressBar.js')
-    ->appendFile($this->layout()->staticBaseUrl . 'externals/fancyupload/FancyUpload2.js');
+    ->appendFile($this->baseUrl() . '/externals/fancyupload/Swiff.Uploader.js')
+    ->appendFile($this->baseUrl() . '/externals/fancyupload/Fx.ProgressBar.js')
+    ->appendFile($this->baseUrl() . '/externals/fancyupload/FancyUpload2.js');
   $this->headLink()
-    ->appendStylesheet($this->layout()->staticBaseUrl . 'externals/fancyupload/fancyupload.css');
+    ->appendStylesheet($this->baseUrl() . '/externals/fancyupload/fancyupload.css');
   $this->headTranslate(array(
     'Overall Progress ({total})', 'File Progress', 'Uploading "{name}"',
     'Upload: {bytesLoaded} with {rate}, {timeRemaining} remaining.', '{name}',
@@ -42,16 +42,14 @@ window.addEvent('domready', function() { // wait for the content
 
 	var up = new FancyUpload2($('demo-status'), $('demo-list'), { // options object
 		// we console.log infos, remove that in production!!
-		verbose: ( en4 in window && en4.core.environment == 'development' ? true : false ),
-        //verbose: true,
+		verbose: false,
 		appendCookieData: true,
-		timeLimit: 0,
  
 		// url is read from the form, so you just have to change one place
 		url: $('form-upload').action + '?ul=1',
  
 		// path to the SWF file
-		path: '<?php echo $this->layout()->staticBaseUrl . 'externals/fancyupload/Swiff.Uploader.swf';?>',
+		path: '<?php echo $this->baseUrl() . '/externals/fancyupload/Swiff.Uploader.swf';?>',
  
 		// remove that line to select all files, or edit it, add more items
 		typeFilter: {
@@ -241,11 +239,11 @@ window.addEvent('domready', function() { // wait for the content
   </div>
   <div class="demo-status-overall" id="demo-status-overall" style="display:none">
     <div class="overall-title"></div>
-    <img src="<?php echo $this->layout()->staticBaseUrl . 'externals/fancyupload/assets/progress-bar/bar.gif';?>" class="progress overall-progress" />
+    <img src="<?php echo $this->baseUrl() . '/externals/fancyupload/assets/progress-bar/bar.gif';?>" class="progress overall-progress" />
   </div>
   <div class="demo-status-current" id="demo-status-current" style="display:none">
     <div class="current-title"></div>
-    <img src="<?php echo $this->layout()->staticBaseUrl . 'externals/fancyupload/assets/progress-bar/bar.gif';?>" class="progress current-progress" />
+    <img src="<?php echo $this->baseUrl() . '/externals/fancyupload/assets/progress-bar/bar.gif';?>" class="progress current-progress" />
   </div>
   <div class="current-text"></div>
 </div>

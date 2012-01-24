@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: SignupController.php 9306 2011-09-22 00:24:24Z john $
+ * @version    $Id: SignupController.php 9076 2011-07-21 02:11:10Z john $
  * @author     John
  */
 
@@ -24,22 +24,17 @@ class User_SignupController extends Core_Controller_Action_Standard
   
   public function indexAction()
   {
-    // Render
-    $this->_helper->content
-        //->setNoRender()
-        ->setEnabled()
-        ;
-    
-    // Get settings
     $settings = Engine_Api::_()->getApi('settings', 'core');
 
     // If the user is logged in, they can't sign up now can they?
-    if( Engine_Api::_()->user()->getViewer()->getIdentity() ) {
+    if( Engine_Api::_()->user()->getViewer()->getIdentity() )
+    {
       return $this->_helper->redirector->gotoRoute(array(), 'default', true);
     }
     
     $formSequenceHelper = $this->_helper->formSequence;
-    foreach( Engine_Api::_()->getDbtable('signup', 'user')->fetchAll() as $row ) {
+    foreach( Engine_Api::_()->getDbtable('signup', 'user')->fetchAll() as $row )
+    {
       if( $row->enable == 1 ) {
         $class = $row->class;
         $formSequenceHelper->setPlugin(new $class, $row->order);
@@ -78,39 +73,20 @@ class User_SignupController extends Core_Controller_Action_Standard
       // Check for the user's plan
       $subscriptionsTable = Engine_Api::_()->getDbtable('subscriptions', 'payment');
       if( !$subscriptionsTable->check($viewer) ) {
-    
-        // Handle default payment plan
-        $defaultSubscription = null;
-        try {
-          $subscriptionsTable = Engine_Api::_()->getDbtable('subscriptions', 'payment');
-          if( $subscriptionsTable ) {
-            $defaultSubscription = $subscriptionsTable->activateDefaultPlan($viewer);
-            if( $defaultSubscription ) {
-              // Re-process enabled?
-              $viewer->enabled = true;
-              $viewer->save();
-            }
-          }
-        } catch( Exception $e ) {
-          // Silence
-        }
+        // Redirect to subscription page, log the user out, and set the user id
+        // in the payment session
+        $subscriptionSession = new Zend_Session_Namespace('Payment_Subscription');
+        $subscriptionSession->user_id = $viewer->getIdentity();
         
-        if( !$defaultSubscription ) {
-          // Redirect to subscription page, log the user out, and set the user id
-          // in the payment session
-          $subscriptionSession = new Zend_Session_Namespace('Payment_Subscription');
-          $subscriptionSession->user_id = $viewer->getIdentity();
-          
-          Engine_Api::_()->user()->setViewer(null);
-          Engine_Api::_()->user()->getAuth()->getStorage()->clear();
+        Engine_Api::_()->user()->setViewer(null);
+        Engine_Api::_()->user()->getAuth()->getStorage()->clear();
 
-          if( !empty($subscriptionSession->subscription_id) ) {
-            return $this->_helper->redirector->gotoRoute(array('module' => 'payment',
-              'controller' => 'subscription', 'action' => 'gateway'), 'default', true);
-          } else {
-            return $this->_helper->redirector->gotoRoute(array('module' => 'payment',
-              'controller' => 'subscription', 'action' => 'index'), 'default', true);
-          }
+        if( !empty($subscriptionSession->subscription_id) ) {
+          return $this->_helper->redirector->gotoRoute(array('module' => 'payment',
+            'controller' => 'subscription', 'action' => 'gateway'), 'default', true);
+        } else {
+          return $this->_helper->redirector->gotoRoute(array('module' => 'payment',
+            'controller' => 'subscription', 'action' => 'index'), 'default', true);
         }
       }
     }
@@ -129,7 +105,6 @@ class User_SignupController extends Core_Controller_Action_Standard
 
     // Handle normal signup
     else {
-      Engine_Api::_()->user()->getAuth()->getStorage()->write($viewer->getIdentity());
       Engine_Hooks_Dispatcher::getInstance()
           ->callEvent('onUserEnable', $viewer);
     }
@@ -143,7 +118,7 @@ class User_SignupController extends Core_Controller_Action_Standard
       }
       $viewer->save();
     }
-    
+
     return $this->_helper->_redirector->gotoRoute(array('action' => 'home'), 'user_general', true);
   }
 

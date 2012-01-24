@@ -1,5 +1,5 @@
 
-/* $Id: composer_twitter.js 9382 2011-10-14 00:41:45Z john $ */
+/* $Id: composer_facebook.js 7244 2010-09-01 01:49:53Z john $ */
 
 
 Composer.Plugin.Twitter = new Class({

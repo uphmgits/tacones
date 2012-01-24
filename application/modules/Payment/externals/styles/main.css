@@ -1,9 +1,8 @@
 
-/* $Id: main.css 9191 2011-08-20 00:00:03Z john $ */
+/* $Id: main.css 8825 2011-04-09 01:34:20Z john $ */
 
 
 
-.payment_form_signup .package-container,
 .payment_form_settings .package-container
 {
   display: block;
@@ -19,16 +18,4 @@
 {
   padding-top: 2px;
   clear: both;
-}
-
-.payment_form_signup .package-description
-{
-  padding-top: 2px;
-  clear: both;
-  padding-bottom: 4px;
-}
-
-.payment_form_signup .form-elements .form-label
-{
-  width: 100px;
 }

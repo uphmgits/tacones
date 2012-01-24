@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: jobs.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: jobs.tpl 8221 2011-01-15 00:24:02Z john $
  * @author     John
  */
 ?>
@@ -61,7 +61,7 @@
 <div>
   <?php echo $this->htmlLink(array('action' => 'job-add', 'reset' => false), $this->translate('Add Job'), array(
     'class' => 'buttonlink',
-    'style' => 'background-image: url(' . $this->layout()->staticBaseUrl . 'application/modules/Network/externals/images/admin/add.png);'
+    'style' => 'background-image: url(application/modules/Network/externals/images/admin/add.png);'
   )) ?>
 </div>
 

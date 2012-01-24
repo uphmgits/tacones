@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: ItemPhoto.php 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: ItemPhoto.php 9108 2011-07-26 23:36:26Z john $
  * @author     Sami
  */
 
@@ -107,7 +107,7 @@ class Core_View_Helper_ItemPhoto extends Engine_View_Helper_HtmlImage
       }
       $module = Engine_Api::_()->inflect(Engine_Api::_()->getItemModule($item));
       $this->_noPhotos[$item][$type] = //$this->view->baseUrl() . '/' .
-        $this->view->layout()->staticBaseUrl . 'application/modules/' .
+        'application/modules/' .
         $module .
         '/externals/images/nophoto_' .
         $shortType . '_'

@@ -7,7 +7,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: HelpController.php 9311 2011-09-22 02:03:56Z shaun $
+ * @version    $Id: HelpController.php 7411 2010-09-18 04:02:25Z john $
  * @author     Alex
  */
 
@@ -22,15 +22,9 @@ class Core_HelpController extends Core_Controller_Action_Standard
 
   public function contactAction()
   {
-    // Render
-    $this->_helper->content
-        //->setNoRender()
-        ->setEnabled()
-        ;
-     
     $translate = Zend_Registry::get('Zend_Translate');
     $this->view->form = $form = new Core_Form_Contact();
-         
+
     if( !$this->getRequest()->isPost() ) {
       return;
     }
@@ -78,7 +72,7 @@ class Core_HelpController extends Core_Controller_Action_Standard
       // Make params
       $mail_settings = array(
         'host' => $_SERVER['HTTP_HOST'],
-        'email' => Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.contact', $super_admin->email),
+        'email' => $super_admin->email,
         'date' => time(),
         'recipient_title' => $super_admin->getTitle(),
         'recipient_link' => $super_admin->getHref(),
@@ -115,21 +109,11 @@ class Core_HelpController extends Core_Controller_Action_Standard
   public function termsAction()
   {
     // to change, edit language variable "_CORE_TERMS_OF_SERVICE"
-    // Render
-    $this->_helper->content
-        //->setNoRender()
-        ->setEnabled()
-        ;
   }
 
   public function privacyAction()
   {
     // to change, edit language variable "_CORE_PRIVACY_STATEMENT"
-    // Render
-    $this->_helper->content
-        //->setNoRender()
-        ->setEnabled()
-        ;
   }
 
 }

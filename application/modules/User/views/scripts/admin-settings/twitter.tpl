@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: twitter.tpl 9382 2011-10-14 00:41:45Z john $
+ * @version    $Id: facebook.tpl 7244 2010-09-01 01:49:53Z john $
  * @author     Steve
  */
 ?>

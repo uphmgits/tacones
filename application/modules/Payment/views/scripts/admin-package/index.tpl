@@ -6,7 +6,7 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9171 2011-08-17 21:15:05Z john $
+ * @version    $Id: index.tpl 8482 2011-02-16 22:08:42Z john $
  * @author     John Boehr <j@webligo.com>
  */
 ?>
@@ -117,19 +117,13 @@
         <?php $class = ( $this->order == 'enabled' ? 'admin_table_ordering admin_table_direction_' . strtolower($this->direction) : '' ) ?>
         <th style='width: 1%;' class='admin_table_centered <?php echo $class ?>'>
           <a href="javascript:void(0);" onclick="javascript:changeOrder('enabled', 'DESC');">
-            <?php echo $this->translate("Enabled?") ?>
+            <?php echo $this->translate("Enabled") ?>
           </a>
         </th>
         <?php $class = ( $this->order == 'signup' ? 'admin_table_ordering admin_table_direction_' . strtolower($this->direction) : '' ) ?>
         <th style='width: 1%;' class='admin_table_centered <?php echo $class ?>'>
           <a href="javascript:void(0);" onclick="javascript:changeOrder('signup', 'DESC');">
-            <?php echo $this->translate("Signup?") ?>
-          </a>
-        </th>
-        <?php $class = ( $this->order == 'default' ? 'admin_table_ordering admin_table_direction_' . strtolower($this->direction) : '' ) ?>
-        <th style='width: 1%;' class='admin_table_centered <?php echo $class ?>'>
-          <a href="javascript:void(0);" onclick="javascript:changeOrder('default', 'DESC');">
-            <?php echo $this->translate("Default?") ?>
+            <?php echo $this->translate("Signup") ?>
           </a>
         </th>
         <th style='width: 1%;' class='admin_table_centered'>
@@ -167,9 +161,6 @@
           </td>
           <td class='admin_table_centered'>
             <?php echo ( $item->signup ? $this->translate('Yes') : $this->translate('No') ) ?>
-          </td>
-          <td class='admin_table_centered'>
-            <?php echo ( $item->default ? $this->translate('Yes') : $this->translate('No') ) ?>
           </td>
           <td class='admin_table_centered'>
             <?php echo $this->locale()->toNumber(@$this->memberCounts[$item->package_id]) ?>

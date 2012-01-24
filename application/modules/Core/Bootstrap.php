@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Bootstrap.php 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: Bootstrap.php 9125 2011-07-29 23:27:58Z john $
  * @author     John
  */
 
@@ -604,16 +604,6 @@ class Core_Bootstrap extends Engine_Application_Bootstrap_Abstract
       $settings->core_site_counter = $counter = 1;
     }
     $layout->counter = $counter;
-    
-    // Get baseUrl for static content
-    $view = Zend_Registry::get('Zend_View');
-    $staticBaseUrl = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.static.baseurl');
-    if( !$staticBaseUrl ) {
-      $staticBaseUrl = $view->baseUrl();
-    }
-    $staticBaseUrl = rtrim($staticBaseUrl, '/') . '/';
-    $layout->staticBaseUrl = $staticBaseUrl;
-    Zend_Registry::set('StaticBaseUrl', $staticBaseUrl);
     
     return $layout;
   }

@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: _composeFacebook.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: _composeFacebook.tpl 8968 2011-06-02 00:48:35Z john $
  * @author     Steve
  */
 ?>
@@ -30,7 +30,7 @@
 
   // Add script
   $this->headScript()
-      ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/composer_facebook.js');
+      ->appendFile($this->baseUrl() . '/application/modules/User/externals/scripts/composer_facebook.js');
 ?>
 
 <script type="text/javascript">

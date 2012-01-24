@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: themes.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: themes.tpl 8385 2011-02-02 23:29:35Z john $
  * @author     Steve
  */
 ?>
@@ -157,7 +157,7 @@
         //echo "<pre>".print_r($theme,1)."</pre>";
         ?>
         <li onclick="$(this).getElement('input[type=radio]').checked = true;">
-          <div class="theme_wrapper" style="background-image: url(<?php echo $this->layout()->staticBaseUrl . $thumb ?>);">
+          <div class="theme_wrapper" style="background-image: url(<?php echo $thumb ?>);">
             <?php if( $theme['modified'] ): ?>
               <span class="theme_modified">Modified</span>
             <?php endif; ?>

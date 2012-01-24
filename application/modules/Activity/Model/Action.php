@@ -6,7 +6,7 @@
  * @package    Activity
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Action.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: Action.php 8946 2011-05-18 19:58:25Z jung $
  * @author     John
  * @todo       documentation
  */
@@ -272,7 +272,8 @@ class Activity_Model_Action extends Core_Model_Item_Abstract
 
   public function getComments($commentViewAll)
   {
-    if( null !== $this->_comments ) {
+    if( null !== $this->_comments )
+    {
       return $this->_comments;
     }
 
@@ -280,16 +281,20 @@ class Activity_Model_Action extends Core_Model_Item_Abstract
     $table = $comments->getReceiver();
     $comment_count = $comments->getCommentCount();
     
-    if( $comment_count <= 0 ) {
+    if( $comment_count <= 0 )
+    {
       return;
     }
 
     // Always just get the last three comments
     $select = $comments->getCommentSelect();
     
-    if( $comment_count <= 5 ) {
+    if( $comment_count <= 5 )
+    {
       $select->limit(5);
-    } else if( !$commentViewAll ) {
+    }
+    else if( !$commentViewAll )
+    {
       $select->limit(5, $comment_count - 5);
     }
 
@@ -299,7 +304,8 @@ class Activity_Model_Action extends Core_Model_Item_Abstract
   public function comments()
   {
     $commentable = $this->getTypeInfo()->commentable;
-    switch( $commentable ) {
+    switch( $commentable )
+    {
       // Comments linked to action item
       default: case 0: case 1:
         return new Engine_ProxyObject($this, Engine_Api::_()->getDbtable('comments', 'activity'));
@@ -318,7 +324,8 @@ class Activity_Model_Action extends Core_Model_Item_Abstract
       // Comments linked to the first attachment
       case 4:
         $attachments = $this->getAttachments();
-        if( !isset($attachments[0]) ) {
+        if( !isset($attachments[0]) )
+        {
           // We could just link them to the action item instead
           throw new Activity_Model_Exception('No attachment to link comments to');
         }
@@ -332,7 +339,8 @@ class Activity_Model_Action extends Core_Model_Item_Abstract
   public function likes()
   {
     $commentable = $this->getTypeInfo()->commentable;
-    switch( $commentable ) {
+    switch( $commentable )
+    {
       // Comments linked to action item
       default: case 0: case 1:
         return new Engine_ProxyObject($this, Engine_Api::_()->getDbtable('likes', 'activity'));

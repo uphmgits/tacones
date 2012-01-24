@@ -6,7 +6,7 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Subscriptions.php 9171 2011-08-17 21:15:05Z john $
+ * @version    $Id: Subscriptions.php 8221 2011-01-15 00:24:02Z john $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -94,56 +94,5 @@ class Payment_Model_DbTable_Subscriptions extends Engine_Db_Table
     }
 
     return $this;
-  }
-  
-  public function activateDefaultPlan(User_Model_User $user)
-  {
-    $packagesTable = Engine_Api::_()->getDbtable('packages', 'payment');
-    $gatewaysTable = Engine_Api::_()->getDbtable('gateways', 'payment');
-
-    // Have any gateways or packages been added yet?
-    if( $gatewaysTable->getEnabledGatewayCount() <= 0 ||
-        $packagesTable->getEnabledNonFreePackageCount() <= 0 ) {
-      return false;
-    }
-    
-    // See if they've had a plan before
-    $hasSubscription = (bool) $this->select()
-        ->from($this, new Zend_Db_Expr('TRUE'))
-        ->where('user_id = ?', $user->getIdentity())
-        ->limit(1)
-        ->query()
-        ->fetchColumn();
-    if( $hasSubscription ) {
-      return false;
-    }
-    
-    // Get the default package
-    $package = $packagesTable->fetchRow(array(
-      '`default` = ?' => true,
-      'enabled = ?' => true,
-      'price <= ?' => 0,
-    ));
-    
-    if( !$package ) {
-      return false;
-    }
-    
-    // Create the default subscription
-    $subscription = $this->createRow();
-    $subscription->setFromArray(array(
-      'package_id' => $package->package_id,
-      'user_id' => $user->getIdentity(),
-      'status' => 'initial',
-      'active' => false,
-      'creation_date' => new Zend_Db_Expr('NOW()'),
-    ));
-    $subscription->save();
-
-    // Set active
-    $subscription->setActive(true);
-    $subscription->onPaymentSuccess();
-    
-    return $subscription;
   }
 }

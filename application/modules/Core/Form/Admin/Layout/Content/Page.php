@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Page.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: Page.php 8214 2011-01-14 01:47:20Z char $
  * @author     John
  */
 
@@ -51,7 +51,7 @@ class Core_Form_Admin_Layout_Content_Page extends Engine_Form
       ),
     ));
 
-    $siteURL = $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'default', true) . 'pages/';
+    $siteURL = $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'home') . 'pages/';
     $this->addElement('Text', 'url', array(
       'label' => 'Page URL',
       'description' => 'The URL may only contain alphanumeric characters and dashes - any other characters will be stripped. The full url will be http://'.$siteURL.'[url]',

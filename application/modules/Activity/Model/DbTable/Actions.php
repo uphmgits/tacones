@@ -6,7 +6,7 @@
  * @package    Activity
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Actions.php 9362 2011-10-10 22:25:15Z john $
+ * @version    $Id: Actions.php 8517 2011-02-24 03:49:41Z john $
  * @author     John
  */
 
@@ -391,26 +391,6 @@ class Activity_Model_DbTable_Actions extends Engine_Db_Table
     $action->attachment_count++;
     $action->save();
 
-    return $this;
-  }
-  
-  public function detachFromActivity(Core_Model_Item_Abstract $attachment)
-  {
-    $attachmentsTable = Engine_Api::_()->getDbtable('attachments', 'activity');
-    $select = $attachmentsTable->select()
-        ->where('`type` = ?', $attachment->getType())
-        ->where('`id` = ?', $attachment->getIdentity())
-        ;
-    
-    foreach( $attachmentsTable->fetchAll($select) as $row ) {
-      $this->update(array(
-        'attachment_count' => new Zend_Db_Expr('attachment_count - 1'),
-      ), array(
-        'action_id = ?' => $row->action_id,
-      ));
-      $row->delete();
-    }
-    
     return $this;
   }
 

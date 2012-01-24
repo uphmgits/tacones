@@ -13,6 +13,7 @@
 <h2>
 	<?php echo $this->translate('%1$s\'s Cart', $this->htmlLink($this->viewer()->getHref(), $this->viewer()->getTitle()))?>
 </h2>
+<?php $inspectionEnable = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.inspectionenable', 0); ?>
 
 <?php if(!empty($this->cartitems) && count($this->cartitems)): ?>
 	<form method="post" id="cart_form">
@@ -22,7 +23,10 @@
 					<td><h3><?=$this->translate('Listing')?></h3></td>
 					<td><h3><?=$this->translate('Price')?></h3></td>
 					<td><h3><?=$this->translate('Quantity')?></h3></td>
-					<td><h3><?=$this->translate('Options')?></h3></td>
+          <?php if( $inspectionEnable ) : ?>
+  					<td><h3><?=$this->translate('Inspection')?></h3></td>
+          <?php endif; ?>
+					<td><h3><?=$this->translate('Option')?></h3></td>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,23 +36,26 @@
 				?>
 				<?php foreach($this->cartitems as $cartitem): ?>
 				<?php 
-					$marketplace = Engine_Api::_()->getItem('marketplace', $cartitem->marketplace_id);
+					$marketplace = Engine_Api::_()->getItem('marketplace', $cartitem['marketplace_id']);
 					if(empty($marketplace)){
 						$cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
-						$cartTable->delete(array('marketplace_id = ?' => $cartitem->marketplace_id));
+						$cartTable->delete(array('marketplace_id = ?' => $cartitem['marketplace_id']));
 						continue;
 					}
 
-					$total_amount += $marketplace->price * $cartitem->count;
-					$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($cartitem->marketplace_id, $this->viewer()->getIdentity());
+					$total_amount += $marketplace->price * $cartitem['count'];
+					$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($cartitem['marketplace_id'], $this->viewer()->getIdentity());
 					$product_shipping_fee = 0;
-					$shipping_fee += ($product_shipping_fee?$product_shipping_fee:$this->flat_shipping_rate) * $cartitem->count;
+					$shipping_fee += ($product_shipping_fee?$product_shipping_fee:$this->flat_shipping_rate) * $cartitem['count'];
 				?>
 					<tr>
 						<td><?=$this->htmlLink($marketplace->getHref(), $marketplace->getTitle())?></td>
 						<td>$<?=$marketplace->price?></td>
-						<td><input type="text" name="marketplaces_count[<?=$cartitem->marketplace_id?>]" value="<?=$cartitem->count?>" maxlength="3" style="width:30px;" onchange="return;this.form.submit();" /></td>
-						<td><?=$this->htmlLink(array('route' => 'marketplace_general', 'action' => 'deletefromcart', 'marketplace_id' => $cartitem->marketplace_id), 'Delete', array('class' => 'smoothbox'))?></td>
+						<td><input type="text" name="marketplaces_count[<?=$cartitem['marketplace_id']?>]" value="<?=$cartitem['count']?>" maxlength="3" style="width:30px;" onchange="return;this.form.submit();" /></td>
+            <?php if( $inspectionEnable ) : ?>
+              <td><input type="checkbox" name="marketplaces_inspection[<?=$cartitem['marketplace_id']?>]" <?php if( $cartitem['inspection']) echo 'checked'?> onchange="return;this.form.submit();" /></td>
+            <?php endif; ?>
+						<td><?=$this->htmlLink(array('route' => 'marketplace_general', 'action' => 'deletefromcart', 'marketplace_id' => $cartitem['marketplace_id']), 'Delete', array('class' => 'smoothbox'))?></td>
 					</tr>
 				<?php endforeach; ?>
 				<?php 

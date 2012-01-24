@@ -7,7 +7,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Settings.php 9307 2011-09-22 00:26:32Z shaun $
+ * @version    $Id: Settings.php 8084 2010-12-20 23:54:04Z john $
  * @author     Jung
  */
 
@@ -24,11 +24,6 @@ class Core_Form_Admin_Mail_Settings extends Engine_Form
   {
     // Set form attributes
     $this->setTitle('Mail Settings');
-    
-    $this->addElement('Text', 'contact', array(
-      'label' => 'Contact Form Email',
-      'description' => 'Enter the email address you want contact form messages to be sent to.',
-    ));
 
     // Element: mail_name
     $this->addElement('Text', 'name', array(

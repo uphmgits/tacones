@@ -6,7 +6,7 @@
  * @package    Announcement
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Core.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: Core.php 7244 2010-09-01 01:49:53Z john $
  * @author     John
  */
 
@@ -25,7 +25,7 @@ class Announcement_Api_Core extends Core_Api_Abstract
 
   public function getSelect($params = array())
   {
-    $table = Engine_Api::_()->getDbtable('announcements', 'announcement');
+    $table = $this->api()->getDbtable('announcements', 'announcement');
 
     $select = $table->select()
       ->order( !empty($params['orderby']) ? $params['orderby'].' '.$params['orderby_direction'] : 'announcement_id DESC' );

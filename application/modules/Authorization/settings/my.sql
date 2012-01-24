@@ -6,7 +6,7 @@
  * @package    Authorization
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: my.sql 9378 2011-10-13 22:50:30Z john $
+ * @version    $Id: my.sql 9139 2011-08-03 22:40:56Z john $
  * @author     Steve
  */
 
@@ -209,7 +209,7 @@ INSERT IGNORE INTO `engine4_authorization_permissions`
 --
 
 INSERT INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES
-('authorization', 'Authorization', 'Authorization', '4.1.8', 1, 'core');
+('authorization', 'Authorization', 'Authorization', '4.1.7', 1, 'core');
 
 
 -- --------------------------------------------------------

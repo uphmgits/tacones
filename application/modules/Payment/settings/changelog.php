@@ -6,34 +6,10 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: changelog.php 9409 2011-10-19 00:14:13Z john $
+ * @version    $Id: changelog.php 9140 2011-08-03 23:47:47Z john $
  * @author     John Boehr <j@webligo.com>
  */
 return array(
-  '4.1.8' => array(
-    '/application/languages/en/payment.csv' => 'Added phrases',
-    'controllers/AdminPackageController.php' => 'Added default plan support',
-    'controllers/SubscriptionController.php' => 'Added default plan support',
-    'externals/.htaccess' => 'Updated with far-future expires headers for static resources',
-    'externals/styles/main.css' => 'Style tweaks',
-    'Form/Admin/Gateway/Testing.php' => 'Added svn:keywords',
-    'Form/Admin/Package/Create.php' => 'Added default plan support',
-    'Form/Signup/Subscription.php' => 'Added default plan support',
-    'Model/DbTable/Subscriptions.php' => 'Added default plan support',
-    'Model/Subscription.php' => 'Fixed errors when gateway is missing',
-    'Plugin/Gateway/PayPal.php' => 'Fixed issue with recurring payments when inital payment amount is zero',
-    'Plugin/Gateway/Testing.php' => 'Added svn:keywords',
-    'settings/changelog.php' => 'Incremented version',
-    'settings/manifest.php' => 'Incremented version',
-    'settings/my-upgrade-4.1.7-4.1.8.sql' => 'Added',
-    'settings/my.sql' => 'Incremented version',
-    'views/scripts/_signupSubscription.tpl' => 'Added default plan support',
-    'views/scripts/admin-index/raw-order-detail.tpl' => 'Added missing translation',
-    'views/scripts/admin-index/raw-transaction-detail.tpl' => 'Added missing translation',
-    'views/scripts/admin-package/delete.tpl' => 'Added missing translation',
-    'views/scripts/admin-package/index.tpl' => 'Added missing translation',
-    'views/scripts/settings/confirm.tpl' => 'Added missing translation',
-  ),
   '4.1.7' => array(
     '/application/languages/en/payment.csv' => 'Added phrases',
     'controllers/AdminGatewayController.php' => 'Minor optimizations',

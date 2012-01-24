@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: BannedIps.php 9393 2011-10-15 02:56:53Z shaun $
+ * @version    $Id: BannedIps.php 9099 2011-07-22 21:56:22Z john $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -143,9 +143,6 @@ class Core_Model_DbTable_BannedIps extends Engine_Db_Table
 
     // Do added addresses
     foreach( $addedAddresses as $addedAddress ) {
-      if (empty($addedAddress['start']) && empty($addedAddress['stop'])) {
-        continue;
-      }
       $this->insert(array(
         'start' => $addedAddress['start'],
         'stop' => $addedAddress['stop'],
@@ -155,7 +152,8 @@ class Core_Model_DbTable_BannedIps extends Engine_Db_Table
     // Do removed addresses
     foreach( $removedAddresses as $removedAddress ) {
       $this->delete(array(
-        'bannedip_id = ?' => $removedAddress,
+        'start = ?' => $removedAddress['start'],
+        'stop = ?' => $removedAddress['stop'],
       ));
     }
 

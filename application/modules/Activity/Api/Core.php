@@ -6,7 +6,7 @@
  * @package    Activity
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Core.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: Core.php 7244 2010-09-01 01:49:53Z john $
  * @author     John
  */
 
@@ -81,9 +81,7 @@ class Activity_Api_Core extends Core_Api_Abstract
   {
     if( null === $this->_pluginLoader )
     {
-      $path = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR 
-          . 'modules' . DIRECTORY_SEPARATOR
-          . 'Activity';
+      $path = Engine_Api::_()->getModuleBootstrap('activity')->getModulePath();
       $this->_pluginLoader = new Zend_Loader_PluginLoader(array(
         'Activity_Model_Helper_' => $path . '/Model/Helper/'
       ));

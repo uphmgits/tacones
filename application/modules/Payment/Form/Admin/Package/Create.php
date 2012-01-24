@@ -6,7 +6,7 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Create.php 9171 2011-08-17 21:15:05Z john $
+ * @version    $Id: Create.php 8355 2011-02-01 01:13:34Z john $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -158,20 +158,6 @@ class Payment_Form_Admin_Package_Create extends Engine_Form
         '0' => 'No, only show this plan after signup.',
       ),
       'value' => 1,
-    ));
-
-    // Element: default
-    $this->addElement('Radio', 'default', array(
-      'label' => 'Default Plan?',
-      'description' => 'If choosing a plan on signup is disabled, this plan ' . 
-          'will be assigned to new members. Selecting this option will ' . 
-          'switch this setting from the current default plan. Only a ' . 
-          'free plan may be the default plan.',
-      'multiOptions' => array(
-        '1' => 'Yes, this plan will be selected by default after signup.',
-        '0' => 'No, this is not the default plan.',
-      ),
-      'value' => 0,
     ));
 
     // Element: execute

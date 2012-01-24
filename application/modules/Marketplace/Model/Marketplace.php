@@ -168,6 +168,31 @@ class Marketplace_Model_Marketplace extends Core_Model_Item_Abstract
     return $photo;
   }
   
+
+  public function getPhotoUrl($type = null)
+  {
+    if( empty($this->photo_id) )
+    {
+      return null;
+    }
+
+    $photosTable = Engine_Api::_()->getDbtable('photos', 'marketplace');
+    $photo = $photosTable->select()->where('file_id = ?', $this->photo_id)->query()->fetch();
+
+    if( !empty($photo) and isset($photo['approved_photo']) and empty($photo['approved_photo']) ) {
+      $viewer = Engine_Api::_()->user()->getViewer();
+      if( !$viewer->getIdentity() ) return null;
+      if( $viewer->level_id > 2 and $viewer->getIdentity() != $photo['user_id'] ) return null;
+    }
+
+    $file = Engine_Api::_()->getApi('storage', 'storage')->get($this->photo_id, $type);
+    if( !$file ) {
+      return null;
+    }
+
+    return $file->map();
+  }
+
   public function getSingletonAlbum()
   {
     $table = Engine_Api::_()->getItemTable('marketplace_album');

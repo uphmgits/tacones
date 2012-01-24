@@ -10,6 +10,8 @@
  * 
  */
 ?>
+<?php $inspectionEnable = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.inspectionenable', 0); ?>
+
 <?php if($this->coupon_error): ?>
 	<div class="tip">
 	  <span>
@@ -28,7 +30,7 @@
 
 <?php if(!empty($this->cartitems) && count($this->cartitems)): ?>
 	<?php
-		$first_marketplace = Engine_Api::_()->getItem('marketplace', $this->cartitems[0]->marketplace_id);
+		$first_marketplace = Engine_Api::_()->getItem('marketplace', $this->cartitems[0]['marketplace_id']);
 		$first_stage_owner = $first_marketplace->getOwner()->getIdentity();
 	?>
 	<h2>
@@ -42,6 +44,9 @@
 					<td><h3><?=$this->translate('Seller')?></h3></td>
 					<td><h3><?=$this->translate('Price')?></h3></td>
 					<td><h3><?=$this->translate('Quantity')?></h3></td>
+          <?php if( $inspectionEnable ) : ?>
+					    <td><h3><?=$this->translate('Inspection')?></h3></td>
+          <?php endif; ?>
 				</tr>
 			</thead>
 			<tbody>
@@ -49,29 +54,36 @@
 					$total_amount = 0;
 					$shipping_fee = 0;
 					$discount_amount = 0;
+					$total_inspection = 0;
 				?>
 				<?php foreach($this->cartitems as $cartitem): ?>
 				<?php 
-					$marketplace = Engine_Api::_()->getItem('marketplace', $cartitem->marketplace_id);
-					if($first_stage_owner != $marketplace->getOwner()->getIdentity())
-						continue;
+					$marketplace = Engine_Api::_()->getItem('marketplace', $cartitem['marketplace_id']);
+					//if($first_stage_owner != $marketplace->getOwner()->getIdentity())
+					//	continue;
 					
-					$total_amount += $marketplace->price * $cartitem->count;
-					$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($cartitem->marketplace_id, $this->viewer()->getIdentity());
-					$shipping_fee += ($product_shipping_fee?$product_shipping_fee:$this->flat_shipping_rate) * $cartitem->count;
+          $inspection = ( $cartitem['inspection'] and $inspectionEnable ) ? $this->inspection_fee * $cartitem['count'] : 0;
+          $total_inspection += $inspection;
+					$total_amount += $marketplace->price * $cartitem['count'];
+					$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($cartitem['marketplace_id'], $this->viewer()->getIdentity());
+					$shipping_fee += ($product_shipping_fee?$product_shipping_fee:$this->flat_shipping_rate) * $cartitem['count'];
+          
 					
-					$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($cartitem->marketplace_id, $this->viewer()->getIdentity());
-					$discount_amount += $coupon_discount * $cartitem->count;
+					$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($cartitem['marketplace_id'], $this->viewer()->getIdentity());
+					$discount_amount += $coupon_discount * $cartitem['count'];
 				?>
 					<tr>
 						<td><?=$this->htmlLink($marketplace->getHref(), $marketplace->getTitle())?></td>
 						<td><?=$this->htmlLink($marketplace->getOwner()->getHref(), $marketplace->getOwner()->getTitle())?></td>
 						<td>$<?=$marketplace->price?></td>
-						<td style="text-align: center;" ><?=$cartitem->count?></td>
+						<td style="text-align: center;" ><?=$cartitem['count']?></td>
+            <?php if( $inspectionEnable ) : ?>  
+                <td style="text-align: center;" ><?=$inspection?></td>
+            <?php endif; ?>
 					</tr>
 				<?php endforeach; ?>
 				<?php 
-					$total_amount_full = $total_amount + $shipping_fee - $discount_amount;
+					$total_amount_full = $total_amount + $shipping_fee + $total_inspection - $discount_amount;
 				?>
 			</tbody>
 		</table>

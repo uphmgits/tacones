@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Controller.php 9314 2011-09-23 01:51:18Z john $
+ * @version    $Id: Controller.php 9012 2011-06-22 01:45:16Z john $
  * @author     John
  */
 
@@ -69,9 +69,6 @@ class Core_Widget_MenuFooterController extends Engine_Content_Widget_Abstract
       $defaultLanguage => $defaultLanguage
     ), $languageNameList);
     $this->view->languageNameList = $languageNameList;
-    
-    // Get affiliate code
-    $this->view->affiliateCode = Engine_Api::_()->getDbtable('settings', 'core')->core_affiliate_code;
   }
 
   public function getCacheKey()

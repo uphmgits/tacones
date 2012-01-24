@@ -166,6 +166,17 @@ class Marketplace_Api_Core extends Core_Api_Abstract
 	  }
   }
 
+  public function getCommissionFee( $user ) {
+      if( !($user instanceof User_Model_User) and !$user->getIdentity() ) return 0;
+
+      $commissionTable = Engine_Api::_()->getDbtable('commissions', 'marketplace');
+      $res = $commissionTable->select()->where('level_id = ?', $user->level_id)->query()->fetch();
+      return ( !empty($res) ) ? $res['commission'] : 0;
+  }
+  public function getInspectionFee() {
+      return Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.inspection', 0);
+  }
+
   public function getUserFieldValueByTitle(User_Model_User $user, $field_title = '')
   {
     if(empty($field_title))
@@ -599,8 +610,8 @@ function tree_list_load_related($k_item)
 
   $r=mysql_query("
     select
-      t1.k_parent as k1, #мама
-      t2.k_parent as k2  #бабушка
+      t1.k_parent as k1, #Г¬Г Г¬Г 
+      t2.k_parent as k2  #ГЎГ ГЎГіГёГЄГ 
     from
       t_catalog_tree as t1 left join
       t_catalog_tree as t2 on

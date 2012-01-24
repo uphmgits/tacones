@@ -6,17 +6,17 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: network.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: network.tpl 8852 2011-04-12 00:24:54Z jung $
  * @author     Alex
  */
 ?>
 
 <?php
   $this->headScript()
-    ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Observer.js')
-    ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Autocompleter.js')
-    ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Autocompleter.Local.js')
-    ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Autocompleter.Request.js');
+    ->appendFile($this->baseUrl().'/externals/autocompleter/Observer.js')
+    ->appendFile($this->baseUrl().'/externals/autocompleter/Autocompleter.js')
+    ->appendFile($this->baseUrl().'/externals/autocompleter/Autocompleter.Local.js')
+    ->appendFile($this->baseUrl().'/externals/autocompleter/Autocompleter.Request.js');
 ?>
 
 <script type="text/javascript">
@@ -24,19 +24,19 @@
   {
     $('join_id').value = network_id;
     $('network-form').submit();
-    $('avaliable_networks').innerHTML = "<div style='margin:15px 0;'><img class='loading_icon' src='" + en4.core.staticBaseUrl + "application/modules/Core/externals/images/loading.gif'/><?php echo $this->translate('Joining Network...')?></div>";
+    $('avaliable_networks').innerHTML = "<div style='margin:15px 0;'><img class='loading_icon' src='application/modules/Core/externals/images/loading.gif'/><?php echo $this->translate('Joining Network...')?></div>";
   }
 
   function leaveNetwork(network_id)
   {
-    $('current_networks').innerHTML = "<div><img class='loading_icon' src='" + en4.core.staticBaseUrl + "application/modules/Core/externals/images/loading.gif'/><?php echo $this->translate('Leaving Network...')?></div>";
+    $('current_networks').innerHTML = "<div><img class='loading_icon' src='application/modules/Core/externals/images/loading.gif'/><?php echo $this->translate('Leaving Network...')?></div>";
     $('leave_id').value = network_id;
     $('network-form').submit();
   }
   en4.core.runonce.add(function()
   {
     var availableNetworks = <?php echo $this->action('suggest', 'network', 'network', array('sendNow' => false, 'includeSelf' => true)) ?>;
-    var loader = new Element('img',{ src: en4.core.staticBaseUrl + 'application/modules/Core/externals/images/loading.gif'});
+    var loader = new Element('img',{ src:'application/modules/Core/externals/images/loading.gif'});
     var networkAutocomplete = new Autocompleter.Local('title', availableNetworks, {
       'postVar'        : 'text',
       'alwaysOpen'     : true,

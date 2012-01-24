@@ -6,20 +6,10 @@
  * @package    Fields
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: changelog.php 9381 2011-10-14 00:37:49Z john $
+ * @version    $Id: changelog.php 8825 2011-04-09 01:34:20Z john $
  * @author     John
  */
 return array(
-  '4.1.8' => array(
-    '/application/languages/en/fields.csv' => 'Added phrases',
-    'externals/.htaccess' => 'Updated with far-future expires headers for static resources',
-    'Form/Search.php' => 'Fixed issue with incorrect data being sent in search form',
-    'settings/changelog.php' => 'Incremented version',
-    'settings/manifest.php' => 'Incremented version',
-    'settings/my.sql' => 'Incremented version',
-    'views/scripts/_jsSwitch.tpl' => 'Form clears values when switching dependent fields; Compatibility for AJAX page loading',
-    'views/scripts/admin-fields/field-create.tpl' => 'Added static base URL for CDN support',
-  ),
   '4.1.4' => array(
     'Form/Search.php' => 'Fixed multi-checkbox display issues',
     'Model/DbTable/Meta.php' => 'Fixed issue with clearing field alias when changing the profile type',

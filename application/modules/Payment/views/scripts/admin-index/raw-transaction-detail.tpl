@@ -6,7 +6,7 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: raw-transaction-detail.tpl 9256 2011-09-14 00:13:43Z shaun $
+ * @version    $Id: raw-transaction-detail.tpl 8221 2011-01-15 00:24:02Z john $
  * @author     John Boehr <j@webligo.com>
  */
 ?>
@@ -19,7 +19,7 @@
 
   <div class="error">
     <span>
-    <?php $this->translate('Order could not be found.') ?>
+      Order could not be found.
     </span>
   </div>
 

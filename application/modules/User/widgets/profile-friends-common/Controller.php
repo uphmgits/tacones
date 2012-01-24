@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Controller.php 9245 2011-09-07 22:41:17Z shaun $
+ * @version    $Id: Controller.php 8855 2011-04-12 02:46:28Z john $
  * @author     John
  */
 
@@ -22,6 +22,8 @@ class User_Widget_ProfileFriendsCommonController extends Engine_Content_Widget_A
 
   public function indexAction()
   {
+    // Just remove the title decorator
+    $this->getElement()->removeDecorator('Title');
 
     // Don't render this if not authorized
     $viewer = Engine_Api::_()->user()->getViewer();

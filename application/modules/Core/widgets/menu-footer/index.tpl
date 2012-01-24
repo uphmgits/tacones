@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9317 2011-09-23 19:36:24Z john $
+ * @version    $Id: index.tpl 7424 2010-09-20 03:39:08Z john $
  * @author     John
  */
 ?>
@@ -28,15 +28,4 @@
       <?php echo $this->formSelect('language', $selectedLanguage, array('onchange' => '$(this).getParent(\'form\').submit();'), $this->languageNameList) ?>
       <?php echo $this->formHidden('return', $this->url()) ?>
     </form>
-<?php endif; ?>
-
-<?php if( !empty($this->affiliateCode) ): ?>
-  <div class="affiliate_banner">
-    <?php 
-      echo $this->translate('Powered by %1$s', 
-        $this->htmlLink('http://www.socialengine.net/?source=v4&aff=' . urlencode($this->affiliateCode), 
-        $this->translate('SocialEngine Community Software'),
-        array('target' => '_blank')))
-    ?>
-  </div>
 <?php endif; ?>

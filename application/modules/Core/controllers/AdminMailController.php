@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: AdminMailController.php 9307 2011-09-22 00:26:32Z shaun $
+ * @version    $Id: AdminMailController.php 7322 2010-09-09 05:05:22Z john $
  * @author     John
  */
 
@@ -120,7 +120,6 @@ class Core_AdminMailController extends Core_Controller_Action_Admin
       'from' => $values['from'],
       'name' => $values['name'],
       'queueing' => $values['queueing'],
-      'contact' => $values['contact'],
     );
     
     $form->addNotice('Your changes have been saved.');

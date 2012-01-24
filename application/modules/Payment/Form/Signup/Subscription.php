@@ -6,7 +6,7 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Subscription.php 9191 2011-08-20 00:00:03Z john $
+ * @version    $Id: Subscription.php 8221 2011-01-15 00:24:02Z john $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -19,8 +19,6 @@
 class Payment_Form_Signup_Subscription extends Engine_Form
 {
   protected $_isSignup = true;
-  
-  protected $_packages;
   
   public function setIsSignup($flag)
   {
@@ -47,8 +45,7 @@ class Payment_Form_Signup_Subscription extends Engine_Form
     }
 
     $multiOptions = array();
-    $this->_packages = $packagesTable->fetchAll($packagesSelect);
-    foreach( $this->_packages as $package ) {
+    foreach( $packagesTable->fetchAll($packagesSelect) as $package ) {
       $multiOptions[$package->package_id] = $package->title
         . ' (' . $package->getPackageDescription() . ')'
         ;
@@ -71,15 +68,5 @@ class Payment_Form_Signup_Subscription extends Engine_Form
       'type' => 'submit',
       'ignore' => true,
     ));
-  }
-  
-  public function getPackages()
-  {
-    return $this->_packages;
-  }
-  
-  public function setPackages($packages)
-  {
-    $this->_packages = $packages;
   }
 }

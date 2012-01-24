@@ -6,7 +6,7 @@
  * @package    Storage
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Vfs.php 9352 2011-10-05 22:04:53Z john $
+ * @version    $Id: Vfs.php 8822 2011-04-09 00:30:46Z john $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -36,9 +36,6 @@ class Storage_Form_Admin_Service_Vfs extends Storage_Form_Admin_Service_Generic
       'label' => 'Remote Host',
       'required' => true,
       'allowEmpty' => false,
-      'filters' => array(
-        'StringTrim',
-      ),
     ));
 
     // Element: username
@@ -46,9 +43,6 @@ class Storage_Form_Admin_Service_Vfs extends Storage_Form_Admin_Service_Generic
       'label' => 'Username',
       'required' => true,
       'allowEmpty' => false,
-      'filters' => array(
-        'StringTrim',
-      ),
     ));
 
     // Element: password
@@ -56,9 +50,6 @@ class Storage_Form_Admin_Service_Vfs extends Storage_Form_Admin_Service_Generic
       'label' => 'Password',
       'required' => true,
       'allowEmpty' => false,
-      'filters' => array(
-        'StringTrim',
-      ),
     ));
 
     // Element: path
@@ -66,9 +57,6 @@ class Storage_Form_Admin_Service_Vfs extends Storage_Form_Admin_Service_Generic
       'label' => 'Path',
       'required' => true,
       'allowEmpty' => false,
-      'filters' => array(
-        'StringTrim',
-      ),
     ));
 
     // Element: baseUrl
@@ -76,9 +64,6 @@ class Storage_Form_Admin_Service_Vfs extends Storage_Form_Admin_Service_Generic
       'label' => 'Base URL',
       'required' => true,
       'allowEmpty' => false,
-      'filters' => array(
-        'StringTrim',
-      ),
     ));
 
     parent::init();

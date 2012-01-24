@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: CommentController.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: CommentController.php 8985 2011-06-15 00:13:54Z john $
  * @author     John
  */
 
@@ -309,9 +309,6 @@ class Core_CommentController extends Core_Controller_Action_Standard
           'label' => $commentedItem->getShortType()
         ));
       }
-      
-      // Stats
-      Engine_Api::_()->getDbtable('statistics', 'core')->increment('core.likes');
       
       $db->commit();
     } catch( Exception $e ) {

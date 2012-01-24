@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: IndexController.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: IndexController.php 8536 2011-03-01 04:43:10Z john $
  * @author     John
  */
 
@@ -32,7 +32,7 @@ class User_IndexController extends Core_Controller_Action_Standard
     }
 
     if( !Engine_Api::_()->user()->getViewer()->getIdentity() ) {
-      return $this->_helper->redirector->gotoRoute(array(), 'default', true);
+      return $this->_helper->redirector->gotoRoute(array(), 'home', true);
     }
 
     // Render
@@ -75,23 +75,6 @@ class User_IndexController extends Core_Controller_Action_Standard
     $page = (int)  $this->_getParam('page', 1);
     $ajax = (bool) $this->_getParam('ajax', false);
     $options = $form->getValues();
-    
-    // Process options
-    $tmp = array();
-    foreach( $options as $k => $v ) {
-      if( null == $v || '' == $v || (is_array($v) && count(array_filter($v)) == 0) ) {
-        continue;
-      } else if( false !== strpos($k, '_field_') ) {
-        list($null, $field) = explode('_field_', $k);
-        $tmp['field_' . $field] = $v;
-      } else if( false !== strpos($k, '_alias_') ) {
-        list($null, $alias) = explode('_alias_', $k);
-        $tmp[$alias] = $v;
-      } else {
-        $tmp[$k] = $v;
-      }
-    }
-    $options = $tmp;
 
     // Get table info
     $table = Engine_Api::_()->getItemTable('user');

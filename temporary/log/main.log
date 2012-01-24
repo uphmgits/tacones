@@ -1,27 +1,777 @@
-2011-12-07T07:26:19+00:00 CRIT (2): 
-Error Code: 5aa55e
-exception 'Zend_Form_Exception' with message 'Method getLabel does not exist' in /home/zapato/public_html/application/libraries/Zend/Form.php:2869
+2012-01-23T12:50:07+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
 Stack trace:
-#0 /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/edit.tpl(77): Zend_Form->__call('getLabel', Array)
-#1 /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/edit.tpl(77): Marketplace_Form_Custom_Fields->getLabel()
-#2 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
-#3 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('/home/zapato/pu...')
-#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('index/edit.tpl')
-#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('index/edit.tpl', NULL)
-#6 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
-#7 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
-#8 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
-#9 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('editAction')
-#10 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
-#11 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
-#12 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
-#13 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
-#14 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
-#15 {main}
-2011-12-07T07:45:42+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [278]
-Error Code: da722b
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('mobi_main')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('mobi_main', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Mobi/widgets/mobi-menu-main/Controller.php(25): Core_Api_Menus->getNavigation('mobi_main')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Mobi_Widget_MobiMenuMainController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('header_mobi')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('header_mobi')
+#16 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(179): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(179): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('header_mobi')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:50:07+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
 Stack trace:
-#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(246): Marketplace_IndexController->paypal(Array)
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('mobi_footer')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('mobi_footer', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Mobi/widgets/mobi-footer/Controller.php(25): Core_Api_Menus->getNavigation('mobi_footer')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Mobi_Widget_MobiFooterController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('footer_mobi')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('footer_mobi')
+#16 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(189): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(189): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('footer_mobi')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:50:12+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('core_admin_main')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('core_admin_main', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Core/widgets/admin-menu-main/Controller.php(25): Core_Api_Menus->getNavigation('core_admin_main')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Core_Widget_AdminMenuMainController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render('index')
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(73): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/modules/Core/layouts/scripts/admin.tpl(156): Engine_View_Helper_Content->renderWidget('core.admin-menu...')
+#13 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#14 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('/home/zapato/pu...')
+#15 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('admin.tpl')
+#16 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render()
+#17 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch(Object(Zend_Controller_Request_Http))
+#18 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#19 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#20 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#21 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#22 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#23 {main}
+2012-01-23T12:50:14+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('core_mini')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('core_mini', Array, NULL)
+#5 /home/zapato/public_html/application/widgets/topbar/Controller.php(11): Core_Api_Menus->getNavigation('core_mini')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Widget_topbarController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('header')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('header')
+#16 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(172): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(172): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('header')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:50:14+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('core_footer')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('core_footer', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Core/widgets/menu-footer/Controller.php(25): Core_Api_Menus->getNavigation('core_footer')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Core_Widget_MenuFooterController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('footer')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('footer')
+#16 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(182): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(182): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('footer')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:50:16+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('core_mini')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('core_mini', Array, NULL)
+#5 /home/zapato/public_html/application/widgets/topbar/Controller.php(11): Core_Api_Menus->getNavigation('core_mini')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Widget_topbarController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('header')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('header')
+#16 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(172): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(172): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('header')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:50:16+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('core_footer')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('core_footer', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Core/widgets/menu-footer/Controller.php(25): Core_Api_Menus->getNavigation('core_footer')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Core_Widget_MenuFooterController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('footer')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('footer')
+#16 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(182): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(182): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('footer')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:50:19+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('core_mini')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('core_mini', Array, NULL)
+#5 /home/zapato/public_html/application/widgets/topbar/Controller.php(11): Core_Api_Menus->getNavigation('core_mini')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Widget_topbarController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('header')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('header')
+#16 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(172): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(172): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('header')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:50:19+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('core_footer')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('core_footer', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Core/widgets/menu-footer/Controller.php(25): Core_Api_Menus->getNavigation('core_footer')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Core_Widget_MenuFooterController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('footer')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('footer')
+#16 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(182): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(182): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('footer')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:51:07+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('mobi_main')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('mobi_main', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Mobi/widgets/mobi-menu-main/Controller.php(25): Core_Api_Menus->getNavigation('mobi_main')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Mobi_Widget_MobiMenuMainController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('header_mobi')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('header_mobi')
+#16 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(179): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(179): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('header_mobi')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:51:07+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('mobi_footer')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('mobi_footer', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Mobi/widgets/mobi-footer/Controller.php(25): Core_Api_Menus->getNavigation('mobi_footer')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Mobi_Widget_MobiFooterController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('footer_mobi')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('footer_mobi')
+#16 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(189): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(189): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('footer_mobi')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:51:30+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('core_mini')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('core_mini', Array, NULL)
+#5 /home/zapato/public_html/application/widgets/topbar/Controller.php(11): Core_Api_Menus->getNavigation('core_mini')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Widget_topbarController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('header')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('header')
+#16 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(172): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(172): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('header')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:51:30+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('core_footer')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('core_footer', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Core/widgets/menu-footer/Controller.php(25): Core_Api_Menus->getNavigation('core_footer')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Core_Widget_MenuFooterController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('footer')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('footer')
+#16 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(182): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(182): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('footer')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:52:15+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('mobi_main')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('mobi_main', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Mobi/widgets/mobi-menu-main/Controller.php(25): Core_Api_Menus->getNavigation('mobi_main')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Mobi_Widget_MobiMenuMainController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('header_mobi')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('header_mobi')
+#16 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(179): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(179): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('header_mobi')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:52:15+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('mobi_footer')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('mobi_footer', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Mobi/widgets/mobi-footer/Controller.php(25): Core_Api_Menus->getNavigation('mobi_footer')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Mobi_Widget_MobiFooterController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('footer_mobi')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('footer_mobi')
+#16 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(189): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(189): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('footer_mobi')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:53:08+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('mobi_main')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('mobi_main', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Mobi/widgets/mobi-menu-main/Controller.php(25): Core_Api_Menus->getNavigation('mobi_main')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Mobi_Widget_MobiMenuMainController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('header_mobi')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('header_mobi')
+#16 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(179): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(179): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('header_mobi')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:53:08+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('mobi_footer')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('mobi_footer', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Mobi/widgets/mobi-footer/Controller.php(25): Core_Api_Menus->getNavigation('mobi_footer')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Mobi_Widget_MobiFooterController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('footer_mobi')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('footer_mobi')
+#16 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(189): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(189): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('footer_mobi')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:53:19+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('mobi_main')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('mobi_main', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Mobi/widgets/mobi-menu-main/Controller.php(25): Core_Api_Menus->getNavigation('mobi_main')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Mobi_Widget_MobiMenuMainController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('header_mobi')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('header_mobi')
+#16 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(179): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(179): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('header_mobi')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:53:19+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('mobi_footer')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('mobi_footer', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Mobi/widgets/mobi-footer/Controller.php(25): Core_Api_Menus->getNavigation('mobi_footer')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Mobi_Widget_MobiFooterController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('footer_mobi')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('footer_mobi')
+#16 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(189): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(189): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('footer_mobi')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:54:23+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('core_mini')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('core_mini', Array, NULL)
+#5 /home/zapato/public_html/application/widgets/topbar/Controller.php(11): Core_Api_Menus->getNavigation('core_mini')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Widget_topbarController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('header')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('header')
+#16 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(172): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(172): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('header')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:54:23+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('core_footer')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('core_footer', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Core/widgets/menu-footer/Controller.php(25): Core_Api_Menus->getNavigation('core_footer')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Core_Widget_MenuFooterController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('footer')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('footer')
+#16 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(182): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(182): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('footer')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:54:49+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('core_mini')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('core_mini', Array, NULL)
+#5 /home/zapato/public_html/application/widgets/topbar/Controller.php(11): Core_Api_Menus->getNavigation('core_mini')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Widget_topbarController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('header')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('header')
+#16 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(172): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(172): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('header')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:54:49+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('core_footer')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('core_footer', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Core/widgets/menu-footer/Controller.php(25): Core_Api_Menus->getNavigation('core_footer')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Core_Widget_MenuFooterController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('footer')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('footer')
+#16 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(182): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Core/layouts/scripts/default.tpl(182): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('footer')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:55:29+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('mobi_main')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('mobi_main', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Mobi/widgets/mobi-menu-main/Controller.php(25): Core_Api_Menus->getNavigation('mobi_main')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Mobi_Widget_MobiMenuMainController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('header_mobi')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('header_mobi')
+#16 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(179): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(179): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('header_mobi')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:55:29+00:00 WARN (4): exception 'Engine_Exception' with message 'Method 'setCurrentModule' is not supported' in /home/zapato/public_html/application/libraries/Engine/Api.php:252
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->__call('setCurrentModul...', Array)
+#1 /home/zapato/public_html/application/modules/Core/Api/Abstract.php(41): Engine_Api->setCurrentModule('core')
+#2 /home/zapato/public_html/application/modules/Core/Api/Menus.php(154): Core_Api_Abstract->api()
+#3 /home/zapato/public_html/application/modules/Core/Api/Menus.php(31): Core_Api_Menus->getMenu('mobi_footer')
+#4 /home/zapato/public_html/application/modules/Core/Api/Menus.php(23): Core_Api_Menus->getMenuParams('mobi_footer', Array, NULL)
+#5 /home/zapato/public_html/application/modules/Mobi/widgets/mobi-footer/Controller.php(25): Core_Api_Menus->getNavigation('mobi_footer')
+#6 /home/zapato/public_html/application/libraries/Engine/Content/Widget/Abstract.php(254): Mobi_Widget_MobiFooterController->indexAction()
+#7 /home/zapato/public_html/application/libraries/Engine/Content/Element/Widget.php(66): Engine_Content_Widget_Abstract->render(NULL)
+#8 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(583): Engine_Content_Element_Widget->_render()
+#9 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#10 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#11 /home/zapato/public_html/application/libraries/Engine/Content/Decorator/Children.php(31): Engine_Content_Element_Abstract->render()
+#12 /home/zapato/public_html/application/libraries/Engine/Content/Element/Abstract.php(594): Engine_Content_Decorator_Children->render('')
+#13 /home/zapato/public_html/application/libraries/Engine/Content.php(207): Engine_Content_Element_Abstract->render()
+#14 /home/zapato/public_html/application/libraries/Engine/View/Helper/Content.php(49): Engine_Content->render('footer_mobi')
+#15 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(342): Engine_View_Helper_Content->content('footer_mobi')
+#16 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(189): Zend_View_Abstract->__call(Array, Array)
+#17 /home/zapato/public_html/application/modules/Mobi/layouts/scripts/default.tpl(189): Zend_View->content('content', Array)
+#18 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
+#19 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('footer_mobi')
+#20 /home/zapato/public_html/application/libraries/Zend/Layout.php(793): Zend_View_Abstract->render('/home/zapato/pu...')
+#21 /home/zapato/public_html/application/libraries/Zend/Layout/Controller/Plugin/Layout.php(142): Zend_Layout->render('default.tpl')
+#22 /home/zapato/public_html/application/libraries/Zend/Controller/Plugin/Broker.php(331): Zend_Layout_Controller_Plugin_Layout->postDispatch()
+#23 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(957): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#24 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch(Object(Zend_Controller_Request_Http))
+#25 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#26 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#27 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#28 {main}
+2012-01-23T12:58:06+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [283]
+Error Code: fb27a7
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(247): Marketplace_IndexController->paypal(Array)
 #1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
 #2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
 #3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
@@ -31,87 +781,10 @@ Stack trace:
 #7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
 #8 {main}
 
-2011-12-07T08:03:06+00:00 ERR (3): Error Code: acbf86
-exception 'Zend_Db_Statement_Mysqli_Exception' with message 'Mysqli statement execute error : Lock wait timeout exceeded; try restarting transaction' in /home/zapato/public_html/application/libraries/Zend/Db/Statement/Mysqli.php:214
+2012-01-23T12:58:06+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [293]
+Error Code: 0a2993
 Stack trace:
-#0 /home/zapato/public_html/application/libraries/Zend/Db/Statement.php(320): Zend_Db_Statement_Mysqli->_execute(Array)
-#1 /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Abstract.php(468): Zend_Db_Statement->execute(Array)
-#2 /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Abstract.php(604): Zend_Db_Adapter_Abstract->query('UPDATE `engine4...', Array)
-#3 /home/zapato/public_html/application/libraries/Zend/Db/Table/Abstract.php(1113): Zend_Db_Adapter_Abstract->update('engine4_user_on...', Array, Array)
-#4 /home/zapato/public_html/application/libraries/Engine/Db/Table.php(166): Zend_Db_Table_Abstract->update(Array, Array)
-#5 /home/zapato/public_html/application/modules/User/Model/DbTable/Online.php(43): Engine_Db_Table->update(Array, Array)
-#6 /home/zapato/public_html/application/modules/User/Bootstrap.php(44): User_Model_DbTable_Online->check(Object(User_Model_User))
-#7 /home/zapato/public_html/application/modules/Core/Bootstrap.php(779): User_Bootstrap->__construct(Object(Core_Bootstrap))
-#8 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(256): Core_Bootstrap->_initModules()
-#9 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(207): Engine_Application_Bootstrap_Abstract->_executeResource('modules')
-#10 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(150): Engine_Application_Bootstrap_Abstract->_bootstrap(NULL)
-#11 /home/zapato/public_html/application/libraries/Engine/Application.php(149): Engine_Application_Bootstrap_Abstract->bootstrap(NULL)
-#12 /home/zapato/public_html/application/index.php(193): Engine_Application->bootstrap()
-#13 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
-#14 {main}
-2011-12-07T08:03:56+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-07T08:09:29+00:00 CRIT (2): 
-Error Code: dd5dad
-exception 'Zend_Form_Exception' with message 'Method getLabel does not exist' in /home/zapato/public_html/application/libraries/Zend/Form.php:2869
-Stack trace:
-#0 /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/edit.tpl(77): Zend_Form->__call('getLabel', Array)
-#1 /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/edit.tpl(77): Marketplace_Form_Custom_Fields->getLabel()
-#2 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
-#3 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('/home/zapato/pu...')
-#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('index/edit.tpl')
-#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('index/edit.tpl', NULL)
-#6 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
-#7 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
-#8 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
-#9 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('editAction')
-#10 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
-#11 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
-#12 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
-#13 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
-#14 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
-#15 {main}
-2011-12-07T08:12:14+00:00 CRIT (2): 
-Error Code: 860b79
-exception 'Zend_Form_Exception' with message 'Method getElenent does not exist' in /home/zapato/public_html/application/libraries/Zend/Form.php:2869
-Stack trace:
-#0 /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/edit.tpl(77): Zend_Form->__call('getElenent', Array)
-#1 /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/edit.tpl(77): Marketplace_Form_Edit->getElenent('weight')
-#2 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/pu...')
-#3 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('/home/zapato/pu...')
-#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('index/edit.tpl')
-#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('index/edit.tpl', NULL)
-#6 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
-#7 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
-#8 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
-#9 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('editAction')
-#10 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
-#11 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
-#12 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
-#13 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
-#14 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
-#15 {main}
-2011-12-07T08:25:11+00:00 NOTICE (5): [8] Undefined variable: fieldNamr (/home/zapato/public_html/application/modules/Marketplace/views/scripts/index/edit.tpl) [80]
-Error Code: f477d3
-Stack trace:
-#0 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/public_html/applica...')
-#1 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('/home/zapato/public_html/applica...')
-#2 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('index/edit.tpl')
-#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('index/edit.tpl', )
-#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
-#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
-#6 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
-#7 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('editAction')
-#8 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
-#9 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
-#10 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
-#11 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
-#12 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
-#13 {main}
-
-2011-12-07T08:35:08+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [278]
-Error Code: 188222
-Stack trace:
-#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(246): Marketplace_IndexController->paypal(Array)
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(247): Marketplace_IndexController->paypal(Array)
 #1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
 #2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
 #3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
@@ -121,144 +794,254 @@ Stack trace:
 #7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
 #8 {main}
 
-2011-12-07T13:33:05+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireAdmin failed check for: core.admin-index.index
-2011-12-07T13:33:05+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: core.admin-index.index
-2011-12-07T13:33:05+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: core.error.requireuser
-2011-12-07T13:33:09+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: marketplace.index.edit
-2011-12-07T13:33:22+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-07T15:41:30+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-07T16:15:15+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-07T16:17:10+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-07T16:17:56+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-07T16:22:29+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-07T16:23:32+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-07T16:24:43+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-07T16:28:01+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-07T16:46:46+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-07T16:46:49+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-07T20:20:17+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-08T03:37:06+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-08T06:34:13+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireAdmin failed check for: core.admin-index.index
-2011-12-08T06:34:13+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: core.admin-index.index
-2011-12-08T06:34:13+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: core.error.requireuser
-2011-12-08T06:34:16+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: marketplace.index.edit
-2011-12-08T08:06:52+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-08T08:47:12+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-08T09:10:59+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-08T09:11:03+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-08T09:14:46+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-08T09:56:45+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-08T10:19:56+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-08T13:52:55+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-08T15:35:39+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-08T15:50:58+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-08T17:48:29+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-08T19:22:17+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-09T00:25:57+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-09T02:37:54+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-09T04:04:07+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-09T04:08:52+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-09T05:03:23+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-09T06:19:13+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-09T06:38:08+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireAdmin failed check for: core.admin-index.index
-2011-12-09T06:38:08+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: core.admin-index.index
-2011-12-09T06:38:08+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: core.error.requireuser
-2011-12-09T07:24:47+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-09T09:49:17+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-09T10:44:43+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-09T11:01:25+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-09T11:03:37+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-09T11:05:47+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-09T11:12:46+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-09T12:12:22+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-09T13:41:38+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-09T15:10:03+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-09T16:02:11+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-09T16:38:42+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-09T18:51:59+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-09T18:55:51+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T01:01:21+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T04:33:47+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T06:34:01+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-10T07:32:09+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T09:22:16+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T09:22:17+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T09:22:25+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T09:22:27+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T09:49:08+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T11:26:50+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T12:22:20+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T13:04:15+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-10T15:41:38+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-10T18:16:37+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: review.index.view
-2011-12-10T18:16:37+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: review.index.view
-2011-12-10T20:52:42+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T21:24:05+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: mobi.index.index
-2011-12-10T21:24:17+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T21:24:48+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T22:11:01+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T22:14:23+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-10T23:28:57+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-11T00:47:30+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-11T02:05:33+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-11T02:38:00+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-11T04:21:29+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-11T05:46:02+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: mobi.index.index
-2011-12-11T05:46:09+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-11T08:22:20+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-11T08:31:27+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-11T11:29:16+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-11T12:18:52+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-11T13:51:22+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-11T15:40:20+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-11T16:07:36+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: review.index.view
-2011-12-11T16:07:36+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: review.index.view
-2011-12-11T17:34:24+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-11T20:50:54+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-11T23:13:15+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-11T23:36:22+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T00:25:14+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-12T01:00:27+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T02:41:31+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-12T03:03:20+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-12T04:26:26+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T05:03:23+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-12T05:24:43+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-12T06:02:03+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: user.profile.index
-2011-12-12T06:02:03+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: user.profile.index
-2011-12-12T06:19:05+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-12T08:18:25+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T09:00:24+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-12T09:02:29+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: review.index.view
-2011-12-12T09:02:29+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: review.index.view
-2011-12-12T10:28:56+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T10:51:27+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-12T11:45:28+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T12:01:47+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T12:05:58+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T15:04:26+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: user.profile.index
-2011-12-12T15:04:26+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: user.profile.index
-2011-12-12T15:08:34+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: user.profile.index
-2011-12-12T15:08:34+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: user.profile.index
-2011-12-12T15:10:49+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: user.profile.index
-2011-12-12T15:10:49+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: user.profile.index
-2011-12-12T15:24:59+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-12T16:29:02+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T16:31:47+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T16:38:32+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-12T16:39:19+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T16:41:08+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T16:43:02+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T16:46:46+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T16:52:34+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T16:54:30+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T16:56:27+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T17:00:29+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T17:04:31+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T17:05:30+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-12T17:06:41+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T20:26:20+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
-2011-12-12T22:38:49+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-12T23:09:01+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-13T00:34:43+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
-2011-12-13T02:36:05+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-23T12:58:06+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [293]
+Error Code: 5797a1
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(247): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-01-23T13:00:06+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [283]
+Error Code: 2e4344
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(247): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-01-23T13:00:06+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [293]
+Error Code: d58924
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(247): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-01-23T13:00:06+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [293]
+Error Code: 3825cb
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(247): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-01-23T13:00:25+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [1694]
+Error Code: 1c4f59
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(1635): Marketplace_IndexController->paypalcart(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->checkoutAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('checkoutAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-01-23T13:00:25+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [1694]
+Error Code: 1b47c9
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(1635): Marketplace_IndexController->paypalcart(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->checkoutAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('checkoutAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-01-23T13:01:23+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [1694]
+Error Code: f2ddcf
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(1635): Marketplace_IndexController->paypalcart(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->checkoutAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('checkoutAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-01-23T13:01:23+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [1694]
+Error Code: 0665df
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(1635): Marketplace_IndexController->paypalcart(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->checkoutAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('checkoutAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-01-23T13:01:41+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [1694]
+Error Code: 9f6c61
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(1635): Marketplace_IndexController->paypalcart(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->checkoutAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('checkoutAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-01-23T13:01:41+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [1694]
+Error Code: 6bec39
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(1635): Marketplace_IndexController->paypalcart(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->checkoutAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('checkoutAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-01-23T15:53:10+00:00 NOTICE (5): [8] Undefined offset:  0 (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [1586]
+Error Code: 9e059e
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->checkoutAction()
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('checkoutAction')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#3 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#4 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#5 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#6 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#7 {main}
+
+2012-01-23T15:53:14+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-23T15:53:16+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireAdmin failed check for: marketplace.admin-ordermanagement.index
+2012-01-23T15:53:16+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: marketplace.admin-ordermanagement.index
+2012-01-23T15:53:16+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: core.error.requireuser
+2012-01-23T16:30:33+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-23T17:11:41+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-23T18:26:52+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-23T19:12:12+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-23T19:32:05+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-23T19:44:34+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: mobi.index.index
+2012-01-23T19:44:46+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-23T19:53:34+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-23T20:23:40+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-23T20:26:58+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-23T20:27:08+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-23T20:27:15+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-23T20:50:42+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-23T20:54:29+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-23T21:08:59+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-23T23:51:11+00:00 CRIT (2): 
+Error Code: fcb97f
+exception 'Zend_View_Exception' with message 'script 'index/get-likes.tpl' not found in path (/home/zapato/public_html/application/modules/Activity/views/scripts/:/home/zapato/public_html/)' in /home/zapato/public_html/application/libraries/Zend/View/Abstract.php:928
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(831): Zend_View_Abstract->_script('index/get-likes...')
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('index/get-likes...')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('index/get-likes...', NULL)
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('getLikesAction')
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#8 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#9 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#10 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#11 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#12 {main}
+2012-01-24T00:42:47+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T01:33:51+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T01:34:24+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T01:43:16+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T01:48:01+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: mobi.index.index
+2012-01-24T01:48:41+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: user.index.browse
+2012-01-24T02:25:56+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T03:11:20+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T03:17:29+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T03:20:54+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T04:09:06+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T05:00:37+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T05:52:09+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T06:24:24+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T06:24:27+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T06:24:29+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T06:24:43+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T06:24:45+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T06:24:46+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T06:29:16+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T06:43:41+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T06:47:56+00:00 NOTICE (5): [8] Undefined offset:  0 (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [1586]
+Error Code: ec50f0
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->checkoutAction()
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('checkoutAction')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#3 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#4 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#5 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#6 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#7 {main}
+
+2012-01-24T06:48:00+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T06:48:03+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireAdmin failed check for: marketplace.admin-ordermanagement.index
+2012-01-24T06:48:03+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: marketplace.admin-ordermanagement.index
+2012-01-24T06:48:03+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: core.error.requireuser
+2012-01-24T07:35:24+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T08:26:56+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T08:54:47+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T09:23:20+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T09:23:21+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T09:57:41+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T10:00:40+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T11:15:34+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T13:46:24+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T16:20:57+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T16:37:51+00:00 NOTICE (5): [8] Undefined offset:  0 (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [1586]
+Error Code: 13d4ec
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->checkoutAction()
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('checkoutAction')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#3 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#4 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#5 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#6 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#7 {main}
+
+2012-01-24T16:37:54+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T16:38:00+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireAdmin failed check for: marketplace.admin-ordermanagement.index
+2012-01-24T16:38:00+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: marketplace.admin-ordermanagement.index
+2012-01-24T16:38:00+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: core.error.requireuser
+2012-01-24T16:42:50+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T16:53:57+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T17:32:38+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T21:10:21+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T22:18:57+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T22:29:19+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T22:29:33+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T22:29:57+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-01-24T22:30:07+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-01-24T22:59:43+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index

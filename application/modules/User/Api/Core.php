@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Core.php 9401 2011-10-18 21:03:49Z john $
+ * @version    $Id: Core.php 9076 2011-07-21 02:11:10Z john $
  * @author     John
  */
 
@@ -318,7 +318,7 @@ class User_Api_Core extends Core_Api_Abstract
     $pass = '';
     for( $i=0; $i<$len; $i++ ) {
       $char = chr(rand(48,122));
-      while( !preg_match("[a-zA-Z0-9]", $char) ) {
+      while( !ereg("[a-zA-Z0-9]", $char) ) {
         if( $char == $lchar ) {
           continue;
         }
@@ -332,7 +332,7 @@ class User_Api_Core extends Core_Api_Abstract
 
   public function getSuperAdmins()
   {
-    $table = Engine_Api::_()->getDbtable('users', 'user');
+    $table = $this->api()->getDbtable('users');
     $select = $table->select()
       ->where('level_id = ?', 1);
 

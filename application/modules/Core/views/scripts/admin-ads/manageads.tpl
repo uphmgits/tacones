@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: manageads.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: manageads.tpl 8357 2011-02-01 01:29:21Z john $
  * @author     Jung
  */
 ?>
@@ -91,7 +91,7 @@
   <?php echo $this->htmlLink(array('action' => 'createad', 'id'=> $this->campaign_id, 'reset' => false),
       $this->translate("Add New Advertisement"), array(
       'class' => 'buttonlink',
-      'style' => 'background-image: url(' . $this->layout()->staticBaseUrl . 'application/modules/Announcement/externals/images/admin/add.png);')) ?>
+      'style' => 'background-image: url(application/modules/Announcement/externals/images/admin/add.png);')) ?>
 </div>
 
 <br/>

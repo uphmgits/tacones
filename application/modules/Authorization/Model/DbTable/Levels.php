@@ -6,7 +6,7 @@
  * @package    Authorization
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Levels.php 9165 2011-08-16 03:21:59Z shaun $
+ * @version    $Id: Levels.php 9076 2011-07-21 02:11:10Z john $
  * @author     John
  */
 
@@ -66,7 +66,7 @@ class Authorization_Model_DbTable_Levels extends Engine_Db_Table
     
     $data = array();
     foreach( $levels as $level ) {
-      $data[$level['level_id']] = $level['title'];
+      $data[$level['level_id']] = $data['title'];
     }
     
     return $data;

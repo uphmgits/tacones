@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9402 2011-10-18 21:05:37Z john $
+ * @version    $Id: index.tpl 8763 2011-03-31 02:14:45Z john $
  * @author     John
  */
 ?>
@@ -145,17 +145,13 @@ function loginAsUser(id) {
                 (hidden)
               <?php endif; ?>
             </td>
-            <td class="admin_table_centered nowrap">
-              <a href="<?php echo $this->url(array('module'=>'authorization','controller'=>'level', 'action' => 'edit', 'id' => $item->level_id)) ?>">
+            <td class='admin_table_centered'>
+              <a href='<?php echo $this->url(array('module'=>'authorization','controller'=>'level', 'action' => 'edit', 'id' => $item->level_id)) ?>'>
                 <?php echo $this->translate(Engine_Api::_()->getItem('authorization_level', $item->level_id)->getTitle()) ?>
               </a>
             </td>
-            <td class='admin_table_centered'>
-              <?php echo ( $item->enabled ? $this->translate('Yes') : $this->translate('No') ) ?>
-            </td>
-            <td class="nowrap">
-              <?php echo $this->locale()->toDateTime($item->creation_date) ?>
-            </td>
+            <td class='admin_table_centered'><?php echo ( $item->enabled ? $this->translate('Yes') : $this->translate('No') ) ?></td>
+            <td><?php echo $item->creation_date ?></td>
             <td class='admin_table_options'>
               <a class='smoothbox' href='<?php echo $this->url(array('action' => 'stats', 'id' => $item->user_id));?>'>
                 <?php echo $this->translate("stats") ?>

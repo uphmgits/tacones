@@ -1,5 +1,5 @@
 
-/* $Id: main.css 9412 2011-10-19 21:36:30Z john $ */
+/* $Id: main.css 8993 2011-06-16 23:29:20Z john $ */
 
 @include "constants.css";
 
@@ -109,17 +109,8 @@ html[dir="rtl"] a.buttonlink {
   /* margin-right: 0px; */
   margin-left: 20px;
 }
-a.admin.help {
-  padding-left: 10px;
-  padding-right: 10px;
-  background-repeat: no-repeat;
-  margin-left: 5px;
-  margin-right: 5px;
-  font-weight: bold;
-  background-image: url(~/application/modules/Core/externals/images/help.png);
-  background-repeat: no-repeat;
-  background-position: 1px 0px;
-}
+
+
 
 
 
@@ -2895,7 +2886,7 @@ div.admin_layoutbox_footer a
 /* main area styles */
 .admin_content_container_left
 {
-  width: 180px;
+  width: 150px;
   border-right: 5px solid #eee;
 }
 html[dir="rtl"] .admin_content_container_left
@@ -2908,7 +2899,7 @@ html[dir="rtl"] .admin_content_container_left
 }
 .admin_content_container_right
 {
-  width: 180px;
+  width: 150px;
   border-left: 5px solid #eee;
 }
 html[dir="rtl"] .admin_content_container_right

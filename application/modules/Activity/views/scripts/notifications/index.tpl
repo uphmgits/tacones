@@ -6,7 +6,7 @@
  * @package    Activity
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: index.tpl 8530 2011-02-28 23:53:49Z john $
  * @author     John
  */
 ?>
@@ -120,7 +120,7 @@
         </div>
       <?php endif; ?>
       <div class="notifications_viewmore" id="notifications_loading_main" style="display: none;">
-        <img src='<?php echo $this->layout()->staticBaseUrl ?>application/modules/Core/externals/images/loading.gif' style='float:left; margin-right: 5px;' />
+        <img src='application/modules/Core/externals/images/loading.gif' style='float:left; margin-right: 5px;' />
         <?php echo $this->translate("Loading ...") ?>
       </div>
     </div>

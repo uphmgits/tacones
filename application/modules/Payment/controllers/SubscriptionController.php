@@ -6,7 +6,7 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: SubscriptionController.php 9171 2011-08-17 21:15:05Z john $
+ * @version    $Id: SubscriptionController.php 8536 2011-03-01 04:43:10Z john $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -91,9 +91,6 @@ class Payment_SubscriptionController extends Core_Controller_Action_Standard
     unset($this->_session->gateway_id);
     unset($this->_session->order_id);
     unset($this->_session->errorMessage);
-    
-    // Check for default plan
-    $this->_checkDefaultPaymentPlan();
     
     // Make form
     $this->view->form = $form = new Payment_Form_Signup_Subscription(array(
@@ -464,28 +461,5 @@ class Payment_SubscriptionController extends Core_Controller_Action_Standard
     } else {
       return $this->_helper->redirector->gotoRoute(array('action' => 'finish', 'state' => $state));
     }
-  }
-  
-  protected function _checkDefaultPaymentPlan()
-  {
-    // No user?
-    if( !$this->_user ) {
-      return $this->_helper->redirector->gotoRoute(array(), 'default', true);
-    }
-    
-    // Handle default payment plan
-    try {
-      $subscriptionsTable = Engine_Api::_()->getDbtable('subscriptions', 'payment');
-      if( $subscriptionsTable ) {
-        $subscription = $subscriptionsTable->activateDefaultPlan($this->_user);
-        if( $subscription ) {
-          return $this->_finishPayment('free');
-        }
-      }
-    } catch( Exception $e ) {
-      // Silence
-    }
-    
-    // Fall-through
   }
 }

@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: index.tpl 7244 2010-09-01 01:49:53Z john $
  * @author     John
  */
 ?>
@@ -48,11 +48,11 @@ var exit_maintenance_mode = function(){
 <div id='global_header_right'>
   <div id='global_header_right_menu'>
     <?php if( $this->viewer()->getIdentity() ) : ?>
-    <?php echo $this->htmlImage($this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/lock.png', '', array('class' => 'icon')) ?>
+    <?php echo $this->htmlImage('application/modules/Core/externals/images/lock.png', '', array('class' => 'icon')) ?>
     <?php echo $this->translate("You're signed-in as %s", $this->viewer()->getTitle()) ?>
     &nbsp;
     <?php endif; ?>
-    [<a href='<?php echo $this->url(array(), 'default', true) ?>'><?php echo $this->translate("back to network") ?></a>]
+    [<a href='<?php echo $this->url(array(), 'core_home') ?>'><?php echo $this->translate("back to network") ?></a>]
     &nbsp;
     [<a href='<?php echo $this->url(array(), 'user_logout') ?>'><?php echo $this->translate("sign out") ?></a>]
   </div>

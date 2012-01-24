@@ -6,7 +6,7 @@
  * @package    Authorization
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: deleteselected.tpl 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: deleteselected.tpl 7244 2010-09-01 01:49:53Z john $
  * @author     Jung
  */
 ?>
@@ -30,11 +30,7 @@
 
         <button type='submit'><?php echo $this->translate("Delete") ?></button>
         <?php echo $this->translate(" or ") ?>
-        <a href='<?php echo $this->url(array(
-          'module' => 'authorization',
-          'controller' => 'admin-level',
-          'action' => 'index',
-        ), 'default', true) ?>'>
+        <a href='<?php echo $this->url(array(), 'authorization_admin_levels', true) ?>'>
         <?php echo $this->translate("cancel") ?></a>
       </p>
     </div>

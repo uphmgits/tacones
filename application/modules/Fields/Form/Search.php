@@ -7,7 +7,7 @@
  * @package    Fields
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Search.php 9176 2011-08-18 18:55:38Z john $
+ * @version    $Id: Search.php 8724 2011-03-28 05:52:35Z char $
  * @author     John
  */
 
@@ -106,14 +106,12 @@ class Fields_Form_Search extends Engine_Form
           || ($map->field_id == $this->_topLevelId && $map->option_id == $this->_topLevelValue) );
 
       // Get search key
-      $uKey = $key = $map->getKey();
-      $name = null;
+      $key = null;
       if( !empty($field->alias) ) {
-        $name = sprintf('alias_%s', $field->alias);
+        $key = $field->alias;
       } else {
-        $name = sprintf('field_%d', $field->field_id);
+        $key = sprintf('field_%d', $field->field_id);
       }
-      $key .= '_' . $name;
 
       // Get params
       $params = $field->getElementParams($this->_fieldType, array('required' => false));
@@ -122,13 +120,19 @@ class Fields_Form_Search extends Engine_Form
       if( !@is_array($params['options']['attribs']) ) {
         $params['options']['attribs'] = array();
       }
-      
-      $params['options']['attribs']['class'] =
+
+      if(isset($this->_fieldElements[$key])) {
+        $params['options']['attribs']['class'] = $this->_fieldElements[$key]->class .
+        'parent_' . $map->field_id . ' ' .
+        'option_' . $map->option_id . ' ';
+      } else {
+        $params['options']['attribs']['class'] =
         'field_toggle' . ' ' .
         'parent_' . $map->field_id . ' ' .
         'option_' . $map->option_id . ' ' .
         'field_'  . $map->child_id  . ' ';
-      
+      }
+
       if( $isGlobal ) {
         $params['options']['attribs']['class'] .= ' field_toggle_nohide';
       }

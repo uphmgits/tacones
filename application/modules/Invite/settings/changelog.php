@@ -6,20 +6,10 @@
  * @package    Invite
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: changelog.php 9381 2011-10-14 00:37:49Z john $
+ * @version    $Id: changelog.php 8587 2011-03-11 01:44:39Z john $
  * @author     Steve
  */
 return array(
-  '4.1.8' => array(
-    '/application/languages/en/invite.csv' => 'Added phrases',
-    'controllers/IndexController.php' => 'Added pages to the layout editor',
-    'externals/.htaccess' => 'Updated with far-future expires headers for static resources',
-    'Model/DbTable/Invites.php' => 'Fixed issue with incorrect URL in invite emails',
-    'settings/changelog.php' => 'Incremented version',
-    'settings/install.php' => 'Added',
-    'settings/manifest.php' => 'Incremented version',
-    'settings/my.sql' => 'Incremented version',
-  ),
   '4.1.3' => array(
     'Plugin/Signup.php' => 'Friendship requests now considers network friendship settings',
     'settings/changelog.php' => 'Incremented version',

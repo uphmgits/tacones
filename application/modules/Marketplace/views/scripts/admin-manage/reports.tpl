@@ -26,6 +26,10 @@
 </div>
 
 <br />
+<?php if( $this->file_name ) : ?>
+  <h1><a href="<?=$this->file_name?>" target='_blank'><?=$this->translate('Download File')?></a></h1>
+<?php endif; ?>
+
 
 <script type="text/javascript">
   var currentOrder = '<?php echo $this->order ?>';
@@ -46,7 +50,7 @@ function multiModify()
   var multimodify_form = $('multimodify_form');
   if (multimodify_form.submit_button.value == 'delete')
   {
-    return confirm('<?php echo $this->string()->escapeJavascript($this->translate("Are you sure you want to delete the selected user accounts?")) ?>');
+    return confirm('<?php echo $this->string()->escapeJavascript($this->translate("Are you sure you want to add to paypal file the selected orders?")) ?>');
   }
 }
 
@@ -60,24 +64,6 @@ function selectAll()
       inputs[i].checked = inputs[0].checked;
     }
   }
-}
-
-function loginAsUser(id) {
-  if( !confirm('<?php echo $this->translate('Note that you will be logged out of your current account if you click ok.') ?>') ) {
-    return;
-  }
-  var url = '<?php echo $this->url(array('action' => 'login')) ?>';
-  var baseUrl = '<?php echo $this->url(array(), 'default', true) ?>';
-  (new Request.JSON({
-    url : url,
-    data : {
-      format : 'json',
-      id : id
-    },
-    onSuccess : function() {
-      window.location.replace( baseUrl );
-    }
-  })).send();
 }
 </script>
 
@@ -96,14 +82,17 @@ function loginAsUser(id) {
 <br />
 <?php if( count($this->paginator) ): ?>
 <div class="admin_table_form">
+<form id='multimodify_form' method="post" action="" onSubmit="multiModify()">
   <table class='admin_table'>
     <thead>
       <tr>
+        <th style='width: 1%;'><input onclick="selectAll()" type='checkbox' class='checkbox'></th>
         <th style='width: 1%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('order_id', 'DESC');"><?php echo $this->translate("ID") ?></a></th>
         <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('marketplace_id', 'DESC');"><?php echo $this->translate("Marketplace") ?></a></th>
         <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('user_id', 'DESC');"><?php echo $this->translate("Seller") ?></a></th>
         <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('owner_id', 'DESC');"><?php echo $this->translate("Who buy?") ?></a></th>
-        <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('summ', 'DESC');"><?php echo $this->translate("Price") ?></a></th>
+        <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('summ', 'DESC');"><?php echo $this->translate("Summ") ?></a></th>
+        <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('summ', 'DESC');"><?php echo $this->translate("Status") ?></a></th>
         <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('count', 'DESC');"><?php echo $this->translate("Count") ?></a></th>
         <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('date', 'DESC');"><?php echo $this->translate("Date") ?></a></th>
 
@@ -113,6 +102,9 @@ function loginAsUser(id) {
       
         <?php foreach( $this->paginator as $item ): ?>
           <tr>
+            <td>
+              <input <?php if ( $item->to_file_transfer > 0 or $item->status != 1 ) echo 'disabled';?> name="modify_<?=$item->getIdentity()?>" value="<?=$item->getIdentity()?>" type="checkbox" class="checkbox" />
+            </td>
             <td><?php echo $item->order_id ?></td>
             <td class='admin_table_user'>
               <?php $marketplace = $this->item('marketplace', $item->marketplace_id); ?>
@@ -141,6 +133,23 @@ function loginAsUser(id) {
             </td>
             
             <td><?php echo $item->summ; ?></td>
+            <td><?php if( $item->to_file_transfer == 0) : ?>
+                    <?php switch( $item->status ) {
+                          //case 0 : echo $this->translate('In Progress'); break;
+                          case 1 : echo '<span style="color:green">'.$this->translate('Sold')."</span>"; break;
+                          case 2 : echo '<span style="color:orange">'.$this->translate('Return')."</span>"; break;
+                          case 3 : echo '<span style="color:red">'.$this->translate('Not Legitimate')."</span>"; break;
+                          case 9 : echo '<span style="color:red; font-weight: bold;">'.$this->translate('Punished')."</span>"; break;
+                    } ?>
+                <?php else : ?>
+                    <?php if( $item->to_file_transfer == 1) : ?>
+                      <?='<span style="color:gray">'.$this->translate('In Sold File')."</span>"?>
+                    <?php endif; ?>
+                    <?php if( $item->to_file_transfer == 2) : ?>
+                      <?='<span style="color:gray">'.$this->translate('In Return File')."</span>"?>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </td>
             <td><?php echo $item->count; ?></td>
             <td><?php echo $item->date; ?></td>
           </tr>
@@ -149,6 +158,10 @@ function loginAsUser(id) {
     </tbody>
   </table>
   <br />
+  <div class='buttons'>
+    <button type='submit' name="submit_button" value="add_to_file"><?php echo $this->translate("Add to Sold File") ?></button>
+  </div>
+</form>
 </div>
 <?php else:?>
       <br/>

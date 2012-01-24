@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: index.tpl 8862 2011-04-12 22:42:45Z john $
  * @author     John
  */
 ?>
@@ -689,13 +689,10 @@
       <li class="admin_layoutbox_menu_generic" id="admin_layoutbox_menu_openpage">
         <div class="admin_layoutbox_menu_wrapper_generic admin_layoutbox_menu_pages_wrapper" id="admin_layoutbox_menu_pages_wrapper">
           <ul class="admin_layoutbox_menu_pages">
-            <?php foreach( $this->pageListAssoc as $pageType => $pageListSub ): ?>
-              <?php foreach( $pageListSub as $page ): ?>
-                <li onclick="loadPage(<?php echo $page->page_id ?>);">
-                  <?php echo $page->displayname ?>
-                </li>
-              <?php endforeach; ?>
-              <li class="sep" style="height: 0px; padding: 0;border-top-color: #999;border-bottom-color: #999;"></li>
+            <?php foreach( $this->pageList as $page ): ?>
+              <li onclick="loadPage(<?php echo $page->page_id ?>);">
+                <?php echo $page->displayname ?>
+              </li>
             <?php endforeach; ?>
           </ul>
         </div>
@@ -771,22 +768,22 @@
                 <?php echo $this->translate("Select a new column layout for this page.") ?>
               </div>
               <ul class="admin_layoutbox_menu_columnchoices_thumbs">
-                <li><?php echo $this->htmlImage($this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/content/cols1_3.png', '3 columns', array('onClick' => "changeCurrentLayoutType('left,middle,right');switchPageMenu(new Event(event), $(this));")) ?></li>
-                <li><?php echo $this->htmlImage($this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/content/cols1_2left.png', '2 columns - Left', array('onClick' => "changeCurrentLayoutType('left,middle');switchPageMenu(new Event(event), $(this));")) ?></li>
-                <li><?php echo $this->htmlImage($this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/content/cols1_2right.png', '2 columns - Right', array('onClick' => "changeCurrentLayoutType('middle,right');switchPageMenu(new Event(event), $(this));")) ?></li>
-                <li><?php echo $this->htmlImage($this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/content/cols1_1.png', '1 columns', array('onClick' => "changeCurrentLayoutType('middle');switchPageMenu(new Event(event), $(this));")) ?></li>
+                <li><?php echo $this->htmlImage('application/modules/Core/externals/images/content/cols1_3.png', '3 columns', array('onClick' => "changeCurrentLayoutType('left,middle,right');switchPageMenu(new Event(event), $(this));")) ?></li>
+                <li><?php echo $this->htmlImage('application/modules/Core/externals/images/content/cols1_2left.png', '2 columns - Left', array('onClick' => "changeCurrentLayoutType('left,middle');switchPageMenu(new Event(event), $(this));")) ?></li>
+                <li><?php echo $this->htmlImage('application/modules/Core/externals/images/content/cols1_2right.png', '2 columns - Right', array('onClick' => "changeCurrentLayoutType('middle,right');switchPageMenu(new Event(event), $(this));")) ?></li>
+                <li><?php echo $this->htmlImage('application/modules/Core/externals/images/content/cols1_1.png', '1 columns', array('onClick' => "changeCurrentLayoutType('middle');switchPageMenu(new Event(event), $(this));")) ?></li>
               </ul>
               <ul class="admin_layoutbox_menu_columnchoices_thumbs">
-                <li><?php echo $this->htmlImage($this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/content/cols2_3.png', '3 columns', array('onClick' => "changeCurrentLayoutType('top,left,middle,right');switchPageMenu(new Event(event), $(this));")) ?></li>
-                <li><?php echo $this->htmlImage($this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/content/cols2_2left.png', '2 columns - Left', array('onClick' => "changeCurrentLayoutType('top,left,middle');switchPageMenu(new Event(event), $(this));")) ?></li>
-                <li><?php echo $this->htmlImage($this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/content/cols2_2right.png', '2 columns - Right', array('onClick' => "changeCurrentLayoutType('top,middle,right');switchPageMenu(new Event(event), $(this));")) ?></li>
-                <li><?php echo $this->htmlImage($this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/content/cols2_1.png', '1 columns', array('onClick' => "changeCurrentLayoutType('top,middle');switchPageMenu(new Event(event), $(this));")) ?></li>
+                <li><?php echo $this->htmlImage('application/modules/Core/externals/images/content/cols2_3.png', '3 columns', array('onClick' => "changeCurrentLayoutType('top,left,middle,right');switchPageMenu(new Event(event), $(this));")) ?></li>
+                <li><?php echo $this->htmlImage('application/modules/Core/externals/images/content/cols2_2left.png', '2 columns - Left', array('onClick' => "changeCurrentLayoutType('top,left,middle');switchPageMenu(new Event(event), $(this));")) ?></li>
+                <li><?php echo $this->htmlImage('application/modules/Core/externals/images/content/cols2_2right.png', '2 columns - Right', array('onClick' => "changeCurrentLayoutType('top,middle,right');switchPageMenu(new Event(event), $(this));")) ?></li>
+                <li><?php echo $this->htmlImage('application/modules/Core/externals/images/content/cols2_1.png', '1 columns', array('onClick' => "changeCurrentLayoutType('top,middle');switchPageMenu(new Event(event), $(this));")) ?></li>
               </ul>
               <ul class="admin_layoutbox_menu_columnchoices_thumbs">
-                <li><?php echo $this->htmlImage($this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/content/cols3_3.png', '3 columns', array('onClick' => "changeCurrentLayoutType('left,middle,right,bottom');switchPageMenu(new Event(event), $(this));")) ?></li>
-                <li><?php echo $this->htmlImage($this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/content/cols3_2left.png', '2 columns - Left', array('onClick' => "changeCurrentLayoutType('left,middle,bottom');switchPageMenu(new Event(event), $(this));")) ?></li>
-                <li><?php echo $this->htmlImage($this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/content/cols3_2right.png', '2 columns - Right', array('onClick' => "changeCurrentLayoutType('middle,right,bottom');switchPageMenu(new Event(event), $(this));")) ?></li>
-                <li><?php echo $this->htmlImage($this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/content/cols3_1.png', '1 columns', array('onClick' => "changeCurrentLayoutType('middle,bottom');switchPageMenu(new Event(event), $(this));")) ?></li>
+                <li><?php echo $this->htmlImage('application/modules/Core/externals/images/content/cols3_3.png', '3 columns', array('onClick' => "changeCurrentLayoutType('left,middle,right,bottom');switchPageMenu(new Event(event), $(this));")) ?></li>
+                <li><?php echo $this->htmlImage('application/modules/Core/externals/images/content/cols3_2left.png', '2 columns - Left', array('onClick' => "changeCurrentLayoutType('left,middle,bottom');switchPageMenu(new Event(event), $(this));")) ?></li>
+                <li><?php echo $this->htmlImage('application/modules/Core/externals/images/content/cols3_2right.png', '2 columns - Right', array('onClick' => "changeCurrentLayoutType('middle,right,bottom');switchPageMenu(new Event(event), $(this));")) ?></li>
+                <li><?php echo $this->htmlImage('application/modules/Core/externals/images/content/cols3_1.png', '1 columns', array('onClick' => "changeCurrentLayoutType('middle,bottom');switchPageMenu(new Event(event), $(this));")) ?></li>
               </ul>
               <div class="admin_layoutbox_menu_columnchoices_cancel">
                 Or, <a href="javascript:void(0);" onClick="switchPageMenu(new Event(event), $(this));"><?php echo $this->translate("cancel") ?></a> <?php echo $this->translate("and keep your current layout.") ?>

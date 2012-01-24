@@ -6,16 +6,16 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: edit.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: edit.tpl 7244 2010-09-01 01:49:53Z john $
  * @author     Jung
  */
 
 ?>
 <?php
-  $this->headScript()
-    ->appendFile($this->layout()->staticBaseUrl . 'externals/calendar/calendar.compat.js');
-  $this->headLink()
-    ->appendStylesheet($this->layout()->staticBaseUrl . 'externals/calendar/styles.css');
+$this->headScript()
+  ->appendFile($this->baseUrl() . '/externals/calendar/calendar.compat.js');
+$this->headLink()
+  ->appendStylesheet($this->baseUrl() . '/externals/calendar/styles.css');
 ?>
 <script type="text/javascript">
   var myCalStart = false;

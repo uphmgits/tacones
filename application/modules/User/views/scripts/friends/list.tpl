@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: list.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: list.tpl 7244 2010-09-01 01:49:53Z john $
  * @author     Alex
  */
 ?>
@@ -31,7 +31,7 @@
   <div class="profile_friends_lists_addlink" id="profile_friends_lists_addlink_<?php echo $this->friend->user_id;?>" >
     <a href="#"  onclick="showFriendListMenu(<?php echo $this->friend->user_id;?>); return false;">
       <span class="profile_friends_lists_addlinktext">
-        <img src='<?php echo $this->layout()->staticBaseUrl ?>application/modules/User/externals/images/friends/add_list.png' alt='' />
+        <img src='application/modules/User/externals/images/friends/add_list.png' alt='' />
         <?php echo $this->translate('add to list');?>
       </span>
     </a>

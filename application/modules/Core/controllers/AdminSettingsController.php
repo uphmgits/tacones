@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: AdminSettingsController.php 9358 2011-10-07 23:24:11Z john $
+ * @version    $Id: AdminSettingsController.php 9099 2011-07-22 21:56:22Z john $
  * @author     John
  */
 
@@ -36,8 +36,6 @@ class Core_AdminSettingsController extends Core_Controller_Action_Admin
     $form->populate(array(
       'maintenance_mode' => !empty($generalConfig['maintenance']['enabled']),
       'maintenance_code' => ( !empty($generalConfig['maintenance']['code']) ? $generalConfig['maintenance']['code'] : $this->_createRandomPassword(5) ),
-      'staticBaseUrl' => Engine_Api::_()->getApi('settings', 'core')->getSetting('core.static.baseurl'),
-      'analytics' => Engine_Api::_()->getApi('settings', 'core')->getSetting('core.analytics.code'),
     ));
     
     // Check post/valid
@@ -63,12 +61,6 @@ class Core_AdminSettingsController extends Core_Controller_Action_Admin
 
     // Save settings
     Engine_Api::_()->getApi('settings', 'core')->core_general = $values;
-    
-    // Save static base url
-    Engine_Api::_()->getApi('settings', 'core')->setSetting('core.static.baseurl', @$values['staticBaseUrl']);
-    
-    // Save google analytics code
-    Engine_Api::_()->getApi('settings', 'core')->setSetting('core.analytics.code', @$values['analytics']);
 
     // Save public level view permission
     $publicLevel = Engine_Api::_()->getDbtable('levels', 'authorization')->getPublicLevel();
@@ -417,71 +409,6 @@ class Core_AdminSettingsController extends Core_Controller_Action_Admin
 
     Engine_Api::_()->getApi('settings', 'core')->core_admin = $values;
 
-    $form->addNotice('Your changes have been saved.');
-  }
-  
-  public function affiliateAction()
-  {
-    $this->view->form = $form = new Core_Form_Admin_Settings_Affiliate();
-    
-    $form->populate(array(
-      'code' => Engine_Api::_()->getDbtable('settings', 'core')->core_affiliate_code,
-    ));
-    
-    if( !$this->getRequest()->isPost() ) {
-      return;
-    }
-    
-    if( !$form->isValid($this->getRequest()->getPost()) ) {
-      return;
-    }
-    
-    // Get values
-    $values = $form->getValues();
-    $code = $values['code'];
-    
-    // Check affiliate code
-    if( !empty($code) ) {
-      $httpClient = new Zend_Http_Client();
-      $httpClient->setAdapter('Zend_Http_Client_Adapter_Curl');
-      $httpClient->setUri('http://www.socialengine.net/affiliate/check');
-      $httpClient->setParameterGet('id', $code);
-      $response = $httpClient->request();
-      if( $response->getBody() !== 'true' ) {
-        return $form->addError('It appears that an affiliate account with ' . 
-            'that name does not yet exist. Please verify the name is ' . 
-            'correct, or create an account.');
-      }
-    }
-    
-    // Save
-    Engine_Api::_()->getDbtable('settings', 'core')->core_affiliate_code = $code;
-    
-    $form->addNotice('Your changes have been saved.');
-  }
-  
-  public function viglinkAction()
-  {
-    $this->view->form = $form = new Core_Form_Admin_Settings_Viglink();
-    $form->populate((array) Engine_Api::_()->getDbtable('settings', 'core')->core_viglink);
-    
-    if( !$this->getRequest()->isPost() ) {
-      return;
-    }
-    
-    if( !$form->isValid($this->getRequest()->getPost()) ) {
-      return;
-    }
-    
-    // Get values
-    $values = $form->getValues();
-    
-    // Save
-    Engine_Api::_()->getDbtable('settings', 'core')->core_viglink = $values;
-    
-    // Regenerate form >.>
-    $this->view->form = $form = new Core_Form_Admin_Settings_Viglink();
-    $form->populate($values);
     $form->addNotice('Your changes have been saved.');
   }
 

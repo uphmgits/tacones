@@ -6,7 +6,7 @@
  * @package    Messages
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: MessagesController.php 9308 2011-09-22 00:36:41Z john $
+ * @version    $Id: MessagesController.php 9143 2011-08-06 23:40:24Z jung $
  * @author     John
  */
 
@@ -28,31 +28,27 @@ class Messages_MessagesController extends Core_Controller_Action_User
   
   public function inboxAction()
   {
+    // Get navigation
+    $this->view->navigation = Engine_Api::_()->getApi('menus', 'core')
+        ->getNavigation('messages_main');
+    
     $viewer = Engine_Api::_()->user()->getViewer();
     $this->view->paginator = $paginator = Engine_Api::_()->getItemTable('messages_conversation')
         ->getInboxPaginator($viewer);
     $paginator->setCurrentPageNumber($this->_getParam('page'));
     $this->view->unread = Engine_Api::_()->messages()->getUnreadMessageCount($viewer);
-    
-    // Render
-    $this->_helper->content
-        //->setNoRender()
-        ->setEnabled()
-        ;
   }
 
   public function outboxAction()
   {
+    // Get navigation
+    $this->view->navigation = Engine_Api::_()->getApi('menus', 'core')
+        ->getNavigation('messages_main');
+    
     $viewer = Engine_Api::_()->user()->getViewer();
     $this->view->paginator = $paginator = Engine_Api::_()->getItemTable('messages_conversation')->getOutboxPaginator($viewer);
     $paginator->setCurrentPageNumber($this->_getParam('page'));
     $this->view->unread = Engine_Api::_()->messages()->getUnreadMessageCount($viewer);
-    
-    // Render
-    $this->_helper->content
-        //->setNoRender()
-        ->setEnabled()
-        ;
   }
 
   public function viewAction()
@@ -222,13 +218,7 @@ class Messages_MessagesController extends Core_Controller_Action_User
 
   public function composeAction()
   {
-    // Render
-//    $this->_helper->content
-//        //->setNoRender()
-//        ->setEnabled()
-//        ;
-    
-     // Get navigation
+    // Get navigation
     $this->view->navigation = Engine_Api::_()->getApi('menus', 'core')
         ->getNavigation('messages_main');
 

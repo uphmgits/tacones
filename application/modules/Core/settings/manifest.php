@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: manifest.php 9378 2011-10-13 22:50:30Z john $
+ * @version    $Id: manifest.php 9139 2011-08-03 22:40:56Z john $
  * @author     John
  */
 return array(
@@ -14,8 +14,8 @@ return array(
   'package' => array(
     'type' => 'module',
     'name' => 'core',
-    'version' => '4.1.8',
-    'revision' => '$Revision: 9378 $',
+    'version' => '4.1.7',
+    'revision' => '$Revision: 9139 $',
     'path' => 'application/modules/Core',
     'repository' => 'socialengine.net',
     'title' => 'Core',
@@ -39,7 +39,7 @@ return array(
         'type' => 'library',
         'name' => 'engine',
         'required' => true,
-        'minVersion' => '4.1.8',
+        'minVersion' => '4.1.6',
       ),
     ),
     'directories' => array(
@@ -103,22 +103,6 @@ return array(
       'event' => 'onItemDeleteBefore',
       'resource' => 'Core_Plugin_Core',
     ),
-    array(
-      'event' => 'onRenderLayoutDefault',
-      'resource' => 'Core_Plugin_Core',
-    ),
-    array(
-      'event' => 'onRenderLayoutDefaultSimple',
-      'resource' => 'Core_Plugin_Core',
-    ),
-    array(
-      'event' => 'onRenderLayoutMobileDefault',
-      'resource' => 'Core_Plugin_Core',
-    ),
-    array(
-      'event' => 'onRenderLayoutMobileDefaultSimple',
-      'resource' => 'Core_Plugin_Core',
-    ),
   ),
   // Items ---------------------------------------------------------------------
   'items' => array(
@@ -147,6 +131,24 @@ return array(
         'action' => 'index'
       )
     ),
+    'core_home' => array(
+      'route' => '/',
+      'defaults' => array(
+        'module' => 'core',
+        'controller' => 'index',
+        'action' => 'index'
+      )
+    ),
+    'confirm' => array(
+      'route'=>'/confirm',
+      'defaults' => array(
+        'module'=>'core',
+        'controller'=>'confirm',
+        'action'=>'confirm'
+      )
+    ),
+    
+    // Admin - General
     'core_admin_settings' => array(
       'route' => "admin/core/settings/:action/*",
       'defaults' => array(

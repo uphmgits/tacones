@@ -6,7 +6,7 @@
  * @package    Fields
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: my.sql 9378 2011-10-13 22:50:30Z john $
+ * @version    $Id: my.sql 8820 2011-04-08 00:31:16Z john $
  * @author     John
  */
 
@@ -32,4 +32,4 @@ INSERT IGNORE INTO `engine4_activity_actiontypes` (`type`, `module`, `body`, `en
 --
 
 INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES
-('fields', 'Fields', 'Fields', '4.1.8', 1, 'core');
+('fields', 'Fields', 'Fields', '4.1.4', 1, 'core');

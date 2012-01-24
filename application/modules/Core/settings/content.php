@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: content.php 9403 2011-10-18 21:06:28Z john $
+ * @version    $Id: content.php 9052 2011-07-06 01:21:56Z john $
  * @author     John
  */
 return array(
@@ -201,20 +201,6 @@ return array(
     'name' => 'core.theme-choose',
     'defaultParams' => array(
       'title' => 'Themes'
-    ),
-  ),
-  array(
-    'title' => 'Contact Form',
-    'description' => 'Displays the contact form.',
-    'category' => 'Core',
-    'type' => 'widget',
-    'name' => 'core.contact',
-    'requirements' => array(
-      'no-subject',
-    ),
-    'defaultParams' => array(
-      'title' => 'Contact',
-      'titleCount' => true,
     ),
   ),
 ) ?>

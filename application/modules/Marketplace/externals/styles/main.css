@@ -227,7 +227,6 @@ ul.marketplace_thumbs > li img
 {
   max-width: 50%;
   max-height: 50%;
-  margin: 15px 15px 15px 0px;
   border: 1px solid $theme_photo_border_color;
 }
 

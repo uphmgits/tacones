@@ -92,7 +92,7 @@
  <div class="main-nav-search">
     <form action="/search" method="get">
     <input type="text" name="query" class="text" onFocus="if(this.value == 'search...') { this.value = ''; }" value="search..." />
-    <button type="submit" class="main-nav-search-butn">
+    <input type="submit" value=" " class="main-nav-search-butn">
     </form>
  </div>
  <div id="main-nav-container">
@@ -106,9 +106,11 @@
    ?>
  </div>
 </div>
-<div class="clear"></div>
 
 
+
+
+ <div class="clear"></div>
 
 <script type='text/javascript'>
   var notificationUpdater;

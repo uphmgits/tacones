@@ -6,7 +6,7 @@
  * @package    Invite
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: manifest.php 9378 2011-10-13 22:50:30Z john $
+ * @version    $Id: manifest.php 8586 2011-03-11 01:24:50Z john $
  * @author     Steve
  */
 return array(
@@ -14,8 +14,8 @@ return array(
   'package' => array(
     'type' => 'module',
     'name' => 'invite',
-    'version' => '4.1.8',
-    'revision' => '$Revision: 9378 $',
+    'version' => '4.1.3',
+    'revision' => '$Revision: 8586 $',
     'path' => 'application/modules/Invite',
     'repository' => 'socialengine.net',
     'title' => 'Invite',
@@ -26,7 +26,7 @@ return array(
       array(
         'type' => 'module',
         'name' => 'core',
-        'version' => '4.1.8',
+        'version' => '4.1.2',
       ),
     ),
     'actions' => array(
@@ -37,8 +37,7 @@ return array(
        //'disable',
      ),
     'callback' => array(
-      'path' => 'application/modules/Invite/settings/install.php',
-      'class' => 'Invite_Installer',
+      'class' => 'Engine_Package_Installer_Module',
     ),
     'directories' => array(
       'application/modules/Invite',
@@ -59,4 +58,35 @@ return array(
     'invite'
   ),
   // Routes --------------------------------------------------------------------
+  'routes' => array(
+    // Public
+    // User
+    'invite' => array(
+      'route' => 'invite',
+      'defaults' => array(
+        'module' => 'invite',
+        'controller' => 'index',
+        'action' => 'index'
+      )
+    ),
+
+    // Admin
+    'invite_admin_settings' => array(
+      'route' => 'admin/invite/settings',
+      'defaults' => array(
+        'module' => 'invite',
+        'controller' => 'admin',
+        'action' => 'settings'
+      )
+    ),
+    'invite_admin_stats' => array(
+      'route' => 'admin/invite/stats',
+      'defaults' => array(
+        'module' => 'invite',
+        'controller' => 'admin',
+        'action' => 'stats'
+      )
+    ),
+  // end routes
+  ),
 );

@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: manifest.php 9378 2011-10-13 22:50:30Z john $
+ * @version    $Id: manifest.php 9139 2011-08-03 22:40:56Z john $
  * @author     John
  */
 return array(
@@ -14,8 +14,8 @@ return array(
   'package' => array(
     'type' => 'module',
     'name' => 'user',
-    'version' => '4.1.8',
-    'revision' => '$Revision: 9378 $',
+    'version' => '4.1.7',
+    'revision' => '$Revision: 9139 $',
     'path' => 'application/modules/User',
     'repository' => 'socialengine.net',
     'title' => 'Members',
@@ -26,7 +26,7 @@ return array(
       array(
         'type' => 'module',
         'name' => 'core',
-        'minVersion' => '4.1.8',
+        'minVersion' => '4.1.6',
       ),
     ),
     'actions' => array(
@@ -63,10 +63,6 @@ return array(
   ),
   // Hooks ---------------------------------------------------------------------
   'hooks' => array(
-    array(
-      'event' => 'onUserEnable',
-      'resource' => 'User_Plugin_Core',
-    ),
     array(
       'event' => 'onUserDeleteBefore',
       'resource' => 'User_Plugin_Core',

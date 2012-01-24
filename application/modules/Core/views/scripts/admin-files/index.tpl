@@ -6,19 +6,19 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: index.tpl 7305 2010-09-07 06:49:55Z john $
  * @author     John
  */
 ?>
 
 <?php
-  $baseUrl = $this->layout()->staticBaseUrl;
+  $baseUrl = $this->baseUrl();
   $this->headScript()
-    ->appendFile($baseUrl . 'externals/fancyupload/Swiff.Uploader.js')
-    ->appendFile($baseUrl . 'externals/fancyupload/Fx.ProgressBar.js')
-    ->appendFile($baseUrl . 'externals/fancyupload/FancyUpload2.js');
+    ->appendFile($baseUrl . '/externals/fancyupload/Swiff.Uploader.js')
+    ->appendFile($baseUrl . '/externals/fancyupload/Fx.ProgressBar.js')
+    ->appendFile($baseUrl . '/externals/fancyupload/FancyUpload2.js');
   $this->headLink()
-    ->appendStylesheet($baseUrl . 'externals/fancyupload/fancyupload.css');
+    ->appendStylesheet($this->baseUrl() . '/externals/fancyupload/fancyupload.css');
   $this->headTranslate(array(
     'Overall Progress ({total})', 'File Progress', 'Uploading "{name}"',
     'Upload: {bytesLoaded} with {rate}, {timeRemaining} remaining.', '{name}',
@@ -40,7 +40,7 @@
   var absBasePath = '<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $this->baseUrl() . '/public/admin/'; ?>';
 
   var up;
-  var swfPath = '<?php echo $baseUrl . 'externals/fancyupload/Swiff.Uploader.swf' ?>';
+  var swfPath = '<?php echo $baseUrl . '/externals/fancyupload/Swiff.Uploader.swf' ?>';
   var extraData = {
     format : 'json',
     path : '<?php echo $this->relPath ?>'

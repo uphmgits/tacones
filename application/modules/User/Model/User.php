@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: User.php 9392 2011-10-15 02:18:28Z shaun $
+ * @version    $Id: User.php 9154 2011-08-09 21:07:25Z john $
  * @author     John
  */
 
@@ -228,14 +228,12 @@ class User_Model_User extends Core_Model_Item_Abstract
     }
     
     // Check level
-    return (bool) Engine_Registry::get('database-default')
-        ->select()
-        ->from('engine4_authorization_levels', new Zend_Db_Expr('TRUE'))
-        ->where('level_id = ?', $this->level_id)
-        ->where('type IN(?)', array('admin', 'moderator'))
-        ->limit(1)
-        ->query()
-        ->fetchColumn();
+    $level = Engine_Api::_()->getItem('authorization_level', $this->level_id);
+    if( $level->type == 'admin' || $level->type == 'moderator' ) {
+      return true;
+    }
+    
+    return false;
   }
 
   // Internal hooks
@@ -288,7 +286,7 @@ class User_Model_User extends Core_Model_Item_Abstract
     parent::_postInsert();
     
     // Create auth stuff
-    $context = Engine_Api::_()->authorization()->context;
+    $context = $this->api()->authorization()->context;
     
     // View
     $view_options = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('user', $this, 'auth_view');
@@ -347,7 +345,7 @@ class User_Model_User extends Core_Model_Item_Abstract
     }
     
     // Remove from online users
-    $table = Engine_Api::_()->getDbtable('online', 'user');
+    $table = $this->api()->getDbtable('online', 'user');
     $table->delete(array('user_id = ?' => $this->getIdentity()));
 
     // Remove fields values
@@ -390,7 +388,7 @@ class User_Model_User extends Core_Model_Item_Abstract
       return false;
     }
 
-    $table = Engine_Api::_()->getDbtable('block', 'user');
+    $table = $this->api()->getDbtable('block', 'user');
     $select = $table->select()
       ->where('user_id = ?', $this->getIdentity())
       ->where('blocked_user_id = ?', $user->getIdentity())
@@ -406,7 +404,7 @@ class User_Model_User extends Core_Model_Item_Abstract
       return false;
     }
     
-    $table = Engine_Api::_()->getDbtable('block', 'user');
+    $table = $this->api()->getDbtable('block', 'user');
     $select = $table->select()
       ->where('user_id = ?', $user->getIdentity())
       ->where('blocked_user_id = ?', $this->getIdentity())
@@ -423,7 +421,7 @@ class User_Model_User extends Core_Model_Item_Abstract
       return array();
     }
     
-    $table = Engine_Api::_()->getDbtable('block', 'user');
+    $table = $this->api()->getDbtable('block', 'user');
     $select = $table->select()
       ->where('user_id = ?', $this->getIdentity());
     
@@ -450,7 +448,7 @@ class User_Model_User extends Core_Model_Item_Abstract
       $db->beginTransaction();
       try
       {
-        Engine_Api::_()->getDbtable('block', 'user')
+        $this->api()->getDbtable('block', 'user')
           ->insert(array(
             'user_id' => $this->getIdentity(),
             'blocked_user_id' => $user->getIdentity()
@@ -473,7 +471,7 @@ class User_Model_User extends Core_Model_Item_Abstract
       return $this;
     }
     
-    Engine_Api::_()->getDbtable('block', 'user')
+    $this->api()->getDbtable('block', 'user')
       ->delete(array(
         'user_id = ?' => $this->getIdentity(),
         'blocked_user_id = ?' => $user->getIdentity()
@@ -513,7 +511,7 @@ class User_Model_User extends Core_Model_Item_Abstract
    */
   public function fields()
   {
-    return new Engine_ProxyObject($this, Engine_Api::_()->getApi('core', 'fields'));
+    return new Engine_ProxyObject($this, $this->api()->getApi('core', 'fields'));
   }
 
   /**
@@ -523,12 +521,12 @@ class User_Model_User extends Core_Model_Item_Abstract
    */
   public function membership()
   {
-    return new Engine_ProxyObject($this, Engine_Api::_()->getDbtable('membership', 'user'));
+    return new Engine_ProxyObject($this, $this->api()->getDbtable('membership', 'user'));
   }
 
   public function lists()
   {
-    return new Engine_ProxyObject($this, Engine_Api::_()->getDbtable('lists', 'user'));
+    return new Engine_ProxyObject($this, $this->api()->getDbtable('lists', 'user'));
   }
 
 
@@ -539,7 +537,7 @@ class User_Model_User extends Core_Model_Item_Abstract
    */
   public function status()
   {
-    return new Engine_ProxyObject($this, Engine_Api::_()->getDbtable('status', 'core'));
+    return new Engine_ProxyObject($this, $this->api()->getDbtable('status', 'core'));
   }
 
 

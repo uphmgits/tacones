@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Controller.php 9264 2011-09-16 19:18:51Z john $
+ * @version    $Id: Controller.php 8536 2011-03-01 04:43:10Z john $
  * @author     John
  */
 
@@ -43,8 +43,7 @@ class User_Widget_ListSignupsController extends Engine_Content_Widget_Abstract
   {
     $viewer = Engine_Api::_()->user()->getViewer();
     $translate = Zend_Registry::get('Zend_Translate');
-	$locale = Zend_Registry::get('Locale');
-    return $viewer->getIdentity() . $translate->getLocale() . $locale->toString();
+    return $viewer->getIdentity() . $translate->getLocale();
   }
 
   public function getCacheSpecificLifetime()

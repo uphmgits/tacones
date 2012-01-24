@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: _composeTwitter.tpl 9382 2011-10-14 00:41:45Z john $
+ * @version    $Id: _composeFacebook.tpl 7244 2010-09-01 01:49:53Z john $
  * @author     Steve
  */
 ?>
@@ -27,7 +27,7 @@
 
   // Add script
   $this->headScript()
-      ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/composer_twitter.js');
+      ->appendFile($this->baseUrl(). '/application/modules/User/externals/scripts/composer_twitter.js');
 ?>
 
 <script type="text/javascript">

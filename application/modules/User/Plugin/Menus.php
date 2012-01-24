@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Menus.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: Menus.php 8546 2011-03-02 00:56:06Z john $
  * @author     John
  */
 
@@ -45,17 +45,19 @@ class User_Plugin_Menus
     $viewer  = Engine_Api::_()->user()->getViewer();
     $request = Zend_Controller_Front::getInstance()->getRequest();
     $route   = array(
-      'route' => 'default',
+      'route' => 'core_home',
     );
 
-    if( $viewer->getIdentity() ) {
+    if( $viewer->getIdentity() )
+    {
       $route['route']  = 'user_general';
       $route['params'] = array(
         'action' => 'home',
       );
-      if( 'user'  == $request->getModuleName() && 
-          'index' == $request->getControllerName() && 
-          'home'  == $request->getActionName() ) {
+      if(  'user'  == $request->getModuleName()
+        && 'index' == $request->getControllerName()
+        && 'home'  == $request->getActionName() )
+      {
         $route['active'] = true;
       }
     }
@@ -69,11 +71,11 @@ class User_Plugin_Menus
   public function onMenuInitialize_CoreMiniAdmin($row)
   {
     // @todo check perms
-    if( Engine_Api::_()->getApi('core', 'authorization')->isAllowed('admin', null, 'view') ) {
+    if( Engine_Api::_()->getApi('core', 'authorization')->isAllowed('admin', null, 'view') )
+    {
       return array(
         'label' => $row->label,
-        'route' => 'admin_default',
-        'class' => 'no-dloader',
+        'route' => 'admin_default'
       );
     }
 
@@ -83,20 +85,21 @@ class User_Plugin_Menus
   public function onMenuInitialize_CoreMiniProfile($row)
   {
     $viewer = Engine_Api::_()->user()->getViewer();
-    if( $viewer->getIdentity() ) {
+    if( $viewer->getIdentity() )
+    {
       return array(
         'label' => $row->label,
         'uri' => $viewer->getHref(),
       );
     }
-    
     return false;
   }
 
   public function onMenuInitialize_CoreMiniSettings($row)
   {
     $viewer = Engine_Api::_()->user()->getViewer();
-    if( $viewer->getIdentity() ) {
+    if( $viewer->getIdentity() )
+    {
       return array(
         'label' => $row->label,
         'route' => 'user_extended',
@@ -106,20 +109,22 @@ class User_Plugin_Menus
         )
       );
     }
-    
     return false;
   }
 
   public function onMenuInitialize_CoreMiniAuth($row)
   {
     $viewer = Engine_Api::_()->user()->getViewer();
-    if( $viewer->getIdentity() ) {
+    if( $viewer->getIdentity() )
+    {
       return array(
         'label' => 'Sign Out',
-        'route' => 'user_logout',
-        'class' => 'no-dloader',
+        'route' => 'user_logout'
       );
-    } else {
+    }
+
+    else
+    {
       return array(
         'label' => 'Sign In',
         'route' => 'user_login',
@@ -134,7 +139,8 @@ class User_Plugin_Menus
   public function onMenuInitialize_CoreMiniSignup($row)
   {
     $viewer = Engine_Api::_()->user()->getViewer();
-    if( !$viewer->getIdentity() ) {
+    if( !$viewer->getIdentity() )
+    {
       return array(
         'label' => 'Sign Up',
         'route' => 'user_signup'
@@ -151,7 +157,8 @@ class User_Plugin_Menus
   public function onMenuInitialize_UserHomeView($row)
   {
     $viewer = Engine_Api::_()->user()->getViewer();
-    if( $viewer->getIdentity() ) {
+    if( $viewer->getIdentity() )
+    {
       return array(
         'label' => $row->label,
         'icon' => $row->params['icon'],
@@ -194,7 +201,8 @@ class User_Plugin_Menus
       $label = "Edit Member Profile";
     }
 
-    if( $subject->authorization()->isAllowed($viewer, 'edit') ) {
+    if( $subject->authorization()->isAllowed($viewer, 'edit') )
+    {
       return array(
         'label' => $label,
         'icon' => 'application/modules/User/externals/images/edit.png',
@@ -221,13 +229,14 @@ class User_Plugin_Menus
     $subject = Engine_Api::_()->core()->getSubject();
 
     // Not logged in
-    if( !$viewer->getIdentity() || $viewer->getGuid(false) === $subject->getGuid(false) ) {
+    if( !$viewer->getIdentity() || $viewer->getGuid(false) === $subject->getGuid(false) )
+    {
       return false;
     }
 
     // Check if friendship is allowed in the network
     $eligible = (int) Engine_Api::_()->getApi('settings', 'core')->getSetting('user.friends.eligible', 2);
-    if( !$eligible ) {
+    if( !$eligible ){
       return '';
     }
 
@@ -405,7 +414,8 @@ class User_Plugin_Menus
     $subject = Engine_Api::_()->core()->getSubject();
 
     // Can't block self or if not logged in
-    if( !$viewer->getIdentity() || $viewer->getGuid() == $subject->getGuid() ) {
+    if( !$viewer->getIdentity() || $viewer->getGuid() == $subject->getGuid() )
+    {
       return false;
     }
 
@@ -413,7 +423,8 @@ class User_Plugin_Menus
       return false;
     }
     
-    if( !$subject->isBlockedBy($viewer) ) {
+    if( !$subject->isBlockedBy($viewer) )
+    {
       return array(
         'label' => 'Block Member',
         'icon' => 'application/modules/User/externals/images/block.png',
@@ -425,7 +436,10 @@ class User_Plugin_Menus
           'user_id' => $subject->getIdentity()
         ),
       );
-    } else {
+    }
+
+    else
+    {
       return array(
         'label' => 'Unblock Member',
         'icon' => 'application/modules/User/externals/images/block.png',
@@ -445,11 +459,13 @@ class User_Plugin_Menus
     $viewer = Engine_Api::_()->user()->getViewer();
     $subject = Engine_Api::_()->core()->getSubject();
 
-    if( !$viewer->getIdentity() || 
-        !$subject->getIdentity() || 
-        $viewer->isSelf($subject) ) {
+    if( !$viewer->getIdentity() || !$subject->getIdentity() || $viewer->isSelf($subject) )
+    {
       return false;
-    } else {
+    }
+
+    else
+    {
       return array(
         'label' => 'Report',
         'icon' => 'application/modules/Core/externals/images/report.png',

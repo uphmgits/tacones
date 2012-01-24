@@ -6,10 +6,25 @@
  * @package    Messages
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: inbox.tpl 9308 2011-09-22 00:36:41Z john $
+ * @version    $Id: inbox.tpl 9136 2011-08-03 19:27:18Z jung $
  * @author     John
  */
 ?>
+
+<div class="headline">
+  <h2>
+    <?php echo $this->translate('My Messages');?>
+  </h2>
+  <div class="tabs">
+    <?php
+      // Render the menu
+      echo $this->navigation()
+        ->menu()
+        ->setContainer($this->navigation)
+        ->render();
+    ?>
+  </div>
+</div>
 
 <div>
   <?php echo $this->translate(array('You have %1$s new message, %2$s total', 'You have %1$s new messages, %2$s total', $this->unread),

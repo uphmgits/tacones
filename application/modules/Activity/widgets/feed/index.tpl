@@ -6,7 +6,7 @@
  * @package    Activity
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9329 2011-09-27 22:55:58Z john $
+ * @version    $Id: index.tpl 8823 2011-04-09 00:35:36Z john $
  * @author     John
  */
 ?>
@@ -14,14 +14,13 @@
 <?php if( (!empty($this->feedOnly) || !$this->endOfFeed ) &&
     (empty($this->getUpdate) && empty($this->checkUpdate)) ): ?>
   <script type="text/javascript">
-    en4.core.runonce.add(function() {
-      
+    (function(){
       var activity_count = <?php echo sprintf('%d', $this->activityCount) ?>;
       var next_id = <?php echo sprintf('%d', $this->nextid) ?>;
       var subject_guid = '<?php echo $this->subjectGuid ?>';
       var endOfFeed = <?php echo ( $this->endOfFeed ? 'true' : 'false' ) ?>;
 
-      var activityViewMore = window.activityViewMore = function(next_id, subject_guid) {
+      var activityViewMore = function(next_id, subject_guid) {
         if( en4.core.request.isRequestActive() ) return;
 
         var url = '<?php echo $this->url(array('module' => 'core', 'controller' => 'widget', 'action' => 'index', 'content_id' => $this->identity), 'default', true) ?>';
@@ -47,19 +46,21 @@
        request.send();
       }
       
-      if( next_id > 0 && !endOfFeed ) {
-        $('feed_viewmore').style.display = '';
-        $('feed_loading').style.display = 'none';
-        $('feed_viewmore_link').removeEvents('click').addEvent('click', function(event){
-          event.stop();
-          activityViewMore(next_id, subject_guid);
-        });
-      } else {
-        $('feed_viewmore').style.display = 'none';
-        $('feed_loading').style.display = 'none';
-      }
-      
-    });
+      en4.core.runonce.add(function(){
+        if( next_id > 0 && !endOfFeed ) {
+          $('feed_viewmore').style.display = '';
+          $('feed_loading').style.display = 'none';
+          $('feed_viewmore_link').removeEvents('click').addEvent('click', function(event){
+            event.stop();
+            activityViewMore(next_id, subject_guid);
+          });
+        } else {
+          $('feed_viewmore').style.display = 'none';
+          $('feed_loading').style.display = 'none';
+        }
+      });
+    })();
+
   </script>
 <?php endif; ?>
 
@@ -114,8 +115,8 @@ endif; ?>
 
     <?php
       $this->headScript()
-        ->appendFile($this->layout()->staticBaseUrl . 'externals/mdetect/mdetect' . ( APPLICATION_ENV != 'development' ? '.min' : '' ) . '.js')
-        ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Core/externals/scripts/composer.js');
+        ->appendFile($this->baseUrl() . '/externals/mdetect/mdetect' . ( APPLICATION_ENV != 'development' ? '.min' : '' ) . '.js')
+        ->appendFile($this->baseUrl() . '/application/modules/Core/externals/scripts/composer.js');
     ?>
 
     <script type="text/javascript">
@@ -203,6 +204,6 @@ endif; ?>
 </div>
 
 <div class="feed_viewmore" id="feed_loading" style="display: none;">
-  <img src='<?php echo $this->layout()->staticBaseUrl ?>application/modules/Core/externals/images/loading.gif' style='float:left;margin-right: 5px;' />
+  <img src='application/modules/Core/externals/images/loading.gif' style='float:left;margin-right: 5px;' />
   <?php echo $this->translate("Loading ...") ?>
 </div>

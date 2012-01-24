@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: AuthController.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: AuthController.php 9154 2011-08-09 21:07:25Z john $
  * @author     John
  */
 
@@ -25,7 +25,7 @@ class User_AuthController extends Core_Controller_Action_Standard
       $this->view->status = false;
       $this->view->error = Zend_Registry::get('Zend_Translate')->_('You are already signed in.');
       if( null === $this->_helper->contextSwitch->getCurrentContext() ) {
-        $this->_helper->redirector->gotoRoute(array(), 'default', true);;
+        $this->_helper->redirector->gotoRoute(array(), 'home');
       }
       return;
     }
@@ -42,12 +42,6 @@ class User_AuthController extends Core_Controller_Action_Standard
 //      // Facebook login succeeded, redirect to home
 //      return $this->_helper->redirector->gotoRoute(array(), 'default', true);
 //    }
-
-    // Render
-    $this->_helper->content
-        //->setNoRender()
-        ->setEnabled()
-        ;
     
     // Not a post
     if( !$this->getRequest()->isPost() ) {
@@ -353,23 +347,22 @@ class User_AuthController extends Core_Controller_Action_Standard
   {
     // Check if already logged out
     $viewer = Engine_Api::_()->user()->getViewer();
-    if( !$viewer->getIdentity() ) {
+    if( !$viewer->getIdentity() )
+    {
       $this->view->status = false;
       $this->view->error = Zend_Registry::get('Zend_Translate')->_('You are already logged out.');
-      if( null === $this->_helper->contextSwitch->getCurrentContext() ) {
-        $this->_helper->redirector->gotoRoute(array(), 'default', true);
+      if( null === $this->_helper->contextSwitch->getCurrentContext() )
+      {
+        $this->_helper->redirector->gotoRoute(array(), 'home');
       }
       return;
     }
-    
-    // Run logout hook
-    $event = Engine_Hooks_Dispatcher::getInstance()->callEvent('onUserLogoutBefore', $viewer);
 
     // Test activity @todo remove
     Engine_Api::_()->getDbtable('actions', 'activity')
         ->addActivity($viewer, $viewer, 'logout');
-    
-    // Update online status
+
+    $table = Engine_Api::_()->getItemTable('user');
     $onlineTable = Engine_Api::_()->getDbtable('online', 'user')
         ->delete(array(
             'user_id = ?' => $viewer->getIdentity(),
@@ -386,68 +379,11 @@ class User_AuthController extends Core_Controller_Action_Standard
       ));
       unset($_SESSION['login_id']);
     }
-    
-    
-    // Run logout hook
-    $event = Engine_Hooks_Dispatcher::getInstance()->callEvent('onUserLogoutAfter', $viewer);
-    
-    $doRedirect = true;
-    
-    // Clear twitter/facebook session info
-    
-    // facebook api
-    $facebookTable = Engine_Api::_()->getDbtable('facebook', 'user');
-    $facebook = $facebookTable->getApi();
-    $settings = Engine_Api::_()->getDbtable('settings', 'core');
-    if( $facebook && 'none' != $settings->core_facebook_enable ) {
-      /*
-      $logoutUrl = $facebook->getLogoutUrl(array(
-        'next' => 'http://' . $_SERVER['HTTP_HOST'] . $this->view->url(array(), 'default', true),
-      ));
-      */
-      if( method_exists($facebook, 'getAccessToken') && 
-          ($access_token = $facebook->getAccessToken()) ) {
-        $doRedirect = false; // javascript will run to log them out of fb
-        $this->view->appId = $facebook->getAppId();
-        $access_array = split("\|", $access_token);
-        $session_key = $access_array[1];
-        $this->view->fbSession = $session_key;
-      }
-      try {
-        $facebook->clearAllPersistentData();
-      } catch( Exception $e ) {
-        // Silence
-      }
-    }
-    
-    unset($_SESSION['facebook_lock']);
-    unset($_SESSION['facebook_uid']);
-    
-    // twitter api
-    /*
-    $twitterTable = Engine_Api::_()->getDbtable('twitter', 'user');
-    $twitter = $twitterTable->getApi();
-    $twitterOauth = $twitterTable->getOauth();
-    if( $twitter && $twitterOauth ) {
-      try {
-        $result = $accountInfo = $twitter->account->end_session();
-      } catch( Exception $e ) {
-        // Silence
-        echo $e;die();
-      }
-    }
-    */
-    unset($_SESSION['twitter_lock']);
-    unset($_SESSION['twitter_token']);
-    unset($_SESSION['twitter_secret']);
-    unset($_SESSION['twitter_token2']);
-    unset($_SESSION['twitter_secret2']);
-    
-    // Response
+
     $this->view->status = true;
     $this->view->message =  Zend_Registry::get('Zend_Translate')->_('You are now logged out.');
-    if( $doRedirect && null === $this->_helper->contextSwitch->getCurrentContext() ) {
-      return $this->_helper->redirector->gotoRoute(array(), 'default', true);
+    if( null === $this->_helper->contextSwitch->getCurrentContext() ) {
+      return $this->_helper->redirector->gotoRouteAndExit(array(), 'home');
     }
   }
 
@@ -619,12 +555,6 @@ class User_AuthController extends Core_Controller_Action_Standard
 
   public function facebookAction()
   {
-    // Clear
-    if( null !== $this->_getParam('clear') ) {
-      unset($_SESSION['facebook_lock']);
-      unset($_SESSION['facebook_uid']);
-    }
-    
     $viewer = Engine_Api::_()->user()->getViewer();
     $facebookTable = Engine_Api::_()->getDbtable('facebook', 'user');
     $facebook = $facebookTable->getApi();
@@ -754,14 +684,13 @@ class User_AuthController extends Core_Controller_Action_Standard
   {
     // Clear
     if( null !== $this->_getParam('clear') ) {
-      unset($_SESSION['twitter_lock']);
       unset($_SESSION['twitter_token']);
       unset($_SESSION['twitter_secret']);
       unset($_SESSION['twitter_token2']);
       unset($_SESSION['twitter_secret2']);
     }
     
-    if( $this->_getParam('denied') ) {
+    if ( $this->_getParam('denied') ) {
       $this->view->error = 'Access Denied!';
       return;
     }

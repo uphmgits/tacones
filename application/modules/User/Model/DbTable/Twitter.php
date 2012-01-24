@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Twitter.php 9382 2011-10-14 00:41:45Z john $
+ * @version    $Id: Signup.php 7244 2010-09-01 01:49:53Z john $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -70,7 +70,6 @@ class User_Model_Dbtable_Twitter extends Engine_Db_Table
         empty($settings['secret']) ||
         empty($settings['enable']) ||
         $settings['enable'] == 'none' ) {
-
       $this->_api = null;
       Zend_Registry::set('Twitter_Api', $this->_api);
     }
@@ -125,8 +124,8 @@ class User_Model_Dbtable_Twitter extends Engine_Db_Table
     $href = Zend_Controller_Front::getInstance()->getRouter()
         ->assemble(array('module' => 'user', 'controller' => 'auth',
           'action' => 'twitter'), 'default', true);
-    $imgHref = Zend_Registry::get('StaticBaseUrl')
-        . 'application/modules/User/externals/images/twitter-sign-in.png';
+    $imgHref = _ENGINE_R_BASE
+        . '/application/modules/User/externals/images/twitter-sign-in.png';
     //$imgHref = 'http://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-l.png';
     return '
       <a href="'.$href.'">

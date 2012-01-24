@@ -6,7 +6,7 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Subscription.php 9258 2011-09-14 18:24:46Z john $
+ * @version    $Id: Subscription.php 8906 2011-04-21 00:22:33Z john $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -98,11 +98,9 @@ class Payment_Model_Subscription extends Core_Model_Item_Abstract
     if( !empty($this->gateway_id) && !empty($this->gateway_profile_id) ) {
       try {
         $gateway = Engine_Api::_()->getItem('payment_gateway', $this->gateway_id);
-        if( $gateway ) {
-          $gatewayPlugin = $gateway->getPlugin();
-          if( method_exists($gatewayPlugin, 'cancelSubscription') ) {
-            $gatewayPlugin->cancelSubscription($this->gateway_profile_id);
-          }
+        $gatewayPlugin = $gateway->getPlugin();
+        if( method_exists($gatewayPlugin, 'cancelSubscription') ) {
+          $gatewayPlugin->cancelSubscription($this->gateway_profile_id);
         }
       } catch( Exception $e ) {
         // Silence?

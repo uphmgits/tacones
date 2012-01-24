@@ -6,17 +6,17 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: _composeTag.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: _composeTag.tpl 7665 2010-10-19 22:09:19Z john $
  * @author     John
  */
 ?>
 
 <?php $this->headScript()
-    ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Observer.js')
-    ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Autocompleter.js')
-    ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Autocompleter.Local.js')
-    ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Autocompleter.Request.js')
-    ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Core/externals/scripts/composer_tag.js') ?>
+    ->appendFile($this->baseUrl().'/externals/autocompleter/Observer.js')
+    ->appendFile($this->baseUrl().'/externals/autocompleter/Autocompleter.js')
+    ->appendFile($this->baseUrl().'/externals/autocompleter/Autocompleter.Local.js')
+    ->appendFile($this->baseUrl().'/externals/autocompleter/Autocompleter.Request.js')
+    ->appendFile('application/modules/Core/externals/scripts/composer_tag.js') ?>
 
 <script type="text/javascript">
   en4.core.runonce.add(function() {

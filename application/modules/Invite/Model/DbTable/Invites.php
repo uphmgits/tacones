@@ -6,7 +6,7 @@
  * @package    Invite
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Invites.php 9331 2011-09-28 20:21:11Z shaun $
+ * @version    $Id: Invites.php 7341 2010-09-10 03:51:24Z john $
  * @author     Steve
  */
 
@@ -80,7 +80,9 @@ class Invite_Model_DbTable_Invites extends Engine_Db_Table
       
       try {
         
-        $inviteUrl = Zend_Controller_Front::getInstance()->getRouter()->assemble(array(
+        $inviteUrl = ( _ENGINE_SSL ? 'https://' : 'http://' )
+          . $_SERVER['HTTP_HOST']
+          . Zend_Controller_Front::getInstance()->getRouter()->assemble(array(
               'module' => 'invite',
               'controller' => 'signup',
             ), 'default', true)

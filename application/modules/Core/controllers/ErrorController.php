@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: ErrorController.php 9217 2011-08-26 21:57:06Z shaun $
+ * @version    $Id: ErrorController.php 8968 2011-06-02 00:48:35Z john $
  * @author     John
  */
 
@@ -53,9 +53,7 @@ class Core_ErrorController extends Core_Controller_Action_Standard
     $this->view->errorName = get_class($error->exception);
 
     if( APPLICATION_ENV != 'production' ) {
-      if( $error->exception instanceof Exception ){
-        $this->view->error = $error->exception->__toString();
-      }
+      $this->view->error = $error->exception->__toString();
     } else {
       $this->view->message = Zend_Registry::get('Zend_Translate')->_('An error has occurred');
     }

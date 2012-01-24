@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: index.tpl 7500 2010-09-30 22:04:33Z john $
  * @author     John
  */
 ?>
@@ -34,7 +34,7 @@
     <a id="admin_stats_offset_next" onclick="processStatisticsPage(1);" style="display: none;"><?php echo $this->translate("Next") ?></a>
   </div>
 
-  <script type="text/javascript" src="<?php echo $this->layout()->staticBaseUrl ?>externals/swfobject/swfobject.js"></script>
+  <script type="text/javascript" src="externals/swfobject/swfobject.js"></script>
   <script type="text/javascript">
     var currentArgs = {};
     var processStatisticsFilter = function(formElement) {
@@ -58,7 +58,7 @@
       
       //$('my_chart').empty();
       swfobject.embedSWF(
-        "<?php echo $this->layout()->staticBaseUrl ?>/externals/open-flash-chart/open-flash-chart.swf",
+        "<?php echo $this->baseUrl() ?>/externals/open-flash-chart/open-flash-chart.swf",
         "my_chart",
         "850",
         "400",

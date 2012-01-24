@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Online.php 9239 2011-09-06 18:51:17Z john $
+ * @version    $Id: Online.php 9154 2011-08-09 21:07:25Z john $
  * @author     John
  */
 
@@ -39,7 +39,6 @@ class User_Model_DbTable_Online extends Engine_Db_Table
     ), array(
       'user_id = ?' => $id,
       'ip = ?' => $ipExpr,
-      'active > ?' => new Zend_Db_Expr('DATE_SUB(NOW(),INTERVAL 20 MINUTE)'),
     ));
 
     // Run insert if update doesn't do anything

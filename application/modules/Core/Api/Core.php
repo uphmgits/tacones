@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Core.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: Core.php 7244 2010-09-01 01:49:53Z john $
  * @author     John
  */
 
@@ -27,15 +27,17 @@ class Core_Api_Core extends Core_Api_Abstract
    * Set the object that represents the subject of the page
    *
    * @param Core_Model_Item_Abstract|mixed $subject
-   * @return Core_Api_Core
+   * @return Core_Model_Api
    */
   public function setSubject($subject)
   {
-    if( null !== $this->_subject ) {
+    if( null !== $this->_subject )
+    {
       throw new Core_Model_Exception("The subject may not be set twice");
     }
 
-    if( !($subject instanceof Core_Model_Item_Abstract) ) {
+    if( !($subject instanceof Core_Model_Item_Abstract) )
+    {
       throw new Core_Model_Exception("The subject must be an instance of Core_Model_Item_Abstract");
     }
     
@@ -50,11 +52,16 @@ class Core_Api_Core extends Core_Api_Abstract
    */
   public function getSubject($type = null)
   {
-    if( null === $this->_subject ) {
+    if( null === $this->_subject )
+    {
       throw new Core_Model_Exception("getSubject was called without first setting a subject.  Use hasSubject to check");
-    } else if( is_string($type) && $type !== $this->_subject->getType() ) {
+    }
+    else if( is_string($type) && $type !== $this->_subject->getType() )
+    {
       throw new Core_Model_Exception("getSubject was given a type other than the set subject");
-    } else if( is_array($type) && !in_array($this->_subject->getType(), $type) ) {
+    }
+    else if( is_array($type) && !in_array($this->_subject->getType(), $type) )
+    {
       throw new Core_Model_Exception("getSubject was given a type other than the set subject");
     }
     

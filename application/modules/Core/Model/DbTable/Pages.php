@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Pages.php 9389 2011-10-14 23:54:09Z john $
+ * @version    $Id: Pages.php 7466 2010-09-25 00:02:41Z john $
  * @author     John
  */
 
@@ -88,10 +88,8 @@ class Core_Model_DbTable_Pages extends Engine_Db_Table implements Engine_Content
     $struct = array();
     foreach( $children as $child ) {
       $elStruct = $this->createElementParams($child);
-      if( $elStruct ) {
-        $elStruct['elements'] = $this->prepareContentArea($content, $child);
-        $struct[] = $elStruct;
-      }
+      $elStruct['elements'] = $this->prepareContentArea($content, $child);
+      $struct[] = $elStruct;
     }
 
     return $struct;
@@ -106,20 +104,20 @@ class Core_Model_DbTable_Pages extends Engine_Db_Table implements Engine_Content
       'order' => $row->order,
     );
     $params = (array) $row->params;
-    if( isset($params['title']) ) {
-      $data['title'] = $params['title'];
-    }
+    if( isset($params['title']) ) $data['title'] = $params['title'];
     $data['params'] = $params;
-    
-    // Check mobile here?
-    if( !empty($params['nomobile']) && 
-        Engine_Api::_()->hasModuleBootstrap('mobi') &&
-        !empty($_SESSION['mobile']) &&
-        !empty($_SESSION['mobile']['mobile']) ) {
-      return false;
-    }
-    
     return $data;
+    /*
+    return array(
+      'type' => $row->type,
+      'name' => $row->name,
+      'order' => $row->order,
+      //'identity' => $row->content_id,
+      'params' => (array) $row->params,
+      //'attribs' => $row->attribs,
+    );
+     * 
+     */
   }
 
   public function deletePage(Core_Model_Page $page)

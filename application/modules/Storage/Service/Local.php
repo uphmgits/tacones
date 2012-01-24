@@ -6,7 +6,7 @@
  * @package    Storage
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Local.php 9250 2011-09-09 03:07:08Z john $
+ * @version    $Id: Local.php 8303 2011-01-25 09:20:19Z john $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -23,8 +23,6 @@ class Storage_Service_Local extends Storage_Service_Abstract
   protected $_type = 'local';
   
   protected $_path;
-  
-  protected $_baseUrl;
 
   public function __construct(array $config)
   {
@@ -32,10 +30,6 @@ class Storage_Service_Local extends Storage_Service_Abstract
       $this->_path = $config['path'];
     } else {
       $this->_path = 'public';
-    }
-    
-    if( !empty($config['baseUrl']) ) {
-      $this->_baseUrl = $config['baseUrl'];
     }
 
     parent::__construct($config);
@@ -45,21 +39,13 @@ class Storage_Service_Local extends Storage_Service_Abstract
   {
     return $this->_type;
   }
-  
-  public function getBaseUrl()
-  {
-    if( null === $this->_baseUrl ) {
-      $this->_baseUrl = $this->_removeScriptName(Zend_Controller_Front::getInstance()->getBaseUrl());
-    }
-    return $this->_baseUrl;
-  }
 
   
   // Accessors
 
   public function map(Storage_Model_File $model)
   {
-    return rtrim($this->getBaseUrl(), '/') . '/' . $model->storage_path;
+    return rtrim($this->getBaseUrl(), '/') .'/'. $model->storage_path;
   }
 
   public function store(Storage_Model_File $model, $file)

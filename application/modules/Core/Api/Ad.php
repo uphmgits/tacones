@@ -30,7 +30,7 @@ class Core_Api_Ad extends Core_Api_Abstract
 
   public function getSelect($params = array())
   {
-    $table = Engine_Api::_()->getDbtable('ads', 'core');
+    $table = $this->api()->getDbtable('ads', 'core');
     
     $select = $table->select()
       ->order( 'ad_id DESC' );

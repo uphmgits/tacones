@@ -6,7 +6,7 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: delete.tpl 9382 2011-10-14 00:41:45Z john $
+ * @version    $Id: index.tpl 8973 2011-06-07 23:58:22Z john $
  * @author     John Boehr <j@webligo.com>
  */
 ?>

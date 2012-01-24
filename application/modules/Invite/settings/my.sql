@@ -6,7 +6,7 @@
  * @package    Invite
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: my.sql 9378 2011-10-13 22:50:30Z john $
+ * @version    $Id: my.sql 8586 2011-03-11 01:24:50Z john $
  * @author     John
  */
 
@@ -63,7 +63,7 @@ INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`
 --
 
 INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES
-('invite', 'Invites', 'Invites', '4.1.8', 1, 'standard');
+('invite', 'Invites', 'Invites', '4.1.3', 1, 'standard');
 
 
 -- --------------------------------------------------------

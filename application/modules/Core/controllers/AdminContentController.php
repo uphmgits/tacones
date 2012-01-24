@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: AdminContentController.php 9389 2011-10-14 23:54:09Z john $
+ * @version    $Id: AdminContentController.php 8862 2011-04-12 22:42:45Z john $
  * @author     John
  */
 
@@ -52,30 +52,7 @@ class Core_AdminContentController extends Core_Controller_Action_Admin
     }
 
     // Get page list
-    $pageSelect = $pageTable->select()
-        ->order('fragment DESC')
-        ->order('custom ASC')
-        ->order('displayname ASC');
-    $pageList = $pageTable->fetchAll($pageSelect);
-    $pageListAssoc = array(
-      'fragment' => array(),
-      'main' => array(),
-      'mobile' => array(),
-      'custom' => array()
-    );
-    foreach( $pageList as $pageRow ) {
-      if( false !== stripos($pageRow->displayname, 'mobile') ) {
-        $pageListAssoc['mobile'][] = $pageRow;
-      } else if( $pageRow->fragment ) {
-        $pageListAssoc['fragment'][] = $pageRow;
-      } else if( $pageRow->custom ) {
-        $pageListAssoc['custom'][] = $pageRow;
-      } else {
-        $pageListAssoc['main'][] = $pageRow;
-      }
-    }
-    $this->view->pageListAssoc = $pageListAssoc;
-    $this->view->pageList = $pageList;
+    $this->view->pageList = $pageList = $pageTable->fetchAll();
     
     // Get available content blocks
     $contentAreas = $this->buildCategorizedContentAreas($this->getContentAreas());
@@ -451,19 +428,6 @@ class Core_AdminContentController extends Core_Controller_Action_Admin
         $form->addElement('Text', 'title', array(
           'label' => 'Title',
           'order' => -100,
-        ));
-      }
-      
-      // Add mobile element?
-      if( !$form->getElement('nomobile') ) {
-        $form->addElement('Select', 'nomobile', array(
-          'label' => 'Hide on mobile site?',
-          'order' => 100000 - 5,
-          'multiOptions' => array(
-            '1' => 'Yes, do not display on mobile site.',
-            '0' => 'No, display on mobile site.',
-          ),
-          'value' => '0',
         ));
       }
 

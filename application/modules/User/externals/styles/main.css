@@ -1,5 +1,5 @@
 
-/* $Id: main.css 9312 2011-09-23 00:32:49Z john $ */
+/* $Id: main.css 8825 2011-04-09 01:34:20Z john $ */
 
 
 
@@ -13,7 +13,6 @@ diplayed on the main portal page.
   margin-bottom: 15px;
 }
 .layout_user_login_or_signup div.form-element input[type=text],
-.layout_user_login_or_signup div.form-element input[type=email],
 .layout_user_login_or_signup div.form-element input[type=password]
 {
   width: 95%;

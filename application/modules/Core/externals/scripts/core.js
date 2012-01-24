@@ -1,5 +1,5 @@
 
-/* $Id: core.js 9330 2011-09-27 23:33:35Z john $ */
+/* $Id: core.js 8375 2011-02-02 02:09:25Z john $ */
 
 
 var en4 = {};
@@ -58,36 +58,12 @@ en4.core.runonce = {
     if( this.executing ) return;
     this.executing = true;
     var fn;
-    while( (fn = this.fns.shift()) ){
+    while( fn = this.fns.shift() ){
       $try(function(){fn();});
     }
-    this.fns = [];
-    this.executing = false;
-  }
-  
-};
-
-
-/**
- * shutdown scripts
- */
-en4.core.shutdown = {
-
-  executing : false,
-  
-  fns : [],
-
-  add : function(fn){
-    this.fns.push(fn);
-  },
-
-  trigger : function(){
-    if( this.executing ) return;
-    this.executing = true;
-    var fn;
-    while( (fn = this.fns.shift()) ){
-      $try(function(){fn();});
-    }
+    //this.fns.each(function(fn){
+    //  $try(function(){ fn(); });
+    //});
     this.fns = [];
     this.executing = false;
   }
@@ -101,10 +77,6 @@ window.addEvent('load', function(){
 // This is experimental
 window.addEvent('domready', function(){
   en4.core.runonce.trigger();
-});
-
-window.addEvent('unload', function() {
-  en4.core.shutdown.trigger();
 });
 
 
@@ -124,12 +96,6 @@ en4.core.dloader = {
   frame : false,
 
   enabled : false,
-  
-  previous : false,
-  
-  hash : false,
-  
-  registered : false,
 
   setEnabled : function(flag) {
     this.enabled = ( flag == true );
@@ -141,7 +107,8 @@ en4.core.dloader = {
     this.activeHref = options.url;
 
     // Use an iframe for get requests
-    if( $type(options.conntype) && options.conntype == 'frame' ) {
+    if( $type(options.conntype) && options.conntype == 'frame' )
+    {
       options = $merge({
         data : {
           format : 'async',
@@ -165,13 +132,16 @@ en4.core.dloader = {
       }
       // Add format as query string
       if( $type(options.data) ) {
-        var separator = ( options.src.indexOf('?') > -1 ? '&' : '?' );
+        var separator = ( options.src.indexOf() > -1 ? '&' : '?' );
         options.src += separator + $H(options.data).toQueryString();
         delete options.data;
       }
       this.frame = new IFrame(options);
       this.frame.inject(document.body);
-    } else {
+    }
+
+    else
+    {
       options = $merge({
         method : 'get',
         data : {
@@ -200,84 +170,47 @@ en4.core.dloader = {
     return this;
   },
 
-  attach : function(els) {
+  attach : function(els)
+  {
     var bind = this;
 
-    if( !$type(els) ) {
+    if( !$type(els) )
+    {
       els = $$('a');
     }
 
     // Attach to links
     //$$('a.ajaxable').each(function(element)
-    els.each(function(element) {
-      if( !this.shouldAttach(element) ) {
-        return;
-      } else if( element.hasEvents() ) {
+    els.each(function(element)
+    {
+      if( element.get('tag') != 'a' || element.onclick || !element.href || element.href.match(/^(javascript|[#])/) || element.hasEvents() )
+      {
         return;
       }
       
-      element.addEvent('click', function(event) {
-        if( !this.shouldAttach(element) ) {
+      element.addEvent('click', function(event)
+      {
+        if( element.get('tag') != 'a' || element.onclick || !element.href || element.href.match(/^(javascript|[#])/) ) {
           return;
         }
-        
         var events = element.getEvents('click');
         if( events && events.length > 1 ) {
           return;
         }
         
+        // Cancel link click
+        event.stopPropagation();
 
-        // Remove host + basePath
-        var basePath = window.location.protocol + '//' + window.location.hostname + en4.core.baseUrl;
-        var newPath;
-        if( element.href.indexOf(basePath) === 0 ) {
-          // Cancel link click
-          if( event ) {
-            event.stopPropagation();
-            event.preventDefault();
-          }
-          
-          // Start request
-          newPath = element.href.substring(basePath.length);
-          
-          // Update url
-          if( this.hasPushState() ) {
-            this.push(element.href);
-          } else {
-            this.push(newPath);
-          }
-          
-          // Make request
-          this.startRequest(newPath);
-        }
-      }.bind(this));
-    }.bind(this));
+        bind.startRequest(element.href);
+
+        return false;
+      });
+    });
 
     // Monitor location
     //window.addEvent('unload', this.monitorAddress.bind(this));
     this.currentHref = window.location.href;
-    
-    if( !this.registered ) {
-      this.registered = true;
-      if( this.hasPushState() ) {
-        window.addEventListener("popstate", function(e) {
-          this.pop(e)
-        }.bind(this));
-      } else {
-        this.loopId = this.monitor.periodical(200, this);
-      }
-    }
-  },
-  
-  shouldAttach : function(element) {
-    return (
-      element.get('tag') == 'a' &&
-      !element.onclick &&
-      element.href &&
-      !element.href.match(/^(javascript|[#])/) &&
-      !element.hasClass('no-dloader') &&
-      !element.hasClass('smoothbox')
-    );  
+    this.loopId = this.monitorAddress.periodical(200, this);
   },
 
   handleLoad : function(response1, response2, response3, response4) {
@@ -294,112 +227,62 @@ en4.core.dloader = {
     }
 
     if( response ) {
-      // Shutdown previous scripts
-      en4.core.shutdown.trigger();
-      // Replace HTML
       $('global_content').innerHTML = response;
-      // Evaluate scripts in content
       en4.core.request.evalScripts($('global_content'));
-      // Attach dloader to a's in content
       this.attach($('global_content').getElements('a'));
-      // Execute runonce
       en4.core.runonce.trigger();
     }
     
     this.cancel();
     this.activeHref = false;
   },
-  
-  handleRedirect : function(url) {
-    this.push(url);
-    this.startRequest(url);
-  },
 
-  startRequest : function(url) {
-    
-    var fullUrl = window.location.protocol + '//' + window.location.hostname + en4.core.baseUrl + url;
-    //console.log(url, fullUrl);
-    
+  startRequest : function(url)
+  {
     // Cancel current request if active
-    if( this.activeHref ) {
+    if( this.activeHref )
+    {
       // Ignore if equal
-      if( this.activeHref == url ) {
+      if( this.activeHref == url )
+      {
         return;
       }
       // Otherwise cancel an continue
       this.cancel();
     }
 
-    //$('global_content').innerHTML = '<h1>Loading...</h1>';
-      
     this.start({
-      url : fullUrl,
+      url : url,
       conntype : 'frame'
     });
     
+    // Set hash in url to page
+    this.updateWindowLocation(url);
   },
-  
-  
-  
-  // functions for history
-  hasPushState : function() {
-    //return false;
-    return ('pushState' in window.history);
+
+  updateWindowLocation : function(url)
+  {
+    middlesegment = window.location.host + en4.core.baseUrl;
+    tail = url.split(middlesegment)[1];
+    window.location.hash = tail;
+    this.currentHref = window.location.href;
   },
-  
-  push : function(url, title, state) {
-    if( this.previous == url ) return;
-    
-    if( this.hasPushState() ) {
-      window.history.pushState(state || null, title || null, url);
-      this.previous = url;
-    } else {
-      window.location.hash = url;
+
+  monitorAddress : function()
+  {
+    if( this.currentHref == window.location.href )
+    {
+      return;
     }
-  },
-  
-  replace : function(url, title, state) {
-    if( this.hasPushState() ) {
-      window.history.replaceState(state || null, title || null, url);
-    } else {
-      this.hash = '#' + url;
-      this.push(url);
-    }
-  },
-  
-  pop : function(event) {
-    if( this.hasPushState() ) {
-      if( window.location.pathname.indexOf(en4.core.baseUrl) === 0 ) {
-        this.onChange(window.location.pathname.substring(en4.core.baseUrl.length));
-      } else {
-        this.onChange(window.location.pathname);
-      }
-    } else {
-      var hash = window.location.hash;
-      if( this.hash == hash ) {
-        return;
-      }
-      
-      this.hash = hash;
-      this.onChange(hash.substr(1));
-    }
-  },
-  
-  onChange : function(url) {
-    this.startRequest(url);
-  },
-  
-  back : function() {
-    window.history.back();
-  },
-  
-  forward : function() {
-    window.history.forward();
-  },
-  
-  monitor : function() {
-    if( this.hash != window.location.hash ) {
-      this.pop();
+    else
+    {
+      var fullUrl =
+        window.location.protocol + '//' +
+        window.location.host +
+        en4.core.baseUrl +
+        window.location.hash.replace('#', '');
+
+      this.startRequest(fullUrl);
     }
   }
 };

@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Login.php 9275 2011-09-20 21:15:50Z john $
+ * @version    $Id: Login.php 8968 2011-06-02 00:48:35Z john $
  * @author     John
  */
 
@@ -42,12 +42,8 @@ class User_Form_Login extends Engine_Form
       'validators' => array(
         'EmailAddress'
       ),
-      
-      // Fancy stuff
       'tabindex' => 1,
       'autofocus' => 'autofocus',
-      'inputType' => 'email',
-      'class' => 'text',
     ));
 
     $password = Zend_Registry::get('Zend_Translate')->_('Password');

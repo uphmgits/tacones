@@ -6,7 +6,7 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9412 2011-10-19 21:36:30Z john $
+ * @version    $Id: index.tpl 8974 2011-06-08 00:12:11Z john $
  * @author     John Boehr <j@webligo.com>
  */
 ?>
@@ -17,7 +17,6 @@
 
 <p>
   <?php echo $this->translate("STORAGE_VIEWS_ADMIN_SERVICES_INDEX_DESCRIPTION") ?>
-  <a class="admin help" href="http://www.socialengine.net/support/article?q=188&question=How-to-use-the-CDN-Storage-Feature" target="_blank"> </a>
 </p>
 
 <br />
@@ -26,7 +25,7 @@
 <div>
   <?php echo $this->htmlLink(array('action' => 'create', 'reset' => false), $this->translate('Add Service'), array(
     'class' => 'buttonlink',
-    'style' => 'background-image: url(' . $this->layout()->staticBaseUrl . 'application/modules/Storage/externals/images/admin/add.png);'
+    'style' => 'background-image: url(application/modules/Storage/externals/images/admin/add.png);'
   )) ?>
 </div>
 
@@ -130,7 +129,7 @@
           </td>
           <td class='admin_table_centered'>
             <?php if( $item->default ): ?>
-              <img src="<?php echo $this->layout()->staticBaseUrl ?>application/modules/Core/externals/images/notice.png" alt="Default" />
+              <img src="application/modules/Core/externals/images/notice.png" alt="Default" />
             <?php else: ?>
               <?php echo $this->formRadio('default', $item->service_id, array('onchange' => "setDefaultStorageService({$item->service_id});",'disable'=>!$item->enabled), '') ?>
             <?php endif; ?>

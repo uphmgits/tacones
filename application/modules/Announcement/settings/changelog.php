@@ -6,18 +6,10 @@
  * @package    Announcement
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: changelog.php 9381 2011-10-14 00:37:49Z john $
+ * @version    $Id: changelog.php 9140 2011-08-03 23:47:47Z john $
  * @author     John
  */
 return array(
-  '4.1.8' => array(
-    'Api/Core.php' => 'Refactored deprecated method calls',
-    'externals/.htaccess' => 'Updated with far-future expires headers for static resources',
-    'settings/changelog.php' => 'Incremented version',
-    'settings/manifest.php' => 'Incremented version',
-    'settings/my.sql' => 'Incremented version',
-    'views/scripts/admin-manage/index.tpl' => 'Added static base URL for CDN support',
-  ),
   '4.1.7' => array(
     'controllers/AdminManageController.php' => 'Removing deprecated usage of $this->_helper->api()',
     'settings/changelog.php' => 'Incremented version',

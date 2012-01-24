@@ -6,7 +6,7 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: PayPal.php 9209 2011-08-25 20:35:17Z john $
+ * @version    $Id: PayPal.php 9041 2011-06-30 04:37:55Z john $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -152,14 +152,10 @@ class Payment_Plugin_Gateway_PayPal extends Engine_Payment_Plugin_Abstract
 
       // Should fix some issues with GiroPay
       if( !empty($params['return_url']) ) {
-        $params['driverSpecificParams']['PayPal']['GIROPAYSUCCESSURL'] = $params['return_url']
-          . ( false === strpos($params['return_url'], '?') ? '?' : '&' ) . 'giropay=1';
-        $params['driverSpecificParams']['PayPal']['BANKTXNPENDINGURL'] = $params['return_url']
-          . ( false === strpos($params['return_url'], '?') ? '?' : '&' ) . 'giropay=1';
+        $params['driverSpecificParams']['PayPal']['GIROPAYSUCCESSURL'] = $params['return_url'];
       }
       if( !empty($params['cancel_url']) ) {
-        $params['driverSpecificParams']['PayPal']['GIROPAYCANCELURL'] = $params['cancel_url']
-          . ( false === strpos($params['return_url'], '?') ? '?' : '&' ) . 'giropay=1';
+        $params['driverSpecificParams']['PayPal']['GIROPAYCANCELURL'] = $params['cancel_url'];
       }
     }
     // This is a recurring subscription
@@ -675,10 +671,7 @@ class Payment_Plugin_Gateway_PayPal extends Engine_Payment_Plugin_Abstract
 
         // Profile was created
         case 'recurring_payment_profile_created':
-          if( (!empty($rawData['initial_payment_status']) &&
-               $rawData['initial_payment_status'] == 'Completed') ||
-              (!empty($rawData['profile_status']) && 
-               $rawData['profile_status'] == 'Active') ) {
+          if( $rawData['initial_payment_status'] == 'Completed' ) {
             //$subscription->active = true;
             $subscription->onPaymentSuccess();
             // @todo add transaction row for the initial amount?
@@ -693,8 +686,8 @@ class Payment_Plugin_Gateway_PayPal extends Engine_Payment_Plugin_Abstract
               ));
             }
           } else {
-            throw new Engine_Payment_Plugin_Exception(sprintf('Unknown or missing ' .
-                'initial_payment_status %1$s', @$rawData['initial_payment_status']));
+            throw new Engine_Payment_Plugin_Exception(sprintf('Unknown ' .
+                'initial_payment_status %1$s', $rawData['initial_payment_status']));
           }
           break;
 

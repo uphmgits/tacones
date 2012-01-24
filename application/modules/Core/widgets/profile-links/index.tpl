@@ -6,50 +6,12 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9162 2011-08-15 20:58:43Z shaun $
+ * @version    $Id: index.tpl 8934 2011-05-12 21:13:19Z jung $
  * @author     John
  */
 ?>
 
-<script type="text/javascript">
-  en4.core.runonce.add(function(){
-
-    <?php if( !$this->renderOne ): ?>
-    var anchor = $('profile_links').getParent();
-    $('profile_links_previous').style.display = '<?php echo ( $this->paginator->getCurrentPageNumber() == 1 ? 'none' : '' ) ?>';
-    $('profile_links_next').style.display = '<?php echo ( $this->paginator->count() == $this->paginator->getCurrentPageNumber() ? 'none' : '' ) ?>';
-
-    $('profile_links_previous').removeEvents('click').addEvent('click', function(){
-      en4.core.request.send(new Request.HTML({
-        url : en4.core.baseUrl + 'widget/index/content_id/' + <?php echo sprintf('%d', $this->identity) ?>,
-        data : {
-          format : 'html',
-          subject : en4.core.subject.guid,
-          page : <?php echo sprintf('%d', $this->paginator->getCurrentPageNumber() - 1) ?>
-        }
-      }), {
-        'element' : anchor
-      })
-    });
-
-    $('profile_links_next').removeEvents('click').addEvent('click', function(){
-      en4.core.request.send(new Request.HTML({
-        url : en4.core.baseUrl + 'widget/index/content_id/' + <?php echo sprintf('%d', $this->identity) ?>,
-        data : {
-          format : 'html',
-          subject : en4.core.subject.guid,
-          page : <?php echo sprintf('%d', $this->paginator->getCurrentPageNumber() + 1) ?>
-        }
-      }), {
-        'element' : anchor
-      })
-    });
-    <?php endif; ?>
-  });
-</script>
-
-
-<ul class="profile_links" id="profile_links">
+<ul class="profile_links">
   <?php foreach( $this->paginator as $link ): ?>
     <li>
       <?php if($link->photo_id != 0):?>
@@ -82,18 +44,3 @@
     </li>
   <?php endforeach; ?>
 </ul>
-
-<div>
-  <div id="profile_links_previous" class="paginator_previous">
-    <?php echo $this->htmlLink('javascript:void(0);', $this->translate('Previous'), array(
-      'onclick' => '',
-      'class' => 'buttonlink icon_previous'
-    )); ?>
-  </div>
-  <div id="profile_links_next" class="paginator_next">
-    <?php echo $this->htmlLink('javascript:void(0);', $this->translate('Next'), array(
-      'onclick' => '',
-      'class' => 'buttonlink_right icon_next'
-    )); ?>
-  </div>
-</div>

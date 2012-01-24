@@ -27,9 +27,22 @@
 }
 </style>
 
-<div class="header-img">
-<img src="./public/header-imgs/marketplace_browse.jpg">
+
+
+<div class="header_img_sd" style="display:block;">
+<?php
+ $mycatid = $this->category; 
+ if($mycatid=='1') $myimg='marketplace_shoes_header.png';
+ elseif($mycatid=='3') $myimg='marketplace_cloth_header.png';
+ elseif($mycatid=='5') $myimg='marketplace_accessories_header.png';
+ elseif($mycatid=='8') $myimg='marketplace_accessories_header.png';
+ elseif($mycatid=='13') $myimg='marketplace_brands_header.png';
+ else $myimg='marketplace_shopall_header.png';
+ ?>
+ <img src="./public/header-imgs/<?php echo $myimg ?>"  />
 </div>
+
+
 
 
 <div class="headline">
@@ -133,7 +146,7 @@
 <span style="float:left; width:24px; padding: 5px 5px 0px 0px;">
 <?php echo $this->htmlLink($this->user($item->owner_id)->getHref(), $this->itemPhoto($this->user($item->owner_id), 'thumb.icon', $this->user($item->owner_id)->getTitle()), array('title'=>$this->user($item->owner_id)->getTitle())) ?>
 </span>
-<span style="float:left; text-align:left; overflow:hidden; max-width: 124px; max-height:34px; border: none;">
+<span style="float:left; text-align:left; overflow:hidden; max-width: 124px; max-height:32px; border: none;">
 <?php // echo $this->user($item->owner_id)->getHref(); ?> see all items by <br />
 <?php echo $this->user($item->owner_id)->getTitle(); ?>
 </span>

@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: default.tpl 9353 2011-10-06 00:05:12Z john $
+ * @version    $Id: default.tpl 9089 2011-07-21 23:12:11Z john $
  * @author     John
  */
 ?>
@@ -24,7 +24,6 @@
   <?php // TITLE/META ?>
   <?php
     $counter = (int) $this->layout()->counter;
-    $staticBaseUrl = $this->layout()->staticBaseUrl;
     
     $request = Zend_Controller_Front::getInstance()->getRequest();
     $this->headTitle()
@@ -79,7 +78,7 @@
     $this->headLink(array(
       'rel' => 'favicon',
       'href' => ( isset($this->layout()->favicon)
-        ? $staticBaseUrl . $this->layout()->favicon
+        ? $this->baseUrl() . $this->layout()->favicon
         : '/favicon.ico' ),
       'type' => 'image/x-icon'),
       'PREPEND');
@@ -91,7 +90,7 @@
     }
     foreach( $themes as $theme ) {
       $this->headLink()
-        ->prependStylesheet($staticBaseUrl . 'application/css.php?request=application/themes/'.$theme.'/theme.css');
+        ->prependStylesheet($this->baseUrl().'/application/css.php?request=application/themes/'.$theme.'/theme.css');
       if( $orientation == 'rtl' ) {
         // @todo add include for rtl
       }
@@ -123,8 +122,7 @@
     en4.core.environment = '<?php echo APPLICATION_ENV ?>';
     en4.core.language.setLocale('<?php echo $this->locale()->getLocale()->__toString() ?>');
     en4.core.setBaseUrl('<?php echo $this->url(array(), 'default', true) ?>');
-    en4.core.staticBaseUrl = '<?php echo $this->escape($staticBaseUrl) ?>';
-    en4.core.loader = new Element('img', {src: en4.core.staticBaseUrl + 'application/modules/Core/externals/images/loading.gif'});
+    en4.core.loader = new Element('img', {src: 'application/modules/Core/externals/images/loading.gif'});
     
     <?php if( $this->subject() ): ?>
       en4.core.subject = {
@@ -140,24 +138,21 @@
         guid : '<?php echo $this->viewer()->getGuid(); ?>'
       };
     <?php endif; ?>
-    if( <?php echo ( Engine_Api::_()->getDbtable('settings', 'core')->core_dloader_enabled ? 'true' : 'false' ) ?> ) {
-      en4.core.runonce.add(function() {
-        en4.core.dloader.attach();
-      });
+    if( <?php echo ( Zend_Controller_Front::getInstance()->getRequest()->getParam('ajax', false) ? 'true' : 'false' ) ?> ) {
+      en4.core.dloader.attach();
     }
-    
     <?php echo $this->headScript()->captureEnd(Zend_View_Helper_Placeholder_Container_Abstract::PREPEND) ?>
   </script>
   <?php
     $this->headScript()
-      ->prependFile($staticBaseUrl . 'externals/smoothbox/smoothbox4.js')
-      ->prependFile($staticBaseUrl . 'application/modules/User/externals/scripts/core.js')
-      ->prependFile($staticBaseUrl . 'application/modules/Core/externals/scripts/core.js')
-      ->prependFile($staticBaseUrl . 'externals/chootools/chootools.js')
-      ->prependFile($staticBaseUrl . 'externals/mootools/mootools-1.2.5.1-more-' . (APPLICATION_ENV == 'development' ? 'nc' : 'yc') . '.js')
-      ->prependFile($staticBaseUrl . 'externals/mootools/mootools-1.2.5-core-' . (APPLICATION_ENV == 'development' ? 'nc' : 'yc') . '.js');
-    //->prependFile($staticBaseUrl . 'externals/mootools/mootools-more-1.3.2.1-full-compat-' . (APPLICATION_ENV == 'development' ? 'nc' : 'yc') . '.js')
-    //->prependFile($staticBaseUrl . 'externals/mootools/mootools-core-1.3.2-full-compat-' . (APPLICATION_ENV == 'development' ? 'nc' : 'yc') . '.js');
+      ->prependFile($this->baseUrl().'/externals/smoothbox/smoothbox4.js')
+      ->prependFile($this->baseUrl().'/application/modules/User/externals/scripts/core.js')
+      ->prependFile($this->baseUrl().'/application/modules/Core/externals/scripts/core.js')
+      ->prependFile($this->baseUrl().'/externals/chootools/chootools.js')
+      ->prependFile($this->baseUrl().'/externals/mootools/mootools-1.2.5.1-more-' . (APPLICATION_ENV == 'development' ? 'nc' : 'yc') . '.js')
+      ->prependFile($this->baseUrl().'/externals/mootools/mootools-1.2.5-core-' . (APPLICATION_ENV == 'development' ? 'nc' : 'yc') . '.js');
+      //->prependFile($this->baseUrl().'/externals/mootools/mootools-more-1.3.2.1-full-compat-' . (APPLICATION_ENV == 'development' ? 'nc' : 'yc') . '.js')
+      //->prependFile($this->baseUrl().'/externals/mootools/mootools-core-1.3.2-full-compat-' . (APPLICATION_ENV == 'development' ? 'nc' : 'yc') . '.js');
     // Process
     foreach( $this->headScript()->getContainer() as $dat ) {
       if( !empty($dat->attributes['src']) ) {

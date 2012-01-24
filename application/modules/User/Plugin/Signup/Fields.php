@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Fields.php 9204 2011-08-24 22:38:11Z john $
+ * @version    $Id: Fields.php 9079 2011-07-21 03:28:24Z shaun $
  * @author     John
  */
 
@@ -92,12 +92,11 @@ class User_Plugin_Signup_Fields extends Core_Plugin_FormSequence_Abstract
               $field = $map->getChild();
               if( $field->isHeading() ) continue;
               
-              if( isset($field->type) && in_array($field->type, $fb_keys) ) {
+              if( isset($field->type) && in_array($field->type, $fb_keys) ){
                 $el_key = $map->getKey();
                 $el_val = $fb_data[$field->type];
                 $el_obj = $this->_form->getElement($el_key);
-                if( $el_obj instanceof Zend_Form_Element &&
-                    !$el_obj->getValue() ) {
+                if( !$el_obj->getValue() ){
                   $el_obj->setValue($el_val);
                 }
               }
@@ -109,10 +108,13 @@ class User_Plugin_Signup_Fields extends Core_Plugin_FormSequence_Abstract
         }
       }
 
-      if( !empty($data) ) {
-        foreach( $data as $key => $val ) {
+      if( !empty($data) )
+      {
+        foreach( $data as $key => $val )
+        {
           $el = $this->_form->getElement($key);
-          if( $el instanceof Zend_Form_Element ) {
+          if( $el )
+          {
             $el->setValue($val);
           }
         }
@@ -208,3 +210,5 @@ class User_Plugin_Signup_Fields extends Core_Plugin_FormSequence_Abstract
     return null;
   }
 }
+
+

@@ -6,7 +6,7 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Testing.php 9382 2011-10-14 00:41:45Z john $
+ * @version    $Id: 2Checkout.php 9041 2011-06-30 04:37:55Z john $
  * @author     John Boehr <j@webligo.com>
  */
 

@@ -1,5 +1,5 @@
 
-/* $Id: composer.js 9368 2011-10-12 01:37:55Z john $ */
+/* $Id: composer.js 8850 2011-04-11 23:47:44Z john $ */
 
 
 var Composer = new Class({
@@ -16,8 +16,7 @@ var Composer = new Class({
     allowEmptyWithoutAttachment : false,
     allowEmptyWithAttachment : true,
     hideSubmitOnBlur : true,
-    submitElement : false,
-    useContentEditable : true
+    submitElement : false
   },
 
   initialize : function(element, options) {
@@ -120,47 +119,31 @@ var Composer = new Class({
       }
     });
     this.elements.container.wraps(this.elements.textarea);
-    
+
     // Create body
-    var supportsContentEditable = this._supportsContentEditable();
-    
-    if( supportsContentEditable ) {
-      this.elements.body = new Element('div', {
-        'class' : 'compose-content',
-        'styles' : {
-          'display' : 'block'
-        },
-        'events' : {
-          'keypress' : function(event) {
-            if( event.key == 'a' && event.control ) {
-              // FF only
-              if( Browser.Engine.gecko ) {
-                fix_gecko_select_all_contenteditable_bug(this, event);
-              }
+    this.elements.body = new Element('div', {
+      'class' : 'compose-content',
+      'styles' : {
+        'display' : 'block'
+      },
+      'events' : {
+        'keypress' : function(event) {
+          if( event.key == 'a' && event.control ) {
+            // FF only
+            if( Browser.Engine.gecko ) {
+              fix_gecko_select_all_contenteditable_bug(this, event);
             }
           }
         }
-      }).inject(this.elements.textarea, 'before');
-    } else {
-      this.elements.body = this.elements.textarea;
-    }
-    
-    // Attach blur event
+      }
+    }).inject(this.elements.textarea, 'before');
+
     var self = this;
     this.elements.body.addEvent('blur', function(e) {
-      var curVal;
-      if( supportsContentEditable ) {
-        curVal = this.get('html').replace(/\s/, '').replace(/<[^<>]+?>/ig, '');
-      } else {
-        curVal = this.get('value').replace(/\s/, '').replace(/<[^<>]+?>/ig, '')
-      }
-      if( '' == curVal ) {
+      if( '' == this.get('html').replace(/\s/, '').replace(/<[^<>]+?>/ig, '') )
+      {
         if( !Browser.Engine.trident ) {
-          if( supportsContentEditable ) {
-            this.set('html', '<br />');
-          } else {
-            this.set('value', '');
-          }
+          this.set('html', '<br />');
         }
         if( self.options.hideSubmitOnBlur ) {
           (function() {
@@ -178,29 +161,24 @@ var Composer = new Class({
         self.getMenu().setStyle('display', '');
       });
     }
+    
+    $(this.elements.body);
+    this.elements.body.contentEditable = true;
+    this.elements.body.designMode = 'On';
+    
+    ['MouseUp', 'MouseDown', 'ContextMenu', 'Click', 'Dblclick', 'KeyPress', 'KeyUp', 'KeyDown'].each(function(eventName) {
+      var method = (this['editor' + eventName] || function(){}).bind(this);
+      this.elements.body.addEvent(eventName.toLowerCase(), method);
+    }.bind(this));
 
-    if( supportsContentEditable ) {
-      $(this.elements.body);
-      this.elements.body.contentEditable = true;
-      this.elements.body.designMode = 'On';
-
-      ['MouseUp', 'MouseDown', 'ContextMenu', 'Click', 'Dblclick', 'KeyPress', 'KeyUp', 'KeyDown'].each(function(eventName) {
-        var method = (this['editor' + eventName] || function(){}).bind(this);
-        this.elements.body.addEvent(eventName.toLowerCase(), method);
-      }.bind(this));
-
-      this.setContent(this.elements.textarea.value);
-
-      this.selection = new Composer.Selection(this.elements.body);
-    } else {
-      this.elements.textarea.setStyle('display', '');
-    }
+    this.setContent(this.elements.textarea.value);
+    
+    this.selection = new Composer.Selection(this.elements.body);
 
     if( this.options.overText ) {
       new Composer.OverText(this.elements.body, $merge({
         textOverride : this._lang('Post Something...'),
         poll : true,
-        isPlainText : !supportsContentEditable,
         positionOptions: {
           position: ( en4.orientation == 'rtl' ? 'upperRight' : 'upperLeft' ),
           edge: ( en4.orientation == 'rtl' ? 'upperRight' : 'upperLeft' ),
@@ -214,11 +192,10 @@ var Composer = new Class({
     
     this.fireEvent('attach', this);
     
-    /*
     this.plugins.each(function(){
 
     });
-    */
+
   },
 
   detach : function() {
@@ -243,27 +220,17 @@ var Composer = new Class({
   // Content
   
   getContent: function(){
-    if( this._supportsContentEditable() ) {
-      return this.cleanup(this.elements.body.get('html'));
-    } else {
-      return this.cleanup(this.elements.body.get('value'));
-    }
+    return this.cleanup(this.elements.body.get('html'));
   },
 
-  setContent: function(newContent) {
-    if( this._supportsContentEditable() ) {
-      if( !newContent.trim() && !Browser.Engine.trident ) newContent = '<br />';
-      this.elements.body.set('html', newContent);
-    } else {
-      this.elements.body.set('value', newContent);
-    }
+  setContent: function(newContent){
+    if( !newContent.trim() && !Browser.Engine.trident ) newContent = '<br />';
+    this.elements.body.set('html', newContent);
     return this;
   },
 
   saveContent: function(){
-    if( this._supportsContentEditable() ) {
-      this.elements.textarea.set('value', this.getContent());
-    }
+    this.elements.textarea.set('value', this.getContent());
     return this;
   },
 
@@ -422,14 +389,6 @@ var Composer = new Class({
       return string.vsprintf(args);
     } catch( e ) {
       alert(e);
-    }
-  },
-  
-  _supportsContentEditable : function() {
-    if( 'useContentEditable' in this.options && this.options.useContentEditable ) {
-      return true;
-    } else {
-      return false;
     }
   }
 });
@@ -620,7 +579,7 @@ Composer.Plugin.Interface = new Class({
   composer : false,
 
   options : {
-    loadingImage : en4.core.staticBaseUrl + 'application/modules/Core/externals/images/loading.gif'
+    loadingImage : 'application/modules/Core/externals/images/loading.gif'
   },
   
   elements : {},

@@ -188,6 +188,7 @@ class Marketplace_Form_Create extends Engine_Form
         'item' => $this->getItem()
       ));
     }
+
     $this->addSubForms(array(
       'fields' => $customFields
     ));

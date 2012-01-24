@@ -40,6 +40,13 @@ class Marketplace_Form_Edit extends Marketplace_Form_Create
     $this->addElement('Radio', 'cover', array(
       'label' => 'Album Cover',
     ));
+
+    $content = Zend_Registry::get('Zend_Translate')->_("<span><a href='%s'>Add Photos</a></span>");
+    $content= sprintf($content, Zend_Controller_Front::getInstance()->getRouter()->assemble(array('controller' => 'photo', 'action' => 'upload', 'subject' => $this->_item->getGuid()), 'marketplace_extended'));
+    // Init forgot password link
+    $this->addElement('Dummy', 'addphotos', array(
+      'content' => $content,
+    ));
     $this->submit->setLabel('Save Changes');
   }
 }

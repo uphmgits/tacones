@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9329 2011-09-27 22:55:58Z john $
+ * @version    $Id: index.tpl 8859 2011-04-12 03:10:41Z john $
  * @author     John
  */
 ?>
@@ -25,7 +25,7 @@
           <div class="pulldown_contents">
             <ul class="notifications_menu" id="notifications_menu">
               <div class="notifications_loading" id="notifications_loading">
-                <img src='<?php echo $this->layout()->staticBaseUrl ?>application/modules/Core/externals/images/loading.gif' style='float:left; margin-right: 5px;' />
+                <img src='application/modules/Core/externals/images/loading.gif' style='float:left; margin-right: 5px;' />
                 <?php echo $this->translate("Loading ...") ?>
               </div>
             </ul>
@@ -44,11 +44,7 @@
     </li>
     <?php endif; ?>
     <?php foreach( $this->navigation as $item ): ?>
-      <li><?php echo $this->htmlLink($item->getHref(), $this->translate($item->getLabel()), array_filter(array(
-        'class' => ( !empty($item->class) ? $item->class : null ),
-        'alt' => ( !empty($item->alt) ? $item->alt : null ),
-        'target' => ( !empty($item->target) ? $item->target : null ),
-      ))) ?></li>
+      <li><?php echo $this->htmlLink($item->getHref(), $this->translate($item->getLabel())) ?></li>
     <?php endforeach; ?>
     <?php if($this->search_check):?>
       <li id="global_search_form_container">

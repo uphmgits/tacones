@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: install.php 9405 2011-10-18 23:07:04Z john $
+ * @version    $Id: install.php 7244 2010-09-01 01:49:53Z john $
  * @author     John
  */
 
@@ -21,15 +21,7 @@ class User_Installer extends Engine_Package_Installer_Module
   public function onInstall()
   {
     $db = $this->getDb();
-    
-    // Add some pages
-    if( method_exists($this, '_addGenericPage') ) {
-      $this->_addGenericPage('user_auth_login', 'Sign-in', 'Sign-in Page', 'This is the site sign-in page.');
-      $this->_addGenericPage('user_signup_index', 'Sign-up', 'Sign-up Page', 'This is the site sign-up page.');
-    } else {
-      $this->_error('Missing _addGenericPage method');
-    }
-    
+
     // Run upgrades first to prevent issues with upgrading from older versions
     parent::onInstall();
     

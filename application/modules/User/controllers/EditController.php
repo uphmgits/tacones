@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: EditController.php 9170 2011-08-17 20:09:03Z john $
+ * @version    $Id: EditController.php 9076 2011-07-21 02:11:10Z john $
  * @author     John
  */
 
@@ -306,12 +306,14 @@ class User_EditController extends Core_Controller_Action_User
     
     // Get photo
     $photo = Engine_Api::_()->getItemByGuid($this->_getParam('photo'));
-    if( !$photo || !($photo instanceof Core_Model_Item_Abstract) || empty($photo->photo_id) ) {
+    if( !$photo || !($photo instanceof Core_Model_Item_Collectible) || empty($photo->photo_id) )
+    {
       $this->_forward('requiresubject', 'error', 'core');
       return;
     }
 
-    if( !$photo->authorization()->isAllowed(null, 'view') ) {
+    if( !$photo->getCollection()->authorization()->isAllowed(null, 'view') )
+    {
       $this->_forward('requireauth', 'error', 'core');
       return;
     }

@@ -16,6 +16,8 @@
 <?php return; // Do no render the rest of the script in this mode
 endif; ?>
 
+<?php $inspectionEnable = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.inspectionenable', 0); ?>
+
 <link rel="stylesheet" href="application/modules/Marketplace/externals/milkbox/css/milkbox/milkbox.css" type="text/css" media="screen" />
 <script type="text/javascript" src="application/modules/Marketplace/externals/milkbox/js/mootools-1.2.5.1-more.js"></script>
 <script type="text/javascript" src="application/modules/Marketplace/externals/milkbox/js/milkbox.js"></script>
@@ -29,12 +31,40 @@ endif; ?>
     $('tag').value = tag;
     $('filter_form').submit();
   }
-  var dateAction =function(start_date, end_date){
+  var dateAction = function(start_date, end_date){
     $('start_date').value = start_date;
     $('end_date').value = end_date;
     $('filter_form').submit();
   }
+  <?php if( $inspectionEnable ) : ?>
+  function setInspection(el){
+    var insp = document.getElementById('inspection_fee');
+    var total_price = document.getElementById('total_price');
+    var add_to_cart = document.getElementById('add_to_cart');
+
+    add_to_cart.href = add_to_cart.href.replace("\/inspection\/1", ''); 
+    if( el.checked ) {
+      insp.innerHTML = "$<?=number_format($this->inspection_fee, 2)?>";
+      total_price.innerHTML = "$<?=number_format($this->total_amount + $this->inspection_fee, 2)?>";
+      add_to_cart.href = add_to_cart.href + "/inspection/1";
+    }
+    else {
+      insp.innerHTML = "$0.00";
+      total_price.innerHTML = "$<?=number_format($this->total_amount, 2)?>";
+    }
+    <?php endif; ?>
+  }
 </script>
+
+<style>
+  .marketplace_fieldvalueloop {
+    width: 220px;
+  }
+  .marketplace_fieldvalueloop > ul > li {
+    overflow: hidden;
+    width: auto;
+  }
+</style>
 
 <div class='layout_common'>
 	<div class='layout_right'>
@@ -147,6 +177,25 @@ endif; ?>
 
 		  <ul class='marketplaces_entrylist'>
 			<li>
+				<ul class='marketplace_thumbs'>
+          <?php $i = 0; ?> 
+          <?php $colInRow = 8; ?> 
+				  <?php foreach( $this->paginator as $photo ): ?>
+					<?php if($this->marketplace->photo_id != $photo->file_id):?>
+					  <?php if ($i % $colInRow == 0): ?><li> <?php endif;?>
+            <?php if($photo->getPhotoUrl()) : ?>
+						  <a  href="<?=$photo->getPhotoUrl()?>" class="smoothbox11" rel="milkbox[gall1]" title="<?=$this->marketplace->getTitle()?>">
+                <?=$this->itemPhoto($photo, 'thumb.icon', array('id' => 'media_photo', 'style'=>'text-align: center; width: 100px;'))?>
+              </a>
+            <?php endif;?>
+
+					  <?php if( ($i++ % $colInRow == $colInRow - 1) ) echo "</li>"; ?> 
+					<?php endif; ?>
+
+				  <?php endforeach;?>
+          <?php if( ($i % $colInRow != 0) ) echo "</li>"; ?>
+				</ul>
+
 			  <h3>
 				<?php echo $this->marketplace->getTitle() ?>
 			  </h3>
@@ -173,17 +222,7 @@ endif; ?>
 					<?php echo nl2br($this->marketplace->body) ?>
 				</div>
 
-				<ul class='marketplace_thumbs'>
-				  <?php $i=0; foreach( $this->paginator as $photo ): ?>
-					<?php if($this->marketplace->photo_id != $photo->file_id):?>
-					  <?php if ($i == 0 || ($i % 5) == 0): ?><li> <?php endif;?>
-						<a  href="<?php echo $photo->getPhotoUrl(); ?>" class="smoothbox11" rel="milkbox[gall1]" title="<?=$this->marketplace->getTitle()?>"><?php echo $this->htmlImage($photo->getPhotoUrl(), $this->itemPhoto($photo, 'thumb.icon'), array(
-						  'id' => 'media_photo', 'style'=>'text-align: center; width: 100px;'
-						)) ?></a>
-					  <?php if (($i % 4) == 0 && $i!=0): ?></li> <?php endif;?>
-					<?php endif;  $i++;?>
-				  <?php endforeach;?>
-				</ul>
+
 				
 			</li>
 		  <?php echo $this->action("list", "comment", "core", array("type"=>"marketplace", "id"=>$this->marketplace->getIdentity())) ?>
@@ -193,22 +232,30 @@ endif; ?>
 			<br />
 			<ul style="margin:15px 0;">
 				<li>
-					<span style="font-size:18px;">Price:</span>
-					<span style="font-size:18px;">$<?php echo (($this->marketplace->price - $this->discount_sum) >= 0?$this->marketplace->price - $this->discount_sum:0);?></span>
+					<span style="font-size:13px;"><?=$this->translate("Price")?>:</span>
+					<span style="font-size:13px;">$<?=number_format( (($this->marketplace->price - $this->discount_sum) >= 0?$this->marketplace->price - $this->discount_sum:0), 2)?></span>
 				</li>
 				<?php if(Engine_Api::_()->marketplace()->upsIsActive()): ?>
-					<?php
-						$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($this->marketplace->marketplace_id, $this->viewer()->getIdentity());
-					?>
-					<?php if($product_shipping_fee): ?>
+					<?php if($this->product_shipping_fee): ?>
 						<li>
-							<span style="font-size:13px;text-align: left;">Shipping Fee:</span>
-							<span style="font-size:13px;">$<?php echo number_format($product_shipping_fee, 2);?></span>
+							<span style="font-size:13px;"><?=$this->translate("Shipping Fee")?>:</span>
+							<span style="font-size:13px;">$<?=number_format($this->product_shipping_fee, 2)?></span>
 						</li>
 					<?php endif; ?>
 				<?php endif; ?>
+        <?php if( $inspectionEnable ) : ?>
+          <li>
+            <input type="checkbox" class="checkbox" name="inspection_option" id="inspection_option" onchange="setInspection(this);"/>
+					  <span style="font-size:13px;"><?=$this->translate("Inspection")?>:</span>
+					  <span style="font-size:13px;" id='inspection_fee'>$<?=number_format(0, 2)?></span>
+				  </li>
+        <?php endif; ?>
+        <li>
+					<span style="font-size:18px;"><?=$this->translate("Total Price")?>:</span>
+					<span style="font-size:18px;" id='total_price'>$<?=number_format($this->total_amount, 2)?></span>
+				</li>
 			</ul>
-			<?php if(Engine_Api::_()->marketplace()->cartIsActive() and $this->viewer()->getIdentity() ): ?>
+			<?php if(Engine_Api::_()->marketplace()->cartIsActive()/* and $this->viewer()->getIdentity()*/ ): ?>
 				<br /><br />
 				<?php if(!empty($this->already_in_cart)): ?>
 					<div class="tip">
@@ -218,7 +265,7 @@ endif; ?>
 					</div>
 				<?php endif; ?>
 				<div style="text-align: left;margin-bottom: 10px;">
-					<?=$this->htmlLink(array('route' => 'marketplace_general', 'action' => 'addtocart', 'marketplace_id' => $this->marketplace->getIdentity()), 'Add to Cart', array('class' => 'add_to_cart smoothbox'))?>
+					<?=$this->htmlLink(array('route' => 'marketplace_general', 'action' => 'addtocart', 'marketplace_id' => $this->marketplace->getIdentity()), 'Add to Cart', array('class' => 'add_to_cart smoothbox', 'id' => 'add_to_cart'))?>
 				</div>
 			<?php else: ?>
 				<?php if(Engine_Api::_()->marketplace()->couponIsActive()): ?>
@@ -236,20 +283,19 @@ endif; ?>
 					<?php endif; ?>
 				<?php endif; ?>
 				<br /><br />
-				<?php if( !$this->prepay ) : ?>
-          <?php //echo '<pre>'; print_r($this->paymentForm); echo '</pre>'; ?>
+				<?php /*if( !$this->prepay ) : ?>
           <?php echo $this->paymentForm?>
-  			<?php endif; ?>
+  			<?php endif;*/ ?>
 
 			<?php endif; ?>
-			<?php if( $this->prepay ) : ?>
+			<?php /*if( $this->prepay ) : ?>
         <style>
           #marketplaces_prepaypal .form-label { display: none; }
           #marketplaces_prepaypal input#marketplaces_email { width: 160px; }
           #marketplaces_prepaypal .form-elements { margin-top: 0; }
         </style>
         <?=$this->paymentForm->render($this)?>
-  		<?php endif; ?>
+  		<?php endif; */ ?>
 		  </div>
 	</div>
 </div>

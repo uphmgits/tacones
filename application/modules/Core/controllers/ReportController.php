@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: ReportController.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: ReportController.php 8185 2011-01-10 23:29:00Z john $
  * @author     John
  */
 
@@ -74,7 +74,7 @@ class Core_ReportController extends Core_Controller_Action_Standard
     $currentContext = $this->_helper->contextSwitch->getCurrentContext();
     if( null === $currentContext )
     {
-      return $this->_helper->redirector->gotoRoute(array(), 'default', true);
+      return $this->_helper->redirector->gotoRoute(array(), 'home', true);
     }
     else if( 'smoothbox' === $currentContext )
     {

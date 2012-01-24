@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Edit.php 9414 2011-10-19 22:10:29Z john $
+ * @version    $Id: Edit.php 8536 2011-03-01 04:43:10Z john $
  * @author     John
  */
 
@@ -18,14 +18,6 @@
  */
 class User_Form_Admin_Manage_Edit extends Engine_Form
 {
-  protected $_userIdentity;
-  
-  public function setUserIdentity($userIdentity)
-  {
-    $this->_userIdentity = (int) $userIdentity;
-    return $this;
-  }
-  
   public function init()
   {
     $this
@@ -36,19 +28,7 @@ class User_Form_Admin_Manage_Edit extends Engine_Form
 
     // init email
     $this->addElement('Text', 'email', array(
-      'label' => 'Email Address',
-      'validators' => array(
-        array('NotEmpty', true),
-        array('EmailAddress', true),
-        array('Db_NoRecordExists', true, array(
-          Engine_Db_Table::getTablePrefix() . 'users', 'email', array(
-            'field' => 'user_id',
-            'value' => (int) $this->_userIdentity
-        )))
-      ),
-      'filters' => array(
-        'StringTrim'
-      )
+      'label' => 'Email Address'
     ));
 
     // init username

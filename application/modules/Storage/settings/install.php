@@ -6,7 +6,7 @@
  * @package    Storage
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: install.php 9405 2011-10-18 23:07:04Z john $
+ * @version    $Id: install.php 7244 2010-09-01 01:49:53Z john $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -18,7 +18,7 @@
  */
 class Storage_Installer extends Engine_Package_Installer_Module
 {
-  public function onInstall()
+  function onInstall()
   {
     $db = $this->getDb();
 

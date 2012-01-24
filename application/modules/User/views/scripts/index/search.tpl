@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: search.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: search.tpl 7864 2010-11-30 03:25:41Z steve $
  * @author     Jung
  */
 ?>
@@ -88,7 +88,7 @@ endif; ?>
     var userCount = <?php echo $this->userCount; ?>;
     var loadNextSearchMembers = function()
     {
-      $('browsemembers_viewmore').innerHTML = "<div><img src='" + en4.core.staticBaseUrl + "application/modules/Core/externals/images/loading.gif' style='float:left;margin-right: 5px;'/><?php echo $this->translate('Loading...');?></div>";
+      $('browsemembers_viewmore').innerHTML = "<div><img src='application/modules/Core/externals/images/loading.gif' style='float:left;margin-right: 5px;'/><?php echo $this->translate('Loading...');?></div>";
       $('form_ajax').value = "true";
       if( requestActive ) return;
 
@@ -113,7 +113,7 @@ endif; ?>
 
     var searchMembers = function()
     {
-      $('browsemembers_results').innerHTML = "<div><img src='" + en4.core.staticBaseUrl + "application/modules/Core/externals/images/loading.gif' style='float:left;margin-right: 5px;'/><?php echo $this->translate('Loading...');?></div>";
+      $('browsemembers_results').innerHTML = "<div><img src='application/modules/Core/externals/images/loading.gif' style='float:left;margin-right: 5px;'/><?php echo $this->translate('Loading...');?></div>";
       $('form_ajax').value = "";
       $('form_lastrow').value = '0';
       if( requestActive ) return;

@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Abstract.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: Abstract.php 7244 2010-09-01 01:49:53Z john $
  * @author     John
  */
 
@@ -34,6 +34,11 @@ abstract class Core_Api_Abstract
       $this->_moduleName = strtolower($prefix);
     }
     return $this->_moduleName;
+  }
+
+  public function api()
+  {
+    return Engine_Api::_()->setCurrentModule($this->getModuleName());
   }
 
   public function __call($method, array $arguments = array())

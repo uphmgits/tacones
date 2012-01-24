@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9412 2011-10-19 21:36:30Z john $
+ * @version    $Id: index.tpl 8385 2011-02-02 23:29:35Z john $
  * @author     Jung
  */
 ?>
@@ -111,7 +111,7 @@
             <?php foreach( $this->themes as $theme ):?>
               <?php
               // @todo meta key is deprecated and pending removal in 4.1.0; b/c removal in 4.2.0
-              $thumb = $this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/anonymous.png';
+              $thumb = 'application/modules/Core/externals/images/anonymous.png';
               if( !empty($this->manifest[$theme->name]['package']['thumb']) ) {
                 $thumb = $this->manifest[$theme->name]['package']['thumb'];
               }
@@ -168,9 +168,6 @@
       </h3>
       <div>
         <?php echo $this->htmlLink(array('route'=>'admin_default', 'controller'=>'themes','action'=>'upload'), $this->translate("Upload New Theme"), array('class'=>'buttonlink admin_themes_header_import')) ?>
-        <!--
-        <a class="admin help" href="http://www.socialengine.net/support/documentation/article?q=128&question=Creating-Your-Own-Theme" target="_blank" style="margin-left: 10px; margin-right: 0px;"> </a>
-        -->
       </div>
     </div>
 
@@ -179,35 +176,34 @@
       <ul class="admin_themes">
         <?php
         // @todo meta key is deprecated and pending removal in 4.1.0; b/c removal in 4.2.0
-        $alt_row = true;
-        foreach( $this->themes as $theme ):
-          $thumb = $this->layout()->staticBaseUrl . 'application/modules/Core/externals/images/anonymous.png';
-          if( !empty($this->manifest[$theme->name]['package']['thumb']) )
-            $thumb = $this->manifest[$theme->name]['package']['thumb'];
-          ?>
-          <li <?php echo ($alt_row) ? ' class="alt_row"' : "";?>>
-            <div class="theme_wrapper"><img src="<?php echo $thumb ?>" alt="<?php echo $theme->name?>"></div>
-            <div class="theme_chooser_info">
-                  <h3><?php echo $theme->title?></h3>
-                    <?php if ( !empty($this->manifest[$theme->name]['package']['version'])): ?>
-                        <h4 class="version">v<?php echo $this->manifest[$theme->name]['package']['version'] ?></h4>
-                    <?php endif; ?>
-                    <?php if ( !empty($this->manifest[$theme->name]['package']['author'])): ?>
-                      <h4><?php echo $this->translate('by %s', $this->manifest[$theme->name]['package']['author']) ?></h4>
-                    <?php endif; ?>
-                    <?php if ($theme->name !== $this->activeTheme->name):?>
-                            <form action="<?php echo $this->url(array('action' => 'change')) ?>" method="post">
-                                    <button class="activate_button"><?php echo $this->translate('Activate Theme') ?></button>
-                                    <?php echo $this->formHidden('theme', $theme->name, array('id'=>'')) ?>
-                            </form>
-                    <?php else:?>
-                            <div class="current_theme">
-                              (<?php echo $this->translate("this is your current theme") ?>)
-                            </div>
-                    <?php endif;?>
-            </div>
-          </li>
-          <?php $alt_row = !$alt_row; ?>
+        $alt_row=true; foreach( $this->themes as $theme ):
+        $thumb = 'application/modules/Core/externals/images/anonymous.png';
+        if( !empty($this->manifest[$theme->name]['package']['thumb']) )
+          $thumb = $this->manifest[$theme->name]['package']['thumb'];
+        ?>
+        <li <?php echo ($alt_row) ? ' class="alt_row"' : "";?>>
+          <div class="theme_wrapper"><img src="<?php echo $thumb ?>" alt="<?php echo $theme->name?>"></div>
+          <div class="theme_chooser_info">
+                <h3><?php echo $theme->title?></h3>
+                  <?php if ( !empty($this->manifest[$theme->name]['package']['version'])): ?>
+                      <h4 class="version">v<?php echo $this->manifest[$theme->name]['package']['version'] ?></h4>
+                  <?php endif; ?>
+                  <?php if ( !empty($this->manifest[$theme->name]['package']['author'])): ?>
+                    <h4><?php echo $this->translate('by %s', $this->manifest[$theme->name]['package']['author']) ?></h4>
+                  <?php endif; ?>
+                  <?php if ($theme->name !== $this->activeTheme->name):?>
+                          <form action="<?php echo $this->url(array('action' => 'change')) ?>" method="post">
+                                  <button class="activate_button"><?php echo $this->translate('Activate Theme') ?></button>
+                                  <?php echo $this->formHidden('theme', $theme->name, array('id'=>'')) ?>
+                          </form>
+                  <?php else:?>
+                          <div class="current_theme">
+                            (<?php echo $this->translate("this is your current theme") ?>)
+                          </div>
+                  <?php endif;?>
+          </div>
+        </li>
+        <?php $alt_row = !$alt_row; ?>
         <?php endforeach; ?>
       </ul>
     </div>

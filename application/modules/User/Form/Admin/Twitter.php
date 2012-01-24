@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Twitter.php 9382 2011-10-14 00:41:45Z john $
+ * @version    $Id: Facebook.php 8318 2011-01-26 21:23:55Z char $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -45,17 +45,11 @@ class User_Form_Admin_Twitter extends Engine_Form
     $this->addElement('Text', 'key', array(
       'label' => 'Twitter App Consumer Key',
       'description' => '',
-      'filters' => array(
-        'StringTrim',
-      ),
     ));
     
     $this->addElement('Text', 'secret', array(
       'label' => 'Twitter App Consumer Secret',
       'description' => '',
-      'filters' => array(
-        'StringTrim',
-      ),
     ));
 
     $this->addElement('Radio', 'enable', array(

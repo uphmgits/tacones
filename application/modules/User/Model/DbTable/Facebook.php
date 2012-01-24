@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Facebook.php 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: Facebook.php 9148 2011-08-08 19:28:04Z john $
  * @author     Steve
  */
 
@@ -131,18 +131,13 @@ class User_Model_DbTable_Facebook extends Engine_Db_Table
     $href = Zend_Controller_Front::getInstance()->getRouter()
         ->assemble(array('module' => 'user', 'controller' => 'auth',
           'action' => 'facebook'), 'default', true);
-    $imgHref = Zend_Registry::get('StaticBaseUrl')
-        . 'application/modules/User/externals/images/facebook-sign-in.gif';
+    $imgHref = _ENGINE_R_BASE
+        . '/application/modules/User/externals/images/facebook-sign-in.gif';
     //$imgHref = 'http://static.ak.fbcdn.net/rsrc.php/z38X1/hash/6ad3z8m6.gif';
     return '
       <a href="'.$href.'">
         <img src="' . $imgHref . '" border="0" alt="'.$connect_text.'" />
       </a>
     ';
-  }
-  
-  public static function signup(User_Form_Account $form)
-  {
-    
   }
 }

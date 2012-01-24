@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: RequireAbstract.php 9247 2011-09-08 21:52:27Z shaun $
+ * @version    $Id: RequireAbstract.php 7244 2010-09-01 01:49:53Z john $
  * @author     John
  */
 
@@ -118,7 +118,7 @@ abstract class Core_Controller_Action_Helper_RequireAbstract extends
 
   public function reset()
   {
-    // $this->_errorAction = array('error', 'error', 'core');
+    $this->_errorAction = array('error', 'error', 'core');
     $this->_noForward = false;
     $this->_require = false;
     $this->_actionRequires = array();

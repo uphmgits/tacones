@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Core.php 9370 2011-10-12 18:39:47Z john $
+ * @version    $Id: Core.php 8413 2011-02-09 01:12:03Z john $
  * @author     John
  */
 
@@ -139,78 +139,5 @@ class Core_Plugin_Core
         $report->delete();
       }
     }
-  }
-  
-  public function onRenderLayoutDefault($event)
-  {
-    $view = $event->getPayload();
-    if( !($view instanceof Zend_View_Interface) ) {
-      return;
-    }
-    
-    $settings = Engine_Api::_()->getDbtable('settings', 'core');
-    
-    // Generic
-    if( ($script = $settings->core_site_script) ) {
-      $view->headScript()->appendScript($script);
-    }
-    
-    // Google analytics
-    if( ($code = $settings->core_analytics_code) ) {
-      $code = $view->string()->escapeJavascript($code);
-      $script = <<<EOF
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', '$code']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-EOF;
-      $view->headScript()->appendScript($script);
-    }
-    
-    // Viglink
-    if( $settings->core_viglink_enabled ) {
-      $code = $settings->core_viglink_code;
-      $subid = $settings->core_viglink_subid;
-      $subid = ( !$subid ? 'undefined' : "'" . $subid . "'" );
-      $code = $view->string()->escapeJavascript($code);
-      $script = <<<EOF
-var vglnk = {
-  api_url: 'http://api.viglink.com/api',
-  key: '$code',
-  sub_id: $subid
-};
-
-(function(d, t) {
-  var s = d.createElement(t); s.type = 'text/javascript'; s.async = true;
-  s.src = ('https:' == document.location.protocol ? vglnk.api_url :
-           'http://cdn.viglink.com/api') + '/vglnk.js';
-  var r = d.getElementsByTagName(t)[0]; r.parentNode.insertBefore(s, r);
-}(document, 'script'));
-EOF;
-      $view->headScript()->appendScript($script);
-    }
-  }
-  
-  public function onRenderLayoutDefaultSimple($event)
-  {
-    // Forward
-    return $this->onRenderLayoutDefault($event);
-  }
-  
-  public function onRenderLayoutMobileDefault($event)
-  {
-    // Forward
-    return $this->onRenderLayoutDefault($event);
-  }
-  
-  public function onRenderLayoutMobileDefaultSimple($event)
-  {
-    // Forward
-    return $this->onRenderLayoutDefault($event);
   }
 }

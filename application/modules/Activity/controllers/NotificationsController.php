@@ -7,7 +7,7 @@
  * @package    Activity
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: NotificationsController.php 9204 2011-08-24 22:38:11Z john $
+ * @version    $Id: NotificationsController.php 7344 2010-09-10 21:01:44Z john $
  * @author     John
  */
 
@@ -66,10 +66,8 @@ class Activity_NotificationsController extends Core_Controller_Action_Standard
 
     try {
       $notification = Engine_Api::_()->getItem('activity_notification', $action_id);
-      if( $notification ) {
-        $notification->read = 1;
-        $notification->save();
-      }
+      $notification->read = 1;
+      $notification->save();
       // Commit
       $db->commit();
     } catch( Exception $e ) {

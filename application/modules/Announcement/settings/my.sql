@@ -6,7 +6,7 @@
  * @package    Announcement
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: my.sql 9381 2011-10-14 00:37:49Z john $
+ * @version    $Id: my.sql 9139 2011-08-03 22:40:56Z john $
  * @author     John
  */
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `engine4_announcement_announcements` (
 --
 
 INSERT INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES
-('announcement', 'Announcements', 'Announcements', '4.1.8', 1, 'standard');
+('announcement', 'Announcements', 'Announcements', '4.1.7', 1, 'standard');
 
 
 -- --------------------------------------------------------

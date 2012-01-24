@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Abstract.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: Abstract.php 7418 2010-09-20 00:18:02Z john $
  * @author     John
  */
 
@@ -52,5 +52,13 @@ abstract class Core_Model_Abstract
   public function __call($method, $arguments)
   {
     throw new Core_Model_Exception(sprintf('Unimplemented method %1$s in class %2$s', $method, get_class($this)));
+  }
+
+  /**
+   * Gets api
+   */
+  public function api()
+  {
+    return Engine_Api::_()->setCurrentModule($this->getModuleName());
   }
 }

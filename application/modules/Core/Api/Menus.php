@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Menus.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: Menus.php 7244 2010-09-01 01:49:53Z john $
  * @author     John
  */
 
@@ -151,7 +151,7 @@ class Core_Api_Menus extends Core_Api_Abstract
     $enabledModuleNames = Engine_Api::_()->getDbtable('modules', 'core')->getEnabledModuleNames();
 
     // Get items
-    $table = Engine_Api::_()->getDbtable('menuItems', 'core');
+    $table = $this->api()->getDbtable('menuItems', 'core');
     $select = $table->select()
       ->where('menu = ?', $name)
       ->where('module IN(?)', $enabledModuleNames)

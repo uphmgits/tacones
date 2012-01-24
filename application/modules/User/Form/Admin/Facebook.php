@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Facebook.php 9352 2011-10-05 22:04:53Z john $
+ * @version    $Id: Facebook.php 9041 2011-06-30 04:37:55Z john $
  * @author     Steve
  */
 
@@ -37,29 +37,20 @@ class User_Form_Admin_Facebook extends Engine_Form
 
     $this->loadDefaultDecorators();
     $this->getDecorator('Description')->setOption('escape', false);
-    
-    /*
+
     $this->addElement('Text', 'key', array(
       'label' => 'Facebook API Key',
       'description' => '',
     ));
-    */
+    
+    $this->addElement('Text', 'secret', array(
+      'label' => 'Facebook App Secret',
+      'description' => 'This is a 36 character string of letters and numbers provided by Facebook when you create an Application in your account.',
+    ));
 
     $this->addElement('Text', 'appid', array(
       'label' => 'Facebook App ID',
       'description' => '',
-      'filters' => array(
-        'StringTrim',
-      ),
-    ));
-    
-    $this->addElement('Text', 'secret', array(
-      'label' => 'Facebook App Secret',
-      'description' => 'This is a 36 character string of letters and numbers ' . 
-          'provided by Facebook when you create an Application in your account.',
-      'filters' => array(
-        'StringTrim',
-      ),
     ));
 
     $this->addElement('Radio', 'enable', array(

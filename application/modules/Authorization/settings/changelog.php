@@ -6,20 +6,10 @@
  * @package    Authorization
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: changelog.php 9381 2011-10-14 00:37:49Z john $
+ * @version    $Id: changelog.php 9140 2011-08-03 23:47:47Z john $
  * @author     John
  */
 return array(
-  '4.1.8' => array(
-    'Api/Core.php' => 'Refactored deprecated method calls; fixed issue where exception would be throw if resource was null',
-    'externals/.htaccess' => 'Updated with far-future expires headers for static resources',
-    'Model/DbTable/Levels.php' => 'Fixed typo',
-    'settings/changelog.php' => 'Incremented version',
-    'settings/manifest.php' => 'Incremented version',
-    'settings/my.sql' => 'Incremented version',
-    'views/scripts/admin-level/deleteselected.tpl' => 'Removed deprecated routes',
-    'views/scripts/admin-level/index.tpl' => 'Added static base URL for CDN support',
-  ),
   '4.1.7' => array(
     'controllers/AdminLevelController.php' => 'Removing deprecated usage of $this->_helper->api()',
     'Model/DbTable/Levels.php' => 'Added utility method to get an associative array of level_id => title',

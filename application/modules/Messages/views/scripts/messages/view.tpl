@@ -6,7 +6,7 @@
  * @package    Messages
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: view.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: view.tpl 9136 2011-08-03 19:27:18Z jung $
  * @author     John
  */
 ?>
@@ -152,8 +152,8 @@
 
   <?php
       $this->headScript()
-        ->appendFile($this->layout()->staticBaseUrl . 'externals/mdetect/mdetect' . ( APPLICATION_ENV != 'development' ? '.min' : '' ) . '.js')
-        ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Core/externals/scripts/composer.js');
+        ->appendFile($this->baseUrl() . '/externals/mdetect/mdetect' . ( APPLICATION_ENV != 'development' ? '.min' : '' ) . '.js')
+        ->appendFile($this->baseUrl().'/application/modules/Core/externals/scripts/composer.js');
   ?>
 
   <script type="text/javascript">

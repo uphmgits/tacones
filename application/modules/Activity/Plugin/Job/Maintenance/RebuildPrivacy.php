@@ -6,7 +6,7 @@
  * @package    Activity
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: RebuildPrivacy.php 9367 2011-10-12 01:19:01Z john $
+ * @version    $Id: RebuildPrivacy.php 7904 2010-12-03 03:36:14Z john $
  * @author     John
  */
 
@@ -30,6 +30,7 @@ class Activity_Plugin_Job_Maintenance_RebuildPrivacy extends Core_Plugin_Job_Abs
 
 
     // Prepare tables
+    $tasksTable = Engine_Api::_()->getDbtable('tasks', 'core');
     $actionTable = Engine_Api::_()->getItemTable('activity_action');
 
 
@@ -58,8 +59,6 @@ class Activity_Plugin_Job_Maintenance_RebuildPrivacy extends Core_Plugin_Job_Abs
     
 
     // Don't run yet if there are any rebuild privacy plugins running
-    /*
-    $tasksTable = Engine_Api::_()->getDbtable('tasks', 'core');
     $rebuildPrivacyTaskCount = $tasksTable->select()
       ->from($tasksTable->info('name'), new Zend_Db_Expr('COUNT(*)'))
       ->where('plugin != ?', 'Activity_Plugin_Task_Maintenance_RebuildPrivacy')
@@ -73,7 +72,6 @@ class Activity_Plugin_Job_Maintenance_RebuildPrivacy extends Core_Plugin_Job_Abs
       $this->_setWasIdle();
       return;
     }
-    */
 
     
     // Execute

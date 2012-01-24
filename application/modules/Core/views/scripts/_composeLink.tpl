@@ -6,13 +6,12 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: _composeLink.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: _composeLink.tpl 8468 2011-02-15 23:11:09Z shaun $
  * @author     John
  */
 ?>
 
-<?php $this->headScript()
-    ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Core/externals/scripts/composer_link.js') ?>
+<?php $this->headScript()->appendFile('application/modules/Core/externals/scripts/composer_link.js') ?>
 
 <script type="text/javascript">
   en4.core.runonce.add(function() {

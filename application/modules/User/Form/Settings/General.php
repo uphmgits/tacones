@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: General.php 9387 2011-10-14 22:37:17Z shaun $
+ * @version    $Id: General.php 8968 2011-06-02 00:48:35Z john $
  * @author     Steve
  */
 
@@ -52,9 +52,6 @@ class User_Form_Settings_General extends Engine_Form
         array('EmailAddress', true),
         array('Db_NoRecordExists', true, array(Engine_Db_Table::getTablePrefix().'users', 'email', array('field' => 'user_id', 'value' => $this->getItem()->getIdentity())))
       ),
-      'filters' => array(
-        'StringTrim'
-      )
     ));
     $this->email->getValidator('NotEmpty')->setMessage('Please enter a valid email address.', 'isEmpty');
     $this->email->getValidator('Db_NoRecordExists')->setMessage('Someone has already registered this email address, please use another one.', 'recordFound');

@@ -89,10 +89,51 @@ class Marketplace_AdminManageController extends Core_Controller_Action_Admin
 
   }
   public function reportsAction() {
-	if( !$this->_helper->requireUser()->isValid() ) return;
-	$this->view->navigation = $navigation = Engine_Api::_()->getApi('menus', 'core')
+
+	  if( !$this->_helper->requireUser()->isValid() ) return;
+	  $this->view->navigation = $navigation = Engine_Api::_()->getApi('menus', 'core')
       ->getNavigation('marketplace_admin_main', array(), 'marketplace_admin_main_reports');
     $page = $this->_getParam('page', 1);
+
+
+    if( $this->getRequest()->isPost() ) {
+      $values = $this->getRequest()->getPost();
+
+      $ordersTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+      $file_content = '';
+
+      foreach ($values as $key=>$value) :
+
+        if( $key == 'modify_' . $value ) {
+
+          $order = $ordersTable->select()->where('order_id = ?', (int) $value )->query()->fetch();
+
+          if( !empty($order) and $order['to_file_transfer'] == 0 ) {
+
+              $owner = Engine_Api::_()->getItem('user', $order['owner_id']);
+              $marketplace = Engine_Api::_()->getItem('marketplace', $order['marketplace_id']);
+
+              if( $owner and $owner->getIdentity() and $marketplace and $marketplace->getIdentity() ) {
+                $summ = $order['count'] * ( $order['price'] * ( 1 - Engine_Api::_()->marketplace()->getCommissionFee($owner) / 100) + $order['shipping'] );
+                $file_content .= $marketplace->business_email . " " . number_format($summ, 2) . " " . "USD" . " " . $order['order_id'] . "\n";
+                $ordersTable->update( array('to_file_transfer' => 1), 'order_id = '.$value);
+              }
+          }
+        }
+      endforeach;
+
+      if( $file_content ) {
+          $path = $this->view->baseUrl() . '/public/masspay/masspay_' . date('Y-m-d_H-i-s') . '.txt';
+          $file_name = $_SERVER['DOCUMENT_ROOT'] . $path;
+          $this->view->file_name = 'http://' . $_SERVER['HTTP_HOST'] . $path;
+
+          ob_start();
+          print_r($file_content);
+          $c = ob_get_clean();
+          file_put_contents($file_name, $c);
+          chmod($file_name, 0777);
+      }
+    }
 
 
     $this->view->formFilter = $formFilter = new Marketplace_Form_Filter();//User_Form_Admin_Manage_Filter();
@@ -126,4 +167,6 @@ class Marketplace_AdminManageController extends Core_Controller_Action_Admin
     $this->view->paginator = $paginator = Zend_Paginator::factory($select);
     $this->view->paginator = $paginator->setCurrentPageNumber( $page );
   }
+
+
 }

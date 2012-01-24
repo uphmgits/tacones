@@ -252,6 +252,32 @@ class Engine_Api
     throw new Engine_Exception("Method '$method' is not supported");
   }
 
+
+  /**
+   * Used to shorten some api calls, sets the default module to load resources
+   * from
+   * 
+   * @param string $module
+   * @return Engine_Api
+   */
+  public function setCurrentModule($module)
+  {
+    if( is_string($module) )
+    {
+      $this->_currentModuleName = $module;
+    }
+    else if( is_object($module) && method_exists($object, 'getModuleName') )
+    {
+      $this->_currentModuleName = $object->getModuleName();
+    }
+    else
+    {
+      $this->_currentModuleName = null;
+    }
+
+    return $this;
+  }
+
   /**
    * Loads a singleton instance of a module resource
    *

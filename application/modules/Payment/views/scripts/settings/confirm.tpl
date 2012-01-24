@@ -6,7 +6,7 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: confirm.tpl 9256 2011-09-14 00:13:43Z shaun $
+ * @version    $Id: confirm.tpl 8221 2011-01-15 00:24:02Z john $
  * @author     John Boehr <j@webligo.com>
  */
 ?>
@@ -41,7 +41,7 @@
       <div class="form-elements">
         <div class="form-wrapper" id="execute-wrapper">
           <div class="form-element" id="execute-element">
-            <button type="submit" id="execute" name="execute"><?php echo $this->translate('Subscribe') ?></button>
+            <button type="submit" id="execute" name="execute">Subscribe</button>
             <?php echo $this->translate(' or ') ?>
             <?php echo $this->htmlLink(array('action' => 'index',
               'package_id' => null), $this->translate('cancel')) ?>

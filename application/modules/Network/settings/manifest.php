@@ -6,7 +6,7 @@
  * @package    Network
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: manifest.php 9378 2011-10-13 22:50:30Z john $
+ * @version    $Id: manifest.php 8820 2011-04-08 00:31:16Z john $
  * @author     Sami
  */
 return array(
@@ -14,8 +14,8 @@ return array(
   'package' => array(
     'type' => 'module',
     'name' => 'network',
-    'version' => '4.1.8',
-    'revision' => '$Revision: 9378 $',
+    'version' => '4.1.4',
+    'revision' => '$Revision: 8820 $',
     'path' => 'application/modules/Network',
     'repository' => 'socialengine.net',
     'title' => 'Networks',
@@ -26,12 +26,12 @@ return array(
       array(
         'type' => 'module',
         'name' => 'core',
-        'minVersion' => '4.1.8',
+        'minVersion' => '4.1.2',
       ),
       array(
         'type' => 'module',
         'name' => 'fields',
-        'minVersion' => '4.1.8',
+        'minVersion' => '4.1.2',
       ),
     ),
     'actions' => array(
@@ -72,4 +72,14 @@ return array(
     'network'
   ),
   // Routes --------------------------------------------------------------------
+  'routes' => array(
+    'network_suggest' => array(
+      'route' => 'networks/suggest',
+      'defaults' => Array(
+      'module' => 'network',
+      'controller' => 'network',
+      'action'=> 'suggest'
+      )
+    )
+  )
 );

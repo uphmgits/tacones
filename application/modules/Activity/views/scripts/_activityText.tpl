@@ -6,7 +6,7 @@
  * @package    Activity
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: _activityText.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: _activityText.tpl 8933 2011-05-12 20:37:57Z jung $
  * @author     Jung
  */
 ?>
@@ -18,9 +18,8 @@
    $actions = $this->actions;
 } ?>
 
-<?php $this->headScript()
-        ->appendFile($this->layout()->staticBaseUrl . 'application/modules/Activity/externals/scripts/core.js')
-        ->appendFile($this->layout()->staticBaseUrl . 'externals/flowplayer/flashembed-1.0.1.pack.js') ?>
+<?php $this->headScript()->appendFile('application/modules/Activity/externals/scripts/core.js')
+        ->appendFile($this->baseUrl() . '/externals/flowplayer/flashembed-1.0.1.pack.js');?>
 
 <script type="text/javascript">
   var CommentLikesTooltips;
@@ -98,7 +97,7 @@
       
       <?php // Main Content ?>
       <span class="<?php echo ( empty($action->getTypeInfo()->is_generated) ? 'feed_item_posted' : 'feed_item_generated' ) ?>">
-        <?php echo nl2br($action->getContent()) // converting line-breaks to br tags?>
+        <?php echo $action->getContent() ?>
       </span>
 
       <?php // Attachments ?>
@@ -114,22 +113,30 @@
                 <?php if( $attachment->meta->mode == 0 ): // Silence ?>
                 <?php elseif( $attachment->meta->mode == 1 ): // Thumb/text/title type actions ?>
                   <div>
-                    <?php 
-                      if ($attachment->item->getType() == "core_link")
-                      {
-                        $attribs = Array('target'=>'_blank');
-                      }
-                      else
-                      {
-                        $attribs = Array();
-                      } 
-                    ?>
                     <?php if( $attachment->item->getPhotoUrl() ): ?>
+                      <?php 
+                        if ($attachment->item->getType() == "core_link")
+                        {
+                          $attribs = Array('target'=>'_blank');
+                        }
+                        else
+                        {
+                          $attribs = Array();
+                        } 
+                      ?>
                       <?php echo $this->htmlLink($attachment->item->getHref(), $this->itemPhoto($attachment->item, 'thumb.normal', $attachment->item->getTitle()), $attribs) ?>
                     <?php endif; ?>
                     <div>
                       <div class='feed_item_link_title'>
                         <?php
+                          if ($attachment->item->getType() == "core_link")
+                          {
+                            $attribs = Array('target'=>'_blank');
+                          }
+                          else
+                          {
+                            $attribs = Array();
+                          }
                           echo $this->htmlLink($attachment->item->getHref(), $attachment->item->getTitle() ? $attachment->item->getTitle() : '', $attribs);
                         ?>
                       </div>
@@ -195,15 +202,6 @@
                 <?php echo $this->htmlLink('javascript:void(0);', $this->translate('Comment'), array('onclick'=>'document.getElementById("'.$this->commentForm->getAttrib('id').'").style.display = ""; document.getElementById("'.$this->commentForm->submit->getAttrib('id').'").style.display = "block"; document.getElementById("'.$this->commentForm->body->getAttrib('id').'").focus();')) ?>
               </li>
             <?php endif; ?>
-            <?php if( $this->viewAllComments ): ?>
-              <script type="text/javascript">
-                en4.core.runonce.add(function() {
-                  document.getElementById('<?php echo $this->commentForm->getAttrib('id') ?>').style.display = "";
-                  document.getElementById('<?php echo $this->commentForm->submit->getAttrib('id') ?>').style.display = "block";
-                  document.getElementById('<?php echo $this->commentForm->body->getAttrib('id') ?>').focus();
-                });
-              </script>
-            <?php endif ?>
           <?php endif; ?>
           <?php if( $this->viewer()->getIdentity() && (
                 $this->activity_moderate || (

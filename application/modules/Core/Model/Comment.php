@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Comment.php 9384 2011-10-14 20:14:56Z john $
+ * @version    $Id: Comment.php 8478 2011-02-16 04:01:47Z john $
  * @author     John
  */
 
@@ -24,19 +24,11 @@ class Core_Model_Comment extends Core_Model_Item_Abstract
   {
     // @todo take directly to the comment
     if( isset($this->resource_type) ) {
-      $resource = Engine_Api::_()->getItem($this->resource_type, $this->resource_id);
-      if( $resource ) {
-        return $resource->getHref() . '#comment-' . $this->comment_id;
-      } else {
-        return null;
-      }
+      return Engine_Api::_()->getItem($this->resource_type, $this->resource_id)->getHref()
+        . '#comment-' . $this->comment_id;
     } else if( method_exists($this->getTable(), 'getResourceType') ) {
       $tmp = Engine_Api::_()->getItem($this->getTable()->getResourceType(), $this->resource_id);
-      if( $tmp ) {
-        return $tmp->getHref() . '#comment-' . $this->comment_id;
-      } else {
-        return null;
-      }
+      return $tmp->getHref() . '#comment-' . $this->comment_id;
     } else {
       return parent::getHref(); // @todo fix this
     }

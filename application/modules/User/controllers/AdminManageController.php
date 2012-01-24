@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: AdminManageController.php 9414 2011-10-19 22:10:29Z john $
+ * @version    $Id: AdminManageController.php 9076 2011-07-21 02:11:10Z john $
  * @author     John
  */
 
@@ -133,9 +133,7 @@ class User_AdminManageController extends Core_Controller_Action_Admin
   {
     $id = $this->_getParam('id', null);
     $this->view->user = $user = Engine_Api::_()->getItem('user', $id);
-    $this->view->form = $form = new User_Form_Admin_Manage_Edit(array(
-      'userIdentity' => $id,
-    ));
+    $this->view->form = $form = new User_Form_Admin_Manage_Edit();
 
     // Do not allow editing level if the last superadmin
     if( $user->level_id == 1 && count(Engine_Api::_()->user()->getSuperAdmins()) == 1 ) {

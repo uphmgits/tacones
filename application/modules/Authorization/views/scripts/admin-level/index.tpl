@@ -6,7 +6,7 @@
  * @package    Authorization
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: index.tpl 8485 2011-02-17 03:44:40Z john $
  * @author     John
  */
 ?>
@@ -84,7 +84,7 @@
   <div>
     <?php echo $this->htmlLink(array('action' => 'create', 'reset' => false), $this->translate('Add Member Level'), array(
       'class' => 'buttonlink',
-      'style' => 'background-image: url(' . $this->layout()->staticBaseUrl . 'application/modules/Authorization/externals/images/admin/add.png);'
+      'style' => 'background-image: url(' . rtrim($this->baseUrl(), '/') . '/application/modules/Authorization/externals/images/admin/add.png);'
     )) ?>
   </div>
   <div>

@@ -6,7 +6,7 @@
  * @package    Invite
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: IndexController.php 9310 2011-09-22 01:59:56Z john $
+ * @version    $Id: IndexController.php 7547 2010-10-04 21:58:31Z john $
  * @author     Steve
  */
 
@@ -22,12 +22,6 @@ class Invite_IndexController extends Core_Controller_Action_Standard
 {
   public function indexAction()
   {
-    // Render
-    $this->_helper->content
-        //->setNoRender()
-        ->setEnabled()
-        ;
-    
     $settings = Engine_Api::_()->getApi('settings', 'core');
 
     // Check if admins only

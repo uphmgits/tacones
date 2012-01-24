@@ -6,18 +6,10 @@
  * @package    Network
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: changelog.php 9381 2011-10-14 00:37:49Z john $
+ * @version    $Id: changelog.php 8878 2011-04-13 19:12:12Z jung $
  * @author     Sami
  */
 return array(
-  '4.1.8' => array(
-    'externals/.htaccess' => 'Updated with far-future expires headers for static resources',
-    'Model/Network.php' => 'Removed deprecated method call',
-    'settings/changelog.php' => 'Incremented version',
-    'settings/manifest.php' => 'Incremented version',
-    'settings/my.sql' => 'Incremented version',
-    'views/scripts/admin-manage/index.tpl' => 'Added static base URL for CDN support',
-  ),
   '4.1.4' => array(
     'controllers/NetworkController.php' => 'Members can join hidden networks',
     'externals/styles/main.css' => 'Added svn:keywords Id',

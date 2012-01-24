@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: BannedEmails.php 9235 2011-09-02 22:32:26Z john $
+ * @version    $Id: BannedEmails.php 9054 2011-07-07 01:26:54Z john $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -108,7 +108,7 @@ class Core_Model_DbTable_BannedEmails extends Engine_Db_Table
 
   public function setEmails($emails)
   {
-    $emails = array_unique(array_map('strtolower', array_values($emails)));
+    $emails = array_map('strtolower', array_values($emails));
 
     $data = $this->select()
         ->from($this, 'email')

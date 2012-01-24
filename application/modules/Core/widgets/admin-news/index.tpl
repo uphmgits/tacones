@@ -6,8 +6,8 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9339 2011-09-29 23:03:01Z john $
- * @author     John Boehr <john@socialengine.com>
+ * @version    $Id: index.tpl 9033 2011-06-28 21:28:45Z john $
+ * @author     John
  */
 ?>
 
@@ -57,16 +57,3 @@
 
   <?php endif; ?>
 </div>
-
-<?php if( false ): ?>
-  <br />
-  <span class="rss_fetched_timestamp">
-    <?php if( $this->isCached ): ?>
-      <?php echo $this->translate('Results last fetched at %1$s',
-          $this->locale()->toDateTime($this->channel['fetched'])) ?>
-    <?php else: ?>
-      <?php echo $this->translate('Results are current') ?>
-    <?php endif ?>
-  </span>
-<?php endif ?>
-

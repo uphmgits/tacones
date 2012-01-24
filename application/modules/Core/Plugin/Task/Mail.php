@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Mail.php 9346 2011-10-04 01:28:27Z shaun $
+ * @version    $Id: Mail.php 7676 2010-10-20 22:00:38Z john $
  * @author     John
  */
 
@@ -135,14 +135,11 @@ class Core_Plugin_Task_Mail extends Core_Plugin_Task_Abstract
     $recipientsRowset = $mailRecipientsTable->fetchAll($mailRecipientsSelect);
 
     $recipientIds = array();
-    $emails = array();
+    $emails[] = array();
     foreach( $recipientsRowset as $recipient ) {
       $recipientIds[] = $recipient->recipient_id;
       if( !empty($recipient->user_id) ) {
         $userObject = Engine_Api::_()->getItem('user', $recipient->user_id);
-        if (!isset($userObject->email)) {
-          continue;
-        }
         $emails[] = $userObject->email;
       } else if( !empty($recipient->email) ) {
         $emails[] = $recipient->email;

@@ -6,7 +6,7 @@
  * @package    Activity
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: index.tpl 7244 2010-09-01 01:49:53Z john $
  * @author     John
  */
 ?>
@@ -19,7 +19,7 @@
       <li>
       <?php
       $request_type = str_replace('_', ' ', $requestInfo['info']['type']);
-      echo $this->htmlLink(array('route' => 'default', 'module' => 'activity', 'controller' => 'notifications'),
+      echo $this->htmlLink(array('route'=> 'recent_activity'),
         $this->translate(array("%s {$request_type}", "%s {$request_type}s", $requestInfo['count']), $this->locale()->toNumber($requestInfo['count'])),
         array('class' => 'buttonlink notification_item_general notification_type_'.$requestInfo['info']['type'])) ?>
       </li>

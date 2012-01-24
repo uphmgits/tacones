@@ -6,14 +6,14 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: delete.tpl 9256 2011-09-14 00:13:43Z shaun $
+ * @version    $Id: delete.tpl 8221 2011-01-15 00:24:02Z john $
  * @author     John Boehr <j@webligo.com>
  */
 ?>
 
 <?php if( $this->status ): ?>
 
-  <?php echo $this->translate('Plan Deleted'); ?>
+  Plan Deleted
   <script type="text/javascript">
     parent.window.location.reload();
   </script>

@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9412 2011-10-19 21:36:30Z john $
+ * @version    $Id: index.tpl 9064 2011-07-19 18:22:52Z john $
  * @author     Jung
  */
 ?>
@@ -65,7 +65,6 @@
 
 <p>
   <?php echo $this->translate("CORE_VIEWS_SCRIPTS_ADMINADS_INDEX_DESCRIPTION") ?>
-  <a class="admin help" href="http://www.socialengine.net/support/documentation/article?q=161&question=Admin-Panel---Ads" target="_blank"> </a>
 </p>
 
 <br />

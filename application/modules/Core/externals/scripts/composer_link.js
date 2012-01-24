@@ -1,5 +1,5 @@
 
-/* $Id: composer_link.js 9228 2011-08-30 19:06:37Z john $ */
+/* $Id: composer_link.js 8986 2011-06-15 00:14:28Z john $ */
 
 
 Composer.Plugin.Link = new Class({
@@ -183,14 +183,8 @@ Composer.Plugin.Link = new Class({
   
   doLoadImages : function() {
     // Start image load timeout
-    var interval = (function() {
-      // Debugging
-      if( this.options.debug ) {
-        console.log('Timeout reached');
-      }
-      this.doShowPreview();
-    }).delay(this.options.imageTimeout, this);
-      
+    var interval = this.doShowPreview.delay(this.options.imageTimeout, this);
+
     // Load them images
     this.params.loadedImages = [];
 

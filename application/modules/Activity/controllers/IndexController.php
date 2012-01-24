@@ -6,7 +6,7 @@
  * @package    Activity
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: IndexController.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: IndexController.php 9076 2011-07-21 02:11:10Z john $
  * @author     John
  */
 
@@ -270,7 +270,7 @@ class Activity_IndexController extends Core_Controller_Action_Standard
 
     // Redirect if not json context
     if( null === $this->_getParam('format', null) ) {
-      $this->_helper->redirector->gotoRoute(array(), 'default', true);
+      $this->_helper->redirector->gotoRoute(array(), 'core_home');
     } else if ('json' === $this->_getParam('format', null) ) {
       $this->view->body = $this->view->activity($action, array('viewAllLikes' => true, 'noList' => $this->_getParam('nolist', false)));
     }
@@ -339,9 +339,6 @@ class Activity_IndexController extends Core_Controller_Action_Standard
         }
       }
       
-      // Stats
-      Engine_Api::_()->getDbtable('statistics', 'core')->increment('core.likes');
-      
       $db->commit();
     }
 
@@ -358,7 +355,7 @@ class Activity_IndexController extends Core_Controller_Action_Standard
     // Redirect if not json context
     if( null === $this->_helper->contextSwitch->getCurrentContext() )
     {
-      $this->_helper->redirector->gotoRoute(array(), 'default', true);
+      $this->_helper->redirector->gotoRoute(array(), 'core_home');
 
     }
     else if ('json'===$this->_helper->contextSwitch->getCurrentContext())
@@ -423,7 +420,7 @@ class Activity_IndexController extends Core_Controller_Action_Standard
     // Redirect if not json context
     if( null === $this->_helper->contextSwitch->getCurrentContext() )
     {
-      $this->_helper->redirector->gotoRoute(array(), 'default', true);
+      $this->_helper->redirector->gotoRoute(array(), 'core_home');
     }
     else if ('json'===$this->_helper->contextSwitch->getCurrentContext())
     {
@@ -445,7 +442,7 @@ class Activity_IndexController extends Core_Controller_Action_Standard
     // Redirect if not json context
     if (null===$this->_getParam('format', null))
     {
-      $this->_helper->redirector->gotoRoute(array(), 'default', true);
+      $this->_helper->redirector->gotoRoute(array(), 'core_home');
     }
     else if ('json'===$this->_getParam('format', null))
     {
@@ -530,9 +527,6 @@ class Activity_IndexController extends Core_Controller_Action_Standard
           ));
         }
       }
-      
-      // Stats
-      Engine_Api::_()->getDbtable('statistics', 'core')->increment('core.comments');
       
       $db->commit();
     }

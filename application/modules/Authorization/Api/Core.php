@@ -6,7 +6,7 @@
  * @package    Authorization
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Core.php 9265 2011-09-16 19:25:03Z john $
+ * @version    $Id: Core.php 7299 2010-09-06 06:08:27Z john $
  * @author     John
  */
 
@@ -96,15 +96,9 @@ class Authorization_Api_Core extends Core_Api_Abstract
    */
   public function isAllowed($resource, $role, $action = 'view')
   {
-    if( null === $resource ) {
-      try {
-        $resource = Engine_Api::_()->core()->getSubject();
-      } catch( Exception $e ) {
-        
-      }
-      if( !$resource ) {
-        return false;
-      }
+    if( null === $resource )
+    {
+      $resource = Engine_Api::_()->core()->getSubject();
     }
     
     if( null === $role ) {
@@ -283,9 +277,6 @@ class Authorization_Api_Core extends Core_Api_Abstract
 
   public function getPermission($level_id, $type, $name)
   {
-    if( $level_id instanceof User_Model_User ) {
-      $level_id = $level_id->level_id;
-    }
     $permissionTable = Engine_Api::_()->getDbtable('permissions', 'authorization');
     $select = $permissionTable->select()
       ->where('level_id = ?', $level_id)

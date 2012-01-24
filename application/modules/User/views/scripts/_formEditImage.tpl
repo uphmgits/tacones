@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: _formEditImage.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: _formEditImage.tpl 7244 2010-09-01 01:49:53Z john $
  * @author     John
  */
 ?>
@@ -14,8 +14,8 @@
 
   <?php
     $this->headScript()
-      ->appendFile($this->layout()->staticBaseUrl . 'externals/moolasso/Lasso.js')
-      ->appendFile($this->layout()->staticBaseUrl . 'externals/moolasso/Lasso.Crop.js')
+      ->appendFile($this->baseUrl().'/externals/moolasso/Lasso.js')
+      ->appendFile($this->baseUrl().'/externals/moolasso/Lasso.Crop.js')
   ?>
   <div>
     <?php echo $this->itemPhoto($this->subject(), 'thumb.profile', "", array('id' => 'lassoImg')) ?>
@@ -31,7 +31,7 @@
   <script type="text/javascript">
     var orginalThumbSrc;
     var originalSize;
-    var loader = new Element('img',{ src: en4.core.staticBaseUrl + 'application/modules/Core/externals/images/loading.gif'});
+    var loader = new Element('img',{ src:'application/modules/Core/externals/images/loading.gif'});
     var lassoCrop;
     
     var lassoSetCoords = function(coords)
@@ -61,7 +61,7 @@
   handleSize : 8,
   opacity : .6,
   color : '#7389AE',
-  border : '<?php echo $this->layout()->staticBaseUrl . 'externals/moolasso/crop.gif' ?>',
+  border : '<?php echo $this->baseUrl().'/externals/moolasso/crop.gif' ?>',
   onResize : lassoSetCoords,
         bgimage : ''
       });

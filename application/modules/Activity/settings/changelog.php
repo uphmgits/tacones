@@ -6,28 +6,10 @@
  * @package    Activity
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: changelog.php 9381 2011-10-14 00:37:49Z john $
+ * @version    $Id: changelog.php 9140 2011-08-03 23:47:47Z john $
  * @author     John
  */
 return array(
-  '4.1.8' => array(
-    'Api/Core.php' => 'Refactored deprecated method calls',
-    'Bootstrap.php' => 'Added static base URL for CDN support',
-    'controllers/IndexController.php' => 'Removing deprecated routes; added like stat tracking',
-    'controllers/NotificationsController.php' => 'Prevents exception',
-    'externals/.htaccess' => 'Updated with far-future expires headers for static resources',
-    'Model/Action.php' => 'Code formatting',
-    'Model/DbTable/Actions.php' => 'Added detachFromActivity() method for removing attachments',
-    'Plugin/Job/Maintenance/RebuildPrivacy.php' => 'Fixed issue when porting from task to job',
-    'settings/changelog.php' => 'Incremented version',
-    'settings/manifest.php' => 'Incremented version',
-    'settings/my.sql' => 'Incremented version',
-    'views/scripts/_activityText.tpl' => 'Added static base URL for CDN support',
-    'views/scripts/notifications/index.tpl' => 'Added static base URL for CDN support',
-    'widgets/feed/Controller.php' => 'Fixed issue where composer wouldn\'t show in some cases',
-    'widgets/feed/index.tpl' => 'Added static base URL for CDN support; compatibility for AJAX page loader',
-    'widgets/list-requests/index.tpl' => 'Removing deprecated routes',
-  ),
   '4.1.7' => array(
     'controllers/AdminSettingsController.php' => 'Fixes issue with saving default email notifications when the plugin name contains a /',
     'controllers/AjaxController.php' => 'Code formatting',

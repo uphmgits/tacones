@@ -6,7 +6,7 @@
  * @package    Announcement
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: index.tpl 7244 2010-09-01 01:49:53Z john $
  * @author     Sami
  */
 ?>
@@ -51,7 +51,7 @@
     $this->translate("Post New Announcement"),
     array(
       'class' => 'buttonlink',
-      'style' => 'background-image: url(' . $this->layout()->staticBaseUrl . 'application/modules/Announcement/externals/images/admin/add.png);')) ?>
+      'style' => 'background-image: url(application/modules/Announcement/externals/images/admin/add.png);')) ?>
   <?php if($this->paginator->getTotalItemCount()!=0): ?>
     <?php echo $this->translate('%d announcements total', $this->paginator->getTotalItemCount()) ?>
   <?php endif;?>

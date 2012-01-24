@@ -5,7 +5,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: my.sql 9378 2011-10-13 22:50:30Z john $
+ * @version    $Id: my.sql 9139 2011-08-03 22:40:56Z john $
  * @author     John
  */
 
@@ -645,8 +645,6 @@ INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`
 
 ('core_admin_main_ads_manage', 'core', 'Manage Ad Campaigns', '', '{"route":"admin_default","controller":"ads"}', 'core_admin_main_ads', '', 1),
 ('core_admin_main_ads_create', 'core', 'Create New Campaign', '', '{"route":"admin_default","controller":"ads","action":"create"}', 'core_admin_main_ads', '', 2),
-('core_admin_main_ads_affiliate', 'core', 'SE Affiliate Program', '', '{"route":"admin_default","controller":"settings","action":"affiliate"}', 'core_admin_main_ads', '', 3),
-('core_admin_main_ads_viglink', 'core', 'VigLink', '', '{"route":"admin_default","controller":"settings","action":"viglink"}', 'core_admin_main_ads', '', 4),
 
 ('core_admin_main_stats_statistics', 'core', 'Site-wide Statistics', '', '{"route":"admin_default","controller":"stats"}', 'core_admin_main_stats', '', 1),
 ('core_admin_main_stats_url', 'core', 'Referring URLs', '', '{"route":"admin_default","controller":"stats","action":"referrers"}', 'core_admin_main_stats', '', 2),
@@ -696,7 +694,7 @@ CREATE TABLE IF NOT EXISTS `engine4_core_modules` (
 --
 
 INSERT INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES
-('core', 'Core', 'The Alpha and the Omega.', '4.1.8', 1, 'core');
+('core', 'Core', 'The Alpha and the Omega.', '4.1.7', 1, 'core');
 
 
 -- --------------------------------------------------------

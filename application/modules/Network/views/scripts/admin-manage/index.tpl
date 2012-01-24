@@ -6,7 +6,7 @@
  * @package    Network
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: index.tpl 8558 2011-03-04 01:12:51Z jung $
  * @author     Sami
  * @author     John
  */
@@ -51,7 +51,7 @@
 <div>
   <?php echo $this->htmlLink(array('action' => 'create', 'reset' => false), $this->translate('Add Network'), array(
     'class' => 'buttonlink',
-    'style' => 'background-image: url(' . $this->layout()->staticBaseUrl . 'application/modules/Network/externals/images/admin/add.png);'
+    'style' => 'background-image: url(application/modules/Network/externals/images/admin/add.png);'
   )) ?>
 </div>
 

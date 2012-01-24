@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: UtilityController.php 9167 2011-08-16 20:57:20Z john $
+ * @version    $Id: UtilityController.php 9076 2011-07-21 02:11:10Z john $
  * @author     John
  */
 
@@ -194,7 +194,7 @@ class Core_UtilityController extends Core_Controller_Action_Standard
       $theme = $themesTable->find((int) $selectThemeId)->current();
       if( $theme ) {
         $_SESSION['theme'] = $_COOKIE['theme'] = $theme['theme_id'];
-        setcookie('theme', $theme['theme_id'], 0, _ENGINE_R_BASE);
+        setcookie('theme', $theme['theme_id'], 0, Zend_Controller_Front::getInstance()->getBaseUrl());
       }
     }
 

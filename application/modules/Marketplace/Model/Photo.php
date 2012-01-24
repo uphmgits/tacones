@@ -41,7 +41,7 @@ class Marketplace_Model_Photo extends Core_Model_Item_Collectible
     return Zend_Controller_Front::getInstance()->getRouter()
       ->assemble($params, $route, $reset);
   }
-
+/*
   public function getPhotoUrl($type = null)
   {
     if( empty($this->file_id) )
@@ -57,6 +57,29 @@ class Marketplace_Model_Photo extends Core_Model_Item_Collectible
 
     return $file->map();
   }
+*/
+  public function getPhotoUrl($type = null)
+  {
+    if( empty($this->file_id) )
+    {
+      return null;
+    }
+
+    if( isset($this->approved_photo) and empty($this->approved_photo) ) {
+      $viewer = Engine_Api::_()->user()->getViewer();
+      if( !$viewer->getIdentity() ) return null;
+      if( $viewer->level_id > 2 and $viewer->getIdentity() != $this->getOwner()->getIdentity() ) return null;
+    }
+
+    $file = Engine_Api::_()->getApi('storage', 'storage')->get($this->file_id, $type);
+    if( !$file ) {
+      return null;
+    }
+
+    return $file->map();
+  }
+
+
 
   public function getMarketplace()
   {

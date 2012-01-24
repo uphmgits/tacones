@@ -6,7 +6,7 @@
  * @package    Fields
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: field-create.tpl 9325 2011-09-27 00:11:15Z john $
+ * @version    $Id: field-create.tpl 8410 2011-02-08 20:00:06Z char $
  * @author     John
  */
 ?>
@@ -14,7 +14,7 @@
 
   <?php
     $this->headScript()
-      ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Observer.js');
+      ->appendFile($this->baseUrl().'/externals/autocompleter/Observer.js');
   ?>
 
   <div style="padding: 15px 15px 0px 15px;">

@@ -7,7 +7,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Account.php 9387 2011-10-14 22:37:17Z shaun $
+ * @version    $Id: Account.php 9101 2011-07-25 18:52:53Z shaun $
  * @author     John
  */
 
@@ -19,18 +19,19 @@
  */
 class User_Form_Signup_Account extends Engine_Form
 {
+
   public function init()
   {
     $settings = Engine_Api::_()->getApi('settings', 'core');
     $inviteSession = new Zend_Session_Namespace('invite');
     
     // Init form
-    $this->setTitle('Create Fashbay Account'); /* Slight text change - jfa */ 
+    $this->setTitle('Create Account');
 
     // Element: email
     $this->addElement('Text', 'email', array(
       'label' => 'Email Address',
-      'description' => 'You will use email address as your login.',
+      'description' => 'You will use your email address to login.',
       'required' => true,
       'allowEmpty' => false,
       'validators' => array(
@@ -38,13 +39,6 @@ class User_Form_Signup_Account extends Engine_Form
         array('EmailAddress', true),
         array('Db_NoRecordExists', true, array(Engine_Db_Table::getTablePrefix() . 'users', 'email'))
       ),
-      'filters' => array(
-        'StringTrim'
-      ),
-      // fancy stuff
-      'inputType' => 'email',
-      'autofocus' => 'autofocus',
-      'tabindex' => 1,
     ));
     $this->email->getDecorator('Description')->setOptions(array('placement' => 'APPEND'));
     $this->email->getValidator('NotEmpty')->setMessage('Please enter a valid email address.', 'isEmpty');
@@ -275,8 +269,8 @@ class User_Form_Signup_Account extends Engine_Form
     }
     
     if( $settings->getSetting('user.signup.terms', 1) == 1 ) {
-      // Element: terms /* Testing additional comments -jfa */
-      $description = Zend_Registry::get('Zend_Translate')->_('I have read and agree to the <a target="_blank" href="%s/help/terms">TOS</a>.');
+      // Element: terms
+      $description = Zend_Registry::get('Zend_Translate')->_('I have read and agree to the <a target="_blank" href="%s/help/terms">terms of service</a>.');
       $description = sprintf($description, Zend_Controller_Front::getInstance()->getBaseUrl());
 
       $this->addElement('Checkbox', 'terms', array(

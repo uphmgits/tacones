@@ -6,24 +6,10 @@
  * @package    Storage
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: changelog.php 9413 2011-10-19 21:38:47Z john $
+ * @version    $Id: changelog.php 9140 2011-08-03 23:47:47Z john $
  * @author     John
  */
 return array(
-  '4.1.8' => array(
-    'externals/.htaccess' => 'Updated with far-future expires headers for static resources',
-    'Form/Admin/Service/Local.php' => 'Added baseUrl parameter',
-    'Form/Admin/Service/S3.php' => 'Improved description; Added trim to options',
-    'Form/Admin/Service/Vfs.php' => 'Added trim to options',
-    'Service/Local.php' => 'Added baseUrl parameter',
-    'settings/changelog.php' => 'Incremented version',
-    'settings/install.php' => 'Code formatting',
-    'settings/manifest.php' => 'Incremented version',
-    'settings/my.sql' => 'Incremented version',
-    'views/scripts/admin-services/delete.tpl' => 'Added svn:keywords',
-    'views/scripts/admin-services/index.tpl' => 'Added static base URL for CDN support; Added link to KB',
-    'views/scripts/upload/upload.tpl' => 'Added static base URL for CDN support, Sets the FancyUpload timeLimit directive to 0',
-  ),
   '4.1.7' => array(
     'Plugin/Job/Transfer.php' => 'An error will no longer stop the transfer process, instead will log into messages column',
     'settings/changelog.php' => 'Incremented version',

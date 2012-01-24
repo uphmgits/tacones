@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: SettingsController.php 9334 2011-09-29 00:25:38Z john $
+ * @version    $Id: SettingsController.php 9076 2011-07-21 02:11:10Z john $
  * @author     Steve
  */
 
@@ -261,20 +261,19 @@ class User_SettingsController extends Core_Controller_Action_User
     if( $form->getElement('publishTypes') ) {
       $actionTypes = Engine_Api::_()->getDbtable('actionTypes', 'activity')->getEnabledActionTypesAssoc();
       unset($actionTypes['signup']);
-      unset($actionTypes['postself']);
-      unset($actionTypes['post']);
-      unset($actionTypes['status']);
       $form->publishTypes->setMultiOptions($actionTypes);
       $actionTypesEnabled = Engine_Api::_()->getDbtable('actionSettings', 'activity')->getEnabledActions($user);
       $form->publishTypes->setValue($actionTypesEnabled);
     }
     
     // Check if post and populate
-    if( !$this->getRequest()->isPost() ) {
+    if( !$this->getRequest()->isPost() )
+    {
       return;
     }
 
-    if( !$form->isValid($this->getRequest()->getPost()) ) {
+    if( !$form->isValid($this->getRequest()->getPost()) )
+    {
       $this->view->status = false;
       $this->view->error = Zend_Registry::get('Zend_Translate')->_('Invalid data');
       return;
@@ -288,8 +287,6 @@ class User_SettingsController extends Core_Controller_Action_User
     if( $form->getElement('publishTypes') ) {
       $publishTypes = $form->publishTypes->getValue();
       $publishTypes[] = 'signup';
-      $publishTypes[] = 'post';
-      $publishTypes[] = 'status';
       Engine_Api::_()->getDbtable('actionSettings', 'activity')->setEnabledActions($user, (array) $publishTypes);
     }
   }

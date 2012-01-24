@@ -1,25 +1,5 @@
 
-/* $Id: mobile.css 9363 2011-10-10 23:52:26Z john $ */
-
-
-.affiliate_banner,
-.affiliate_banner > a,
-.affiliate_banner > a:link,
-.affiliate_banner > a:hover,
-.affiliate_banner > a:visited
-{
-  color: $theme_topbar_menu_link_color;
-  margin-top: 5px;
-  text-align: center;
-}
-.affiliate_banner > a,
-.affiliate_banner > a:link,
-.affiliate_banner > a:hover,
-.affiliate_banner > a:visited
-{
-  text-decoration: underline;
-}
-
+/* $Id: mobile.css 8825 2011-04-09 01:34:20Z john $ */
 
 
 

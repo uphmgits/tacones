@@ -6,7 +6,7 @@
  * @package    Network
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Network.php 9339 2011-09-29 23:03:01Z john $
+ * @version    $Id: Network.php 8544 2011-03-02 00:15:57Z jung $
  * @author     Sami
  * @author     John
  */
@@ -63,7 +63,7 @@ class Network_Model_Network extends Core_Model_Item_Abstract
 
   public function membership()
   {
-    return new Engine_ProxyObject($this, Engine_Api::_()->getDbtable('membership', 'network'));
+    return new Engine_ProxyObject($this, $this->api()->getDbtable('membership', 'network'));
   }
   
   public function recalculateAll()

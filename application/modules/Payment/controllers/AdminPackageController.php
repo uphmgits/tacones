@@ -6,7 +6,7 @@
  * @package    Payment
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: AdminPackageController.php 9380 2011-10-14 00:20:41Z john $
+ * @version    $Id: AdminPackageController.php 8390 2011-02-03 23:35:08Z john $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -204,25 +204,12 @@ class Payment_AdminPackageController extends Core_Controller_Action_Admin
      * 
      */
     
-    if( !empty($values['default']) && (float) $values['price'] > 0 ) {
-      return $form->addError('Only a free plan may be the default plan.');
-    }
-    
 
     $packageTable = Engine_Api::_()->getDbtable('packages', 'payment');
     $db = $packageTable->getAdapter();
     $db->beginTransaction();
 
     try {
-      
-      // Update default
-      if( !empty($values['default']) ) {
-        $packageTable->update(array(
-          'default' => 0,
-        ), array(
-          '`default` = ?' => 1,
-        ));
-      }
 
       // Create package
       $package = $packageTable->createRow();
@@ -339,11 +326,6 @@ class Payment_AdminPackageController extends Core_Controller_Action_Admin
     unset($values['duration_type']);
     unset($values['trial_duration']);
     unset($values['trial_duration_type']);
-    
-    if( !empty($values['default']) && (float) $values['price'] > 0 ) {
-      return $form->addError('Only a free plan may be the default plan.');
-    }
-    
 
     $packageTable = Engine_Api::_()->getDbtable('packages', 'payment');
     $db = $packageTable->getAdapter();
@@ -351,16 +333,6 @@ class Payment_AdminPackageController extends Core_Controller_Action_Admin
 
     try {
       
-      // Update default
-      if( !empty($values['default']) ) {
-        $packageTable->update(array(
-          'default' => 0,
-        ), array(
-          '`default` = ?' => 1,
-        ));
-      }
-      
-      // Update package
       $package->setFromArray($values);
       $package->save();
       

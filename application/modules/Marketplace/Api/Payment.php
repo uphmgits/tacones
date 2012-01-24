@@ -113,6 +113,10 @@ class Marketplace_Api_Payment {//extends Core_Api_Abstract {
         $this->paypalData['item_number'] = $number;
     }
 
+    public function setReturn($return_url) {
+        $this->paypalData['returnUrl'] = $return_url;
+    }
+
     public function setAmount($amount) {
         $this->paypalData['amount'] = $amount;
     }

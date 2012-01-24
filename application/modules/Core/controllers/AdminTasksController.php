@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: AdminTasksController.php 9366 2011-10-12 01:10:46Z john $
+ * @version    $Id: AdminTasksController.php 8432 2011-02-10 00:27:00Z john $
  * @author     John Boehr <j@webligo.com>
  */
 
@@ -182,8 +182,8 @@ class Core_AdminTasksController extends Core_Controller_Action_Admin
       //->from($jobTypeTable->info('name'), 'jobtype_id')
       ->where('enabled = ?', 1)
       ->where('module IN(?)', $enabledModules)
-      //->where('form IS NOT NULL')
-      //->where('form != ?', '')
+      ->where('form IS NOT NULL')
+      ->where('form != ?', '')
       ;
 
     $this->view->enabledJobTypes = $enabledJobTypes = $jobTypeTable->fetchAll($enabledJobTypesSelect);
@@ -202,9 +202,6 @@ class Core_AdminTasksController extends Core_Controller_Action_Admin
 
     // Show form
     $formClass = $jobType->form;
-    if( !$formClass ) {
-      $formClass = 'Core_Form_Admin_Job_Generic';
-    }
     Engine_Loader::loadClass($formClass);
     $this->view->form = $form = new $formClass();
 

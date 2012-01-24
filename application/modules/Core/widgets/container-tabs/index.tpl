@@ -6,35 +6,33 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9329 2011-09-27 22:55:58Z john $
+ * @version    $Id: index.tpl 7754 2010-11-10 03:29:21Z jung $
  * @author     John
  */
 ?>
 
 <script type="text/javascript">
-  en4.core.runonce.add(function() {
-    var tabContainerSwitch = window.tabContainerSwitch = function(element) {
-      if( element.tagName.toLowerCase() == 'a' ) {
-        element = element.getParent('li');
+  var tabContainerSwitch = function(element) {
+    if( element.tagName.toLowerCase() == 'a' ) {
+      element = element.getParent('li');
+    }
+
+    var myContainer = element.getParent('.tabs_parent').getParent();
+
+    myContainer.getChildren('div:not(.tabs_alt)').setStyle('display', 'none');
+    myContainer.getElements('ul > li').removeClass('active');
+    element.get('class').split(' ').each(function(className){
+      className = className.trim();
+      if( className.match(/^tab_[0-9]+$/) ) {
+        myContainer.getChildren('div.' + className).setStyle('display', null);
+        element.addClass('active');
       }
-
-      var myContainer = element.getParent('.tabs_parent').getParent();
-
-      myContainer.getChildren('div:not(.tabs_alt)').setStyle('display', 'none');
-      myContainer.getElements('ul > li').removeClass('active');
-      element.get('class').split(' ').each(function(className){
-        className = className.trim();
-        if( className.match(/^tab_[0-9]+$/) ) {
-          myContainer.getChildren('div.' + className).setStyle('display', null);
-          element.addClass('active');
-        }
-      });
-    }
-    var moreTabSwitch = window.moreTabSwitch = function(el) {
-      el.toggleClass('tab_open');
-      el.toggleClass('tab_closed');
-    }
-  });
+    });
+  }
+  var moreTabSwitch = function(el) {
+    el.toggleClass('tab_open');
+    el.toggleClass('tab_closed');
+  }
 </script>
 
 <div class='tabs_alt tabs_parent'>

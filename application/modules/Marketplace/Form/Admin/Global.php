@@ -24,6 +24,11 @@ class Marketplace_Form_Admin_Global extends Engine_Form
       ->setTitle('Global Settings')
       ->setDescription('These settings affect all members in your community.');
     
+    $this->addElement('Text', 'marketplace_mainpaypal', array(
+      'label' => 'Paypal Account',
+      'description' => 'Main paypal account',
+      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.mainpaypal', ''),
+    ));
 
     $this->addElement('Text', 'marketplace_page', array(
       'label' => 'Listings Per Page',

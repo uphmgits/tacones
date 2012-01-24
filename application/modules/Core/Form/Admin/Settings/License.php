@@ -6,7 +6,7 @@
  * @package    Core
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: License.php 9352 2011-10-05 22:04:53Z john $
+ * @version    $Id: License.php 8221 2011-01-15 00:24:02Z john $
  * @author     John
  */
 
@@ -35,10 +35,7 @@ class Core_Form_Admin_Settings_License extends Engine_Form
       'validators' => array(
         array('NotEmpty', true),
         new Engine_Validate_Callback(array(get_class($this), 'validateKey'))
-      ),
-      'filters' => array(
-        'StringTrim',
-      ),
+      )
     ));
     $this->getElement('key')->getValidator('NotEmpty')
       ->setMessage('Please fill in the license key.', 'notEmptyInvalid')

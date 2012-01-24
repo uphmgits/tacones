@@ -6,7 +6,7 @@
  * @package    Activity
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Controller.php 9192 2011-08-20 00:31:59Z john $
+ * @version    $Id: Controller.php 8933 2011-05-12 20:37:57Z jung $
  * @author     John
  */
 
@@ -181,14 +181,8 @@ class Activity_Widget_FeedController extends Engine_Content_Widget_Abstract
     
     $this->view->enableComposer = false;
     if( $viewer->getIdentity() && !$this->_getParam('action_id') ) {
-      if( !$subject || ($subject instanceof Core_Model_Item_Abstract && $subject->isSelf($viewer)) ) {
-        if( Engine_Api::_()->authorization()->getPermission($viewer->level_id, 'user', 'status') ) {
-          $this->view->enableComposer = true;
-        }
-      } else if( $subject ) {
-        if( Engine_Api::_()->authorization()->isAllowed($subject, $viewer, 'comment') ) {
-          $this->view->enableComposer = true;
-        }
+      if( !$subject || $subject->authorization()->isAllowed($viewer, 'comment') ) {
+        $this->view->enableComposer = true;
       }
     }
 

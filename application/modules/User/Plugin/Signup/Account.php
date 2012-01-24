@@ -6,7 +6,7 @@
  * @package    User
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.net/license/
- * @version    $Id: Account.php 9392 2011-10-15 02:18:28Z shaun $
+ * @version    $Id: Account.php 9094 2011-07-22 02:21:01Z shaun $
  * @author     John
  */
 
@@ -114,10 +114,6 @@ class User_Plugin_Signup_Account extends Core_Plugin_FormSequence_Abstract
 
     if( $random ) {
       $data['password'] = Engine_Api::_()->user()->randomPass(10);
-    }
-    
-    if (isset($data['language'])) {
-      $data['locale'] = $data['language'];
     }
 
     // Create user
