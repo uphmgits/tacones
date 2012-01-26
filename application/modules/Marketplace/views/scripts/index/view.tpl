@@ -283,19 +283,8 @@ endif; ?>
 					<?php endif; ?>
 				<?php endif; ?>
 				<br /><br />
-				<?php /*if( !$this->prepay ) : ?>
-          <?php echo $this->paymentForm?>
-  			<?php endif;*/ ?>
-
 			<?php endif; ?>
-			<?php /*if( $this->prepay ) : ?>
-        <style>
-          #marketplaces_prepaypal .form-label { display: none; }
-          #marketplaces_prepaypal input#marketplaces_email { width: 160px; }
-          #marketplaces_prepaypal .form-elements { margin-top: 0; }
-        </style>
-        <?=$this->paymentForm->render($this)?>
-  		<?php endif; */ ?>
+
 		  </div>
 	</div>
 </div>
