@@ -64,8 +64,9 @@ function selectAll()
     <tbody>
         <?php foreach ($this->paginator as $item): ?>
           <tr>
-            <td><input type='checkbox' class='checkbox' name='checked_<?php echo $item->photo_id;?>' value="<?php echo $item->photo_id ?>"/></td>
-            <td><?php echo $item->getIdentity() ?></td>
+            <?php if( !Engine_Api::_()->getItem('marketplace', $item->marketplace_id ) ) continue; ?>
+            <td><input type='checkbox' class="checkbox" name="checked_<?php echo $item->photo_id;?>" value="<?php echo $item->photo_id ?>"/></td>
+            <td><?=$item->getIdentity() ?></td>
             <td>
               <a class="thumbs_photo" href="<?=$item->getHref()?>">
                 <img src="<?=$item->getPhotoUrl('thumb.normal'); ?>" style="width: 48px"/></td>

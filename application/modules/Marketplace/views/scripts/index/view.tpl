@@ -67,11 +67,11 @@ endif; ?>
 </style>
 
 <div class='layout_common'>
-	<div class='layout_right'>
+	<div class='layout_left'>
 	  <div class='marketplaces_gutter'>
 		<div class='marketplaces_gutter_photo'>
 		  <?php if($this->main_photo):?>
-			  <?php echo $this->htmlLink($this->main_photo->getPhotoUrl(), $this->itemPhoto($this->main_photo, 'thumb.normal'), array('class'=>'smoothbox11', 'rel'=>'milkbox[gall1]', 'title'=> $this->marketplace->getTitle())) ?>
+			  <?php echo $this->htmlLink($this->main_photo->getPhotoUrl(), $this->itemPhoto($this->main_photo, 'normal'), array('class'=>'smoothbox11', 'rel'=>'milkbox[gall1]', 'title'=> $this->marketplace->getTitle())) ?>
 		  <?php endif; ?>
 		</div>
 		<a href='<?php echo $this->url(array('id' => $this->marketplace->owner_id), 'user_profile') ?>' class="marketplaces_gutter_name"><?php echo $this->user($this->marketplace->owner_id)->getTitle() ?></a>

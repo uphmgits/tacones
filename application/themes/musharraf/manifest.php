@@ -58,5 +58,6 @@ return array(
   'files' => array(
     'theme.css',
     'constants.css',
+    'mobile.css',	
   ),
 ) ?>

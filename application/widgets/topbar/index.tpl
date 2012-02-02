@@ -67,7 +67,7 @@
       
    </li>
    <li>
-    <a href="#">invite friends</a>
+    <a href="/invite">invite friends</a>
    </li>
   </ul>
  </div>

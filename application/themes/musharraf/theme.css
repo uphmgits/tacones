@@ -1887,7 +1887,6 @@ ul.marketplaces_browse .marketplaces_browse_photo img {
  
     overflow: hidden;
     padding: 0px;
-    border-bottom: 1px solid #555;
     max: 160px;
 }
 .marketplaces_browse_info a {
@@ -2008,11 +2007,19 @@ padding: 20px;
     background: url("~/public/header-imgs/core_signup_header.png") no-repeat;
 }
 
+#global_page_user-auth-login .header_img_sd {
+    display: block !important;
+    background: url("~/public/header-imgs/core_signin_header.png") no-repeat;
+}
+
+#global_page_user-profile-index .header_img_sd {
+    display: block !important;
+    background: url("~/public/header-imgs/core_profile_header.png") no-repeat;
+}
 #global_page_core-search-index .header_img_sd {
     display: block !important;
     background: url("~/public/header-imgs/core_search_header.png") no-repeat;
 }
-
 
 #global_page_user-index-home .header_img_sd {
     display: block !important;
@@ -2025,7 +2032,11 @@ padding: 20px;
 }
 
 .marketplaces_gutter_photo {
-display: block;
-max-height: 250px;
-overflow: hidden;
+   display: block;
+   max-height: 250px;
+   overflow: hidden;
+}
+
+#global_page_marketplace-index-index #filter_form {
+  display: none;
 }
