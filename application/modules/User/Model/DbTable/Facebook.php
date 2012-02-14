@@ -132,7 +132,7 @@ class User_Model_DbTable_Facebook extends Engine_Db_Table
         ->assemble(array('module' => 'user', 'controller' => 'auth',
           'action' => 'facebook'), 'default', true);
     $imgHref = _ENGINE_R_BASE
-        . '/application/modules/User/externals/images/facebook-sign-in.gif';
+        . 'application/modules/User/externals/images/facebook-sign-in.gif';
     //$imgHref = 'http://static.ak.fbcdn.net/rsrc.php/z38X1/hash/6ad3z8m6.gif';
     return '
       <a href="'.$href.'">

@@ -29,17 +29,19 @@
 
 
 
-<div class="header_img_sd" style="display:block;">
+<div class="header_img_sd_home" style="display:block;">
 <?php
  $mycatid = $this->category; 
- if($mycatid=='1') $myimg='marketplace_shoes_header.png';
- elseif($mycatid=='3') $myimg='marketplace_cloth_header.png';
- elseif($mycatid=='5') $myimg='marketplace_accessories_header.png';
- elseif($mycatid=='8') $myimg='marketplace_accessories_header.png';
- elseif($mycatid=='13') $myimg='marketplace_brands_header.png';
- else $myimg='marketplace_shopall_header.png';
+ if($mycatid=='1') $myimg='marketplace_shoes_header.jpg';
+ elseif($mycatid=='3') $myimg='marketplace_cloth_header.jpg';
+ elseif($mycatid=='5') $myimg='marketplace_bags_header.jpg';
+ elseif($mycatid=='8') $myimg='marketplace_accessories_header.jpg';
+ elseif($mycatid=='13') $myimg='marketplace_brands_header.jpg';
+ else $myimg='marketplace_home_header.jpg';
+//
+ if($myimg=='marketplace_home_header.jpg') echo "<a href='#'><img src='/public/header-imgs/$myimg'/></a>";
+  else echo "<img src='/public/header-imgs/$myimg'/>";
  ?>
- <img src="./public/header-imgs/<?php echo $myimg ?>"  />
 </div>
 
 

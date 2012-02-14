@@ -1884,9 +1884,8 @@ ul.marketplaces_browse .marketplaces_browse_photo img {
 
 .marketplaces_browse_info {
     clear: left;
- 
     overflow: hidden;
-    padding: 0px;
+    padding: 0px 19px 0px 0px;
     max: 160px;
 }
 .marketplaces_browse_info a {
@@ -1960,7 +1959,7 @@ padding: 20px;
     color: #FF0078;
     font-family: Univers LT Std;
     font-size: 13px;
-    padding-left: 17px;
+    padding-left: 20px;
     padding-right: 15px;
 }
 .love-info span.we-love {
@@ -1972,10 +1971,15 @@ padding: 20px;
     margin-top: 0px !important;
 }
 .paginationControl {
-    font-weight: bold;
     border: 0px solid #FFF;
     padding: 3px;
     float: none !important;
+    text-align: right;
+}
+
+.paginationControl a {
+    color: #858485;
+    font-weight: bold;
 }
 
 
@@ -1989,22 +1993,22 @@ padding: 20px;
 
 #global_page_core-help-privacy .header_img_sd {
     display: block !important;
-    background: url("~/public/header-imgs/core_privacy_header.png") no-repeat;
+    background: url("~/public/header-imgs/core_privacy_header.jpg") no-repeat;
 }
 
 #global_page_core-help-terms .header_img_sd {
     display: block !important;
-    background: url("~/public/header-imgs/core_terms_header.png") no-repeat;
+    background: url("~/public/header-imgs/core_terms_header.jpg") no-repeat;
 }
 
 #global_page_core-help-contact .header_img_sd {
     display: block !important;
-    background: url("~/public/header-imgs/core_contactus_header.png") no-repeat;
+    background: url("~/public/header-imgs/core_contactus_header.jpg") no-repeat;
 }
 
 #global_page_user-signup-index .header_img_sd {
     display: block !important;
-    background: url("~/public/header-imgs/core_signup_header.png") no-repeat;
+    background: url("~/public/header-imgs/core_signup_header.jpg") no-repeat;
 }
 
 #global_page_user-auth-login .header_img_sd {
@@ -2014,21 +2018,26 @@ padding: 20px;
 
 #global_page_user-profile-index .header_img_sd {
     display: block !important;
-    background: url("~/public/header-imgs/core_profile_header.png") no-repeat;
+    background: url("~/public/header-imgs/core_profile_header.jpg") no-repeat;
 }
 #global_page_core-search-index .header_img_sd {
     display: block !important;
-    background: url("~/public/header-imgs/core_search_header.png") no-repeat;
+    background: url("~/public/header-imgs/core_search_header.jpg") no-repeat;
 }
 
 #global_page_user-index-home .header_img_sd {
     display: block !important;
-    background: url("~/public/header-imgs/community_header.png") no-repeat;
+    background: url("~/public/header-imgs/community_header.jpg") no-repeat;
+}
+
+#global_page_user-settings-general .header_img_sd, #global_page_user-settings-privacy .header_img_sd, #global_page_user-settings-notifications .header_img_sd, #global_page_user-settings-password .header_img_sd, #global_page_user-settings-network .header_img_sd {
+    display: block !important;
+    background: url("~/public/header-imgs/core_profile_header.jpg") no-repeat;
 }
 
 #global_page_marketplace-index-cart .header_img_sd {
     display: block !important;
-    background: url("~/public/header-imgs/marketplace_cart_header.png") no-repeat;
+    background: url("~/public/header-imgs/marketplace_cart_header.jpg") no-repeat;
 }
 
 .marketplaces_gutter_photo {

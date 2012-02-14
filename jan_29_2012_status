@@ -1,0 +1,88 @@
+# On branch master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   application/modules/Marketplace/views/scripts/admin-approve/index.tpl
+#	modified:   application/themes/musharraf/theme.css
+#	modified:   temporary/log/mail.log
+#	modified:   temporary/log/main.log
+#	modified:   temporary/log/tasks.log
+#	modified:   temporary/log/tasks.log.1
+#	modified:   temporary/log/tasks.log.2
+#	modified:   temporary/log/tasks.log.3
+#	modified:   temporary/log/tasks.log.4
+#	modified:   temporary/log/tasks.log.5
+#	modified:   temporary/log/translate.log
+#	modified:   temporary/log/translate.log.1
+#	modified:   temporary/log/translate.log.2
+#	modified:   temporary/log/translate.log.3
+#	modified:   temporary/log/translate.log.4
+#	modified:   temporary/log/translate.log.5
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	application/packages/module-marketplaceups-4.3.0.json
+#	error_log
+#	jan_jan_2012_status
+#	public/header-imgs/blogs_header.png
+#	public/header-imgs/community_header.png
+#	public/header-imgs/core_aboutus_header.png
+#	public/header-imgs/core_contactus_header.png
+#	public/header-imgs/core_faq_header.png
+#	public/header-imgs/core_privacy_header.png
+#	public/header-imgs/core_search_header.png
+#	public/header-imgs/core_signup_header.png
+#	public/header-imgs/core_terms_header.png
+#	public/header-imgs/marketplace_accessories_header.png
+#	public/header-imgs/marketplace_brands_header.png
+#	public/header-imgs/marketplace_cart_header.png
+#	public/header-imgs/marketplace_cloth_header.png
+#	public/header-imgs/marketplace_shoes_header.png
+#	public/header-imgs/marketplace_shopall_header.png
+#	public/marketplace/ab/
+#	public/marketplace/ac/
+#	public/marketplace/ad/
+#	public/marketplace/ae/
+#	public/marketplace/af/
+#	public/marketplace/b0/
+#	public/marketplace/b1/
+#	public/marketplace/b2/
+#	public/marketplace/b3/
+#	public/marketplace/b4/
+#	public/marketplace/b5/
+#	public/marketplace/b6/
+#	public/marketplace/b7/
+#	public/marketplace/b8/
+#	public/marketplace/b9/
+#	public/marketplace/ba/
+#	public/marketplace/bb/
+#	public/marketplace/bc/
+#	public/marketplace/bd/
+#	public/marketplace/be/
+#	public/marketplace/bf/
+#	public/marketplace/c0/
+#	public/marketplace/c1/
+#	public/marketplace/c2/
+#	public/marketplace/c3/
+#	public/marketplace/c4/
+#	public/marketplace/c5/
+#	public/marketplace/c6/
+#	public/temporary/00a5_965f.JPG
+#	public/temporary/00a6_3078.JPG
+#	public/temporary/00a7_5123.JPG
+#	public/temporary/00a8_4167.JPG
+#	public/temporary/DSCN0009.JPG
+#	public/temporary/DSCN0065.JPG
+#	status_jan_18_2012
+#	temporary/cache/EngineInstall---dd5687e27c23d00a64bc858c39239ed3_module_marketplaceups_4_3_0
+#	temporary/cache/EngineInstall---internal-metadatas---dd5687e27c23d00a64bc858c39239ed3_module_marketplaceups_4_3_0
+#	temporary/cache/EngineInstall---internal-metadatas---transactiondd5687e27c23d00a64bc858c39239ed3
+#	temporary/cache/EngineInstall---transactiondd5687e27c23d00a64bc858c39239ed3
+#	temporary/log/scaffold/2012-01-17.log.php
+#	temporary/log/scaffold/2012-01-21.log.php
+#	temporary/log/tasks.log.6
+#	temporary/log/translate.log.6
+#	temporary/scaffold/
+no changes added to commit (use "git add" and/or "git commit -a")

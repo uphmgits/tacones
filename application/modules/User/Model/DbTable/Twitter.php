@@ -125,7 +125,7 @@ class User_Model_Dbtable_Twitter extends Engine_Db_Table
         ->assemble(array('module' => 'user', 'controller' => 'auth',
           'action' => 'twitter'), 'default', true);
     $imgHref = _ENGINE_R_BASE
-        . '/application/modules/User/externals/images/twitter-sign-in.png';
+        . 'application/modules/User/externals/images/twitter-sign-in.png';
     //$imgHref = 'http://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-l.png';
     return '
       <a href="'.$href.'">

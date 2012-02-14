@@ -91,7 +91,7 @@
    
  <div class="main-nav-search">
     <form action="/search" method="get">
-    <input type="text" name="query" class="text" onFocus="if(this.value == 'search...') { this.value = ''; }" value="search..." />
+    <input type="text" name="query" class="text" onFocus="if(this.value == 'search') { this.value = ''; }" value="search" />
     <input type="submit" value=" " class="main-nav-search-butn">
     </form>
  </div>

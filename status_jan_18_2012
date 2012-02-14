@@ -1,0 +1,100 @@
+# On branch master
+# Changes not staged for commit:
+#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	deleted:    application/languages/en/.custom.csv.swo
+#	deleted:    application/modules/Marketplace/Model/DbTable/.htempty
+#	modified:   application/modules/Marketplace/views/scripts/index/index.tpl
+#	deleted:    application/packages/module-marketplace-4.2.4.4.json
+#	modified:   install/config/vfs.php
+#	deleted:    socialengine4.1.7.zip
+#	deleted:    temporary/cache/EngineInstall---1501259b3db95ebb0963640e8f1559a2_module_marketplace_4_2_4_4
+#	deleted:    temporary/cache/EngineInstall---4ceca6024541c99d834ce10bea3d8bc5_module_marketplace_4_3_0
+#	deleted:    temporary/cache/EngineInstall---4ceca6024541c99d834ce10bea3d8bc5_module_marketplacecart_4_3_0
+#	deleted:    temporary/cache/EngineInstall---internal-metadatas---1501259b3db95ebb0963640e8f1559a2_module_marketplace_4_2_4_4
+#	deleted:    temporary/cache/EngineInstall---internal-metadatas---4ceca6024541c99d834ce10bea3d8bc5_module_marketplace_4_3_0
+#	deleted:    temporary/cache/EngineInstall---internal-metadatas---4ceca6024541c99d834ce10bea3d8bc5_module_marketplacecart_4_3_0
+#	deleted:    temporary/cache/EngineInstall---internal-metadatas---transaction1501259b3db95ebb0963640e8f1559a2
+#	deleted:    temporary/cache/EngineInstall---internal-metadatas---transaction4ceca6024541c99d834ce10bea3d8bc5
+#	deleted:    temporary/cache/EngineInstall---transaction1501259b3db95ebb0963640e8f1559a2
+#	deleted:    temporary/cache/EngineInstall---transaction4ceca6024541c99d834ce10bea3d8bc5
+#	modified:   temporary/log/mail.log
+#	modified:   temporary/log/main.log
+#	modified:   temporary/log/tasks.log
+#	modified:   temporary/log/tasks.log.1
+#	modified:   temporary/log/tasks.log.2
+#	modified:   temporary/log/tasks.log.3
+#	modified:   temporary/log/tasks.log.4
+#	modified:   temporary/log/tasks.log.5
+#	modified:   temporary/log/translate.log
+#	modified:   temporary/log/translate.log.1
+#	modified:   temporary/log/translate.log.2
+#	modified:   temporary/log/translate.log.3
+#	modified:   temporary/log/translate.log.4
+#	modified:   temporary/log/translate.log.5
+#	deleted:    temporary/scaffold/2f08eef095905013c138545d759e5db1.css
+#	modified:   temporary/scaffold/479c9e11bc57b6bc8e4e6d6477e9e74e.css
+#	deleted:    temporary/scaffold/4ceffd5241761013920860a139780baf.css
+#	deleted:    temporary/scaffold/7149ae56579bf684bd412a3f33ccc224.css
+#	deleted:    temporary/scaffold/7205aea9353e683d40b62743ba812775.css
+#	deleted:    temporary/scaffold/7ba4a053d3b6a4c84d14e1d58a3c4261.css
+#	deleted:    temporary/scaffold/8d3264fc166996ce20ecd637d1b33fb4.css
+#	deleted:    temporary/scaffold/98b186debb3a412837fb9f6924087124.css
+#	modified:   temporary/scaffold/application/modules/Core/externals/styles/admin/main_paginator_pagestart=0_pageend=0.css
+#	modified:   temporary/scaffold/application/modules/Core/externals/styles/admin/main_paginator_pagestart=0_pageend=0_morning.css
+#	deleted:    temporary/scaffold/application/modules/Core/externals/styles/admin/main_paginator_pagestart=0_pageend=0_tuesday_morning.css
+#	deleted:    temporary/scaffold/application/themes/slipstream/mobile_paginator_pagestart=0_pageend=0.css
+#	deleted:    temporary/scaffold/application/themes/slipstream/theme_paginator_pagestart=0_pageend=0.css
+#	deleted:    temporary/scaffold/application/themes/slipstream/theme_paginator_pagestart=0_pageend=0_morning.css
+#	deleted:    temporary/scaffold/application/themes/slipstream/theme_paginator_pagestart=0_pageend=0_night.css
+#	deleted:    temporary/scaffold/application/themes/slipstream/theme_paginator_pagestart=0_pageend=0_tuesday.css
+#	deleted:    temporary/scaffold/application/themes/slipstream/theme_paginator_pagestart=0_pageend=0_tuesday_morning.css
+#	deleted:    temporary/scaffold/application/themes/sooraj/mobile_paginator_pagestart=0_pageend=0.css
+#	deleted:    temporary/scaffold/application/themes/sooraj/mobile_paginator_pagestart=0_pageend=0_morning.css
+#	deleted:    temporary/scaffold/application/themes/sooraj/theme_paginator_pagestart=0_pageend=0.css
+#	deleted:    temporary/scaffold/application/themes/sooraj/theme_paginator_pagestart=0_pageend=0_morning.css
+#	deleted:    temporary/scaffold/application/themes/sooraj/theme_paginator_pagestart=0_pageend=0_night.css
+#	deleted:    temporary/scaffold/application/themes/sooraj/theme_paginator_pagestart=0_pageend=0_tuesday.css
+#	deleted:    temporary/scaffold/c4811e1c92778efce61f45cdec278874.css
+#	deleted:    temporary/scaffold/c78d1c18ac2c833587baf0b23b6b2f1b.css
+#	deleted:    temporary/scaffold/d8bc0c7d3bed659442d45e36a514d857.css
+#	deleted:    temporary/scaffold/e8a12d6bb68f4c2882bf1f5c0dfa8c99.css
+#	deleted:    temporary/scaffold/f45b24349c48865f64add9ff90f5e5bd.css
+#	modified:   temporary/scaffold/fd300f183c430b26286a8774c5ded232.css
+#	deleted:    temporary/scaffold/ff3bac8a260c4c280ca8bab75a353a6c.css
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	application/languages/en/slider.csv
+#	application/modules/Marketplace/views/scripts/index/index_ORG.tpl
+#	application/modules/Slider/
+#	application/packages/module-slider-4.0.1.json
+#	application/themes/musharraf/
+#	application/widgets/topbar/
+#	public/marketplace/a9/
+#	public/marketplace/aa/
+#	public/temporary/00a5_965f.JPG
+#	public/temporary/00a6_3078.JPG
+#	public/temporary/00a7_5123.JPG
+#	public/temporary/00a8_4167.JPG
+#	public/temporary/DSCN0009.JPG
+#	public/temporary/DSCN0065.JPG
+#	public/user/a5/
+#	public/user/a6/
+#	public/user/a7/
+#	public/user/a8/
+#	status_jan_18
+#	temporary/cache/EngineInstall---b84e83822f2aac9a97475ca4dab70fd2_module_slider_4_0_1
+#	temporary/cache/EngineInstall---internal-metadatas---b84e83822f2aac9a97475ca4dab70fd2_module_slider_4_0_1
+#	temporary/cache/EngineInstall---internal-metadatas---transactionb84e83822f2aac9a97475ca4dab70fd2
+#	temporary/cache/EngineInstall---transactionb84e83822f2aac9a97475ca4dab70fd2
+#	temporary/log/scaffold/2012-01-17.log.php
+#	temporary/log/tasks.log.6
+#	temporary/log/translate.log.6
+#	temporary/scaffold/25f3c80a239f774e7bb7ebe1005bb05a.css
+#	temporary/scaffold/application/themes/musharraf/
+#	temporary/scaffold/d3a6436da82d111ef6b2fd9e38b676c6.css
+#	temporary/scaffold/ed836fdaf450f855750b43080d8f3f84.css
+no changes added to commit (use "git add" and/or "git commit -a")
