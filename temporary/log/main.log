@@ -3289,3 +3289,272 @@ Stack trace:
 #10 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
 #11 {main}
 
+2012-02-15T13:17:38+00:00 CRIT (2): 
+Error Code: acc87f
+exception 'Zend_View_Exception' with message 'script 'index/get-likes.tpl' not found in path (/home/zapato/public_html/application/modules/Activity/views/scripts/:/home/zapato/public_html/)' in /home/zapato/public_html/application/libraries/Zend/View/Abstract.php:928
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(831): Zend_View_Abstract->_script('index/get-likes...')
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('index/get-likes...')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('index/get-likes...', NULL)
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('getLikesAction')
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#8 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#9 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#10 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#11 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#12 {main}
+2012-02-15T21:04:04+00:00 CRIT (2): 
+Error Code: 2b0be3
+exception 'Zend_View_Exception' with message 'script 'index/get-likes.tpl' not found in path (/home/zapato/public_html/application/modules/Activity/views/scripts/:/home/zapato/public_html/)' in /home/zapato/public_html/application/libraries/Zend/View/Abstract.php:928
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(831): Zend_View_Abstract->_script('index/get-likes...')
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('index/get-likes...')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('index/get-likes...', NULL)
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('getLikesAction')
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#8 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#9 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#10 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#11 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#12 {main}
+2012-02-16T03:11:06+00:00 NOTICE (5): [8] Undefined index:  RATEDSHIPMENT (/home/zapato/public_html/application/modules/Marketplaceups/Api/Core.php) [130]
+Error Code: 13c869
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/Api/Core.php(161): Marketplaceups_Api_Core->ups('94107', '03', 0, 0, 0, 0, '94107')
+#1 /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/cart.tpl(47): Marketplace_Api_Core->getShipingFee(34, 1)
+#2 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/public_html/applica...')
+#3 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('/home/zapato/public_html/applica...')
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('index/cart.tpl')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('index/cart.tpl', )
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#8 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#9 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('cartAction')
+#10 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#11 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#12 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#13 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#14 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#15 {main}
+
+2012-02-16T03:13:02+00:00 NOTICE (5): [8] Undefined index:  RATEDSHIPMENT (/home/zapato/public_html/application/modules/Marketplaceups/Api/Core.php) [130]
+Error Code: 12b58d
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/Api/Core.php(161): Marketplaceups_Api_Core->ups('94107', '03', 0, 0, 0, 0, '94107')
+#1 /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/cart.tpl(47): Marketplace_Api_Core->getShipingFee(34, 1)
+#2 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/public_html/applica...')
+#3 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('/home/zapato/public_html/applica...')
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('index/cart.tpl')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('index/cart.tpl', )
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#8 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#9 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('cartAction')
+#10 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#11 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#12 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#13 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#14 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#15 {main}
+
+2012-02-16T03:13:12+00:00 NOTICE (5): [8] Undefined index:  RATEDSHIPMENT (/home/zapato/public_html/application/modules/Marketplaceups/Api/Core.php) [130]
+Error Code: ca4ef2
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/Api/Core.php(161): Marketplaceups_Api_Core->ups('94107', '03', 0, 0, 0, 0, '94107')
+#1 /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/cart.tpl(47): Marketplace_Api_Core->getShipingFee(34, 1)
+#2 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/public_html/applica...')
+#3 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('/home/zapato/public_html/applica...')
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('index/cart.tpl')
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('index/cart.tpl', )
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#8 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#9 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('cartAction')
+#10 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#11 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#12 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#13 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#14 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#15 {main}
+
+2012-02-17T12:23:38+00:00 CRIT (2): 
+Error Code: cf121e
+exception 'Zend_View_Exception' with message 'script 'index/get-likes.tpl' not found in path (/home/zapato/public_html/application/modules/Activity/views/scripts/:/home/zapato/public_html/)' in /home/zapato/public_html/application/libraries/Zend/View/Abstract.php:928
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(831): Zend_View_Abstract->_script('index/get-likes...')
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('index/get-likes...')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('index/get-likes...', NULL)
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('getLikesAction')
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#8 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#9 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#10 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#11 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#12 {main}
+2012-02-17T14:22:15+00:00 CRIT (2): 
+Error Code: 0b5c6c
+exception 'Zend_View_Exception' with message 'script 'index/get-likes.tpl' not found in path (/home/zapato/public_html/application/modules/Activity/views/scripts/:/home/zapato/public_html/)' in /home/zapato/public_html/application/libraries/Zend/View/Abstract.php:928
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(831): Zend_View_Abstract->_script('index/get-likes...')
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('index/get-likes...')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('index/get-likes...', NULL)
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('getLikesAction')
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#8 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#9 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#10 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#11 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#12 {main}
+2012-02-19T09:57:58+00:00 CRIT (2): 
+Error Code: 797323
+exception 'Zend_View_Exception' with message 'script 'index/get-likes.tpl' not found in path (/home/zapato/public_html/application/modules/Activity/views/scripts/:/home/zapato/public_html/)' in /home/zapato/public_html/application/libraries/Zend/View/Abstract.php:928
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(831): Zend_View_Abstract->_script('index/get-likes...')
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('index/get-likes...')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('index/get-likes...', NULL)
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('getLikesAction')
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#8 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#9 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#10 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#11 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#12 {main}
+2012-02-21T07:14:08+00:00 WARN (4): [2] array_sum() [<a href='function.array-sum'>function.array-sum</a>]: The argument should be an array (/home/zapato/public_html/application/modules/Review/views/scripts/list/most-reviewed-members.tpl) [82]
+Error Code: 17375f
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Review/views/scripts/list/most-reviewed-members.tpl(82): array_sum()
+#1 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('/home/zapato/public_html/applica...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('list/most-reviewed-members.tpl')
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('list/most-reviewed-members.tpl', )
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#8 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('mostReviewedMembersAction')
+#9 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#10 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#11 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#12 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#13 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#14 {main}
+
+2012-02-21T12:26:19+00:00 NOTICE (5): [8] Undefined index:  marketplaces_inspection (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [1515]
+Error Code: 543863
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->cartAction()
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('cartAction')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#3 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#4 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#5 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#6 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#7 {main}
+
+2012-02-21T19:58:46+00:00 WARN (4): [2] array_sum() [<a href='function.array-sum'>function.array-sum</a>]: The argument should be an array (/home/zapato/public_html/application/modules/Review/views/scripts/list/top-rated-members.tpl) [82]
+Error Code: 57caaa
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Review/views/scripts/list/top-rated-members.tpl(82): array_sum()
+#1 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('/home/zapato/public_html/applica...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('list/top-rated-members.tpl')
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('list/top-rated-members.tpl', )
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#8 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('topRatedMembersAction')
+#9 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#10 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#11 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#12 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#13 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#14 {main}
+
+2012-02-22T05:33:02+00:00 WARN (4): [2] array_sum() [<a href='function.array-sum'>function.array-sum</a>]: The argument should be an array (/home/zapato/public_html/application/modules/Review/views/scripts/list/most-recommended-members.tpl) [82]
+Error Code: 786a62
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Review/views/scripts/list/most-recommended-members.tpl(82): array_sum()
+#1 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('/home/zapato/public_html/applica...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('list/most-recommended-members.tp...')
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('list/most-recommended-members.tp...', )
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#8 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('mostRecommendedMembersAction')
+#9 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#10 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#11 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#12 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#13 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#14 {main}
+
+2012-02-22T07:15:11+00:00 WARN (4): [2] array_sum() [<a href='function.array-sum'>function.array-sum</a>]: The argument should be an array (/home/zapato/public_html/application/modules/Review/views/scripts/list/most-recommended-members.tpl) [82]
+Error Code: 328b50
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Review/views/scripts/list/most-recommended-members.tpl(82): array_sum()
+#1 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('/home/zapato/public_html/applica...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('list/most-recommended-members.tp...')
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('list/most-recommended-members.tp...', )
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#8 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('mostRecommendedMembersAction')
+#9 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#10 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#11 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#12 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#13 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#14 {main}
+
+2012-02-22T18:29:08+00:00 WARN (4): [2] array_sum() [<a href='function.array-sum'>function.array-sum</a>]: The argument should be an array (/home/zapato/public_html/application/modules/Review/views/scripts/list/top-rated-members.tpl) [82]
+Error Code: 0f93ca
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Review/views/scripts/list/top-rated-members.tpl(82): array_sum()
+#1 /home/zapato/public_html/application/libraries/Zend/View.php(108): include('/home/zapato/public_html/applica...')
+#2 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(835): Zend_View->_run('/home/zapato/public_html/applica...')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('list/top-rated-members.tpl')
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('list/top-rated-members.tpl', )
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#8 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('topRatedMembersAction')
+#9 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#10 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#11 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#12 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#13 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#14 {main}
+
+2012-02-23T19:16:13+00:00 CRIT (2): 
+Error Code: c08058
+exception 'Zend_View_Exception' with message 'script 'index/get-likes.tpl' not found in path (/home/zapato/public_html/application/modules/Activity/views/scripts/:/home/zapato/public_html/)' in /home/zapato/public_html/application/libraries/Zend/View/Abstract.php:928
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/View/Abstract.php(831): Zend_View_Abstract->_script('index/get-likes...')
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(903): Zend_View_Abstract->render('index/get-likes...')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(924): Zend_Controller_Action_Helper_ViewRenderer->renderScript('index/get-likes...', NULL)
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/ViewRenderer.php(963): Zend_Controller_Action_Helper_ViewRenderer->render()
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action/HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(523): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('getLikesAction')
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#8 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#9 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#10 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#11 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#12 {main}

@@ -123,7 +123,7 @@ DEFAULT STYLES FOR THIS THEME
   theme_buttontabs_font_color_active: #fff;
   theme_buttontabs_background_color: transparent;
   theme_buttontabs_background_color_hover: #55677a;
-  theme_buttontabs_background_color_active: #55677a;
+  theme_buttontabs_background_color_active: transparent;
 
   /*
   TABS
@@ -283,7 +283,6 @@ classes throughout the stylesheet.
   -moz-user-select: none;
   -webkit-user-select: none;
 }
-
 
 
 

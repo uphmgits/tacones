@@ -135,7 +135,7 @@
 
             <div class='marketplaces_browse_info_blurb'>
               <span style="font-weight:bold;font-size:12px;"><?=$this->translate('Price')?>:</span> <span style="font-size:12px;">$<?php echo $item->price; ?></span>
-              &nbsp;&nbsp;
+              <br />
              
               <?php
                 // Not mbstring compat
@@ -159,8 +159,6 @@
         <?php if($myi==$myrowsize) { echo "</ul><ul class='marketplaces_browse'>"; $myi = 0;} ?>        
       <?php endforeach; ?>
     </ul>
-    <?php echo $this->paginationControl($this->paginator); ?>
-    <?php //echo $this->paginationControl($this->paginator, null, array("pagination/pagination.tpl","marketplace")); ?>
 
   <?php elseif( $this->category || $this->show == 2 || $this->search ):?>
     <div class="tip">
@@ -181,4 +179,5 @@
       </span>
     </div>
   <?php endif; ?>
+  <?php echo $this->paginationControl($this->paginator, null, array("pagination/pagination.tpl","marketplace")); ?>
 </div>

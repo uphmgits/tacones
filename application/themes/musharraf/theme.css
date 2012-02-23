@@ -252,7 +252,12 @@ html[dir="rtl"] .layout_right
 {
   text-transform: lowercase;
   color: #858485;
-  
+}
+
+.layout_core_menu_footer a:hover
+{
+  text-decoration: none;
+  color: #fff;
 }
 
 
@@ -1907,7 +1912,7 @@ ul.marketplaces_browse > li , ul.marketplaces_browse > li + li {
     border: none;
     overflow: hidden;
     padding: 20px 0px;
-    width: 160px;
+    width: 165px;
     text-transform: uppercase;
 }
 
@@ -2047,5 +2052,13 @@ padding: 20px;
 }
 
 #global_page_marketplace-index-index #filter_form {
+  display: none;
+}
+
+#global_page_marketplace-index-index .quicklinks {
+    margin-left: 22px;
+}
+
+#global_page_user-index-home #mini-nav-ul > li > span > a {
   display: none;
 }
