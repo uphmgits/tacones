@@ -39,12 +39,19 @@ class Marketplace_AdminApproveController extends Core_Controller_Action_Admin
         }
       }
       if( isset($values['delete']) ) {
-        foreach ($values as $key => $value) {
+        foreach ($values as $key => $value) :
           if ($key == 'checked_' . $value) {
             $photo = Engine_Api::_()->getItem('marketplace_photo', $value);
-            $photo->delete();
+            if( $photo ) {
+              $marketplace = Engine_Api::_()->getItem('marketplace', $photo->marketplace_id);
+              if ( $marketplace and $marketplace->photo_id == $photo->file_id) {
+                  $marketplace->photo_id = 0;
+                  $marketplace->save();
+              }
+              $photo->delete();
+            }
           }
-        }
+        endforeach;
       }
     }
    
@@ -104,6 +111,11 @@ class Marketplace_AdminApproveController extends Core_Controller_Action_Admin
 
       try {
         $photo = Engine_Api::_()->getItem('marketplace_photo', $id);
+        $marketplace = Engine_Api::_()->getItem('marketplace', $photo->marketplace_id);
+        if ($marketplace->photo_id == $photo->file_id) {
+            $marketplace->photo_id = 0;
+            $marketplace->save();
+        }
         $photo->delete();
         $db->commit();
       }

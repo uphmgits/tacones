@@ -55,6 +55,7 @@ function selectAll()
       <tr>
         <th class='admin_table_short'><input onclick="selectAll()" type='checkbox' class='checkbox' /></th>
         <th class='admin_table_short'>ID</th>
+        <th class='admin_table_short'>Marketplace ID</th>
         <th><?php echo $this->translate('Preview') ?></th>
         <th><?php echo $this->translate('Owner') ?></th>
         <th><?php echo $this->translate('Date') ?></th>
@@ -67,6 +68,7 @@ function selectAll()
             <?php if( !Engine_Api::_()->getItem('marketplace', $item->marketplace_id ) ) continue; ?>
             <td><input type='checkbox' class="checkbox" name="checked_<?php echo $item->photo_id;?>" value="<?php echo $item->photo_id ?>"/></td>
             <td><?=$item->getIdentity() ?></td>
+            <td><?=$item->marketplace_id ?></td>
             <td>
               <a class="thumbs_photo" href="<?=$item->getHref()?>">
                 <img src="<?=$item->getPhotoUrl('thumb.normal'); ?>" style="width: 48px"/></td>
@@ -76,13 +78,19 @@ function selectAll()
             <td>
                 <?=$this->htmlLink(
                     array('route' => 'default', 'module' => 'marketplace', 'controller' => 'admin-approve', 'action' => 'approve', 'id' => $item->photo_id),
-                    $this->translate("Approve"),
+                    $this->translate("approve"),
                     array('class' => 'smoothbox'))
                 ?>
               |
                 <?=$this->htmlLink(
                     array('route' => 'default', 'module' => 'marketplace', 'controller' => 'admin-approve', 'action' => 'delete', 'id' => $item->photo_id),
                     $this->translate("delete"),
+                    array('class' => 'smoothbox'))
+                ?>
+              |
+                <?=$this->htmlLink(
+                    array('route' => 'default', 'module' => 'marketplace', 'controller' => 'admin-manage', 'action' => 'delete', 'id' => $item->marketplace_id),
+                    $this->translate("delete marketplace"),
                     array('class' => 'smoothbox'))
                 ?>
             </td>

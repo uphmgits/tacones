@@ -1,0 +1,109 @@
+# On branch master
+# Changes not staged for commit:
+#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	deleted:    application/languages/en/.custom.csv.swo
+#	modified:   application/languages/en/marketplace.csv
+#	modified:   application/modules/Core/controllers/IndexController.php
+#	modified:   application/modules/Core/widgets/menu-logo/index.tpl
+#	modified:   application/modules/Marketplace/Api/Core.php
+#	modified:   application/modules/Marketplace/Api/Payment.php
+#	modified:   application/modules/Marketplace/Form/Admin/Global.php
+#	modified:   application/modules/Marketplace/Form/Create.php
+#	modified:   application/modules/Marketplace/Form/Custom/Search.php
+#	modified:   application/modules/Marketplace/Form/Search.php
+#	deleted:    application/modules/Marketplace/Model/DbTable/.htempty
+#	modified:   application/modules/Marketplace/Model/DbTable/Marketplaces.php
+#	modified:   application/modules/Marketplace/Model/DbTable/Orders.php
+#	modified:   application/modules/Marketplace/Model/Marketplace.php
+#	modified:   application/modules/Marketplace/controllers/AdminManageController.php
+#	modified:   application/modules/Marketplace/controllers/AdminSettingsController.php
+#	modified:   application/modules/Marketplace/controllers/IndexController.php
+#	modified:   application/modules/Marketplace/externals/styles/main.css
+#	modified:   application/modules/Marketplace/settings/install.php
+#	modified:   application/modules/Marketplace/settings/manifest.php
+#	modified:   application/modules/Marketplace/settings/my-upgrade-4.0.2-4.0.3.sql
+#	modified:   application/modules/Marketplace/settings/my.sql
+#	modified:   application/modules/Marketplace/views/scripts/admin-manage/reports.tpl
+#	modified:   application/modules/Marketplace/views/scripts/admin-settings/categories.tpl
+#	modified:   application/modules/Marketplace/views/scripts/index/index.tpl
+#	modified:   application/modules/Marketplace/views/scripts/index/manage.tpl
+#	modified:   application/modules/Marketplace/views/scripts/index/paymentreturn.tpl
+#	modified:   application/modules/Marketplace/views/scripts/index/paypal.tpl
+#	modified:   application/modules/Marketplace/views/scripts/index/reports.tpl
+#	modified:   application/modules/Marketplace/views/scripts/index/view.tpl
+#	deleted:    application/packages/module-marketplace-4.2.4.4.json
+#	modified:   default.htm
+#	modified:   install/config/vfs.php
+#	modified:   robots.txt
+#	deleted:    temporary/cache/EngineInstall---1501259b3db95ebb0963640e8f1559a2_module_marketplace_4_2_4_4
+#	deleted:    temporary/cache/EngineInstall---internal-metadatas---1501259b3db95ebb0963640e8f1559a2_module_marketplace_4_2_4_4
+#	deleted:    temporary/cache/EngineInstall---internal-metadatas---transaction1501259b3db95ebb0963640e8f1559a2
+#	deleted:    temporary/cache/EngineInstall---transaction1501259b3db95ebb0963640e8f1559a2
+#	modified:   temporary/log/install.log
+#	modified:   temporary/log/mail.log
+#	modified:   temporary/log/main.log
+#	modified:   temporary/log/tasks.log
+#	modified:   temporary/log/tasks.log.1
+#	modified:   temporary/log/tasks.log.2
+#	modified:   temporary/log/translate.log
+#	modified:   temporary/log/translate.log.1
+#	modified:   temporary/log/translate.log.2
+#	deleted:    temporary/scaffold/479c9e11bc57b6bc8e4e6d6477e9e74e.css
+#	deleted:    temporary/scaffold/4ceffd5241761013920860a139780baf.css
+#	deleted:    temporary/scaffold/7ba4a053d3b6a4c84d14e1d58a3c4261.css
+#	modified:   temporary/scaffold/8d3264fc166996ce20ecd637d1b33fb4.css
+#	deleted:    temporary/scaffold/98b186debb3a412837fb9f6924087124.css
+#	modified:   temporary/scaffold/application/modules/Core/externals/styles/admin/main_paginator_pagestart=0_pageend=0.css
+#	deleted:    temporary/scaffold/application/modules/Core/externals/styles/admin/main_paginator_pagestart=0_pageend=0_morning.css
+#	deleted:    temporary/scaffold/application/modules/Core/externals/styles/admin/main_paginator_pagestart=0_pageend=0_tuesday_morning.css
+#	deleted:    temporary/scaffold/application/themes/slipstream/mobile_paginator_pagestart=0_pageend=0.css
+#	modified:   temporary/scaffold/application/themes/slipstream/theme_paginator_pagestart=0_pageend=0.css
+#	modified:   temporary/scaffold/application/themes/slipstream/theme_paginator_pagestart=0_pageend=0_morning.css
+#	deleted:    temporary/scaffold/application/themes/slipstream/theme_paginator_pagestart=0_pageend=0_night.css
+#	deleted:    temporary/scaffold/application/themes/slipstream/theme_paginator_pagestart=0_pageend=0_tuesday.css
+#	deleted:    temporary/scaffold/application/themes/slipstream/theme_paginator_pagestart=0_pageend=0_tuesday_morning.css
+#	deleted:    temporary/scaffold/d8bc0c7d3bed659442d45e36a514d857.css
+#	modified:   temporary/scaffold/e8a12d6bb68f4c2882bf1f5c0dfa8c99.css
+#	deleted:    temporary/scaffold/f45b24349c48865f64add9ff90f5e5bd.css
+#	modified:   temporary/scaffold/fd300f183c430b26286a8774c5ded232.css
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	PhotoGrepResults.txt
+#	adminer.php
+#	application/languages/en/marketplacecart.csv
+#	application/modules/Marketplace/Form/Coupon/
+#	application/modules/Marketplace/Form/Prepaypal.php
+#	application/modules/Marketplace/Model/Cart.php
+#	application/modules/Marketplace/Model/Coupon.php
+#	application/modules/Marketplace/Model/Couponcart.php
+#	application/modules/Marketplace/Model/DbTable/Cart.php
+#	application/modules/Marketplace/Model/DbTable/Couponcarts.php
+#	application/modules/Marketplace/Model/DbTable/Coupons.php
+#	application/modules/Marketplace/controllers/CouponController.php
+#	application/modules/Marketplace/externals/images/ss_button_bg.png
+#	application/modules/Marketplace/settings/my-upgrade-4.2.4-4.2.5.sql
+#	application/modules/Marketplace/views/scripts/coupon/
+#	application/modules/Marketplace/views/scripts/index/addtocart.tpl
+#	application/modules/Marketplace/views/scripts/index/cart.tpl
+#	application/modules/Marketplace/views/scripts/index/checkout.tpl
+#	application/modules/Marketplace/views/scripts/index/deletefromcart.tpl
+#	application/modules/Marketplacecart/
+#	application/packages/module-marketplace-4.3.0.json
+#	application/packages/module-marketplacecart-4.3.0.json
+#	carlos_temp
+#	public/marketplace/a3/
+#	public/marketplace/a4/
+#	temporary/cache/EngineInstall---4ceca6024541c99d834ce10bea3d8bc5_module_marketplace_4_3_0
+#	temporary/cache/EngineInstall---4ceca6024541c99d834ce10bea3d8bc5_module_marketplacecart_4_3_0
+#	temporary/cache/EngineInstall---internal-metadatas---4ceca6024541c99d834ce10bea3d8bc5_module_marketplace_4_3_0
+#	temporary/cache/EngineInstall---internal-metadatas---4ceca6024541c99d834ce10bea3d8bc5_module_marketplacecart_4_3_0
+#	temporary/cache/EngineInstall---internal-metadatas---transaction4ceca6024541c99d834ce10bea3d8bc5
+#	temporary/cache/EngineInstall---transaction4ceca6024541c99d834ce10bea3d8bc5
+#	temporary/log/tasks.log.3
+#	temporary/log/translate.log.3
+#	temporary/log/translate.log.4
+no changes added to commit (use "git add" and/or "git commit -a")

@@ -114,7 +114,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
         $paginator = Engine_Api::_()->marketplace()->getMarketplacesPaginator($values);
         $items_count = (int) Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.page', 10);
         $paginator->setItemCountPerPage($items_count);
-        $this->view->paginator = $paginator->setCurrentPageNumber($values['page']);
+        $this->view->paginator = $paginator->setCurrentPageNumber($this->_getParam('page'));
+        //$this->view->paginator = $paginator->setCurrentPageNumber($values['page']);
 
         if (!empty($values['category']))
             $this->view->categoryObject = Engine_Api::_()->marketplace()->getCategory($values['category']);
@@ -757,7 +758,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
         $this->view->paginator = $paginator = Engine_Api::_()->marketplace()->getMarketplacesPaginator($values, array()); //$price);//$customFieldValues);
         $items_count = (int) Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.page', 10);
         $paginator->setItemCountPerPage($items_count);
-        $this->view->paginator = $paginator->setCurrentPageNumber($values['page']);
+        //$this->view->paginator = $paginator->setCurrentPageNumber($values['page']);
+        $this->view->paginator = $paginator->setCurrentPageNumber($this->_getParam('page'));
 
         $view = $this->view;
         $view->addHelperPath(APPLICATION_PATH . '/application/modules/Fields/View/Helper', 'Fields_View_Helper');
@@ -1704,5 +1706,14 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
 
       return $paypal;
    }
+
+    public function ajaxlikeAction() {
+        $marketplace_id = (int)$this->_getParam('marketplace_id', 0);
+        $marketplace = Engine_Api::_()->getItem('marketplace', $marketplace_id);
+        if( $marketplace ) {
+            $marketplace->updateLikes();
+        }
+        die();
+    }
 }
 

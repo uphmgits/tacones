@@ -1,0 +1,1095 @@
+53Marketplace_Model_Marketplace Object
+(
+    [_parent_type:protected] => user
+    [_parent_is_owner:protected] => 1
+    [_moduleName:protected] => 
+    [_identity:protected] => 53
+    [_type:protected] => 
+    [_shortType:protected] => 
+    [_store:protected] => stdClass Object
+        (
+        )
+
+    [_searchTriggers:protected] => Array
+        (
+            [0] => title
+            [1] => body
+        )
+
+    [_modifiedTriggers:protected] => Array
+        (
+            [0] => title
+            [1] => description
+            [2] => body
+            [3] => photo_id
+            [4] => file_id
+            [5] => category_id
+        )
+
+    [_disableHooks:protected] => 
+    [_data:protected] => Array
+        (
+            [marketplace_id] => 53
+            [title] => temp13
+            [body] => sjlfks
+            [owner_id] => 1
+            [category_id] => 1
+            [photo_id] => 0
+            [creation_date] => 2012-02-26 03:42:47
+            [modified_date] => 2012-02-26 03:42:48
+            [view_count] => 10
+            [comment_count] => 0
+            [search] => 1
+            [closed] => 0
+            [price] => 1.00
+            [business_email] => carlos.aldana@gmail.com
+            [authorize_login] => 
+            [authorize_key] => 
+            [weight] => 23
+            [length] => 23
+            [width] => 123
+            [height] => 23
+        )
+
+    [_cleanData:protected] => Array
+        (
+            [marketplace_id] => 53
+            [title] => temp13
+            [body] => sjlfks
+            [owner_id] => 1
+            [category_id] => 1
+            [photo_id] => 0
+            [creation_date] => 2012-02-26 03:42:47
+            [modified_date] => 2012-02-26 03:42:48
+            [view_count] => 10
+            [comment_count] => 0
+            [search] => 1
+            [closed] => 0
+            [price] => 1.00
+            [business_email] => carlos.aldana@gmail.com
+            [authorize_login] => 
+            [authorize_key] => 
+            [weight] => 23
+            [length] => 23
+            [width] => 123
+            [height] => 23
+        )
+
+    [_modifiedFields:protected] => Array
+        (
+        )
+
+    [_table:protected] => Marketplace_Model_DbTable_Marketplaces Object
+        (
+            [_rowClass:protected] => Marketplace_Model_Marketplace
+            [_rowsetClass:protected] => Engine_Db_Table_Rowset
+            [_definition:protected] => 
+            [_definitionConfigName:protected] => 
+            [_db:protected] => Zend_Db_Adapter_Mysqli Object
+                (
+                    [_numericDataTypes:protected] => Array
+                        (
+                            [0] => 0
+                            [1] => 1
+                            [2] => 2
+                            [INT] => 0
+                            [INTEGER] => 0
+                            [MEDIUMINT] => 0
+                            [SMALLINT] => 0
+                            [TINYINT] => 0
+                            [BIGINT] => 1
+                            [SERIAL] => 1
+                            [DEC] => 2
+                            [DECIMAL] => 2
+                            [DOUBLE] => 2
+                            [DOUBLE PRECISION] => 2
+                            [FIXED] => 2
+                            [FLOAT] => 2
+                        )
+
+                    [_stmt:protected] => Zend_Db_Statement_Mysqli Object
+                        (
+                            [_keys:protected] => Array
+                                (
+                                    [0] => marketplace_id
+                                    [1] => title
+                                    [2] => body
+                                    [3] => owner_id
+                                    [4] => category_id
+                                    [5] => photo_id
+                                    [6] => creation_date
+                                    [7] => modified_date
+                                    [8] => view_count
+                                    [9] => comment_count
+                                    [10] => search
+                                    [11] => closed
+                                    [12] => price
+                                    [13] => business_email
+                                    [14] => authorize_login
+                                    [15] => authorize_key
+                                    [16] => weight
+                                    [17] => length
+                                    [18] => width
+                                    [19] => height
+                                )
+
+                            [_values:protected] => Array
+                                (
+                                    [0] => 53
+                                    [1] => temp13
+                                    [2] => sjlfks
+                                    [3] => 1
+                                    [4] => 1
+                                    [5] => 0
+                                    [6] => 2012-02-26 03:42:47
+                                    [7] => 2012-02-26 03:42:48
+                                    [8] => 10
+                                    [9] => 0
+                                    [10] => 1
+                                    [11] => 0
+                                    [12] => 1.00
+                                    [13] => carlos.aldana@gmail.com
+                                    [14] => 
+                                    [15] => 
+                                    [16] => 23
+                                    [17] => 23
+                                    [18] => 123
+                                    [19] => 23
+                                )
+
+                            [_meta:protected] => mysqli_result Object
+                                (
+                                )
+
+                            [_stmt:protected] => mysqli_stmt Object
+                                (
+                                )
+
+                            [_adapter:protected] => Zend_Db_Adapter_Mysqli Object
+ *RECURSION*
+                            [_fetchMode:protected] => 2
+                            [_attribute:protected] => Array
+                                (
+                                )
+
+                            [_bindColumn:protected] => Array
+                                (
+                                )
+
+                            [_bindParam:protected] => Array
+                                (
+                                )
+
+                            [_sqlSplit:protected] => Array
+                                (
+                                    [0] => SELECT `engine4_marketplace_marketplaces`.* FROM `engine4_marketplace_marketplaces` WHERE (((`engine4_marketplace_marketplaces`.`marketplace_id` = 53)))
+                                )
+
+                            [_sqlParam:protected] => Array
+                                (
+                                    [0] => SELECT `engine4_marketplace_marketplaces`.* FROM `engine4_marketplace_marketplaces` WHERE (((`engine4_marketplace_marketplaces`.`marketplace_id` = 53)))
+                                )
+
+                            [_queryId:protected] => 
+                        )
+
+                    [_defaultStmtClass:protected] => Zend_Db_Statement_Mysqli
+                    [_config:protected] => Array
+                        (
+                            [host] => localhost
+                            [username] => zapato_social
+                            [password] => password123
+                            [dbname] => zapato_social
+                            [charset] => UTF8
+                            [persistent] => 
+                            [options] => Array
+                                (
+                                    [caseFolding] => 0
+                                    [autoQuoteIdentifiers] => 1
+                                )
+
+                            [driver_options] => Array
+                                (
+                                )
+
+                        )
+
+                    [_fetchMode:protected] => 2
+                    [_profiler:protected] => Zend_Db_Profiler Object
+                        (
+                            [_queryProfiles:protected] => Array
+                                (
+                                )
+
+                            [_enabled:protected] => 
+                            [_filterElapsedSecs:protected] => 
+                            [_filterTypes:protected] => 
+                        )
+
+                    [_defaultProfilerClass:protected] => Zend_Db_Profiler
+                    [_connection:protected] => mysqli Object
+                        (
+                        )
+
+                    [_caseFolding:protected] => 0
+                    [_autoQuoteIdentifiers:protected] => 1
+                    [_allowSerialization:protected] => 1
+                    [_autoReconnectOnUnserialize:protected] => 
+                )
+
+            [_schema:protected] => 
+            [_name:protected] => engine4_marketplace_marketplaces
+            [_cols:protected] => Array
+                (
+                    [0] => marketplace_id
+                    [1] => title
+                    [2] => body
+                    [3] => owner_id
+                    [4] => category_id
+                    [5] => photo_id
+                    [6] => creation_date
+                    [7] => modified_date
+                    [8] => view_count
+                    [9] => comment_count
+                    [10] => search
+                    [11] => closed
+                    [12] => price
+                    [13] => business_email
+                    [14] => authorize_login
+                    [15] => authorize_key
+                    [16] => weight
+                    [17] => length
+                    [18] => width
+                    [19] => height
+                )
+
+            [_primary:protected] => Array
+                (
+                    [1] => marketplace_id
+                )
+
+            [_identity:protected] => 1
+            [_sequence:protected] => 1
+            [_metadata:protected] => Array
+                (
+                    [marketplace_id] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => marketplace_id
+                            [COLUMN_POSITION] => 1
+                            [DATA_TYPE] => int
+                            [DEFAULT] => 
+                            [NULLABLE] => 
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 1
+                            [PRIMARY] => 1
+                            [PRIMARY_POSITION] => 1
+                            [IDENTITY] => 1
+                        )
+
+                    [title] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => title
+                            [COLUMN_POSITION] => 2
+                            [DATA_TYPE] => varchar
+                            [DEFAULT] => 
+                            [NULLABLE] => 
+                            [LENGTH] => 128
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [body] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => body
+                            [COLUMN_POSITION] => 3
+                            [DATA_TYPE] => longtext
+                            [DEFAULT] => 
+                            [NULLABLE] => 
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [owner_id] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => owner_id
+                            [COLUMN_POSITION] => 4
+                            [DATA_TYPE] => int
+                            [DEFAULT] => 
+                            [NULLABLE] => 
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 1
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [category_id] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => category_id
+                            [COLUMN_POSITION] => 5
+                            [DATA_TYPE] => int
+                            [DEFAULT] => 
+                            [NULLABLE] => 
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 1
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [photo_id] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => photo_id
+                            [COLUMN_POSITION] => 6
+                            [DATA_TYPE] => int
+                            [DEFAULT] => 0
+                            [NULLABLE] => 
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 1
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [creation_date] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => creation_date
+                            [COLUMN_POSITION] => 7
+                            [DATA_TYPE] => datetime
+                            [DEFAULT] => 
+                            [NULLABLE] => 
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [modified_date] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => modified_date
+                            [COLUMN_POSITION] => 8
+                            [DATA_TYPE] => datetime
+                            [DEFAULT] => 
+                            [NULLABLE] => 
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [view_count] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => view_count
+                            [COLUMN_POSITION] => 9
+                            [DATA_TYPE] => int
+                            [DEFAULT] => 0
+                            [NULLABLE] => 
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 1
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [comment_count] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => comment_count
+                            [COLUMN_POSITION] => 10
+                            [DATA_TYPE] => int
+                            [DEFAULT] => 0
+                            [NULLABLE] => 
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 1
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [search] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => search
+                            [COLUMN_POSITION] => 11
+                            [DATA_TYPE] => tinyint
+                            [DEFAULT] => 1
+                            [NULLABLE] => 
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [closed] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => closed
+                            [COLUMN_POSITION] => 12
+                            [DATA_TYPE] => tinyint
+                            [DEFAULT] => 0
+                            [NULLABLE] => 
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [price] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => price
+                            [COLUMN_POSITION] => 13
+                            [DATA_TYPE] => decimal
+                            [DEFAULT] => 0.00
+                            [NULLABLE] => 
+                            [LENGTH] => 
+                            [SCALE] => 2
+                            [PRECISION] => 10
+                            [UNSIGNED] => 
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [business_email] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => business_email
+                            [COLUMN_POSITION] => 14
+                            [DATA_TYPE] => varchar
+                            [DEFAULT] => 
+                            [NULLABLE] => 
+                            [LENGTH] => 255
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [authorize_login] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => authorize_login
+                            [COLUMN_POSITION] => 15
+                            [DATA_TYPE] => varchar
+                            [DEFAULT] => 
+                            [NULLABLE] => 1
+                            [LENGTH] => 255
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [authorize_key] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => authorize_key
+                            [COLUMN_POSITION] => 16
+                            [DATA_TYPE] => varchar
+                            [DEFAULT] => 
+                            [NULLABLE] => 1
+                            [LENGTH] => 255
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [weight] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => weight
+                            [COLUMN_POSITION] => 17
+                            [DATA_TYPE] => float
+                            [DEFAULT] => 0
+                            [NULLABLE] => 1
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [length] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => length
+                            [COLUMN_POSITION] => 18
+                            [DATA_TYPE] => float
+                            [DEFAULT] => 0
+                            [NULLABLE] => 1
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [width] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => width
+                            [COLUMN_POSITION] => 19
+                            [DATA_TYPE] => float
+                            [DEFAULT] => 0
+                            [NULLABLE] => 1
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                    [height] => Array
+                        (
+                            [SCHEMA_NAME] => 
+                            [TABLE_NAME] => engine4_marketplace_marketplaces
+                            [COLUMN_NAME] => height
+                            [COLUMN_POSITION] => 20
+                            [DATA_TYPE] => float
+                            [DEFAULT] => 0
+                            [NULLABLE] => 1
+                            [LENGTH] => 
+                            [SCALE] => 
+                            [PRECISION] => 
+                            [UNSIGNED] => 
+                            [PRIMARY] => 
+                            [PRIMARY_POSITION] => 
+                            [IDENTITY] => 
+                        )
+
+                )
+
+            [_metadataCache:protected] => Zend_Cache_Core Object
+                (
+                    [_backend:protected] => Zend_Cache_Backend_File Object
+                        (
+                            [_options:protected] => Array
+                                (
+                                    [cache_dir] => /home/zapato/public_html/temporary/cache/
+                                    [file_locking] => 1
+                                    [read_control] => 1
+                                    [read_control_type] => crc32
+                                    [hashed_directory_level] => 0
+                                    [hashed_directory_umask] => 448
+                                    [file_name_prefix] => zend_cache
+                                    [cache_file_umask] => 384
+                                    [metadatas_array_max_size] => 100
+                                )
+
+                            [_metadatasArray:protected] => Array
+                                (
+                                    [Engine4_1eaef74802329430ae139483b04e5d6f] => Array
+                                        (
+                                            [hash] => 3386308009
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                    [Engine4_Engine_Manifest] => Array
+                                        (
+                                            [hash] => 651397813
+                                            [mtime] => 1331033758
+                                            [expire] => 1331033818
+                                            [tags] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                    [Engine4_9c00de7b6711a8fdd16de1bb253c103b] => Array
+                                        (
+                                            [hash] => 3573568056
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                    [Engine4_settings] => Array
+                                        (
+                                            [hash] => 2194780546
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                    [Engine4_83aca0bb9fd8bbc128d0896ba8f8d25e] => Array
+                                        (
+                                            [hash] => 884664728
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_Csv_Options] => Array
+                                        (
+                                            [hash] => 2982270779
+                                            [mtime] => 1331033758
+                                            [expire] => 1331033818
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_90ac3cfad2cce88aadfbbb664af4c7c3_Csv] => Array
+                                        (
+                                            [hash] => 1779020192
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_e2ee8c0cfc8c9426aa62f8db849fe10b_Csv] => Array
+                                        (
+                                            [hash] => 1579810946
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_0dde0307ace40d67f9a1d37ef335686d_Csv] => Array
+                                        (
+                                            [hash] => 4268345512
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_5b71d3d980f7d93bda3bfdb992f30a92_Csv] => Array
+                                        (
+                                            [hash] => 3533687808
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_44c33f4fd0e319820426a4ec07cb658c_Csv] => Array
+                                        (
+                                            [hash] => 2442556142
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_0b4aee056a6758a0c1d6d53e24d58ad3_Csv] => Array
+                                        (
+                                            [hash] => 1260151065
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_a0b5196fbf190671a99d85c825fcf0f6_Csv] => Array
+                                        (
+                                            [hash] => 1123742815
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_14a3fe649d54727b7f247ddd7f823fca_Csv] => Array
+                                        (
+                                            [hash] => 4062781951
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_a5918cab3daaa7fc46d98524b150bfbb_Csv] => Array
+                                        (
+                                            [hash] => 14253912
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_b9c1b8c1927ea010e3a818bd71411fc0_Csv] => Array
+                                        (
+                                            [hash] => 1671172862
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_c2d43436d8761add09e8c81042ea5693_Csv] => Array
+                                        (
+                                            [hash] => 2532267540
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_cd44aa2f4d76bd80b16253b7c4615c4d_Csv] => Array
+                                        (
+                                            [hash] => 1902494317
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_06bfebeff297ec483e68a06387f2c3a1_Csv] => Array
+                                        (
+                                            [hash] => 1286011568
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_475e21670bb5a10da31ab80a56b6d995_Csv] => Array
+                                        (
+                                            [hash] => 2632632298
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_ae8c91a9431707ecbe721a2b496715a4_Csv] => Array
+                                        (
+                                            [hash] => 3964288783
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_12dfe9326d0ae99c24cc81e9cefa2b8d_Csv] => Array
+                                        (
+                                            [hash] => 4264704838
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_95f428a6bd5213ccc827f6c21d69d2c2_Csv] => Array
+                                        (
+                                            [hash] => 2973897779
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_c5aa5b1ab3d00480752260a2e39648bd_Csv] => Array
+                                        (
+                                            [hash] => 3964288783
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_2ab10fc8dfbc3213bf90a35480f2c933_Csv] => Array
+                                        (
+                                            [hash] => 1745094662
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_Translate_e80c54a78a03d1b35094e5dc406be60e_Csv] => Array
+                                        (
+                                            [hash] => 2644914982
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                    [0] => Zend_Translate
+                                                )
+
+                                        )
+
+                                    [Engine4_652c5b7148c96a94c5bc031ad83533cd] => Array
+                                        (
+                                            [hash] => 923684574
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                    [Engine4_1f8ce2cca3744de7600661611567db14] => Array
+                                        (
+                                            [hash] => 1323965675
+                                            [mtime] => 1331033721
+                                            [expire] => 1331033781
+                                            [tags] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                    [Engine4_Zend_LocaleL_en_US_layout_] => Array
+                                        (
+                                            [hash] => 3552295963
+                                            [mtime] => 1331033758
+                                            [expire] => 1331033818
+                                            [tags] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                    [Engine4_bannedwords] => Array
+                                        (
+                                            [hash] => 1384231703
+                                            [mtime] => 1331033722
+                                            [expire] => 1331033782
+                                            [tags] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                    [Engine4_9ac56393407aabfd900471f92b67a59e] => Array
+                                        (
+                                            [hash] => 2824759444
+                                            [mtime] => 1331033750
+                                            [expire] => 1331033810
+                                            [tags] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                    [Engine4_1bf93dd7fa992d1739bd24d800cf5c35] => Array
+                                        (
+                                            [hash] => 276756090
+                                            [mtime] => 1331033758
+                                            [expire] => 1331033818
+                                            [tags] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                )
+
+                            [_directives:protected] => Array
+                                (
+                                    [lifetime] => 60
+                                    [logging] => 
+                                    [logger] => 
+                                )
+
+                        )
+
+                    [_options:protected] => Array
+                        (
+                            [write_control] => 1
+                            [caching] => 1
+                            [cache_id_prefix] => Engine4_
+                            [automatic_serialization] => 1
+                            [automatic_cleaning_factor] => 10
+                            [lifetime] => 60
+                            [logging] => 
+                            [logger] => 
+                            [ignore_user_abort] => 
+                        )
+
+                    [_specificOptions:protected] => Array
+                        (
+                        )
+
+                    [_lastId:private] => Engine4_1bf93dd7fa992d1739bd24d800cf5c35
+                    [_extendedBackend:protected] => 1
+                    [_backendCapabilities:protected] => Array
+                        (
+                            [automatic_cleaning] => 1
+                            [tags] => 1
+                            [expired_read] => 1
+                            [priority] => 
+                            [infinite_lifetime] => 1
+                            [get_list] => 1
+                        )
+
+                )
+
+            [_metadataCacheInClass:protected] => 1
+            [_referenceMap:protected] => Array
+                (
+                )
+
+            [_dependentTables:protected] => Array
+                (
+                )
+
+            [_defaultSource:protected] => defaultNone
+            [_defaultValues:protected] => Array
+                (
+                )
+
+        )
+
+    [_connected:protected] => 1
+    [_readOnly:protected] => 
+    [_tableClass:protected] => Marketplace_Model_DbTable_Marketplaces
+    [_primary:protected] => Array
+        (
+            [1] => marketplace_id
+        )
+
+)

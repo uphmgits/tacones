@@ -1,0 +1,27 @@
+
+/* $Id: mobile.css 8825 2011-04-09 01:34:20Z john $ */
+
+
+
+.browse_menu
+{
+  margin-top: 10px;
+}
+.browse_menu > ul
+{
+  border-top: 1px solid $theme_border_medium_color;
+}
+.browse_menu > ul > li
+{
+  display: block;
+  border-bottom: 1px solid $theme_border_medium_color;
+}
+.browse_menu > ul > li > a
+{
+  display: block;
+  font-size: 14pt;
+  padding: .5em;
+  background-image: url(~/application/modules/Mobi/externals/images/mobile_arrow.png);
+  background-repeat: no-repeat;
+  background-position: center right;
+}

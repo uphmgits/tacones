@@ -4,6 +4,8 @@
     $('filter_form').submit();
   }
 
+  var likeInProgress = false;
+
   en4.core.runonce.add(function(){
     $$('#filter_form input[type=text]').each(function(f) {
         if (f.value == '' && f.id.match(/\min$/)) {
@@ -15,7 +17,31 @@
             
         }
     });
+
   });
+
+  function marketplaceLike( mid ) {
+      if( likeInProgress ) return;
+      var url = '<?php echo $this->url(array('module' => 'marketplace', 'controller' => 'index', 'action' => 'ajaxlike'), 'default', true) ?>';
+      var counterEl = $('marketplacelike_' + mid);
+      likeInProgress = true;
+      var request = new Request.HTML({
+        url : url,
+        data : {
+          format : 'html',
+          'marketplace_id' : mid
+        },
+        onSuccess : function(responseTree, responseElements, responseHTML, responseJavaScript) {
+            var dx = parseInt(counterEl.get('param'));
+            if( dx ) {
+              $('marketplacelike_' + mid).innerHTML = parseInt($('marketplacelike_' + mid).innerHTML) + dx;
+              counterEl.set('param', -dx);
+            }
+            likeInProgress = false;
+        }
+      });
+      request.send();
+  }
 </script>
 
 <style type="text/css">
@@ -24,6 +50,10 @@
 }
 #done-wrapper{
 	margin-top: 10px;
+}
+span.like:hover{
+  cursor: pointer;
+  text-decoration: none;
 }
 </style>
 
@@ -119,7 +149,16 @@
           <div class='marketplaces_browse_info'>
             <div class='marketplaces_browse_info_title'>
               <div class="love-info">
-                  <span class="like"><?php echo $item->view_count; ?></span>
+                  <?php if( $this->viewer()->getIdentity() ) : ?>
+                    <span class="like" id="marketplacelike_<?=$item->getIdentity()?>" 
+                                       onclick="marketplaceLike(<?=$item->getIdentity()?>)" 
+                                       param="<?=$item->isLiked($this->viewer()) ? '-1' : '1'?>"
+                    >
+                        <?=$item->getLikesCount()?>
+                    </span>
+                  <?php else : ?>
+                    <span class="like"><?=$item->getLikesCount()?></span>
+                  <?php endif;?>
                   <span class="comment"><?php echo $item->comment_count; ?></span>
               </div>
               <br />

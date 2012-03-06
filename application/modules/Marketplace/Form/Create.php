@@ -57,6 +57,8 @@ class Marketplace_Form_Create extends Engine_Form
     $a_tree = Engine_Api::_()->marketplace()->tree_list_load_all(); // tree_list_load_array(array(0));
     Engine_Api::_()->marketplace()->tree_select($a_tree,'',1);
 
+    $categoryId = Zend_Controller_Front::getInstance()->getRequest()->getParam('category', 0);
+
     $newcategories = Engine_Api::_()->marketplace()->gettemp();
     // prepare categories
     $categories = Engine_Api::_()->marketplace()->getCategories();
@@ -69,8 +71,13 @@ class Marketplace_Form_Create extends Engine_Form
       // category field
       $this->addElement('Select', 'category_id', array(
         'label' => 'Category',
-        'multiOptions' => $categories_prepared
+        'multiOptions' => $categories_prepared,
+        'attribs' => array( 'onchange' => 'location.replace("' . 
+                              "" . "/marketplaces/create/" . 
+                            '"+this.value)' ),
+        'value' => $categoryId
       ));
+      
     }
 
     $this->addElement('Textarea', 'body', array(
@@ -140,6 +147,7 @@ class Marketplace_Form_Create extends Engine_Form
 		$this->business_email->getDecorator('Description')->setOption('placement', 'append');
 	}
 
+/*
     $this->addElement('Text', 'weight', array(
       'label' => 'Weight',
       'description' => 'in lbs.',
@@ -171,7 +179,8 @@ class Marketplace_Form_Create extends Engine_Form
       'required' => true,
     ));
     $this->height->getDecorator('Description')->setOption('placement', 'append');
-	
+*/
+
     // Privacy
     $availableLabels = array(
       'everyone' => 'Everyone',
@@ -188,6 +197,14 @@ class Marketplace_Form_Create extends Engine_Form
         'item' => $this->getItem()
       ));
     }
+
+    // only category profile question
+    foreach($customFields as $field) {
+        if( $field->category_id != $categoryId) {
+          $customFields->removeElement($field->getName());
+        }
+    }
+
 
     $this->addSubForms(array(
       'fields' => $customFields

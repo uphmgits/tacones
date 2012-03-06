@@ -37,6 +37,10 @@ class Marketplace_Form_Edit extends Marketplace_Form_Create
     parent::init();
     $this->setTitle('Edit Marketplace Listing')
          ->setDescription('Edit your listing below, then click \"Save Changes\" to save your listing.');
+
+    $this->category_id->setAttrib('onchange', 'location.replace("' . "" . "/marketplaces/edit/" . $this->_item->getIdentity() .
+                            '/"+this.value)');
+
     $this->addElement('Radio', 'cover', array(
       'label' => 'Album Cover',
     ));

@@ -141,11 +141,15 @@ return array(
     ),
     // User
     'marketplace_create' => array(
-      'route' => 'marketplaces/create',
+      'route' => 'marketplaces/create/:category',
       'defaults' => array(
         'module' => 'marketplace',
         'controller' => 'index',
-        'action' => 'create'
+        'action' => 'create',
+        'category' => 0
+      ),
+      'reqs' => array(
+        'category' => '\d+',
       )
     ),
     'marketplace_reports' => array(
@@ -174,11 +178,15 @@ return array(
       )
     ),
     'marketplace_edit' => array(
-      'route' => 'marketplaces/edit/:marketplace_id',
+      'route' => 'marketplaces/edit/:marketplace_id/:category',
       'defaults' => array(
         'module' => 'marketplace',
         'controller' => 'index',
-        'action' => 'edit'
+        'action' => 'edit',
+        'category' => 0
+      ),
+      'reqs' => array(
+        'category' => '\d+',
       )
     ),
     'marketplace_manage' => array(

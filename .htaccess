@@ -1,9 +1,12 @@
-
 # $Id: .htaccess 7539 2010-10-04 04:41:38Z john $
 
 <IfModule mod_rewrite.c>
   Options +FollowSymLinks
   RewriteEngine On
+
+  # Aldana rewrite here
+  #RewriteCond %{HTTP_HOST} ^fashbay.com$ [NC]
+  #RewriteRule ^(.*)$ http://beta.upheels.com/$1 [R=301,L]
 
   # Get rid of index.php
   RewriteCond %{REQUEST_URI} /index\.php

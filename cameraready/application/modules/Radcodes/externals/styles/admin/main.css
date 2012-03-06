@@ -1,0 +1,20 @@
+@include "~/application/modules/Core/externals/styles/admin/constants.css";
+
+
+.icon_radcodes_category_new
+{
+  background-image: url(~/application/modules/Core/externals/images/admin/new_category.png);
+}
+.icon_radcodes_category_move
+{
+  background-image: url(~/application/modules/Radcodes/externals/images/admin/move_category.png);
+}
+
+ul.radcodes_admin_icons_legend li {
+  padding: 3px;
+}
+ul.radcodes_admin_icons_legend li img {
+  padding-right: 5px;
+  vertical-align: text-bottom;
+  display: inline-block;
+}

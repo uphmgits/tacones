@@ -74,7 +74,7 @@
 								<span>
 									<?php 
 										$keys = array_keys($error);
-										echo $this->form->$form_el_name->getLabel().' - '.$this->translate(array_shift($error));
+										//echo $this->form->$form_el_name->getLabel().' - '.$this->translate(array_shift($error));
 									?>
 								</span>
 							</div>
@@ -97,6 +97,10 @@
 							echo $formElement->render();
 					endforeach;
 				endif;
+        echo $this->form->fields->render();
+        /*foreach($this->form->fields->getElements() as $formElement):
+            у$formElement->render();
+  			endforeach;*/
 			?>
 		  </div>
 		  <?php echo $this->form->marketplace_id; ?>
