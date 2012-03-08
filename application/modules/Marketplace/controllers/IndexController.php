@@ -210,7 +210,24 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
             // Load fields view helpers
             $view = $this->view;
             $view->addHelperPath(APPLICATION_PATH . '/application/modules/Fields/View/Helper', 'Fields_View_Helper');
-            $this->view->fieldStructure = $fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($marketplace);
+            $fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($marketplace);
+
+    // only category profile question
+    $categoryTree = Engine_Api::_()->marketplace()->tree_list_load_path($marketplace->category_id); 
+    $mainParentCategory = !empty($categoryTree) ? $categoryTree[0]['k_item'] : $marketplace->category_id;
+    $deletedElemets = array();
+    foreach($fieldStructure as $map) {
+        $field = $map->getChild();
+        if( $field->category_id != $mainParentCategory) {
+          $deletedElemets[] = $map->field_id . "_" . $map->option_id . "_" . $map->child_id;
+        }
+
+    }
+    foreach($deletedElemets as $name) {
+        unset($fieldStructure[$name]);
+    }
+
+            $this->view->fieldStructure = $fieldStructure;
 
             // album material
             $this->view->album = $album = $marketplace->getSingletonAlbum();
@@ -933,6 +950,10 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
             Engine_Api::_()->core()->setSubject($marketplace);
         }
 
+        if( $this->_getParam('category') == null ) {
+            return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id, 'category' => $marketplace->category_id), 'marketplace_edit', true);
+        }
+
         if (!$this->_helper->requireSubject()->isValid())
             return;
 
@@ -975,9 +996,11 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard {
                 $form->addNotice($savedChangesNotice);
             }
 
-			$marketplace->body = htmlspecialchars_decode($marketplace->body);
+			      $marketplace->body = htmlspecialchars_decode($marketplace->body);
             // etc
             $form->populate($marketplace->toArray());
+            $form->category_id->setValue((int)$this->_getParam('category'));
+
             $auth = Engine_Api::_()->authorization()->context;
             $roles = array('owner', 'owner_member', 'owner_member_member', 'owner_network', 'everyone');
             foreach ($roles as $role) {

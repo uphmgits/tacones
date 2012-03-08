@@ -2,7 +2,7 @@
 # $Id: .htaccess 8220 2011-01-15 00:21:51Z john $
 
 deny from all
-<Files ~ "index.php|css.php|mobile.php|lite.php|offline.html|maintenance.html">
+<Files ~ "index.php|css.php|mobile.php|lite.php|offline.html|css1.htm|maintenance.html">
     order allow,deny
     allow from all
 </Files>

@@ -198,11 +198,18 @@ class Marketplace_Form_Create extends Engine_Form
       ));
     }
 
+
     // only category profile question
+    $categoryTree = Engine_Api::_()->marketplace()->tree_list_load_path($categoryId); 
+    $mainParentCategory = !empty($categoryTree) ? $categoryTree[0]['k_item'] : $categoryId;
+    $deletedElemets = array();
     foreach($customFields as $field) {
-        if( $field->category_id != $categoryId) {
-          $customFields->removeElement($field->getName());
+        if( $field->category_id != $mainParentCategory) {
+          $deletedElemets[] = $field->getName();
         }
+    }
+    foreach($deletedElemets as $name) {
+        $customFields->removeElement($name);
     }
 
 

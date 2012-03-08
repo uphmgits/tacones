@@ -64,3 +64,1214 @@ Stack trace:
 #10 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
 #11 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
 #12 {main}
+2012-03-07T08:06:59+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T08:22:29+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T09:12:30+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [284]
+Error Code: de804a
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(248): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T09:12:30+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [294]
+Error Code: b97d07
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(248): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T09:12:30+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [294]
+Error Code: ac67ab
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(248): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T09:13:26+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [284]
+Error Code: fbbb47
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(248): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T09:13:26+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [294]
+Error Code: f6610c
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(248): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T09:13:26+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [294]
+Error Code: c66f9f
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(248): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T09:25:01+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T09:28:05+00:00 CRIT (2): 
+Error Code: 276b8f
+exception 'Zend_Controller_Router_Exception' with message 'marketplace_id is not specified' in /home/zapato/public_html/application/libraries/Zend/Controller/Router/Route.php:350
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/Controller/Router/Rewrite.php(441): Zend_Controller_Router_Route->assemble(Array, true, true)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/Redirector.php(316): Zend_Controller_Router_Rewrite->assemble(Array, 'marketplace_edi...', true, true)
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Action/Helper/Redirector.php(417): Zend_Controller_Action_Helper_Redirector->setGotoRoute(Array, 'marketplace_edi...', true, true)
+#3 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(937): Zend_Controller_Action_Helper_Redirector->gotoRoute(Array, 'marketplace_edi...', true)
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->editAction()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('editAction')
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#7 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#8 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#9 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#10 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#11 {main}
+2012-03-07T09:36:35+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: mobi.index.index
+2012-03-07T09:36:43+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T09:37:02+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: mobi.index.index
+2012-03-07T09:40:41+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T09:51:44+00:00 NOTICE (5): [8] Undefined index:  k_item (/home/zapato/public_html/application/modules/Marketplace/Form/Create.php) [203]
+Error Code: 89499f
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/Form/Edit.php(37): Marketplace_Form_Create->init()
+#1 /home/zapato/public_html/application/libraries/Zend/Form.php(235): Marketplace_Form_Edit->init()
+#2 /home/zapato/public_html/application/libraries/Engine/Form.php(117): Zend_Form->__construct(Array)
+#3 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(954): Engine_Form->__construct(Array)
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->editAction()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('editAction')
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#7 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#8 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#9 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#10 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#11 {main}
+
+2012-03-07T09:51:54+00:00 NOTICE (5): [8] Undefined index:  k_item (/home/zapato/public_html/application/modules/Marketplace/Form/Create.php) [203]
+Error Code: 81d6d1
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/Form/Edit.php(37): Marketplace_Form_Create->init()
+#1 /home/zapato/public_html/application/libraries/Zend/Form.php(235): Marketplace_Form_Edit->init()
+#2 /home/zapato/public_html/application/libraries/Engine/Form.php(117): Zend_Form->__construct(Array)
+#3 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(954): Engine_Form->__construct(Array)
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->editAction()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('editAction')
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#7 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#8 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#9 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#10 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#11 {main}
+
+2012-03-07T09:52:03+00:00 NOTICE (5): [8] Undefined index:  k_item (/home/zapato/public_html/application/modules/Marketplace/Form/Create.php) [203]
+Error Code: 152041
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/Form/Edit.php(37): Marketplace_Form_Create->init()
+#1 /home/zapato/public_html/application/libraries/Zend/Form.php(235): Marketplace_Form_Edit->init()
+#2 /home/zapato/public_html/application/libraries/Engine/Form.php(117): Zend_Form->__construct(Array)
+#3 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(954): Engine_Form->__construct(Array)
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->editAction()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('editAction')
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#7 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#8 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#9 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#10 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#11 {main}
+
+2012-03-07T09:52:10+00:00 NOTICE (5): [8] Undefined index:  k_item (/home/zapato/public_html/application/modules/Marketplace/Form/Create.php) [203]
+Error Code: 46d990
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/Form/Edit.php(37): Marketplace_Form_Create->init()
+#1 /home/zapato/public_html/application/libraries/Zend/Form.php(235): Marketplace_Form_Edit->init()
+#2 /home/zapato/public_html/application/libraries/Engine/Form.php(117): Zend_Form->__construct(Array)
+#3 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(954): Engine_Form->__construct(Array)
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->editAction()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('editAction')
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#7 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#8 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#9 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#10 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#11 {main}
+
+2012-03-07T09:52:20+00:00 NOTICE (5): [8] Undefined index:  k_item (/home/zapato/public_html/application/modules/Marketplace/Form/Create.php) [203]
+Error Code: b52f78
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/Form/Edit.php(37): Marketplace_Form_Create->init()
+#1 /home/zapato/public_html/application/libraries/Zend/Form.php(235): Marketplace_Form_Edit->init()
+#2 /home/zapato/public_html/application/libraries/Engine/Form.php(117): Zend_Form->__construct(Array)
+#3 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(954): Engine_Form->__construct(Array)
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->editAction()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('editAction')
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#7 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#8 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#9 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#10 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#11 {main}
+
+2012-03-07T09:54:28+00:00 NOTICE (5): [8] Undefined index:  k_item (/home/zapato/public_html/application/modules/Marketplace/Form/Create.php) [203]
+Error Code: 8eadbd
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/Form/Edit.php(37): Marketplace_Form_Create->init()
+#1 /home/zapato/public_html/application/libraries/Zend/Form.php(235): Marketplace_Form_Edit->init()
+#2 /home/zapato/public_html/application/libraries/Engine/Form.php(117): Zend_Form->__construct(Array)
+#3 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(954): Engine_Form->__construct(Array)
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->editAction()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('editAction')
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#7 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#8 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#9 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#10 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#11 {main}
+
+2012-03-07T09:54:51+00:00 NOTICE (5): [8] Undefined index:  k_item (/home/zapato/public_html/application/modules/Marketplace/Form/Create.php) [203]
+Error Code: 7e01ae
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/Form/Edit.php(37): Marketplace_Form_Create->init()
+#1 /home/zapato/public_html/application/libraries/Zend/Form.php(235): Marketplace_Form_Edit->init()
+#2 /home/zapato/public_html/application/libraries/Engine/Form.php(117): Zend_Form->__construct(Array)
+#3 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(954): Engine_Form->__construct(Array)
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->editAction()
+#5 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('editAction')
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#7 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#8 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#9 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#10 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#11 {main}
+
+2012-03-07T10:03:04+00:00 CRIT (2): 
+Error Code: 8f7541
+exception 'Zend_Form_Element_Exception' with message 'Method removeElement does not exist' in /home/zapato/public_html/application/libraries/Zend/Form/Element.php:931
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/Form/Create.php(209): Zend_Form_Element->__call('removeElement', Array)
+#1 /home/zapato/public_html/application/modules/Marketplace/Form/Create.php(209): Engine_Form_Element_Radio->removeElement()
+#2 /home/zapato/public_html/application/modules/Marketplace/Form/Edit.php(37): Marketplace_Form_Create->init()
+#3 /home/zapato/public_html/application/libraries/Zend/Form.php(235): Marketplace_Form_Edit->init()
+#4 /home/zapato/public_html/application/libraries/Engine/Form.php(117): Zend_Form->__construct(Array)
+#5 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(954): Engine_Form->__construct(Array)
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->editAction()
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('editAction')
+#8 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#9 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#10 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#11 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#12 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#13 {main}
+2012-03-07T10:03:23+00:00 CRIT (2): 
+Error Code: 4f60cb
+exception 'Zend_Form_Element_Exception' with message 'Method remove does not exist' in /home/zapato/public_html/application/libraries/Zend/Form/Element.php:931
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/Form/Create.php(209): Zend_Form_Element->__call('remove', Array)
+#1 /home/zapato/public_html/application/modules/Marketplace/Form/Create.php(209): Engine_Form_Element_Radio->remove()
+#2 /home/zapato/public_html/application/modules/Marketplace/Form/Edit.php(37): Marketplace_Form_Create->init()
+#3 /home/zapato/public_html/application/libraries/Zend/Form.php(235): Marketplace_Form_Edit->init()
+#4 /home/zapato/public_html/application/libraries/Engine/Form.php(117): Zend_Form->__construct(Array)
+#5 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(954): Engine_Form->__construct(Array)
+#6 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->editAction()
+#7 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('editAction')
+#8 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#9 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#10 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#11 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#12 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#13 {main}
+2012-03-07T10:10:50+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T10:10:52+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T10:42:07+00:00 NOTICE (5): [8] Undefined variable: categoriesList (/home/zapato/public_html/application/modules/Marketplace/controllers/AdminFieldsController.php) [93]
+Error Code: 8584bb
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_AdminFieldsController->fieldEditAction()
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('fieldEditAction')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#3 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#4 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#5 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#6 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#7 {main}
+
+2012-03-07T10:45:48+00:00 NOTICE (5): [8] Undefined variable: metaTable (/home/zapato/public_html/application/modules/Marketplace/controllers/AdminFieldsController.php) [63]
+Error Code: 1e0acc
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_AdminFieldsController->fieldCreateAction()
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('fieldCreateAction')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#3 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#4 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#5 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#6 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#7 {main}
+
+2012-03-07T11:00:24+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T11:07:42+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [284]
+Error Code: 53230c
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(248): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:07:42+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [294]
+Error Code: 0bcd61
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(248): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:07:42+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [294]
+Error Code: c1f690
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(248): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:21:46+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [284]
+Error Code: af1897
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(248): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:21:46+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [294]
+Error Code: dab8e2
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(248): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:21:46+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [294]
+Error Code: 09e23a
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(248): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:25:27+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [286]
+Error Code: f10677
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(250): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:25:27+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [296]
+Error Code: 297492
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(250): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:25:27+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [296]
+Error Code: 7c8f08
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(250): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:30:39+00:00 NOTICE (5): [8] Undefined variable: customFields (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [218]
+Error Code: 721b19
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#3 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#4 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#5 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#6 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#7 {main}
+
+2012-03-07T11:30:39+00:00 WARN (4): [2] Invalid argument supplied for foreach() (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [218]
+Error Code: 828501
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#3 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#4 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#5 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#6 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#7 {main}
+
+2012-03-07T11:30:39+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [298]
+Error Code: 579595
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(262): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:30:39+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [308]
+Error Code: 063b8c
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(262): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:30:39+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [308]
+Error Code: 054e05
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(262): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:31:09+00:00 CRIT (2): 
+Error Code: e1c10b
+exception 'Zend_Db_Table_Row_Exception' with message 'Specified column "category_id" is not in the row' in /home/zapato/public_html/application/libraries/Zend/Db/Table/Row/Abstract.php:179
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(219): Zend_Db_Table_Row_Abstract->__get('category_id')
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#8 {main}
+2012-03-07T11:31:34+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [298]
+Error Code: e44005
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(262): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:31:34+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [308]
+Error Code: 219c89
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(262): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:31:34+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [308]
+Error Code: b7b721
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(262): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:31:54+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [299]
+Error Code: a731d9
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(263): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:31:54+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [309]
+Error Code: c34555
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(263): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:31:54+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [309]
+Error Code: c3e5a2
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(263): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:33:15+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [300]
+Error Code: 6a9367
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(264): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:33:15+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [310]
+Error Code: c602e2
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(264): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:33:15+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [310]
+Error Code: a0c139
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(264): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:33:44+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: user.profile.index
+2012-03-07T11:33:44+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: user.profile.index
+2012-03-07T11:33:48+00:00 CRIT (2): 
+Error Code: 3e0e31
+exception 'Zend_Db_Table_Row_Exception' with message 'Unrecognized method 'getName()'' in /home/zapato/public_html/application/libraries/Zend/Db/Table/Row/Abstract.php:1156
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(222): Zend_Db_Table_Row_Abstract->__call('getName', Array)
+#1 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(222): Fields_Model_Meta->getName()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#5 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#6 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#7 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#8 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#9 {main}
+2012-03-07T11:34:44+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [301]
+Error Code: 9478a3
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:34:44+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [311]
+Error Code: 5f400c
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:34:44+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [311]
+Error Code: 17a25a
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:38:35+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [301]
+Error Code: 7c0970
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:38:35+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [311]
+Error Code: 41318d
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:38:35+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [311]
+Error Code: c00acc
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:41:09+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [303]
+Error Code: 54f8c3
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(267): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:41:09+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [313]
+Error Code: c5abed
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(267): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:41:09+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [313]
+Error Code: 880760
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(267): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:41:37+00:00 CRIT (2): 
+Error Code: 170fab
+exception 'Zend_Db_Table_Row_Exception' with message 'Unrecognized method 'getName()'' in /home/zapato/public_html/application/libraries/Zend/Db/Table/Row/Abstract.php:1156
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(224): Zend_Db_Table_Row_Abstract->__call('getName', Array)
+#1 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(224): Fields_Model_Meta->getName()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#4 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#5 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#6 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#7 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#8 /home/zapato/public_html/index.php(24): include('/home/zapato/pu...')
+#9 {main}
+2012-03-07T11:42:04+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [304]
+Error Code: e5d56e
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(268): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:42:04+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [314]
+Error Code: aa663a
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(268): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:42:04+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [314]
+Error Code: 2f1872
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(268): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:43:28+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [304]
+Error Code: fc61eb
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(268): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:43:28+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [314]
+Error Code: 72d7bc
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(268): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:43:28+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [314]
+Error Code: 534489
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(268): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:46:07+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [303]
+Error Code: a1422b
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(267): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:46:07+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [313]
+Error Code: d9222c
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(267): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:46:07+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [313]
+Error Code: c009e5
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(267): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:46:43+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [304]
+Error Code: bbd7ac
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(268): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:46:43+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [314]
+Error Code: 95195b
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(268): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:46:43+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [314]
+Error Code: 379c1f
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(268): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:48:11+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [305]
+Error Code: 474b6b
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(269): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:48:11+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [315]
+Error Code: 576c0d
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(269): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:48:11+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [315]
+Error Code: 4be22c
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(269): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:48:45+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [305]
+Error Code: 6938d2
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(269): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:48:45+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [315]
+Error Code: 452da2
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(269): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:48:45+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [315]
+Error Code: e26025
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(269): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:49:21+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [301]
+Error Code: 320df8
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:49:21+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [311]
+Error Code: 75ff57
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T11:49:21+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [311]
+Error Code: 3bf948
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T12:08:58+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [301]
+Error Code: 4153ef
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T12:08:58+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [311]
+Error Code: 54db4e
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T12:08:58+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [311]
+Error Code: 8f4116
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T12:10:14+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [301]
+Error Code: 3f20b8
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T12:10:14+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [311]
+Error Code: 8405d1
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T12:10:14+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [311]
+Error Code: 2b8fd7
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T12:11:05+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [301]
+Error Code: bbc267
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T12:11:05+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [311]
+Error Code: 0dfe3a
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T12:11:05+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [311]
+Error Code: 8260a1
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-07T12:33:34+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T12:34:51+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-03-07T13:58:44+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T14:58:33+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T15:02:27+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T16:43:37+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: mobi.index.index
+2012-03-07T16:43:43+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: mobi.index.index
+2012-03-07T16:43:52+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: mobi.index.index
+2012-03-07T16:57:50+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T17:02:44+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T17:03:12+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T17:03:19+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T17:03:26+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.view
+2012-03-07T17:03:40+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T17:52:24+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T17:53:01+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T17:56:48+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T17:59:44+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T18:15:35+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T21:11:19+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T21:11:39+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T21:17:09+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T22:05:33+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T23:39:05+00:00 DEBUG (7): Require class Core_Controller_Action_Helper_RequireUser failed check for: mobi.index.index
+2012-03-07T23:46:46+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T23:46:58+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-07T23:47:07+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T01:17:39+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T02:57:28+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T06:13:17+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T08:19:23+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T08:19:38+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T08:25:18+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T08:43:11+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T09:09:19+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T09:18:00+00:00 NOTICE (5): [8] Undefined index:  anonymous_purchase (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [301]
+Error Code: 8aa897
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-08T09:18:00+00:00 NOTICE (5): [8] Undefined variable: first_marketplace (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [311]
+Error Code: 807c35
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-08T09:18:00+00:00 NOTICE (5): [8] Trying to get property of non-object (/home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php) [311]
+Error Code: dcf444
+Stack trace:
+#0 /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php(265): Marketplace_IndexController->paypal(Array)
+#1 /home/zapato/public_html/application/libraries/Zend/Controller/Action.php(513): Marketplace_IndexController->viewAction()
+#2 /home/zapato/public_html/application/libraries/Zend/Controller/Dispatcher/Standard.php(289): Zend_Controller_Action->dispatch('viewAction')
+#3 /home/zapato/public_html/application/libraries/Zend/Controller/Front.php(946): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#4 /home/zapato/public_html/application/modules/Core/Bootstrap.php(75): Zend_Controller_Front->dispatch()
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(160): Core_Bootstrap->run()
+#6 /home/zapato/public_html/application/index.php(194): Engine_Application->run()
+#7 /home/zapato/public_html/index.php(24): include('/home/zapato/public_html/applica...')
+#8 {main}
+
+2012-03-08T10:53:46+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T11:03:58+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T13:24:48+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T14:52:57+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T15:46:01+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: review.index.list-owner
+2012-03-08T17:03:49+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T17:03:54+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T17:03:54+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T17:03:58+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T17:04:03+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T17:04:09+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T17:04:13+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T17:04:17+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index
+2012-03-08T17:04:22+00:00 DEBUG (7): Require class Authorization_Controller_Action_Helper_RequireAuth failed check for: marketplace.index.index

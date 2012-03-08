@@ -66,8 +66,12 @@
         : '/favicon.ico' ),
       'type' => 'image/x-icon'),
       'PREPEND');
+    /*
     $this->headLink()
       ->prependStylesheet($this->baseUrl().'/application/css.php?request=application/modules/Core/externals/styles/admin/main.css');
+    */
+    $this->headLink()
+      ->prependStylesheet($this->baseUrl().'/css.php?request=application/modules/Core/externals/styles/admin/main.css');
     // Process
     foreach( $this->headLink()->getContainer() as $dat ) {
       if( !empty($dat->href) ) {
