@@ -1875,7 +1875,7 @@ ul.marketplaces_browse {
     float:left;
 }
 
-#global_page_marketplace-index-index ul.marketplaces_browse {
+#global_page_marketplace-index-index ul.marketplaces_browse, #global_page_marketplace-index-manage  ul.marketplaces_browse {
     width: 180px;
 }
 
@@ -1925,14 +1925,16 @@ ul.marketplaces_browse > li , ul.marketplaces_browse > li + li {
 }
 #navigation li {
     font-size: 14px;
-    font-weight: bold;
+    // font-weight: bold;
     list-style: none;
     text-transform: uppercase;
+    font-family: Univers Bd Std;
 }
 
-#global_page_marketplace-index-index #filter_form {
-     display: block;
+#navigation li a {
+    font-family: Univers Bd Std;
 }
+
 
 .marketplace-browse-sub-menu {
 display: block;
@@ -2068,25 +2070,35 @@ padding: 20px;
 }
 
 #global_page_marketplace-index-manage ul.marketplaces_browse .marketplaces_browse_photo img {
-  width: 100% !important;
+  // width: 100% !important;
 }
 
+#global_page_marketplace-index-manage #filter_form {
+  display: none;
+}
+
+
 #global_page_marketplace-index-manage .marketplaces_browse_info {
-  clear: none;
-  padding: 0 19px 0 20px;
+  // clear: none;
+  // padding: 0 19px 0 20px;
 }
 
 #global_page_marketplace-index-manage  ul.marketplaces_browse > li, ul.marketplaces_browse > li + li {
-  width: 100%;
-  padding: 0 0 10px 0;
+  // width: 100%;
+  // padding: 0 0 10px 0;
 }
 
 #global_page_marketplace-index-manage .marketplaces_browse_info_title {
-  width: 300px;
-  max-width: 300px !important;
+  // width: 300px;
+  // max-width: 300px !important;
 }
 
 ul.comments_date > li
 {
  display: inline-block;
+}
+
+#global_page_marketplace-index-manage ul.marketplaces_browse .marketplaces_browse_options {
+ float: none;
+ padding-left: 0px;
 }

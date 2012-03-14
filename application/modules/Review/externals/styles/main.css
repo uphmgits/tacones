@@ -188,9 +188,7 @@ ul.reviews_browse .review_info_recommend,
 ul.reviews_profile .review_tool_links {
   margin: 5px 0;
 }
-div.reviews_profile_actions a {
-  margin-right: 20px;
-}
+
 /* DISTRIBUTION BARS */
 ul.review_distribution_histogram li
 {
@@ -838,4 +836,59 @@ ol.reviews_toplist .review_breakdown {
 }
 div.reviews_toplist_layout_right .quicklinks .navigation li.active a {
   font-weight: bold;
+}
+
+
+/* Update for profile-review widget */
+.layout_review_profile_reviews > h3 {
+    height: 26px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+.layout_review_profile_reviews .reviews_profile_actions_container {
+    overflow: hidden;
+    margin-top: -26px;
+}
+.layout_review_profile_reviews .reviews_profile_actions {
+    float: right;
+}
+div.layout_review_profile_reviews * {
+    color: #989898
+}
+.layout_review_profile_reviews .reviews_profile_actions a {
+    color: #989898;
+}
+ul.reviews_profile {
+    background: #101A20;
+    padding: 24px;
+    margin: 10px 0;
+}
+ul.reviews_profile > li + li {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid #233A41;
+}
+ul.reviews_profile div.review_info > div + div {
+    margin-top: 4px;
+}
+ul.reviews_profile div.review_photo {
+    margin-right: 18px
+}
+ul.reviews_profile div.review_photo img {
+    width: 24px;
+    height: 24px;
+}
+ul.reviews_profile .review_owner a {
+    color: #286868;
+    font-family: arial;
+}
+ul.reviews_profile .review_info_header {
+    line-height: 16px;
+}
+ul.reviews_profile .review_info_header a {
+    color: #d0d0d0;
+    vertical-align: top;
+}
+ul.reviews_profile .review_date {
+  float: right;
 }

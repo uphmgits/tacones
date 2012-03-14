@@ -152,12 +152,12 @@ span.like:hover{
                   <?php if( $this->viewer()->getIdentity() ) : ?>
                     <span class="like" id="marketplacelike_<?=$item->getIdentity()?>" 
                                        onclick="marketplaceLike(<?=$item->getIdentity()?>)" 
-                                       param="<?=$item->isLiked($this->viewer()) ? '-1' : '1'?>"
+                                       param="<?=$item->isLike($this->viewer()) ? '-1' : '1'?>"
                     >
-                        <?=$item->getLikesCount()?>
+                        <?=$item->getLikeCount()?>
                     </span>
                   <?php else : ?>
-                    <span class="like"><?=$item->getLikesCount()?></span>
+                    <span class="like"><?=$item->getLikeCount()?></span>
                   <?php endif;?>
                   <span class="comment"><?php echo $item->comment_count; ?></span>
               </div>

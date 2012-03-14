@@ -1,0 +1,309 @@
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   .htaccess
+#	new file:   .htaccess1
+#	modified:   application/.htaccess
+#	modified:   application/css.php
+#	modified:   application/modules/Core/layouts/scripts/admin-simple.tpl
+#	modified:   application/modules/Core/layouts/scripts/admin.tpl
+#	modified:   application/modules/Core/layouts/scripts/default.tpl
+#	modified:   application/modules/Marketplace/Form/Create.php
+#	modified:   application/modules/Marketplace/controllers/AdminFieldsController.php
+#	modified:   application/modules/Marketplace/controllers/IndexController.php
+#	modified:   application/settings/general.php
+#	new file:   cameraready/temporary/log/main.log
+#	new file:   cameraready/temporary/log/tasks.log
+#	new file:   cameraready/temporary/scaffold/application/themes/musharraf/theme_paginator_pagestart=0_pageend=0.css
+#	new file:   cameraready/temporary/scaffold/application/themes/musharraf/theme_paginator_pagestart=0_pageend=0_morning.css
+#	new file:   cameraready/temporary/scaffold/d3a6436da82d111ef6b2fd9e38b676c6.css
+#	new file:   cameraready/temporary/scaffold/ed836fdaf450f855750b43080d8f3f84.css
+#	new file:   css.php
+#	modified:   error_log
+#	modified:   public/.htaccess
+#	modified:   public/admin/Shoes_12.jpg
+#	modified:   public/admin/index.html
+#	modified:   public/header-imgs/blogs_header.jpg
+#	modified:   public/header-imgs/blogs_header.png
+#	modified:   public/header-imgs/community_header.jpg
+#	modified:   public/header-imgs/community_header.png
+#	modified:   public/header-imgs/core_aboutus_header.jpg
+#	modified:   public/header-imgs/core_aboutus_header.png
+#	modified:   public/header-imgs/core_contactus_header.jpg
+#	modified:   public/header-imgs/core_contactus_header.png
+#	modified:   public/header-imgs/core_faq_header.jpg
+#	modified:   public/header-imgs/core_faq_header.png
+#	modified:   public/header-imgs/core_privacy_header.jpg
+#	modified:   public/header-imgs/core_privacy_header.png
+#	modified:   public/header-imgs/core_profile_header.jpg
+#	modified:   public/header-imgs/core_profile_header.png
+#	modified:   public/header-imgs/core_search_header.jpg
+#	modified:   public/header-imgs/core_search_header.png
+#	modified:   public/header-imgs/core_signin_header.png
+#	modified:   public/header-imgs/core_signup_header.jpg
+#	modified:   public/header-imgs/core_signup_header.png
+#	modified:   public/header-imgs/core_terms_header.jpg
+#	modified:   public/header-imgs/core_terms_header.png
+#	modified:   public/header-imgs/marketplace_accessories_header.jpg
+#	modified:   public/header-imgs/marketplace_accessories_header.png
+#	modified:   public/header-imgs/marketplace_bags_header.jpg
+#	modified:   public/header-imgs/marketplace_brands_header.jpg
+#	modified:   public/header-imgs/marketplace_brands_header.png
+#	modified:   public/header-imgs/marketplace_browse.jpg
+#	modified:   public/header-imgs/marketplace_cart_header.jpg
+#	modified:   public/header-imgs/marketplace_cart_header.png
+#	modified:   public/header-imgs/marketplace_cloth_header.jpg
+#	modified:   public/header-imgs/marketplace_cloth_header.png
+#	modified:   public/header-imgs/marketplace_home_header.jpg
+#	modified:   public/header-imgs/marketplace_shoes_header.jpg
+#	modified:   public/header-imgs/marketplace_shoes_header.png
+#	modified:   public/header-imgs/marketplace_shopall_header.jpg
+#	modified:   public/header-imgs/marketplace_shopall_header.png
+#	modified:   public/index.html
+#	new file:   public/marketplace/16/01/0115_631c.jpg
+#	new file:   public/marketplace/17/01/0116_1b14.jpg
+#	new file:   public/marketplace/18/01/0117_3452.jpg
+#	new file:   public/marketplace/19/01/0118_063a.jpg
+#	new file:   public/marketplace/1a/01/0119_57dc.jpg
+#	new file:   public/marketplace/1b/01/011a_bf54.jpg
+#	modified:   temporary/.htaccess
+#	modified:   temporary/b8e8e58c61c6650902d5f7f7d7de4aaa.jpg
+#	modified:   temporary/backup/index.html
+#	modified:   temporary/cache/index.html
+#	new file:   temporary/cache/zend_cache---Engine4_035d30562922afadefcf7d8219252a51
+#	new file:   temporary/cache/zend_cache---Engine4_1bf93dd7fa992d1739bd24d800cf5c35
+#	new file:   temporary/cache/zend_cache---Engine4_62691059a8f53e28cbd3db46c80df82d
+#	new file:   temporary/cache/zend_cache---Engine4_84a3d2a630c10b5d2fda723042559a87
+#	modified:   temporary/cache/zend_cache---Engine4_Engine_Manifest
+#	new file:   temporary/cache/zend_cache---Engine4_Fields_Model_DbTable_Maps__marketplace
+#	new file:   temporary/cache/zend_cache---Engine4_Fields_Model_DbTable_Meta__marketplace
+#	new file:   temporary/cache/zend_cache---Engine4_Fields_Model_DbTable_Options__marketplace
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_LocaleC_en_US_dateitem_y
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_LocaleC_en_US_dateitem_yyyy
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_LocaleL_en_US_language_
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_LocaleL_en_US_layout_
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_LocaleL_en_US_territory_
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_0358be4eebb49649eb075b932fd5e613_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_181e0157e90c549270ac760f635cf11f_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_21007764f5abf649b88689bdd2021dfb_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_210d5d1388678403df7b89b5c0bff1ea_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_228d5a5c03d85b7c5f0cb85d94980f6b_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_26be091e36791778dc933d58fdfd4ca5_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_2b2c59b4505105a9c97e7ee82fa98a3d_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_408367c415f9d570b2ea55c22fbde47a_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_6119d0095c82f665ca761bea8738f62e_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_6d030c1c27e60445343ea9a5a07a8d4f_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_98f0d695e35161d68eb9141ded3120c3_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_9e29f67552fd1e05361a8ad8cf705ae5_Csv
+#	modified:   temporary/cache/zend_cache---Engine4_Zend_Translate_Csv_Options
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_adf41209088b99b2d72cf32f233eec41_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_afdbd0080b454a9e8a4f47bd3d440ee4_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_b23154df38ead19cc880f7a0bb74605a_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_b4ff89a3a3855426a5996db87332a37e_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_b75bd6bb82d99d111a8d0eed3a1abf09_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_cc0c65b84148854c581e8340731c469a_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_dfd236aad516dd8807e537e5cabaf44d_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_Zend_Translate_ee15e62be54f65e56951d5e0dd078ad1_Csv
+#	new file:   temporary/cache/zend_cache---Engine4_a0e5bfcffa4269237e6f1ab1cb0bf6bf
+#	new file:   temporary/cache/zend_cache---Engine4_b1dc30d01405a37e2d4ce0229d664084
+#	new file:   temporary/cache/zend_cache---Engine4_bbc39247118d88a39702ab13cf16c791
+#	new file:   temporary/cache/zend_cache---Engine4_c530ecd9664676ac169f993a0a4808ae
+#	new file:   temporary/cache/zend_cache---Engine4_e87d6833e6b9d95e02160ce3f248b519
+#	new file:   temporary/cache/zend_cache---Engine4_f4485903f174ead2bebded8114735975
+#	modified:   temporary/cache/zend_cache---Engine4_settings
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_035d30562922afadefcf7d8219252a51
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_1bf93dd7fa992d1739bd24d800cf5c35
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_1eaef74802329430ae139483b04e5d6f
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_1f8ce2cca3744de7600661611567db14
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_44b27d0f5d7c5575decf05f26ace4d2c
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_62691059a8f53e28cbd3db46c80df82d
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_652c5b7148c96a94c5bc031ad83533cd
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_66977b1c47ffbd6f8d24e322c0e1895a
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_72411a27867f99f44cec6ecbdb7be33d
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_72ba8de03ef3e0e707c8f34fdfa0e80f
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_83aca0bb9fd8bbc128d0896ba8f8d25e
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_84a3d2a630c10b5d2fda723042559a87
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_9ac56393407aabfd900471f92b67a59e
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_9c00de7b6711a8fdd16de1bb253c103b
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_Engine_Manifest
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Fields_Model_DbTable_Maps__marketplace
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Fields_Model_DbTable_Meta__marketplace
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Fields_Model_DbTable_Options__marketplace
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_LocaleC_en_US_dateitem_y
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_LocaleC_en_US_dateitem_yyyy
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_LocaleC_en_language_en
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_LocaleL_en_US_language_
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_LocaleL_en_US_layout_
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_LocaleL_en_US_territory_
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_0358be4eebb49649eb075b932fd5e613_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_181e0157e90c549270ac760f635cf11f_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_21007764f5abf649b88689bdd2021dfb_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_210d5d1388678403df7b89b5c0bff1ea_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_228d5a5c03d85b7c5f0cb85d94980f6b_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_26be091e36791778dc933d58fdfd4ca5_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_2b2c59b4505105a9c97e7ee82fa98a3d_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_408367c415f9d570b2ea55c22fbde47a_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_6119d0095c82f665ca761bea8738f62e_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_6d030c1c27e60445343ea9a5a07a8d4f_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_98f0d695e35161d68eb9141ded3120c3_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_9e29f67552fd1e05361a8ad8cf705ae5_Csv
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_Csv_Options
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_adf41209088b99b2d72cf32f233eec41_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_afdbd0080b454a9e8a4f47bd3d440ee4_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_b23154df38ead19cc880f7a0bb74605a_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_b4ff89a3a3855426a5996db87332a37e_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_b75bd6bb82d99d111a8d0eed3a1abf09_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_cc0c65b84148854c581e8340731c469a_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_dfd236aad516dd8807e537e5cabaf44d_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_ee15e62be54f65e56951d5e0dd078ad1_Csv
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_a0e5bfcffa4269237e6f1ab1cb0bf6bf
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_b1dc30d01405a37e2d4ce0229d664084
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_bannedwords
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_bbc39247118d88a39702ab13cf16c791
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_c530ecd9664676ac169f993a0a4808ae
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_e87d6833e6b9d95e02160ce3f248b519
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_ea011082dffb55be3a48327e975869ec
+#	new file:   temporary/cache/zend_cache---internal-metadatas---Engine4_f4485903f174ead2bebded8114735975
+#	modified:   temporary/cache/zend_cache---internal-metadatas---Engine4_settings
+#	modified:   temporary/cede1cae30ea060911f040b44fa50852.jpg
+#	modified:   temporary/log/index.html
+#	modified:   temporary/log/install.log
+#	modified:   temporary/log/mail.log
+#	modified:   temporary/log/main.log
+#	modified:   temporary/log/scaffold/2012-01-17.log.php
+#	modified:   temporary/log/scaffold/2012-01-21.log.php
+#	modified:   temporary/log/scaffold/2012-01-30.log.php
+#	modified:   temporary/log/scaffold/index.html
+#	modified:   temporary/log/tasks.log
+#	renamed:    temporary/log/tasks.log -> temporary/log/tasks.log.1
+#	modified:   temporary/log/tasks.log.2
+#	modified:   temporary/log/tasks.log.3
+#	modified:   temporary/log/tasks.log.4
+#	modified:   temporary/log/tasks.log.5
+#	modified:   temporary/log/tasks.log.6
+#	modified:   temporary/log/translate.log
+#	modified:   temporary/log/translate.log.1
+#	modified:   temporary/log/translate.log.2
+#	modified:   temporary/log/translate.log.3
+#	modified:   temporary/log/translate.log.4
+#	modified:   temporary/log/translate.log.5
+#	modified:   temporary/log/translate.log.6
+#	modified:   temporary/package/archives/index.html
+#	modified:   temporary/package/index.html
+#	modified:   temporary/package/manifests/index.html
+#	modified:   temporary/package/packages/index.html
+#	modified:   temporary/package/repositories/index.html
+#	modified:   temporary/package/sdk/index.html
+#	modified:   temporary/scaffold/a78dd7ff5e57f06c582c51b962f3c41a.css
+#	modified:   temporary/scaffold/application/modules/Core/externals/styles/admin/main_paginator_pagestart=0_pageend=0.css
+#	new file:   temporary/scaffold/application/modules/Core/externals/styles/admin/main_paginator_pagestart=0_pageend=0_night.css
+#	modified:   temporary/scaffold/application/themes/musharraf/theme_paginator_pagestart=0_pageend=0.css
+#	modified:   temporary/scaffold/application/themes/musharraf/theme_paginator_pagestart=0_pageend=0_morning.css
+#	modified:   temporary/scaffold/application/themes/musharraf/theme_paginator_pagestart=0_pageend=0_night.css
+#	new file:   temporary/scaffold/b7bd58023e86709de0ca6d4ee41c7c95.css
+#	modified:   temporary/scaffold/d3a6436da82d111ef6b2fd9e38b676c6.css
+#	modified:   temporary/scaffold/ed836fdaf450f855750b43080d8f3f84.css
+#	modified:   temporary/scaffold/fd300f183c430b26286a8774c5ded232.css
+#	modified:   temporary/session/index.html
+#
+# Changes not staged for commit:
+#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	deleted:    public/marketplace/cb/00cb_017a.jpg
+#	deleted:    public/marketplace/cc/00cc_3031.jpg
+#	deleted:    public/marketplace/cd/00cd_0044.jpg
+#	deleted:    public/marketplace/ce/00ce_cafe.jpg
+#	deleted:    public/marketplace/cf/00cf_b4b4.jpg
+#	deleted:    public/marketplace/d0/00d0_49b0.jpg
+#	deleted:    public/marketplace/d1/00d1_2154.jpeg
+#	deleted:    public/marketplace/d2/00d2_0360.jpeg
+#	deleted:    temporary/cache/EngineInstall---dd5687e27c23d00a64bc858c39239ed3_module_marketplaceups_4_3_0
+#	deleted:    temporary/cache/EngineInstall---internal-metadatas---dd5687e27c23d00a64bc858c39239ed3_module_marketplaceups_4_3_0
+#	deleted:    temporary/cache/EngineInstall---internal-metadatas---transactiondd5687e27c23d00a64bc858c39239ed3
+#	deleted:    temporary/cache/EngineInstall---transactiondd5687e27c23d00a64bc858c39239ed3
+#	deleted:    temporary/cache/zend_cache---Engine4_096079e174c41adbf0fe3f13815c9cd8
+#	deleted:    temporary/cache/zend_cache---Engine4_293d4c5fccbc82a24d401ed68cf68032
+#	deleted:    temporary/cache/zend_cache---Engine4_2d08d76464b18fd0a4609ce69fc06f2b
+#	deleted:    temporary/cache/zend_cache---Engine4_6289a02cd8961402dd63b1d5fbad5e1e
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_LocaleL_en_language_
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_LocaleL_en_layout_
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_LocaleL_en_territory_
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_06bfebeff297ec483e68a06387f2c3a1_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_0b4aee056a6758a0c1d6d53e24d58ad3_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_0dde0307ace40d67f9a1d37ef335686d_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_12dfe9326d0ae99c24cc81e9cefa2b8d_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_14a3fe649d54727b7f247ddd7f823fca_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_2ab10fc8dfbc3213bf90a35480f2c933_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_44c33f4fd0e319820426a4ec07cb658c_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_475e21670bb5a10da31ab80a56b6d995_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_5b71d3d980f7d93bda3bfdb992f30a92_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_90ac3cfad2cce88aadfbbb664af4c7c3_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_95f428a6bd5213ccc827f6c21d69d2c2_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_a0b5196fbf190671a99d85c825fcf0f6_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_a5918cab3daaa7fc46d98524b150bfbb_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_ae8c91a9431707ecbe721a2b496715a4_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_b9c1b8c1927ea010e3a818bd71411fc0_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_c2d43436d8761add09e8c81042ea5693_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_c5aa5b1ab3d00480752260a2e39648bd_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_cd44aa2f4d76bd80b16253b7c4615c4d_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_e2ee8c0cfc8c9426aa62f8db849fe10b_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_Zend_Translate_e80c54a78a03d1b35094e5dc406be60e_Csv
+#	deleted:    temporary/cache/zend_cache---Engine4_ab5675149165e982187b0b1108575572
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_096079e174c41adbf0fe3f13815c9cd8
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_293d4c5fccbc82a24d401ed68cf68032
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_2d08d76464b18fd0a4609ce69fc06f2b
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_6289a02cd8961402dd63b1d5fbad5e1e
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_LocaleL_en_language_
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_LocaleL_en_layout_
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_LocaleL_en_territory_
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_06bfebeff297ec483e68a06387f2c3a1_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_0b4aee056a6758a0c1d6d53e24d58ad3_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_0dde0307ace40d67f9a1d37ef335686d_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_12dfe9326d0ae99c24cc81e9cefa2b8d_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_14a3fe649d54727b7f247ddd7f823fca_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_2ab10fc8dfbc3213bf90a35480f2c933_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_44c33f4fd0e319820426a4ec07cb658c_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_475e21670bb5a10da31ab80a56b6d995_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_5b71d3d980f7d93bda3bfdb992f30a92_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_90ac3cfad2cce88aadfbbb664af4c7c3_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_95f428a6bd5213ccc827f6c21d69d2c2_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_a0b5196fbf190671a99d85c825fcf0f6_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_a5918cab3daaa7fc46d98524b150bfbb_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_ae8c91a9431707ecbe721a2b496715a4_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_b9c1b8c1927ea010e3a818bd71411fc0_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_c2d43436d8761add09e8c81042ea5693_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_c5aa5b1ab3d00480752260a2e39648bd_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_cd44aa2f4d76bd80b16253b7c4615c4d_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_e2ee8c0cfc8c9426aa62f8db849fe10b_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_Zend_Translate_e80c54a78a03d1b35094e5dc406be60e_Csv
+#	deleted:    temporary/cache/zend_cache---internal-metadatas---Engine4_ab5675149165e982187b0b1108575572
+#	modified:   temporary/log/tasks.log
+#	modified:   temporary/log/translate.log
+#	deleted:    temporary/scaffold/25f3c80a239f774e7bb7ebe1005bb05a.css
+#	deleted:    temporary/scaffold/3f01a91ba6dc740d0683948d93d0197c.css
+#	deleted:    temporary/scaffold/479c9e11bc57b6bc8e4e6d6477e9e74e.css
+#	deleted:    temporary/scaffold/4aa347c195d106e38fa55b2f289512bb.css
+#	deleted:    temporary/scaffold/6a8e43be5ae416a1b23bc2c858acda1a.css
+#	deleted:    temporary/scaffold/939596beb974ee5fcbd0be2279769d88.css
+#	deleted:    temporary/scaffold/application/modules/Core/externals/styles/admin/main_paginator_pagestart=0_pageend=0_morning.css
+#	deleted:    temporary/scaffold/application/modules/Core/externals/styles/admin/main_paginator_pagestart=0_pageend=0_tuesday.css
+#	deleted:    temporary/scaffold/application/modules/Core/externals/styles/admin/main_paginator_pagestart=0_pageend=0_tuesday_morning.css
+#	deleted:    temporary/scaffold/application/modules/Core/externals/styles/admin/main_paginator_pagestart=0_pageend=0_tuesday_night.css
+#	deleted:    temporary/scaffold/application/themes/musharraf/mobile_paginator_pagestart=0_pageend=0.css
+#	deleted:    temporary/scaffold/application/themes/musharraf/mobile_paginator_pagestart=0_pageend=0_morning.css
+#	deleted:    temporary/scaffold/application/themes/musharraf/mobile_paginator_pagestart=0_pageend=0_tuesday.css
+#	deleted:    temporary/scaffold/application/themes/musharraf/theme_paginator_pagestart=0_pageend=0_tuesday.css
+#	deleted:    temporary/scaffold/application/themes/musharraf/theme_paginator_pagestart=0_pageend=0_tuesday_morning.css
+#	deleted:    temporary/scaffold/application/themes/musharraf/theme_paginator_pagestart=0_pageend=0_tuesday_night.css
+#	deleted:    temporary/scaffold/c7dfd9d170a0cb308824c45e8ed12863.css
+#	deleted:    temporary/scaffold/d72081bb7a482c3714847c9c5c0e889d.css
+#	deleted:    temporary/scaffold/d8bc0c7d3bed659442d45e36a514d857.css
+#	deleted:    temporary/scaffold/f2e24c26d73543690a6d0026ea2ffb1b.css
+#	deleted:    test.zip
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	status_march_8_am

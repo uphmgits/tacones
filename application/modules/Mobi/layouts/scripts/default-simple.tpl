@@ -88,8 +88,11 @@
       $themes = array('default');
     }
     foreach( $themes as $theme ) {
-      $this->headLink()
+      /*$this->headLink()
         ->prependStylesheet($this->baseUrl().'/application/css.php?request=application/themes/'.$theme.'/theme.css');
+      */
+      $this->headLink()
+        ->prependStylesheet($this->baseUrl().'/css.php?request=application/themes/'.$theme.'/theme.css');
     }
     // Process
     foreach( $this->headLink()->getContainer() as $dat ) {

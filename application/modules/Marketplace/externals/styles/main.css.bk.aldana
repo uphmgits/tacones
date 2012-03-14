@@ -1,0 +1,548 @@
+
+/* $Id: main.css 7244 2010-09-01 01:49:53Z john $ */
+@include "~/application/modules/Core/externals/styles/constants.css";
+
+
+
+
+
+
+/*
+FEED ITEMS
+Styles items with marketplace attachments in the feed.
+*/
+ul.feed .feed_attachment_marketplace
+{
+  display: block;
+  overflow: hidden;
+  margin: 0px 5px 5px 0px;
+  vertical-align: top;
+}
+ul.feed .feed_attachment_marketplace > div > a
+{
+  display: block;
+  float: left;
+  margin-right: 7px;
+}
+ul.feed .feed_attachment_marketplace > div > a > img
+{
+  display: inline-block;
+  max-width: 90px;
+  max-height: 90px;
+  vertical-align: top;
+}
+ul.feed .feed_attachment_marketplace > div > div
+{
+  overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ITEM TYPE ICONS */
+.item_icon_marketplace
+{
+  background-image: url(~/application/modules/Marketplace/externals/images/types/marketplace.png);
+}
+
+
+/*
+BROWSE MARKETPLACES
+These styles are used on the browse groups page
+*/
+.marketplaces_browse_filters .form-wrapper
+{
+  overflow: hidden;
+}
+.marketplaces_browse_filters .integer_field .form-element
+{
+  float: left;
+  overflow: hidden;
+}
+.marketplaces_browse_filters .integer_field label
+{
+  display: block;
+  margin-bottom: 2px;
+}
+.marketplaces_browse_filters .integer_field .form-element + .form-element
+{
+  margin-left: 5px;
+}
+.marketplaces_browse_filters .form-element span.overTxtLabel
+{
+  color: $theme_font_color_light;
+}
+.marketplaces_browse_filters .integer_field input {
+  width: 50px;
+}
+ul.marketplaces_browse
+{
+  clear: both;
+}
+ul.marketplaces_browse > li
+{
+  clear: both;
+  padding: 0px 0px 15px 0px;
+  overflow: hidden;
+}
+ul.marketplaces_browse > li + li
+{
+  padding-top: 15px;
+  border-top-width: 1px;
+}
+ul.marketplaces_browse .marketplaces_browse_photo
+{
+  float: left;
+  overflow: hidden;
+  margin-right: 8px;
+}
+ul.marketplaces_browse .marketplaces_browse_photo img
+{
+  width: 100px;
+}
+ul.marketplaces_browse .marketplaces_browse_options
+{
+  float: right;
+  overflow: hidden;
+  padding-left: 20px;
+}
+ul.marketplaces_browse .marketplaces_browse_options > a
+{
+  clear: both;
+  display: block;
+  margin: 5px;
+  font-size: .8em;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+ul.marketplaces_browse .marketplaces_browse_info
+{
+  overflow: hidden;
+}
+ul.marketplaces_browse .marketplaces_browse_info_title h3
+{
+  margin: 0px;
+}
+ul.marketplaces_browse .marketplaces_browse_info_date
+{
+  font-size: .8em;
+  color: $theme_font_color_light;
+}
+ul.marketplaces_browse .marketplaces_browse_info_blurb
+{
+  margin-top: 5px;
+}
+
+
+
+
+/*
+VIEW MARKETPLACE
+Styles both the 'view marketplaces' and the 'view marketplace listing'
+pages, including the right-side gutter column by default.
+*/
+ul.marketplaces_entrylist
+{
+  margin-top: 10px;
+  border-top-width: 1px;
+  padding-top: 10px;
+}
+ul.marketplaces_entrylist > li
+{
+  padding-bottom: 10px;
+  /*border-bottom-width: 1px;*/
+  margin-bottom: 10px
+}
+ul.marketplaces_entrylist h3
+{
+  margin-bottom: 1px;
+}
+ul.marketplaces_entrylist .marketplace_entrylist_entry_date
+{
+  font-size: 8pt;
+  margin-bottom: 5px;
+  color: $theme_font_color_light;
+}
+ul.marketplaces_entrylist .marketplace_entrylist_entry_body
+{
+  line-height: 1.5em;
+  padding: 5px 5px 5px 0px;
+}
+ul.marketplaces_entrylist .marketplace_entrylist_entry_body img
+{
+  max-width: 100%;
+}
+ul.marketplaces_entrylist .marketplace_entrylist_entry_body + .buttonlink
+{
+  margin-top: 5px;
+}
+ul.marketplaces_entrylist + .comments
+{
+  padding-top: 10px;
+}
+div.marketplaces_gutter .marketplaces_gutter_photo
+{
+  display: block;
+}
+div.marketplaces_gutter .marketplaces_gutter_photo > a > img
+{
+  display: block;
+  width: 98%;
+}
+div.marketplaces_gutter .marketplaces_gutter_name
+{
+  display: block;
+  font-weight: bold;
+  margin: 3px 0px 15px 0px;
+  font-size: 1em;
+}
+div.marketplaces_gutter .buttonlink
+{
+  padding-top: 2px;
+  padding-bottom: 1px;
+}
+div.marketplaces_gutter h4
+{
+  margin: 20px 0px 5px 0px;
+  text-transform: uppercase;
+}
+div.marketplaces_gutter > ul > li
+{
+  margin-bottom: 2px;
+}
+div.marketplaces_gutter ul.marketplaces_gutter_options > li
+{
+  font-size: .8em;
+  margin: 3px 0px 3px 0px;
+}
+ul.marketplace_thumbs > li img
+{
+  max-width: 50%;
+  max-height: 50%;
+  border: 1px solid $theme_photo_border_color;
+}
+
+
+
+
+/*
+EDIT MARKETPLACE LISTING
+*/
+ul.marketplaces_editphotos
+{
+  width: 600px;
+}
+ul.marketplaces_editphotos > li
+{
+  padding-top: 15px;
+  clear: both;
+  overflow: hidden;
+  padding-bottom: 15px;
+}
+ul.marketplaces_editphotos .marketplaces_editphotos_photo
+{
+  float: left;
+  margin-right: 15px;
+  overflow: hidden;
+}
+ul.marketplaces_editphotos .marketplaces_editphotos_photo img
+{
+  display: block;
+  margin: 3px;
+  width: 170px;
+}
+ul.marketplaces_editphotos .marketplaces_editphotos_info
+{
+  overflow: hidden;
+}
+ul.marketplaces_editphotos .marketplaces_editphotos_title_input input,
+{
+  margin: 2px 0px 6px 0px;
+  width: 25em;
+}
+ul.marketplaces_editphotos .marketplaces_editphotos_caption_input textarea
+{
+  margin: 2px 0px 6px 0px;
+  width: 25em;
+  height: 3em;
+  min-height: 0px;
+}
+ul.marketplaces_editphotos .marketplaces_editphotos_label
+{
+  float: left;
+}
+ul.marketplaces_editphotos .marketplaces_editphotos_cover
+{
+  float: left;
+}
+ul.marketplaces_editphotos .photo-delete-wrapper
+{
+  float: left;
+  margin-right: 15px;
+}
+ul.marketplaces_editphotos .photo-delete-wrapper > label
+{
+  display: block;
+  float: left;
+}
+
+
+
+
+/*
+MARKETPLACE PHOTOS UPLOAD FORM
+Some minor changes to the global form.
+*/
+.marketplace_form_upload #file-label,
+.marketplace_form_upload #submit-label
+{
+  display: none;
+}
+
+
+
+
+
+
+
+
+/*
+MARKETPLACES USER PROFILE TAB
+Styles the list of marketplace listings on a user's Marketplaces profile tab.
+*/
+ul.marketplaces_profile_tab > li
+{
+  overflow: hidden;
+}
+ul.marketplaces_profile_tab > li + li
+{
+  margin-top: 10px;
+  border-top-width: 1px;
+  padding-top: 10px;
+}
+ul.marketplaces_profile_tab .marketplaces_profile_tab_photo
+{
+  float: left;
+  overflow: hidden;
+  margin-right: 7px;
+}
+ul.marketplaces_profile_tab .marketplaces_profile_tab_photo img
+{
+  max-width: 90px;
+}
+ul.marketplaces_profile_tab .marketplaces_profile_tab_info
+{
+  overflow: hidden;
+}
+ul.marketplaces_profile_tab .marketplaces_profile_tab_title > a
+{
+  font-weight: bold;
+}
+ul.marketplaces_profile_tab .marketplaces_browse_info_date
+{
+  font-size: .8em;
+  color: $theme_font_color_light;
+}
+ul.marketplaces_profile_tab .marketplaces_browse_info_blurb
+{
+  margin-top: 7px;
+}
+
+
+
+
+
+
+/* ICONS */
+.icon_marketplace_new
+{
+  background-image: url(~/application/modules/Marketplace/externals/images/create.png);
+}
+.icon_marketplace_edit
+{
+  background-image: url(~/application/modules/Marketplace/externals/images/edit.png);
+}
+.icon_marketplace_close
+{
+  background-image: url(~/application/modules/Marketplace/externals/images/close.png);
+}
+.icon_marketplace_open
+{
+  background-image: url(~/application/modules/Marketplace/externals/images/unclose.png);
+}
+.icon_marketplace_delete
+{
+  background-image: url(~/application/modules/Marketplace/externals/images/delete.png);
+}
+.icon_marketplace_photo_new
+{
+  background-image: url(~/application/modules/Marketplace/externals/images/upload.png);
+}
+
+
+/*
+ADMIN TABLE LIST
+Styles most tabular data in the admin panel.
+*/
+table.admin_table thead tr th
+{
+  +foreground;
+  padding: 10px;
+  border-bottom: 1px solid #aaa;
+  font-weight: bold;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  white-space: nowrap;
+}
+table.admin_table thead tr th a
+{
+  font-weight: bold;
+}
+table.admin_table tbody tr:nth-child(even)
+{
+  background-color: #f8f8f8;
+}
+table.admin_table tbody tr td
+{
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: .9em;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  white-space: nowrap;
+  vertical-align: top;
+}
+table.admin_table tbody tr td.wrap
+{
+  white-space: normal;
+}
+th.admin_table_short
+{
+  width: 1%;
+}
+td.admin_table_options
+{
+  color: #ccc;
+}
+.admin_table_centered
+{
+  text-align: center;
+}
+.admin_table_bold,
+.admin_table_bold a
+{
+  font-weight: bold;
+}
+td.admin_table_options > span.sep
+{
+  display: none;
+}
+td.admin_table_options > a + span.sep
+{
+  display: inline;
+}
+.admin_table_email
+{
+  white-space: normal !important;
+  max-width: 140px;
+  word-wrap: break-word;
+
+}
+.admin_table_user {
+  white-space: normal !important;
+  max-width: 140px;
+  word-wrap: break-word;
+}
+.admin_table_form {
+  overflow:auto;
+}
+
+#navigation ul  {
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    padding-left: 20px;
+}
+#navigation li   {
+    list-style: square;
+    line-height: 15px;
+}
+#frmPaypal dt {
+	display: none;
+}
+.marketplace_fieldvalueloop > ul > li > span {
+	font-weight: bold;
+    float: left;
+    overflow: hidden;
+    width: 100px;
+}
+.marketplace_fieldvalueloop > ul > li > span + span {
+	font-weight: normal;
+    overflow: hidden;
+}
+.marketplace_fieldvalueloop ul{
+}
+.marketplace_fieldvalueloop{
+	width: 200px;
+	float:right;
+	margin-top: 31px;
+}
+.layout_middle_left{
+	width: 500px;
+	float:left;
+}
+
+
+a.add_to_cart,
+a.marketplace_button
+{
+	+rounded(2px);
+	padding: 6px 5px;
+	font-weight: bold;
+	border: none;
+	background-color: #7EB6D5;
+	border: 1px solid #50809B;
+	color: #fff !important;
+	background-image: url(~/application/modules/Core/externals/images/buttonbg.png);
+	background-repeat: repeat-x;
+	height: 16px;
+}
+
+a.add_to_cart:hover,
+a.marketplace_button:hover
+{
+	background-image: none;
+	background-color: #7EB6D5;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+table.cart_table,
+table.cart_table tr,
+table.cart_table tr td{
+	margin: 4px;
+	padding: 4px;
+}
+
+
+.marketplaces_wrapper{
+	float: left;
+	width: 340px;
+	margin: 0 5px;
+}
+
+#coupon_code{
+	border: 1px solid #000;
+}
+
+*:first-child+html  .global_form div.form-wrapper{
+	margin-bottom: 10px;
+}

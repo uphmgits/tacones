@@ -60,4 +60,18 @@ return array(
     'constants.css',
     'mobile.css',	
   ),
+  'nophoto' => array(
+    'user' => array(
+      'thumb_icon' => 'application/themes/musharraf/images/nophoto_user_thumb_icon.png',
+      'thumb_profile' => 'application/themes/musharraf/images/nophoto_user_thumb_profile.png',
+    ),
+    'group' => array(
+      'thumb_normal' => 'application/themes/musharraf/images/nophoto_event_thumb_normal.jpg',
+      'thumb_profile' => 'application/themes/musharraf/images/nophoto_event_thumb_profile.jpg',
+    ),
+    'event' => array(
+      'thumb_normal' => 'application/themes/musharraf/images/nophoto_event_thumb_normal.jpg',
+      'thumb_profile' => 'application/themes/musharraf/images/nophoto_event_thumb_profile.jpg',
+    ),
+  ),
 ) ?>

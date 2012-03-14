@@ -94,6 +94,38 @@ class Core_Form_Admin_Settings_Spam extends Engine_Form
       'value' => 0,
     ));
 
+    // recaptcha
+    if( $translator ) {
+      $description = sprintf($translator->translate('You can obtain API credentials at: %1$s'), 
+          $this->getView()->htmlLink('https://www.google.com/recaptcha', 
+              'https://www.google.com/recaptcha'));
+    } else {
+      $description = null;
+    }
+    
+    $this->addElement('Text', 'recaptchapublic', array(
+      'label' => 'ReCaptcha Public Key',
+      'description' => $description,
+      'filters' => array(
+        'StringTrim',
+      ),
+    ));
+    $this->getElement('recaptchapublic')
+        ->getDecorator('Description')
+        ->setOption('escape', false);
+    
+    $this->addElement('Text', 'recaptchaprivate', array(
+      'label' => 'ReCaptcha Private Key',
+      'description' => $description,
+      'filters' => array(
+        'StringTrim',
+      ),
+    ));
+    $this->getElement('recaptchaprivate')
+        ->getDecorator('Description')
+        ->setOption('escape', false);
+
+
     $this->addElement('Text', 'commenthtml', array(
       'label' => 'Allow HTML in Comments?',
       'description' => 'CORE_ADMIN_FORM_SETTINGS_SPAM_COMMENTHTML_DESCRIPTION'

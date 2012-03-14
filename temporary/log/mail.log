@@ -172,3 +172,33 @@
 2012-01-30T17:54:50+00:00 DEBUG (7): [System] (notify_liked) waldana@gmail.com <- noreply@fashbay.com
 2012-01-31T19:42:22+00:00 DEBUG (7): [Zend] waldana@gmail.com <- noreply@fashbay.com
 2012-01-31T19:42:22+00:00 DEBUG (7): [System] (notify_liked) waldana@gmail.com <- noreply@fashbay.com
+2012-03-09T01:16:24+00:00 DEBUG (7): [Zend] salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-03-09T01:16:24+00:00 DEBUG (7): [System] (core_contact) salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-03-09T01:56:20+00:00 DEBUG (7): [Zend] waldana@gmail.com <- noreply@fashbay.com
+2012-03-09T01:56:20+00:00 DEBUG (7): [System] (notify_liked) waldana@gmail.com <- noreply@fashbay.com
+2012-03-12T08:35:35+00:00 DEBUG (7): [Zend] salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-03-12T08:35:35+00:00 DEBUG (7): [System] (notify_liked) salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-03-12T08:35:35+00:00 DEBUG (7): [Zend] salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-03-12T08:35:35+00:00 DEBUG (7): [System] (notify_liked) salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-03-12T08:39:37+00:00 DEBUG (7): [Zend] salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-03-12T08:39:37+00:00 DEBUG (7): [System] (notify_liked) salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-03-12T08:54:48+00:00 DEBUG (7): [Zend] scarlettaldana@hotmail.com <- noreply@fashbay.com
+2012-03-12T08:54:48+00:00 DEBUG (7): [System] (notify_liked) scarlettaldana@hotmail.com <- noreply@fashbay.com
+2012-03-12T08:56:48+00:00 DEBUG (7): [Zend] salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-03-12T08:56:48+00:00 DEBUG (7): [System] (notify_liked) salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-03-12T09:19:03+00:00 DEBUG (7): [Zend] tester@tester.com <- noreply@fashbay.com
+2012-03-12T09:19:03+00:00 DEBUG (7): [System] (notify_liked) tester@tester.com <- noreply@fashbay.com
+2012-03-12T09:19:04+00:00 DEBUG (7): [Zend] tester@tester.com <- noreply@fashbay.com
+2012-03-12T09:19:04+00:00 DEBUG (7): [System] (notify_commented) tester@tester.com <- noreply@fashbay.com
+2012-03-12T09:56:44+00:00 DEBUG (7): [Zend] blackpza@hotmail.com <- noreply@fashbay.com
+2012-03-12T09:56:44+00:00 DEBUG (7): [System] (core_verification) blackpza@hotmail.com <- noreply@fashbay.com
+2012-03-12T11:54:20+00:00 DEBUG (7): [Zend] salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-03-12T11:54:20+00:00 DEBUG (7): [System] (notify_liked) salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-03-12T23:40:52+00:00 DEBUG (7): [Zend] yaksas@gmail.com <- noreply@fashbay.com
+2012-03-12T23:40:52+00:00 DEBUG (7): [System] (core_verification) yaksas@gmail.com <- noreply@fashbay.com
+2012-03-14T07:49:49+00:00 DEBUG (7): [Zend] tester@tester.com <- noreply@fashbay.com
+2012-03-14T07:49:49+00:00 DEBUG (7): [System] (notify_liked) tester@tester.com <- noreply@fashbay.com
+2012-03-14T07:51:50+00:00 DEBUG (7): [Zend] elticochico@yahoo.com <- noreply@fashbay.com
+2012-03-14T07:51:50+00:00 DEBUG (7): [System] (notify_liked) elticochico@yahoo.com <- noreply@fashbay.com
+2012-03-14T07:51:50+00:00 DEBUG (7): [Zend] elticochico@yahoo.com <- noreply@fashbay.com
+2012-03-14T07:51:50+00:00 DEBUG (7): [System] (notify_liked) elticochico@yahoo.com <- noreply@fashbay.com

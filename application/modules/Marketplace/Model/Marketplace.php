@@ -217,39 +217,27 @@ class Marketplace_Model_Marketplace extends Core_Model_Item_Abstract
   }
 
 
-  public function isLiked( $viewer ) {
-      $likesTable = Engine_Api::_()->getDbtable('likes', 'marketplace'); 
-      $isLiked = $likesTable->select()
-                ->where("marketplace_id = {$this->getIdentity()} AND user_id = {$viewer->getIdentity()}")
-                ->query()
-                ->fetch()
-      ;
-      return empty($isLiked) ? false : true;
+  public function isLike( $viewer ) {
+      $likesTable = Engine_Api::_()->getDbtable('likes', 'core');
+      return $likesTable->isLike( $this, $viewer );
   }
 
   public function updateLikes() {
       $viewer = Engine_Api::_()->user()->getViewer();
       if( !$viewer ) return;
 
-      $likesTable = Engine_Api::_()->getDbtable('likes', 'marketplace'); 
+      $likesTable = Engine_Api::_()->getDbtable('likes', 'core');
 
-      $isLiked = $this->isLiked($viewer);
-      if( $isLiked ) {
-          $likesTable->delete( "marketplace_id = {$this->getIdentity()} AND user_id = {$viewer->getIdentity()}" );
+      if( $likesTable->isLike( $this, $viewer ) ) {
+          $likesTable->removeLike( $this, $viewer );
       }
       else {
-          $likesTable->insert(array("marketplace_id" => $this->getIdentity(), "user_id" => $viewer->getIdentity() ));          
+          $likesTable->addLike( $this, $viewer );     
       }
   }
 
-  public function getLikesCount() {
-      $likesTable = Engine_Api::_()->getDbtable('likes', 'marketplace'); 
-      return $likesTable->select()
-                ->from($likesTable->info('name'), "count(*)")
-                ->where("marketplace_id = {$this->getIdentity()}")
-                ->query()
-                ->fetchColumn()
-      ;
+  public function getLikeCount() {
+      return Engine_Api::_()->getDbtable('likes', 'core')->getLikeCount( $this );
   }
 
 

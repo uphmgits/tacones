@@ -149,6 +149,13 @@ class Core_AdminSettingsController extends Core_Controller_Action_Admin
     $bannedWords = $bannedWordsTable->getWords();
     $config['bannedwords'] = join("\n", $bannedWords);
 
+// RECAPTCHA FROM 4.20
+    if( _ENGINE_ADMIN_NEUTER ) {
+      $config['recaptchapublic'] = '**********';
+      $config['recaptchaprivate'] = '**********';
+    }
+// END RECAPTCHA FROM 4.20
+
     // Populate
     $form->populate($config);
     
@@ -182,6 +189,38 @@ class Core_AdminSettingsController extends Core_Controller_Action_Admin
         $bannedIpsTable->normalizeAddressArray($bannedIpsNew)) ) {
       return $form->addError('One of the IP addresses or IP address ranges you entered contains your own IP address.');
     }
+
+
+// RECAPTCHA FROM 4.20
+    if( !empty($values['recaptchapublic']) &&
+        !empty($values['recaptchaprivate']) ) {
+      $recaptcha = new Zend_Service_ReCaptcha($values['recaptchapublic'], 
+          $values['recaptchaprivate']);
+      try {
+        $resp = $recaptcha->verify('test', 'test');
+//        if( false === stripos($resp, 'error') ) {
+//          return $form->addError('ReCaptcha Key Invalid: ' . $resp);
+//        }
+        if( in_array($err = $resp->getErrorCode(), array('invalid-site-private-key', 'invalid-site-public-key')) ) {
+          return $form->addError('ReCaptcha Error: ' . $err);
+        }
+        // Validate public key
+        $httpClient = new Zend_Http_Client();
+        $httpClient->setUri('http://www.google.com/recaptcha/api/challenge');
+        $httpClient->setParameterGet('k', $values['recaptchapublic']);
+        $resp = $httpClient->request('GET');
+        if( false !== stripos($resp->getBody(), 'Input error') ) {
+          return $form->addError('ReCaptcha Error: ' . str_replace(array("document.write('", "\\n');"), array('', ''), $resp->getBody()));
+        }
+      } catch( Exception $e ) {
+        return $form->addError('ReCaptcha Key Invalid: ' . $e->getMessage());
+      }
+      
+      $values['recaptchaenabled'] = true;
+    } else {
+      $values['recaptchaenabled'] = false;
+    }
+// END RECAPTCHA FROM 4.20   
     
     try {
 

@@ -251,7 +251,7 @@ class User_Form_Signup_Account extends Engine_Form
     }
 
     // Element: captcha
-    if( Engine_Api::_()->getApi('settings', 'core')->core_spam_signup ) {
+    /*if( Engine_Api::_()->getApi('settings', 'core')->core_spam_signup ) {
       $this->addElement('captcha', 'captcha', array(
         'description' => '_CAPTCHA_DESCRIPTION',
         'captcha' => 'image',
@@ -266,6 +266,13 @@ class User_Form_Signup_Account extends Engine_Form
           'font' => APPLICATION_PATH . '/application/modules/Core/externals/fonts/arial.ttf'
         )
       ));
+    }*/
+
+    // Element: captcha
+    if( Engine_Api::_()->getApi('settings', 'core')->core_spam_signup ) {
+      $this->addElement('captcha', 'captcha', Engine_Api::_()->core()->getCaptchaOptions(array(
+        'tabindex' => $tabIndex++,
+      )));
     }
     
     if( $settings->getSetting('user.signup.terms', 1) == 1 ) {

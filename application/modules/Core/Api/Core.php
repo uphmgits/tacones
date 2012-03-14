@@ -89,4 +89,43 @@ class Core_Api_Core extends Core_Api_Abstract
     $this->_subject = null;
     return $this;
   }
+
+  public function getCaptchaOptions(array $params = array())
+  {
+    $spamSettings = Engine_Api::_()->getApi('settings', 'core')->core_spam;
+    if( (empty($spamSettings['recaptchaenabled']) ||
+        empty($spamSettings['recaptchapublic']) ||
+        empty($spamSettings['recaptchaprivate'])) ) {
+      // Image captcha
+      return array_merge(array(
+        'label' => 'Human Verification',
+        'description' => 'Please type the characters you see in the image.',
+        'captcha' => 'image',
+        'required' => true,
+        'captchaOptions' => array(
+          'wordLen' => 6,
+          'fontSize' => '30',
+          'timeout' => 300,
+          'imgDir' => APPLICATION_PATH . '/public/temporary/',
+          'imgUrl' => Zend_Registry::get('Zend_View')->baseUrl() . '/public/temporary',
+          'font' => APPLICATION_PATH . '/application/modules/Core/externals/fonts/arial.ttf',
+        ),
+      ), $params);
+    } else {
+      // Recaptcha
+      return array_merge(array(
+        'label' => 'Human Verification',
+        'description' => 'Please type the characters you see in the image.',
+        'captcha' => 'reCaptcha',
+        'required' => true,
+        'captchaOptions' => array(
+          'privkey' => $spamSettings['recaptchaprivate'],
+          'pubkey' => $spamSettings['recaptchapublic'],
+          'theme' => 'white',
+          'lang' => Zend_Registry::get('Locale')->getLanguage(),
+          'tabindex' => (isset($params['tabindex']) ? $params['tabindex'] : null ),
+        ),
+      ), $params);
+    }
+  }
 }

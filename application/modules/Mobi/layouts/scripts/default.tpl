@@ -92,8 +92,11 @@
     }
     
     foreach( $themes as $theme ) {
-      $this->headLink()
+      /*$this->headLink()
         ->prependStylesheet($staticBaseUrl . 'application/css.php?request=application/themes/'.$theme.'/mobile.css');
+      */
+      $this->headLink()
+        ->prependStylesheet($staticBaseUrl . 'css.php?request=application/themes/'.$theme.'/mobile.css');
       if( $orientation == 'rtl' ) {
         // @todo add include for rtl
       }

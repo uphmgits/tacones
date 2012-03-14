@@ -1,15 +1,3 @@
-<?php
-/**
- * 
- *
- * @category   Application_Extensions
- * @package    Marketplace
- * @copyright  Copyright 2010 
- * * 
- * @version    $Id: manage.tpl 7244 2010-09-01 01:49:53Z john $
- * 
- */
-?>
 
 <script type="text/javascript">
   var pageAction =function(page){
@@ -69,27 +57,26 @@
     <br/>
   <?php endif; ?>
   <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
+  
+    <?php
+      $myprodcount = $this->paginator->getTotalItemCount(); 
+      if($myprodcount >= 17) $myrowsize=5;
+      elseif($myprodcount >= 14) $myrowsize=4;
+      elseif($myprodcount >= 9) $myrowsize=3;
+      elseif($myprodcount >= 6) $myrowsize=2;
+      else $myrowsize=1;
+    ?>  
+  
     <ul class="marketplaces_browse">
+      <?php $myi=0; ?>    
       <?php foreach( $this->paginator as $item ): ?>
+        <?php $myi++; ?>      
         <li>
           <div class='marketplaces_browse_photo'>
-            <?php echo $this->htmlLink($item->getHref(), $this->itemPhoto($item, 'thumb.normal')) ?>
+            <?php echo $this->htmlLink($item->getHref(), $this->itemPhoto($item, 'normal')) ?>
           </div>
-          <div class='marketplaces_browse_options'>
-            <a href='<?php echo $this->url(array('marketplace_id' => $item->marketplace_id), 'marketplace_edit', true) ?>' class='buttonlink icon_marketplace_edit'><?php echo $this->translate('Edit Listing');?></a>
-            <?php if( $this->allowed_upload ): ?>
-              <?php echo $this->htmlLink(array(
-                  'route' => 'marketplace_extended',
-                  'controller' => 'photo',
-                  'action' => 'upload',
-                  'subject' => $item->getGuid(),
-                ), $this->translate('Add Photos'), array(
-                  'class' => 'buttonlink icon_marketplace_photo_new'
-              )) ?>
-            <?php endif; ?>
 
-            <a href='<?php echo $this->url(array('marketplace_id' => $item->marketplace_id), 'marketplace_delete', true) ?>' class='buttonlink icon_marketplace_delete'><?php echo $this->translate('Delete Listing');?></a>
-          </div>
+
           <div class='marketplaces_browse_info'>
             <div class='marketplaces_browse_info_title'>
               <h3>
@@ -108,7 +95,26 @@
               ?>
             </div>
           </div>
+
+          <div class='marketplaces_browse_options'>
+            <a href='<?php echo $this->url(array('marketplace_id' => $item->marketplace_id), 'marketplace_edit', true) ?>' class='buttonlink icon_marketplace_edit'><?php echo $this->translate('Edit Listing');?></a>
+            <?php if( $this->allowed_upload ): ?>
+              <?php echo $this->htmlLink(array(
+                  'route' => 'marketplace_extended',
+                  'controller' => 'photo',
+                  'action' => 'upload',
+                  'subject' => $item->getGuid(),
+                ), $this->translate('Add Photos'), array(
+                  'class' => 'buttonlink icon_marketplace_photo_new'
+              )) ?>
+            <?php endif; ?>
+
+            <a href='<?php echo $this->url(array('marketplace_id' => $item->marketplace_id), 'marketplace_delete', true) ?>' class='buttonlink icon_marketplace_delete'><?php echo $this->translate('Delete Listing');?></a>
+          </div>
+
+
         </li>
+         <?php if($myi==$myrowsize) { echo "</ul><ul class='marketplaces_browse'>"; $myi = 0;} ?>               
       <?php endforeach; ?>
     </ul>
 
@@ -128,6 +134,5 @@
       </span>
     </div>
   <?php endif; ?>
-  <?php echo $this->paginationControl($this->paginator); ?>
-  <?php //echo $this->paginationControl($this->paginator, null, array("pagination/pagination.tpl","marketplace")); ?>
+  <?php echo $this->paginationControl($this->paginator, null, array("pagination/pagination.tpl","marketplace")); ?>
 </div>

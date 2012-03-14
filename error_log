@@ -1,31 +1,41 @@
-[06-Mar-2012 11:15:10] PHP Fatal error:  Cannot redeclare class Marketplace_Model_DbTable_Marketplaces in /home/zapato/public_html/application/modules/Marketplace/Model/DbTable/Likes.php on line 3
-[06-Mar-2012 11:47:37] PHP Parse error:  syntax error, unexpected ')', expecting ',' or ';' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/index.tpl on line 146
-[06-Mar-2012 11:50:11] PHP Fatal error:  Call to a member function insert() on a non-object in /home/zapato/public_html/application/modules/Marketplace/Model/Marketplace.php on line 225
-[06-Mar-2012 11:50:24] PHP Fatal error:  Call to a member function insert() on a non-object in /home/zapato/public_html/application/modules/Marketplace/Model/Marketplace.php on line 225
-[06-Mar-2012 15:22:34] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /home/zapato/public_html/application/modules/Marketplace/settings/manifest.php on line 151
-[06-Mar-2012 15:22:35] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /home/zapato/public_html/application/modules/Marketplace/settings/manifest.php on line 151
-[06-Mar-2012 15:55:09] PHP Fatal error:  Call to a member function url() on a non-object in /home/zapato/public_html/application/modules/Marketplace/Form/Create.php on line 73
-[06-Mar-2012 16:02:55] PHP Parse error:  syntax error, unexpected ')' in /home/zapato/public_html/application/modules/Marketplace/Form/Create.php on line 76
-[06-Mar-2012 16:14:04] PHP Parse error:  syntax error, unexpected '=' in /home/zapato/public_html/application/modules/Marketplace/Form/Edit.php on line 41
-[06-Mar-2012 16:15:22] PHP Parse error:  syntax error, unexpected T_DOUBLE_ARROW in /home/zapato/public_html/application/modules/Marketplace/Form/Edit.php on line 41
-[06-Mar-2012 16:15:46] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING in /home/zapato/public_html/application/modules/Marketplace/Form/Edit.php on line 42
-[06-Mar-2012 16:15:49] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING in /home/zapato/public_html/application/modules/Marketplace/Form/Edit.php on line 42
-[06-Mar-2012 16:16:07] PHP Fatal error:  Call to undefined method Zend_Controller_Front::baseUrl() in /home/zapato/public_html/application/modules/Marketplace/Form/Create.php on line 76
-[07-Mar-2012 00:11:25] PHP Warning:  include(/home/zapato/public_html/application/index.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home/zapato/public_html/index.php on line 24
-[07-Mar-2012 00:11:25] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home/zapato/public_html/application/index.php' for inclusion (include_path='.:/usr/local/ZendFramework-20080908-11279/trunk/library/:/usr/lib/php:/usr/local/lib/php') in /home/zapato/public_html/index.php on line 24
-[07-Mar-2012 00:11:26] PHP Warning:  include(/home/zapato/public_html/application/index.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home/zapato/public_html/index.php on line 24
-[07-Mar-2012 00:11:26] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home/zapato/public_html/application/index.php' for inclusion (include_path='.:/usr/local/ZendFramework-20080908-11279/trunk/library/:/usr/lib/php:/usr/local/lib/php') in /home/zapato/public_html/index.php on line 24
-[07-Mar-2012 00:12:19] PHP Warning:  include(/home/zapato/public_html/application/index.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home/zapato/public_html/index.php on line 24
-[07-Mar-2012 00:12:19] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home/zapato/public_html/application/index.php' for inclusion (include_path='.:/usr/local/ZendFramework-20080908-11279/trunk/library/:/usr/lib/php:/usr/local/lib/php') in /home/zapato/public_html/index.php on line 24
-[07-Mar-2012 00:12:19] PHP Warning:  include(/home/zapato/public_html/application/index.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home/zapato/public_html/index.php on line 24
-[07-Mar-2012 00:12:19] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home/zapato/public_html/application/index.php' for inclusion (include_path='.:/usr/local/ZendFramework-20080908-11279/trunk/library/:/usr/lib/php:/usr/local/lib/php') in /home/zapato/public_html/index.php on line 24
-[07-Mar-2012 00:12:21] PHP Warning:  include(/home/zapato/public_html/application/index.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home/zapato/public_html/index.php on line 24
-[07-Mar-2012 00:12:21] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home/zapato/public_html/application/index.php' for inclusion (include_path='.:/usr/local/ZendFramework-20080908-11279/trunk/library/:/usr/lib/php:/usr/local/lib/php') in /home/zapato/public_html/index.php on line 24
-[07-Mar-2012 00:12:34] PHP Warning:  include(/home/zapato/public_html/application/index.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home/zapato/public_html/index.php on line 24
-[07-Mar-2012 00:12:34] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home/zapato/public_html/application/index.php' for inclusion (include_path='.:/usr/local/ZendFramework-20080908-11279/trunk/library/:/usr/lib/php:/usr/local/lib/php') in /home/zapato/public_html/index.php on line 24
-[07-Mar-2012 10:45:48] PHP Fatal error:  Call to a member function select() on a non-object in /home/zapato/public_html/application/modules/Marketplace/controllers/AdminFieldsController.php on line 63
-[07-Mar-2012 11:33:45] PHP Warning:  Unexpected character in input:  ''' (ASCII=39) state=1 in /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php on line 582
-[07-Mar-2012 11:33:45] PHP Parse error:  syntax error, unexpected $end in /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php on line 582
-[07-Mar-2012 11:37:53] PHP Fatal error:  Call to a member function removeElement() on a non-object in /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php on line 227
-[07-Mar-2012 11:38:18] PHP Fatal error:  Call to a member function remove() on a non-object in /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php on line 227
-[07-Mar-2012 11:45:31] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING in /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php on line 224
+[12-Mar-2012 01:11:18] PHP Fatal error:  Uncaught exception 'Zend_Db_Statement_Mysqli_Exception' with message 'Mysqli prepare error: Query execution was interrupted' in /home/zapato/public_html/application/libraries/Zend/Db/Statement/Mysqli.php:77
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/Db/Statement.php(115): Zend_Db_Statement_Mysqli->_prepare('SET time_zone =...')
+#1 /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Mysqli.php(405): Zend_Db_Statement->__construct(Object(Zend_Db_Adapter_Mysqli), 'SET time_zone =...')
+#2 /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Abstract.php(467): Zend_Db_Adapter_Mysqli->prepare('SET time_zone =...')
+#3 /home/zapato/public_html/application/modules/Core/Bootstrap.php(112): Zend_Db_Adapter_Abstract->query('SET time_zone =...')
+#4 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(256): Core_Bootstrap->_initDb()
+#5 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(207): Engine_Applic in /home/zapato/public_html/application/libraries/Zend/Db/Statement/Mysqli.php on line 77
+[12-Mar-2012 01:11:19] PHP Fatal error:  Uncaught exception 'Zend_Db_Adapter_Mysqli_Exception' with message 'Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)' in /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Mysqli.php:352
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Abstract.php(448): Zend_Db_Adapter_Mysqli->_connect()
+#1 /home/zapato/public_html/application/modules/Core/Bootstrap.php(112): Zend_Db_Adapter_Abstract->query('SET time_zone =...')
+#2 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(256): Core_Bootstrap->_initDb()
+#3 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(207): Engine_Application_Bootstrap_Abstract->_executeResource('db')
+#4 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(150): Engine_Application_Bootstrap_Abstract->_bootstrap(NULL)
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(149): Engine_Applica in /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Mysqli.php on line 352
+[12-Mar-2012 01:11:46] PHP Fatal error:  Uncaught exception 'Zend_Db_Adapter_Mysqli_Exception' with message 'Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)' in /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Mysqli.php:352
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Abstract.php(448): Zend_Db_Adapter_Mysqli->_connect()
+#1 /home/zapato/public_html/application/modules/Core/Bootstrap.php(112): Zend_Db_Adapter_Abstract->query('SET time_zone =...')
+#2 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(256): Core_Bootstrap->_initDb()
+#3 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(207): Engine_Application_Bootstrap_Abstract->_executeResource('db')
+#4 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(150): Engine_Application_Bootstrap_Abstract->_bootstrap(NULL)
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(149): Engine_Applica in /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Mysqli.php on line 352
+[12-Mar-2012 01:12:10] PHP Fatal error:  Uncaught exception 'Zend_Db_Adapter_Mysqli_Exception' with message 'Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)' in /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Mysqli.php:352
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Abstract.php(448): Zend_Db_Adapter_Mysqli->_connect()
+#1 /home/zapato/public_html/application/modules/Core/Bootstrap.php(112): Zend_Db_Adapter_Abstract->query('SET time_zone =...')
+#2 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(256): Core_Bootstrap->_initDb()
+#3 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(207): Engine_Application_Bootstrap_Abstract->_executeResource('db')
+#4 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(150): Engine_Application_Bootstrap_Abstract->_bootstrap(NULL)
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(149): Engine_Applica in /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Mysqli.php on line 352
+[12-Mar-2012 01:12:41] PHP Fatal error:  Uncaught exception 'Zend_Db_Adapter_Mysqli_Exception' with message 'Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)' in /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Mysqli.php:352
+Stack trace:
+#0 /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Abstract.php(448): Zend_Db_Adapter_Mysqli->_connect()
+#1 /home/zapato/public_html/application/modules/Core/Bootstrap.php(112): Zend_Db_Adapter_Abstract->query('SET time_zone =...')
+#2 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(256): Core_Bootstrap->_initDb()
+#3 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(207): Engine_Application_Bootstrap_Abstract->_executeResource('db')
+#4 /home/zapato/public_html/application/libraries/Engine/Application/Bootstrap/Abstract.php(150): Engine_Application_Bootstrap_Abstract->_bootstrap(NULL)
+#5 /home/zapato/public_html/application/libraries/Engine/Application.php(149): Engine_Applica in /home/zapato/public_html/application/libraries/Zend/Db/Adapter/Mysqli.php on line 352
+[14-Mar-2012 13:17:27] PHP Parse error:  syntax error, unexpected '<' in /home/zapato/public_html/application/modules/Review/widgets/profile-reviews/index.tpl on line 129

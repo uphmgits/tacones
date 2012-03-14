@@ -35,7 +35,7 @@ class Review_Widget_ProfileReviewsController extends Engine_Content_Widget_Abstr
       return $this->setNoRender();
     }     
     
-    $this->view->items_per_page = $max = $this->_getParam('max', 5);
+    $this->view->items_per_page = $max = $this->_getParam('max', 3);
     $this->view->showdetails = $this->_getParam('showdetails', 0);
 
     $this->view->paginator = $paginator = Engine_Api::_()->review()->getReviewsPaginator(array(
