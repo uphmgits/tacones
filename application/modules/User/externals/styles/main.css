@@ -1080,3 +1080,64 @@ body .activity_icon_tagged
 {
   background-image: url(~/application/modules/User/externals/images/types/tag.png);
 }
+
+
+
+/* Update for profile-fields widget */
+div.layout_user_profile_fields {
+  overflow: hidden;
+  background: #080808;
+}
+div.layout_user_profile_fields * {
+  color: #d0d0d0;
+}
+div.layout_user_profile_fields h2 {
+  margin-top: 10px;
+  font-size: 24px;
+}
+#profile_photo_holder {
+  float: left;
+  margin-right: 20px;
+  font-size: 0px;
+}
+#profile_photo_holder img {
+  max-width: 320px;
+}
+#profile_fields_details {
+  overflow: hidden;
+}
+#profile_fields_details .profile_fields {
+  margin-top: 0;
+}
+#profile_fields_details .profile_fields > ul > li > span + span {
+  width: 300px;
+}
+#profile_fields_details h4 {
+  padding: 0;
+  margin: 0;
+  border: none;
+  color: #585858;
+}
+#profile_fields_details > h4 + h4,
+#profile_fields_details > table {
+  margin-top: 10px;
+}
+#profile_fields_details h4 > span {
+  position: static;
+}
+#profile_fields_details .profile_fields > ul > li + li {
+  margin-top: 0;
+}
+#profile_fields_details .profile-favorites {
+  overflow: hidden;
+}
+#profile_fields_details .profile-favorites li {
+  float: left;
+  margin-right: 10px;
+  text-transform: uppercase;
+}
+#profile_fields_details table {
+  margin-left: -14px;
+  border-collapse: separate;
+  border-spacing: 14px 2px;
+}

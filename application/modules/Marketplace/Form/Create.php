@@ -25,32 +25,6 @@ class Marketplace_Form_Create extends Engine_Form
       ->setDescription('Compose your new marketplace listing below, then click "Post Listing" to publish the listing.')
       ->setAttrib('name', 'marketplaces_create');
 
-    $this->addElement('Text', 'title', array(
-      'label' => 'Listing Title',
-      'allowEmpty' => false,
-      'required' => true,
-      'filters' => array(
-        'StripTags',
-        new Engine_Filter_Censor(),
-        new Engine_Filter_StringLength(array('max' => '63')),
-      ),
-    ));
-
-        $this->addElement('Text', 'price', array(
-      'label' => 'Price',
-      'allowEmpty' => false,
-      'required' => true,
-      'filters' => array(
-        'StripTags',
-        new Engine_Filter_Censor(),
-        new Engine_Filter_StringLength(array('max' => '63')),
-      ),
-                      'validators' => array(
-        array('NotEmpty', true),
-		array('Float', true),
-       ),
-    ));
-
     $user = Engine_Api::_()->user()->getViewer();
     $user_level = Engine_Api::_()->user()->getViewer()->level_id;
 
@@ -79,6 +53,32 @@ class Marketplace_Form_Create extends Engine_Form
       ));
       
     }
+
+    $this->addElement('Text', 'title', array(
+      'label' => 'Listing Title',
+      'allowEmpty' => false,
+      'required' => true,
+      'filters' => array(
+        'StripTags',
+        new Engine_Filter_Censor(),
+        new Engine_Filter_StringLength(array('max' => '63')),
+      ),
+    ));
+
+        $this->addElement('Text', 'price', array(
+      'label' => 'Price',
+      'allowEmpty' => false,
+      'required' => true,
+      'filters' => array(
+        'StripTags',
+        new Engine_Filter_Censor(),
+        new Engine_Filter_StringLength(array('max' => '63')),
+      ),
+                      'validators' => array(
+        array('NotEmpty', true),
+		array('Float', true),
+       ),
+    ));
 
     $this->addElement('Textarea', 'body', array(
       'label' => 'Description',

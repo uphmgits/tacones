@@ -17,7 +17,7 @@
 
   <div class="reviews_profile_actions_container">
     <div class="reviews_profile_actions">
-      <?=$this->translate(array('%1$d rewiew', '%1$d rewiews', $totalReviews), $totalReviews);?>
+      <?=$this->translate(array('%1$d rewiew', '%1$d rewiews', $this->total_review), $this->total_review);?>
       <?php echo $this->htmlLink(array('route'=>'review_user', 'id'=>$this->subject()->getIdentity()), 
         $this->translate('View All Reviews'),
         array('class'=>'buttonlink')

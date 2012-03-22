@@ -13,6 +13,18 @@
 
 <?php if( (!empty($this->feedOnly) || !$this->endOfFeed ) &&
     (empty($this->getUpdate) && empty($this->checkUpdate)) ): ?>
+<style>
+  ul#activity-feed {
+    background: #101A20;
+    padding: 24px;
+    margin: 10px 0 0;
+  }
+  ul#activity-feed > li + li {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid #233A41;
+  }
+</style>
   <script type="text/javascript">
     (function(){
       var activity_count = <?php echo sprintf('%d', $this->activityCount) ?>;
@@ -99,69 +111,28 @@ endif; ?>
    </script>
 <?php endif; ?>
 
-<?php if( $this->enableComposer ): ?>
-  <div class="activity-post-container">
-
-    <form method="post" action="<?php echo $this->url(array('module' => 'activity', 'controller' => 'index', 'action' => 'post'), 'default', true) ?>" class="activity" enctype="application/x-www-form-urlencoded" id="activity-form">
-      <textarea id="activity_body" cols="1" rows="1" name="body"></textarea>
-      <input type="hidden" name="return_url" value="<?php echo $this->url() ?>" />
-      <?php if( $this->viewer() && $this->subject() && !$this->viewer()->isSelf($this->subject())): ?>
-        <input type="hidden" name="subject" value="<?php echo $this->subject()->getGuid() ?>" />
-      <?php endif; ?>
-      <div id="compose-menu" class="compose-menu">
-        <button id="compose-submit" type="submit"><?php echo $this->translate("Share") ?></button>
-      </div>
-    </form>
-
-    <?php
-      $this->headScript()
-        ->appendFile($this->baseUrl() . '/externals/mdetect/mdetect' . ( APPLICATION_ENV != 'development' ? '.min' : '' ) . '.js')
-        ->appendFile($this->baseUrl() . '/application/modules/Core/externals/scripts/composer.js');
-    ?>
-
-    <script type="text/javascript">
-      var composeInstance;
-      en4.core.runonce.add(function() {
-        // @todo integrate this into the composer
-        if( !DetectMobileQuick() && !DetectIpad() ) {
-          composeInstance = new Composer('activity_body', {
-            menuElement : 'compose-menu',
-            baseHref : '<?php echo $this->baseUrl() ?>',
-            lang : {
-              'Post Something...' : '<?php echo $this->string()->escapeJavascript($this->translate('Post Something...')) ?>'
-            }
-          });
-        }
-      });
-
-      <?php if ($this->updateSettings && !$this->action_id): // wrap this code around a php if statement to check if there is live feed update turned on ?>
-      var activityUpdateHandler;
-      en4.core.runonce.add(function() {
-        try {
-            activityUpdateHandler = new ActivityUpdateHandler({
-              'baseUrl' : en4.core.baseUrl,
-              'basePath' : en4.core.basePath,
-              'identity' : 4,
-              'delay' : <?php echo $this->updateSettings;?>,
-              'last_id': <?php echo sprintf('%d', $this->firstid) ?>,
-              'subject_guid' : '<?php echo $this->subjectGuid ?>'
-            });
-            setTimeout("activityUpdateHandler.start()",1250);
-            //activityUpdateHandler.start();
-            window._activityUpdateHandler = activityUpdateHandler;
-        } catch( e ) {
-          //if( $type(console) ) console.log(e);
-        }
-      });
-      <?php endif;?>
-    </script>
-
-    <?php foreach( $this->composePartials as $partial ): ?>
-      <?php echo $this->partial($partial[0], $partial[1]) ?>
-    <?php endforeach; ?>
-
-  </div>
-<?php endif; ?>
+<script type="text/javascript">
+  <?php if ($this->updateSettings && !$this->action_id): // wrap this code around a php if statement to check if there is live feed update turned on ?>
+  var activityUpdateHandler;
+  en4.core.runonce.add(function() {
+    try {
+        activityUpdateHandler = new ActivityUpdateHandler({
+          'baseUrl' : en4.core.baseUrl,
+          'basePath' : en4.core.basePath,
+          'identity' : 4,
+          'delay' : <?php echo $this->updateSettings;?>,
+          'last_id': <?php echo sprintf('%d', $this->firstid) ?>,
+          'subject_guid' : '<?php echo $this->subjectGuid ?>'
+        });
+        setTimeout("activityUpdateHandler.start()",1250);
+        //activityUpdateHandler.start();
+        window._activityUpdateHandler = activityUpdateHandler;
+    } catch( e ) {
+      //if( $type(console) ) console.log(e);
+    }
+  });
+  <?php endif;?>
+</script>
 
 <?php if( $this->post_failed == 1 ): ?>
   <div class="tip">

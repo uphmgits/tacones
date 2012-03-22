@@ -1,27 +1,19 @@
-"Terms of Service";"TOS"
-"_CORE_TERMS_OF_SERVICE";"This page will contain the terms of service of your choice."
+"Terms of Service";"Terms of service"
+"_CORE_TERMS_OF_SERVICE";"This website allows for the exchange, purchase, or selling of high-end women's merchandise.  They will be curated and promised to be legitimate items."
 "I have read and agree to the <a target=""_blank"" href=""%s/help/terms"">terms of service</a>.";"I have read and agree to the <a target=""_blank"" href=""%s/help/terms"">terms of service</a>."
 "You must agree to the terms of service to continue.";"You must agree to the terms of service to continue."
 "Yes, make members agree to your terms of service on signup.";"Yes, make members agree to your terms of service on signup."
 "No, members will not be shown a terms of service checkbox on signup.";"No, members will not be shown a terms of service checkbox on signup."
-"USER_FORM_ADMIN_SIGNUP_TERMS_DESCRIPTION";"Require members to agree to your terms of service?  You can modifying your terms of service by editing the _CORE_TERMS_OF_SERVICE language variable in the application/languages/en/core.csv file."
-"Copyright";"Fashbay.com Copyright"
-"Copyright &copy;%s";"Copyright &copy;%s"
-"Copyright &copy;%s";"Fashbay.com Copyright &copy;%s"
+"USER_FORM_ADMIN_SIGNUP_TERMS_DESCRIPTION";"Require members to agree to your terms of service?  You can modify your terms of service by editing the _CORE_TERMS_OF_SERVICE language variable in the application/languages/en/custom.csv file."
 "Copyright";"Copyright"
-"Copyright &copy;%s";"Fashbay.com   Copyright &copy;%s"
-"Copyright &copy;%s";"Fashbay.com    Copyright &copy;%s"
-"Copyright &copy;%s";"Fashbay    Copyright &copy;%s"
-"Copyright &copy;%s";"Fashbay  %s  Copyright &copy;%s"
-"Copyright &copy;%s";"Fashbay   &copy;%s  Copyright &copy;%s"
-"Copyright &copy;%s";"Fashbay  Copyright &copy;%s"
+"Copyright &copy;%s";"Upheels  Copyright &copy;%s"
 "Create Account";"Create Profile Account"
 "ADMIN_SIGNUP_STEP_USER_PLUGIN_SIGNUP_ACCOUNT";"Create Account"
 "Step 1: Create Account";"Step 1: Create Account"
 "ANNOUNCEMENT_VIEW_SCRIPTS_ADMINMANAGE_DESCRIPTION";"Announcements are a great way to keep your members engaged in the community. Announcements appear inside the ""Announcement Widget"", which you can place anywhere on your site. By default, this widget appears at the top of the member homepage - this way, members see your announcements right when they sign in. You can move this widget elsewhere or change its settings in the <a href='%s'>Layout Editor</a>."
 "Please sign in to continue.";"Please sign in to continue."
 "Please sign in to continue..";"Please sign in to continue."
-"Sign In or %1$sJoin%2$s";"Log In or %1$sJoin%2$s"
+"Sign In or %1$sJoin%2$s";"Sign In or %1$sJoin%2$s"
 "No, visitors must sign in to view member profiles.";"No, visitors must sign in to view member profiles."
 "No, visitors must sign in to view the search page.";"No, visitors must sign in to view the search page."
 "No, visitors must sign in to view the main portal page.";"No, visitors must sign in to view the main portal page."
@@ -71,7 +63,7 @@ http://[host][object_link]
 "_INVITE_FORM_DESCRIPTION";"Invite your friends to join! Enter up to 10 email addresses separated by commas in the recipients box below. If your friends decide to sign up, a friend request from you will be waiting for them when they first sign in."
 "_EMAIL_PAYMENT_SUBSCRIPTION_ACTIVE_BODY";"[header]
 
-Thank you for subscribing to our social network! Your subscription is now active.
+Thank you for subscribing to Upheels! Your subscription is now active.
 
 [subscription_title]
 [subscription_description]
@@ -111,7 +103,6 @@ You may follow the link below to sign in.
 
 [footer]"
 "You have selected an account type that requires recurring subscription payments. You will be taken to a secure checkout area where you can setup your subscription. Remember to continue back to our site after your purchase to sign in to your account.";"You have selected an account type that requires recurring subscription payments. You will be taken to a secure checkout area where you can setup your subscription. Remember to continue back to our site after your purchase to sign in to your account."
-"Sign In or %1$sJoin%2$s";"Sign In or %1$sJoin%2$s"
 "Administrator: Please check the error log in your admin panel for more information regarding this error.";"Administrator: Please check the error log in your admin panel for more information regarding this error."
 "USER_FORM_AUTH_FACEBOOK_NOACCOUNT";"Your Facebook login was accepted, but no linked account was found. Would you like to <a href=""%s"">create an account</a>?<br>You may also log in to an existing account below, then link your Facebook account in the <a href=""%2$s"">Settings</a> page."
 "Linking your Facebook account will give you access to use your Facebook account to log in.";"Linking your Facebook account will give you access to use your Facebook account to log in."
@@ -119,7 +110,7 @@ You may follow the link below to sign in.
 "ACTIVITY_TYPE_MARKETPLACE_TRANSACTION_TO_BUYER";"When user make payment for marketplace item."
 "_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_OWNER_BODY";"[header]
 
-[sender_title] has buy ""[object_title]""
+[sender_title] has bought ""[object_title]""
 
 [footer]"
 "_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_BUYER_TITLE";"Marketplace Sale Notification for Buyer"
@@ -127,21 +118,11 @@ You may follow the link below to sign in.
 "_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_BUYER_SUBJECT";"You have successfully bought [object_title]."
 "_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_BUYER_BODY";"[header]
 
-Your have been successfully buyed ""[object_title]""
-
-[footer]"
-"_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_OWNER_BODY";"[header]
-
-[sender_title] has bought ""[object_title]""
-
-[footer]"
-"_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_BUYER_BODY";"[header]
-
 Your have successfully bought ""[object_title]""
 
 [footer]"
-"ACTIVITY_TYPE_MARKETPLACE_TRANSACTION_TO_OWNER";"When user retrieve payment for marketplace item."
-"_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_OWNER_DESCRIPTION";"This email is sent to the member when retrieve payment for marketplace item."
+"ACTIVITY_TYPE_MARKETPLACE_TRANSACTION_TO_OWNER";"When user retrieves payment for marketplace item."
+"_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_OWNER_DESCRIPTION";"This email is sent to the member when they retrieve payment for marketplace item."
 "_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_OWNER_SUBJECT";"Your retrieve payment for [object_title]."
 "_SITE_TITLE";"Social Network"
 "CORE_VIEWS_SCRIPTS_ADMINADS_INDEX_DESCRIPTION";"Displaying advertisements is an excellent way to monetize your social network. By creating ad campaigns, you can determine exactly where your ads will appear, how long they will be displayed, and who they will be shown to. The key to generating substantial revenue from your social network is to create targeted ad campaigns. This means that you should make an effort to show specific ads to users based on their interests or personal characteristics (e.g. their profile information). To accomplish this, ad campaigns can be created for specific user levels and/or networks."
@@ -165,20 +146,18 @@ this will usually not be noticeable to users. For example, some of the
 general site statistics on your homepage may take longer to update.
 This will not be noticeable if your social network is already large and
 populated with a lot of data"
-"_EMAIL_FOOTER_BODY";"Best Regards, Fashbay 
-Social Network Administration"
-"_EMAIL_FOOTER_MEMBER_BODY";"Best Regards, Fashbay 
-Social Network Administration"
-"_EMAIL_CORE_VERIFICATION_SUBJECT";"Fashbay - Email Verification"
+"_EMAIL_FOOTER_BODY";"Best Regards, Upheels Administration"
+"_EMAIL_FOOTER_MEMBER_BODY";"Best Regards, Upheels Administration"
+"_EMAIL_CORE_VERIFICATION_SUBJECT";"Upheels- Email Verification"
 "_EMAIL_CORE_VERIFICATION_BODY";"[header]
 
-Thank you for joining our Fashbay. To verify your email address and continue, please click the following link:
+Thank you for joining our Upheels. To verify your email address and continue, please click the following link:
 http://[host][object_link]
 
 Email: [email]
 
 [footer]"
-"_EMAIL_CORE_VERIFICATION_PASSWORD_SUBJECT";"Fashbay - Email Verification"
+"_EMAIL_CORE_VERIFICATION_PASSWORD_SUBJECT";"Upheels - Email Verification"
 "_EMAIL_CORE_VERIFICATION_PASSWORD_BODY";"[header]
 
 Thank you for joining our social network. To verify your email address and continue, please click the following link:
@@ -188,17 +167,17 @@ Email: [email]
 Password: [password]
 
 [footer]"
-"_EMAIL_CORE_WELCOME_SUBJECT";"Welcome to Fashbay!"
+"_EMAIL_CORE_WELCOME_SUBJECT";"Welcome to Upheels!"
 "_EMAIL_CORE_WELCOME_BODY";"[header]
 
-Thank you for joining Fashbay. Click the following link and enter your information below to login:
+Thank you for joining Upheels. Click the following link and enter your information below to login:
 
 http://[host][object_link]
 
 Email: [email]
 
 [footer]"
-"_EMAIL_CORE_WELCOME_PASSWORD_SUBJECT";"Welcome to Fashbay!"
+"_EMAIL_CORE_WELCOME_PASSWORD_SUBJECT";"Welcome to Upheels!"
 "_EMAIL_CORE_WELCOME_PASSWORD_BODY";"[header]
 
 Thank you for joining our social network. Click the following link and enter your information below to login:
@@ -209,7 +188,7 @@ Email: [email]
 Password: [password]
 
 [footer]"
-"_EMAIL_CORE_LOSTPASSWORD_SUBJECT";"Fashbay - Lost Password"
+"_EMAIL_CORE_LOSTPASSWORD_SUBJECT";"Upheels - Lost Password"
 "POLL_FORM_ADMIN_GLOBAL_POLLPUBLIC_DESCRIPTION";"Select whether or not you want to let the public (visitors that are not logged-in) to view the following sections of your social network. In some cases (such as Profiles, Blogs, and Albums), if you have given them the option, your users will be able to make their pages private even though you have made them publically viewable here. For more permissions settings, please visit the General Settings page."
 "MARKETPLACE_FORM_ADMIN_GLOBAL_MARKETPLACEPUBLIC_DESCRIPTION";"Select whether or not you want to let the public (visitors that are not logged-in) to view the following sections of your social network. In some cases (such as Profiles, Blogs, and Albums), if you have given them the option, your users will be able to make their pages private even though you have made them publically viewable here. For more permissions settings, please visit the General Settings page."
 "ACTIVITY_FORM_ADMIN_SETTINGS_GENERAL_DESCRIPTION";"The recent activity feed is an auto-updating list of actions that have recently occurred on your social network. This information is displayed (by default) on users' ""My Home"" page. Also, each user's own personal activity list will be displayed on their profile page if enabled below. Please note that some of the settings here are not retroactive, meaning that changes you make here may not affect old feed items.<br /><br />Note: To enable, manage, and disable individual feed items, please refer to the <a href='%1$s'>Activity Feed Item Type Settings page</a>."
@@ -219,20 +198,8 @@ Password: [password]
 "USER_FORM_ADMIN_SETTINGS_VERIFICATION_DESCRIPTION";"Your social network can allow either verified or unverified friendship requests. The default setting is verified friendship requests as this is typical for most social networks. Unverified friendship requests mean that when MemberA adds MemberB as a friend, MemberA and MemberB will immediately become friends without any confirmation."
 "USER_VIEWS_SCRIPTS_ADMINMANAGE_INDEX_DESCRIPTION";"The members of your social network are listed here. If you need to search for a specific member, enter your search criteria in the fields below."
 "USER_VIEWS_SCRIPTS_ADMINLOGINS_INDEX_DESCRIPTION";"This page contains a list of recent login attempts. Use this page to observe suspicious login attempts to your social network."
-"_EMAIL_INVITE_SUBJECT";"You have received an invitation to join Fashbay."
+"_EMAIL_INVITE_SUBJECT";"You have received an invitation to join Upheels!"
 "_EMAIL_INVITE_BODY";"[header]
-
-You have been invited by [sender_title] to join our social network. To join, please follow the link below:
-
-http://[hosts][object_link]
-
-----------------------------------------
-[message]
-----------------------------------------
-
-[footer]"
-"_EMAIL_INVITE_CODE_SUBJECT";"You have received an invitation to join Fashbay!"
-"_EMAIL_INVITE_CODE_BODY";"[header]
 
 You have been invited by [sender_title] to join our social network. To join, please follow the link below:
 
@@ -257,31 +224,6 @@ Thank you for your patience.
 
 [footer]"
 "This page lists all of the reviews your users have posted. You can use this page to monitor these reviews and delete offensive material if necessary. Entering criteria into the filter fields will help you find specific reviews. Leaving the filter fields blank will show all the reviews on your social network.";"This page lists all of the reviews your users have posted. You can use this page to monitor these reviews and delete offensive material if necessary. Entering criteria into the filter fields will help you find specific reviews. Leaving the filter fields blank will show all the reviews on your social network."
-"Copyright &copy;%s";"Upheels  Copyright &copy;%s"
-"_EMAIL_PAYMENT_SUBSCRIPTION_ACTIVE_BODY";"[header]
-
-Thank you for subscribing to Upheels! Your subscription is now active.
-
-[subscription_title]
-[subscription_description]
-[subscription_terms]
-
-You may follow the link below to sign in.
-
-[object_link]
-
-[footer]"
-"_EMAIL_CORE_WELCOME_SUBJECT";"Welcome to Upheels!"
-"_EMAIL_CORE_WELCOME_BODY";"[header]
-
-Thank you for joining Upheels. Click the following link and enter your information below to login:
-
-http://[host][object_link]
-
-Email: [email]
-
-[footer]"
-"_EMAIL_CORE_WELCOME_PASSWORD_SUBJECT";"Welcome to Upheels!"
 "Manage Announcements";"Manage Announcements"
 "There are currently no announcements.";"There are currently no announcements."
 "Post New Announcement";"Post New Announcement"
@@ -296,53 +238,103 @@ Email: [email]
 "edit";"edit"
 "Title";"Title"
 "Author";"Author"
-"ACTIVITY_TYPE_MARKETPLACE_TRANSACTION_TO_OWNER";"When user retrieves payment for marketplace item."
-"_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_OWNER_DESCRIPTION";"This email is sent to the member when they retrieve payment for marketplace item."
-"_EMAIL_FOOTER_BODY";"Best Regards, Upheels
-Social Network Administration"
-"_EMAIL_FOOTER_MEMBER_BODY";"Best Regards, Upheels
-Social Network Administration"
-"_EMAIL_CORE_VERIFICATION_SUBJECT";"Upheels- Email Verification"
-"_EMAIL_CORE_VERIFICATION_BODY";"[header]
+"_CORE_PRIVACY_STATEMENT";"Your information will *NOT* be released to anyone.  Any personal information you wish to release will be under the user's control."
+"_EMAIL_INVITE_CODE_SUBJECT";"You have received an invitation to join Upheels!"
+"_EMAIL_INVITE_CODE_BODY";"[header]
 
-Thank you for joining our Upheels. To verify your email address and continue, please click the following link:
-http://[host][object_link]
+You have been invited by [sender_title] to join our exciting e-commerce social network. To join, please follow the link below:
 
-Email: [email]
+http://[hosts][object_link]
+
+----------------------------------------
+[message]
+----------------------------------------
 
 [footer]"
-"_EMAIL_CORE_VERIFICATION_PASSWORD_SUBJECT";"Upheels - Email Verification"
-"_EMAIL_CORE_LOSTPASSWORD_SUBJECT";"Upheels - Lost Password"
-"_EMAIL_INVITE_SUBJECT";"You have received an invitation to join Upheels."
-"_EMAIL_INVITE_CODE_SUBJECT";"You have received an invitation to join Upheels!"
-"_EMAIL_INVITE_SUBJECT";"You have received an invitation to join Upheels!"
-"_EMAIL_FOOTER_BODY";"Best Regards, Upheels
-Juan Administration"
-"_EMAIL_FOOTER_MEMBER_BODY";"Best Regards, Upheels
-Carlos Administration"
-"_EMAIL_FOOTER_BODY";"Best Regards, Upheels Administration
-Juan Administration"
-"_EMAIL_FOOTER_MEMBER_BODY";"Best Regards, Upheels Administration
-Carlos Administration"
-"_EMAIL_FOOTER_BODY";"Best Regards, Upheels Administration"
-"_EMAIL_FOOTER_MEMBER_BODY";"Best Regards, Upheels Administration"
-"_CORE_TERMS_OF_SERVICE";"This page will contain the terms of service of your choice. "
-"_CORE_TERMS_OF_SERVICE";"This page will contain the terms of service of your choice. "
-"USER_FORM_ADMIN_SIGNUP_TERMS_DESCRIPTION";"Require members to agree to your terms of service?  You can modify your terms of service by editing the _CORE_TERMS_OF_SERVICE language variable in the application/languages/en/core.csv file."
-"_CORE_TERMS_OF_SERVICE";"This page will contain the terms of service of your choice. "
-"Terms of Service";"Terms of carlos"
-"_CORE_TERMS_OF_SERVICE";"This page will contain the terms of service of your choice. "
-"Terms of Service";"Terms of Juan"
-"USER_FORM_ADMIN_SIGNUP_TERMS_DESCRIPTION";"Require members to agree to your terms of service?  You can modify your terms of service by editing the _CORE_TERMS_OF_SERVICE language variable in the application/languages/en/custom.csv file."
-"Terms of Service";"Terms of walter"
-"Terms of Service";"Terms of Walter2"
-"Terms of Service";"Terms of Upheels"
-"Terms of Service";"Terms of Service"
-"Terms of Service";"Terms of Walter"
-"Terms of Service";"Terms of micosuki"
-"Terms of Service";"Terms of chanclas"
-"Terms of Service";"Terms of costa rica"
-"Terms of Service";"Terms of mis nalgas"
-"_CORE_PRIVACY_STATEMENT";"Your information will *NOT* be released to anyone.  Any personal information you wish to release will be under the user's control."
-"_CORE_TERMS_OF_SERVICE";"This website allows for the exchange, purchase, or selling of high-end women's merchandise.  They will be curated and promised to be legitimate items."
-"Terms of Service";"Terms of service"
+"_EMAIL_USER_ACCOUNT_APPROVED_BODY";"[header]
+
+Your account has been approved by an administrator. Please click the following link to sign in:
+
+http://[host][object_link]
+
+[footer]"
+"_EMAIL_NOTIFY_FRIEND_ACCEPTED_BODY";"[header]
+
+[sender_title] has approved you as a friend. Please click the following link to sign in:
+
+http://[host][object_link]
+
+[footer]"
+"_EMAIL_NOTIFY_FRIEND_FOLLOW_ACCEPTED_BODY";"[header]
+
+[sender_title] has approved you to follow them. Please click the following link to sign in:
+
+http://[host][object_link]
+
+[footer]"
+"_EMAIL_NOTIFY_FRIEND_FOLLOW_REQUEST_BODY";"[header]
+
+[sender_title] has requested to follow you. Please click the following link to sign in and confirm this request:
+
+http://[host][object_link]
+
+[footer]"
+"_EMAIL_NOTIFY_FRIEND_REQUEST_BODY";"[header]
+
+[sender_title] has added you as a friend. Please click the following link to sign in and confirm this friendship request:
+
+http://[host][object_link]
+
+[footer]"
+"_EMAIL_PAYMENT_SUBSCRIPTION_ACTIVE_BODY";"[header]
+
+Thank you for subscribing to Upheels! Your subscription is now active.
+
+[subscription_title]
+[subscription_description]
+[subscription_terms]
+
+You may follow the link below to sign in.
+
+[object_link]
+
+[footer]"
+"_EMAIL_PAYMENT_SUBSCRIPTION_RECURRENCE_BODY";"[header]
+
+Your subscription has been billed. You should receive an email from the
+payment gateway regarding this charge. Thank you for subscribing to our social
+network.
+
+[subscription_title]
+[subscription_description]
+[subscription_terms]
+
+You may follow the link below to sign in.
+
+[object_link]
+
+[footer]"
+"_EMAIL_PAYMENT_SUBSCRIPTION_REFUNDED_BODY";"[header]
+
+Your subscription has been refunded and is no longer active.
+
+[subscription_title]
+[subscription_description]
+[subscription_terms]
+
+You may follow the link below to sign in.
+
+[object_link]
+
+[footer]"
+"_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_OWNER_BODY";"[header]
+
+[sender_title] has bought ""[object_title]""
+
+[footer]"
+"_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_BUYER_BODY";"[header]
+
+Your have successfully bought ""[object_title]""
+
+[footer]"
+"_EMAIL_NOTIFY_MARKETPLACE_TRANSACTION_TO_OWNER_SUBJECT";"You retrieve payment for [object_title]."

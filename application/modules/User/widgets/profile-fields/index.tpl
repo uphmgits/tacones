@@ -10,36 +10,43 @@
  * @author     John
  */
 ?>
-<style>
-    #profile_photo_holder {
-      float: left;
-      margin-right: 10px;
-    }
-    #profile_fields_details {
-      overflow: hidden;
-    }
-    #profile_fields_details .profile_fields {
-      margin-top: 0;
-    }
-    #profile_fields_details .profile_fields > ul > li > span + span {
-      width: 300px;
-    }
-    #profile_fields_details h4 {
-      padding: 0;
-      margin: 0;
-      border: none;
-    }
-    #profile_fields_details h4 > span {
-      position: static;
-    }
-    #profile_fields_details .profile_fields > ul > li + li {
-      margin-top: 0;
-    }
-</style>
-
 <div id='profile_photo_holder'>
-  <?php echo $this->itemPhoto($this->subject()) ?>
+  <?=$this->itemPhoto($this->subject(), 'normal')?>
 </div>
 <div id='profile_fields_details'>
-  <?php echo $this->fieldValueLoop($this->subject(), $this->fieldStructure) ?>
+  <h2><?=$this->subject()->getTitle()?></h2>
+  <?php if( !empty($this->aliasValues['favdesign']) ) : ?>
+    <h4><?=$this->translate('favorite designer')?></h4>
+    <?php $favList = explode(",", $this->aliasValues['favdesign']);?>
+    <ul class="profile-favorites">
+      <?php foreach($favList as $fav) : ?>
+        <li><?=trim($fav)?></li>
+      <?php endforeach; ?>
+    </ul>
+  <?php endif; ?>
+
+  <?php if ( !empty($this->aliasValues['about_me']) ) : ?>
+    <h4><?=$this->translate('about me')?></h4>
+    <div><?=trim($this->aliasValues['about_me'])?></div>
+  <?php endif; ?>
+
+  <table>
+    <tr>
+      <th>
+        <h4 style="display: inline"><?=$this->translate('rating')?></h4>
+        <span class="review_rating_star_big">
+          <span style="width: <?php echo $this->average_rating * 20 ?>%"></span>
+        </span>
+      </th>
+      <th><h4><?=$this->translate('following')?></h4></th>
+      <th><h4><?=$this->translate('followers')?></h4></th>
+      <th><h4><?=$this->translate('comments')?></h4></th>
+    </tr>
+    <tr>
+      <td><h4 style="display: inline"><?=$this->translate('reviews')?></h4> <?=$this->total_review?></td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </table>  
 </div>

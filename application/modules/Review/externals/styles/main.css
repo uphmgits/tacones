@@ -840,6 +840,9 @@ div.reviews_toplist_layout_right .quicklinks .navigation li.active a {
 
 
 /* Update for profile-review widget */
+.layout_review_profile_reviews {
+    border-bottom: 1px solid #333;
+}
 .layout_review_profile_reviews > h3 {
     height: 26px;
     font-size: 18px;
@@ -861,7 +864,7 @@ div.layout_review_profile_reviews * {
 ul.reviews_profile {
     background: #101A20;
     padding: 24px;
-    margin: 10px 0;
+    margin: 10px 0 0;
 }
 ul.reviews_profile > li + li {
     margin-top: 18px;

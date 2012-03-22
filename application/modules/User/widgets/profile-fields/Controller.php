@@ -32,6 +32,10 @@ class User_Widget_ProfileFieldsController extends Engine_Content_Widget_Abstract
       return $this->setNoRender();
     }
 
+    $this->view->aliasValues = Engine_Api::_()->fields()->getFieldsValuesByAlias($subject); 
+    $this->view->average_rating = Engine_Api::_()->review()->getUserAverageRating($subject);
+    $this->view->total_review = Engine_Api::_()->review()->getUserReviewCount($subject);
+
     // Load fields view helpers
     $view = $this->view;
     $view->addHelperPath(APPLICATION_PATH . '/application/modules/Fields/View/Helper', 'Fields_View_Helper');

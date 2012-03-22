@@ -158,7 +158,7 @@ class Fields_Model_DbTable_Meta extends Fields_Model_DbTable_Abstract
     if( @$info['category'] != 'generic' ) {
       $params['alias'] = $params['type'];
     } else {
-      $params['alias'] = "";
+      //$params['alias'] = "";
     }
 
     // Diff
