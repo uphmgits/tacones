@@ -281,3 +281,13 @@
 2012-03-20T11:40:04+00:00 DEBUG (7): [System] (notify_commented) scarlettaldana@hotmail.com <- noreply@fashbay.com
 2012-03-21T01:55:02+00:00 DEBUG (7): [Zend] artiffact@gmail.com <- noreply@fashbay.com
 2012-03-21T01:55:03+00:00 DEBUG (7): [System] (core_lostpassword) artiffact@gmail.com <- noreply@fashbay.com
+2012-03-22T13:59:24+00:00 DEBUG (7): [Zend] support@starsdeveloper.com <- noreply@fashbay.com
+2012-03-22T13:59:25+00:00 DEBUG (7): [System] (core_verification) support@starsdeveloper.com <- noreply@fashbay.com
+2012-03-22T14:01:38+00:00 DEBUG (7): [Zend] support@starsdeveloper.com <- noreply@fashbay.com
+2012-03-22T14:01:38+00:00 DEBUG (7): [System] (user_account_approved) support@starsdeveloper.com <- noreply@fashbay.com
+2012-03-22T16:36:43+00:00 DEBUG (7): [Zend] test@test.com <- noreply@fashbay.com
+2012-03-22T16:36:43+00:00 DEBUG (7): [System] (core_verification) test@test.com <- noreply@fashbay.com
+2012-03-22T16:48:55+00:00 DEBUG (7): [Zend] tanyushka_angell@mail.ru <- noreply@fashbay.com
+2012-03-22T16:48:55+00:00 DEBUG (7): [System] (core_verification) tanyushka_angell@mail.ru <- noreply@fashbay.com
+2012-03-27T15:57:31+00:00 DEBUG (7): [Zend] waldana@gmail.com <- noreply@fashbay.com
+2012-03-27T15:57:31+00:00 DEBUG (7): [System] (notify_commented) waldana@gmail.com <- noreply@fashbay.com
