@@ -1,0 +1,13 @@
+@include "~/application/modules/Core/externals/styles/admin/constants.css";
+
+.review_rating_star_small  {
+  background:url("~/application/modules/Review/externals/images/stars/rating_small_off.png") repeat-x scroll 0 0 transparent;
+  height:12px;
+  width:60px;
+  display: inline-block;
+}
+.review_rating_star_small span {
+  background:url("~/application/modules/Review/externals/images/stars/rating_small_on.png") repeat-x scroll 0 0 transparent;
+  height:12px;
+  display: inline-block;  
+}

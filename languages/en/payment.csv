@@ -1,0 +1,335 @@
+"Payment";"Payment"
+
+"ADMIN_SIGNUP_STEP_PAYMENT_PLUGIN_SIGNUP_SUBSCRIPTION";"Choose Subscription"
+
+# admin menu
+"Billing";"Billing"
+"Gateways";"Gateways"
+"Plans";"Plans"
+"Subscription";"Subscription"
+"Subscriptions";"Subscriptions"
+"Transactions";"Transactions"
+
+# package description
+"Free";"Free"
+# price period i.e. $40 weekly
+"%1$s %2$s";"%1$s %2$s"
+# price per x period i.e. $2 per 3 days
+"%1$s per %2$s %3$s";"%1$s per %2$s %3$s"
+"day";"day";"days"
+"week";"week";"weeks"
+"month";"month";"months"
+"year";"year";"years"
+"daily";"daily"
+"weekly";"weekly"
+"monthly";"monthly"
+"yearly";"yearly"
+"One-time fee of %1$s";"One-time fee of %1$s"
+# Limited one-time fee i.e. $30 for 2 months
+"%1$s for %2$s %3$s";"%1$s for %2$s %3$s"
+
+# payment.admin-gateway
+"Manage Payment Gateways";"Manage Payment Gateways"
+"PAYMENT_VIEWS_ADMIN_GATEWAYS_INDEX_DESCRIPTION";"Browse and manage payment
+gateways."
+"%s gateway found";"%s gateway found";"%s gateways found"
+"PayPal";"PayPal"
+"Payment Gateway: PayPal";"Payment Gateway: PayPal"
+"API Signature";"API Signature"
+"API Certificate";"API Certificate"
+"2Checkout";"2Checkout"
+"Payment Gateway: 2Checkout";"Payment Gateway: 2Checkout"
+"API Username";"API Username"
+"API Password";"API Password"
+
+"PAYMENT_FORM_ADMIN_GATEWAY_2CHECKOUT_DESCRIPTION";"2Checkout Account Configuration:<br />
+1) If you haven't already, you will need to establish a <a href=""%6$s"" target=""_blank"">2Checkout account</a>.<br />
+2) <a target=""_blank"" href=""%1$s"">Create a new username</a>, checking both the API Access and API Updating checkboxes.  Insert the newly created username and password into this form below.<br />
+<em>Note: If you change the secret word in your 2Checkout account, you will need to visit this page again and re-save the settings.</em><br />
+3) <a target=""_blank"" href=""%2$s"">Enable Instant Notification Settings</a> (INS). Paste the following URL into the Global Settings > Global URL box, then click Apply and Enable All Notifications, then Save Settings:<br />%3$s<br />
+4) <a target=""_blank"" href=""%4$s"">Update the Site Management</a> page, selecting the ""Header Redirect"" option, and pasting the following into the ""Approved URL"" field:<br />%5$s"
+
+"PAYMENT_FORM_ADMIN_GATEWAY_PAYPAL_DESCRIPTION";"Paypal Account Configuration: <br />
+1) If you haven't already, you will need to establish a <a target=""_blank"" href=""%1$s"">Paypal account</a>.<br />
+2) Enable <a target=""_blank"" href=""%1$s"">API access</a> on your Paypal account via: <em>My Account &gt; Profile &gt; API Access &gt; Request API credentials &gt; Request API Signature</em>.<br />
+3) Insert the Paypal API <a target=""_blank"" href=""%1$s"">username, password, and signature</a> values into this form.<br />
+4) Enable <a target=""_blank"" href=""%2$s"">Instant Payment Notifications</a> via: <em>My Account &gt; Profile &gt; Instant Payment Notification Preferences &gt; Choose IPN Settings</em>.  The <em>IPN messages</em> should be <strong>enabled</strong>, and the <em>Notification URL</em> should be set to:<br /><strong>%3$s</strong>"
+
+"PAYMENT_FORM_ADMIN_GATEWAY_TESTING_DESCRIPTION";"<b>This gateway is only for testing the payment functions and should not be enabled for normal site operation.</b>"
+
+# payment.admin-index
+"PAYMENT_VIEWS_ADMIN_INDEX_INDEX_DESCRIPTION";"Browse transactions. The search
+box will look through the member name, username, email, transaction ID, and
+order ID."
+"%s transaction found";"%s transaction found";"%s transactions found"
+"Gateway";"Gateway"
+"Transaction ID";"Transaction ID"
+"Parent Transaction ID";"Parent Transaction ID"
+"Order ID";"Order ID"
+"Deleted or Unknown Member";"Deleted or Unknown Member"
+"Unknown Gateway";"Unknown Gateway"
+"Refund";"Refund"
+"Refunded";"Refunded"
+"Okay";"Okay"
+"Completed";"Completed"
+"(%1$s)";"(%1$s)"
+"details";"details"
+"Member";"Member"
+"Amount";"Amount"
+"Transaction Details";"Transaction Details"
+"Payment Gateway";"Payment Gateway"
+"Payment Type";"Payment Type"
+"Payment State";"Payment State"
+"Payment Amount";"Payment Amount"
+"Gateway Transaction ID";"Gateway Transaction ID"
+"Gateway Order ID";"Gateway Order ID"
+
+# payment.admin-package
+"Manage Subscription Plans";"Manage Subscription Plans"
+"PAYMENT_VIEWS_ADMIN_PACKAGES_INDEX_DESCRIPTION";"Browse and manage subscription plans."
+"Add Plan";"Add Plan"
+"%s plan found";"%s plan found";"%s plans found"
+"Signup";"Signup"
+"Day(s)";"Day(s)"
+"Week(s)";"Week(s)"
+"Month(s)";"Month(s)"
+"Year(s)";"Year(s)"
+"Forever";"Forever"
+"Yes, members may select this plan.";"Yes, members may select this plan."
+"No, members may not select this plan.";"No, members may not select this plan."
+"Yes, show this plan on signup.";"Yes, show this plan on signup."
+"No, only show this plan after signup.";"No, only show this plan after signup."
+"Day";"Day"
+"Week";"Week"
+"Month";"Month"
+"Year";"Year"
+"The member will be placed into this level upon subscribing to this plan. If left empty, the default level at the time a subscription is chosen will be used.";"The member will be placed into this level upon subscribing to this plan. If left empty, the default level at the time a subscription is chosen will be used."
+"The amount to charge the member. This will be charged once for one-time plans, and each billing cycle for recurring plans. Setting this to zero will make this a free plan.";"The amount to charge the member. This will be charged once for one-time plans, and each billing cycle for recurring plans. Setting this to zero will make this a free plan."
+"One-time";"One-time"
+"Fully Supported";"Fully Supported"
+"Partially Supported";"Partially Supported"
+"How often should members in this plan be billed?";"How often should members in this plan be billed?"
+"Billing Cycle";"Billing Cycle"
+"When should this plan expire? For one-time plans, the plan will expire after the period of time set here. For recurring plans, the user will be billed at the above billing cycle for the period of time specified here.";"When should this plan expire? For one-time plans, the plan will expire after the period of time set here. For recurring plans, the user will be billed at the above billing cycle for the period of time specified here."
+"Billing Duration";"Billing Duration"
+"Trial Duration";"Trial Duration"
+"Please note that payment parameters (Price, Recurrence, Duration, Trial Duration) cannot be edited after creation. If you wish to change these, you will have to create a new plan and disable the current one.";"Please note that payment parameters (Price, Recurrence, Duration, Trial Duration) cannot be edited after creation. If you wish to change these, you will have to create a new plan and disable the current one."
+"Create Subscription Plan";"Create Subscription Plan"
+"Can members choose this plan? Please note that disabling this plan will grandfather in existing plan members until they pick a new plan.";"Can members choose this plan? Please note that disabling this plan will grandfather in existing plan members until they pick a new plan."
+"Can members choose this plan on signup?";"Can members choose this plan on signup?"
+"Show on signup?";"Show on signup?"
+"Create Plan";"Create Plan"
+
+# payment.admin-subscription
+"Manage Subscriptions";"Manage Subscriptions"
+"PAYMENT_VIEWS_ADMIN_SUBSCRIPTION_INDEX_DESCRIPTION";"Browse and manage
+subscriptions. The search box will look through member name, username, and
+email."
+"%s subscription found";"%s subscription found";"%s subscriptions found"
+"Plan";"Plan"
+"Missing Plan";"Missing Plan"
+"Deleted Member";"Deleted Member"
+"Initial";"Initial"
+"Trial";"Trial"
+"Pending Payment";"Pending Payment"
+"Cancelled";"Cancelled"
+"Expired";"Expired"
+"Overdue";"Overdue"
+"Refunded";"Refunded"
+
+
+# mail templates
+
+# payment_subscription_active
+"_EMAIL_PAYMENT_SUBSCRIPTION_ACTIVE_TITLE";"Subscription Activated"
+"_EMAIL_PAYMENT_SUBSCRIPTION_ACTIVE_DESCRIPTION";"This is the email that gets sent to a member when their subscription is activated."
+"_EMAIL_PAYMENT_SUBSCRIPTION_ACTIVE_SUBJECT";"Your subscription is now active."
+"_EMAIL_PAYMENT_SUBSCRIPTION_ACTIVE_BODY";"[header]
+
+Thank you for subscribing to our social network! Your subscription is now active.
+
+[subscription_title]
+[subscription_description]
+[subscription_terms]
+
+You may follow the link below to sign in.
+
+[object_link]
+
+[footer]"
+
+# payment_subscription_cancelled
+"_EMAIL_PAYMENT_SUBSCRIPTION_CANCELLED_TITLE";"Subscription Cancelled"
+"_EMAIL_PAYMENT_SUBSCRIPTION_CANCELLED_DESCRIPTION";"This is the email that gets sent to a member when their subscription is cancelled."
+"_EMAIL_PAYMENT_SUBSCRIPTION_CANCELLED_SUBJECT";"Your subscription has been cancelled."
+"_EMAIL_PAYMENT_SUBSCRIPTION_CANCELLED_BODY";"[header]
+
+Your subscription has been cancelled.
+
+[subscription_title]
+[subscription_description]
+[subscription_terms]
+
+Please follow the link below to renew your subscription.
+
+[object_link]
+
+[footer]"
+
+# payment_subscription_expired
+"_EMAIL_PAYMENT_SUBSCRIPTION_EXPIRED_TITLE";"Subscription Expired"
+"_EMAIL_PAYMENT_SUBSCRIPTION_EXPIRED_DESCRIPTION";"This is the email that gets sent to a member when their subscription expires."
+"_EMAIL_PAYMENT_SUBSCRIPTION_EXPIRED_SUBJECT";"Your subscription has expired."
+"_EMAIL_PAYMENT_SUBSCRIPTION_EXPIRED_BODY";"[header]
+
+Your subscription has expired.
+
+[subscription_title]
+[subscription_description]
+[subscription_terms]
+
+Please follow the link below to renew your subscription.
+
+[object_link]
+
+[footer]"
+
+# payment_subscription_overdue
+"_EMAIL_PAYMENT_SUBSCRIPTION_OVERDUE_TITLE";"Subscription Overdue"
+"_EMAIL_PAYMENT_SUBSCRIPTION_OVERDUE_DESCRIPTION";"This is the email that gets sent to a member when their subscription is overdue."
+"_EMAIL_PAYMENT_SUBSCRIPTION_OVERDUE_SUBJECT";"Your subscription is overdue."
+"_EMAIL_PAYMENT_SUBSCRIPTION_OVERDUE_BODY";"[header]
+
+Your subscription is overdue because of a failed or missed payment.
+
+[subscription_title]
+[subscription_description]
+[subscription_terms]
+
+Please follow the link below to renew your subscription.
+
+[object_link]
+
+[footer]"
+
+# payment_subscription_pending
+"_EMAIL_PAYMENT_SUBSCRIPTION_PENDING_TITLE";"Subscription Pending"
+"_EMAIL_PAYMENT_SUBSCRIPTION_PENDING_DESCRIPTION";"This is the email that gets sent to a member when their subscription is pending."
+"_EMAIL_PAYMENT_SUBSCRIPTION_PENDING_SUBJECT";"Your subscription is pending."
+"_EMAIL_PAYMENT_SUBSCRIPTION_PENDING_BODY";"[header]
+
+Thank you for subscribing to our social network! Your subscription is
+pending, awaiting completion of the transaction. Your membership will be
+activated soon; we will notify you by email when it is ready.
+Thank you for your patience.
+
+[subscription_title]
+[subscription_description]
+[subscription_terms]
+
+[footer]"
+
+# payment_subscription_recurrence
+"_EMAIL_PAYMENT_SUBSCRIPTION_RECURRENCE_TITLE";"Subscription Payment Recurrence"
+"_EMAIL_PAYMENT_SUBSCRIPTION_RECURRENCE_DESCRIPTION";"This is the email that gets sent to a member when they are billed for a recurring payment."
+"_EMAIL_PAYMENT_SUBSCRIPTION_RECURRENCE_SUBJECT";"Your subscription has been billed."
+"_EMAIL_PAYMENT_SUBSCRIPTION_RECURRENCE_BODY";"[header]
+
+Your subscription has been billed. You should receive an email from the
+payment gateway regarding this charge. Thank you for subscribing to our social
+network.
+
+[subscription_title]
+[subscription_description]
+[subscription_terms]
+
+You may follow the link below to sign in.
+
+[object_link]
+
+[footer]"
+
+# payment_subscription_refunded
+"_EMAIL_PAYMENT_SUBSCRIPTION_REFUNDED_TITLE";"Subscription Refunded"
+"_EMAIL_PAYMENT_SUBSCRIPTION_REFUNDED_DESCRIPTION";"This is the email that gets sent to a member when their subscription is refunded."
+"_EMAIL_PAYMENT_SUBSCRIPTION_REFUNDED_SUBJECT";"Your subscription has been refunded."
+"_EMAIL_PAYMENT_SUBSCRIPTION_REFUNDED_BODY";"[header]
+
+Your subscription has been refunded and is no longer active.
+
+[subscription_title]
+[subscription_description]
+[subscription_terms]
+
+You may follow the link below to sign in.
+
+[object_link]
+
+[footer]"
+
+
+"Confirm Subscription";"Confirm Subscription"
+"You are about to subscribe to the plan: %1$s";"You are about to subscribe to the plan: %1$s"
+"Are you sure you want to do this? You will be charged: %1$s";"Are you sure you want to do this? You will be charged: %1$s"
+"If yes, click the button below and you will be taken to a payment page. When you have completed your payment, please remember to click the button that takes you back to our site.";"If yes, click the button below and you will be taken to a payment page. When you have completed your payment, please remember to click the button that takes you back to our site."
+"Please note that no refund will be provided for any unused portion of your current plan.";"Please note that no refund will be provided for any unused portion of your current plan."
+
+"The plan you are currently subscribed to is: %1$s";"The plan you are currently subscribed to is: %1$s"
+"You are currently paying: %1$s";"You are currently paying: %1$s"
+"If you would like to change your subscription, please select an option below.";"If you would like to change your subscription, please select an option below."
+"You have not yet selected a subscription plan. Please choose one now below.";"You have not yet selected a subscription plan. Please choose one now below."
+"Change Plan";"Change Plan"
+"(%1$s)";"(%1$s)"
+
+"Subscriptions are not required for administrators and moderators.";"Subscriptions are not required for administrators and moderators."
+
+"Payment Pending";"Payment Pending"
+"Thank you for submitting your payment. Your payment is currently pending - your account will be activated when we are notified that the payment has completed successfully. Please return to our login page when you receive an email notifying you that the payment has completed.";"Thank you for submitting your payment. Your payment is currently pending - your account will be activated when we are notified that the payment has completed successfully. Please return to our login page when you receive an email notifying you that the payment has completed."
+"Back to Home";"Back to Home"
+"Payment Complete";"Payment Complete"
+"Thank you! Your payment has completed successfully.";"Thank you! Your payment has completed successfully."
+"Our payment processor has notified us that your payment could not be completed successfully. We suggest that you try again with another credit card or funding source.";"Our payment processor has notified us that your payment could not be completed successfully. We suggest that you try again with another credit card or funding source."
+"Payment Failed";"Payment Failed"
+
+"Pay for Access";"Pay for Access"
+"You have selected an account type that requires recurring subscription payments. You will be taken to a secure checkout area where you can setup your subscription. Remember to continue back to our site after your purchase to sign in to your account.";"You have selected an account type that requires recurring subscription payments. You will be taken to a secure checkout area where you can setup your subscription. Remember to continue back to our site after your purchase to sign in to your account."
+"Please setup your subscription to continue:";"Please setup your subscription to continue:"
+"Please pay a one-time fee to continue:";"Please pay a one-time fee to continue:"
+"Pay with %1$s";"Pay with %1$s"
+
+"The subscription has been cancelled.";"The subscription has been cancelled."
+"There was a problem cancelling the subscription. The message was:";"There was a problem cancelling the subscription. The message was:"
+
+"Subscription Details";"Subscription Details"
+"Subscription ID";"Subscription ID"
+"Plan Deleted";"Plan Deleted"
+"Current Member Level";"Current Member Level"
+"Plan";"Plan"
+"Plan Member Level";"Plan Member Level"
+"Subscription State";"Subscription State"
+"Created";"Created"
+"Expires";"Expires"
+"N/A";"N/A"
+"Options";"Options"
+"Member Subscription History";"Member Subscription History"
+"Member Transaction History";"Member Transaction History"
+"Cancel Subscription";"Cancel Subscription"
+"Edit Subscription";"Edit Subscription"
+"Related Transactions";"Related Transactions"
+"Transaction ID";"Transaction ID"
+"Gateway";"Gateway"
+"Type";"Type"
+"State";"State"
+"Amount";"Amount"
+"Unknown Gateway";"Unknown Gateway"
+"(%s)";"(%s)"
+"details";"details"
+"Transaction Details";"Transaction Details"
+"Transaction ID";"Transaction ID"
+"Raw Order Details";"Raw Order Details"
+"Order could not be found.";"Order could not be found."
+"Raw Transaction Details";"Raw Transaction Details"
+
+"Subscription Plan";"Subscription Plan"
+"Please select a subscription plan from the list below.";"Please select a subscription plan from the list below."
+"Choose Plan:";"Choose Plan:"

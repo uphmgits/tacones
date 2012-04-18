@@ -1,0 +1,117 @@
+
+@include "~/application/modules/Core/externals/styles/constants.css";
+
+div.radcodes_popular_tags ul {
+
+}
+div.radcodes_popular_tags ul li {
+  display: inline;
+}
+div.radcodes_popular_tags ul li sup {
+  display: none;
+}
+
+div.radcodes_popular_tags .tag_x {
+  font-size: 0.7em;
+}
+
+div.radcodes_popular_tags .tag_0 {
+  font-size: 2em;
+}
+div.radcodes_popular_tags .tag_1,
+div.radcodes_popular_tags .tag_2,
+div.radcodes_popular_tags .tag_3 {
+  font-size: 1.8em;
+}
+div.radcodes_popular_tags .tag_4,
+div.radcodes_popular_tags .tag_5,
+div.radcodes_popular_tags .tag_6,
+div.radcodes_popular_tags .tag_7,
+div.radcodes_popular_tags .tag_8 {
+  font-size: 1.5em;
+}
+div.radcodes_popular_tags .tag_9,
+div.radcodes_popular_tags .tag_10,
+div.radcodes_popular_tags .tag_11,
+div.radcodes_popular_tags .tag_12,
+div.radcodes_popular_tags .tag_13,
+div.radcodes_popular_tags .tag_14,
+div.radcodes_popular_tags .tag_15,
+div.radcodes_popular_tags .tag_16,
+div.radcodes_popular_tags .tag_17,
+div.radcodes_popular_tags .tag_18 {
+  font-size: 1.3em;
+}
+div.radcodes_popular_tags .tag_19,
+div.radcodes_popular_tags .tag_20,
+div.radcodes_popular_tags .tag_21,
+div.radcodes_popular_tags .tag_22,
+div.radcodes_popular_tags .tag_23,
+div.radcodes_popular_tags .tag_24,
+div.radcodes_popular_tags .tag_25,
+div.radcodes_popular_tags .tag_26,
+div.radcodes_popular_tags .tag_27,
+div.radcodes_popular_tags .tag_28,
+div.radcodes_popular_tags .tag_29,
+div.radcodes_popular_tags .tag_30,
+div.radcodes_popular_tags .tag_31,
+div.radcodes_popular_tags .tag_32,
+div.radcodes_popular_tags .tag_33,
+div.radcodes_popular_tags .tag_34,
+div.radcodes_popular_tags .tag_35 {
+  font-size: 1em;
+}
+div.radcodes_popular_tags .tag_36,
+div.radcodes_popular_tags .tag_37,
+div.radcodes_popular_tags .tag_38,
+div.radcodes_popular_tags .tag_39,
+div.radcodes_popular_tags .tag_40,
+div.radcodes_popular_tags .tag_41,
+div.radcodes_popular_tags .tag_42,
+div.radcodes_popular_tags .tag_43,
+div.radcodes_popular_tags .tag_44,
+div.radcodes_popular_tags .tag_45 {
+  font-size: 0.8em; 
+}
+div.radcodes_popular_tags .tag_46,
+div.radcodes_popular_tags .tag_47,
+div.radcodes_popular_tags .tag_48,
+div.radcodes_popular_tags .tag_49 {
+  font-size: 0.7em;
+}
+div.radcodes_popular_tags a.icon_viewmore {
+ margin: 5px 0;
+}
+
+/*
+ * Radcodes_View_Helper_Radcodes_Map :: InfoWindow bubble pop
+ */
+
+div.radcodes_infowindow_pop {
+ 
+}
+div.radcodes_infowindow_pop_title {
+  font-weight: bold;
+}
+div.radcodes_infowindow_pop_address {
+  margin-bottom: 5px;
+}
+div.radcodes_infowindow_pop_meta {
+  font-weight: normal;
+  font-size: .8em;
+  color: $theme_font_color_light; 
+}
+div.radcodes_infowindow_pop_photo {
+  float: left;
+  margin-right: 10px;
+}
+span.radcodes_infowindow_pop_meta_owner {
+  display: block;
+}
+span.radcodes_infowindow_pop_meta_owner a {
+  font-weight: bold;
+}
+span.radcodes_infowindow_pop_meta_stat {
+ display: block;
+}
+
