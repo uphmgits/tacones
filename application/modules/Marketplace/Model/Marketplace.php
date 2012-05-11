@@ -240,6 +240,23 @@ class Marketplace_Model_Marketplace extends Core_Model_Item_Abstract
       return Engine_Api::_()->getDbtable('likes', 'core')->getLikeCount( $this );
   }
 
+  public function canView( $viewer ) {
+
+      if( $viewer->getIdentity() and ( $viewer->isSelf($this->getOwner()) or $viewer->level_id <= 2) ) return true;
+
+      $photosTable = Engine_Api::_()->getDbtable('photos', 'marketplace');
+      $photosTableName = $photosTable->info('name');
+      $res = $photosTable->select()
+                  ->where('approved_photo = 0')
+                  ->where("marketplace_id = {$this->getIdentity()}")
+                  ->query()  
+                  ->fetch()
+      ;
+      if( empty($res) ) return true;
+
+      return false;
+      
+  }
 
 
 

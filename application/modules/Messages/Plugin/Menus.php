@@ -86,6 +86,10 @@ class Messages_Plugin_Menus
     return array(
       'label' => "Send Message",
       'icon' => 'application/modules/Messages/externals/images/send.png',
+
+
+'class' => "smoothbox",
+
       'route' => 'messages_general',
       'params' => array(
         'action' => 'compose',

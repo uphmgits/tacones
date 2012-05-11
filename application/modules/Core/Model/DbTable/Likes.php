@@ -117,10 +117,10 @@ class Core_Model_DbTable_Likes extends Engine_Db_Table
     return $select;
   }
 
-  public function getLikePaginator(Core_Model_Item_Abstract $resource)
+  public function getLikePaginator(Core_Model_Item_Abstract $resource, $count = 3)
   {
     $paginator = Zend_Paginator::factory($this->getLikeSelect($resource));
-    $paginator->setItemCountPerPage(3);
+    $paginator->setItemCountPerPage( $count );
     $paginator->count();
     $pages = $paginator->getPageRange();
     $paginator->setCurrentPageNumber($pages);

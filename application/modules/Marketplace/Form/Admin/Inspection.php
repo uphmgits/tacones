@@ -17,7 +17,7 @@ class Marketplace_Form_Admin_Inspection extends Engine_Form
       ->setDescription('Set inspection.');
     
     $this->addElement('Text', 'marketplace_inspection', array(
-		    'label' => 'Cost',
+		    'label' => 'Cost (%)',
 		    'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.inspection', 0),
 		    'required' => true,
         'validators' => array(

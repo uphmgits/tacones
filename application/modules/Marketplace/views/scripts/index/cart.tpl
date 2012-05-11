@@ -44,9 +44,8 @@
 					}
 
 					$total_amount += $marketplace->price * $cartitem['count'];
-					$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($cartitem['marketplace_id'], $this->viewer()->getIdentity());
-					$product_shipping_fee = 0;
-					$shipping_fee += ($product_shipping_fee?$product_shipping_fee:$this->flat_shipping_rate) * $cartitem['count'];
+					//$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($cartitem['marketplace_id'], $this->viewer()->getIdentity());
+					$shipping_fee += $marketplace->shipping * $cartitem['count'];
 				?>
 					<tr>
 						<td><?=$this->htmlLink($marketplace->getHref(), $marketplace->getTitle())?></td>

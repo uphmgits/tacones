@@ -101,9 +101,8 @@ ul.feed .feed_attachment_review > div > div
 .review_profile_rating a .review_rating_star_big {
   text-align: left;
 }
-.review_profile_rating .review_summary_average {
-  font-size: 0.8em;
-  text-align: center;
+.review_profile_rating .review_summary_average a {
+  color: #892d4d;
 }
 .review_profile_rating .review_profile_actions {
   text-align: center;
@@ -276,7 +275,8 @@ ul.review_distribution_histogram span.review_distribution_histogram_count
 .review_rating_star_small span {
   background:url("~/application/modules/Review/externals/images/stars/rating_small_on.png") repeat-x scroll 0 0 transparent;
   height:12px;
-  display: inline-block;  
+  display: inline-block;
+  vertical-align: top;  
 }
 
 /* SEARCH FORM */

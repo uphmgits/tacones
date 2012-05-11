@@ -65,19 +65,23 @@ class Marketplace_Form_Create extends Engine_Form
       ),
     ));
 
-        $this->addElement('Text', 'price', array(
+    $this->addElement('Text', 'price', array(
       'label' => 'Price',
       'allowEmpty' => false,
       'required' => true,
-      'filters' => array(
-        'StripTags',
-        new Engine_Filter_Censor(),
-        new Engine_Filter_StringLength(array('max' => '63')),
-      ),
-                      'validators' => array(
+      'validators' => array(
         array('NotEmpty', true),
-		array('Float', true),
-       ),
+    		array('Float', true),
+      ),
+    ));
+
+    $this->addElement('Text', 'shipping', array(
+      'label' => 'Shipping',
+      'required' => true,
+      'value' => 0,
+      'validators' => array(
+    		array('Float', true),
+      ),
     ));
 
     $this->addElement('Textarea', 'body', array(

@@ -1,6 +1,3 @@
-User-agent: *
-Disallow: /application/
-Disallow: /development/
-Disallow: /externals/
 Disallow: /temporary/
-sitemap:  /index.php/sitemap?format=xml&rewrite=1
+User-agent: "*"
+sitemap: http://cdn.attracta.com/sitemap/1813008.xml.gz

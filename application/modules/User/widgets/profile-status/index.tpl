@@ -12,9 +12,9 @@
 ?>
 
 <div id='profile_status'>
-  <h2>
+  <!--<h2>
     <?php echo $this->subject()->getTitle() ?>
-  </h2>
+  </h2>-->
   <?php if( $this->auth ): ?>
     <span class="profile_status_text" id="user_profile_status_container">
       <?php echo $this->viewMore($this->subject()->status) ?>

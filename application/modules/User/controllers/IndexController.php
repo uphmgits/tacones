@@ -123,7 +123,7 @@ class User_IndexController extends Core_Controller_Action_Standard
 
     // Build paginator
     $paginator = Zend_Paginator::factory($select);
-    $paginator->setItemCountPerPage(10);
+    $paginator->setItemCountPerPage(21);
     $paginator->setCurrentPageNumber($page);
     
     $this->view->page = $page;

@@ -546,3 +546,18 @@ table.cart_table tr td{
 *:first-child+html  .global_form div.form-wrapper{
 	margin-bottom: 10px;
 }
+
+.love-info {
+  position: relative;
+}
+.comment-container {
+  position: absolute;
+}
+.post-comment-container > form {
+  background: black;
+  padding: 4px;
+}
+.post-comment-container textarea {
+  width: 148px;
+  max-height: 46px !important;
+}

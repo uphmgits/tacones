@@ -137,6 +137,7 @@ class Marketplace_Api_Core extends Core_Api_Abstract
 	return $marketplace->price * ($discount / 100);
  }
 
+  /*
   public function getShipingFee($marketplace_id = 0, $buyer_id = 0){
 
     if( !$this->upsIsActive() ) return 0; 
@@ -165,6 +166,7 @@ class Marketplace_Api_Core extends Core_Api_Abstract
 		  return $flat_shipping_rate;
 	  }
   }
+  */
 
   public function getCommissionFee( $user ) {
       if( !($user instanceof User_Model_User) and !$user->getIdentity() ) return 0;
@@ -173,8 +175,15 @@ class Marketplace_Api_Core extends Core_Api_Abstract
       $res = $commissionTable->select()->where('level_id = ?', $user->level_id)->query()->fetch();
       return ( !empty($res) ) ? $res['commission'] : 0;
   }
-  public function getInspectionFee() {
-      return Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.inspection', 0);
+
+  public function isInspectionEnable() {
+      return Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.inspectionenable', 0);
+  }
+  public function getInspectionFee($price) {
+      if( !$this->isInspectionEnable() ) return 0;
+      $inspection = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.inspection', 0);
+      if( !$price or !$inspection ) return 0;
+      return round( $inspection * $price / 100, 2 );
   }
 
   public function getUserFieldValueByTitle(User_Model_User $user, $field_title = '')
@@ -246,6 +255,15 @@ class Marketplace_Api_Core extends Core_Api_Abstract
 
     $select = $table->select()
       ->order( !empty($params['orderby']) ? $rName.'.'.$params['orderby'].' DESC' : $rName.'.creation_date DESC' );
+
+    $viewer = Engine_Api::_()->user()->getViewer();
+    if( !$viewer->getIdentity() or $viewer->level_id > 2 ) {
+        $notAprroved = $this->notAprrovedMarketplaces();
+        if( !empty($notAprroved) ) {
+            $select->where($rName.".marketplace_id NOT IN (?) OR owner_id = {$viewer->getIdentity()}", $notAprroved);
+        }
+        $select->where($rName.".photo_id > 0 OR owner_id = {$viewer->getIdentity()}");
+    }
     
     if( !empty($params['user_id']) && is_numeric($params['user_id']) )
     {
@@ -461,41 +479,58 @@ function tree_list_tree(&$a_list, $k_item=0) {
     }
 
 
-
-function tree_print_category(&$a_tree,$model,$category_id)
+function tree_print_category2(&$a_tree,$model,$category_id)
 {
   if(empty($a_tree)) return;
 
-  echo "<ul>";
+  echo "<span class='product_filter_on'>filter ON</span><br/><ul>";
   for($i=0;$i<count($a_tree);$i++)
   {
 	$cat_title = Zend_Registry::get('Zend_Translate')->_(ucfirst(strtolower(trim($a_tree[$i]['s_name']))));
-	if ($a_tree[$i]['k_item'] != $category_id)
-		echo '<li><a href="'.$model->url(array('category'=>$a_tree[$i]['k_item']), 'marketplace_browse', true).'">'.$cat_title.'</a>';
+//	if ($a_tree[$i]['k_item'] != $category_id)
+//		echo '<li><a href="'.$model->url(array('category'=>$a_tree[$i]['k_item']), 'marketplace_browse', true).'">'.$cat_title.'</a>';
     if ($a_tree[$i]['k_item'] == $category_id)
-        echo "<li>".$cat_title;
+	echo "<li>".$cat_title;
     $this->tree_print_category($a_tree[$i]['a_tree'],$model,$category_id);
     echo "</li>";
   }
   echo "</ul>";
 }
 
-function tree_select(&$a_tree,$level,$category_id) {
-    
-      $level .= '-';
-  for($i=0;$i<count($a_tree);$i++)
-  {
-	$cat_title = Zend_Registry::get('Zend_Translate')->_(ucfirst(strtolower(trim($a_tree[$i]['s_name']))));
+
+
+function tree_print_category( &$a_tree, $model, $category_id )
+{
+  if(empty($a_tree)) return;
+
+  //echo "<ul>";
+  echo "<span class='product_filter_on'>filter ON</span><br/><ul>";
+  for( $i = 0; $i < count($a_tree); $i++ ) {
+	  $cat_title = Zend_Registry::get('Zend_Translate')->_(ucfirst(strtolower(trim($a_tree[$i]['s_name']))));
+	  if ($a_tree[$i]['k_item'] != $category_id)
+		  echo '<li><a href="'.$model->url(array('category'=>$a_tree[$i]['k_item']), 'marketplace_browse', true).'">'.$cat_title.'</a>';
+    if ($a_tree[$i]['k_item'] == $category_id)
+      echo "<li>".$cat_title;
+    $this->tree_print_category($a_tree[$i]['a_tree'],$model,$category_id);
+    echo "</li>";
+  }
+  echo "</ul>";
+}
+
+function tree_select(&$a_tree,$level,$category_id)
+{
+  $level .= '-';
+  for( $i = 0; $i < count($a_tree); $i++ ) {
+	  $cat_title = Zend_Registry::get('Zend_Translate')->_(ucfirst(strtolower(trim($a_tree[$i]['s_name']))));
     $this->_temp[$a_tree[$i]['k_item']] = ' '.$level.' '.$cat_title;
     $temp[$a_tree[$i]['k_item']] = $cat_title;
     $this->tree_select($a_tree[$i]['a_tree'],$level,$category_id);
-
   }
   $level = '';
-
 }
 
-function tree_to_array($arr1) {
+function tree_to_array($arr1)
+{
 	$this->_arr[] = array(
 		   'k_item' => $arr1[0]['k_item'],
 		   's_name' => $arr1[0]['s_name'],
@@ -503,7 +538,6 @@ function tree_to_array($arr1) {
 	);
 	if (is_array($arr1[0]['a_tree']) && count($arr1[0]['a_tree'])>0)
 	$this->tree_to_array($arr1[0]['a_tree']);
-
 	return $this->_arr;
 }
 
@@ -610,8 +644,8 @@ function tree_list_load_related($k_item)
 
   $r=mysql_query("
     select
-      t1.k_parent as k1, #Ã¬Ã Ã¬Ã 
-      t2.k_parent as k2  #Ã¡Ã Ã¡Ã³Ã¸ÃªÃ 
+      t1.k_parent as k1, #ìàìà
+      t2.k_parent as k2  #áàáóøêà
     from
       t_catalog_tree as t1 left join
       t_catalog_tree as t2 on
@@ -767,4 +801,18 @@ public function getUserCategories($user_id)
     $row->save();
     return $row;
   }
+
+  public function notAprrovedMarketplaces()
+  {
+      $photosTable = Engine_Api::_()->getDbtable('photos', 'marketplace');
+      $photosTableName = $photosTable->info('name');
+      return $photosTable->select()
+                  ->from($photosTableName, 'marketplace_id') 
+                  ->where('approved_photo = 0')
+                  ->group('marketplace_id')
+                  ->query()  
+                  ->fetchAll(Zend_Db::FETCH_COLUMN, 'marketplace_id')
+      ;
+  }
+
 }

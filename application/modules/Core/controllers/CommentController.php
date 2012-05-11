@@ -86,6 +86,37 @@ class Core_CommentController extends Core_Controller_Action_Standard
       ));
     }
   }
+
+  public function postAction()
+  {
+    $viewer = Engine_Api::_()->user()->getViewer();
+    $subject = Engine_Api::_()->core()->getSubject();
+
+    $identity = $this->_getParam('id');
+    if( $subject != $identity ) {
+      $type = $this->_getParam('type');
+      $item = Engine_Api::_()->getItem($type, $identity);
+      if( $item instanceof Core_Model_Item_Abstract && 
+          (method_exists($item, 'comments') || method_exists($item, 'likes')) ) {
+        if( !Engine_Api::_()->core()->hasSubject() ) {
+          Engine_Api::_()->core()->setSubject($item);
+        }
+        $subject = $item;
+      }
+    }
+    
+    $this->view->canComment = $canComment = $subject->authorization()->isAllowed($viewer, 'comment');
+    $this->view->subjectId = $subject->getIdentity();
+
+    if( $viewer->getIdentity() && $canComment ) {
+      $form = new Core_Form_Comment_Create();
+      $form->populate(array(
+        'identity' => $subject->getIdentity(),
+        'type' => $subject->getType(),
+      ));
+      $this->view->form = $form;
+    }
+  }
   
   public function createAction()
   {

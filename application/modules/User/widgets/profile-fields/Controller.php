@@ -1,21 +1,4 @@
 <?php
-/**
- * SocialEngine
- *
- * @category   Application_Core
- * @package    User
- * @copyright  Copyright 2006-2010 Webligo Developments
- * @license    http://www.socialengine.net/license/
- * @version    $Id: Controller.php 7244 2010-09-01 01:49:53Z john $
- * @author     John
- */
-
-/**
- * @category   Application_Core
- * @package    User
- * @copyright  Copyright 2006-2010 Webligo Developments
- * @license    http://www.socialengine.net/license/
- */
 class User_Widget_ProfileFieldsController extends Engine_Content_Widget_Abstract
 {
   public function indexAction()
@@ -26,8 +9,14 @@ class User_Widget_ProfileFieldsController extends Engine_Content_Widget_Abstract
       return $this->setNoRender();
     }
 
+
     // Get subject and check auth
     $subject = Engine_Api::_()->core()->getSubject('user');
+	$subject_id = $subject->getIdentity();
+	//
+	
+	
+	
     if( !$subject->authorization()->isAllowed($viewer, 'view') ) {
       return $this->setNoRender();
     }
@@ -35,6 +24,30 @@ class User_Widget_ProfileFieldsController extends Engine_Content_Widget_Abstract
     $this->view->aliasValues = Engine_Api::_()->fields()->getFieldsValuesByAlias($subject); 
     $this->view->average_rating = Engine_Api::_()->review()->getUserAverageRating($subject);
     $this->view->total_review = Engine_Api::_()->review()->getUserReviewCount($subject);
+	
+///////////////////////////////////////////////////////////////////////
+//Count Comments
+	$commentsTable = Engine_Api::_()->getDbtable('comments', 'activity');
+	$select = $commentsTable->select()
+	->where('poster_id =?', $subject_id);
+	
+	$countComents = $commentsTable->fetchAll($select);
+	$this->view->countComents =  count($countComents);
+///////////////////////////////////////////////////////////////////////
+//Count Followers
+    $selectMembership = Engine_Api::_()->getDbtable('membership', 'user') ;
+    $select = $selectMembership->select()->where('resource_id=?',$subject_id);
+	$followers = $selectMembership->fetchAll($select);
+
+    $this->view->countFollowers =  count($followers);
+///////////////////////////////////////////////////////////////////////
+//Count Following
+    $selectMembership2 = Engine_Api::_()->getDbtable('membership', 'user') ;
+    $select2 = $selectMembership2->select()->where('user_id=?',$subject_id);
+	$followings = $selectMembership2->fetchAll($select2);
+
+	$this->view->countFollowing =  count($followings);
+////////////////////////////////////////////////////////////////////////		
 
     // Load fields view helpers
     $view = $this->view;
@@ -95,7 +108,7 @@ class User_Widget_ProfileFieldsController extends Engine_Content_Widget_Abstract
 
     // Do not render if nothing to show
     if( $valueCount <= 0 ) {
-      return $this->setNoRender();
-    }
+     // return $this->setNoRender();
+    }		
   }
 }

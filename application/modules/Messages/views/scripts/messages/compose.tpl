@@ -195,7 +195,14 @@
   <?php echo $this->partial($partial[0], $partial[1]) ?>
 <?php endforeach; ?>
 
-<div class="headline">
+
+
+
+<div class="headline" style="display:<?php if(!empty($_REQUEST['format'])){echo 'none';}?>">
+
+
+
+
   <h2>
     <?php echo $this->translate('My Messages');?>
   </h2>

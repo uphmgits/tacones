@@ -1,0 +1,2 @@
+2012-05-10 12:16:22 +00:00 --- Error: Missing image - /application/modules/User/externals/images/friends/close-popup.gif / /home/zapato/public_html/application/modules/User/externals/images/friends/close-popup.gif
+2012-05-10 12:17:59 +00:00 --- Error: Missing image - /application/modules/User/externals/images/friends/close-popup.gif / /home/zapato/public_html/application/modules/User/externals/images/friends/close-popup.gif

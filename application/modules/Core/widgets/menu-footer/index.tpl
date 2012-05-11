@@ -32,3 +32,6 @@
 <div style="float:right">
 <?php echo '&copy;'." ", date('Y') ." Upheels"; ?>
 </div>
+
+<?php // script for PInterest button ?>
+<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>

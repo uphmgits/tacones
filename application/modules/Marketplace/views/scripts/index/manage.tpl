@@ -34,7 +34,7 @@
   </div>
 </div>
 
-<div class='layout_right'>
+<div class='layout_left'>
   <?php echo $this->form->render($this) ?>
   <?php if( $this->can_create): ?>
   <div class="quicklinks">

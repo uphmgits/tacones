@@ -69,6 +69,8 @@
 <?php if( !$this->page ): ?>
 <div class='comments' id="comments">
 <?php endif; ?>
+
+<?php /*
   <div class='comments_options'>
     <span><?php echo $this->translate(array('%s comment', '%s comments', $this->comments->getTotalItemCount()), $this->locale()->toNumber($this->comments->getTotalItemCount())) ?></span>
 
@@ -84,6 +86,16 @@
       <?php endif; ?>
     <?php endif; ?>
   </div>
+*/?>
+
+  <h3><?=$this->translate('Add Comment')?></h3>
+
+  <?php if( $this->viewer()->getIdentity() and $this->canComment and isset($this->form) ): ?>
+      <?php $this->form->addElement('Dummy', 'clear', array('content' => "<a href='javascript:void(0);' onclick=\"$$('#comment-form #body').set('value', '');\">{$this->translate('clear')}</a>") ); ?>
+      <?php $this->form->submit->setLabel('send'); ?>
+      <?=$this->form->setAttribs(array('id' => 'comment-form'))->render()?>
+  <?php endif; ?>  
+
   <ul>
     
     <?php if( $this->likes->getTotalItemCount() > 0 ): // LIKES ------------- ?>
@@ -154,11 +166,13 @@
             ) ?>
           </div>
           <div class="comments_info">
-            <span class='comments_author'><?php echo $this->htmlLink($poster->getHref(), $poster->getTitle()); ?></span>
-            <?php echo $this->viewMore($comment->body) ?>
+            <div class="comments_description">
+              <span class='comments_author'><?=$this->htmlLink($poster->getHref(), $poster->getTitle())?></span>
+              <?=$this->viewMore($comment->body)?>
+            </div>
             <div class="comments_date">
               <?php echo $this->timestamp($comment->creation_date); ?>
-              <?php if( $canDelete ): ?>
+              <?php /*if( $canDelete ): ?>
                 -
                 <a href="javascript:void(0);" onclick="en4.core.comments.deleteComment('<?php echo $this->subject()->getType()?>', '<?php echo $this->subject()->getIdentity() ?>', '<?php echo $comment->comment_id ?>')">
                   <?php echo $this->translate('delete') ?>
@@ -183,7 +197,7 @@
                 <a href="javascript:void(0);" id="comments_comment_likes_<?php echo $comment->comment_id ?>" class="comments_comment_likes" title="<?php echo $this->translate('Loading...') ?>">
                   <?php echo $this->translate(array('%s likes this', '%s like this', $comment->likes()->getLikeCount()), $this->locale()->toNumber($comment->likes()->getLikeCount())) ?>
                 </a>
-              <?php endif ?>
+              <?php endif */ ?>
             </div>
             <?php /*
             <div class="comments_date">
@@ -226,7 +240,7 @@
       en4.core.comments.attachCreateComment($('comment-form'));
     });
   </script>
-  <?php if( isset($this->form) ) echo $this->form->setAttribs(array('id' => 'comment-form', 'style' => 'display:none;'))->render() ?>
+  
 <?php if( !$this->page ): ?>
 </div>
     <?php endif; ?>

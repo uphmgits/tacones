@@ -1,17 +1,6 @@
-<?php
-/**
- * SocialEngine
- *
- * @category   Application_Core
- * @package    User
- * @copyright  Copyright 2006-2010 Webligo Developments
- * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 7244 2010-09-01 01:49:53Z john $
- * @author     John
- */
-?>
+
 <div id='profile_photo_holder'>
-  <?=$this->itemPhoto($this->subject(), 'normal')?>
+  <?=$this->itemPhoto($this->subject(), 'thumb_profile')?>
 </div>
 <div id='profile_fields_details'>
   <h2><?=$this->subject()->getTitle()?></h2>
@@ -33,8 +22,8 @@
   <table>
     <tr>
       <th>
-        <h4 style="display: inline"><?=$this->translate('rating')?></h4>
-        <span class="review_rating_star_big">
+        <h4 style="display: inline"><?=$this->translate('rated')?></h4>
+        <span class="review_rating_star">
           <span style="width: <?php echo $this->average_rating * 20 ?>%"></span>
         </span>
       </th>
@@ -43,10 +32,10 @@
       <th><h4><?=$this->translate('comments')?></h4></th>
     </tr>
     <tr>
-      <td><h4 style="display: inline"><?=$this->translate('reviews')?></h4> <?=$this->total_review?></td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
+      <td><h4 style="display: inline"><?=$this->translate('reviews')?></h4>  <?=$this->total_review?></td>
+      <td><center><?=$this->countFollowing?></center></td>
+      <td><center><?=$this->countFollowers?></center></td>
+      <td><center><?=$this->countComents?></center></td>
     </tr>
   </table>  
 </div>

@@ -174,6 +174,23 @@ return array(
       'subject' => 'user',
     ),
   ),
+  
+  
+  
+    array(
+    'title' => 'Profile Options Top',
+    'description' => 'Displays a list of actions that can be performed on a member on their profile.',
+    'category' => 'User',
+    'type' => 'widget',
+    'name' => 'user.profile-options-top',
+    'requirements' => array(
+      'subject' => 'user',
+    ),
+  ),
+  
+  
+  
+  
   array(
     'title' => 'Profile Photo',
     'description' => 'Displays a member\'s photo on their profile.',

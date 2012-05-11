@@ -481,4 +481,19 @@ class User_Plugin_Menus
       );
     }
   }
+
+  public function onMenuInitialize_CoreMiniReviews($row)
+  {
+    $viewer = Engine_Api::_()->user()->getViewer();
+    if( $viewer->getIdentity() )
+    {
+      return array(
+        'label' => 'Reviews',
+        'route' => 'review_general'
+      );
+    }
+
+    return false;
+  }
+
 }

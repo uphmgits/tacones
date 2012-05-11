@@ -112,7 +112,9 @@ function selectAll()
         <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('user_id', 'DESC');"><?php echo $this->translate("Seller") ?></a></th>
         <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('owner_id', 'DESC');"><?php echo $this->translate("Who buy?") ?></a></th>
         <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('summ', 'DESC');"><?php echo $this->translate("Summ") ?></a></th>
-        <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('summ', 'DESC');"><?php echo $this->translate("Status") ?></a></th>
+        <th style='width: 10%;'><?php echo $this->translate("Inspection") ?></th>
+        <th style='width: 10%;'><?php echo $this->translate("Shipping") ?></th>
+        <th style='width: 20%;'><?php echo $this->translate("Status") ?></th>
         <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('count', 'DESC');"><?php echo $this->translate("Count") ?></a></th>
         <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('date', 'DESC');"><?php echo $this->translate("Date") ?></a></th>
 
@@ -153,6 +155,8 @@ function selectAll()
             </td>
             
             <td><?php echo $item->summ; ?></td>
+            <td><?php echo $item->inspection; ?></td>
+            <td><?php echo $item->shipping; ?></td>
             <td>
                 <?php if( $item->to_file_transfer == 0) : ?>
                     <?php if( $item->status != 9) : ?>
@@ -185,7 +189,7 @@ function selectAll()
                 <?php endif; ?>
             </td>
             <td><?php echo $item->count; ?></td>
-            <td><?php echo $item->date; ?></td>
+            <td><?=str_replace(' ', '<br/>', $item->date)?></td>
           </tr>
         <?php endforeach; ?>
      

@@ -1,0 +1,55 @@
+Array
+(
+    [mc_gross] => 420.00
+    [protection_eligibility] => Eligible
+    [address_status] => confirmed
+    [payer_id] => QHNHYTTGAKG2U
+    [tax] => 0.00
+    [address_street] => 1 Main St
+    [payment_date] => 04:48:32 May 03, 2012 PDT
+    [payment_status] => Completed
+    [charset] => windows-1252
+    [address_zip] => 95131
+    [first_name] => Test
+    [address_country_code] => US
+    [address_name] => Test User
+    [notify_version] => 3.4
+    [custom] => 
+    [payer_status] => verified
+    [business] => mynmre_1299873045_biz@gmail.com
+    [address_country] => United States
+    [address_city] => San Jose
+    [quantity] => 1
+    [verify_sign] => A10iDIjQRz107i7yVAsoDoSwcZesAhBncd9QPHmHHXp2xDlljVI2ttCL
+    [payer_email] => mybuy_1306254113_per@gmail.com
+    [txn_id] => 10813634XW6436726
+    [payment_type] => instant
+    [last_name] => User
+    [address_state] => CA
+    [receiver_email] => mynmre_1299873045_biz@gmail.com
+    [receiver_id] => TTVZJF8GV6DXC
+    [txn_type] => web_accept
+    [item_name] => Test Cl
+    [mc_currency] => USD
+    [item_number] => 65-3:13
+    [residence_country] => US
+    [test_ipn] => 1
+    [handling_amount] => 0.00
+    [transaction_subject] => Test Cl
+    [payment_gross] => 420.00
+    [shipping] => 0.00
+    [ipn_track_id] => 6c571e851031d
+)
+420 - 420.00OleleleleArray
+(
+    [user_id] => 13
+    [owner_id] => 13
+    [marketplace_id] => 65
+    [count] => 3
+    [summ] => 140
+    [price] => 100.00
+    [shipping] => 40.00
+    [inspection] => 0
+    [date] => 2012-05-03 11:48:35
+    [contact_email] => mybuy_1306254113_per@gmail.com
+)

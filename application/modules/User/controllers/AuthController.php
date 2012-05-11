@@ -339,6 +339,7 @@ class User_AuthController extends Core_Controller_Action_Standard
       }
 
       // Just redirect to home
+      if( $this->_getParam('gotourl', '') ) return $this->_helper->redirector->gotoUrl($this->_getParam('gotourl'));
       return $this->_helper->redirector->gotoRoute(array('action' => 'home'), 'user_general', true);
     }
   }
@@ -645,6 +646,8 @@ class User_AuthController extends Core_Controller_Action_Standard
       }
 
       // Redirect to home
+      if( $this->_getParam('gotourl', '') ) return $this->_helper->redirector->gotoUrl($this->_getParam('gotourl'));
+
       return $this->_helper->redirector->gotoRoute(array(), 'default', true);
     }
     

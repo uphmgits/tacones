@@ -62,11 +62,11 @@
 					//if($first_stage_owner != $marketplace->getOwner()->getIdentity())
 					//	continue;
 					
-          $inspection = ( $cartitem['inspection'] and $inspectionEnable ) ? $this->inspection_fee * $cartitem['count'] : 0;
+          $inspection = ( $cartitem['inspection'] and $inspectionEnable ) ? (Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price) * $cartitem['count']) : 0;
           $total_inspection += $inspection;
 					$total_amount += $marketplace->price * $cartitem['count'];
-					$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($cartitem['marketplace_id'], $this->viewer()->getIdentity());
-					$shipping_fee += ($product_shipping_fee?$product_shipping_fee:$this->flat_shipping_rate) * $cartitem['count'];
+					//$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($cartitem['marketplace_id'], $this->viewer()->getIdentity());
+					$shipping_fee += $marketplace->shipping * $cartitem['count'];
           
 					
 					$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($cartitem['marketplace_id'], $this->viewer()->getIdentity());

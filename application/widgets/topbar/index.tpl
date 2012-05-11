@@ -23,55 +23,60 @@
  
 <div class="header-sd-right">
 <?php if( $this->viewer->getIdentity()) :?> 
- <div id="mini-nav-container">
-   <ul id="mini-nav-ul" >
-    <li>
-    Welcome <?php echo $this->translate('%1$s!', $this->viewer()->getTitle()); ?>
-    <span>  <?php echo $this->htmlLink($this->viewer()->getHref(), $this->itemPhoto($this->viewer(), 'thumb.icon')) ?> </span>
-    </li>
-   <li>
-    <a class="item9" id="psettings" href="javascript:togglesett();">
-    your account
-    </a>
-   </li>
-   <li>    
-   <div id='core_menu_mini_menuq'>
-   <ul>
-    <?php if( $this->viewer->getIdentity()) :?>
-    <li id='core_menu_mini_menu_update'>
-      <span onclick="toggleUpdatesPulldown(event, this, '4');" style="display: inline-block;" class="updates_pulldown">
-        <div class="pulldown_contents_wrapper">
-          <div class="pulldown_contents">
-            <ul class="notifications_menu" id="notifications_menu">
-              <div class="notifications_loading" id="notifications_loading">
-                <img src='<?php echo $this->layout()->staticBaseUrl ?>application/modules/Core/externals/images/loading.gif' style='float:left; margin-right: 5px;' />
-                <?php echo $this->translate("Loading ...") ?>
+  <div id="mini-nav-container">
+    <ul id="mini-nav-ul" >
+      <li>
+        <?=$this->translate('Welcome %s!', $this->viewer()->getTitle()); ?>
+      </li>
+
+      <li>
+        <a class="item9" id="psettings" href="javascript:togglesett();">
+          <?=$this->translate("your account")?>
+        </a>
+      </li>
+
+      <li>
+        <?=$this->htmlLink(array('route' => 'marketplace_create'), $this->translate("Sell"))?>
+      </li>
+
+      <li style="padding-left: 0;">    
+        <div id='core_menu_mini_menuq'>
+          <ul>
+          <?php if( $this->viewer->getIdentity()) :?>
+          <li id='core_menu_mini_menu_update'>
+            <span onclick="toggleUpdatesPulldown(event, this, '4');" style="display: inline-block;" class="updates_pulldown">
+              <div class="pulldown_contents_wrapper">
+                <div class="pulldown_contents">
+                  <ul class="notifications_menu" id="notifications_menu">
+                    <div class="notifications_loading" id="notifications_loading">
+                      <img src='<?php echo $this->layout()->staticBaseUrl ?>application/modules/Core/externals/images/loading.gif' style='float:left; margin-right: 5px;' />
+                      <?php echo $this->translate("Loading ...") ?>
+                    </div>
+                  </ul>
+                </div>
+                <div class="pulldown_options">
+                  <?php echo $this->htmlLink(array('route' => 'default', 'module' => 'activity', 'controller' => 'notifications'),
+                     $this->translate('View All Updates'),
+                     array('id' => 'notifications_viewall_link')) ?>
+                  <?php echo $this->htmlLink('javascript:void(0);', $this->translate('Mark All Read'), array(
+                    'id' => 'notifications_markread_link',
+                  )) ?>
+                </div>
               </div>
-            </ul>
-          </div>
-          <div class="pulldown_options">
-            <?php echo $this->htmlLink(array('route' => 'default', 'module' => 'activity', 'controller' => 'notifications'),
-               $this->translate('View All Updates'),
-               array('id' => 'notifications_viewall_link')) ?>
-            <?php echo $this->htmlLink('javascript:void(0);', $this->translate('Mark All Read'), array(
-              'id' => 'notifications_markread_link',
-            )) ?>
-          </div>
+              <a href="javascript:void(0);" id="updates_toggle" <?php if( $this->notificationCount ):?> class="new_updates"<?php endif;?>><?php echo $this->translate(array('%s Update', '%s Updates', $this->notificationCount), $this->locale()->toNumber($this->notificationCount)) ?></a>
+            </span>
+          </li>
+          <?php endif; ?>
+          </ul>
         </div>
-        <a href="javascript:void(0);" id="updates_toggle" <?php if( $this->notificationCount ):?> class="new_updates"<?php endif;?>><?php echo $this->translate(array('%s Update', '%s Updates', $this->notificationCount), $this->locale()->toNumber($this->notificationCount)) ?></a>
-      </span>
-    </li>
-    <?php endif; ?>
-  </ul>
+      </li>
+
+      <li>
+        <a href="/invite"><?=$this->translate("invite friends")?></a>
+      </li>
+    </ul>
   </div>
-      
-   </li>
-   <li>
-    <a href="/invite">invite friends</a>
-   </li>
-  </ul>
- </div>
- <?php endif; ?>
+<?php endif; ?>
 
  <?php if( !$this->viewer->getIdentity()) :?> 
   <div id="mini-nav-container">
@@ -89,22 +94,28 @@
  
  <div class="clear"></div>
    
- <div class="main-nav-search">
+  <div class="main-nav-search">
     <form action="/search" method="get">
     <input type="text" name="query" class="text" onFocus="if(this.value == 'search') { this.value = ''; }" value="search" />
     <input type="submit" value=" " class="main-nav-search-butn">
     </form>
- </div>
- <div id="main-nav-container">
-  <?php
-   echo $this->navigation()
-    ->menu()
-    ->setContainer($this->navigation_main)
-    ->setPartial(null)
-    ->setUlClass('main-nav-ul')
-    ->render();
-   ?>
- </div>
+  </div>
+  <div id="main-nav-container">
+    <?php 
+      $categoryId = Zend_Controller_Front::getInstance()->getRequest()->getParam('category');
+      if( is_numeric($categoryId) ) {
+        $url = addslashes($this->url(array('category' => $categoryId), "marketplace_browse"));
+        $page = $this->navigation_main->findOneBy( 'uri', $url );
+        if( $page ) $page->setActive();
+      } 
+      echo $this->navigation()
+                ->menu()
+                ->setContainer($this->navigation_main)
+                ->setPartial(null)
+                ->setUlClass('main-nav-ul')
+                ->render();
+    ?>
+  </div>
 </div>
 
 

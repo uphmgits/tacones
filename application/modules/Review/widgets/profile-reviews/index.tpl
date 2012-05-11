@@ -1,17 +1,3 @@
-<?php
-/**
- * Radcodes - SocialEngine Module
- *
- * @category   Application_Extensions
- * @package    Review
- * @copyright  Copyright (c) 2009-2010 Radcodes LLC (http://www.radcodes.com)
- * @license    http://www.radcodes.com/license/
- * @version    $Id$
- * @author     Vincent Van <vincent@radcodes.com>
- */
- 
-?>
-
 <?php $totalReviews = $this->paginator->getTotalItemCount() ?>
 <?php if( $totalReviews > 0 ): ?>
 
@@ -33,7 +19,7 @@
           <?php echo $this->htmlLink($review_owner->getHref(), $this->itemPhoto($review_owner, 'thumb.icon'));?>
         </div>
         <div class="review_date">
-            <?=$this->timestamp($this->user_review->creation_date)?>
+            <?php echo $this->timestamp($review->creation_date);?>
         </div>
         <div class="review_info">
           <div class="review_owner">

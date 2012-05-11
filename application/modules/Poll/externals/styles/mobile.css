@@ -1,0 +1,323 @@
+
+/* $Id: mobile.css 8825 2011-04-09 01:34:20Z john $ */
+
+
+
+/*
+BROWSE POLLS
+These styles are used on the browse polls page
+and inside the polls profile tab.
+*/
+ul.polls_browse > li
+{
+  clear: both;
+  overflow: hidden;
+  padding: 0px 0px 15px 0px;
+}
+ul.polls_browse > li + li
+{
+  border-top-width: 1px;
+  padding-top: 15px;
+}
+ul.polls_browse > li > a
+{
+  display: block;
+  float: left;
+  overflow: hidden;
+  margin-right: 8px;
+  font-weight: bold;
+}
+ul.polls_browse .polls_browse_options
+{
+  float: right;
+  width: 120px;
+  padding-left: 15px;
+}
+ul.polls_browse .polls_browse_options a
+{
+  clear: both;
+  margin: 3px 0px 0px 0px;
+  font-size: .8em;
+  padding-top: 1px;
+  height: 16px;
+}
+ul.polls_browse .polls_browse_info
+{
+  overflow: hidden;
+}
+ul.polls_browse .polls_browse_info_date
+{
+  font-size: .8em;
+  color: $theme_font_color_light;
+}
+ul.polls_browse .polls_browse_info_desc
+{
+  margin-top: 5px;
+}
+ul.polls_browse .polls_browse_photo > img
+{
+  display: block;
+}
+
+
+/*
+COMMON VIEW POLL
+*/
+.poll_view_single ul.poll_options
+{
+  +rounded(3px);
+}
+.poll_view_single ul.poll_options > li
+{
+  clear: both;
+  overflow: hidden;
+}
+.poll_view_single ul.poll_options > li + li
+{
+  margin-top: 10px;
+}
+.poll_view_single .poll_radio
+{
+  float: left;
+  width: 20px;
+  height: 18px;
+  overflow: hidden;
+}
+.poll_view_single .poll_radio > input
+{
+  display: block;
+  float: left;
+  margin-left: 1px;
+}
+.poll_view_single .poll_radio_loading
+{
+  float: left;
+  width: 20px;
+  height: 18px;
+  background-image: url(~/application/modules/Poll/externals/images/loading.gif);
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+.poll_view_single .poll_radio_loading input
+{
+  display: none;
+}
+.poll_view_single .poll_option
+{
+  margin-bottom: 3px;
+}
+.poll_view_single .poll_answer
+{
+  +rounded;
+  width: 10px;
+  height: 15px;
+  font-size: 1px;
+  margin-right: 5px;
+  float: left;
+  overflow: hidden;
+}
+.poll_view_single .poll_answer_total
+{
+  display: block;
+  height: 15px;
+  font-size: .7em;
+  width: 70px;
+  float: left;
+  padding: 2px 0px 0px 0px;
+}
+.poll_view_single div.poll-answer-1
+{
+  background-color: #aaea4f;
+}
+.poll_view_single div.poll-answer-2
+{
+  background-color: #ea4f4f;
+}
+.poll_view_single div.poll-answer-3
+{
+  background-color: #4faaea;
+}
+.poll_view_single div.poll-answer-4
+{
+  background-color: #eaaa4f;
+}
+.poll_view_single div.poll-answer-5
+{
+  background-color: #4f5eea;
+}
+.poll_view_single div.poll-answer-6
+{
+  background-color: #4feabc;
+}
+.poll_view_single div.poll-answer-7
+{
+  background-color: #e54fea;
+}
+.poll_view_single div.poll-answer-8
+{
+  background-color: #eae84f;
+}
+.poll_view_single .poll_stats
+{
+  margin-top: 15px;
+}
+.poll_view_single .poll_stats > a
+{
+  font-weight: bold;
+}
+
+
+
+/*
+VIEW POLL
+These styles are used for viewing a single poll.
+*/
+#global_page_poll-index-view #global_content > h2
+{
+  text-align: center;
+}
+div.polls_view
+{
+  text-align: center;
+}
+div.polls_view .poll_desc
+{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  padding: 0px 5%;
+}
+div.polls_view .poll_options
+{
+  margin: 0px 5%;
+  padding: 10px;
+  background-color: $theme_foreground_background_color;
+  max-width: none;
+}
+div.polls_view .poll_stats
+{
+  display: none;
+}
+div.polls_view .comments
+{
+  margin-top: 10px;
+  width: auto;
+}
+
+
+/*
+POLL RICH CONTENT
+*/
+.feed_poll_rich_content .poll_option
+{
+  font-size:0.8em;
+}
+.feed_poll_rich_content .poll_answer
+{
+  margin-top: 1px;
+  height: 10px;
+}
+.feed_poll_rich_content .poll_answer_total
+{
+  padding-top: 0;
+}
+.feed_poll_rich_content ul.poll_options
+{
+  padding: 10px;
+  background-color: $theme_foreground_background_color;
+  margin: 7px 0px;
+}
+.feed_poll_rich_content ul.poll_options > li
+{
+  clear: both;
+  overflow: hidden;
+}
+.feed_poll_rich_content ul.poll_options > li + li
+{
+  clear: both;
+  margin-top: 5px;
+  overflow: hidden;
+}
+.feed_poll_rich_content .poll_stats {
+  display: none;
+  margin-top: 5px;
+  font-size: 0.9em;
+}
+.feed_poll_rich_content .poll_stats > a {
+  font-weight: normal;
+}
+
+
+
+
+/* HOME POLL WIDGET */
+.layout_poll_home_poll
+{
+  margin-bottom: 15px;
+}
+.layout_poll_home_poll .poll_option
+{
+  font-size: 0.8em;
+}
+.layout_poll_home_poll .poll_answer_total
+{
+  padding-left: 0px;
+  padding-top: 3px;
+}
+.layout_poll_home_poll .poll_answer
+{
+  display: block;
+  clear: both;
+  float: none;
+}
+.layout_poll_home_poll .poll_answer
+{
+  margin-top: 1px;
+  height: 10px;
+}
+
+
+
+
+
+/* ACTION TYPE ICONS */
+.activity_icon_comment_poll
+{
+  background-image: url(~/application/modules/Core/externals/images/types/post.png);
+}
+
+
+
+
+
+/* ITEM TYPE ICONS */
+.item_icon_poll
+{
+  background-image: url(~/application/modules/Poll/externals/images/types/poll.png);
+}
+
+
+
+/* ICONS */
+.icon_poll_new
+{
+  background-image: url(~/application/modules/Poll/externals/images/new.png);
+}
+.icon_poll_delete
+{
+  background-image: url(~/application/modules/Poll/externals/images/delete.png);
+}
+.icon_poll_edit
+{
+  background-image: url(~/application/modules/Poll/externals/images/edit.png);
+}
+
+
+
+
+
+/* hide menu items */
+.headline .tabs .navigation li > a.poll_main_create
+{
+  display: none;
+}

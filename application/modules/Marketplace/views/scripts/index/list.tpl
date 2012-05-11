@@ -114,6 +114,7 @@
     </div>
   <?php endif; ?>
   
-  <?php echo $this->paginationControl($this->paginator, null, array("pagination/blogpagination.tpl","blog"), array("orderby"=>$this->orderby)); ?>
+  <?php //echo $this->paginationControl($this->paginator, null, array("pagination/blogpagination.tpl","blog"), array("orderby"=>$this->orderby)); ?>
+  <?=$this->paginationControl($this->paginator)?>
 
 </div>
