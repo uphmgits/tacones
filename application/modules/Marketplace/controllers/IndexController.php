@@ -96,7 +96,6 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 
       // check to see if request is for specific user's listings
       $user_id = $this->_getParam('user');
-echo "<pre>"; print_r($user_id); echo "</pre>";
       if ($user_id)
           $values['user_id'] = $user_id;
 
@@ -1834,6 +1833,24 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
             $marketplace->updateLikes();
         }
         die();
+    }
+
+    public function commentsAction() {
+        $marketplace_id = (int)$this->_getParam('marketplace_id', 0);
+        $marketplace = Engine_Api::_()->getItem('marketplace', $marketplace_id);
+        if( !$marketplace ) {
+            return $this->_helper->redirector->gotoRoute(array(), 'marketplace_browse');
+        }
+  
+        Engine_Api::_()->marketplace()->tree_list($marketplace->category_id);
+        $a_tree = Engine_Api::_()->marketplace()->tree_list_load_array(array($marketplace->category_id));
+        $this->view->a_tree = $a_tree;
+        $this->view->urls = $this->_helper->url;	
+
+        $likesTable = Engine_Api::_()->getDbtable('likes', 'core');
+        $this->view->likeList = $likesTable->getLikePaginator($marketplace, 5);
+
+        $this->view->marketplace = $marketplace;
     }
 }
 

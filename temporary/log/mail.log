@@ -450,3 +450,15 @@
 2012-05-11T15:18:48+00:00 DEBUG (7): [System] (notify_commented) waldana@gmail.com <- noreply@fashbay.com
 2012-05-11T15:18:49+00:00 DEBUG (7): [Zend] salsabor_01@yahoo.com <- noreply@fashbay.com
 2012-05-11T15:18:49+00:00 DEBUG (7): [System] (notify_liked_commented) salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-05-14T10:20:46+00:00 DEBUG (7): [Zend] waldana@gmail.com <- noreply@fashbay.com
+2012-05-14T10:20:46+00:00 DEBUG (7): [System] (notify_commented) waldana@gmail.com <- noreply@fashbay.com
+2012-05-14T10:20:46+00:00 DEBUG (7): [Zend] salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-05-14T10:20:46+00:00 DEBUG (7): [System] (notify_liked_commented) salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-05-14T12:53:52+00:00 DEBUG (7): [Zend] waldana@gmail.com <- noreply@fashbay.com
+2012-05-14T12:53:52+00:00 DEBUG (7): [System] (notify_commented) waldana@gmail.com <- noreply@fashbay.com
+2012-05-14T12:53:53+00:00 DEBUG (7): [Zend] salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-05-14T12:53:53+00:00 DEBUG (7): [System] (notify_liked_commented) salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-05-14T12:53:53+00:00 DEBUG (7): [Zend] waldana@gmail.com <- noreply@fashbay.com
+2012-05-14T12:53:53+00:00 DEBUG (7): [System] (notify_commented) waldana@gmail.com <- noreply@fashbay.com
+2012-05-14T12:53:53+00:00 DEBUG (7): [Zend] salsabor_01@yahoo.com <- noreply@fashbay.com
+2012-05-14T12:53:53+00:00 DEBUG (7): [System] (notify_liked_commented) salsabor_01@yahoo.com <- noreply@fashbay.com

@@ -58,7 +58,7 @@ class Core_CommentController extends Core_Controller_Action_Standard
     if( null !== ( $page = $this->_getParam('page')) )
     {
       $commentSelect = $subject->comments()->getCommentSelect();
-      $commentSelect->order('comment_id ASC');
+      $commentSelect->order('comment_id DESC');
       $comments = Zend_Paginator::factory($commentSelect);
       $comments->setCurrentPageNumber($page);
       $comments->setItemCountPerPage(10);
@@ -77,7 +77,6 @@ class Core_CommentController extends Core_Controller_Action_Standard
       $this->view->comments = $comments;
       $this->view->page = $page;
     }
-
     if( $viewer->getIdentity() && $canComment ) {
       $this->view->form = $form = new Core_Form_Comment_Create();
       $form->populate(array(
@@ -93,7 +92,7 @@ class Core_CommentController extends Core_Controller_Action_Standard
     $subject = Engine_Api::_()->core()->getSubject();
 
     $identity = $this->_getParam('id');
-    if( $subject != $identity ) {
+    if( $subject->getIdentity() != $identity ) {
       $type = $this->_getParam('type');
       $item = Engine_Api::_()->getItem($type, $identity);
       if( $item instanceof Core_Model_Item_Abstract && 

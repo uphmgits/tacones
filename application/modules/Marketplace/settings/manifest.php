@@ -112,7 +112,7 @@ return array(
         'module' => 'marketplace',
         'controller' => 'index',
         'action' => 'index',
-        'category' => 0,
+        'category' => 3,
         'page' => 1
       )
     ),
@@ -136,6 +136,17 @@ return array(
       ),
       'reqs' => array(
         'user_id' => '\d+',
+        'marketplace_id' => '\d+'
+      )
+    ),
+    'marketplace_comments' => array(
+      'route' => 'marketplaces/comments/:marketplace_id',
+      'defaults' => array(
+        'module' => 'marketplace',
+        'controller' => 'index',
+        'action' => 'comments'
+      ),
+      'reqs' => array(
         'marketplace_id' => '\d+'
       )
     ),

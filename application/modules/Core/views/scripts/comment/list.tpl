@@ -10,6 +10,7 @@
  * @author     John
  */
 ?>
+<?php $subject = $this->subject(); ?>
 
 <script type="text/javascript">
   var CommentLikesTooltips;
@@ -37,8 +38,8 @@
             format : 'json',
             type : 'core_comment',
             id : id
-            //type : '<?php //echo $this->subject()->getType() ?>',
-            //id : '<?php //echo $this->subject()->getIdentity() ?>',
+            //type : '<?php //echo $subject->getType() ?>',
+            //id : '<?php //echo $subject->getIdentity() ?>',
             //comment_id : id
           },
           onComplete : function(responseJSON) {
@@ -67,7 +68,7 @@
 )); ?>
 
 <?php if( !$this->page ): ?>
-<div class='comments' id="comments">
+  <div class='comments' id="comments">
 <?php endif; ?>
 
 <?php /*
@@ -79,81 +80,85 @@
     <?php endif; ?>
 
     <?php if( $this->viewer()->getIdentity() && $this->canComment ): ?>
-      <?php if( $this->subject()->likes()->isLike($this->viewer()) ): ?>
-        - <a href="javascript:void(0);" onclick="en4.core.comments.unlike('<?php echo $this->subject()->getType()?>', '<?php echo $this->subject()->getIdentity() ?>')"><?php echo $this->translate('Unlike This') ?></a>
+      <?php if( $subject->likes()->isLike($this->viewer()) ): ?>
+        - <a href="javascript:void(0);" onclick="en4.core.comments.unlike('<?php echo $subject->getType()?>', '<?php echo $subject->getIdentity() ?>')"><?php echo $this->translate('Unlike This') ?></a>
       <?php else: ?>
-        - <a href="javascript:void(0);" onclick="en4.core.comments.like('<?php echo $this->subject()->getType()?>', '<?php echo $this->subject()->getIdentity() ?>')"><?php echo $this->translate('Like This') ?></a>
+        - <a href="javascript:void(0);" onclick="en4.core.comments.like('<?php echo $subject->getType()?>', '<?php echo $subject->getIdentity() ?>')"><?php echo $this->translate('Like This') ?></a>
       <?php endif; ?>
     <?php endif; ?>
   </div>
 */?>
 
-  <h3><?=$this->translate('Add Comment')?></h3>
+  <div class="comments-form-container" id="comments-form-container">
+    <div class='close-popup' onclick="$('comments-form-container').hide();"></div>
+    <h3><?=$this->translate('Add Comment')?></h3>
 
-  <?php if( $this->viewer()->getIdentity() and $this->canComment and isset($this->form) ): ?>
-      <?php $this->form->addElement('Dummy', 'clear', array('content' => "<a href='javascript:void(0);' onclick=\"$$('#comment-form #body').set('value', '');\">{$this->translate('clear')}</a>") ); ?>
-      <?php $this->form->submit->setLabel('send'); ?>
-      <?=$this->form->setAttribs(array('id' => 'comment-form'))->render()?>
-  <?php endif; ?>  
+    <?php if( $this->viewer()->getIdentity() and $this->canComment and isset($this->form) ): ?>
+        <?php $this->form->addElement('Dummy', 'clear', array('content' => "<a href='javascript:void(0);' onclick=\"$$('#comment-form #body').set('value', '');\">{$this->translate('clear')}</a>") ); ?>
+        <?php $this->form->submit->setLabel('send'); ?>
+        <?=$this->form->setAttribs(array('id' => 'comment-form'))->render()?>
+        <hr/>
+    <?php endif; ?>  
+  </div>
 
   <ul>
     
-    <?php if( $this->likes->getTotalItemCount() > 0 ): // LIKES ------------- ?>
+    <?php /*if( $this->likes->getTotalItemCount() > 0 ): // LIKES ------------- ?>
       <li>
         <?php if( $this->viewAllLikes || $this->likes->getTotalItemCount() <= 3 ): ?>
           <?php $this->likes->setItemCountPerPage($this->likes->getTotalItemCount()) ?>
           <div> </div>
           <div class="comments_likes">
-            <?php echo $this->translate(array('%s likes this', '%s like this', $this->likes->getTotalItemCount()), $this->fluentList($this->subject()->likes()->getAllLikesUsers())) ?>
+            <?php echo $this->translate(array('%s likes this', '%s like this', $this->likes->getTotalItemCount()), $this->fluentList($subject->likes()->getAllLikesUsers())) ?>
           </div>
         <?php else: ?>
           <div> </div>
           <div class="comments_likes">
             <?php echo $this->htmlLink('javascript:void(0);', 
                           $this->translate(array('%s person likes this', '%s people like this', $this->likes->getTotalItemCount()), $this->locale()->toNumber($this->likes->getTotalItemCount())),
-                          array('onclick' => 'en4.core.comments.showLikes("'.$this->subject()->getType().'", "'.$this->subject()->getIdentity().'");')
+                          array('onclick' => 'en4.core.comments.showLikes("'.$subject->getType().'", "'.$subject->getIdentity().'");')
                       ); ?>
           </div>
         <?php endif; ?>
-    <?php endif; ?>
+    <?php endif;*/ ?>
 
     <?php if( $this->comments->getTotalItemCount() > 0 ): // COMMENTS ------- ?>
 
-      <?php if( $this->page && $this->comments->getCurrentPageNumber() > 1 ): ?>
+      <?php /*if( $this->page && $this->comments->getCurrentPageNumber() > 1 ): ?>
         <li>
           <div> </div>
           <div class="comments_viewall">
             <?php echo $this->htmlLink('javascript:void(0);', $this->translate('View previous comments'), array(
-              'onclick' => 'en4.core.comments.loadComments("'.$this->subject()->getType().'", "'.$this->subject()->getIdentity().'", "'.($this->page - 1).'")'
+              'onclick' => 'en4.core.comments.loadComments("'.$subject->getType().'", "'.$subject->getIdentity().'", "'.($this->page - 1).'")'
             )) ?>
           </div>
         </li>
-      <?php endif; ?>
+      <?php endif;*/ ?>
 
-      <?php if( !$this->page && $this->comments->getCurrentPageNumber() < $this->comments->count() ): ?>
+      <?php /*if( !$this->page && $this->comments->getCurrentPageNumber() < $this->comments->count() ): ?>
         <li>
           <div> </div>
           <div class="comments_viewall">
             <?php echo $this->htmlLink('javascript:void(0);', $this->translate('View more comments'), array(
-              'onclick' => 'en4.core.comments.loadComments("'.$this->subject()->getType().'", "'.$this->subject()->getIdentity().'", "'.($this->comments->getCurrentPageNumber()).'")'
+              'onclick' => 'en4.core.comments.loadComments("'.$subject->getType().'", "'.$subject->getIdentity().'", "'.($this->comments->getCurrentPageNumber()).'")'
             )) ?>
           </div>
         </li>
-      <?php endif; ?>
+      <?php endif;*/ ?>
 
       <?php // Iterate over the comments backwards (or forwards!)
       $comments = $this->comments->getIterator();
-      if( $this->page ):
+      //if( $this->page ):
         $i = 0;
         $l = count($comments) - 1;
         $d = 1;
         $e = $l + 1;
-      else:
+      /*else:
         $i = count($comments) - 1;
         $l = count($comments);
         $d = -1;
         $e = -1;
-      endif;
+      endif;*/
       for( ; $i != $e; $i += $d ):
         $comment = $comments[$i];
         $poster = $this->item($comment->poster_type, $comment->poster_id);
@@ -174,7 +179,7 @@
               <?php echo $this->timestamp($comment->creation_date); ?>
               <?php /*if( $canDelete ): ?>
                 -
-                <a href="javascript:void(0);" onclick="en4.core.comments.deleteComment('<?php echo $this->subject()->getType()?>', '<?php echo $this->subject()->getIdentity() ?>', '<?php echo $comment->comment_id ?>')">
+                <a href="javascript:void(0);" onclick="en4.core.comments.deleteComment('<?php echo $subject->getType()?>', '<?php echo $subject->getIdentity() ?>', '<?php echo $comment->comment_id ?>')">
                   <?php echo $this->translate('delete') ?>
                 </a>
               <?php endif; ?>
@@ -183,11 +188,11 @@
                 ?>
                 -
                 <?php if( !$isLiked ): ?>
-                  <a href="javascript:void(0)" onclick="en4.core.comments.like(<?php echo sprintf("'%s', %d, %d", $this->subject()->getType(), $this->subject()->getIdentity(), $comment->getIdentity()) ?>)">
+                  <a href="javascript:void(0)" onclick="en4.core.comments.like(<?php echo sprintf("'%s', %d, %d", $subject->getType(), $subject->getIdentity(), $comment->getIdentity()) ?>)">
                     <?php echo $this->translate('like') ?>
                   </a>
                 <?php else: ?>
-                  <a href="javascript:void(0)" onclick="en4.core.comments.unlike(<?php echo sprintf("'%s', %d, %d", $this->subject()->getType(), $this->subject()->getIdentity(), $comment->getIdentity()) ?>)">
+                  <a href="javascript:void(0)" onclick="en4.core.comments.unlike(<?php echo sprintf("'%s', %d, %d", $subject->getType(), $subject->getIdentity(), $comment->getIdentity()) ?>)">
                     <?php echo $this->translate('unlike') ?>
                   </a>
                 <?php endif ?>
@@ -220,16 +225,16 @@
         </li>
       <?php endfor; ?>
 
-      <?php if( $this->page && $this->comments->getCurrentPageNumber() < $this->comments->count() ): ?>
+      <?php /*if( $this->page && $this->comments->getCurrentPageNumber() < $this->comments->count() ): ?>
         <li>
           <div> </div>
           <div class="comments_viewall">
             <?php echo $this->htmlLink('javascript:void(0);', $this->translate('View later comments'), array(
-              'onclick' => 'en4.core.comments.loadComments("'.$this->subject()->getType().'", "'.$this->subject()->getIdentity().'", "'.($this->page + 1).'")'
+              'onclick' => 'en4.core.comments.loadComments("'.$subject->getType().'", "'.$subject->getIdentity().'", "'.($this->page + 1).'")'
             )) ?>
           </div>
         </li>
-      <?php endif; ?>
+      <?php endif;*/ ?>
 
     <?php endif; ?>
 

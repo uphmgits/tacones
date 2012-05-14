@@ -1165,37 +1165,48 @@ These styles are used everywhere comments appear.
 {
   width: 450px;
 }
-#global_page_marketplace-index-view .comments {
+#global_page_marketplace-index-view .comments,
+#global_page_marketplace-index-comments .comments {
   width:auto !important;
   background-color:#0d0d0d;
   //margin-top:20px;
-  padding:15px;
+  padding: 15px 15px 0 15px;
   border-bottom:1px solid #7A7A7A;
 }
 .comments > ul
 {
   overflow: hidden;
 }
+.comments hr {
+  height: 1px;
+  margin: 12px -15px;
+  background: #777;
+}
 .comments > ul > li
 {
   +foreground;
   background-image: none;
-  border: none;
-  padding: 5px;
-  border-top: 1px solid $theme_foreground_border_color;
+  padding-bottom: 14px;
   overflow: hidden;
-  margin-bottom: 1px;
-  border-bottom:1px solid #323131;
+}
+.comments > ul > li + li {
+  border-top: 1px solid #323131;
+  padding: 14px 0;
 }
 .comments .comments_author a
 {
-  font-weight: bold;
   margin-right: 2px;
+  font-size: 12px;
+  line-height: 12px;
+  vertical-align: top;
 }
 html[dir="rtl"] .comments .comments_author a
 {
   margin-right: 0px;
   margin-left: 2px;
+  font-size: 12px;
+  line-height: 12px;
+  vertical-align: top
 }
 html[dir="rtl"] .comments_author
 {
@@ -1215,6 +1226,11 @@ html[dir="rtl"] .comments .comments_author_photo
 .comments .comments_author_photo img
 {
   display: block;
+  width: 24px;
+  height: 24px;
+}
+.comments-header {
+  overflow: hidden;
 }
 .comments .comments_options
 {
@@ -1233,6 +1249,7 @@ html[dir="rtl"] .comments .comments_author_photo
 }
 .comments .comments_description {
   margin-right: 80px;
+  font-size: 12px;
 }
 .comments .comments_info
 {
@@ -1252,7 +1269,7 @@ html[dir="rtl"] .comments .comments_info
   position: absolute;
   top: 50%;
   right: 0;
-  margin-top: -.6em;
+  margin-top: -.8em;
   font-size: .9em;
   color: $theme_font_color_light;
 }
@@ -1829,9 +1846,7 @@ border: 0px solid;
     padding: 0px 3px;
 }
 .main-nav-ul li.active > a {
-    line-height: 30px;
-    font-family: Univers Bd Std;
-    font-size: 18px;
+    color: #d2d2d2;
 }
 
 .main-nav-ul li a {
@@ -2244,6 +2259,23 @@ ul.marketplace_fieldvalueloop h3 {
 h3.product-desc, h3.comments-desc {
   margin:10px 10px 10px 0px;
 }
+h3.comments-desc {
+  float: left;
+}
+div.comments-stats {
+  float: right;
+  margin:10px 0 10px 10px;
+  color: #e2e2e2;
+}
+div.comments-stats > span {
+  padding-left: 10px;
+}
+
+div.comments-form-container {
+  display: none;
+  margin-bottom: 14px;
+}
+
 .marketplace_thumb_icon {
   float:left;
   padding-right:16px;
@@ -2299,8 +2331,15 @@ h3.product-desc, h3.comments-desc {
   text-transform:none;
   color: #a51c4b;
 }
-.product-title-right {
+table.product-title-right {
+  margin-bottom: 10px;
+}
+table.product-title-right td {
   font-size:16px;
+  color: #e2e2e2;
+  vertical-align: top;
+  padding-right: 5px;
+  text-transform: uppercase;
 }
 ul.reviews_profile {
   background-color:#210310;
@@ -2362,7 +2401,8 @@ ul.marketplaces_profile_tab .marketplaces_profile_tab_photo {
 }
 .comments ul li div span.comments_author {
   display:block;
-  margin-bottom:5px;
+  /*margin-bottom:5px;*/
+  line-height: 14px;
 }
 .review_rating_star_big {
   margin-bottom:10px;
@@ -2590,4 +2630,17 @@ padding: 0px;
   color: #d2d2d2 !important;
   font-size: 16px;
 }
+#comment-form textarea {
+  width: 100%;
+  margin: 10px 0 5px;
+}
 
+.marketplace_thumbs li {
+  overflow: hidden;
+}
+.marketplace_thumbs li a {
+  vertical-align: top;
+}
+.marketplace_thumbs li a + a {
+  margin-left: 10px;
+}

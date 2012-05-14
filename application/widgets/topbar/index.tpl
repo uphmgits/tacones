@@ -104,8 +104,8 @@
     <?php 
       $categoryId = Zend_Controller_Front::getInstance()->getRequest()->getParam('category');
       if( is_numeric($categoryId) ) {
-        $url = addslashes($this->url(array('category' => $categoryId), "marketplace_browse"));
-        $page = $this->navigation_main->findOneBy( 'uri', $url );
+        $url = $categoryId ? $this->url(array(), "marketplace_browse") . "/{$categoryId}" : $this->url(array(), "marketplace_browse");
+        $page = $this->navigation_main->findOneBy( 'uri', addslashes($url) );
         if( $page ) $page->setActive();
       } 
       echo $this->navigation()

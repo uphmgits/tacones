@@ -5,6 +5,7 @@
  * @copyright   Copyright (c) 2008 Webligo Developments
  * @license     http://www.socialengine.net/license/
  */
+
 // Config
 if( !defined('_ENGINE_R_MAIN') ) {
   define('_ENGINE_R_CONF', true);

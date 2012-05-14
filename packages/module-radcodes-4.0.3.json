@@ -1,0 +1,839 @@
+{
+  "type": "module",
+  "name": "radcodes",
+  "version": "4.0.3",
+  "revision": null,
+  "path": "application\/modules\/Radcodes",
+  "repository": null,
+  "meta": {
+    "date": "Mon, 27 Sep 2010 09:20:30 +0000",
+    "title": "Radcodes",
+    "description": "This module is Radcodes Core Library, and is required by all SocialEngine Modules developed by Radcodes.",
+    "developer": null,
+    "authors": [
+      "Radcodes Developments"
+    ],
+    "changeLog": null
+  },
+  "dependencies": {
+    "module-core": {
+      "type": "module",
+      "name": "core",
+      "guid": "module-core",
+      "minVersion": "4.0.4",
+      "maxVersion": null
+    }
+  },
+  "permissions": [
+    
+  ],
+  "actions": [
+    "install",
+    "upgrade",
+    "refresh",
+    "enable",
+    "disable"
+  ],
+  "callback": {
+    "path": null,
+    "class": "Engine_Package_Installer_Module",
+    "priority": 100
+  },
+  "tests": null,
+  "structure": {
+    "application\/modules\/Radcodes": {
+      "type": "directory",
+      "path": "application\/modules\/Radcodes",
+      "structure": [
+        {
+          "path": "Api",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Api\/Core.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2494,
+          "sha1": "0e11c19107e5a141fed9b75f414d4e5fe4f20443"
+        },
+        {
+          "path": "Api\/Debug.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1802,
+          "sha1": "27192a753e9205628b96f620982268fa17bdbe67"
+        },
+        {
+          "path": "Api\/Filter.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 886,
+          "sha1": "1368816bcdc592ce302579d176aae95d31491321"
+        },
+        {
+          "path": "Api\/Location.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 3865,
+          "sha1": "25f7679442650f42b8c75f763a9ec155dba02f3f"
+        },
+        {
+          "path": "Api\/Map.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 838,
+          "sha1": "c513864cdf834638cd1f98d0177ac5b03e053835"
+        },
+        {
+          "path": "Bootstrap.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 403,
+          "sha1": "51c1be5cf457ecffd81c4a41be95e4cb24c8dac8"
+        },
+        {
+          "path": "controllers",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "controllers\/AdminIndexController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 611,
+          "sha1": "5b22bc1384ac1a30e283af4a1100374137a6fcfa"
+        },
+        {
+          "path": "controllers\/AdminSettingsController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 960,
+          "sha1": "414ae84a6158764af374a2d98ad63f94bba97c5c"
+        },
+        {
+          "path": "controllers\/IndexController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 438,
+          "sha1": "48775877913d55604fe14106517884c7241f18d5"
+        },
+        {
+          "path": "externals",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/.htaccess",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 147,
+          "sha1": "9f1638a8edbe1c5d28789e017fb35b2f2465f01e"
+        },
+        {
+          "path": "externals\/images",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "externals\/images\/admin",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "externals\/images\/admin\/move_category.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 745,
+          "sha1": "0851b459129021751a07297acca2edbb157fd91f"
+        },
+        {
+          "path": "externals\/styles",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "externals\/styles\/admin",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "externals\/styles\/admin\/main.css",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 527,
+          "sha1": "f03cc92dbf60e30ed8ec152565c43aa35d0f97d4"
+        },
+        {
+          "path": "externals\/styles\/main.css",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2959,
+          "sha1": "c9bdff12ded7345f8d1c620abb2789e3042ca439"
+        },
+        {
+          "path": "Form",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Form\/Admin",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Form\/Admin\/Global.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 712,
+          "sha1": "114049e5ae6010d341f334e3ab5e2875caca7ebb"
+        },
+        {
+          "path": "Lib",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Lib\/Fields",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Lib\/Fields\/Form",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Lib\/Fields\/Form\/Search.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 4656,
+          "sha1": "d1b0bea7e8ad75179c060def6950ec2ab2502043"
+        },
+        {
+          "path": "Lib\/Filter",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Lib\/Filter\/Null.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 4938,
+          "sha1": "08788525b4bbb8ff7ec9f19f86cdbd8c098d2781"
+        },
+        {
+          "path": "Lib\/Google",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Lib\/Google\/Map",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Lib\/Google\/Map\/Bounds.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 13416,
+          "sha1": "77dbdadfa58e6730404efc1b64951e4b00cbde06"
+        },
+        {
+          "path": "Lib\/Google\/Map\/Cache.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1139,
+          "sha1": "f31b744bf47636f35b75d411f36117e1a432a679"
+        },
+        {
+          "path": "Lib\/Google\/Map\/Client.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 4318,
+          "sha1": "80b2cfb7693c13993a362dc682b8580e883f5a6e"
+        },
+        {
+          "path": "Lib\/Google\/Map\/Config.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 642,
+          "sha1": "c9fc07255f298ee9def839faeaf3a4b34a9ac279"
+        },
+        {
+          "path": "Lib\/Google\/Map\/Coord.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 9965,
+          "sha1": "d8a400311f248f5e1f323739df1a5e9535b212ae"
+        },
+        {
+          "path": "Lib\/Google\/Map\/Direction.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 8568,
+          "sha1": "db40a55927538e7842ce93b1a3870c354d848dcb"
+        },
+        {
+          "path": "Lib\/Google\/Map\/DirectionWaypoint.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 3414,
+          "sha1": "8ae190882f4b783b1555466574077a6b30bbe810"
+        },
+        {
+          "path": "Lib\/Google\/Map\/Event.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2902,
+          "sha1": "29a86a82fc354ce35479d9a3df71edcfe0eae34c"
+        },
+        {
+          "path": "Lib\/Google\/Map\/Exception.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 77,
+          "sha1": "48bd81c913d64acd1fafcaa7bd26f046c1d8f3ec"
+        },
+        {
+          "path": "Lib\/Google\/Map\/GeocodedAddress.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 12653,
+          "sha1": "080b57c55fd631921b5234751ed99f59bb00ea75"
+        },
+        {
+          "path": "Lib\/Google\/Map\/Icon.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 3791,
+          "sha1": "5081c24a0e2d5677dbc86ff99dde0246aee3eb1f"
+        },
+        {
+          "path": "Lib\/Google\/Map\/InfoWindow.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 7275,
+          "sha1": "74962085eadf5a0002d51fbbb5f0d77e502b0103"
+        },
+        {
+          "path": "Lib\/Google\/Map\/LICENSE",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1060,
+          "sha1": "73dc9984981d2a898ca4ca4109b751d9d0d596a4"
+        },
+        {
+          "path": "Lib\/Google\/Map\/Marker.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 10853,
+          "sha1": "f7a4704952cd2a61fd6880702b42f667d40dc87f"
+        },
+        {
+          "path": "Lib\/Google\/Map\/MarkerImage.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 6510,
+          "sha1": "e5aaa55d0f5f6a7b33ac16b750a08bf22f3264ed"
+        },
+        {
+          "path": "Lib\/Google\/Map\/RenderTag.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 4094,
+          "sha1": "79dc459330d18bcf8befbd33999777ec864ae26c"
+        },
+        {
+          "path": "Lib\/Google\/Map.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 26435,
+          "sha1": "22e3aea4802a074aaa0be0dc39f2b05d592afbb3"
+        },
+        {
+          "path": "Lib\/Helper",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "Lib\/Helper\/Date.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1471,
+          "sha1": "22fcbd51db2143e6cbc9430471b62dc8bda193ad"
+        },
+        {
+          "path": "Lib\/Helper\/Map.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 366,
+          "sha1": "10d0844ba28bedc61721f00c6fe15d4bf3149254"
+        },
+        {
+          "path": "Lib\/Helper\/Number.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 366,
+          "sha1": "e7d5adacf96797439b5621cf47c1fb11ed3e933a"
+        },
+        {
+          "path": "Lib\/Helper\/Text.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2176,
+          "sha1": "8f49f5722356a7dee09321d20114d546d3e8b015"
+        },
+        {
+          "path": "Lib\/Helper\/Unit.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 666,
+          "sha1": "1f3215a6e3044e60390662ba1e67a21e4629a9da"
+        },
+        {
+          "path": "Lib\/Rest",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Lib\/Rest\/Store.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2289,
+          "sha1": "71cfb9397a8fd85e119669db947cfab27cb0b655"
+        },
+        {
+          "path": "Lib\/Rest.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 3669,
+          "sha1": "0063a9e441d738624585ec71c9bed2b6350b58a1"
+        },
+        {
+          "path": "Lib\/Validate",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Lib\/Validate\/License.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2432,
+          "sha1": "73648de5cbed827a5d4263bf83e5a6638740303e"
+        },
+        {
+          "path": "Lib\/Validate\/Location",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Lib\/Validate\/Location\/Address.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1091,
+          "sha1": "f2ccfeaf09385f4737757c0e1ab5c64a6a8dd384"
+        },
+        {
+          "path": "Model",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Model\/DbTable",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Model\/DbTable\/Locations.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 451,
+          "sha1": "0b8f0bdd73706575b6c085603406b2b7ac785538"
+        },
+        {
+          "path": "Model\/Location.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1605,
+          "sha1": "27e60234495dfce56ebb72439342733d194cf388"
+        },
+        {
+          "path": "Plugin",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Plugin\/Core.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 851,
+          "sha1": "6f90b5283b94d126137bd9a4fa04e65974bb1580"
+        },
+        {
+          "path": "settings",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "settings\/install.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 399,
+          "sha1": "3ca144f23ec7135cecd4db5225799bb7a6ca8fe3"
+        },
+        {
+          "path": "settings\/manifest.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2471,
+          "sha1": "3ef66bd165c8e75f1611ae888b8c16831dcbd4bc"
+        },
+        {
+          "path": "settings\/my-upgrade-4.0.0-4.0.2.sql",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 311,
+          "sha1": "c234fa490b86d7dedede8b146bdcf6888513788e"
+        },
+        {
+          "path": "settings\/my-upgrade-4.0.2-4.0.3.sql",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1175,
+          "sha1": "a27d3803cf4400a902f330c9bc43c232b94c565a"
+        },
+        {
+          "path": "settings\/my.sql",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2336,
+          "sha1": "a179ebec66eea9dc84c78f8d6ba38a21140fd990"
+        },
+        {
+          "path": "View",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "View\/Helper",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "View\/Helper\/Abstract.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 401,
+          "sha1": "e0ae58ba6eaf72d3482080f08c42b59464df1caf"
+        },
+        {
+          "path": "View\/Helper\/Radcodes",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "View\/Helper\/Radcodes\/Map.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 5707,
+          "sha1": "c071f6e67757096a4c887f7aa0364602a0a8a8bb"
+        },
+        {
+          "path": "View\/Helper\/Radcodes\/Text.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1167,
+          "sha1": "6ce229f733355ddaed897bfc40f8d066515c766e"
+        },
+        {
+          "path": "View\/Helper\/Radcodes.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1338,
+          "sha1": "cc6a4abadbb229484077845f51739ab01a1a1e42"
+        },
+        {
+          "path": "views",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/admin-index",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/admin-index\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 890,
+          "sha1": "aa3143596ef59b2c18d42efe91e19569ed16795b"
+        },
+        {
+          "path": "views\/scripts\/admin-settings",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/admin-settings\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 738,
+          "sha1": "815401f7cf71ccfccf1f7543e7f291a8506bc308"
+        },
+        {
+          "path": "views\/scripts\/index",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/index\/updates.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 641,
+          "sha1": "38c85563ad2b2f1514bdcc1f12db0c6aa9152705"
+        },
+        {
+          "path": "views\/scripts\/_map_infoWindow.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1747,
+          "sha1": "8e9e977d55b5237cb1eb7bba2fb1be2422cfbbf5"
+        },
+        {
+          "path": "views\/scripts\/_map_jsDraggable.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 653,
+          "sha1": "9aa3e66a9ccdcbc4923826a49992cbc6aacc60b1"
+        },
+        {
+          "path": "widgets",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/admin-modules",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/admin-modules\/Controller.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 572,
+          "sha1": "666bbb5e608672c4efdea8e34ca643344f0fe21e"
+        },
+        {
+          "path": "widgets\/admin-modules\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1028,
+          "sha1": "b5263116ac8e6bea86a3cb46af21cf36cc257998"
+        },
+        {
+          "path": "widgets\/admin-news",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "widgets\/admin-news\/Controller.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1393,
+          "sha1": "def956da5fa8f528a26b7cbe19f4c07987fecc13"
+        },
+        {
+          "path": "widgets\/admin-news\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1882,
+          "sha1": "a817c619f1e0d7badd5cefc80b6963e4df9667b7"
+        }
+      ]
+    },
+    "application\/languages\/en\/radcodes.csv": {
+      "type": "file",
+      "path": "application\/languages\/en\/radcodes.csv",
+      "structure": {
+        "path": "radcodes.csv",
+        "dir": false,
+        "file": true,
+        "perms": "0666",
+        "size": 175,
+        "sha1": "3662c068037ec9d09fdcc4eab94798b308bb479a"
+      }
+    }
+  }
+}

@@ -240,7 +240,7 @@ endif; ?>
 			      <li>
 				      <ul class='marketplace_thumbs'>
                 <?php $i = 0; ?> 
-                <?php $colInRow = 8; ?> 
+                <?php $colInRow = 4; ?> 
 				        <?php foreach( $this->paginator as $photo ): ?>
 
 					        <?php if( $this->marketplace->photo_id != $photo->file_id ) : ?>
@@ -260,15 +260,14 @@ endif; ?>
 				    </li>
           </ul>
             
-          <h3 class="product-title-right">
-				    <?=$this->marketplace->getTitle()?>
-            <span style="font-size:13px;">
-              $<?=number_format( (($this->marketplace->price - $this->discount_sum) >= 0?$this->marketplace->price - $this->discount_sum:0), 2)?>
-            </span>
-          </h3>
-            
-          <br />
-            
+
+          <table class="product-title-right">
+            <tbody><tr>
+              <td><?=$this->marketplace->getTitle()?></td>
+              <td width="70">$<?=number_format( (($this->marketplace->price - $this->discount_sum) >= 0?$this->marketplace->price - $this->discount_sum:0), 2)?></td>
+            </tr></tbody>
+          </table>
+           
           <div class="cart-like-wishlist">
            
             <?php if( $this->viewer()->getIdentity() ) : ?>
@@ -340,8 +339,14 @@ endif; ?>
           </div> <!--cart-like-wishlist-->
             
           <br />
-              
-          <?=$this->fieldValueLoop($this->marketplace, $this->fieldStructure)?>
+           
+          <table class="product-details" width="100%">
+            <tbody><tr>
+              <td width="50%" style="padding-right: 5px;"><?=$this->fieldValueLoop($this->marketplace, $this->fieldStructure)?></td>
+              <td width="50%"><?=$this->fieldValueLoop($this->marketplace, $this->fieldStructure)?></td>
+            </tr></tbody>
+          </table>   
+          <?//=$this->fieldValueLoop($this->marketplace, $this->fieldStructure)?>
 			
           <br />
             
@@ -359,6 +364,7 @@ endif; ?>
             <span class="comment"><?=$this->marketplace->comment_count?></span>
           </div>
             
+          <?php /*
 		      <ul style="margin:5px 0;">
 			      <li>
 				      <span style="font-size:14px;"><?=$this->translate("Price")?>:</span>
@@ -384,6 +390,7 @@ endif; ?>
 				      <span style="font-size:16px;" id='total_price'>$<?=number_format($this->total_amount, 2)?></span>
 			      </li>
 		      </ul>
+          */?>
   
 			    <?php if(Engine_Api::_()->marketplace()->cartIsActive() ) : ?>
 				      <br /><br />
@@ -442,7 +449,7 @@ endif; ?>
 			</div>
 			<br/>
     <?php endif; ?>
-    <h3 class="product-desc">Product Description</h3>
+    <h3 class="product-desc"><?=$this->translate('Product Description')?></h3>
 		<div class="marketplace_entrylist_entry_date">
       <div class="marketplace_thumb_icon">
 			  <?=$this->htmlLink($this->owner->getHref(), $this->itemPhoto($this->owner,'thumb.profile'))?>
@@ -479,7 +486,18 @@ endif; ?>
 
     <?php $this_script = 'http://'.$_SERVER['HTTP_HOST']; ?>
 
-    <h3 class="comments-desc"><?=$this->translate("Comments")?></h3>
+    <div class="comments-header">
+      <div class="comments-stats">
+        <span><?=$this->translate("%s comments", $this->marketplace->comment_count)?></span>
+
+        <span><?=$this->htmlLink(array('route' => 'marketplace_comments', 'marketplace_id' => $this->marketplace->getIdentity() ), 
+                           $this->translate("all comments"),
+                          )?>
+        </span>
+      </div>
+      <h3 class="comments-desc"><?=$this->translate("Comments")?></h3>
+    </div>
+                    
 	  <?=$this->action("list", "comment", "core", array("type"=>"marketplace", "id"=>$this->marketplace->getIdentity()))?>
          
           

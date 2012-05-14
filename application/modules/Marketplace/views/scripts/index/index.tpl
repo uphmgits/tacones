@@ -106,7 +106,8 @@ span.like:hover{
 <br/>
 <div class='layout_common'>
 
-	<div class='layout_left'>
+  <?php /*	
+  <div class='layout_left'>
 	  <div class='marketplaces_gutter'>
       <div class="quicklinks">
         <div id="navigation">
@@ -115,6 +116,7 @@ span.like:hover{
       </div>
     </div>
   </div>
+  */?>
 
   <div class='layout_middle'>
     <?php if( $this->tag ): ?>
@@ -141,7 +143,7 @@ span.like:hover{
      if($z  > 0){
        $myprodcount = $z;
      }    
-     $columns = 4;
+     $columns = 5;
      $myrowsize = ceil( $myprodcount / $columns );
      $myrow = 0;
    ?>
