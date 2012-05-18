@@ -20,6 +20,16 @@ class Widget_topbarController extends Engine_Content_Widget_Abstract
       $navigation_main->removePage($navigation_main->findOneBy('route','user_general'));
     }	
 
+    if( $viewer->getIdentity() ) {
+      $cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
+      $this->view->cartitems = $cartTable->select()
+                                ->from($cartTable->info('name'), "count(*) as cnt")
+                                ->where('user_id = ?', $viewer->getIdentity())
+                                ->query()
+                                ->fetch()
+      ;
+    }
+    
 
 //Udates Menu
     if( $viewer->getIdentity() )

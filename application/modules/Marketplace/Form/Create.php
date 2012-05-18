@@ -251,10 +251,10 @@ class Marketplace_Form_Create extends Engine_Form
     $this->addElement('Button', 'submit', array(
       'label' => 'Post Listing',
       'type' => 'submit',
-      'decorators' => array(array('ViewScript', array(
+      /*'decorators' => array(array('ViewScript', array(
         'viewScript' => '_formButtonCancel.tpl',
         'class' => 'form element'
-      )))
+      )))*/
     ));
   }
 

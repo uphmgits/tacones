@@ -10,6 +10,7 @@ class Marketplace_Model_DbTable_Cart extends Engine_Db_Table
 	protected $_rowClass = 'Marketplace_Model_Cart';
 	protected $_name = 'marketplace_cart';
 	protected $_cookieName = 'marketplacecart';
+	protected $_cookieShippingName = 'marketplacecart_shipping';
 
 	public function productIsAlreadyInCart($user_id = 0, $marketplace_id = 0) {
 		if($user_id == 0 || $marketplace_id == 0)
@@ -126,6 +127,38 @@ class Marketplace_Model_DbTable_Cart extends Engine_Db_Table
     }
 
     setcookie($this->_cookieName, $value, time() + 86400, "/"); 
+  }
+
+
+  public function updateCookieShippingInfo( $info = array() ) 
+  {
+    $newAddress = '';
+    $newAddress .= isset($info['name']) ? 'name|=|' . $info['name'] . '/endinfoitem/': '';
+    $newAddress .= isset($info['email']) ? 'email|=|' . $info['email'] . '/endinfoitem/': '';
+    $newAddress .= isset($info['billing_address']) ? 'billing_address|=|' . $info['billing_address'] . '/endinfoitem/': '';
+    $newAddress .= isset($info['shipping_address']) ? 'shipping_address|=|' . $info['shipping_address'] . '/endinfoitem/': '';
+    $newAddress .= isset($info['phone']) ? 'phone|=|' . $info['phone'] . '/endinfoitem/': '';
+    $newAddress .= isset($info['cell_phone']) ? 'cell_phone|=|' . $info['cell_phone'] . '/endinfoitem/': '';
+
+    setcookie($this->_cookieShippingName, $newAddress, time() + 86400, "/"); 
+  }
+
+  public function getCookieShippingInfo() 
+  {
+    $result = array();
+
+    $value = Zend_Controller_Front::getInstance()->getRequest()->getCookie($this->_cookieShippingName);
+    if( !$value ) return $result;
+
+    $parts = explode('/endinfoitem/', $value);
+    foreach( $parts as $part ) {
+      if( !$part ) continue;
+      $param = explode("|=|", $part);
+      if( count($param) >= 2 ) {
+        $result[$param[0]] = $param[1];
+      }
+    }
+    return $result;
   }
 
 }

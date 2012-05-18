@@ -491,7 +491,7 @@ endif; ?>
         <span><?=$this->translate("%s comments", $this->marketplace->comment_count)?></span>
 
         <span><?=$this->htmlLink(array('route' => 'marketplace_comments', 'marketplace_id' => $this->marketplace->getIdentity() ), 
-                           $this->translate("all comments"),
+                           $this->translate("all comments")
                           )?>
         </span>
       </div>

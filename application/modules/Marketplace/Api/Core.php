@@ -499,7 +499,7 @@ function tree_print_category2(&$a_tree,$model,$category_id)
 
 
 
-function tree_print_category( &$a_tree, $model, $category_id )
+function tree_print_category( &$a_tree, $model, $category_id, $specRoute = null, $specParams = array() )
 {
   if(empty($a_tree)) return;
 
@@ -507,11 +507,17 @@ function tree_print_category( &$a_tree, $model, $category_id )
   echo "<span class='product_filter_on'>filter ON</span><br/><ul>";
   for( $i = 0; $i < count($a_tree); $i++ ) {
 	  $cat_title = Zend_Registry::get('Zend_Translate')->_(ucfirst(strtolower(trim($a_tree[$i]['s_name']))));
-	  if ($a_tree[$i]['k_item'] != $category_id)
-		  echo '<li><a href="'.$model->url(array('category'=>$a_tree[$i]['k_item']), 'marketplace_browse', true).'">'.$cat_title.'</a>';
+	  if ($a_tree[$i]['k_item'] != $category_id) {
+      $params = array('category'=>$a_tree[$i]['k_item']);
+      if( !$specRoute ) {
+        echo '<li><a href="'.$model->url($params, 'marketplace_browse', true).'">'.$cat_title.'</a>';
+      } else {
+        echo '<li><a href="'.$model->url(array_merge($params, $specParams), $specRoute, true).'">'.$cat_title.'</a>';
+      }
+    }
     if ($a_tree[$i]['k_item'] == $category_id)
       echo "<li>".$cat_title;
-    $this->tree_print_category($a_tree[$i]['a_tree'],$model,$category_id);
+    $this->tree_print_category($a_tree[$i]['a_tree'],$model, $category_id, $specRoute, $specParam);
     echo "</li>";
   }
   echo "</ul>";

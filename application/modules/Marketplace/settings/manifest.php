@@ -102,7 +102,7 @@ return array(
         'action' => 'index',
       ),
       'reqs' => array(
-        'action' => '(index|addtocart|deletefromcart|cart|checkout)',
+        'action' => '(index|addtocart|deletefromcart|cart|checkout|shippinginfo)',
       )
     ),
     // Public
@@ -112,7 +112,7 @@ return array(
         'module' => 'marketplace',
         'controller' => 'index',
         'action' => 'index',
-        'category' => 3,
+        'category' => 0,
         'page' => 1
       )
     ),
@@ -161,6 +161,17 @@ return array(
       ),
       'reqs' => array(
         'category' => '\d+',
+      )
+    ),
+    'marketplace_itempreview' => array(
+      'route' => 'marketplaces/itempreview/:marketplace_id',
+      'defaults' => array(
+        'module' => 'marketplace',
+        'controller' => 'index',
+        'action' => 'itempreview',
+      ),
+      'reqs' => array(
+        'marketplace_id' => '\d+',
       )
     ),
     'marketplace_reports' => array(

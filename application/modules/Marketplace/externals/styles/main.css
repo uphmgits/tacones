@@ -551,13 +551,13 @@ table.cart_table tr td{
   position: relative;
 }
 .comment-container {
-  position: absolute;
+  /*position: absolute;*/
 }
 .post-comment-container > form {
   background: black;
   padding: 4px;
 }
 .post-comment-container textarea {
-  width: 148px;
-  max-height: 46px !important;
+  width: 143px;
+  margin-bottom:5px;
 }

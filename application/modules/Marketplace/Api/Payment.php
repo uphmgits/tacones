@@ -53,8 +53,7 @@ class Marketplace_Api_Payment {//extends Core_Api_Abstract {
                 $this->addFormField("quantity" . $i, $v['quantity']);
             }
         }
-        $elt = $this->frm->createElement('image', 'submitButton');
-        $elt->setAttrib('src', 'https://www.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif');
+        $elt = $this->frm->createElement('button', 'submitButton', array('label' => 'Buy', 'type' => 'submit'));
         $this->frm->addElement($elt);
         return $this->frm;
     }

@@ -10,12 +10,65 @@
  * 
  */
 ?>
+
+<div class="cart-container">
 <h2>
-	<?php echo $this->translate('%1$s\'s Cart', $this->htmlLink($this->viewer()->getHref(), $this->viewer()->getTitle()))?>
+	<?php //echo $this->translate('%1$s\'s Cart', $this->htmlLink($this->viewer()->getHref(), $this->viewer()->getTitle()))?>
+	<?=$this->translate('Product in Cart')?>
 </h2>
 <?php $inspectionEnable = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.inspectionenable', 0); ?>
 
 <?php if(!empty($this->cartitems) && count($this->cartitems)): ?>
+  <?php $i = 0; $colInRow = 5; $shipping_fee = 0; $total_amount = 0; ?> 
+  <?php $this->addHelperPath(APPLICATION_PATH . '/application/modules/Fields/View/Helper', 'Fields_View_Helper'); ?>
+
+  <?php foreach($this->cartitems as $cartitem): ?>
+
+    	<?php if( $i % $colInRow == 0 ) echo '<ul class="cart-item-row">'; ?>
+	    <li>
+          <?php $marketplace = Engine_Api::_()->getItem('marketplace', $cartitem['marketplace_id']); ?>
+          <div class="cart-item-photo">
+            <?=$this->htmlLink($marketplace->getHref(), $this->itemPhoto($marketplace, 'normal'))?>
+          </div>
+          <table class="product-title-right">
+            <tbody><tr>
+              <td><?=$marketplace->getTitle()?></td>
+              <td width="20">$<?=number_format($marketplace->price, 2)?></td>
+            </tr></tbody>
+          </table>
+          <div class="cart-item-fields">
+              <?php $fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($marketplace); ?>
+              <?=$this->fieldValueLoop($marketplace, $fieldStructure)?>
+          </div>
+          <div class="cart-item-options">
+              <?=$this->htmlLink( array('route' => 'marketplace_general', 'action' => 'deletefromcart', 'marketplace_id' => $cartitem['marketplace_id']), 
+                                  $this->translate('delete'), 
+                                  array('class' => 'smoothbox')
+                                )?>
+              <?=$this->htmlLink( 'javascript:void(0);', 
+                                  $this->translate('move to wishlist'),
+                                  array('class' => 'cart-item-wishlist')
+                                )?>
+          </div>
+      </li>
+	    <?php if( $i++ % $colInRow == $colInRow - 1 ) echo "</ul>"; ?> 
+
+      <?php $shipping_fee += $marketplace->shipping * $cartitem['count']; ?>
+      <?php $total_amount += $marketplace->price * $cartitem['count']; ?>
+
+  <?php endforeach; ?>
+
+  <?php if( $i % $colInRow != 0 ) echo "</ul>"; ?>
+  <?php $total_amount_full = $total_amount + $shipping_fee; ?>
+
+  <hr/>
+  <div class="cart-total-container"> 
+    <span><?=$this->translate('TOTAL update')?></span>
+    <span>$<?=number_format($total_amount_full, 2);?></span>
+    <?=$this->htmlLink(array('route' => 'marketplace_general', 'action' => 'shippinginfo'), $this->translate('checkout'), array('class' => 'button'))?>
+  </div>
+  
+  <?php /*
 	<form method="post" id="cart_form">
 		<table cellpadding="8" cellspacing="8" class="cart_table">
 			<thead>
@@ -83,6 +136,8 @@
 		<?=$this->htmlLink('javascript:void(0);', 'Continue Shopping', array('class' => 'marketplace_button', 'onclick' => '$("redirect").value="2";$("cart_form").submit();'))?>
 		<input type="hidden" id="redirect" name="redirect" value="0" />
 	</form>
+  */?>
 <?php else:?>
 	<h2><?=$this->translate('Cart is Empty');?></h2>
 <?php endif;?>
+</div>

@@ -907,7 +907,8 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
         $this->view->userCategories = Engine_Api::_()->marketplace()->getUserCategories($owner->getIdentity());
     }
 
-    public function createAction() {
+    public function createAction()
+    {
         if (!$this->_helper->requireUser()->isValid())
             return;
         if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'create')->isValid())
@@ -915,6 +916,13 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
         $viewer = Engine_Api::_()->user()->getViewer();
         $this->view->navigation = $this->getNavigation();
         $this->view->form = $form = new Marketplace_Form_Create();
+
+        $category_id = $this->_getParam('category', 0);    
+        Engine_Api::_()->marketplace()->tree_list($category_id);
+        $a_tree = Engine_Api::_()->marketplace()->tree_list_load_array(array($category_id));
+        $this->view->a_tree = $a_tree;
+        $this->view->urls = $this->_helper->url;
+        $this->view->category_id = $category_id;	
 
         // set up data needed to check quota
         $values['user_id'] = $viewer->getIdentity();
@@ -939,12 +947,13 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
             }
         }
 
-		if(Engine_Api::_()->marketplace()->authorizeIsActive()){
-			$form->authorize_login->setValue($mark['authorize_login']);
-			$form->authorize_key->setValue($mark['authorize_key']);
-		}else{
-			$form->business_email->setValue($mark['business_email']);
-		}
+		    if(Engine_Api::_()->marketplace()->authorizeIsActive()){
+			    $form->authorize_login->setValue($mark['authorize_login']);
+			    $form->authorize_key->setValue($mark['authorize_key']);
+		    }else{
+			    $form->business_email->setValue($mark['business_email']);
+		    }
+
         // If not post or form not valid, return
         if (!$this->getRequest()->isPost()) {
             return;
@@ -958,7 +967,6 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
 
         $db = $table->getAdapter();
         $db->beginTransaction();
-
         try {
             // Create marketplace
             $values = array_merge($form->getValues(), array(
@@ -973,6 +981,29 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
             // Set photo
             if (!empty($values['photo'])) {
                 $marketplace->setPhoto($form->photo);
+            }
+            
+            if( !empty($_FILES) ) {
+                $album = $marketplace->getSingletonAlbum();
+
+                $params = array(
+                  // We can set them now since only one album is allowed
+                  'collection_id' => $album->getIdentity(),
+                  'album_id' => $album->getIdentity(),
+                  'marketplace_id' => $marketplace->getIdentity(),
+                  'user_id' => $viewer->getIdentity(),
+                );
+                $noMainPhoto = $marketplace->photo_id ? false : true;
+                foreach( $_FILES as $key => $file ) {
+                    if( $key == 'photo' or !$file['tmp_name'] ) continue;
+                    $photo_id = Engine_Api::_()->marketplace()->createPhoto($params, $file)->photo_id;
+
+                    if( $noMainPhoto ){
+                      $marketplace->photo_id = $photo_id;
+                      $marketplace->save();
+                      $noMainPhoto = false;
+                    }
+                } 
             }
 
             // Save custom fields
@@ -1021,10 +1052,32 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
         // Redirect
         $allowed_upload = Engine_Api::_()->authorization()->getPermission($viewer->level_id, 'marketplace', 'photo');
         if ($allowed_upload) {
-            return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id), 'marketplace_success', true);
+            //return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id), 'marketplace_success', true);
+            return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id), 'marketplace_itempreview', true);
         } else {
             return $this->_helper->redirector->gotoUrl($marketplace->getHref(), array('prependBase' => false));
         }
+    }
+    
+    
+    public function itempreviewAction() {
+        $marketplace_id = (int)$this->_getParam('marketplace_id', 0);
+        $marketplace = Engine_Api::_()->getItem('marketplace', $marketplace_id);
+        if( !$marketplace ) {
+            return $this->_helper->redirector->gotoRoute(array(), 'marketplace_browse');
+        }
+        $this->view->marketplace = $marketplace;
+        $this->view->album = $album = $marketplace->getSingletonAlbum();
+        $this->view->paginator = $paginator = $album->getCollectiblesPaginator();
+        
+        $this->view->addHelperPath(APPLICATION_PATH . '/application/modules/Fields/View/Helper', 'Fields_View_Helper');
+        $this->view->fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($marketplace);
+        
+        $category_id = $marketplace->category_id;    
+        Engine_Api::_()->marketplace()->tree_list($category_id);
+        $a_tree = Engine_Api::_()->marketplace()->tree_list_load_array(array($category_id));
+        $this->view->a_tree = $a_tree;
+        $this->view->urls = $this->_helper->url;
     }
 
     public function editAction() {
@@ -1037,8 +1090,10 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
             Engine_Api::_()->core()->setSubject($marketplace);
         }
 
-        if( $this->_getParam('category') == null ) {
-            return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id, 'category' => $marketplace->category_id), 'marketplace_edit', true);
+        if( $this->_getParam('category') === null ) {
+            return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id, 
+                                                               'category' => $marketplace->category_id), 
+                                                               'marketplace_edit', true);
         }
 
         if (!$this->_helper->requireSubject()->isValid())
@@ -1048,6 +1103,13 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
         if ($viewer->getIdentity() != $marketplace->owner_id && !$this->_helper->requireAuth()->setAuthParams($marketplace, null, 'edit')->isValid()) {
             return $this->_forward('requireauth', 'error', 'core');
         }
+        
+        $category_id = $this->_getParam('category', 0);   
+        Engine_Api::_()->marketplace()->tree_list($category_id);
+        $a_tree = Engine_Api::_()->marketplace()->tree_list_load_array(array($category_id));
+        $this->view->a_tree = $a_tree;
+        $this->view->urls = $this->_helper->url;
+        $this->view->category_id = $category_id;
 
         // Get navigation
         $navigation = $this->getNavigation(true);
@@ -1086,7 +1148,7 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
 			      $marketplace->body = htmlspecialchars_decode($marketplace->body);
             // etc
             $form->populate($marketplace->toArray());
-            $form->category_id->setValue((int)$this->_getParam('category'));
+            $form->category_id->setValue((int)$this->_getParam('category', 0));
 
             $auth = Engine_Api::_()->authorization()->context;
             $roles = array('owner', 'owner_member', 'owner_member_member', 'owner_network', 'everyone');
@@ -1101,14 +1163,15 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
 
             return;
         }
-        if (!$form->isValid($this->getRequest()->getPost())) {
+        
+        $request = $this->getRequest()->getPost();
+        if( !$form->isValid($request) ) {
             return;
         }
 
         // Process
         // handle save for tags
         $values = $form->getValues();
-
         $db = Engine_Db_Table::getDefaultAdapter();
         $db->beginTransaction();
         try {
@@ -1120,7 +1183,24 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
             $cover = $values['cover'];
 
             // Process
+            //echo "<pre>"; print_r($request); echo "</pre>"; die();
             foreach ($paginator as $photo) {
+                $photoId = $photo->getIdentity();
+                if( $marketplace->photo_id == $photo->file_id ) {
+                    if( ( isset($request['delete_photo']) and $request['delete_photo'] ) or
+                        ( isset($_FILES['photo']) and $_FILES['photo']['tmp_name'] ) ) {
+                        $marketplace->photo_id = 0;
+                        $marketplace->save();
+                        $photo->delete();
+                    } 
+                    continue;
+                }   
+                if( ( isset($request['delete_photo_' . $photoId]) and $request['delete_photo_' . $photoId] ) or 
+                    ( isset($_FILES['photo_' . $photoId]) and $_FILES['photo_' . $photoId]['tmp_name'] ) ) {
+                    $photo->delete();
+                }
+                
+                /*
                 $subform = $form->getSubForm($photo->getGuid());
                 $subValues = $subform->getValues();
                 $subValues = $subValues[$photo->getGuid()];
@@ -1141,6 +1221,37 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
                     $photo->setFromArray($subValues);
                     $photo->save();
                 }
+                */
+
+            }
+            
+            if( !empty($_FILES) ) {
+              $album = $marketplace->getSingletonAlbum();
+              $params = array(
+                // We can set them now since only one album is allowed
+                'collection_id' => $album->getIdentity(),
+                'album_id' => $album->getIdentity(),
+                'marketplace_id' => $marketplace->getIdentity(),
+                'user_id' => $viewer->getIdentity(),
+              );
+              
+              $noMainPhoto = $marketplace->photo_id ? false : true;
+              if( isset($_FILES['photo']) and $_FILES['photo']['tmp_name'] ) {
+                  $photo_id = Engine_Api::_()->marketplace()->createPhoto($params, $_FILES['photo'])->photo_id;
+                  $marketplace->photo_id = $photo_id;
+                  $marketplace->save();
+                  $noMainPhoto = false;
+                  unset( $_FILES['photo'] );
+              }
+              foreach( $_FILES as $key => $file ) {
+                  if( !$file['tmp_name'] ) continue;
+                  $photo_id = Engine_Api::_()->marketplace()->createPhoto($params, $file)->photo_id;
+                  if( $noMainPhoto ){
+                    $marketplace->photo_id = $photo_id;
+                    $marketplace->save();
+                    $noMainPhoto = false;
+                  }
+              } 
             }
 
             // Save custom fields
@@ -1194,8 +1305,8 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
             $db->rollBack();
             throw $e;
         }
-
-        return $this->_redirect("marketplaces/manage");
+        return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id), 'marketplace_itempreview', true);
+        //return $this->_redirect("marketplaces/manage");
     }
 
     public function deleteAction() {
@@ -1636,10 +1747,55 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
 		$this->view->flat_shipping_rate = $flat_shipping_rate = floatval(Engine_Api::_()->getApi('settings', 'core')->getSetting('flat.shipping.rate', 0)); 
 	}
 	
+    public function shippinginfoAction() 
+    {
+      if( !Engine_Api::_()->marketplace()->cartIsActive() ) return $this->_forward('notfound', 'error', 'core');
+	    $viewer = Engine_Api::_()->user()->getViewer();
+
+      if( !$viewer->getIdentity() ) return $this->_helper->redirector->gotoRoute(array(), 'user_login');
+	
+	    $cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
+      $shippinginfoTable = Engine_Api::_()->getDbtable('shippinginfo', 'marketplace');
+
+      $this->view->form = $form = new Marketplace_Form_Shippinginfo();
+
+      $select = $cartTable->select()->where('user_id = ?', $viewer->getIdentity());
+      $cartitems = $select->query()->fetchAll();
+
+      $currentInfo = $shippinginfoTable->getInfo();
+      if( !empty($currentInfo) ) {
+        $form->populate($currentInfo);
+      } else {
+        $form->name->setValue($viewer->displayname);
+        $form->email->setValue($viewer->email);
+      }
+
+      $this->view->cartitems = $cartitems;
+
+      if( $this->getRequest()->isPost() ) {
+
+			  if( $form->isValid($this->getRequest()->getPost()) ) {
+            $values = $form->getValues();
+        } else {
+            return;
+        }
+        $siId = $shippinginfoTable->saveInfo($values);
+        /*if( !$viewer->getIdentity()) {
+          $cartTable->updateCookieShippingInfo($values);
+        }*/
+        return $this->_helper->redirector->gotoRoute(array('action' => 'checkout', 'sinfo' => $siId), 'marketplace_general');
+      }
+    }
+
     public function checkoutAction() {
 		
 		  if( !Engine_Api::_()->marketplace()->cartIsActive() ) return $this->_forward('notfound', 'error', 'core');
 		  $viewer = Engine_Api::_()->user()->getViewer();
+
+      if( !$viewer->getIdentity() ) return $this->_helper->redirector->gotoRoute(array(), 'user_login');
+
+      $shippinginfoTable = Engine_Api::_()->getDbtable('shippinginfo', 'marketplace');
+      $this->view->shippingInfo = $shippinginfoTable->getInfo();
 		
 		  $cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
 
@@ -1651,7 +1807,6 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
 		      ->where('user_id = ?', $viewer_id)
 	      ;
 	      $cartitems = $select->query()->fetchAll();
-
       } else {
         $cartitems = $cartTable->getCookieCart();
         $viewer_id = 0;

@@ -16,3 +16,50 @@
 [14-May-2012 12:10:50] PHP Parse error:  syntax error, unexpected T_ENDFOR in /home/zapato/public_html/application/modules/Core/views/scripts/comment/list.tpl on line 224
 [14-May-2012 12:52:17] PHP Parse error:  syntax error, unexpected T_LNUMBER, expecting ')' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/comments.tpl on line 139
 [14-May-2012 13:03:29] PHP Parse error:  syntax error, unexpected ';' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/comments.tpl on line 139
+[14-May-2012 14:23:29] PHP Parse error:  syntax error, unexpected ')' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/view.tpl on line 495
+[14-May-2012 19:06:03] PHP Parse error:  syntax error, unexpected ')' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/view.tpl on line 495
+[15-May-2012 00:37:50] PHP Parse error:  syntax error, unexpected ')' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/view.tpl on line 495
+[15-May-2012 02:49:30] PHP Parse error:  syntax error, unexpected ')' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/view.tpl on line 495
+[15-May-2012 04:31:32] PHP Parse error:  syntax error, unexpected ')' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/view.tpl on line 495
+[15-May-2012 04:57:08] PHP Parse error:  syntax error, unexpected ')' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/view.tpl on line 495
+[15-May-2012 06:47:19] PHP Parse error:  syntax error, unexpected ')' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/view.tpl on line 495
+[15-May-2012 08:47:53] PHP Fatal error:  Call to a member function getHref() on a non-object in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/cart.tpl on line 37
+[15-May-2012 08:48:13] PHP Fatal error:  Call to a member function getHref() on a non-object in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/cart.tpl on line 37
+[15-May-2012 08:48:21] PHP Fatal error:  Call to a member function getHref() on a non-object in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/cart.tpl on line 37
+[15-May-2012 09:01:53] PHP Parse error:  syntax error, unexpected ')' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/view.tpl on line 495
+[15-May-2012 09:58:44] PHP Parse error:  syntax error, unexpected T_ARRAY in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/cart.tpl on line 82
+[15-May-2012 09:58:44] PHP Parse error:  syntax error, unexpected T_ARRAY in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/cart.tpl on line 82
+[15-May-2012 11:34:20] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /home/zapato/public_html/application/modules/Marketplace/Form/Shippinginfo.php on line 18
+[15-May-2012 11:52:43] PHP Parse error:  syntax error, unexpected T_PUBLIC in /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php on line 1655
+[15-May-2012 12:00:36] PHP Parse error:  syntax error, unexpected T_LNUMBER in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/shippinginfo.tpl on line 22
+[15-May-2012 12:01:47] PHP Parse error:  syntax error, unexpected ';' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/shippinginfo.tpl on line 26
+[15-May-2012 14:19:45] PHP Fatal error:  Call to undefined method Marketplace_Model_DbTable_Shippinginfo::lastInsertId() in /home/zapato/public_html/application/modules/Marketplace/Model/DbTable/Shippinginfo.php on line 39
+[15-May-2012 14:21:52] PHP Fatal error:  Call to undefined method Marketplace_Model_DbTable_Shippinginfo::getDb() in /home/zapato/public_html/application/modules/Marketplace/Model/DbTable/Shippinginfo.php on line 36
+[15-May-2012 14:40:48] PHP Fatal error:  Call to undefined method Marketplace_Model_DbTable_Cart::getInfo() in /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php on line 1659
+[16-May-2012 01:34:45] PHP Fatal error:  Call to a member function __toString() on a non-object in /home/zapato/public_html/application/modules/Core/controllers/ErrorController.php on line 56
+[16-May-2012 09:32:34] PHP Parse error:  syntax error, unexpected '<' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/checkout.tpl on line 206
+[16-May-2012 12:49:00] PHP Fatal error:  Call to a member function render() on a non-object in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/create.tpl on line 73
+[16-May-2012 13:09:58] PHP Fatal error:  Call to a member function render() on a non-object in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/create.tpl on line 108
+[17-May-2012 13:01:33] PHP Parse error:  syntax error, unexpected '}', expecting ')' in /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php on line 1051
+[17-May-2012 13:52:39] PHP Parse error:  syntax error, unexpected ';' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/itempreview.tpl on line 101
+[17-May-2012 15:04:21] PHP Parse error:  syntax error, unexpected '<' in /home/zapato/public_html/application/widgets/topbar/index.tpl on line 114
+[17-May-2012 15:04:25] PHP Parse error:  syntax error, unexpected '<' in /home/zapato/public_html/application/widgets/topbar/index.tpl on line 114
+[17-May-2012 15:06:00] PHP Parse error:  syntax error, unexpected '<' in /home/zapato/public_html/application/widgets/topbar/index.tpl on line 114
+[17-May-2012 15:06:04] PHP Parse error:  syntax error, unexpected '<' in /home/zapato/public_html/application/widgets/topbar/index.tpl on line 114
+[17-May-2012 15:06:41] PHP Parse error:  syntax error, unexpected '<' in /home/zapato/public_html/application/widgets/topbar/index.tpl on line 114
+[17-May-2012 15:06:45] PHP Parse error:  syntax error, unexpected '<' in /home/zapato/public_html/application/widgets/topbar/index.tpl on line 114
+[17-May-2012 15:07:08] PHP Parse error:  syntax error, unexpected '<' in /home/zapato/public_html/application/widgets/topbar/index.tpl on line 114
+[17-May-2012 15:07:09] PHP Parse error:  syntax error, unexpected '<' in /home/zapato/public_html/application/widgets/topbar/index.tpl on line 114
+[17-May-2012 15:07:10] PHP Parse error:  syntax error, unexpected '<' in /home/zapato/public_html/application/widgets/topbar/index.tpl on line 114
+[17-May-2012 15:43:50] PHP Parse error:  syntax error, unexpected $end in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/edit.tpl on line 326
+[17-May-2012 16:08:11] PHP Parse error:  syntax error, unexpected '<' in /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php on line 991
+[17-May-2012 16:08:36] PHP Parse error:  syntax error, unexpected '<' in /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php on line 991
+[17-May-2012 16:09:17] PHP Parse error:  syntax error, unexpected '<' in /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php on line 988
+[17-May-2012 16:45:24] PHP Parse error:  syntax error, unexpected $end in /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php on line 390
+[17-May-2012 16:45:42] PHP Parse error:  syntax error, unexpected $end in /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php on line 1334
+[18-May-2012 08:50:36] PHP Parse error:  syntax error, unexpected ':' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/edit.tpl on line 150
+[18-May-2012 09:03:36] PHP Parse error:  syntax error, unexpected T_LOGICAL_OR in /home/zapato/public_html/application/modules/Marketplace/controllers/IndexController.php on line 1191
+[18-May-2012 09:26:11] PHP Parse error:  syntax error, unexpected ';' in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/edit.tpl on line 252
+[18-May-2012 09:40:15] PHP Fatal error:  Call to a member function __toString() on a non-object in /home/zapato/public_html/application/modules/Core/controllers/ErrorController.php on line 56
+[18-May-2012 09:42:59] PHP Fatal error:  Call to a member function render() on a non-object in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/edit.tpl on line 252
+[18-May-2012 10:00:42] PHP Fatal error:  Call to a member function render() on a non-object in /home/zapato/public_html/application/modules/Marketplace/views/scripts/index/edit.tpl on line 260

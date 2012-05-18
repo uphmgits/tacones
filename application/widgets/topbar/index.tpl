@@ -94,6 +94,12 @@
  
  <div class="clear"></div>
    
+  <?php if( $this->viewer->getIdentity() ) : ?>
+    <div class="main-nav-cart">
+      <?=$this->htmlLink(array('route' => 'marketplace_general', 'action' => 'cart'), $this->translate('cart ( %s )', $this->cartitems['cnt']))?>
+    </div>
+  <?php endif; ?>
+
   <div class="main-nav-search">
     <form action="/search" method="get">
     <input type="text" name="query" class="text" onFocus="if(this.value == 'search') { this.value = ''; }" value="search" />
@@ -104,7 +110,8 @@
     <?php 
       $categoryId = Zend_Controller_Front::getInstance()->getRequest()->getParam('category');
       if( is_numeric($categoryId) ) {
-        $url = $categoryId ? $this->url(array(), "marketplace_browse") . "/{$categoryId}" : $this->url(array(), "marketplace_browse");
+        //$url = $categoryId ? $this->url(array(), "marketplace_browse") . "/{$categoryId}" : $this->url(array(), "marketplace_browse");
+        $url = $this->url(array(), "marketplace_browse") . "/{$categoryId}";
         $page = $this->navigation_main->findOneBy( 'uri', addslashes($url) );
         if( $page ) $page->setActive();
       } 

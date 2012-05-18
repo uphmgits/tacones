@@ -1738,7 +1738,7 @@ html[dir="rtl"] .tag > a
     border:0;
     margin-top: 0px;
     padding: 20px 0px 10px 0px;
-border: 0px solid;
+    border: 0px solid;
 }
  
 #logo-sd a
@@ -1759,15 +1759,14 @@ border: 0px solid;
     display: block;
     float: right;
     width: auto;
-border: 0px solid;
+    border: 0px solid;
 }
 
 #mini-nav-container {
     display: block;
     float: right;
     padding-top: 30px;
-border: 0px solid;
-
+    border: 0px solid;
 }
 
 #mini-nav-ul li {
@@ -1859,15 +1858,25 @@ border: 0px solid;
     text-transform: lowercase;
 }
 
-.main-nav-ul li a:hover {
+.main-nav-ul li a:hover,
+.main-nav-cart a:hover {
     color: #cccccc;
+    text-decoration: none;
+}
+.main-nav-cart {
+    float: right;
+    padding-top: 10px;
+}
+.main-nav-cart a {
+    color: #858485;
+    font-size: 19px;
     text-decoration: none;
 }
 
 .main-nav-search {
     float: right;
     padding: 5px 3px 1px 10px; 
-border: 0px solid;
+    border: 0px solid;
 }
 
 .main-nav-search input {
@@ -1991,16 +2000,15 @@ ul.marketplaces_browse > li , ul.marketplaces_browse > li + li {
 }
 
 .marketplace-browse-sub-menu {
-display: block;
-float: left;
-width: 120px;
-background-color: #82114E;
-padding: 20px;
+    display: block;
+    float: left;
+    width: 120px;
+    background-color: #82114E;
+    padding: 20px;
 }
 
 #global_page_marketplace-index-index .item_photo_user {
     height: 24px;
-    
     width: 24px;
 }
 
@@ -2631,8 +2639,10 @@ padding: 0px;
   font-size: 16px;
 }
 #comment-form textarea {
-  width: 100%;
+  width: 98%;
   margin: 10px 0 5px;
+  background: transparent;
+  border-color: #333;
 }
 
 .marketplace_thumbs li {
@@ -2644,3 +2654,233 @@ padding: 0px;
 .marketplace_thumbs li a + a {
   margin-left: 10px;
 }
+
+.cart-container,
+.marketplace-create-container {
+  background: #181818;
+  padding: 20px;
+  margin-top: 30px;
+}
+form#marketplaces_shippinginfo .form-elements {
+  overflow: hidden;
+}
+.cart-container hr {
+  background: #333;
+  height: 1px;
+  margin: 14px 0;
+}
+.cart-item-row {
+  overflow: hidden;
+}
+.cart-item-row > li {
+  float: left;
+  overflow: hidden;
+  width: 160px;
+}
+.cart-item-row > li + li {
+  margin-left: 20px;
+}
+.cart-item-row > li div.cart-item-photo img {
+  width: 160px;
+}
+.cart-item-photo {
+  height: 270px;
+  overflow: hidden;
+}
+.cart-item-options > a {
+  color: #93C;
+}
+.cart-item-wishlist {
+  float: right;
+}
+.cart-total-container {
+  overflow: hidden;
+}
+.cart-total-container span + span {
+  float: right;
+}
+a.button {
+  border: 1px solid #333;
+  padding: 4px 10px;
+}
+.cart-total-container a.button {
+  float: right;
+  clear: both;
+  margin-top: 10px;
+}
+
+
+.cart-container .global_form > div > div {
+  border: none;
+  padding: 0;
+}
+.cart-container .global_form input, 
+.cart-container .global_form textarea {
+  width: 420px;
+  max-width: 420px;
+  padding: 3px;
+  background: transparent;
+  border: 1px solid #333;
+}
+.cart-container .global_form div.form-wrapper {
+  float: right;
+  clear: none;
+}
+.cart-container .global_form div.form-label {
+  margin: 0;
+  text-align: left;
+  float: none;
+}
+
+.cart-container #name-wrapper,
+.cart-container #billing_address-wrapper,
+.cart-container #phone-wrapper {
+  float: left;
+  margin-right: 40px;
+}
+.cart-container #submit-element {
+  float: right;
+  text-align: right;
+}
+
+.checkout-info-table {
+  table-layout: fixed;
+}
+.checkout-info-table th,
+.checkout-info-table td {
+    width: 160px;
+    padding: 0;
+    vertical-align: top;
+    text-align: left;
+}
+.checkout-info-table td {
+    color: #d2d2d2;
+}
+
+
+.marketplace-create-container {
+  overflow: hidden;
+  margin: 0;
+}
+.marketplace-create-photos {
+  float: left;
+  width: 300px;
+}
+.marketplace-create-info {
+  overflow: hidden;
+}
+.marketplace-create-mainphoto {
+  overflow: hidden;
+}
+.marketplace-create-mainphoto > a {
+  float: right;
+}
+.marketplace-create-miniphoto_item_container {
+  float: left;
+  margin: 0 20px 20px 0px;
+  text-align: right;
+}
+.marketplace-create-mainphoto-container {
+  margin-bottom: 20px;
+  text-align: right;
+}
+.marketplace-create-mainphoto-container {
+  width: 262px;
+}
+.marketplace-create-mainphoto,
+.marketplace-create-miniphoto_item {
+  border: 1px solid #333;
+  padding: 20px;
+  width: 222px;
+}
+.marketplace-create-miniphoto_item {
+  width: 80px;
+  height: 80px;
+}
+.marketplace-create-miniphoto_item input {
+  width: 100%;
+}
+.marketplace-create-details {
+  overflow: hidden;
+}
+.marketplace-create-details > div {
+  margin-bottom: 10px;
+}
+.marketplace-create-fields {
+  overflow: hidden; 
+}
+.marketplace-create-fields > div {
+  float: left;
+  width: 130px;
+}
+.marketplace-create-details select,
+.marketplace-create-details input,
+.marketplace-create-details textarea {
+  width: 380px;
+}
+.marketplace-create-fields > div select,
+.marketplace-create-fields > div input[type=text],
+.marketplace-create-fields > div textarea {
+  width: 110px;
+}
+.marketplace-create-fields > div input[type=radio],
+.marketplace-create-fields > div input[type=checkbox] {
+  width: 14px;
+}
+.marketplace-create-container select,
+.marketplace-create-container input,
+.marketplace-create-container textarea {
+  background: transparent;
+  border: 1px solid #333;
+}
+
+.marketplace-create-buttons {
+  float: right;
+}
+.marketplace-create-buttons > a,
+.marketplace-create-buttons > button,
+.marketplace-create-miniphoto_item_container > a,
+.marketplace-create-mainphoto-container > a{
+  background: none;
+  border: none;
+  color: #4499bb;
+  text-decoration: none;
+}
+.marketplace-create-photofake {
+  overflow: hidden;
+  width: 80px;
+  height: 24px;
+  background: #333;
+}
+.marketplace-create-photofake > div {
+  padding: 3px;
+  margin-bottom: -30px;
+  color: #d2d2d2; 
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+.marketplace-create-photofake > input {
+  height: 60px;
+  width: 200%;
+  margin: -50px auto auto -50px;
+  -moz-opacity: 0;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  cursor: pointer;
+}
+.marketplace-create-photos .marketplace-create-buttons {
+  margin-right: 36px;
+}
+.marketplace-create-mainphoto img,
+.marketplace-create-miniphoto_item img {
+    width:100%;
+}
+.marketplace-create-miniphoto-holder {
+    height: 50px;
+    overflow: hidden;
+}
+.error_message {
+    color: #b16;
+}
+
