@@ -1,0 +1,1 @@
+<?php/** */class User_BlogController extends Core_Controller_Action_Standard{  public function indexAction()  {  }    }

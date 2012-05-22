@@ -119,6 +119,16 @@ return array(
       )
     ),
     
+    // User - Blog
+    'user_profile' => array(
+      'route' => 'blog/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'blog',
+        'action' => 'index'
+      )
+    ),
+    
     'user_login' => array(
       //'type' => 'Zend_Controller_Router_Route_Static',
       'route' => '/login/*',

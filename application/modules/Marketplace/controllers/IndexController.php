@@ -1086,6 +1086,9 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
 
         $viewer = $this->_helper->api()->user()->getViewer();
         $this->view->marketplace = $marketplace = Engine_Api::_()->getItem('marketplace', $this->_getParam('marketplace_id'));
+
+        if (!$marketplace ) return $this->_forward('requireauth', 'error', 'core');
+        
         if (!Engine_Api::_()->core()->hasSubject('marketplace')) {
             Engine_Api::_()->core()->setSubject($marketplace);
         }

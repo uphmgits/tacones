@@ -79,8 +79,8 @@ span.like:hover{
  elseif($mycatid=='13') $myimg='marketplace_brands_header.jpg';
  else $myimg='marketplace_home_header.jpg';
 //
- if($myimg=='marketplace_home_header.jpg') echo "<a href='#'><img src='/public/header-imgs/$myimg'/></a>";
-  else echo "<img src='/public/header-imgs/$myimg'/>";
+ if($myimg=='marketplace_home_header.jpg') echo "<a href='#'><img src='{$this->baseUrl()}/public/header-imgs/$myimg'/></a>";
+  else echo "<img src='{$this->baseUrl()}/public/header-imgs/$myimg'/>"; 
  ?>
 </div>
 
@@ -147,6 +147,7 @@ span.like:hover{
      $myrowsize = ceil( $myprodcount / $columns );
      $myrow = 0;
    ?>
+   <?php /*
       <ul class="marketplaces_browse">
         <?php $myi=0; ?>
         <?php foreach( $this->paginator as $item ): ?>
@@ -220,6 +221,133 @@ span.like:hover{
           } ?>        
         <?php endforeach; ?>
       </ul>
+      */ ?>
+      
+      <style>
+        #global_page_marketplace-index-index ul.marketplaces_browse { position: relative; width: auto !important; }
+        #global_page_marketplace-index-index ul.marketplaces_browse > li { position: absolute; }
+        #global_page_marketplace-index-index #global_content { width: 100%; padding: 0 10px; }
+        #global_page_marketplace-index-index .header_img_sd_home { text-align: center; }
+        #global_page_marketplace-index-index .marketplaces_browse_photo > a { display: block; }
+      </style>
+      <script type="text/javascript">
+      
+          function refreshMarketplaceList() {
+              var width = jQuery('.layout_common').width();
+              var columnsWidth = 180;
+              var columns = Math.floor(width / columnsWidth);
+              $oldColumns = jQuery("ul.marketplaces_browse").attr("data-column");
+              if( !$oldColumns || ($oldColumns && columns != $oldColumns) ) {
+              
+                  var columnsHeight = new Array(columns);
+                  for (i = 0; i < columns; i++) { columnsHeight[i] = 0; }
+                  
+                  list = jQuery("ul.marketplaces_browse > li");
+                  list.each(function(i){
+                      var colNum = i % columns;
+                      var element = jQuery(this);
+                      img = element.find('img.item_photo_marketplace');
+                      if( img && !img.height()) {
+                          jQuery("<img/>").attr("src", jQuery(img).attr("src")).load(function() {
+                              h = element.outerHeight();
+                              element.attr('data-height', h);
+                              element.css('top', columnsHeight[colNum] + 'px');
+                              element.css('left', colNum * columnsWidth + 'px');
+                              columnsHeight[colNum] += (h + 20);
+                              
+                              heightBlock = Math.max.apply( Math, columnsHeight );
+                              jQuery('ul.marketplaces_browse').height(heightBlock);
+                              jQuery('ul.marketplaces_browse').attr("data-column", columns);
+                          });
+                      } else {
+                        h = element.outerHeight();
+                        element.attr('data-height', h);
+                        element.css('top', columnsHeight[colNum] + 'px');
+                        element.css('left', colNum * columnsWidth + 'px');
+                        columnsHeight[colNum] += (h + 20);
+                      }
+                  });
+                  
+                  heightBlock = Math.max.apply( Math, columnsHeight );
+                  jQuery('ul.marketplaces_browse').height(heightBlock);
+                  jQuery('ul.marketplaces_browse').attr("data-column", columns);
+              }
+          }
+      
+          jQuery(document).ready(function () {
+              refreshMarketplaceList();
+          });
+          jQuery(window).bind('resize', function() { 
+              refreshMarketplaceList();
+          });
+      </script>
+      
+      <ul class="marketplaces_browse">
+        <?php foreach( $this->paginator as $item ): ?>
+          <?php $marketplaceId = $item->getIdentity(); ?>
+          <li>
+            <div class='marketplaces_browse_photo'>
+              <?php echo $this->htmlLink($item->getHref(), $this->itemPhoto($item, 'normal')) ?>
+            </div>
+            <div class='marketplaces_browse_info'>
+              <div class='marketplaces_browse_info_title'>
+                <div class="love-info">
+                    <?php if( $this->viewer()->getIdentity() ) : ?>
+                      <span class="like" id="marketplacelike_<?=$marketplaceId?>" 
+                                         onclick="marketplaceLike(<?=$marketplaceId?>)" 
+                                         param="<?=$item->isLike($this->viewer()) ? '-1' : '1'?>"
+                      >
+                          <?=$item->getLikeCount()?>
+                      </span>
+                    <?php else : ?>
+                      <span class="like"><?=$item->getLikeCount()?></span>
+                    <?php endif;?>
+                    <span class="comment" id="comment-lips-<?=$marketplaceId?>" onclick="marketplaceComment(<?=$marketplaceId?>);">
+                        <?=$item->comment_count?>
+                    </span>
+
+                    <div class="pinterest-button" style="display: inline-block;">
+                      <a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2F<?=urlencode($_SERVER['HTTP_HOST'] . $this->url(array('user_id' => $item->owner_id, 'marketplace_id' => $item->getIdentity() ), 'marketplace_entry_view'))?>" class="pin-it-button" count-layout="none">
+                        <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="<?=$this->translate('Pin It')?>" />
+                      </a>
+                    </div>
+                 
+                    <div class="comment-container" ><?=$this->action("post", "comment", "core", array("type" => "marketplace", "id" => $marketplaceId))?></div>
+                </div>
+                
+                <?php echo $this->htmlLink($item->getHref(), $item->getTitle()); ?>
+                 
+                <?php if( $item->closed ): ?>
+                  <img src='application/modules/Marketplace/externals/images/close.png'/>
+                <?php endif;?>
+              </div>
+
+              <div class='marketplaces_browse_info_date'></div>
+
+              <div class='marketplaces_browse_info_blurb' style="font-size: 11px; color: #999;">
+                <span><?=$this->translate('Price')?>:</span> <span>$<?php echo $item->price; ?></span>
+                &nbsp;&nbsp;
+               
+                <?php // echo substr(strip_tags($item->body), 0, 90); if (strlen($item->body)>89) echo "..."; ?>              
+                <br />
+
+                <div class="more-seller-items">
+                  <div style="width:24px; padding-right: 5px">
+                    <?=$this->htmlLink($this->user($item->owner_id)->getHref(), $this->itemPhoto($this->user($item->owner_id), 'thumb.icon', $this->user($item->owner_id)->getTitle()), array('title'=>$this->user($item->owner_id)->getTitle()))?>
+                  </div>
+        
+                  <div style="width:130px;">
+                    <?=$this->user($item->owner_id)->getTitle()?><br/>
+                    <?=$this->htmlLink(array('route' => 'marketplace_view', 'user_id' => $item->owner_id), $this->translate('see all seller items'))?>
+                  </div>
+              </div>
+            </div>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+      
+      
+      
       <?php echo $this->paginationControl($this->paginator); ?>
       <?php //echo $this->paginationControl($this->paginator, null, array("pagination/pagination.tpl","marketplace")); ?>
 

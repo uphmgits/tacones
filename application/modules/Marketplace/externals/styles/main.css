@@ -100,7 +100,7 @@ ul.marketplaces_browse > li + li
 }
 ul.marketplaces_browse .marketplaces_browse_photo
 {
-  float: left;
+  /*float: left;*/
   overflow: hidden;
   margin-right: 8px;
 }
