@@ -49,7 +49,7 @@
     $description .= ' ' .$this->layout()->siteinfo['description'];
     $keywords = $this->layout()->siteinfo['keywords'];
 
-    if( $this->subject() && $this->subject()->getIdentity() ) {
+    if( $this->subject() and $this->subject()->getIdentity() and !preg_match('/marketplaces\/browse/i',  $_SERVER['REQUEST_URI'], $m)) {
       $this->headTitle($this->subject()->getTitle());
       
       $description .= ' ' .$this->subject()->getDescription();

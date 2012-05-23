@@ -2,25 +2,6 @@
    <a href="/" title="Home"></a>
 </div>
 
-<?php if( $this->viewer->getIdentity()) :?> 
- <div id="settings-menu-sd">
-   <?php
-    $count = count($this->navigation_mini);
-    foreach( $this->navigation_mini->getPages() as $item ) $item->setOrder(--$count);
-  ?>
-  <ul>
-    <?php foreach( $this->navigation_mini as $item ): ?>
-      <li><?php echo $this->htmlLink($item->getHref(), $this->translate($item->getLabel()), array_filter(array(
-        'class' => ( !empty($item->class) ? $item->class : null ),
-        'alt' => ( !empty($item->alt) ? $item->alt : null ),
-        'target' => ( !empty($item->target) ? $item->target : null ),
-      ))) ?></li>
-    <?php endforeach; ?> 
-  </ul>
- </div>
- <?php endif; ?>
- 
- 
 <div class="header-sd-right">
 <?php if( $this->viewer->getIdentity()) :?> 
   <div id="mini-nav-container">
@@ -29,10 +10,25 @@
         <?=$this->translate('Welcome %s!', $this->viewer()->getTitle()); ?>
       </li>
 
-      <li>
+      <li style="position: relative;">
         <a class="item9" id="psettings" href="javascript:togglesett();">
-          <?=$this->translate("your account")?>
+          <?=$this->translate("your account")?><span class='menu-arrow'>&nbsp;&nbsp;&nbsp;</span>
         </a>
+        <div id="settings-menu-sd">
+          <?php
+            $count = count($this->navigation_mini);
+            foreach( $this->navigation_mini->getPages() as $item ) $item->setOrder(--$count);
+          ?>
+          <ul>
+            <?php foreach( $this->navigation_mini as $item ): ?>
+              <li><?php echo $this->htmlLink($item->getHref(), $this->translate($item->getLabel()), array_filter(array(
+                'class' => ( !empty($item->class) ? $item->class : null ),
+                'alt' => ( !empty($item->alt) ? $item->alt : null ),
+                'target' => ( !empty($item->target) ? $item->target : null ),
+              ))) ?></li>
+            <?php endforeach; ?> 
+          </ul>
+        </div>
       </li>
 
       <li>

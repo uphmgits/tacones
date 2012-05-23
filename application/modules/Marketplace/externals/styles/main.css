@@ -91,7 +91,7 @@ ul.marketplaces_browse > li
 {
   clear: both;
   padding: 0px 0px 15px 0px;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 ul.marketplaces_browse > li + li
 {
@@ -125,7 +125,7 @@ ul.marketplaces_browse .marketplaces_browse_options > a
 }
 ul.marketplaces_browse .marketplaces_browse_info
 {
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 ul.marketplaces_browse .marketplaces_browse_info_title h3
 {

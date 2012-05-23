@@ -226,9 +226,11 @@ span.like:hover{
       <style>
         #global_page_marketplace-index-index ul.marketplaces_browse { position: relative; width: auto !important; }
         #global_page_marketplace-index-index ul.marketplaces_browse > li { position: absolute; }
-        #global_page_marketplace-index-index #global_content { width: 100%; padding: 0 10px; }
+        #global_page_marketplace-index-index #global_content { max-width: 940px; width: auto; padding: 0 10px; }
         #global_page_marketplace-index-index .header_img_sd_home { text-align: center; }
         #global_page_marketplace-index-index .marketplaces_browse_photo > a { display: block; }
+        #global_page_marketplace-index-index .marketplaces_browse_info_title > a { font-family: impact; }
+        #global_page_marketplace-index-index .correct_font .marketplaces_browse_info_title > a{ font-family: Univers LT Std; }
       </style>
       <script type="text/javascript">
       
@@ -250,10 +252,10 @@ span.like:hover{
                       if( img && !img.height()) {
                           jQuery("<img/>").attr("src", jQuery(img).attr("src")).load(function() {
                               h = element.outerHeight();
-                              element.attr('data-height', h);
+                              element.addClass('correct_font');
                               element.css('top', columnsHeight[colNum] + 'px');
                               element.css('left', colNum * columnsWidth + 'px');
-                              columnsHeight[colNum] += (h + 20);
+                              columnsHeight[colNum] += (h + 10);
                               
                               heightBlock = Math.max.apply( Math, columnsHeight );
                               jQuery('ul.marketplaces_browse').height(heightBlock);
@@ -261,10 +263,10 @@ span.like:hover{
                           });
                       } else {
                         h = element.outerHeight();
-                        element.attr('data-height', h);
+                        element.addClass('correct_font');
                         element.css('top', columnsHeight[colNum] + 'px');
                         element.css('left', colNum * columnsWidth + 'px');
-                        columnsHeight[colNum] += (h + 20);
+                        columnsHeight[colNum] += (h + 10);
                       }
                   });
                   
@@ -282,6 +284,7 @@ span.like:hover{
           });
       </script>
       
+      <?php $viewer = $this->viewer(); ?>
       <ul class="marketplaces_browse">
         <?php foreach( $this->paginator as $item ): ?>
           <?php $marketplaceId = $item->getIdentity(); ?>
@@ -292,10 +295,10 @@ span.like:hover{
             <div class='marketplaces_browse_info'>
               <div class='marketplaces_browse_info_title'>
                 <div class="love-info">
-                    <?php if( $this->viewer()->getIdentity() ) : ?>
+                    <?php if( $viewer->getIdentity() ) : ?>
                       <span class="like" id="marketplacelike_<?=$marketplaceId?>" 
                                          onclick="marketplaceLike(<?=$marketplaceId?>)" 
-                                         param="<?=$item->isLike($this->viewer()) ? '-1' : '1'?>"
+                                         param="<?=$item->isLike($viewer) ? '-1' : '1'?>"
                       >
                           <?=$item->getLikeCount()?>
                       </span>
@@ -312,7 +315,11 @@ span.like:hover{
                       </a>
                     </div>
                  
-                    <div class="comment-container" ><?=$this->action("post", "comment", "core", array("type" => "marketplace", "id" => $marketplaceId))?></div>
+                    <div class="comment-container" >
+                      <?php if( $viewer->getIdentity() ) : ?>
+                        <?=$this->action("post", "comment", "core", array("type" => "marketplace", "id" => $marketplaceId))?>
+                      <?php endif;?>
+                    </div>
                 </div>
                 
                 <?php echo $this->htmlLink($item->getHref(), $item->getTitle()); ?>
