@@ -379,3 +379,27 @@ span.like:hover{
     <?php endif; ?>
   </div>
 </div>
+
+<div class="marketplace_browse_userlist">
+  <div style="float: right">
+      <?=$this->totalUsers?>
+      <span style='padding-left: 10px'>
+          <?=$this->htmlLink(array('route' => 'user_general'), $this->translate('see all'))?>
+       </span>
+  </div>
+  <h2><?=$this->translate('Newest Members')?></h2>
+  <table width='100%'>
+  <tr>
+  <?php foreach($this->userList as $user) : ?>
+    <td class="marketplace_browse_userlist_item">
+      <div class="marketplace_browse_userlist_photo">
+        <?=$this->htmlLink($user->getHref(), "<img src='{$user->getPhotoUrl('thumb.profile')}' />")?>
+      </div>
+      <div class="marketplace_browse_userlist_info">
+        <?=$user->getTitle()?>
+      </div>
+    </td>
+  <?php endforeach; ?>
+  </tr>
+  </table>
+</div>

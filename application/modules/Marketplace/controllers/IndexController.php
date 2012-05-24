@@ -44,6 +44,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       if (!$viewer->getIdentity()) {
           $form->removeElement('show');
       }
+      $usersTable = Engine_Api::_()->getDbTable('users', 'user');
+      
       $idd = $this->getRequest()->getParam('category');
       if (empty($idd))
           $id = 0; else
@@ -82,9 +84,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       // Do the show thingy
       if (@$values['show'] == 2) {
           // Get an array of friend ids to pass to getMarketplacesPaginator
-          $table = $this->_helper->api()->getItemTable('user');
           $select = $viewer->membership()->getMembersSelect('user_id');
-          $friends = $table->fetchAll($select);
+          $friends = $usersTable->fetchAll($select);
           // Get stuff
           $ids = array();
           foreach ($friends as $friend) {
@@ -123,6 +124,10 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       if (!$this->getRequest()->isPost()) {
 		    $form->category->setValue($id);
 	    }
+      
+      $userList = $usersTable->select()->where('photo_id > 0')->order('creation_date DESC')->limit(8)->query()->fetchAll(Zend_Db::FETCH_COLUMN);
+      $this->view->totalUsers = $usersTable->select()->from($usersTable->info("name"), "count(*) as total")->query()->fetchColumn();
+      $this->view->userList = Engine_Api::_()->getItemMulti('user', $userList);
   }
 
   public function viewAction() 

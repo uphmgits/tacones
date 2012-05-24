@@ -121,10 +121,9 @@
   </div>
 </div>
 
+<div class="clear"></div>
 
-
-
- <div class="clear"></div>
+<div class="header_img_sd"></div>
 
 <script type='text/javascript'>
   var notificationUpdater;

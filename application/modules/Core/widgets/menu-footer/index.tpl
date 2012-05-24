@@ -11,7 +11,7 @@
  */
 ?>
 
-1.800.555.5555
+<?=$this->translate('1.800.555.5555')?>
 <?php foreach( $this->navigation as $item ):
   $attribs = array_diff_key(array_filter($item->toArray()), array_flip(array(
     'reset_params', 'route', 'module', 'controller', 'action', 'type',

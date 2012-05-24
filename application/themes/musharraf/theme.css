@@ -2112,7 +2112,9 @@ ul.marketplaces_browse > li , ul.marketplaces_browse > li + li {
     background: url(/fashbay/public/header-imgs/core_terms_header.jpg) no-repeat;
 }
 
-#global_page_core-help-contact .header_img_sd {
+#global_page_core-help-contact .header_img_sd,
+#global_page_core-help-faq .header_img_sd,
+#global_page_core-help-about .header_img_sd {
     display: block !important;
     background: url(/fashbay/public/header-imgs/core_contactus_header.jpg) no-repeat;
 }
@@ -2903,5 +2905,30 @@ a.button {
 }
 .error_message {
     color: #b16;
+}
+
+.marketplace_browse_userlist {
+    padding-top: 10px;
+    border-top: 1px solid #555;
+}
+.marketplace_browse_userlist div,
+.marketplace_browse_userlist a { 
+    color: #555;
+}
+.marketplace_browse_userlist_item {
+    max-width: 100px;
+    vertical-align: top;
+}
+.marketplace_browse_userlist_item + .marketplace_browse_userlist_item {
+    padding-left: 20px;
+}
+.marketplace_browse_userlist_photo {
+    height: 100px;
+    overflow: hidden;
+}
+.marketplace_browse_userlist_photo img,
+.marketplace_browse_userlist_info  {
+    width: 100%;
+    overflow: hidden;
 }
 

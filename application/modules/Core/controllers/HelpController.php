@@ -116,4 +116,12 @@ class Core_HelpController extends Core_Controller_Action_Standard
     // to change, edit language variable "_CORE_PRIVACY_STATEMENT"
   }
 
+  public function faqAction()
+  {
+  }
+  
+  public function aboutAction()
+  {
+  }
+  
 }
