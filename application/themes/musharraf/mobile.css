@@ -1088,12 +1088,12 @@ form.filters dd + dt
     padding-right: 15px;
 }
 .love-info span.like {
-    background: url(/fashbay/application/themes/musharraf/images/love.png) no-repeat scroll left center transparent;
+    background: url(~/application/themes/musharraf/images/love.png) no-repeat scroll left center transparent;
     color: #C20C0C;
     padding-left: 17px;
 }
 .love-info span.comment {
-    background: url(/fashbay/application/themes/musharraf/images/comment.png) no-repeat scroll left center transparent;
+    background: url(~/application/themes/musharraf/images/comment.png) no-repeat scroll left center transparent;
     color: #FF0078;
     padding-left: 20px;
 }
