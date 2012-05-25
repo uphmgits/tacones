@@ -1173,7 +1173,6 @@ These styles are used everywhere comments appear.
 #global_page_marketplace-index-comments .comments {
   width:auto !important;
   background-color:#0d0d0d;
-  //margin-top:20px;
   padding: 15px 15px 0 15px;
   border-bottom:1px solid #7A7A7A;
 }
@@ -1316,7 +1315,14 @@ div.comments_comment_likes_tips
   color: $theme_font_color_light;
   font-size: 0.9em;
 }
-
+.post-comment-container > form {
+  background: black;
+  padding: 4px;
+}
+.post-comment-container textarea {
+  width: 143px;
+  margin-bottom:5px;
+}
 
 
 
@@ -1938,7 +1944,9 @@ ul.marketplaces_browse {
     float:left;
 }
 
-#global_page_marketplace-index-index ul.marketplaces_browse, #global_page_marketplace-index-manage ul.marketplaces_browse, #global_page_user-profile-index ul.marketplaces_browse{
+#global_page_marketplace-index-index ul.marketplaces_browse, 
+#global_page_marketplace-index-manage ul.marketplaces_browse, 
+#global_page_user-profile-index ul.marketplaces_browse{
     width: 180px;
 }
 
@@ -2737,7 +2745,7 @@ a.button {
   border: none;
   padding: 0;
 }
-.cart-container .global_form input, 
+.cart-container .global_form input[type=text], 
 .cart-container .global_form textarea {
   width: 420px;
   max-width: 420px;
@@ -2761,6 +2769,17 @@ a.button {
   float: left;
   margin-right: 40px;
 }
+.cart-container #copy_address-wrapper {
+  width: 100%;
+}
+.cart-container #copy_address-label {
+  display: none;
+}
+.cart-container #copy_address-element {
+  float: right;
+  margin-right: 270px;
+}
+
 .cart-container #submit-element {
   float: right;
   text-align: right;

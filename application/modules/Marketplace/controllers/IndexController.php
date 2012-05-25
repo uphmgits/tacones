@@ -616,8 +616,13 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
 							$values['date'] = date('Y-m-d H:i:s');
               $values['contact_email'] = $arrPost['payer_email'];
 
+              $shippinginfoTable = Engine_Api::_()->getDbtable('shippinginfo', 'marketplace');
+              $values['shipping_info'] = $shippinginfoTable->select()->where("user_id = {$user_id} and paid = 0 ")->query()->fetchColumn();
+              if( $values['shipping_info'] ) $shippinginfoTable->update(array('paid' => '1'), "user_id = {$user_id}");
+
               $table = Engine_Api::_()->getDbtable('orders', 'marketplace');
  					    $table->insert($values);
+
 						
               if( $user_id ) {
                   $buyer = Engine_Api::_()->getItem('user', $user_id);

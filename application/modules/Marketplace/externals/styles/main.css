@@ -553,11 +553,3 @@ table.cart_table tr td{
 .comment-container {
   /*position: absolute;*/
 }
-.post-comment-container > form {
-  background: black;
-  padding: 4px;
-}
-.post-comment-container textarea {
-  width: 143px;
-  margin-bottom:5px;
-}

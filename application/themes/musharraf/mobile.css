@@ -596,6 +596,18 @@ These styles are used everywhere comments appear.
 {
   margin-top: 5px;
 }
+.comment-container {
+  position: absolute;
+  z-index: 998;
+  width: 160px;
+}
+#global_page_marketplace-index-view .comments,
+#global_page_marketplace-index-comments .comments {
+  width:auto !important;
+  background-color:#0d0d0d;
+  padding: 15px 15px 0 15px;
+  border-bottom:1px solid #7A7A7A;
+}
 .comments
 {
   width: 450px;
@@ -693,7 +705,14 @@ div.comments_comment_likes_tips
   color: $theme_font_color_light;
   font-size: 0.9em;
 }
-
+.post-comment-container > form {
+  background: black;
+  padding: 4px;
+}
+.post-comment-container textarea {
+  width: 143px;
+  margin-bottom:5px;
+}
 
 
 
@@ -1054,4 +1073,105 @@ form.filters dd + dt
 {
   background-color: #f2f2f2;
   border: 1px solid #ccc;
+}
+
+.love-info {
+    display: block;
+    padding-bottom: 3px;
+    width: 160px;
+}
+.love-info > span {
+    vertical-align: top;
+    font-family: Univers LT Std;
+    font-size: 13px;
+    cursor: pointer;
+    padding-right: 15px;
+}
+.love-info span.like {
+    background: url(/fashbay/application/themes/musharraf/images/love.png) no-repeat scroll left center transparent;
+    color: #C20C0C;
+    padding-left: 17px;
+}
+.love-info span.comment {
+    background: url(/fashbay/application/themes/musharraf/images/comment.png) no-repeat scroll left center transparent;
+    color: #FF0078;
+    padding-left: 20px;
+}
+.love-info span.we-love {
+    float: right;
+    padding-right: 5px;
+    padding-top: 3px;
+}
+
+.layout_common {
+    overflow: hidden;
+}
+
+ul.marketplaces_browse {
+    clear: none;
+    margin-right: 0px !important;
+    float:left;
+}
+
+#global_page_marketplace-index-index ul.marketplaces_browse, 
+#global_page_marketplace-index-manage ul.marketplaces_browse, 
+#global_page_user-profile-index ul.marketplaces_browse{
+    width: 180px;
+}
+
+
+.marketplaces_browse_photo {
+    margin-right: 0px !important;
+    max-height: 300px;
+    overflow: hidden;
+}
+
+ul.marketplaces_browse .marketplaces_browse_photo img,
+ul.marketplaces_browse .marketplaces_profile_tab_photo img{
+    width: 160px !important;
+    max-width: 160px !important;
+    border: none !important;
+}
+
+.marketplaces_browse_info {
+    clear: left;
+    /*overflow: hidden;*/
+    padding: 0px 0px 0px 0px;
+    max-width: 160px;
+}
+.marketplaces_profile_tab_title a,
+.marketplaces_browse_info a {
+    text-transform: uppercase;
+    color: #E2E2E2;
+}
+ul.marketplaces_browse > li , ul.marketplaces_browse > li + li {
+    overflow: visible;
+    border: none;
+    width: 180px;
+    padding: 0;
+}
+
+.marketplace_browse_userlist {
+    padding-top: 10px;
+    border-top: 1px solid #555;
+}
+.marketplace_browse_userlist div,
+.marketplace_browse_userlist a { 
+    color: #555;
+}
+.marketplace_browse_userlist_item {
+    max-width: 100px;
+    vertical-align: top;
+}
+.marketplace_browse_userlist_item + .marketplace_browse_userlist_item {
+    padding-left: 20px;
+}
+.marketplace_browse_userlist_photo {
+    height: 100px;
+    overflow: hidden;
+}
+.marketplace_browse_userlist_photo img,
+.marketplace_browse_userlist_info  {
+    width: 100%;
+    overflow: hidden;
 }

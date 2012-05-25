@@ -121,7 +121,9 @@
   <?php $this->headScript()->prependScript($this->headTranslate()->toString()) ?>
 
   <?php // SCRIPTS ?>
+  <script type="text/javascript" src="<?=$this->baseUrl()?>/externals/jquery/jquery-1.7.1.min.js"></script>
   <script type="text/javascript">
+    jQuery.noConflict();
     <?php echo $this->headScript()->captureStart(Zend_View_Helper_Placeholder_Container_Abstract::PREPEND) ?>
 
     Date.setServerOffset('<?php echo date('D, j M Y G:i:s O', time()) ?>');

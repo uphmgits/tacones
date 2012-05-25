@@ -120,7 +120,7 @@ return array(
     ),
     
     // User - Blog
-    'user_profile' => array(
+    'user_blog' => array(
       'route' => 'blog/*',
       'defaults' => array(
         'module' => 'user',

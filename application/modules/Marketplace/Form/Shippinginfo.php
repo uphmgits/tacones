@@ -14,7 +14,7 @@ class Marketplace_Form_Shippinginfo extends Engine_Form
     $this->addElement('Text', 'name', array(
       'required' => true,
       'allowEmpty' => false,
-      'label' => 'Name',
+      'label' => '*Name',
       'filters' => array(
         'StringTrim',
       ),
@@ -25,7 +25,7 @@ class Marketplace_Form_Shippinginfo extends Engine_Form
     $this->addElement('Text', 'email', array(
       'required' => true,
       'allowEmpty' => false,
-      'label' => 'Email',
+      'label' => '*Email',
       'filters' => array(
         'StringTrim',
       ),
@@ -38,7 +38,7 @@ class Marketplace_Form_Shippinginfo extends Engine_Form
     $this->addElement('Textarea', 'billing_address', array(
       'required' => true,
       'allowEmpty' => false,
-      'label' => 'Billing Info',
+      'label' => '*Billing Info',
       'filters' => array(
         'StringTrim',
       ),
@@ -48,26 +48,32 @@ class Marketplace_Form_Shippinginfo extends Engine_Form
     $this->addElement('Textarea', 'shipping_address', array(
       'required' => true,
       'allowEmpty' => false,
-      'label' => 'Shipping Info',
+      'label' => '*Shipping Info',
       'filters' => array(
         'StringTrim',
       ),
       'tabindex' => 4,
     ));
-
-    $this->addElement('Text', 'phone', array(
-      'label' => 'Phone',
-      'filters' => array(
-        'StringTrim',
-      ),
+    $this->addElement('Checkbox', 'copy_address', array(
+      'required' => false,
+      'label' => 'Copy Address',
+      'attribs' => array('onchange' => "if(this.checked) $('shipping_address').value = $('billing_address').value"),
       'tabindex' => 5,
     ));
-    $this->addElement('Text', 'cell_phone', array(
-      'label' => 'Phone Cell',
+
+    $this->addElement('Text', 'phone', array(
+      'label' => 'Home Phone',
       'filters' => array(
         'StringTrim',
       ),
       'tabindex' => 6,
+    ));
+    $this->addElement('Text', 'business_phone', array(
+      'label' => 'Business Phone',
+      'filters' => array(
+        'StringTrim',
+      ),
+      'tabindex' => 7,
     ));
   
     // Init submit
@@ -75,7 +81,7 @@ class Marketplace_Form_Shippinginfo extends Engine_Form
       'label' => 'Next',
       'type' => 'submit',
       'ignore' => true,
-      'tabindex' => 7,
+      'tabindex' => 8,
     ));
   }
 

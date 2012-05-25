@@ -245,6 +245,7 @@ span.like:hover{
                   for (i = 0; i < columns; i++) { columnsHeight[i] = 0; }
                   
                   list = jQuery("ul.marketplaces_browse > li");
+console.log(list);
                   list.each(function(i){
                       var colNum = i % columns;
                       var element = jQuery(this);
