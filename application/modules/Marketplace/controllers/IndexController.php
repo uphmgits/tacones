@@ -112,11 +112,10 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       $view->addHelperPath(APPLICATION_PATH . '/application/modules/Fields/View/Helper', 'Fields_View_Helper');
 
       $values['closed'] = 0;
-      $paginator = Engine_Api::_()->marketplace()->getMarketplacesPaginator($values);
-      $items_count = (int) Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.page', 10);
-      $paginator->setItemCountPerPage($items_count);
-      $this->view->paginator = $paginator->setCurrentPageNumber($this->_getParam('page'));
-      //$this->view->paginator = $paginator->setCurrentPageNumber($values['page']);
+      $values['page'] = $this->_getParam('page', 1);
+      $values['limit'] = (int) Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.page', 20);
+
+      $this->view->paginator = $paginator = Engine_Api::_()->marketplace()->getMarketplacesPaginator($values);
 
       if (!empty($values['category']))
           $this->view->categoryObject = Engine_Api::_()->marketplace()->getCategory($values['category']);
@@ -129,6 +128,36 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       $this->view->totalUsers = $usersTable->select()->from($usersTable->info("name"), "count(*) as total")->query()->fetchColumn();
       $this->view->userList = Engine_Api::_()->getItemMulti('user', $userList);
   }
+
+  public function ajaxlistAction() {
+      $viewer = $this->_helper->api()->user()->getViewer();
+
+      if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'view')->isValid()) eturn;
+
+      $this->view->form = $form = new Marketplace_Form_Search();
+      // Process form
+      if ($form->isValid($this->getRequest()->getPost())) {
+          $values = $form->getValues();
+      } else {
+          $values = array();
+      }
+
+      // check to see if request is for specific user's listings
+      $user_id = $this->_getParam('user');
+      if ($user_id) $values['user_id'] = $user_id;
+      $values['page'] = $this->_getParam('page', 2);
+      $values['limit'] = (int) Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.page', 20);
+      
+      $this->view->paginator = Engine_Api::_()->marketplace()->getMarketplacesPaginator( $values );
+      if( ($values['page'] - 1) * $values['limit'] > $this->view->paginator->getTotalItemCount() ) die();
+
+      $this->view->addHelperPath(APPLICATION_PATH . '/application/modules/Fields/View/Helper', 'Fields_View_Helper');
+      $values['closed'] = 0;
+      $this->_helper->layout->setLayout('empty');
+  }
+
+
+
 
   public function viewAction() 
   {

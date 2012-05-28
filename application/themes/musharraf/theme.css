@@ -1975,7 +1975,8 @@ ul.marketplaces_browse .marketplaces_profile_tab_photo img{
     text-transform: uppercase;
     color: #E2E2E2;
 }
-ul.marketplaces_browse > li , ul.marketplaces_browse > li + li {
+ul.marketplaces_browse > li , ul.marketplaces_browse > li + li,
+ul.marketplaces_browse .scrollwrap > li, ul.marketplaces_browse .scrollwrap > li + li {
     overflow: visible;
     border: none;
     width: 180px;

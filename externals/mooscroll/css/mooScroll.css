@@ -1,0 +1,138 @@
+.scrollControlsY{
+	display:block;
+	position: absolute;
+	top:0;
+	right:0;
+	height:100%;
+	width:24px;
+}
+
+.upBtn{
+	display:block;
+	position:absolute;
+	top:0;
+	right:0;
+	width:24px;
+	height:24px;
+	background: url(../img/upBtn.gif) no-repeat 0 0;
+	cursor:pointer;
+}
+
+.upBtn:hover{
+	background: url(../img/upBtn.gif) no-repeat 0 -24px;
+}
+
+.upBtn-Active, .upBtn-Active:hover{
+	background: url(../img/upBtn.gif) no-repeat 0 -48px;
+}
+
+.downBtn{
+	display:block;
+	position:absolute;
+	bottom:0;
+	right:0;
+	width:24px;
+	height:24px;
+	background: url(../img/downBtn.gif) no-repeat 0 -48px;
+	cursor:pointer;
+}
+
+.downBtn:hover{
+	background: url(../img/downBtn.gif) no-repeat 0 -24px;
+}
+
+.downBtn-Active, .downBtn-Active:hover{
+	background: url(../img/downBtn.gif) no-repeat 0 0;
+}
+
+.scrollBar{
+	display:block;
+	position: absolute;
+	top:24px;
+	right:0;
+	bottom:24px;
+	width:24px;
+	background: url(../img/scrollBar.gif) repeat-y center top;
+}
+
+.scrollHandle{
+	display:block;
+	position:absolute;
+	top:0px;
+	right:0;
+	width:24px;
+	height:35px;
+	min-height:13px;
+	cursor: pointer;
+	padding:11px 0;
+}
+
+.scrollHandleBG{
+	display:block;
+	position: relative;
+	height:100%;
+	width:24px;
+	background: url(../img/scrollHandleBG.gif) repeat-y 0 0 ;
+}
+
+.scrollHandle .scrollHandleBG:hover, .scrollHandle:hover .scrollHandleBG{
+	background: url(../img/scrollHandleBG.gif) repeat-y -24px 0;
+}
+
+.scrollHandle-Active .scrollHandleBG:hover, .scrollHandle-Active:hover .scrollHandleBG, .scrollHandle-Active .scrollHandleBG{
+	background: url(../img/scrollHandleBG.gif) repeat-y -48px 0;
+}
+
+.scrollHandleMiddle{
+	display:block;
+	position: absolute;
+	width:24px;
+	height:13px;
+	background: url(../img/scrollHandleMiddle.gif) no-repeat 0 0  ;
+	top:50%;
+	margin:-5px 0 0 0;
+}
+
+.scrollHandle .scrollHandleMiddle:hover, .scrollHandle:hover .scrollHandleMiddle{
+	background: url(../img/scrollHandleMiddle.gif) repeat-y -24px 0;
+}
+
+.scrollHandle-Active .scrollHandleMiddle:hover, .scrollHandle-Active:hover .scrollHandleMiddle, .scrollHandle-Active .scrollHandleMiddle{
+	background: url(../img/scrollHandleMiddle.gif) repeat-y -48px 0;
+}
+
+.scrollHandleTop{
+	display:block;
+	position:absolute;
+	width:24px;
+	height:11px;
+	background: url(../img/scrollHandleTop.gif) no-repeat 0 0;
+	top:0;
+	margin:0 0 0 0;
+}
+
+.scrollHandle .scrollHandleTop:hover, .scrollHandle:hover .scrollHandleTop{
+	background: url(../img/scrollHandleTop.gif) no-repeat -24px 0;
+}
+
+.scrollHandle-Active .scrollHandleTop:hover, .scrollHandle-Active:hover .scrollHandleTop, .scrollHandle-Active .scrollHandleTop{
+	background: url(../img/scrollHandleTop.gif) no-repeat -48px 0;
+}
+
+.scrollHandleBottom{
+	display:block;
+	position:absolute;
+	width:24px;
+	height:11px;
+	background: url(../img/scrollHandleBottom.gif) no-repeat -48px 0 ;
+	bottom:0;
+	margin:0 0 0 0;
+}
+
+.scrollHandle .scrollHandleBottom:hover, .scrollHandle:hover .scrollHandleBottom{
+	background: url(../img/scrollHandleBottom.gif) no-repeat -24px 0;
+}
+
+.scrollHandle-Active .scrollHandleBottom:hover, .scrollHandle-Active:hover .scrollHandleBottom, .scrollHandle-Active .scrollHandleBottom{
+	background: url(../img/scrollHandleBottom.gif) no-repeat 0 0 ;
+}

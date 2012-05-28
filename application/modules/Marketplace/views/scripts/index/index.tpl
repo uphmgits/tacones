@@ -1,5 +1,19 @@
+<?php $this->headLink()->prependStylesheet("{$this->baseUrl()}/externals/jqscroll/css/scrollbars.css");?>
+<?php $this->headLink()->prependStylesheet("{$this->baseUrl()}/externals/jqscroll/css/scrollbars-black.css");?>
+
+<style>
+    #marketplace-content { height: 500px; }
+    #global_page_marketplace-index-index ul.marketplaces_browse { position: relative; width: 916px !important; }
+    #global_page_marketplace-index-index ul.marketplaces_browse > li { position: absolute; }
+    #global_page_marketplace-index-index #global_content { max-width: 940px; width: auto; padding: 0 10px; }
+    #global_page_marketplace-index-index .header_img_sd_home { text-align: center; }
+    #global_page_marketplace-index-index .marketplaces_browse_photo > a { display: block; }
+    #global_page_marketplace-index-index .marketplaces_browse_info_title > a { font-family: arial; letter-spacing: -2px }
+    #global_page_marketplace-index-index .correct_font .marketplaces_browse_info_title > a{ font-family: Univers LT Std; letter-spacing: 0; }
+</style>
+
 <script type="text/javascript">
-  var pageAction =function(page){
+  var pageAction = function(page){
     $('page').value = page;
     $('filter_form').submit();
   }
@@ -45,14 +59,93 @@
 
   function marketplaceComment( mid ) {
       var form = $('comment-form-' + mid);
-      if( form.style.display ) { 
-          form.style.display = '';
-          form.body.focus();
-      } else {
-          form.style.display = 'none';
+      if( form ) {
+          if( form.style.display ) { 
+              form.style.display = '';
+              form.body.focus();
+          } else {
+              form.style.display = 'none';
+          }
       }
   }
+
+  //contentEl.removeEvents('scroll').addEvent('scroll', function(event) {
+      /*var scrollTop = contentEl.scrollTop;
+      if( scrollTop > 0 )  {
+          var tickerSize = contentEl.getSize();
+          var scrollSize = contentEl.getScrollSize();
+          var tmp = 0.8 * ( scrollSize.y - tickerSize.y);
+          console.log("top: "+scrollTop+" - tmp: "+tmp+" - scrollWait: "+$('activity-ticker').get('params')+" - next_id: "+next_id);
+          if( scrollTop > tmp && !$('activity-ticker').get('params') ) {
+              $('activity-ticker').set('params', 'scrollwait');
+              tickerViewMore(next_id, subject_guid);
+          }
+      }*/
+  //});
+  jQuery('#marketplace-content .scrollcontent').scroll(function() {
+    //console.log($(this).scrollTop());
+    alert('aa');
+  });
+
 </script>
+
+
+<script type="text/javascript">
+
+    function refreshMarketplaceList(ref) {
+        var width = jQuery('.layout_common').width();
+        var columnsWidth = 180;
+        var columns = Math.floor(width / columnsWidth);
+        $oldColumns = jQuery("ul.marketplaces_browse").attr("data-column");
+
+        if( !$oldColumns || ($oldColumns && columns != $oldColumns) || ref ) {
+        
+            var columnsHeight = new Array(columns);
+            for (i = 0; i < columns; i++) { columnsHeight[i] = 0; }
+            
+            list = jQuery("ul.marketplaces_browse > li");
+
+            list.each(function(i){
+                var colNum = i % columns;
+                var element = jQuery(this);
+                img = element.find('img.item_photo_marketplace');
+                if( img && !img.height()) {
+                    jQuery("<img/>").attr("src", jQuery(img).attr("src")).load(function() {
+                        h = element.outerHeight();
+                        element.addClass('correct_font');
+                        element.css('top', columnsHeight[colNum] + 'px');
+                        element.css('left', colNum * columnsWidth + 'px');
+                        columnsHeight[colNum] += (h + 10);
+                        
+                        heightBlock = Math.max.apply( Math, columnsHeight );
+                        jQuery('ul.marketplaces_browse').height(heightBlock);
+                        jQuery('ul.marketplaces_browse').attr("data-column", columns);
+                    });
+                } else {
+                  h = element.outerHeight();
+                  element.addClass('correct_font');
+                  element.css('top', columnsHeight[colNum] + 'px');
+                  element.css('left', colNum * columnsWidth + 'px');
+                  columnsHeight[colNum] += (h + 10);
+                }
+            });
+            
+            heightBlock = Math.max.apply( Math, columnsHeight );
+            jQuery('ul.marketplaces_browse').height(heightBlock);
+            jQuery('ul.marketplaces_browse').attr("data-column", columns);
+        }
+    }
+
+    jQuery(document).ready(function () {
+        refreshMarketplaceList();
+        jQuery("#marketplace-content").scrollbars();
+    });
+
+    jQuery(window).bind('resize', function() { 
+        refreshMarketplaceList();
+    });
+</script>
+
 
 <style type="text/css">
 .browse-separator-wrapper{
@@ -118,7 +211,7 @@ span.like:hover{
   </div>
   */?>
 
-  <div class='layout_middle'>
+  <div class='layout_middle' id="marketplace-content">
     <?php if( $this->tag ): ?>
       <h3>
         <?php echo $this->translate('Showing marketplace listings using the tag');?> #<?php echo $this->tag_text;?> <a href="<?php echo $this->url(array('module' => 'marketplace', 'controller' => 'index', 'action' => 'index'), 'default', true) ?>">(x)</a>
@@ -223,68 +316,6 @@ span.like:hover{
       </ul>
       */ ?>
       
-      <style>
-        #global_page_marketplace-index-index ul.marketplaces_browse { position: relative; width: auto !important; }
-        #global_page_marketplace-index-index ul.marketplaces_browse > li { position: absolute; }
-        #global_page_marketplace-index-index #global_content { max-width: 940px; width: auto; padding: 0 10px; }
-        #global_page_marketplace-index-index .header_img_sd_home { text-align: center; }
-        #global_page_marketplace-index-index .marketplaces_browse_photo > a { display: block; }
-        #global_page_marketplace-index-index .marketplaces_browse_info_title > a { font-family: impact; }
-        #global_page_marketplace-index-index .correct_font .marketplaces_browse_info_title > a{ font-family: Univers LT Std; }
-      </style>
-      <script type="text/javascript">
-      
-          function refreshMarketplaceList() {
-              var width = jQuery('.layout_common').width();
-              var columnsWidth = 180;
-              var columns = Math.floor(width / columnsWidth);
-              $oldColumns = jQuery("ul.marketplaces_browse").attr("data-column");
-              if( !$oldColumns || ($oldColumns && columns != $oldColumns) ) {
-              
-                  var columnsHeight = new Array(columns);
-                  for (i = 0; i < columns; i++) { columnsHeight[i] = 0; }
-                  
-                  list = jQuery("ul.marketplaces_browse > li");
-console.log(list);
-                  list.each(function(i){
-                      var colNum = i % columns;
-                      var element = jQuery(this);
-                      img = element.find('img.item_photo_marketplace');
-                      if( img && !img.height()) {
-                          jQuery("<img/>").attr("src", jQuery(img).attr("src")).load(function() {
-                              h = element.outerHeight();
-                              element.addClass('correct_font');
-                              element.css('top', columnsHeight[colNum] + 'px');
-                              element.css('left', colNum * columnsWidth + 'px');
-                              columnsHeight[colNum] += (h + 10);
-                              
-                              heightBlock = Math.max.apply( Math, columnsHeight );
-                              jQuery('ul.marketplaces_browse').height(heightBlock);
-                              jQuery('ul.marketplaces_browse').attr("data-column", columns);
-                          });
-                      } else {
-                        h = element.outerHeight();
-                        element.addClass('correct_font');
-                        element.css('top', columnsHeight[colNum] + 'px');
-                        element.css('left', colNum * columnsWidth + 'px');
-                        columnsHeight[colNum] += (h + 10);
-                      }
-                  });
-                  
-                  heightBlock = Math.max.apply( Math, columnsHeight );
-                  jQuery('ul.marketplaces_browse').height(heightBlock);
-                  jQuery('ul.marketplaces_browse').attr("data-column", columns);
-              }
-          }
-      
-          jQuery(document).ready(function () {
-              refreshMarketplaceList();
-          });
-          jQuery(window).bind('resize', function() { 
-              refreshMarketplaceList();
-          });
-      </script>
-      
       <?php $viewer = $this->viewer(); ?>
       <ul class="marketplaces_browse">
         <?php foreach( $this->paginator as $item ): ?>
@@ -309,13 +340,7 @@ console.log(list);
                     <span class="comment" id="comment-lips-<?=$marketplaceId?>" onclick="marketplaceComment(<?=$marketplaceId?>);">
                         <?=$item->comment_count?>
                     </span>
-
-                    <div class="pinterest-button" style="display: inline-block;">
-                      <a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2F<?=urlencode($_SERVER['HTTP_HOST'] . $this->url(array('user_id' => $item->owner_id, 'marketplace_id' => $item->getIdentity() ), 'marketplace_entry_view'))?>" class="pin-it-button" count-layout="none">
-                        <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="<?=$this->translate('Pin It')?>" />
-                      </a>
-                    </div>
-                 
+                
                     <div class="comment-container" >
                       <?php if( $viewer->getIdentity() ) : ?>
                         <?=$this->action("post", "comment", "core", array("type" => "marketplace", "id" => $marketplaceId))?>
@@ -353,9 +378,9 @@ console.log(list);
           </li>
         <?php endforeach; ?>
       </ul>
-      
-      
-      
+      <div id='update-wait' params="0"></div>;
+      <div id='next-page' params="2"></div>;
+
       <?php echo $this->paginationControl($this->paginator); ?>
       <?php //echo $this->paginationControl($this->paginator, null, array("pagination/pagination.tpl","marketplace")); ?>
 

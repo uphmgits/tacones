@@ -118,6 +118,11 @@
 
   <?php // SCRIPTS ?>
   <script type="text/javascript" src="<?=$this->baseUrl()?>/externals/jquery/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="<?=$this->baseUrl()?>/externals/jqscroll/jq.event.drag.js"></script>
+  <script type="text/javascript" src="<?=$this->baseUrl()?>/externals/jqscroll/jq.resize.js"></script>
+  <script type="text/javascript" src="<?=$this->baseUrl()?>/externals/jqscroll/jq.mousehold.js"></script>
+  <script type="text/javascript" src="<?=$this->baseUrl()?>/externals/jqscroll/jq.mousewheel.js"></script>
+  <script type="text/javascript" src="<?=$this->baseUrl()?>/externals/jqscroll/aplweb.scrollbars.js"></script>
   <script type="text/javascript">
     jQuery.noConflict();
     <?php echo $this->headScript()->captureStart(Zend_View_Helper_Placeholder_Container_Abstract::PREPEND) ?>
