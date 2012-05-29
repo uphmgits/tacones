@@ -21,8 +21,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 {
   protected $_navigation;
   // true - sandbox, false - paypal original
-  //protected $_sandbox = true;
-  protected $_sandbox = false;
+  protected $_sandbox = true;
+  //protected $_sandbox = false;
 
   public function init() {
       if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'view')->isValid())
@@ -123,7 +123,9 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       if (!$this->getRequest()->isPost()) {
 		    $form->category->setValue($id);
 	    }
-      
+
+      $this->view->loginForm = new User_Form_Login();
+
       $userList = $usersTable->select()->where('photo_id > 0')->order('creation_date DESC')->limit(8)->query()->fetchAll(Zend_Db::FETCH_COLUMN);
       $this->view->totalUsers = $usersTable->select()->from($usersTable->info("name"), "count(*) as total")->query()->fetchColumn();
       $this->view->userList = Engine_Api::_()->getItemMulti('user', $userList);
@@ -147,12 +149,15 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       if ($user_id) $values['user_id'] = $user_id;
       $values['page'] = $this->_getParam('page', 2);
       $values['limit'] = (int) Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.page', 20);
+      $values['closed'] = 0;
       
       $this->view->paginator = Engine_Api::_()->marketplace()->getMarketplacesPaginator( $values );
-      if( ($values['page'] - 1) * $values['limit'] > $this->view->paginator->getTotalItemCount() ) die();
+
+      if( ($values['page'] - 1) * $values['limit'] >= $this->view->paginator->getTotalItemCount() ) die();
 
       $this->view->addHelperPath(APPLICATION_PATH . '/application/modules/Fields/View/Helper', 'Fields_View_Helper');
-      $values['closed'] = 0;
+
+      $this->view->loginForm = new User_Form_Login();
       $this->_helper->layout->setLayout('empty');
   }
 
@@ -165,8 +170,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       $paypal = $this->_helper->api()->getApi('paypal', 'marketplace');
       $marketplace = Engine_Api::_()->getItem('marketplace', $this->_getParam('marketplace_id'));
 	
-	    if(empty($marketplace))
-		    return;
+	    if(empty($marketplace)) return;
 
       $this->view->loginForm = new User_Form_Login();
 
@@ -223,8 +227,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 
 	    endif;
 	
-      if (!$this->_helper->requireAuth()->setAuthParams($marketplace, null, 'view')->isValid())
-          return;
+      //if (!$this->_helper->requireAuth()->setAuthParams($marketplace, null, 'view')->isValid()) return;
 
       $can_edit = $this->view->can_edit = $this->_helper->requireAuth()->setAuthParams($marketplace, null, 'edit')->checkRequire();
       $this->view->allowed_upload = ( $viewer && $viewer->getIdentity()
@@ -559,7 +562,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 			if ($paypal->validateNotify($arrPost)) {
 
 				$order = explode(':', $arrPost['item_number']);
-				$user_id = $order[1];
+				$user_id = (int)$order[1];
 				if(strstr($order[0], '-')){//few items
 					$final_amount = 0;
 					$item_ids = explode('|', $order[0]);
@@ -577,10 +580,11 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 						if(empty($marketplace) or (!$user_id and empty($arrPost['payer_email']) ))
 							return $this->_helper->redirector->gotoRoute(array('action' => 'manage', 'result' => 'error'), 'marketplace_paymentreturn', true);
 
-            if( preg_match("/\d(?=\+)/i", $item_count, $m) ) {
+            /*if( preg_match("/\d(?=\+)/i", $item_count, $m) ) {
 						     $item_count = $m[0];
                  $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
-            }
+            }*/
+            $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
 
 						$title_arr[] = $marketplace->title;
 						$ids_arr[] = $item_id;
@@ -597,16 +601,21 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
             }
             $final_amount += ($marketplace->price + $product_shipping_fee + $inspection_fee - $coupon_discount) * $item_count;
 					}
-/*
-ob_start();
+
+/*ob_start();
 print_r($arrPost);
 print_r($final_amount . " - " . $arrPost['mc_gross']);
 $c = ob_get_clean();
-file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', $c );
-chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
+file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/fashbay/temporary/log/pplog.txt', $c );
+chmod($_SERVER['DOCUMENT_ROOT'] . '/fashbay/temporary/log/pplog.txt', 0777);
+*/
 
 
 					if ((string)$final_amount == (string)$arrPost['mc_gross']){
+
+            $shippinginfoTable = Engine_Api::_()->getDbtable('shippinginfo', 'marketplace');
+            $shippingInfo = $shippinginfoTable->select()->where("user_id = {$user_id} and paid = 0 ")->query()->fetchColumn();
+            if( $shippingInfo ) $shippinginfoTable->update(array('paid' => '1'), "user_id = {$user_id}");
 
 						foreach($item_ids as $key => $item_count_id){
 							
@@ -616,12 +625,13 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
 
 							$marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
 
-              if( preg_match("/\d(?=\+)/i", $item_count, $m) ) {
+              /*if( preg_match("/\d(?=\+)/i", $item_count, $m) ) {
 						     $item_count = $m[0];
                  $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
               } else {
                  $inspection_fee = 0;
-              }
+              }*/
+              $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
 
 							$owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
 							
@@ -644,10 +654,7 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
               $values['inspection'] = $inspection_fee;
 							$values['date'] = date('Y-m-d H:i:s');
               $values['contact_email'] = $arrPost['payer_email'];
-
-              $shippinginfoTable = Engine_Api::_()->getDbtable('shippinginfo', 'marketplace');
-              $values['shipping_info'] = $shippinginfoTable->select()->where("user_id = {$user_id} and paid = 0 ")->query()->fetchColumn();
-              if( $values['shipping_info'] ) $shippinginfoTable->update(array('paid' => '1'), "user_id = {$user_id}");
+              $values['shipping_info'] = $shippingInfo;
 
               $table = Engine_Api::_()->getDbtable('orders', 'marketplace');
  					    $table->insert($values);
@@ -693,12 +700,12 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
 					if(empty($marketplace) or (!$user_id and empty($arrPost['payer_email']) ))
 						return $this->_helper->redirector->gotoRoute(array('action' => 'manage', 'result' => 'error'), 'marketplace_paymentreturn', true);
 
-          if( preg_match("/\d(?=\+)/i", $item_count, $m) ) {
+          //if( preg_match("/\d(?=\+)/i", $item_count, $m) ) {
 				     $item_count = $m[0];
              $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
-          } else {
-             $inspection_fee = 0;
-          }
+          //} else {
+          //   $inspection_fee = 0;
+          //}
 
 					$values['user_id'] = $user_id;
 					$values['owner_id'] = $marketplace->owner_id;
@@ -1615,7 +1622,8 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
 			'parentRefresh' => true,
 		  ));
 
-    $inspection = (int)$this->_getParam('inspection', 0);
+    //$inspection = (int)$this->_getParam('inspection', 0);
+    $inspection = 1;
 
 		$viewer = Engine_Api::_()->user()->getViewer();
     $cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
@@ -1742,7 +1750,7 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
 			    if($values['marketplaces_count']){
 				    foreach($values['marketplaces_count'] as $marketplace_id => $m_count){
 					    $m_count = intval($m_count);
-              $inspection = isset($values['marketplaces_inspection'][$marketplace_id]) ? 1 : 0;
+              $inspection = 1; //isset($values['marketplaces_inspection'][$marketplace_id]) ? 1 : 0;
 					    if($m_count > 0){
 						    $cartTable->update(array(
 							    'count' => $m_count,
@@ -1780,7 +1788,7 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
 			        $cartTable->updateCookieCartItemArray($values['marketplaces_count'], $values['marketplaces_inspection']);
               foreach($values['marketplaces_count'] as $marketplace_id => $m_count) { 
                 $cartitems[$marketplace_id]['count'] = $m_count;
-                $cartitems[$marketplace_id]['inspection'] = isset($values['marketplaces_inspection'][$marketplace_id]) ? true : false;
+                $cartitems[$marketplace_id]['inspection'] = true; //isset($values['marketplaces_inspection'][$marketplace_id]) ? true : false;
               }
 			      }
         }
@@ -1996,8 +2004,9 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/temporary/log/pplog.txt', 0777);*/
 			
 			  $titles_arr[] = $current_marketplace->title;
 
-        $inspectionMode = ($cartitem['inspection'] and $inspectionEnable) ? '+' : '';
-			  $ids_arr[] = $current_marketplace->marketplace_id.'-'.$cartitem['count'].$inspectionMode;
+        //$inspectionMode = ($cartitem['inspection'] and $inspectionEnable) ? '+' : '';
+			  //$ids_arr[] = $current_marketplace->marketplace_id.'-'.$cartitem['count'].$inspectionMode;
+        $ids_arr[] = $current_marketplace->marketplace_id.'-'.$cartitem['count'];
 
         $mids[] = $current_marketplace->marketplace_id;
 		  }

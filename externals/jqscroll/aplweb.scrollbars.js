@@ -196,7 +196,6 @@
 					
 					//and assign the new values
 					$vscrollblock.css({top: vscrollTop, height: vscrollHeight});
-          console.log(amountHeight + " - " + vscrollTop + " - " + vscrollHeight + " - " + $vscrollarea.innerHeight() + " - " + $('#update-wait').attr('params'));
 
           if( 0.8 * ( $vscrollarea.innerHeight() - vscrollHeight) < vscrollTop && !parseInt(jQuery('#update-wait').attr('params')) ) {
             pageEl = jQuery('#next-page');

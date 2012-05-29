@@ -228,7 +228,7 @@ endif; ?>
 
 	<div class='layout_middle'>
 		<div class='layout_middle_left'>
-		  <div class="layout_middle_left_top" style="position: relative; overflow: hidden;">
+		  <div class="layout_middle_left_top" style="position: relative;">
         <div class='marketplaces_gutter_photo'>
           <?php if( $this->main_photo ) : ?>
               <?=$this->htmlLink($this->main_photo->getPhotoUrl(), $this->itemPhoto($this->main_photo, 'normal'), array('class'=>'smoothbox11', 'rel'=>'milkbox[gall1]', 'title'=> $this->marketplace->getTitle()))?>
@@ -273,7 +273,7 @@ endif; ?>
             <?php if( $this->viewer()->getIdentity() ) : ?>
 					      <?=$this->htmlLink(array('route' => 'marketplace_general', 'action' => 'addtocart', 'marketplace_id' => $this->marketplace->getIdentity()), 'purchase ', array('class' => 'add_to_cart smoothbox', 'id' => 'add_to_cart'))?>
             <?php else : ?>
-              <div id='login-popup' style="d">
+              <div id='login-popup' class="login-popup">
                 <form name='frm_login_popup' action="<?=$this->loginForm->getAction()?>" method="post">
                   <div class='close-popup' onclick="$('login-popup').hide();"></div>
                   <h3><?=$this->translate('Login')?></h3>
@@ -302,14 +302,14 @@ endif; ?>
                     <div id="facebook-wrapper" class="form-wrapper">
                       <div id="facebook-element" class="form-element">
                         <a href="<?=Zend_Controller_Front::getInstance()->getRouter()->assemble(array('module' => 'user', 'controller' => 'auth','action' => 'facebook', 'gotourl' => $goToUrl), 'default', true);?>">
-                          <img src="/application/modules/User/externals/images/facebook-sign-in-popup.gif" border="0" alt="Connect with Facebook">
+                          <img src="<?=$this->baseUrl()?>/application/modules/User/externals/images/facebook-sign-in-popup.gif" border="0" alt="Connect with Facebook">
                         </a>
                       </div>
                     </div>
                   <?php endif; ?>
 
                   <input type="hidden" name="gotourl" value="<?=$goToUrl?>" />
-                <form>
+                </form>
               </div>
               <?//=$this->htmlLink(array('route' => 'user_loginpopup', 'format' => 'smoothbox'), 'purchase ', array('class' => 'add_to_cart smoothbox', 'id' => 'add_to_cart'))?>
               <?=$this->htmlLink('javascript:void(0);', 'purchase ', array('class' => 'add_to_cart', 'id' => 'add_to_cart', 'onclick' => '$("login-popup").show();'))?>
@@ -422,7 +422,9 @@ endif; ?>
 			    <?php endif; ?>
 
 		  </div> <!-- marketplace_fieldvalueloop -->
-            
+
+      <div style="clear:both"></div>      
+
     </div> <!-- layout_middle_left_top -->
           
 

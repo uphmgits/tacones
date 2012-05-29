@@ -109,6 +109,8 @@
         }
       }
     }
+    $this->headLink()->prependStylesheet("{$this->baseUrl()}/externals/jqscroll/css/scrollbars.css");
+    $this->headLink()->prependStylesheet("{$this->baseUrl()}/externals/jqscroll/css/scrollbars-black.css");
   ?>
   <?php echo $this->headLink()->toString()."\n" ?>
   <?php echo $this->headStyle()->toString()."\n" ?>

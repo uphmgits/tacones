@@ -15,6 +15,7 @@
 
 .scrollable .scrollwrap {
 	overflow: hidden;
+  width: 100%;
 	display: inline-block;
 	line-height: 1.3em;
 }

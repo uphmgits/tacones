@@ -38,6 +38,7 @@
   ))
 ?>
 
+<?php /*
 <script type="text/javascript">
   var url = '<?php echo $this->url() ?>';
   var requestActive = false;
@@ -114,3 +115,4 @@
     }
   });
 </script>
+*/ ?>

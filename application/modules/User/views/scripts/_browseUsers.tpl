@@ -70,11 +70,7 @@
 
 <?php if( $this->users ): ?>
   <div class='browsemembers_viewmore' id="browsemembers_viewmore">
-    <?php echo $this->paginationControl($this->users, null, null, array(
-      'pageAsQuery' => true,
-      'query' => $this->formValues,
-      //'params' => $this->formValues,
-    )); ?>
+    <?=$this->paginationControl($this->users)?>
   </div>
 <?php endif; ?>
 

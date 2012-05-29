@@ -1944,11 +1944,11 @@ ul.marketplaces_browse {
     float:left;
 }
 
-#global_page_marketplace-index-index ul.marketplaces_browse, 
+/*#global_page_marketplace-index-index ul.marketplaces_browse, 
 #global_page_marketplace-index-manage ul.marketplaces_browse, 
 #global_page_user-profile-index ul.marketplaces_browse{
     width: 180px;
-}
+}*/
 
 
 .marketplaces_browse_photo {
@@ -1979,7 +1979,7 @@ ul.marketplaces_browse > li , ul.marketplaces_browse > li + li,
 ul.marketplaces_browse .scrollwrap > li, ul.marketplaces_browse .scrollwrap > li + li {
     overflow: visible;
     border: none;
-    width: 180px;
+    width: 160px;
     padding: 0;
 
 }
@@ -2356,6 +2356,7 @@ div.comments-form-container {
 }
 .browsemembers_results div.browsemembers_results_info {
   padding-left:0px;
+  line-height: 24px;
 }
 
 #global_page_user-index-browse .layout_left{
@@ -2952,3 +2953,41 @@ a.button {
     overflow: hidden;
 }
 
+
+/* login-popup */
+.login-popup {
+  display: none;
+  position: absolute;
+  z-index: 500;
+  right: 30%;
+  width: 340px;
+  padding: 16px;
+  background: black;
+}
+.close-popup {
+  float: right; 
+  width: 9px;
+  height: 9px;
+  background: url(~/application/modules/User/externals/images/close-popup.gif);
+  cursor: pointer;
+}
+.login-popup input {
+  width: 334px;
+  background: transparent;
+  border: 1px solid #444;
+}
+.login-popup #password-wrapper {
+  margin: 10px 0 5px;
+}
+.login-popup #forgot-label {
+  display: none;
+}
+.login-popup #button-wrapper {
+  float: right;
+}
+.login-popup a {
+  color: #999 !important;
+  font-size: 12px;
+  vertical-align: top;
+  text-transform: none;
+}

@@ -1,13 +1,12 @@
 <div id="sidebar_members_wrapper">
   <div class="sidebar_members quicklinks">
     <ul class="sidebar_members_list">
-       <li><a href="/members">Members</a></li>
-      <li><a href="/members?extra[is_online]=1">Online Now</a></li>
-      <li><a href="javascript:void(0)">New Members</a></li>
-      <li><a href="javascript:void(0)">V.I.P Members</a></li>
-      <li><a href="javascript:void(0)">Most Followed</a></li>
-      <li><a href="/pages/announcement">Announcements</a></li>
-      <li><a href="/forum">Forum</a></li>
+      <li><?=$this->htmlLink( array('route' => 'user_general', 'is_online' => 1), $this->translate('Online Now') )?></li>
+      <li><?=$this->htmlLink( array('route' => 'user_general', 'newest' => 1), $this->translate('New Members') )?></li>
+      <li><?=$this->htmlLink( "javascript:void(0)", $this->translate('V.I.P Members') )?></li>
+      <li><?=$this->htmlLink( "javascript:void(0)", $this->translate('Most Followed') )?></li>
+      <li><?=$this->htmlLink( $this->baseUrl() . "/pages/announcement", $this->translate('Announcements') )?></li>
+      <li><?=$this->htmlLink( array('route' => 'forum_general'), $this->translate('Forum') )?></li>
     </ul>
   </div>
 </div>

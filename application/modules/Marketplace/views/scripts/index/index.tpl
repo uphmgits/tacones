@@ -1,11 +1,9 @@
-<?php $this->headLink()->prependStylesheet("{$this->baseUrl()}/externals/jqscroll/css/scrollbars.css");?>
-<?php $this->headLink()->prependStylesheet("{$this->baseUrl()}/externals/jqscroll/css/scrollbars-black.css");?>
-
 <style>
-    #marketplace-content { height: 500px; }
-    #global_page_marketplace-index-index ul.marketplaces_browse { position: relative; width: 916px !important; }
+    #marketplace-content { height: 500px; width: 970px; }
+    #global_page_marketplace-index-index .login-popup { left: 0; }
+    #global_page_marketplace-index-index ul.marketplaces_browse { position: relative; width: 100% !important; }
     #global_page_marketplace-index-index ul.marketplaces_browse > li { position: absolute; }
-    #global_page_marketplace-index-index #global_content { max-width: 940px; width: auto; padding: 0 10px; }
+    #global_page_marketplace-index-index #global_content { max-width: 940px; overflow: visible; width: auto; padding: 0 10px; }
     #global_page_marketplace-index-index .header_img_sd_home { text-align: center; }
     #global_page_marketplace-index-index .marketplaces_browse_photo > a { display: block; }
     #global_page_marketplace-index-index .marketplaces_browse_info_title > a { font-family: arial; letter-spacing: -2px }
@@ -93,8 +91,8 @@
 <script type="text/javascript">
 
     function refreshMarketplaceList(ref) {
-        var width = jQuery('.layout_common').width();
-        var columnsWidth = 180;
+        var width = jQuery('#marketplace-content').width();
+        var columnsWidth = 194;
         var columns = Math.floor(width / columnsWidth);
         $oldColumns = jQuery("ul.marketplaces_browse").attr("data-column");
 
@@ -115,7 +113,7 @@
                         element.addClass('correct_font');
                         element.css('top', columnsHeight[colNum] + 'px');
                         element.css('left', colNum * columnsWidth + 'px');
-                        columnsHeight[colNum] += (h + 10);
+                        columnsHeight[colNum] += (h + 30);
                         
                         heightBlock = Math.max.apply( Math, columnsHeight );
                         jQuery('ul.marketplaces_browse').height(heightBlock);
@@ -126,7 +124,7 @@
                   element.addClass('correct_font');
                   element.css('top', columnsHeight[colNum] + 'px');
                   element.css('left', colNum * columnsWidth + 'px');
-                  columnsHeight[colNum] += (h + 10);
+                  columnsHeight[colNum] += (h + 30);
                 }
             });
             
@@ -228,94 +226,19 @@ span.like:hover{
 
     <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
 
-   <?php
-     $myprodcount = $this->paginator->getTotalItemCount(); 
-     $y = $this->paginator->getItemCountPerPage();
-     $x = ($this->paginator->getCurrentPageNumber() - 1) * $y ;
-     $z = $myprodcount - $x;
-     if($z  > 0){
-       $myprodcount = $z;
-     }    
-     $columns = 5;
-     $myrowsize = ceil( $myprodcount / $columns );
-     $myrow = 0;
-   ?>
-   <?php /*
-      <ul class="marketplaces_browse">
-        <?php $myi=0; ?>
-        <?php foreach( $this->paginator as $item ): ?>
-          <?php $myi++; ?>
-          <?php $marketplaceId = $item->getIdentity(); ?>
-          <li>
-            <div class='marketplaces_browse_photo'>
-              <?php echo $this->htmlLink($item->getHref(), $this->itemPhoto($item, 'normal')) ?>
-            </div>
-            <div class='marketplaces_browse_info'>
-              <div class='marketplaces_browse_info_title'>
-                <div class="love-info">
-                    <?php if( $this->viewer()->getIdentity() ) : ?>
-                      <span class="like" id="marketplacelike_<?=$marketplaceId?>" 
-                                         onclick="marketplaceLike(<?=$marketplaceId?>)" 
-                                         param="<?=$item->isLike($this->viewer()) ? '-1' : '1'?>"
-                      >
-                          <?=$item->getLikeCount()?>
-                      </span>
-                    <?php else : ?>
-                      <span class="like"><?=$item->getLikeCount()?></span>
-                    <?php endif;?>
-                    <span class="comment" id="comment-lips-<?=$marketplaceId?>" onclick="marketplaceComment(<?=$marketplaceId?>);">
-                        <?=$item->comment_count?>
-                    </span>
+     <?php
+       $myprodcount = $this->paginator->getTotalItemCount(); 
+       $y = $this->paginator->getItemCountPerPage();
+       $x = ($this->paginator->getCurrentPageNumber() - 1) * $y ;
+       $z = $myprodcount - $x;
+       if($z  > 0){
+         $myprodcount = $z;
+       }    
+       $columns = 5;
+       $myrowsize = ceil( $myprodcount / $columns );
+       $myrow = 0;
+     ?>
 
-                    <div class="pinterest-button" style="display: inline-block;">
-                      <a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2F<?=urlencode($_SERVER['HTTP_HOST'] . $this->url(array('user_id' => $item->owner_id, 'marketplace_id' => $item->getIdentity() ), 'marketplace_entry_view'))?>" class="pin-it-button" count-layout="none">
-                        <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="<?=$this->translate('Pin It')?>" />
-                      </a>
-                    </div>
-                 
-
-                    <div class="comment-container" ><?=$this->action("post", "comment", "core", array("type" => "marketplace", "id" => $marketplaceId))?></div>
-                </div>
-                
-              
-                <?php echo $this->htmlLink($item->getHref(), $item->getTitle()); ?>
-                 
-                <?php if( $item->closed ): ?>
-                  <img src='application/modules/Marketplace/externals/images/close.png'/>
-                <?php endif;?>
-              </div>
-
-              <div class='marketplaces_browse_info_date'></div>
-
-              <div class='marketplaces_browse_info_blurb' style="font-size: 11px; color: #999;">
-                <span><?=$this->translate('Price')?>:</span> <span>$<?php echo $item->price; ?></span>
-                &nbsp;&nbsp;
-               
-                <?php // echo substr(strip_tags($item->body), 0, 90); if (strlen($item->body)>89) echo "..."; ?>              
-                <br />
-
-                <div class="more-seller-items">
-                  <div style="width:24px; padding-right: 5px">
-                    <?=$this->htmlLink($this->user($item->owner_id)->getHref(), $this->itemPhoto($this->user($item->owner_id), 'thumb.icon', $this->user($item->owner_id)->getTitle()), array('title'=>$this->user($item->owner_id)->getTitle()))?>
-                  </div>
-        
-                  <div style="width:130px;">
-                    <?=$this->user($item->owner_id)->getTitle()?><br/>
-                    <?=$this->htmlLink(array('route' => 'marketplace_view', 'user_id' => $item->owner_id), $this->translate('see all seller items'))?>
-                  </div>
-              </div>
-            </div>
-          </li>
-          
-          <?php if($myi==$myrowsize and $myrow < $columns - 1 ) { 
-              echo "</ul><ul class='marketplaces_browse'>"; 
-              $myi=0; 
-              $myrow++;
-          } ?>        
-        <?php endforeach; ?>
-      </ul>
-      */ ?>
-      
       <?php $viewer = $this->viewer(); ?>
       <ul class="marketplaces_browse">
         <?php foreach( $this->paginator as $item ): ?>
@@ -334,18 +257,63 @@ span.like:hover{
                       >
                           <?=$item->getLikeCount()?>
                       </span>
+
+                      <span class="comment" id="comment-lips-<?=$marketplaceId?>" onclick="marketplaceComment(<?=$marketplaceId?>);">
+                          <?=$item->comment_count?>
+                      </span>
+
+                      <div class="comment-container" >
+                        <?php if( $viewer->getIdentity() ) : ?>
+                          <?=$this->action("post", "comment", "core", array("type" => "marketplace", "id" => $marketplaceId))?>
+                        <?php endif;?>
+                      </div>
+
                     <?php else : ?>
-                      <span class="like"><?=$item->getLikeCount()?></span>
+                      <span class="like" onclick="$$('.login-popup').hide(); $('login-popup-<?=$marketplaceId?>').show();"><?=$item->getLikeCount()?></span>
+                      <span class="comment" id="comment-lips-<?=$marketplaceId?>" onclick="$$('.login-popup').hide(); $('login-popup-<?=$marketplaceId?>').show();">
+                          <?=$item->comment_count?>
+                      </span>
+
+                      <div id="login-popup-<?=$marketplaceId?>" class="login-popup">
+                       <form name="frm_login_popup_<?=$marketplaceId?>" action="<?=$this->loginForm->getAction()?>" method="post">
+                          <div class='close-popup' onclick="$('login-popup-<?=$marketplaceId?>').hide();"></div>
+                          <h3><?=$this->translate('Login')?></h3>
+
+                          <?php $this->loginForm->email->setLabel('name'); ?>
+                          <?=$this->loginForm->email->render($this);?>
+
+                          <?php $this->loginForm->email->setLabel('password'); ?>
+
+                          <?=$this->loginForm->password->render($this);?>
+                          <div id="button-wrapper" class="form-wrapper">
+                            <div id="button-element" class="form-element">
+                              <a href="javascript:void(0);" onclick="document.frm_login_popup_<?=$marketplaceId?>.submit();"><?=$this->translate('Send')?></a>
+                            </div>
+                          </div>
+                          <?=$this->loginForm->forgot->render($this);?>
+
+                          <div id="button-wrapper" class="form-wrapper">
+                            <div id="button-element" class="form-element">
+                              <a href="<?=$this->url(array(), 'user_signup')?>"><?=$this->translate('or sign up now')?></a>
+                            </div>
+                          </div>
+
+                          <?php $goToUrl = $this->url(array(), 'marketplace_browse'); ?>
+                          <?php if ($this->loginForm->facebook) : ?>
+                            <div id="facebook-wrapper" class="form-wrapper">
+                              <div id="facebook-element" class="form-element">
+                                <a href="<?=Zend_Controller_Front::getInstance()->getRouter()->assemble(array('module' => 'user', 'controller' => 'auth','action' => 'facebook', 'gotourl' => $goToUrl), 'default', true);?>">
+                                  <img src="<?=$this->baseUrl()?>/application/modules/User/externals/images/facebook-sign-in-popup.gif" border="0" alt="Connect with Facebook">
+                                </a>
+                              </div>
+                            </div>
+                          <?php endif; ?>
+
+                          <input type="hidden" name="gotourl" value="<?=$goToUrl?>" />
+                        </form>
+                      </div>
                     <?php endif;?>
-                    <span class="comment" id="comment-lips-<?=$marketplaceId?>" onclick="marketplaceComment(<?=$marketplaceId?>);">
-                        <?=$item->comment_count?>
-                    </span>
                 
-                    <div class="comment-container" >
-                      <?php if( $viewer->getIdentity() ) : ?>
-                        <?=$this->action("post", "comment", "core", array("type" => "marketplace", "id" => $marketplaceId))?>
-                      <?php endif;?>
-                    </div>
                 </div>
                 
                 <?php echo $this->htmlLink($item->getHref(), $item->getTitle()); ?>
@@ -378,10 +346,10 @@ span.like:hover{
           </li>
         <?php endforeach; ?>
       </ul>
-      <div id='update-wait' params="0"></div>;
-      <div id='next-page' params="2"></div>;
+      <div id='update-wait' params="0"></div>
+      <div id='next-page' params="2"></div>
 
-      <?php echo $this->paginationControl($this->paginator); ?>
+      <?php //echo $this->paginationControl($this->paginator); ?>
       <?php //echo $this->paginationControl($this->paginator, null, array("pagination/pagination.tpl","marketplace")); ?>
 
     <?php elseif( $this->category || $this->show == 2 || $this->search ):?>

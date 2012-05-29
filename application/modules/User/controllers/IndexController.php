@@ -88,6 +88,9 @@ class User_IndexController extends Core_Controller_Action_Standard
     $displayname = @$options['displayname'];
     extract($options['extra']); // is_online, has_photo, submit
 
+    if( $this->_getParam('is_online', 0) ) $is_online = (int)$this->_getParam('is_online', 0) ;
+    $most_followed = $this->_getParam('most_followed', 0);
+
     // Contruct query
     $select = $table->select()
       //->setIntegrityCheck(false)
@@ -95,8 +98,13 @@ class User_IndexController extends Core_Controller_Action_Standard
       ->joinLeft($searchTableName, "`{$searchTableName}`.`item_id` = `{$userTableName}`.`user_id`", null)
       //->group("{$userTableName}.user_id")
       ->where("{$userTableName}.search = ?", 1)
-      ->where("{$userTableName}.enabled = ?", 1)
-      ->order("{$userTableName}.displayname ASC");
+      ->where("{$userTableName}.enabled = ?", 1);
+
+    if( $this->_getParam('newest', 0) ) $select->order("{$userTableName}.creation_date DESC");
+    else {
+//      if( $this->_getParam('most_followed', 0) );
+      $select->order("{$userTableName}.displayname ASC");
+    }
 
     // Build the photo and is online part of query
     if( !empty($has_photo) ) {
