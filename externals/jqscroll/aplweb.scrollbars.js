@@ -202,7 +202,7 @@
             nextPage = parseInt(pageEl.attr('params'));
             jQuery('#update-wait').attr('params', 1);
             jQuery.ajax({
-              url: '/fashbay/marketplaces/ajaxlist',
+              url: '/marketplaces/ajaxlist',
               type: 'post',
               dataType: "html",
               data: { 'page':nextPage },
