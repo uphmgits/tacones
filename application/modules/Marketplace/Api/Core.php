@@ -254,7 +254,8 @@ class Marketplace_Api_Core extends Core_Api_Abstract
     $tmName = $tmTable->info('name');
 
     $select = $table->select()
-      ->order( !empty($params['orderby']) ? $rName.'.'.$params['orderby'].' DESC' : $rName.'.creation_date DESC' );
+                    ->from($rName)
+                    ->order( !empty($params['orderby']) ? $rName.'.'.$params['orderby'].' DESC' : $rName.'.creation_date DESC' );
 
     $viewer = Engine_Api::_()->user()->getViewer();
     if( !$viewer->getIdentity() or $viewer->level_id > 2 ) {
@@ -280,7 +281,41 @@ class Marketplace_Api_Core extends Core_Api_Abstract
       $str = (string) ( is_array($params['users']) ? "'" . join("', '", $params['users']) . "'" : $params['users'] );
       $select->where($rName.'.owner_id in (?)', new Zend_Db_Expr($str));
     }
+    if( !empty($params['brand_id']) )
+    {
+      $valuesTable = Engine_Api::_()->fields()->getTable('marketplace', 'values');
+      $valuesTableName = $valuesTable->info('name');
 
+      $metaTable = Engine_Api::_()->fields()->getTable('marketplace', 'meta');
+      $metaTableName = $metaTable->info('name');
+
+      $select->join($valuesTableName, "{$valuesTableName}.item_id = {$rName}.marketplace_id", null)
+             ->join($metaTableName, "{$metaTableName}.category_id = {$rName}.category_id", null)
+             ->where("LCASE({$metaTableName}.label) LIKE ?", "%brand%")
+             ->where("{$valuesTableName}.field_id = {$metaTableName}.field_id") 
+             ->where("{$valuesTableName}.value = {$params['brand_id']}")
+      ;
+    }
+    if( !empty($params['never_worn']) )
+    {
+      $valuesTable = Engine_Api::_()->fields()->getTable('marketplace', 'values');
+      $valuesTableName = $valuesTable->info('name');
+
+      $metaTable = Engine_Api::_()->fields()->getTable('marketplace', 'meta');
+      $metaTableName = $metaTable->info('name');
+
+      $optionsTable = Engine_Api::_()->fields()->getTable('marketplace', 'options');
+      $optionsTableName = $optionsTable->info('name');
+
+      $select->join($valuesTableName, "{$valuesTableName}.item_id = {$rName}.marketplace_id", null)
+             ->join($metaTableName, "{$metaTableName}.category_id = {$rName}.category_id", null)
+             ->join($optionsTableName, "{$metaTableName}.field_id = {$optionsTableName}.field_id", null)
+             ->where("LCASE({$metaTableName}.label) LIKE ?", "%condition%")
+             ->where("LCASE({$optionsTableName}.label) LIKE ?", "%new%")
+             ->where("{$valuesTableName}.field_id = {$metaTableName}.field_id") 
+             ->where("{$valuesTableName}.value = {$optionsTableName}.option_id")
+      ;
+    }
     if( !empty($params['tag']) )
     {
       $select
@@ -324,7 +359,6 @@ class Marketplace_Api_Core extends Core_Api_Abstract
     {
       $select->where($rName.".creation_date < ?", date('Y-m-d', $params['end_date']));
     }
-   
     return $select;
   }
 
@@ -650,8 +684,8 @@ function tree_list_load_related($k_item)
 
   $r=mysql_query("
     select
-      t1.k_parent as k1, #мама
-      t2.k_parent as k2  #бабушка
+      t1.k_parent as k1, #\EC\E0\EC\E0
+      t2.k_parent as k2  #\E1\E0\E1\F3\F8\EA\E0
     from
       t_catalog_tree as t1 left join
       t_catalog_tree as t2 on

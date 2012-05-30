@@ -46,19 +46,18 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       }
       $usersTable = Engine_Api::_()->getDbTable('users', 'user');
       
-      $idd = $this->getRequest()->getParam('category');
-      if (empty($idd))
-          $id = 0; else
-          $id = intval($this->getRequest()->getParam('category'));
+      $idd = $this->getRequest()->getParam('category', 0);
+      if (empty($idd)) $id = 0; 
+      else $id = intval($this->getRequest()->getParam('category'));
 	
       Engine_Api::_()->marketplace()->tree_list($id);
 
       $categ = implode(', ', Engine_Api::_()->marketplace()->_inarr);
 
       $a_tree = Engine_Api::_()->marketplace()->tree_list_load_array(array($id));
-
       $this->view->a_tree = $a_tree;
       $this->view->urls = $this->_helper->url;
+
       // Populate form
       $this->view->categories = $categories = Engine_Api::_()->marketplace()->getCategories();
 
@@ -76,10 +75,10 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
           $values = array();
       }
 
-	    $values['category'] = $categ;
-          if ($this->getRequest()->isPost()) {
+	    $this->view->category = $values['category'] = $idd;
+      /*if ($this->getRequest()->isPost()) {
 		    $this->view->category = $values['category'] = $this->getRequest()->getPost('category');
-	    }
+	    }*/
 
       // Do the show thingy
       if (@$values['show'] == 2) {
@@ -114,6 +113,22 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       $values['closed'] = 0;
       $values['page'] = $this->_getParam('page', 1);
       $values['limit'] = (int) Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.page', 20);
+      $this->view->never_worn = $values['never_worn'] = (int)$this->_getParam('neverworn', 0);
+
+      // branding
+      $this->view->brand_id = $values['brand_id'] = (int)$this->_getParam('brand_id', 0);
+  
+      $metaTable = Engine_Api::_()->fields()->getTable('marketplace', 'meta');
+      $metaTableName = $metaTable->info('name');
+      $brandFieldId = $metaTable->select()->where("category_id = {$id} AND LCASE(label) LIKE ?", "%brand%")->query()->fetchColumn('field_id');
+
+      if( $brandFieldId ) {
+        $brandField = Engine_Api::_()->fields()->getField( $brandFieldId, 'marketplace');
+        $this->view->brandOptions = $brandField->getOptions();
+      } else {
+        $this->view->brandOptions = array();
+      }
+      // end branding
 
       $this->view->paginator = $paginator = Engine_Api::_()->marketplace()->getMarketplacesPaginator($values);
 
@@ -148,6 +163,10 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       $user_id = $this->_getParam('user');
       if ($user_id) $values['user_id'] = $user_id;
       $values['page'] = $this->_getParam('page', 2);
+      $values['category'] = (int)$this->_getParam('category_id', 0);
+      $values['brand_id'] = (int)$this->_getParam('brand_id', 0);
+      $values['never_worn'] = (int)$this->_getParam('neverworn', 0);
+
       $values['limit'] = (int) Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.page', 20);
       $values['closed'] = 0;
       

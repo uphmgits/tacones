@@ -1,5 +1,7 @@
 <style>
-    #marketplace-content { height: 500px; width: 970px; }
+    #marketplace-content { height: 500px; max-width: 970px; margin-right: -30px;}
+    #marketplace-content .vscroll-correct { right: 24px;}
+    #marketplace-content .hscroller { display: none !important; }
     #global_page_marketplace-index-index .login-popup { left: 0; }
     #global_page_marketplace-index-index ul.marketplaces_browse { position: relative; width: 100% !important; }
     #global_page_marketplace-index-index ul.marketplaces_browse > li { position: absolute; }
@@ -28,6 +30,10 @@
             new OverText(f, {'textOverride':'max','element':'span'});
             
         }
+    });
+
+    $$('.login-popup').each(function(el) {
+        console.log(el.get('left'));
     });
 
   });
@@ -66,25 +72,6 @@
           }
       }
   }
-
-  //contentEl.removeEvents('scroll').addEvent('scroll', function(event) {
-      /*var scrollTop = contentEl.scrollTop;
-      if( scrollTop > 0 )  {
-          var tickerSize = contentEl.getSize();
-          var scrollSize = contentEl.getScrollSize();
-          var tmp = 0.8 * ( scrollSize.y - tickerSize.y);
-          console.log("top: "+scrollTop+" - tmp: "+tmp+" - scrollWait: "+$('activity-ticker').get('params')+" - next_id: "+next_id);
-          if( scrollTop > tmp && !$('activity-ticker').get('params') ) {
-              $('activity-ticker').set('params', 'scrollwait');
-              tickerViewMore(next_id, subject_guid);
-          }
-      }*/
-  //});
-  jQuery('#marketplace-content .scrollcontent').scroll(function() {
-    //console.log($(this).scrollTop());
-    alert('aa');
-  });
-
 </script>
 
 
@@ -93,8 +80,10 @@
     function refreshMarketplaceList(ref) {
         var width = jQuery('#marketplace-content').width();
         var columnsWidth = 194;
-        var columns = Math.floor(width / columnsWidth);
+        var columns = Math.floor( width / columnsWidth);
         $oldColumns = jQuery("ul.marketplaces_browse").attr("data-column");
+        if( width < 970 ) jQuery('#marketplace-content .vscroller').addClass('vscroll-correct');
+        else jQuery('#marketplace-content .vscroller').removeClass('vscroll-correct');
 
         if( !$oldColumns || ($oldColumns && columns != $oldColumns) || ref ) {
         
@@ -136,7 +125,7 @@
 
     jQuery(document).ready(function () {
         refreshMarketplaceList();
-        jQuery("#marketplace-content").scrollbars();
+        jQuery("#marketplace-content").marketplaceScrollbars("<?=$this->baseUrl()?>", <?=$this->category?>, <?=$this->brand_id?>, <?=$this->never_worn?>);
     });
 
     jQuery(window).bind('resize', function() { 
@@ -208,6 +197,37 @@ span.like:hover{
     </div>
   </div>
   */?>
+
+  <div class="marketplace-browse-options-container">
+    <ul class="marketplace-browse-options">
+        <li><?=$this->translate('%s items', $this->paginator->getTotalItemCount())?></li>
+        <li><?=$this->htmlLink(array('route' => 'marketplace_browse'), $this->translate('see all'))?></li>
+
+        <?php if( !empty($this->brandOptions) ): ?>
+          <li class="brand-container">
+            <?=$this->translate('brand')?>
+            <ul class="brand-list">
+            <?php foreach( $this->brandOptions as $option ) : ?>
+              <li><?=$this->htmlLink(array('route' => 'marketplace_browse', 'brand_id' => $option->option_id), $option->label)?></li>
+              <?php if( $option->option_id == $this->brand_id ) $brandLabel = $option->label; ?>
+            <?php endforeach; ?>
+            </ul>
+          </li>
+        <?php endif; ?>
+
+        <li><?=$this->htmlLink(array('route' => 'marketplace_browse', 'neverworn' => 1), $this->translate('never worn'))?></li>
+    </ul>
+    <div class="filter-options">
+      <?php if( $this->never_worn or $this->brand_id ) : ?>
+        <?php if( $this->never_worn ) echo "<span>" . $this->translate('NEVER WORN') . "</span>"; ?>
+        <?php if( $this->brand_id and $brandLabel ) "<span>" . $this->translate('BRAND - %s', $brandLabel) . "</span>";?>
+        <?=$this->translate('filter ON')?>
+      <?php else: ?>
+        <?=$this->translate('filter OFF')?>
+      <?php endif; ?>
+    </div>
+    <div style="clear:both"></div>
+  </div>
 
   <div class='layout_middle' id="marketplace-content">
     <?php if( $this->tag ): ?>

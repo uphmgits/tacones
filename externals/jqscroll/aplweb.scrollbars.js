@@ -11,56 +11,11 @@
 * @requires jquery.mousewheel.js
 */
 
-/*function refreshMarketplaceList() {
-    var width = jQuery('.layout_common').width();
-    var columnsWidth = 180;
-    var columns = Math.floor(width / columnsWidth);
-    $oldColumns = jQuery("ul.marketplaces_browse").attr("data-column");
-    if( !$oldColumns || ($oldColumns && columns != $oldColumns) ) {
-    
-        var columnsHeight = new Array(columns);
-        for (i = 0; i < columns; i++) { columnsHeight[i] = 0; }
-        
-        list = jQuery("ul.marketplaces_browse > li");
-
-        list.each(function(i){
-            var colNum = i % columns;
-            var element = jQuery(this);
-            img = element.find('img.item_photo_marketplace');
-            if( img && !img.height()) {
-                jQuery("<img/>").attr("src", jQuery(img).attr("src")).load(function() {
-                    h = element.outerHeight();
-                    element.addClass('correct_font');
-                    element.css('top', columnsHeight[colNum] + 'px');
-                    element.css('left', colNum * columnsWidth + 'px');
-                    columnsHeight[colNum] += (h + 10);
-                    
-                    heightBlock = Math.max.apply( Math, columnsHeight );
-                    jQuery('ul.marketplaces_browse').height(heightBlock);
-                    jQuery('ul.marketplaces_browse').attr("data-column", columns);
-                });
-            } else {
-              h = element.outerHeight();
-              element.addClass('correct_font');
-              element.css('top', columnsHeight[colNum] + 'px');
-              element.css('left', colNum * columnsWidth + 'px');
-              columnsHeight[colNum] += (h + 10);
-            }
-        });
-        
-        heightBlock = Math.max.apply( Math, columnsHeight );
-        jQuery('ul.marketplaces_browse').height(heightBlock);
-        jQuery('ul.marketplaces_browse').attr("data-column", columns);
-    }
-}
-*/
-
 (function($) {
-	$.fn.scrollbars = function() {
+	$.fn.marketplaceScrollbars = function( urlBase, categoryId, brandId, newerWorn ) {
 		return $(this).each(function() {
 			//transform the selected dom elements
 			var $scrollable = $(this);
-			
 			$scrollable.addClass("scrollable");
 			
 			var $scrollcontent = $('<div class="scrollcontent"></div>');
@@ -202,10 +157,10 @@
             nextPage = parseInt(pageEl.attr('params'));
             jQuery('#update-wait').attr('params', 1);
             jQuery.ajax({
-              url: '/marketplaces/ajaxlist',
+              url: urlBase + '/marketplaces/ajaxlist',
               type: 'post',
               dataType: "html",
-              data: { 'page':nextPage },
+              data: { 'page':nextPage, 'category_id':categoryId, 'brand_id':brandId, 'neverworn':newerWorn },
               success: function(data) {
                 if( data ) {
                   jQuery('#marketplace-content .marketplaces_browse').append(data);

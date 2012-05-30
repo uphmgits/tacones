@@ -83,6 +83,9 @@ class User_IndexController extends Core_Controller_Action_Standard
     $searchTable = Engine_Api::_()->fields()->getTable('user', 'search');
     $searchTableName = $searchTable->info('name');
 
+    $membershipTable = Engine_Api::_()->getDbTable('membership', 'user');
+    $membershipTableName = $membershipTable->info('name');
+    
     //extract($options); // displayname
     $profile_type = @$options['profile_type'];
     $displayname = @$options['displayname'];
@@ -91,19 +94,30 @@ class User_IndexController extends Core_Controller_Action_Standard
     if( $this->_getParam('is_online', 0) ) $is_online = (int)$this->_getParam('is_online', 0) ;
     $most_followed = $this->_getParam('most_followed', 0);
 
+    /*$select = new Zend_Db_Select($table->getAdapter());
+    $select->from($userTableName, "*")
+           ->joinLeft($membershipTableName, "`{$membershipTableName}`.`resource_id` = `{$userTableName}`.`user_id`", "COUNT({$membershipTableName}.resource_id) as count")
+           ->where("{$userTableName}.search = ?", 1)
+           ->where("{$userTableName}.enabled = ?", 1)
+           ->group("{$membershipTableName}.resource_id")
+           ->order("count DESC")
+    ;
+*/
+    //$select1 = $table->getAdapter()->query($select)->fetchAll();
+
+
     // Contruct query
     $select = $table->select()
-      //->setIntegrityCheck(false)
+      ->setIntegrityCheck(false)
       ->from($userTableName)
       ->joinLeft($searchTableName, "`{$searchTableName}`.`item_id` = `{$userTableName}`.`user_id`", null)
-      //->group("{$userTableName}.user_id")
       ->where("{$userTableName}.search = ?", 1)
-      ->where("{$userTableName}.enabled = ?", 1);
+      ->where("{$userTableName}.enabled = ?", 1)
+    ;
 
-    if( $this->_getParam('newest', 0) ) $select->order("{$userTableName}.creation_date DESC");
-    else {
-//      if( $this->_getParam('most_followed', 0) );
-      $select->order("{$userTableName}.displayname ASC");
+    // Build the photo and is online part of query
+    if( !empty($has_photo) ) {
+      $select->where($userTableName.'.photo_id != ?', "0");
     }
 
     // Build the photo and is online part of query
@@ -118,6 +132,14 @@ class User_IndexController extends Core_Controller_Action_Standard
         ->where($userTableName.'.user_id != ?', "0");
     }
 
+    if( $most_followed ) {
+      $select
+        ->joinLeft($membershipTableName, "`{$membershipTableName}`.`resource_id` = `{$userTableName}`.`user_id`", "COUNT({$userTableName}.user_id) as count")
+        ->group("{$userTableName}.user_id")
+        ->order("count DESC")
+        ->order("{$membershipTableName}.resource_id DESC");
+    }
+
     // Add displayname
     if( !empty($displayname) ) {
       $select->where("(`{$userTableName}`.`username` LIKE ? || `{$userTableName}`.`displayname` LIKE ?)", "%{$displayname}%");
@@ -129,6 +151,9 @@ class User_IndexController extends Core_Controller_Action_Standard
       $select->where("`{$searchTableName}`.{$k}", $v);
     }
 
+    if( $this->_getParam('newest', 0) ) $select->order("{$userTableName}.creation_date DESC");
+    elseif( !$most_followed ) $select->order("{$userTableName}.displayname ASC");
+//echo "<pre>"; print_r($select->__toString()); echo "</pre>"; die();
     // Build paginator
     $paginator = Zend_Paginator::factory($select);
     $paginator->setItemCountPerPage(21);
