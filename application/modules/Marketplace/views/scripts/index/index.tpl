@@ -208,14 +208,14 @@ span.like:hover{
             <?=$this->translate('brand')?>
             <ul class="brand-list">
             <?php foreach( $this->brandOptions as $option ) : ?>
-              <li><?=$this->htmlLink(array('route' => 'marketplace_browse', 'brand_id' => $option->option_id), $option->label)?></li>
+              <li><?=$this->htmlLink(array('route' => 'marketplace_browse', 'category' => $this->category, 'brand_id' => $option->option_id), $option->label)?></li>
               <?php if( $option->option_id == $this->brand_id ) $brandLabel = $option->label; ?>
             <?php endforeach; ?>
             </ul>
           </li>
         <?php endif; ?>
 
-        <li><?=$this->htmlLink(array('route' => 'marketplace_browse', 'neverworn' => 1), $this->translate('never worn'))?></li>
+        <li><?=$this->htmlLink(array('route' => 'marketplace_browse', 'category' => $this->category, 'neverworn' => 1), $this->translate('never worn'))?></li>
     </ul>
     <div class="filter-options">
       <?php if( $this->never_worn or $this->brand_id ) : ?>
