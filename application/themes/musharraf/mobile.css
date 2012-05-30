@@ -132,7 +132,7 @@ usually above content, not within a form.
   background-color: #faf6e4;
   float: left;
   margin-bottom: 15px;
-  background-image: url(/fashbay/application/modules/Core/externals/images/tip.png);
+  background-image: url(~/application/modules/Core/externals/images/tip.png);
 }
 
 
@@ -177,11 +177,11 @@ ul.form-notices > li > ul > li
   font-size: .9em;
 }
 ul.form-errors > li {
-  background-image: url(/fashbay/application/modules/Core/externals/images/error.png);
+  background-image: url(~/application/modules/Core/externals/images/error.png);
   background-color: #faf7e9;
 }
 ul.form-notices > li {
-  background-image: url(/fashbay/application/modules/Core/externals/images/notice.png);
+  background-image: url(~/application/modules/Core/externals/images/notice.png);
   background-color: #e9faeb;
 }
 
@@ -1088,12 +1088,12 @@ form.filters dd + dt
     padding-right: 15px;
 }
 .love-info span.like {
-    background: url(/fashbay/application/themes/musharraf/images/love.png) no-repeat scroll left center transparent;
+    background: url(~/application/themes/musharraf/images/love.png) no-repeat scroll left center transparent;
     color: #C20C0C;
     padding-left: 17px;
 }
 .love-info span.comment {
-    background: url(/fashbay/application/themes/musharraf/images/comment.png) no-repeat scroll left center transparent;
+    background: url(~/application/themes/musharraf/images/comment.png) no-repeat scroll left center transparent;
     color: #FF0078;
     padding-left: 20px;
 }
