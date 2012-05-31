@@ -1,21 +1,4 @@
-<style>
-    #blog_content {
-        margin-top: 30px;
-    }
-    #blog_content .date {
-        float: right;
-        padding-left: 50px;
-    }
-    #blog_content div.post div {
-        color: #d2d2d2;
-    }
-    #blog_content div.post {
-        margin-bottom: 20px;
-    }
-    #blog_content .retweet {
-        color: #09c;
-    }
-</style>
+<?=$this->content()->renderWidget('marketplace.topbanner', array('pageName' => 'blog'))?>
 
 <div id="blog_content"></div>
 

@@ -21,4 +21,22 @@ return array(
       'titleCount' => true,
     ),
   ),
+  array(
+    'title' => 'Top Banner',
+    'description' => 'Displays a category banner.',
+    'category' => 'Marketplace',
+    'type' => 'widget',
+    'name' => 'marketplace.topbanner',
+    'adminForm' => array(
+      'elements' => array(
+        array(
+          'Text',
+          'pageName',
+          array(
+            'label' => 'Page Name'
+          )
+        ),
+      )
+    ),
+  ),
 ) ?>

@@ -170,6 +170,9 @@ html[dir="rtl"] .layout_left
   vertical-align: top;
   margin-right:4px;
 }
+.layout_top .layout_middle {
+  overflow: visible;
+}
 
 .layout_right
 {
@@ -197,7 +200,7 @@ html[dir="rtl"] .layout_right
 {
   width: $theme_content_width;
   margin: 0px auto 0px auto;
-  overflow: hidden;
+  /*overflow: hidden;*/
   min-height: 500px;
 }
 #global_content_simple
@@ -2111,6 +2114,14 @@ ul.marketplaces_browse .scrollwrap > li, ul.marketplaces_browse .scrollwrap > li
     display: none
 }
 
+#global_page_user-index-browse .header_img_sd {
+    display: block !important;
+    background: url(~/public/header-imgs/community_header.jpg) no-repeat;
+}
+#global_page_user-profile-index .header_img_sd {
+    display: block !important;
+    background: url(~/public/header-imgs/core_profile_header.jpg) no-repeat;
+}
 #global_page_core-help-privacy .header_img_sd {
     display: block !important;
     background: url(~/public/header-imgs/core_privacy_header.jpg) no-repeat;
@@ -2147,19 +2158,13 @@ ul.marketplaces_browse .scrollwrap > li, ul.marketplaces_browse .scrollwrap > li
     background: url(~/public/header-imgs/core_search_header.jpg) no-repeat;
 }
 
-#global_page_user-index-home .header_img_sd {
-    display: block !important;
-    background: url(~/public/header-imgs/community_header.jpg) no-repeat;
-}
-
-#global_page_user-settings-general .header_img_sd, #global_page_user-settings-privacy .header_img_sd, #global_page_user-settings-notifications .header_img_sd, #global_page_user-settings-password .header_img_sd, #global_page_user-settings-network .header_img_sd {
+#global_page_user-settings-general .header_img_sd, 
+#global_page_user-settings-privacy .header_img_sd, 
+#global_page_user-settings-notifications .header_img_sd, 
+#global_page_user-settings-password .header_img_sd, 
+#global_page_user-settings-network .header_img_sd {
     display: block !important;
     background: url(~/public/header-imgs/core_profile_header.jpg) no-repeat;
-}
-
-#global_page_marketplace-index-cart .header_img_sd {
-    display: block !important;
-    background: url(~/public/header-imgs/marketplace_cart_header.jpg) no-repeat;
 }
 
 .marketplaces_gutter_photo {
@@ -2301,6 +2306,11 @@ h3.product-desc, h3.comments-desc {
 }
 h3.comments-desc {
   float: left;
+  max-width: 400px;
+  vertical-align: top;
+}
+h3.comments-desc > span {
+  margin-left: 20px;
 }
 div.comments-stats {
   float: right;
@@ -2547,19 +2557,6 @@ ul.marketplaces_gutter_options > li a.buttonlink {
 
 #global_page_user-index-home .comments > ul > li{
   border-width:0px;
-}
-
-#global_page_user-index-browse .header_img_sd {
-    display: block !important;
-    background: url(~/public/header-imgs/community_header.jpg) no-repeat;
-}
-#global_page_user-profile-index .header_img_sd {
-    display: block !important;
-    background: url(~/public/header-imgs/core_profile_header.jpg) no-repeat;
-}
-#global_page_review-index-list-user .header_img_sd{
-    display: block !important;
-    background: url(~/public/header-imgs/community_header.jpg) no-repeat;
 }
 
 .layout_left a {
@@ -3027,3 +3024,99 @@ li.brand-container:hover ul.brand-list {
   vertical-align: top;
   text-transform: none;
 }
+
+#blog_content {
+    margin-top: 30px;
+}
+#blog_content .date {
+    float: right;
+    padding-left: 50px;
+}
+#blog_content div.post div {
+    color: #d2d2d2;
+}
+#blog_content div.post {
+    margin-bottom: 20px;
+}
+#blog_content .retweet {
+    color: #09c;
+}
+
+.top-banner-container {
+    position: relative;
+}
+.top-banner-container > a {
+    height: 148px;
+    overflow: hidden;
+}
+ style='padding:20px; background: #c31; position: absolute; top: 50%; right:20px;
+.top-banner-menu {
+    position: absolute;
+    top: 0;
+}
+.top-banner-menu > div {
+    position: absolute;
+    top: 50%;
+    height: 40px;
+    width: 20px;
+    margin-top: -20px;
+}
+.top-banner-prev {
+    right: 100%;
+}
+.top-banner-prev > div{
+    right: 20px;
+    background: transparent url(~/application/modules/Marketplace/externals/images/prevArrow.png);
+}
+.top-banner-next {
+    left: 100%;
+}
+.top-banner-next > div {
+  left: 20px;
+  background: transparent url(~/application/modules/Marketplace/externals/images/nextArrow.png);
+}
+
+#review-form-container {
+  overflow: hidden;
+  padding: 15px 15px 5px 15px;
+  margin: 0;
+  background: #190206;
+}
+#review-form-container div,
+#review-form-container h3,
+#review-form-container a,
+#review-form-container button {
+  color: #a51c4b;
+}
+#review_form .form-wrapper {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+#review_form input[type="text"],
+#review_form textarea {
+  width: 98%;
+  background: transparent;
+  border-color: #a51c4b;
+  color: #d2d2d2;
+}
+#review_form #buttons-label {
+  display: none;
+}
+#review_form #body-wrapper,
+#review_form #buttons-wrapper {
+  margin-bottom: 0;
+}
+#review_form #buttons-wrapper {
+  float: right;
+}
+#review_form #buttons-wrapper button {
+  border: none;
+  background: none;
+}
+#review_form ul.form-errors > li {
+  float: none;
+  color: #955;
+  background-color: transparent;
+  border-color: #a51c4b;
+}
+

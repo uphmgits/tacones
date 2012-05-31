@@ -181,7 +181,7 @@ ul.reviews_browse .review_info_recommend,
 .review_view .review_info_recommend {
   font-weight: bold;
   margin: 10px 0;
-  background:url("~/application/modules/Review/externals/images/recommend.png") no-repeat scroll left center transparent;
+  background:url(~/application/modules/Review/externals/images/recommend.png) no-repeat scroll left center transparent;
   padding-left: 21px;
 }
 ul.reviews_profile .review_tool_links {
@@ -211,7 +211,7 @@ ul.review_distribution_histogram span.review_distribution_histogram_label
 }
 ul.review_distribution_histogram span.review_distribution_histogram_bar
 {
-  background:url("~/application/modules/Review/externals/images/bar.png") no-repeat scroll left bottom transparent;
+  background:url(~/application/modules/Review/externals/images/bar.png) no-repeat scroll left bottom transparent;
   border:medium none;
   display:inline;
   float:left;
@@ -222,7 +222,7 @@ ul.review_distribution_histogram span.review_distribution_histogram_bar
 }
 ul.review_distribution_histogram span.review_distribution_histogram_bar span
 {
-  background:url("~/application/modules/Review/externals/images/bar_full.png") no-repeat scroll left bottom transparent;
+  background:url(~/application/modules/Review/externals/images/bar_full.png) no-repeat scroll left bottom transparent;
   display:inline;
   float:left;
   height:15px;
@@ -242,38 +242,38 @@ ul.review_distribution_histogram span.review_distribution_histogram_count
 /* RATING STARS */
 .review_rating_star_big
 {
-  background:url("~/application/modules/Review/externals/images/stars/rating_big_off.png") repeat-x scroll 0 0 transparent;
+  background:url(~/application/modules/Review/externals/images/stars/rating_big_off.png) repeat-x scroll 0 0 transparent;
   height:24px;
   width:120px;
   display: inline-block;
 }
 .review_rating_star_big span
 {
-  background:url("~/application/modules/Review/externals/images/stars/rating_big_on.png") repeat-x scroll 0 0 transparent;
+  background:url(~/application/modules/Review/externals/images/stars/rating_big_on.png) repeat-x scroll 0 0 transparent;
   height:24px;
   display: inline-block;  
 }
 
 .review_rating_star  {
-  background:url("~/application/modules/Review/externals/images/stars/rating_off.png") repeat-x scroll 0 0 transparent;
+  background:url(~/application/modules/Review/externals/images/stars/rating_off.png) repeat-x scroll 0 0 transparent;
   height:16px;
   width:80px;
   display: inline-block;
 }
 .review_rating_star span {
-  background:url("~/application/modules/Review/externals/images/stars/rating_on.png") repeat-x scroll 0 0 transparent;
+  background:url(~/application/modules/Review/externals/images/stars/rating_on.png) repeat-x scroll 0 0 transparent;
   height:16px;
   display: inline-block;  
 }
 
 .review_rating_star_small  {
-  background:url("~/application/modules/Review/externals/images/stars/rating_small_off.png") repeat-x scroll 0 0 transparent;
+  background:url(~/application/modules/Review/externals/images/stars/rating_small_off.png) repeat-x scroll 0 0 transparent;
   height:12px;
   width:60px;
   display: inline-block;
 }
 .review_rating_star_small span {
-  background:url("~/application/modules/Review/externals/images/stars/rating_small_on.png") repeat-x scroll 0 0 transparent;
+  background:url(~/application/modules/Review/externals/images/stars/rating_small_on.png) repeat-x scroll 0 0 transparent;
   height:12px;
   display: inline-block;
   vertical-align: top;  
@@ -386,14 +386,14 @@ font-size: 0.8em;
 .layout_review_statistics ul.review_distribution_histogram span.review_distribution_histogram_bar,
 .review_breakdown ul.review_distribution_histogram span.review_distribution_histogram_bar
 {
-  background:url("~/application/modules/Review/externals/images/bar_mini.png") no-repeat scroll left bottom transparent;
+  background:url(~/application/modules/Review/externals/images/bar_mini.png) no-repeat scroll left bottom transparent;
   width:105px;
 }
 .reviews_gutter ul.review_distribution_histogram span.review_distribution_histogram_bar span,
 .layout_review_statistics ul.review_distribution_histogram span.review_distribution_histogram_bar span,
 .review_breakdown ul.review_distribution_histogram span.review_distribution_histogram_bar span
 {
-  background:url("~/application/modules/Review/externals/images/bar_mini_full.png") no-repeat scroll left bottom transparent;
+  background:url(~/application/modules/Review/externals/images/bar_mini_full.png) no-repeat scroll left bottom transparent;
 }
 
 ul.reviews_list > li {
@@ -487,7 +487,7 @@ ul.reviews_rows .review_content {
 }
 ul.reviews_rows .review_recommend {
   font-weight: bold;
-  background:url("~/application/modules/Review/externals/images/recommend.png") no-repeat scroll left center transparent;
+  background:url(~/application/modules/Review/externals/images/recommend.png) no-repeat scroll left center transparent;
   padding-left: 21px;
   overflow: hidden;
   font-size: 0.8em;
@@ -726,7 +726,7 @@ div.review_vote_feedback a {
   white-space: nowrap;  
   padding: 2px 8px 2px 22px;
   margin-right: 10px;
-  background-image: url("~/application/modules/Review/externals/images/thumbs.png");
+  background-image: url(~/application/modules/Review/externals/images/thumbs.png);
   background-repeat: no-repeat;
   text-decoration: none;
 }
@@ -787,7 +787,7 @@ div.review_vote_feedback .review_voted_actions a.review_vote_yes:hover {
 ul.reviews_profile li.review_featured_entry .review_info_header a,
 ul.reviews_entries li.review_featured_entry .review_info_header a,
 div.review_layout_middle div.review_featured_entry h3 {
-  background: url("~/application/modules/Review/externals/images/featured.png") no-repeat top left;
+  background: url(~/application/modules/Review/externals/images/featured.png) no-repeat top left;
   padding-left: 20px;
 }
 div.review_layout_middle div.review_featured_entry h3 {

@@ -10,6 +10,7 @@
  * 
  */
 ?>
+<?=$this->content()->renderWidget('marketplace.topbanner', array('pageName' => 'cart'))?>
 
 <div class="cart-container">
 <h2>

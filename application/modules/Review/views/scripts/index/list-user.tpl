@@ -11,10 +11,144 @@
  * @version    $Id$
  * @author     Vincent Van <vincent@radcodes.com>
  */
- 
- 
 ?>
+<?=$this->partial('index/_js_fields.tpl', 'review', array())?>
+<?php $this->headScript()->appendFile($this->baseUrl().'/application/modules/Review/externals/scripts/rating.js'); ?>
+<script type="text/javascript">
+  en4.core.runonce.add(function()
+  {
+    // convert the selectbox with id 'rating'
+    var rating = new radcodesReviewMooRatings(document.id('rating'), {
+      showSelectBox : false,
+      container : null,
+      defaultRating : <?php echo $this->form->rating->getValue();?>
+    });
+  });
+</script>
 
+<?=$this->content()->renderWidget('marketplace.topbanner', array('pageName' => 'community'))?>
+<?php $userId = $this->user->getIdentity(); ?>
+
+<div class='layout_common'>
+
+	<div class='layout_left'>
+	  <div class='marketplaces_gutter'>
+      <div class="quicklinks">
+      </div>
+    </div>
+  </div>
+
+	<div class='layout_middle'>
+    <style>div.comments-form-container { display: block; }</style>
+    <div class="comments-header">
+      <div class="comments-stats">
+        <span><?=$this->translate("%s reviews", $this->total_review)?></span>
+
+        <span><?=$this->htmlLink(array('route' => 'user_profile', 
+                                       'id' => $userId), $this->translate("back"))?>
+        </span>
+
+        <span><?=$this->htmlLink('javascript:void(0);', $this->translate('add review'), array(
+              "onclick" => "$('review-form-container').show();"
+            )) ?>
+        </span>
+      </div>
+      <h3 class="comments-desc" style="margin-bottom: 0;">
+        <?=$this->user->getTitle()?>
+        <span class="review_rating_star_big"><span style="width: <?php echo $this->average_rating * 20 ?>%"></span></span>
+      </h3>
+    </div>
+
+    <div class="comments-form-container" id="review-form-container">
+        <div class='close-popup' onclick="$('review-form-container').hide();"></div>
+        <h3><?=$this->translate('Add Review')?></h3>
+        <?php if( $this->viewer()->getIdentity() /*and $this->canComment*/ and isset($this->form) ): ?>
+            <?=$this->form->render()?>
+            <hr/>
+        <?php endif; ?>  
+    </div>
+
+    <?php if( $this->paginatorOwnerReview->getTotalItemCount() > 0 ): ?>
+      <ul class='reviews_profile' style="margin: 0;">
+        <?php foreach( $this->paginator as $review ):
+          $review_owner = $review->getOwner();
+          ?>
+          <li id="review_review_<?php echo $review->getIdentity() ?>"<?php if ($review->featured):?> class="review_featured_entry"<?php endif;?>>
+            <div class="review_photo">
+              <?php echo $this->htmlLink($review_owner->getHref(), $this->itemPhoto($review_owner, 'thumb.icon'));?>
+            </div>
+            <div class="review_date">
+                <?php echo $this->timestamp($review->creation_date);?>
+            </div>
+            <div class="review_info">
+              <div class="review_owner">
+                <?php echo $this->htmlLink($review_owner->getHref(), $review_owner->getTitle());?>
+              </div>
+              <?php if ($review->vote_count): ?>
+                <div class="review_helpful_stat">
+                  <?php echo $this->translate(array('%1$s of %2$s person found the following review helpful:','%1$s of %2$s people found the following review helpful:',$review->vote_count), $review->helpful_count, $review->vote_count)?>
+                </div>
+              <?php endif; ?>
+              <div class="review_info_header">
+                <span class="review_rating_star"><span style="width: <?php echo $review->rating * 20?>%"></span></span>
+                <?php echo $this->htmlLink($review->getHref(), $this->radcodes()->text()->truncate($review->getTitle(),80)); ?>
+              </div>
+              <?php if ($this->showdetails): ?>
+                <div class="review_info_details">
+                  <?php echo nl2br($review->body); ?>
+                  <?php if ($review->pros): ?>
+                    <div class="review_info_details_header"><?php echo $this->translate('Pros:')?></div>
+                    <div class="review_info_details_pros">
+                      <?php echo nl2br($review->pros);?>
+                    </div>
+                  <?php endif;?>
+                  <?php if ($review->cons): ?>
+                    <div class="review_info_details_header"><?php echo $this->translate('Cons:')?></div>
+                    <div class="review_info_details_cons">
+                      <?php echo nl2br($review->cons);?>
+                    </div>
+                  <?php endif;?>
+                </div>
+                
+                <?php if ($review->recommend): ?>
+                <div class="review_info_recommend">
+                  <?php echo $this->translate("I would recommend this member to a friend!")?>
+                </div>
+                <?php endif; ?>
+                <div class="review_tool_links">
+                  <?php echo $this->htmlLink(array('module'=> 'activity', 'controller' => 'index', 'action' => 'share', 'route' => 'default', 'type' => 'review', 'id' => $review->getIdentity(), 'format' => 'smoothbox'), $this->translate("Share"), array('class' => 'smoothbox')); ?>
+                 - <?php echo $this->htmlLink(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'route' => 'default', 'subject' =>  $review->getGuid(), 'format' => 'smoothbox'), $this->translate("Report"), array('class' => 'smoothbox')); ?>
+                 - <?php 
+                        if ($review->comment_count) {
+                           $comment_text = $this->translate(array("%s comment", "%s comments", $review->comment_count), $this->locale()->toNumber($review->comment_count));
+                         }
+                         else {
+                           $comment_text = $this->translate('Post Comment');
+                         }
+                         echo $this->htmlLink($review->getHref().'#comments', $comment_text);
+                       ?>
+                </div>
+              <?php else: ?>
+                <div class="review_info_details">
+                  <?php echo $this->radcodes()->text()->truncate($review->body, 198); ?>
+                </div>
+              <?php endif; ?>
+            </div>
+
+          </li>
+
+        <?php endforeach;?>
+      </ul>
+      <?=$this->paginationControl($this->paginator, null, null, array(
+        'query' => $this->formValues
+      )); ?>
+    <?php endif; ?> 
+
+	</div>
+
+</div>
+
+<?php /*
 <div class='layout_right review_view_layout_right'>
   <div class='reviews_gutter'>
   
@@ -253,4 +387,4 @@
       </div>
     <?php endif; ?>
   </div>
-</div>
+</div> */?>

@@ -146,22 +146,72 @@ class Review_IndexController extends Core_Controller_Action_Standard
     if( !$this->_helper->requireSubject('user')->isValid() ) {
       return;
     }
-    
-    $this->view->form = $form = new Review_Form_Filter();
-    $form->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array('id'=>$user_id),'review_user',true));
-    
-    $values = array();
-    // Populate form data
-    if( $form->isValid($this->_getAllParams()) )
-    {
-      $values = $form->getValues();
-    }
 
-    $values = Engine_Api::_()->getApi('filter','radcodes')->removeKeyEmptyValues($values);
-    $this->view->formValues = $values;
-        
+    //$this->view->form = $form = new Review_Form_Filter();
+    //$form->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array('id'=>$user_id),'review_user',true));
+    //$values = array();
+    // Populate form data
+    //if( $form->isValid($this->_getAllParams()) ) {
+    //  $values = $form->getValues();
+    //}
+    //$values = Engine_Api::_()->getApi('filter','radcodes')->removeKeyEmptyValues($values);
+    //$this->view->formValues = $values;
     
     $this->view->user = $user;
+
+    if( $this->_helper->requireAuth()->setAuthParams('review', null, 'create')->isValid()) {
+
+        $this->view->form = $form = new Review_Form_Create();
+        $toValues = $user_id;
+        $form->toValues->setValue($user_id);
+
+        // If not post or form not valid, return
+        if( $this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost()) ) {
+
+            $table = Engine_Api::_()->getItemTable('review');
+            $db = $table->getAdapter();
+            $db->beginTransaction();
+
+            try 
+            {
+            	$featured = Engine_Api::_()->authorization()->getPermission($viewer->level_id, 'review', 'featured') ? 1 : 0;
+      	
+              // Create review
+              $values = array_merge($form->getValues(), array(
+                    'user_id' => $form->toValues->getValue(),
+                    'owner_id' => $viewer->getIdentity(),
+                    'featured' => $featured,
+              ));
+              $values['recommend'] = 0;
+        
+              $review = $table->createRow();
+              $review->setFromArray($values);
+              $review->save();
+
+              // Add activity only if review is published
+              $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($viewer, $review, 'review_new');
+              if($action!=null) {
+                Engine_Api::_()->getDbtable('actions', 'activity')->attachActivity($action, $review);
+              }
+
+            	$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+              $notifyApi->addNotification($review->getUser(), $viewer, $review, 'has_posted_review', array(
+                'label' => $review->getShortType()
+              ));
+        
+              // Commit
+              $db->commit();
+        
+              return $this->_redirectCustom($review);
+            }
+
+            catch( Exception $e )
+            {
+              $db->rollBack();
+              throw $e;
+            }
+        }
+    }
 
     $this->view->total_review = Engine_Api::_()->review()->getUserReviewCount($user);
     $this->view->average_rating = Engine_Api::_()->review()->getUserAverageRating($user);
@@ -328,6 +378,7 @@ class Review_IndexController extends Core_Controller_Action_Standard
           'owner_id' => $viewer->getIdentity(),
           'featured' => $featured,
         ));
+echo "<pre>"; print_r( $values); echo "</pre>"; die();
         $values['recommend'] = $values['recommend'] ? 1 : 0;
         
         $review = $table->createRow();

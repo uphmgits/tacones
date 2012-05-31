@@ -5,6 +5,8 @@
  * @copyright  Copyright 2012
  */
 ?>
+<?=$this->content()->renderWidget('marketplace.topbanner', array('pageName' => 'cart'))?>
+
 <div class="cart-container">
   <?php if(!empty($this->cartitems) && count($this->cartitems)): ?>
 	  <?=$this->form->render($this)?>
