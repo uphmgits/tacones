@@ -203,7 +203,7 @@ class Review_IndexController extends Core_Controller_Action_Standard
                     // Commit
                     $db->commit();
               
-                    return $this->_redirectCustom($review);
+                    //return $this->_redirectCustom($review);
                   }
 
                   catch( Exception $e ) {
