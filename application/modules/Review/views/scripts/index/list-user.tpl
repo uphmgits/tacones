@@ -12,29 +12,30 @@
  * @author     Vincent Van <vincent@radcodes.com>
  */
 ?>
-<?=$this->partial('index/_js_fields.tpl', 'review', array())?>
-<?php $this->headScript()->appendFile($this->baseUrl().'/application/modules/Review/externals/scripts/rating.js'); ?>
-<script type="text/javascript">
-  en4.core.runonce.add(function()
-  {
-    // convert the selectbox with id 'rating'
-    var rating = new radcodesReviewMooRatings(document.id('rating'), {
-      showSelectBox : false,
-      container : null,
-      defaultRating : <?php echo $this->form->rating->getValue();?>
-    });
-  });
-</script>
+<?php if( $this->showForm ) : ?> 
+    <?=$this->partial('index/_js_fields.tpl', 'review', array())?>
+    <?php $this->headScript()->appendFile($this->baseUrl().'/application/modules/Review/externals/scripts/rating.js'); ?>
+    <script type="text/javascript">
+      en4.core.runonce.add(function()
+      {
+        // convert the selectbox with id 'rating'
+        var rating = new radcodesReviewMooRatings(document.id('rating'), {
+          showSelectBox : false,
+          container : null,
+          defaultRating : <?php echo $this->form->rating->getValue();?>
+        });
+      });
+    </script>
+<?php endif; ?>
 
 <?=$this->content()->renderWidget('marketplace.topbanner', array('pageName' => 'community'))?>
 <?php $userId = $this->user->getIdentity(); ?>
 
-<div class='layout_common'>
+<div class='layout_common' style="margin-top: 30px;">
 
 	<div class='layout_left'>
 	  <div class='marketplaces_gutter'>
-      <div class="quicklinks">
-      </div>
+      <?=$this->content()->renderwidget('sidebarmembers'); ?>
     </div>
   </div>
 
@@ -48,10 +49,12 @@
                                        'id' => $userId), $this->translate("back"))?>
         </span>
 
-        <span><?=$this->htmlLink('javascript:void(0);', $this->translate('add review'), array(
-              "onclick" => "$('review-form-container').show();"
-            )) ?>
-        </span>
+        <?php if( $this->showForm ) : ?> 
+          <span><?=$this->htmlLink('javascript:void(0);', $this->translate('add review'), array(
+                "onclick" => "$('review-form-container').show();"
+              )) ?>
+          </span>
+        <?php endif; ?>
       </div>
       <h3 class="comments-desc" style="margin-bottom: 0;">
         <?=$this->user->getTitle()?>
@@ -59,16 +62,17 @@
       </h3>
     </div>
 
-    <div class="comments-form-container" id="review-form-container">
-        <div class='close-popup' onclick="$('review-form-container').hide();"></div>
-        <h3><?=$this->translate('Add Review')?></h3>
-        <?php if( $this->viewer()->getIdentity() /*and $this->canComment*/ and isset($this->form) ): ?>
-            <?=$this->form->render()?>
-            <hr/>
-        <?php endif; ?>  
-    </div>
+    <?php if( $this->showForm ) : ?> 
+      <div class="comments-form-container" id="review-form-container">
+          <div class='close-popup' onclick="$('review-form-container').hide();"></div>
+          <?php if( $this->viewer()->getIdentity() /*and $this->canComment*/ and isset($this->form) ): ?>
+              <?=$this->form->render()?>
+              <hr/>
+          <?php endif; ?>  
+      </div>
+    <?php endif; ?>
 
-    <?php if( $this->paginatorOwnerReview->getTotalItemCount() > 0 ): ?>
+    <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
       <ul class='reviews_profile' style="margin: 0;">
         <?php foreach( $this->paginator as $review ):
           $review_owner = $review->getOwner();

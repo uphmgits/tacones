@@ -10,6 +10,7 @@
     #global_page_marketplace-index-index .marketplaces_browse_photo > a { display: block; }
     #global_page_marketplace-index-index .marketplaces_browse_info_title > a { font-family: arial; letter-spacing: -2px }
     #global_page_marketplace-index-index .correct_font .marketplaces_browse_info_title > a{ font-family: Univers LT Std; letter-spacing: 0; }
+    #global_page_marketplace-index-index .last-column-login-popup { right: 0; left: auto }
 </style>
 
 <script type="text/javascript">
@@ -81,20 +82,25 @@
         var width = jQuery('#marketplace-content').width();
         var columnsWidth = 194;
         var columns = Math.floor( width / columnsWidth);
-        $oldColumns = jQuery("ul.marketplaces_browse").attr("data-column");
+        oldColumns = jQuery("ul.marketplaces_browse").attr("data-column");
         if( width < 970 ) jQuery('#marketplace-content .vscroller').addClass('vscroll-correct');
         else jQuery('#marketplace-content .vscroller').removeClass('vscroll-correct');
 
-        if( !$oldColumns || ($oldColumns && columns != $oldColumns) || ref ) {
+        if( !oldColumns || (oldColumns && columns != oldColumns) || ref ) {
         
             var columnsHeight = new Array(columns);
             for (i = 0; i < columns; i++) { columnsHeight[i] = 0; }
             
             list = jQuery("ul.marketplaces_browse > li");
+            list.find('div.login-popup').removeClass('last-column-login-popup'); 
 
             list.each(function(i){
                 var colNum = i % columns;
                 var element = jQuery(this);
+
+                popup = element.find('div.login-popup');
+                if( colNum == columns - 1 ) popup.addClass('last-column-login-popup');
+
                 img = element.find('img.item_photo_marketplace');
                 if( img && !img.height()) {
                     jQuery("<img/>").attr("src", jQuery(img).attr("src")).load(function() {
@@ -228,20 +234,6 @@ span.like:hover{
     <?php endif; ?>
 
     <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
-
-     <?php
-       $myprodcount = $this->paginator->getTotalItemCount(); 
-       $y = $this->paginator->getItemCountPerPage();
-       $x = ($this->paginator->getCurrentPageNumber() - 1) * $y ;
-       $z = $myprodcount - $x;
-       if($z  > 0){
-         $myprodcount = $z;
-       }    
-       $columns = 5;
-       $myrowsize = ceil( $myprodcount / $columns );
-       $myrow = 0;
-     ?>
-
       <?php $viewer = $this->viewer(); ?>
       <ul class="marketplaces_browse">
         <?php foreach( $this->paginator as $item ): ?>

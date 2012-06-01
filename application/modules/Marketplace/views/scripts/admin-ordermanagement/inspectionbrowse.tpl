@@ -77,15 +77,14 @@ function selectAll()
 <div class='admin_search' style="display: none; height: 20px;">
   <?php echo $this->formFilter->render($this) ?>
 </div>
-
 <form method='post' action=''>
   <select name='status_filter'>
-    <option value='0' <?php if( !$this->status_filter ) echo "selected"?>><?=$this->translate("All")?></option>
-    <option value='1' <?php if( $this->status_filter == 1 ) echo "selected"?>><?=$this->translate("In Progress")?></option>
-    <option value='2' <?php if( $this->status_filter == 2 ) echo "selected"?>><?=$this->translate("Sold")?></option>
-    <option value='3' <?php if( $this->status_filter == 3 ) echo "selected"?>><?=$this->translate("Return")?></option>
-    <option value='4' <?php if( $this->status_filter == 4 ) echo "selected"?>><?=$this->translate("Not Legitimate")?></option>
-    <option value='9' <?php if( $this->status_filter == 5 ) echo "selected"?>><?=$this->translate("Punished")?></option>
+    <option value='all'      <?php if( $this->status_filter == 'all' )      echo "selected"?>><?=$this->translate("All")?></option>
+    <option value='pending'  <?php if( $this->status_filter == 'pending' )  echo "selected"?>><?=$this->translate("In Progress")?></option>
+    <option value='sold'     <?php if( $this->status_filter == 'sold' )     echo "selected"?>><?=$this->translate("Sold")?></option>
+    <option value='return'   <?php if( $this->status_filter == 'return' )   echo "selected"?>><?=$this->translate("Return")?></option>
+    <option value='notlegit' <?php if( $this->status_filter == 'notlegit' ) echo "selected"?>><?=$this->translate("Not Legitimate")?></option>
+    <option value='punished' <?php if( $this->status_filter == 'punished' ) echo "selected"?>><?=$this->translate("Punished")?></option>
   </select>  
   <button type='submit' name="submit_button" value="change_status_filter"><?php echo $this->translate("Filter") ?></button>
 </form>
@@ -125,7 +124,7 @@ function selectAll()
         <?php foreach( $this->paginator as $item ): ?>
           <tr>
             <td>
-              <input <?php if ( $item->to_file_transfer > 0 or $this->status_filter == 0 or $this->status_filter == 1) echo 'disabled';?> name="modify_<?=$item->getIdentity()?>" value="<?=$item->getIdentity()?>" type="checkbox" class="checkbox" />
+              <input <?php if ( $item->to_file_transfer > 0 or $this->status_filter == 'all' or $this->status_filter == 'pending') echo 'disabled';?> name="modify_<?=$item->getIdentity()?>" value="<?=$item->getIdentity()?>" type="checkbox" class="checkbox" />
             </td>
             <td><?php echo $item->order_id ?></td>
             <td class='admin_table_user'>
@@ -198,13 +197,13 @@ function selectAll()
   <br />
   <div class='buttons'>
     <button type='submit' name="submit_button" value="change_status"><?php echo $this->translate("Change Status") ?></button>
-     <?php if( $this->status_filter == 2 ) : ?>
+     <?php if( $this->status_filter == 'sold' ) : ?>
         <button type='submit' name="submit_button" value="add_to_sold_file"><?php echo $this->translate("Add to Sold File") ?></button>
      <?php endif; ?>
-     <?php if( $this->status_filter == 3 ) : ?>
+     <?php if( $this->status_filter == 'return' ) : ?>
         <button type='submit' name="submit_button" value="add_to_return_file"><?php echo $this->translate("Add to Return File") ?></button>
      <?php endif; ?>
-     <?php if( $this->status_filter == 4 ) : ?>
+     <?php if( $this->status_filter == 'notlegit' ) : ?>
         <button type='submit' name="submit_button" value="punish"><?php echo $this->translate("Punish") ?></button>
      <?php endif; ?>
   </div>

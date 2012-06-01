@@ -24,7 +24,8 @@ class Review_Form_Create extends Engine_Form
     $user = Engine_Api::_()->user()->getViewer();
     $user_level = Engine_Api::_()->user()->getViewer()->level_id;    
 
-    $this->setAttrib('name', 'reviews_create')
+    $this->setTitle('Add Review')
+         ->setAttrib('name', 'reviews_create')
          ->setAttrib('id', 'review_form')
          ->setAttrib('class', 'review_form');
     
@@ -124,23 +125,15 @@ class Review_Form_Create extends Engine_Form
       return false;
     } 
     
-    
-    $review = Engine_Api::_()->review()->getOwnerReviewForUser($viewer, $value);
-    
-    
+    /*$review = Engine_Api::_()->review()->getOwnerReviewForUser($viewer, $value);
     if ($review) {
-      
-      if ($review->authorization()->isAllowed($viewer, 'edit'))
-      {
+      if ($review->authorization()->isAllowed($viewer, 'edit')) {
         $this->toValues->getValidator('Engine_Validate_Callback')->setMessage('You have already reviewed this member. To update your review, please use Edit Review function.');
-      }
-      else 
-      {
+      } else {
         $this->toValues->getValidator('Engine_Validate_Callback')->setMessage('You have already reviewed this member.');
       }
-      
       return false; 
-    }
+    }*/
 
     return true;
   }

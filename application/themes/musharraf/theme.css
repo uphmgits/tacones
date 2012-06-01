@@ -2363,10 +2363,12 @@ div.comments-form-container {
 }
 .browsemembers_results > ul > li > a {
   float:none;
+  height: 90px;
+  overflow: hidden;
 }
 .browsemembers_results div.browsemembers_results_info {
   padding-left:0px;
-  line-height: 24px;
+  line-height: 30px;
 }
 
 #global_page_user-index-browse .layout_left{
@@ -2374,8 +2376,6 @@ div.comments-form-container {
 }
 .browsemembers_results > ul > li > a > img {
   width:90px;
-  height:90px;
-
 }
 .quicklinks .product_filter_on {
   margin-left:20px;
@@ -3113,10 +3113,17 @@ li.brand-container:hover ul.brand-list {
   border: none;
   background: none;
 }
-#review_form ul.form-errors > li {
+#review_form ul.form-errors,
+#review_form ul.form-notices {
+  margin: 10px 0 0;
+}
+#review_form ul.form-errors > li,
+#review_form ul.form-notices > li {
   float: none;
   color: #955;
   background-color: transparent;
   border-color: #a51c4b;
+  margin-left: 0;
+  margin-right: 0;
 }
 

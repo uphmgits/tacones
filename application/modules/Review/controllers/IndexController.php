@@ -146,102 +146,119 @@ class Review_IndexController extends Core_Controller_Action_Standard
     if( !$this->_helper->requireSubject('user')->isValid() ) {
       return;
     }
-
-    //$this->view->form = $form = new Review_Form_Filter();
-    //$form->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array('id'=>$user_id),'review_user',true));
-    //$values = array();
-    // Populate form data
-    //if( $form->isValid($this->_getAllParams()) ) {
-    //  $values = $form->getValues();
-    //}
-    //$values = Engine_Api::_()->getApi('filter','radcodes')->removeKeyEmptyValues($values);
-    //$this->view->formValues = $values;
     
     $this->view->user = $user;
 
-    if( $this->_helper->requireAuth()->setAuthParams('review', null, 'create')->isValid()) {
+    
+    if( $user->haveTransaction($viewer) ) {
+        $this->view->viewer_review = $review = Engine_Api::_()->review()->getOwnerReviewForUser($viewer, $user);
+        if ($this->view->viewer_review) {
+          $this->view->can_edit = $this->_helper->requireAuth()->setAuthParams('review', null, 'edit')->checkRequire();
+        } else {
+          $this->view->can_create = $this->_helper->requireAuth()->setAuthParams('review', null, 'create')->checkRequire();
+        } 
+        $this->view->showForm = $showForm = ( ($this->view->can_edit or $this->view->can_create) );
 
-        $this->view->form = $form = new Review_Form_Create();
-        $toValues = $user_id;
-        $form->toValues->setValue($user_id);
+        if( $showForm ) :
 
-        // If not post or form not valid, return
-        if( $this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost()) ) {
+          $featured = Engine_Api::_()->authorization()->getPermission($viewer->level_id, 'review', 'featured') ? 1 : 0;
 
-            $table = Engine_Api::_()->getItemTable('review');
-            $db = $table->getAdapter();
-            $db->beginTransaction();
+          if( $this->view->can_create ) {
+              $this->view->form = $form = new Review_Form_Create();
+              $toValues = $user_id;
+              $form->toValues->setValue($user_id);
 
-            try 
-            {
-            	$featured = Engine_Api::_()->authorization()->getPermission($viewer->level_id, 'review', 'featured') ? 1 : 0;
-      	
-              // Create review
-              $values = array_merge($form->getValues(), array(
-                    'user_id' => $form->toValues->getValue(),
-                    'owner_id' => $viewer->getIdentity(),
-                    'featured' => $featured,
-              ));
-              $values['recommend'] = 0;
-        
-              $review = $table->createRow();
-              $review->setFromArray($values);
-              $review->save();
+              // If not post or form not valid, return
+              if( $this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost()) ) :
 
-              // Add activity only if review is published
-              $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($viewer, $review, 'review_new');
-              if($action!=null) {
-                Engine_Api::_()->getDbtable('actions', 'activity')->attachActivity($action, $review);
-              }
+                  $table = Engine_Api::_()->getItemTable('review');
+                  $db = $table->getAdapter();
+                  $db->beginTransaction();
 
-            	$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-              $notifyApi->addNotification($review->getUser(), $viewer, $review, 'has_posted_review', array(
-                'label' => $review->getShortType()
-              ));
-        
-              // Commit
-              $db->commit();
-        
-              return $this->_redirectCustom($review);
-            }
+                  try {
+            	
+                    // Create review
+                    $values = array_merge($form->getValues(), array(
+                          'user_id' => $user_id,
+                          'owner_id' => $viewer->getIdentity(),
+                          'featured' => $featured,
+                    ));
+                    $values['recommend'] = 0;
+              
+                    $review = $table->createRow();
+                    $review->setFromArray($values);
+                    $review->save();
 
-            catch( Exception $e )
-            {
-              $db->rollBack();
-              throw $e;
-            }
-        }
-    }
+                    // Add activity only if review is published
+                    $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($viewer, $review, 'review_new');
+                    if($action != null) {
+                      Engine_Api::_()->getDbtable('actions', 'activity')->attachActivity($action, $review);
+                    }
+
+                  	$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+                    $notifyApi->addNotification($review->getUser(), $viewer, $review, 'has_posted_review', array(
+                      'label' => $review->getShortType()
+                    ));
+              
+                    // Commit
+                    $db->commit();
+              
+                    return $this->_redirectCustom($review);
+                  }
+
+                  catch( Exception $e ) {
+                    $db->rollBack();
+                    throw $e;
+                  }
+              endif; 
+          } 
+          else {
+              $this->view->form = $form = new Review_Form_Edit(array('item' => $review));
+              $form->populate($review->toArray());
+              $form->toValues->setValue($user_id);
+
+              if( $this->getRequest()->isPost() and $form->isValid($this->getRequest()->getPost()) ) :
+                  $values = $form->getValues();
+                  $values['user_id'] = $user_id;
+                  $values['owner_id'] = $viewer->getIdentity();
+
+                  $db = Engine_Db_Table::getDefaultAdapter();
+                  $db->beginTransaction();
+                  try {
+                    $review->setFromArray($values);
+                    $review->modified_date = date('Y-m-d H:i:s');
+                    $review->save();
+                    $db->commit();
+
+                    $savedChangesNotice = Zend_Registry::get('Zend_Translate')->_("Your changes were saved.");
+                    $form->addNotice($savedChangesNotice);
+                  }
+                  catch( Exception $e ) {
+                    $db->rollBack();
+                    throw $e;
+                  }
+              endif;
+          }
+        endif;
+    } else $this->view->showForm = false;
 
     $this->view->total_review = Engine_Api::_()->review()->getUserReviewCount($user);
     $this->view->average_rating = Engine_Api::_()->review()->getUserAverageRating($user);
     $this->view->distributions = Engine_Api::_()->review()->getUserReviewDistributions($user);     
     $this->view->total_recommend = Engine_Api::_()->review()->getUserRecommendCount($user);
     
+    $values = array();
     $values['limit'] = (int) Engine_Api::_()->getApi('settings', 'core')->getSetting('review.perpage', 10);
     $values['user'] = $user;
+    $values['page'] = $this->_getParam('page', 1);
     $this->view->paginator = $paginator = Engine_Api::_()->review()->getReviewsPaginator($values);
-    $paginator->setCurrentPageNumber($this->_getParam('page', 1));
-    
-    
-   
-    $this->view->viewer_review = Engine_Api::_()->review()->getOwnerReviewForUser($viewer, $user);
-    if ($this->view->viewer_review)
-    {
-      $this->view->can_edit = $this->_helper->requireAuth()->setAuthParams('review', null, 'edit')->checkRequire();
-    }
-    else
-    {
-      $this->view->can_create = $this->_helper->requireAuth()->setAuthParams('review', null, 'create')->checkRequire();
-    } 
-    
     $values = array(
       'owner' => $user,
       'limit' => 5,
       'order' => 'random',
       //'recommend' => 1
     );
-    $this->view->paginatorOwnerReview = Engine_Api::_()->review()->getReviewsPaginator($values);
+    //$this->view->paginatorOwnerReview = Engine_Api::_()->review()->getReviewsPaginator($values);
     
     $this->view->addHelperPath(APPLICATION_PATH . '/application/modules/Fields/View/Helper', 'Fields_View_Helper');
   }
@@ -378,7 +395,6 @@ class Review_IndexController extends Core_Controller_Action_Standard
           'owner_id' => $viewer->getIdentity(),
           'featured' => $featured,
         ));
-echo "<pre>"; print_r( $values); echo "</pre>"; die();
         $values['recommend'] = $values['recommend'] ? 1 : 0;
         
         $review = $table->createRow();
@@ -489,7 +505,7 @@ echo "<pre>"; print_r( $values); echo "</pre>"; die();
       }
 
       $this->view->tagNamePrepared = $tagString;
-      $form->keywords->setValue($tagString);
+      //$form->keywords->setValue($tagString);
       
       foreach ($auth_keys as $auth_key => $auth_default)
       {
@@ -530,7 +546,7 @@ echo "<pre>"; print_r( $values); echo "</pre>"; die();
       $review->save();
 
       // Save custom fields
-      $customfieldform = $form->getSubForm('customField');
+      /*$customfieldform = $form->getSubForm('customField');
       $customfieldform->setItem($review);
       $customfieldform->saveValues();
 
@@ -548,13 +564,13 @@ echo "<pre>"; print_r( $values); echo "</pre>"; die();
           $auth->setAllowed($review, $role, $auth_key, ($i <= $authMax));
         }
       }
-      
+      */
       $db->commit();
 
 
       $savedChangesNotice = Zend_Registry::get('Zend_Translate')->_("Your changes were saved.");
       $form->addNotice($savedChangesNotice);
-      $customfieldform->removeElement('submit');
+      //$customfieldform->removeElement('submit');
       
     }
     catch( Exception $e )

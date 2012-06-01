@@ -32,11 +32,10 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
     $this->view->subNavigation = $subNavigation = Engine_Api::_()->getApi('menus', 'core')->getNavigation('marketplace_admin_main_ordermanagement', array(), 'marketplace_admin_main_ordermanagement_inspectionbrowse');
 
     $page = $this->_getParam('page', 1);
-    $status_filter = $this->_getParam('status_filter', 0);
+    $status_filter = $this->_getParam('status_filter', 'all');
+
     if( $this->getRequest()->isPost() ) {
       $values = $this->getRequest()->getPost();
-
-      $status_filter = isset($values['status_filter']) ? $values['status_filter'] : 0;
 
       $ordersTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
       $file_content = '';
@@ -180,11 +179,11 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
 
     $this->view->status_filter = $status_filter;
     switch( $status_filter ) {
-      case 1 : $select->where('status = 0'); break;
-      case 2 : $select->where('status = 1 and to_file_transfer = 0'); break;
-      case 3 : $select->where('status = 2'); break;
-      case 4 : $select->where('status = 3'); break;
-      case 9 : $select->where('status = 9'); break;
+      case 'pending'  : $select->where('status = 0'); break;
+      case 'sold'     : $select->where('status = 1 and to_file_transfer = 0'); break;
+      case 'return'   : $select->where('status = 2'); break;
+      case 'notlegit' : $select->where('status = 3'); break;
+      case 'punished' : $select->where('status = 9'); break;
     }
 
     $select->order(( !empty($values['order']) ? $values['order'] : 'order_id' ) . ' ' . ( !empty($values['order_direction']) ? $values['order_direction'] : 'ASC' ));

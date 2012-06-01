@@ -819,6 +819,8 @@ chmod($_SERVER['DOCUMENT_ROOT'] . '/fashbay/temporary/log/pplog.txt', 0777);
         $mids = $this->_getParam('mids');
         $mids_ids = explode('_', $mids);
 
+        $this->view->marketplaceList = Engine_Api::_()->getItemMulti('marketplace', $mids_ids); 
+
 		    if(Engine_Api::_()->marketplace()->cartIsActive()){
 			    $cartTable  = Engine_Api::_()->getDbTable('cart', 'marketplace');
 

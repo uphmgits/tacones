@@ -27,8 +27,19 @@
         <button type="submit" name="fbconnect"><?=$this->translate('Connect to Facebook.')?></button>
       </form>
     <?php endif; ?>
-<?php endif; ?>    
+<?php endif; ?>
+<br/>    
 
+<?php if( !empty($this->marketplaceList) ) : ?>
+  <div>
+      <h3><?=$this->translate('You can post a review for these users:')?></h3>
+      <?php foreach( $this->marketplaceList as $item) : ?>
+          <?php $owner = $item->getOwner(); ?>
+          <?=$this->htmlLink(array('route' => 'review_user', 'id' => $owner->getIdentity()), $owner->getTitle())?><br/>
+      <?php endforeach; ?>
+  </div>
+  <br/>    
+<?php endif; ?>
 	
 <?php	if(!empty($this->cartContent)) : ?>
 	<p>

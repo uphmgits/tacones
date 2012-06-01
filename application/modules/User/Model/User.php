@@ -480,6 +480,22 @@ class User_Model_User extends Core_Model_Item_Abstract
     return $this;
   }
 
+  public function haveTransaction( $user ) 
+  {
+      if( !($user instanceof User_Model_User) ) return false;
+      $userId1 = $this->getIdentity();
+      $userId2 = $user->getIdentity();
+      if( !$userId1 or !$userId2 or $userId1 == $userId2 ) return false;
+
+      $ordersTable = Engine_Api::_()->getDbTable('orders', 'marketplace');
+      $result = $ordersTable->select()
+                  ->where("owner_id = {$userId1} AND user_id = {$userId2}")
+                  ->orWhere("owner_id = {$userId2} AND user_id = {$userId1}")
+                  ->query() 
+                  ->fetch()
+      ;
+      return !empty($result);
+  }
 
 
   // Interfaces

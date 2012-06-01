@@ -1,5 +1,5 @@
 <div id="logo-sd">
-   <a href="/" title="Home"></a>
+   <a href="<?=$this->baseUrl()?>" title="Home"></a>
 </div>
 
 <div class="header-sd-right">

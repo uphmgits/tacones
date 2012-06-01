@@ -33,7 +33,8 @@ class Review_Api_Core extends Core_Api_Abstract
    */
   public function getReviewsPaginator($params = array(), $options = null)
   {
-    $paginator = Zend_Paginator::factory($this->getReviewsSelect($params, $options));
+    $select = $this->getReviewsSelect($params, $options);
+    $paginator = Zend_Paginator::factory($select);
     if( !empty($params['page']) )
     {
       $paginator->setCurrentPageNumber($params['page']);
@@ -98,7 +99,7 @@ class Review_Api_Core extends Core_Api_Abstract
 		*/
     $select = $table->select();
     $select = $table->selectParamBuilder($select, $params);  
-      
+
     // Build search part of query
     $searchParts = Engine_Api::_()->fields()->getSearchQuery('review', $params);
     if (!empty($searchParts))

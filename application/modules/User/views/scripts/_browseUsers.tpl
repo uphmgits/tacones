@@ -17,53 +17,36 @@
 <ul id="browsemembers_ul">
   <?php foreach( $this->users as $user ): ?>
     <li>
-      <?php echo $this->htmlLink($user->getHref(), $this->itemPhoto($user, 'thumb.icon')) ?>
+      <?=$this->htmlLink($user->getHref(), $this->itemPhoto($user, 'thumb.profile'))?>
 
+      <?php
+        $total_review = Engine_Api::_()->review()->getUserReviewCount($user);
+        $average_rating = Engine_Api::_()->review()->getUserAverageRating($user);
+        $total_recommend = Engine_Api::_()->review()->getUserRecommendCount($user);	
+      ?>
+      <div class="review_profile_rating">
+        <a href="<?php echo $this->url(array('id'=>$user->getIdentity()), 'review_user', true)?>">
+          <span class="review_rating_star_small"><span style="width: <?=$average_rating * 20?>%"></span></span>
+        </a>
+      </div>
 
-
-
-
-
-<?php
-    $total_review = Engine_Api::_()->review()->getUserReviewCount($user);
-    $average_rating = Engine_Api::_()->review()->getUserAverageRating($user);
-    $total_recommend = Engine_Api::_()->review()->getUserRecommendCount($user);	
-?>
-<div class="review_profile_rating">
-  <a href="<?php echo $this->url(array('id'=>$user->getIdentity()), 'review_user', true)?>">
-    <span class="review_rating_star_small"><span style="width: <?php echo $average_rating * 20 ?>%"></span></span>
-  </a>
-</div>
-
-
-
-
-
-
-      
-
-
-        <div class='browsemembers_results_info'>
-          <?php echo $this->htmlLink($user->getHref(), $user->getTitle()) ?>
-<!--
-          <?php echo $user->status; ?>
+      <div class='browsemembers_results_info'>
+          <?=$this->htmlLink($user->getHref(), $user->getTitle())?>
+          
+          <?php /*echo $user->status; ?>
           <?php if( $user->status != "" ): ?>
             <div>
               <?php echo $this->timestamp($user->status_date) ?>
             </div>
-          <?php endif; ?>
+          <?php endif;*/ ?>
 
--->
-        </div>
+      </div>
 
-<!--      <?php if( $this->viewer()->getIdentity() ): ?>
+      <?php /*if( $this->viewer()->getIdentity() ): ?>
         <div class='browsemembers_results_links'>
           <?php echo $this->userFriendship($user) ?>
         </div>
-      <?php endif; ?>
--->
-
-
+      <?php endif;*/ ?>
     </li>
   <?php endforeach; ?>
 </ul>
