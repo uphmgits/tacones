@@ -2051,11 +2051,16 @@ ul.marketplaces_browse .scrollwrap > li, ul.marketplaces_browse .scrollwrap > li
     width: 160px;
 }
 .love-info > span {
+    padding-right: 15px;
+}
+.love-info span {
     vertical-align: top;
     font-family: Univers LT Std;
     font-size: 13px;
     cursor: pointer;
-    padding-right: 15px;
+}
+.love-info a {
+    text-decoration: none;
 }
 .love-info span.like {
     background: url(~/application/themes/musharraf/images/love.png) no-repeat scroll left center transparent;

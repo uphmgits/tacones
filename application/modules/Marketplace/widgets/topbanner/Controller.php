@@ -69,10 +69,10 @@ class Marketplace_Widget_TopbannerController extends Engine_Content_Widget_Abstr
                            $this->view->nextUrl = $this->view->url(array('action' => 'home'), 'user_general');
                            break;
                   //case 13: $this->view->banner = 'marketplace_brands_header.jpg'; break;
-                  default: $this->view->prevBanner    = 'marketplace_cart_header.jpg';   
+                  default: $this->view->prevBanner    = 'marketplace_accessories_header.jpg';   
                            $this->view->currentBanner = 'marketplace_home_header.jpg';
                            $this->view->nextBanner    = 'marketplace_cloth_header.jpg';
-                           $this->view->prevUrl = $this->view->url(array('action' => 'cart'), 'marketplace_general');
+                           $this->view->prevUrl = $this->view->url(array('category' => '8'), 'marketplace_browse');
                            $this->view->nextUrl = $this->view->url(array('category' => '3'), 'marketplace_browse');
                 }
                 break; 

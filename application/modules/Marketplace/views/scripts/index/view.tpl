@@ -314,7 +314,7 @@ endif; ?>
                       <?=$this->translate('item')?>
                   </span>
                 <?php else : ?>
-                  <span class="like"><?//=$likeCount?><?=$this->translate('item')?></span>
+                  <span><?=$this->htmlLink(array('route' => 'user_login'), "<span class='like'>{$this->translate('item')}</span>")?></span>
                 <?php endif;?>
             </div>
 
@@ -346,9 +346,9 @@ endif; ?>
                   <?=$likeCount?>
               </span>
             <?php else : ?>
-              <span class="like"><?=$likeCount?></span>
+              <span><?=$this->htmlLink(array('route' => 'user_login'), "<span class='like'>{$likeCount}</span>")?></span>
             <?php endif;?>
-            <span class="comment"><?=$this->marketplace->comment_count?></span>
+            <span class="comment" style="cursor: default"><?=$this->marketplace->comment_count?></span>
           </div>
             
           <?php /*

@@ -71,8 +71,14 @@ function selectAll()
     }
   }
 }
-
+function inspectionNotify(value) {
+    $('notifyOrder').value = value;
+    $('frmNotify').submit();
+}
 </script>
+<form action="" method="post" id="frmNotify">
+  <input type="hidden" id="notifyOrder" name="notifyOrder" value="" />
+</form>
 
 <div class='admin_search' style="display: none; height: 20px;">
   <?php echo $this->formFilter->render($this) ?>
@@ -174,6 +180,7 @@ function selectAll()
                     <div>
                     <input <?php if ( $item->status == 3 ) echo 'checked';?> name="status_modify_<?=$item->getIdentity()?>" value="3" type="radio" class="radio" />
                     <span style='font-size: 11px;'><?=$this->translate('Not Legitimate')?></span>
+                    <button type="button" onclick="inspectionNotify(<?=$item->getIdentity()?>)"><?=$this->translate('Inspected')?></button>
                     </div>
                     <?php else : ?>    
                         <?='<span style="color:red; font-weight: bold;">'.$this->translate('Punished')."</span>"?>

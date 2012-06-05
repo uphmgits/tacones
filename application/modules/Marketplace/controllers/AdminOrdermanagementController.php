@@ -38,6 +38,7 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
       $values = $this->getRequest()->getPost();
 
       $ordersTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+      $ordersTableName = $ordersTable->info('name');
       $file_content = '';
 
       foreach ($values as $key=>$value) :
@@ -49,13 +50,12 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
 
           if( !empty($order) and $order['to_file_transfer'] == 0 ) {
 
-              $owner = Engine_Api::_()->getItem('user', $order['owner_id']);
               $marketplace = Engine_Api::_()->getItem('marketplace', $order['marketplace_id']);
-
+              $owner = Engine_Api::_()->getItem('user', $order['owner_id']);
               
               if( $values['submit_button'] == 'add_to_sold_file' ) {
                   // ADD TO SOLD FILE
-                  if( $owner and $owner->getIdentity() and $marketplace and $marketplace->getIdentity() ) {
+                  if( $owner and $marketplace ) {
 
                     $commission = $order['price'] * Engine_Api::_()->marketplace()->getCommissionFee($owner) / 100;
                     $summ = $order['count'] * ( $order['price'] - $commission + $order['shipping'] );
@@ -79,7 +79,7 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
               if( $values['submit_button'] == 'add_to_return_file' ) {
 
                   // ADD TO RETURN FILE
-                  if( $owner and $owner->getIdentity() and $marketplace and $marketplace->getIdentity() and $order['contact_email'] ) {
+                  if( $owner and $marketplace and $order['contact_email'] ) {
                     $return_summ = $order['count'] * ( $order['price'] - $order['shipping'] ); // Buyer pay 2 shippings when he's not happy
                     if( $return_summ < 0 ) continue;
                     $file_content .= $order['contact_email'] . " " . number_format($return_summ, 2) . " " . "USD" . " " . $order['order_id'] . " ";
@@ -126,13 +126,45 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
 
         // CHANGE STATUS
         if( $values['submit_button'] == 'change_status' and preg_match("/^status_modify_(\d+)/i", $key, $matches ) ) {
+
+            $order = $ordersTable->select()
+                                 ->where("order_id = {$matches[1]}")
+                                 ->query()
+                                 ->fetch();
             if($value == 1 or $value == 2 or $value == 3) $status = $value;
             else $status = 0;
+
+            if( $order['status'] == $status ) continue;
+
             $ordersTable->update( array('status' => $status), 'order_id = '.$matches[1]);
+            
+            if( $value == 3 ) {
+              $marketplace = Engine_Api::_()->getItem('marketplace', $order['marketplace_id']);
+              $owner = Engine_Api::_()->getItem('user', $order['owner_id']);
+              $buyer = Engine_Api::_()->getItem('user', $order['user_id']);
+              if( $owner and $buyer and $marketplace ) {
+                $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+                $notifyApi->addNotification($owner, $buyer, $marketplace, 'item_not_legitimate_to_owner');
+                $notifyApi->addNotification($buyer, $owner, $marketplace, 'item_not_legitimate_to_buyer');
+              }
+            }
+        }
+        if( $key == 'notifyOrder' ) {
+              $order = $ordersTable->select()
+                                 ->where("order_id = {$value}")
+                                 ->query()
+                                 ->fetch();
+              $marketplace = Engine_Api::_()->getItem('marketplace', $order['marketplace_id']);
+              $owner = Engine_Api::_()->getItem('user', $order['owner_id']);
+              $buyer = Engine_Api::_()->getItem('user', $order['user_id']);
+              if( $owner and $buyer and $marketplace ) {
+                $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+                $notifyApi->addNotification($owner, $buyer, $marketplace, 'ready_for_inspection');
+                $notifyApi->addNotification($buyer, $owner, $marketplace, 'ready_for_inspection');
+              }
         }
 
-
-      endforeach;
+      endforeach; 
       if( $file_content ) {
           if( $values['submit_button'] == 'add_to_sold_file' ) {
               $path = $this->view->baseUrl() . '/public/masspay/masspay_' . date('Y-m-d_H-i-s') . '.txt';

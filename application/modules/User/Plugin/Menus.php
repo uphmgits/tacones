@@ -45,7 +45,7 @@ class User_Plugin_Menus
     $viewer  = Engine_Api::_()->user()->getViewer();
     $request = Zend_Controller_Front::getInstance()->getRequest();
     $route   = array(
-      'route' => 'core_home',
+      'route' => 'user_login',
     );
 
     if( $viewer->getIdentity() )
