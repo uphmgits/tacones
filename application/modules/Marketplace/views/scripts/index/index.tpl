@@ -209,7 +209,7 @@ span.like:hover{
     <div class="filter-options">
       <?php if( $this->never_worn or $this->brand_id ) : ?>
         <?php if( $this->never_worn ) echo "<span>" . $this->translate('NEVER WORN') . "</span>"; ?>
-        <?php if( $this->brand_id and $brandLabel ) "<span>" . $this->translate('BRAND - %s', $brandLabel) . "</span>";?>
+        <?php if( $this->brand_id and $brandLabel ) echo "<span>" . $this->translate('BRAND - %s', $brandLabel) . "</span>";?>
         <?=$this->translate('filter ON')?>
       <?php else: ?>
         <?=$this->translate('filter OFF')?>
