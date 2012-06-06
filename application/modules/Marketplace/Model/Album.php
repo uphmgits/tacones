@@ -28,7 +28,7 @@ class Marketplace_Model_Album extends Core_Model_Item_Collection
 
   public function getHref($params = array())
   {
-    $params = array_merge(array(
+    /*$params = array_merge(array(
       'route' => 'marketplace_profile',
       'reset' => true,
       'id' => $this->getMarketplace()->getIdentity(),
@@ -37,8 +37,17 @@ class Marketplace_Model_Album extends Core_Model_Item_Collection
     $reset = $params['reset'];
     unset($params['route']);
     unset($params['reset']);
+    */
+    $marketplace = $this->getMarketplace();
+    if( !$marketplace ) return false;
+
+    $route = 'marketplace_entry_view';
+    $params = array(
+      'user_id' => $marketplace->getOwner()->getIdentity(),
+      'marketplace_id' => $marketplace->getIdentity()
+    );
     return Zend_Controller_Front::getInstance()->getRouter()
-      ->assemble($params, $route, $reset);
+      ->assemble($params, $route);
   }
 
   public function getMarketplace()
