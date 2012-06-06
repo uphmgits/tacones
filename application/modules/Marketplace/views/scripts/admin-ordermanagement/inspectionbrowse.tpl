@@ -71,13 +71,21 @@ function selectAll()
     }
   }
 }
-function inspectionNotify(value) {
-    $('notifyOrder').value = value;
-    $('frmNotify').submit();
+function startInspectionNotify(value) {
+    $('notifyStart').value = value;
+    $('frmNotifyStart').submit();
+}
+function finishInspectionNotify(value) {
+    $('notifyFinish').value = value;
+    $('frmNotifyFinish').submit();
 }
 </script>
-<form action="" method="post" id="frmNotify">
-  <input type="hidden" id="notifyOrder" name="notifyOrder" value="" />
+
+<form action="" method="post" id="frmNotifyStart">
+  <input type="hidden" id="notifyStart" name="notifyStart" value="" />
+</form>
+<form action="" method="post" id="frmNotifyFinish">
+  <input type="hidden" id="notifyFinish" name="notifyFinish" value="" />
 </form>
 
 <div class='admin_search' style="display: none; height: 20px;">
@@ -128,9 +136,10 @@ function inspectionNotify(value) {
     <tbody>
       
         <?php foreach( $this->paginator as $item ): ?>
+          <?php $itemId = $item->getIdentity(); ?>
           <tr>
             <td>
-              <input <?php if ( $item->to_file_transfer > 0 or $this->status_filter == 'all' or $this->status_filter == 'pending') echo 'disabled';?> name="modify_<?=$item->getIdentity()?>" value="<?=$item->getIdentity()?>" type="checkbox" class="checkbox" />
+              <input <?php if ( $item->to_file_transfer > 0 or $this->status_filter == 'all' or $this->status_filter == 'pending') echo 'disabled';?> name="modify_<?=$itemId?>" value="<?=$itemId?>" type="checkbox" class="checkbox" />
             </td>
             <td><?php echo $item->order_id ?></td>
             <td class='admin_table_user'>
@@ -164,34 +173,42 @@ function inspectionNotify(value) {
             <td><?php echo $item->shipping; ?></td>
             <td>
                 <?php if( $item->to_file_transfer == 0) : ?>
-                    <?php if( $item->status != 9) : ?>
-                    <div>
-                    <input <?php if ( $item->status == 0 ) echo 'checked';?> name="status_modify_<?=$item->getIdentity()?>" value="0" type="radio" class="radio" />
+                  <?php if( $item->status != 9) : ?>
+                  <div>
+                    <input <?php if ( $item->status == 0 ) echo 'checked';?> name="status_modify_<?=$itemId?>" value="0" type="radio" class="radio" />
                     <span style='font-size: 11px;'><?=$this->translate('In Progress')?></span>
-                    </div>
-                    <div>
-                    <input <?php if ( $item->status == 1 ) echo 'checked';?> name="status_modify_<?=$item->getIdentity()?>" value="1" type="radio" class="radio" />
+                  </div>
+                  <div>
+                    <input <?php if ( $item->status == 1 ) echo 'checked';?> name="status_modify_<?=$itemId?>" value="1" type="radio" class="radio" />
                     <span style='font-size: 11px;'><?=$this->translate('Sold')?></span>    
-                    </div>
-                    <div>
-                    <input <?php if ( $item->status == 2 ) echo 'checked';?> name="status_modify_<?=$item->getIdentity()?>" value="2" type="radio" class="radio" />
+                  </div>
+                  <div>
+                    <input <?php if ( $item->status == 2 ) echo 'checked';?> name="status_modify_<?=$itemId?>" value="2" type="radio" class="radio" />
                     <span style='font-size: 11px;'><?=$this->translate('Return')?></span>
-                    </div>
-                    <div>
-                    <input <?php if ( $item->status == 3 ) echo 'checked';?> name="status_modify_<?=$item->getIdentity()?>" value="3" type="radio" class="radio" />
+                  </div>
+                  <div>
+                    <input <?php if ( $item->status == 3 ) echo 'checked';?> name="status_modify_<?=$itemId?>" value="3" type="radio" class="radio" />
                     <span style='font-size: 11px;'><?=$this->translate('Not Legitimate')?></span>
-                    <button type="button" onclick="inspectionNotify(<?=$item->getIdentity()?>)"><?=$this->translate('Inspected')?></button>
-                    </div>
-                    <?php else : ?>    
-                        <?='<span style="color:red; font-weight: bold;">'.$this->translate('Punished')."</span>"?>
-                    <?php endif; ?>
+                  </div>
+
+                  <button type="button" onclick="startInspectionNotify(<?=$itemId?>)" style="font-size:10px; margin-top: 8px;">
+                    <?=$this->translate('Notify about<br/>start Inspection')?>
+                  </button>
+                  <button type="button" onclick="finishInspectionNotify(<?=$itemId?>)" style="font-size:10px; margin-top: 8px;">
+                    <?=$this->translate('Notify about<br/>approving item')?>
+                  </button>
+
+                  </div>
+                  <?php else : ?>    
+                      <?='<span style="color:red; font-weight: bold;">'.$this->translate('Punished')."</span>"?>
+                  <?php endif; ?>
                 <?php else : ?>
-                    <?php if( $item->to_file_transfer == 1) : ?>
-                      <?='<span style="color:gray">'.$this->translate('In Sold File')."</span>"?>
-                    <?php endif; ?>
-                    <?php if( $item->to_file_transfer == 2) : ?>
-                      <?='<span style="color:gray">'.$this->translate('In Return File')."</span>"?>
-                    <?php endif; ?>
+                  <?php if( $item->to_file_transfer == 1) : ?>
+                    <?='<span style="color:gray">'.$this->translate('In Sold File')."</span>"?>
+                  <?php endif; ?>
+                  <?php if( $item->to_file_transfer == 2) : ?>
+                    <?='<span style="color:gray">'.$this->translate('In Return File')."</span>"?>
+                  <?php endif; ?>
                 <?php endif; ?>
             </td>
             <td><?php echo $item->count; ?></td>

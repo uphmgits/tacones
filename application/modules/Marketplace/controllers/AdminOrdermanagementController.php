@@ -149,7 +149,7 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
               }
             }
         }
-        if( $key == 'notifyOrder' ) {
+        if( $key == 'notifyStart' or $key == 'notifyFinish' ) {
               $order = $ordersTable->select()
                                  ->where("order_id = {$value}")
                                  ->query()
@@ -159,8 +159,12 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
               $buyer = Engine_Api::_()->getItem('user', $order['user_id']);
               if( $owner and $buyer and $marketplace ) {
                 $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-                $notifyApi->addNotification($owner, $buyer, $marketplace, 'ready_for_inspection');
-                $notifyApi->addNotification($buyer, $owner, $marketplace, 'ready_for_inspection');
+                if( $key == 'notifyStart') {
+                  $notifyApi->addNotification($owner, $buyer, $marketplace, 'ready_for_inspection');
+                  $notifyApi->addNotification($buyer, $owner, $marketplace, 'ready_for_inspection');
+                } else {
+                  $notifyApi->addNotification($buyer, $owner, $marketplace, 'inspection_approving');
+                }
               }
         }
 
