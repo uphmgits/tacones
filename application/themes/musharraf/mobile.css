@@ -1104,7 +1104,7 @@ form.filters dd + dt
 }
 
 .layout_common {
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 ul.marketplaces_browse {
@@ -1174,4 +1174,84 @@ ul.marketplaces_browse > li , ul.marketplaces_browse > li + li {
 .marketplace_browse_userlist_info  {
     width: 100%;
     overflow: hidden;
+}
+
+
+.layout_marketplace_topbanner {
+    display: none;
+}
+
+/* login-popup */
+.login-popup {
+  display: none;
+  position: absolute;
+  z-index: 500;
+  right: 30%;
+  width: 340px;
+  padding: 16px;
+  background: black;
+}
+.close-popup {
+  float: right; 
+  width: 9px;
+  height: 9px;
+  background: url(~/application/modules/User/externals/images/close-popup.gif);
+  cursor: pointer;
+}
+.login-popup input {
+  width: 334px;
+  background: transparent;
+  border: 1px solid #444;
+}
+.login-popup #password-wrapper {
+  margin: 10px 0 5px;
+}
+.login-popup #forgot-label {
+  display: none;
+}
+.login-popup #button-wrapper {
+  float: right;
+}
+.login-popup a {
+  color: #999 !important;
+  font-size: 12px;
+  vertical-align: top;
+  text-transform: none;
+}
+
+
+.marketplace-browse-options-container {
+  padding-bottom: 10px;
+}
+ul.marketplace-browse-options {
+  float: right;
+}
+ul.marketplace-browse-options > li {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  margin-left: 20px;
+  color: #d1cfcf;
+}
+li.brand-container {
+  position: relative;
+}
+ul.brand-list {
+  display: none;
+  position: absolute;
+  z-index: 1010;
+  left: -15px;
+  max-height: 196px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 5px 15px 5px;
+  background: #232323;
+}
+li.brand-container:hover ul.brand-list {
+  display: block;
+}
+.marketplace-browse-options-container .filter-options > span {
+  color: #d1cfcf;
+  font-weight: bold;
+  padding-right: 20px;
 }

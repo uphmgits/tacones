@@ -9,16 +9,34 @@ class User_Widget_ProfileFieldsController extends Engine_Content_Widget_Abstract
       return $this->setNoRender();
     }
 
-
     // Get subject and check auth
     $subject = Engine_Api::_()->core()->getSubject('user');
-	$subject_id = $subject->getIdentity();
-	//
-	
-	
+	  $subject_id = $subject->getIdentity();
+	  //
 	
     if( !$subject->authorization()->isAllowed($viewer, 'view') ) {
       return $this->setNoRender();
+    }
+
+    $this->view->level_id = $viewer->level_id;
+
+    if( $viewer->level_id <= 2 )  {
+        $notBanned = ( $subject->enabled and $subject->approved );
+        $request = Zend_Controller_Front::getInstance()->getRequest()->getPost();
+
+        if( isset($request['ban_option']) )  {
+            if( $notBanned ) {
+                $subject->enabled = 0;
+                $subject->approved = 0;
+                $notBanned = false;
+            } else {
+                $subject->enabled = 1;
+                $subject->approved = 1;
+                $notBanned = true;
+            }
+            $subject->save();
+        }
+        $this->view->notBanned = $notBanned;
     }
 
     $this->view->aliasValues = Engine_Api::_()->fields()->getFieldsValuesByAlias($subject); 

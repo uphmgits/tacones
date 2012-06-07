@@ -79,6 +79,10 @@ function finishInspectionNotify(value) {
     $('notifyFinish').value = value;
     $('frmNotifyFinish').submit();
 }
+function createInvoice(value) {
+    $('createInvoice').value = value;
+    $('frmCreateInvoice').submit();
+}
 </script>
 
 <form action="" method="post" id="frmNotifyStart">
@@ -86,6 +90,9 @@ function finishInspectionNotify(value) {
 </form>
 <form action="" method="post" id="frmNotifyFinish">
   <input type="hidden" id="notifyFinish" name="notifyFinish" value="" />
+</form>
+<form action="" method="post" id="frmCreateInvoice">
+  <input type="hidden" id="createInvoice" name="createInvoice" value="" />
 </form>
 
 <div class='admin_search' style="display: none; height: 20px;">
@@ -197,6 +204,13 @@ function finishInspectionNotify(value) {
                   <button type="button" onclick="finishInspectionNotify(<?=$itemId?>)" style="font-size:10px; margin-top: 8px;">
                     <?=$this->translate('Notify about<br/>approving item')?>
                   </button>
+                  <?php if( file_exists( $this->pdfMainPath . $itemId . ".pdf" ) ) : ?>
+                    <?=$this->htmlLink($this->pdfMainUrl . $itemId . ".pdf", $this->translate('Download Invoice'))?>
+                  <?php else: ?>
+                    <button type="button" onclick="createInvoice(<?=$itemId?>)" style="font-size:10px; margin-top: 8px;">
+                      <?=$this->translate('Create Invoice')?>
+                    </button>
+                  <?php endif; ?>
 
                   </div>
                   <?php else : ?>    

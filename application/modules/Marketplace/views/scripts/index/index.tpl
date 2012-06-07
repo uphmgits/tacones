@@ -4,11 +4,12 @@
     #marketplace-content .hscroller { display: none !important; }
     #global_page_marketplace-index-index .login-popup { left: 0; }
     #global_page_marketplace-index-index ul.marketplaces_browse { position: relative; width: 100% !important; }
-    #global_page_marketplace-index-index ul.marketplaces_browse > li { position: absolute; }
+    #global_page_marketplace-index-index ul.marketplaces_browse > li { position: absolute; display: none; }
     #global_page_marketplace-index-index #global_content { max-width: 940px; overflow: visible; width: auto; padding: 0 10px; }
     #global_page_marketplace-index-index .header_img_sd_home { text-align: center; }
     #global_page_marketplace-index-index .marketplaces_browse_photo > a { display: block; }
     #global_page_marketplace-index-index .marketplaces_browse_info_title > a { font-family: arial; letter-spacing: -2px }
+    #global_page_marketplace-index-index ul.marketplaces_browse > li.correct_font { display: block; }
     #global_page_marketplace-index-index .correct_font .marketplaces_browse_info_title > a{ font-family: Univers LT Std; letter-spacing: 0; }
     #global_page_marketplace-index-index .last-column-login-popup { right: 0; left: auto }
 </style>
@@ -112,7 +113,6 @@
                         
                         heightBlock = Math.max.apply( Math, columnsHeight );
                         jQuery('ul.marketplaces_browse').height(heightBlock);
-                        jQuery('ul.marketplaces_browse').attr("data-column", columns);
                     });
                 } else {
                   h = element.outerHeight();

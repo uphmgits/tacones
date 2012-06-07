@@ -33,8 +33,14 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
 
     $page = $this->_getParam('page', 1);
     $status_filter = $this->_getParam('status_filter', 'all');
+    $this->view->pdfMainPath = $pdfMainPath = APPLICATION_PATH . "/public/invoices/invoice_";
+    $this->view->pdfMainUrl = $pdfMainUrl = $this->view->baseUrl() . "/public/invoices/invoice_";
 
     if( $this->getRequest()->isPost() ) {
+
+      $mpdfClass = APPLICATION_PATH . '/externals/mpdf/mpdf.php';
+      include $mpdfClass;
+
       $values = $this->getRequest()->getPost();
 
       $ordersTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
@@ -166,6 +172,25 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
                   $notifyApi->addNotification($buyer, $owner, $marketplace, 'inspection_approving');
                 }
               }
+        }
+
+        if( $key == 'createInvoice' ) {
+
+            $pdfPath = $pdfMainPath . $value . ".pdf";
+
+            $html_body = "<html>";
+            $html_body .= "<head>";
+            $html_body .= "</head>";
+            $html_body .= "<body>";
+            $html_body .= "<h1>ORDER #{$value}</h1>";
+            $html_body .= "</body>";
+            $html_body .= "</html>";
+
+            $mpdf = new mPDF('c','A4','','',10, 10, 7, 7, 10, 10); 
+            $mpdf->SetDisplayMode('fullpage');
+        	  $mpdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list
+            $mpdf->WriteHTML($html_body);
+            $mpdf->Output( $pdfPath );
         }
 
       endforeach; 

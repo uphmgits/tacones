@@ -3,6 +3,13 @@
   <?=$this->itemPhoto($this->subject(), 'thumb_profile')?>
 </div>
 <div id='profile_fields_details'>
+  <?php if($this->level_id <= 2) : ?>
+    <form action="" method="post">
+      <button type="submit" name="ban_option">
+        <?php if( $this->notBanned ) echo $this->translate('Ban'); else echo $this->translate('Unban');?>
+      </button>
+    </form>
+  <?php endif; ?>
   <h2><?=$this->subject()->getTitle()?></h2>
   <?php if( !empty($this->aliasValues['favdesign']) ) : ?>
     <h4><?=$this->translate('favorite designer')?></h4>
