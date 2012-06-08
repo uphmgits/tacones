@@ -413,357 +413,361 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $this->view->paypalForm = $this->paypal()->form();
     }
 
-    public function paymentnotifyAction() {
-		$this->_helper->viewRenderer->setNoRender();
-		$this->_helper->layout->disableLayout();
-		if(Engine_Api::_()->marketplace()->cartIsActive()){
-			$cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
-		}
-		if(Engine_Api::_()->marketplace()->couponIsActive()){
-			$couponcartTable = Engine_Api::_()->getDbTable('couponcarts', 'marketplace');
-		}
-		if($this->_getParam('payment') == 'authorize'){
-			$myAuthorize_order = $_POST;
-			if(strstr($myAuthorize_order['x_product_id'], '-')){//few items
-				$order = explode(':', $myAuthorize_order['x_product_id']);
-				if(strstr($order, '|')){
-					$item_ids = explode('|', $order[0]);
-					$first_item_id = $item_ids[0];
-				}else{
-					$first_item_id = $order[0];
-				}
-				$item_id_info = explode('-', $first_item_id);
-				$item_id = $item_id_info[0];
-				$first_marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
-			}else{
-				$first_marketplace = Engine_Api::_()->getItem('marketplace', $order['x_product_id']);
-			}
-			ob_start();
-			print_r($first_marketplace->toArray());
-			$c = ob_get_clean();
-			file_put_contents(APPLICATION_PATH . '/temporary/log/post.log', $c, FILE_APPEND);
-			$authorize_login = ($first_marketplace->authorize_login?$first_marketplace->authorize_login:'7sBYqTp344eh');
-			$authorize_key = ($first_marketplace->authorize_key?$first_marketplace->authorize_key:'8sY8eUVj47M46dxA');
-			$testmode = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.authorize.testmode', '0');
-			$myAuthorize = new Marketplaceauthorize_Api_Authorize();
-			$myAuthorize->ipnLog = TRUE;
-			$myAuthorize->setUserInfo($authorize_login, $authorize_key);
-			$myAuthorize->enableTestMode();
-			if ($myAuthorize->validateIpn())
-			{
-				ob_start();
-				print_r($myAuthorize->ipnData);
-				$c = 'SUCCESS' . "\n" . ob_get_clean();
-				file_put_contents(APPLICATION_PATH . '/temporary/log/authorize.log', $c);
-				$myAuthorize_order = $myAuthorize->ipnData;
+    public function paymentnotifyAction() 
+    {
+		  $this->_helper->viewRenderer->setNoRender();
+		  $this->_helper->layout->disableLayout();
+		  if(Engine_Api::_()->marketplace()->cartIsActive()){
+			  $cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
+		  }
+		  if(Engine_Api::_()->marketplace()->couponIsActive()){
+			  $couponcartTable = Engine_Api::_()->getDbTable('couponcarts', 'marketplace');
+		  }
+
+      // authorize
+		  if($this->_getParam('payment') == 'authorize'){
+			  $myAuthorize_order = $_POST;
+			  if(strstr($myAuthorize_order['x_product_id'], '-')){//few items
+				  $order = explode(':', $myAuthorize_order['x_product_id']);
+				  if(strstr($order, '|')){
+					  $item_ids = explode('|', $order[0]);
+					  $first_item_id = $item_ids[0];
+				  }else{
+					  $first_item_id = $order[0];
+				  }
+				  $item_id_info = explode('-', $first_item_id);
+				  $item_id = $item_id_info[0];
+				  $first_marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
+			  }else{
+				  $first_marketplace = Engine_Api::_()->getItem('marketplace', $order['x_product_id']);
+			  }
+			  ob_start();
+			  print_r($first_marketplace->toArray());
+			  $c = ob_get_clean();
+			  file_put_contents(APPLICATION_PATH . '/temporary/log/post.log', $c, FILE_APPEND);
+			  $authorize_login = ($first_marketplace->authorize_login?$first_marketplace->authorize_login:'7sBYqTp344eh');
+			  $authorize_key = ($first_marketplace->authorize_key?$first_marketplace->authorize_key:'8sY8eUVj47M46dxA');
+			  $testmode = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.authorize.testmode', '0');
+			  $myAuthorize = new Marketplaceauthorize_Api_Authorize();
+			  $myAuthorize->ipnLog = TRUE;
+			  $myAuthorize->setUserInfo($authorize_login, $authorize_key);
+			  $myAuthorize->enableTestMode();
+			  if ($myAuthorize->validateIpn())
+			  {
+				  ob_start();
+				  print_r($myAuthorize->ipnData);
+				  $c = 'SUCCESS' . "\n" . ob_get_clean();
+				  file_put_contents(APPLICATION_PATH . '/temporary/log/authorize.log', $c);
+				  $myAuthorize_order = $myAuthorize->ipnData;
 				
-				if(strstr($myAuthorize_order['x_product_id'], '-')){//few items
-					$order = explode(':', $myAuthorize_order['x_product_id']);
-					$final_amount = 0;
-					$item_ids = explode('|', $order[0]);
-					$values = array();
-					$title_arr = array();
-					$ids_arr = array();
-					foreach($item_ids as $key => $item_count_id){
+				  if(strstr($myAuthorize_order['x_product_id'], '-')){//few items
+					  $order = explode(':', $myAuthorize_order['x_product_id']);
+					  $final_amount = 0;
+					  $item_ids = explode('|', $order[0]);
+					  $values = array();
+					  $title_arr = array();
+					  $ids_arr = array();
+					  foreach($item_ids as $key => $item_count_id){
 						
-						$item_id_info = explode('-', $item_count_id);
-						$item_id = $item_id_info[0];
-						$item_count = $item_id_info[1];
+						  $item_id_info = explode('-', $item_count_id);
+						  $item_id = $item_id_info[0];
+						  $item_count = $item_id_info[1];
 						
-						$marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
-						if(empty($marketplace))
-							return $this->_helper->redirector->gotoRoute(array('action' => 'manage', 'result' => 'error'), 'marketplace_paymentreturn', true);
-						$title_arr[] = $marketplace->title;
-						$ids_arr[] = $item_id;
+						  $marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
+						  if(empty($marketplace))
+							  return $this->_helper->redirector->gotoRoute(array('action' => 'manage', 'result' => 'error'), 'marketplace_paymentreturn', true);
+						  $title_arr[] = $marketplace->title;
+						  $ids_arr[] = $item_id;
 							
-						$owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
-						$buyer = Engine_Api::_()->getItem('user', $myAuthorize_order['x_user_id']);
+						  $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+						  $buyer = Engine_Api::_()->getItem('user', $myAuthorize_order['x_user_id']);
 						
-						////////////////////////////////////////////////////////////discount
-						$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($marketplace->marketplace_id,  $myAuthorize_order['x_user_id']);
-						//$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $myAuthorize_order['x_user_id']);
-            $product_shipping_fee = $marketplace->shipping;
-						$final_amount += ($marketplace->price + $product_shipping_fee - $coupon_discount) * $item_count;
-						////////////////////////////////////////////////////////////discount
-					}
-					if ($final_amount == $myAuthorize_order['x_amount']){
-						foreach($item_ids as $key => $item_count_id){
-							
-							$item_id_info = explode('-', $item_count_id);
-							$item_id = $item_id_info[0];
-							$item_count = $item_id_info[1];
-							
-							$marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
-							$owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
-							$buyer = Engine_Api::_()->getItem('user', $myAuthorize_order['x_user_id']);
-							////////////////////////////////////////////////////////////discount
-							$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($marketplace->marketplace_id,  $myAuthorize_order['x_user_id']);
-							//$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $myAuthorize_order['x_user_id']);
+						  ////////////////////////////////////////////////////////////discount
+						  $coupon_discount = Engine_Api::_()->marketplace()->getDiscount($marketplace->marketplace_id,  $myAuthorize_order['x_user_id']);
+						  //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $myAuthorize_order['x_user_id']);
               $product_shipping_fee = $marketplace->shipping;
-							////////////////////////////////////////////////////////////discount
+						  $final_amount += ($marketplace->price + $product_shipping_fee - $coupon_discount) * $item_count;
+						  ////////////////////////////////////////////////////////////discount
+					  }
+					  if ($final_amount == $myAuthorize_order['x_amount']){
+						  foreach($item_ids as $key => $item_count_id){
 							
-							$values['user_id'] = $myAuthorize_order['x_user_id'];
-							$values['owner_id'] = $marketplace->owner_id;
-							$values['marketplace_id'] = $item_id;
-							$values['count'] = $item_count;
-							$values['summ'] = $marketplace->price + $product_shipping_fee - $coupon_discount;
-							$values['date'] = date('Y-m-d H:i:s');
-						
-							$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-							$notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
-							$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-							$notifyApi->addNotification($buyer, $owner, $marketplace, 'marketplace_transaction_to_buyer');
+							  $item_id_info = explode('-', $item_count_id);
+							  $item_id = $item_id_info[0];
+							  $item_count = $item_id_info[1];
 							
-							$table = Engine_Api::_()->getDbtable('orders', 'marketplace');
-							$table->insert($values);
-							if(Engine_Api::_()->marketplace()->cartIsActive()){
-								$cartTable->delete(array(
-									'user_id = ?' => $myAuthorize_order['x_user_id'],
-									'marketplace_id = ?' => $marketplace->getIdentity(),
-								));
-							}
-							if(Engine_Api::_()->marketplace()->couponIsActive()){
-								$couponcartTable->delete(array(
-									'user_id = ?' => $myAuthorize_order['x_user_id']
-								));
-							}
-						}
-					}
-				}elseif(!empty($order['x_product_id'])){//one item
-					$marketplace = Engine_Api::_()->getItem('marketplace', $order['x_product_id']);
-
-					if(empty($marketplace))
-						return $this->_helper->redirector->gotoRoute(array('action' => 'manage', 'result' => 'error'), 'marketplace_paymentreturn', true);
-					////////////////////////////////////////////////////////////discount
-					$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($cartitem->marketplace_id, $order[1]);
-					//$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $order[1]);
-          $product_shipping_fee = $marketplace->shipping;
-					$final_amount = $marketplace->price + $product_shipping_fee - $coupon_discount;
-					////////////////////////////////////////////////////////////discount
-
-					$values['user_id'] = $order['x_user_id'];
-					$values['owner_id'] = $marketplace->getOwner()->getIdentity();
-					$values['marketplace_id'] = $order['x_product_id'];
-					$values['count'] = 1;
-					$values['summ'] = $order['x_amount'];
-					$values['date'] = date('Y-m-d H:i:s');
-					$table = Engine_Api::_()->getDbtable('orders', 'marketplace');
-					if ($final_amount == $order['x_amount'])
-						$table->insert($values);
-						
-					$owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
-					$buyer = Engine_Api::_()->getItem('user', $order['x_user_id']);
-					
-					$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-					$notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
-					$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-					$notifyApi->addNotification($buyer, $owner, $marketplace, 'marketplace_transaction_to_buyer');
-					if(Engine_Api::_()->marketplace()->couponIsActive()){
-						$couponcartTable->delete(array(
-							'user_id = ?' => $order['x_user_id']
-						));
-					}
-				}
-			}
-			else
-			{
-				ob_start();
-				print_r($myAuthorize->ipnData);
-				$c = 'FAILURE' . "\n" . ob_get_clean();
-				file_put_contents(APPLICATION_PATH . '/temporary/log/authorize.log', $c);
-			}
-			return $this->_helper->redirector->gotoRoute(array('action' => 'manage'), 'marketplace_paymentreturn', true);
-		}else{
-
-			$paypal = new Marketplace_Api_Payment(true);
-			$arrPost = $this->getRequest()->getPost();
-
-			if ($paypal->validateNotify($arrPost)) {
-
-				$order = explode(':', $arrPost['item_number']);
-				$user_id = (int)$order[1];
-				if(strstr($order[0], '-')){//few items
-					$final_amount = 0;
-					$item_ids = explode('|', $order[0]);
-
-					$values = array();
-					$title_arr = array();
-					$ids_arr = array();
-					foreach($item_ids as $key => $item_count_id){
-						
-						$item_id_info = explode('-', $item_count_id);
-						$item_id = $item_id_info[0];
-            $item_count = $item_id_info[1];
-
-						$marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
-						if(empty($marketplace) or (!$user_id and empty($arrPost['payer_email']) ))
-							return $this->_helper->redirector->gotoRoute(array('action' => 'manage', 'result' => 'error'), 'marketplace_paymentreturn', true);
-
-            /*if( preg_match("/\d(?=\+)/i", $item_count, $m) ) {
-						     $item_count = $m[0];
-                 $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
-            }*/
-            $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
-
-						$title_arr[] = $marketplace->title;
-						$ids_arr[] = $item_id;
+							  $marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
+							  $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+							  $buyer = Engine_Api::_()->getItem('user', $myAuthorize_order['x_user_id']);
+							  ////////////////////////////////////////////////////////////discount
+							  $coupon_discount = Engine_Api::_()->marketplace()->getDiscount($marketplace->marketplace_id,  $myAuthorize_order['x_user_id']);
+							  //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $myAuthorize_order['x_user_id']);
+                $product_shipping_fee = $marketplace->shipping;
+							  ////////////////////////////////////////////////////////////discount
 							
-						$owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+							  $values['user_id'] = $myAuthorize_order['x_user_id'];
+							  $values['owner_id'] = $marketplace->owner_id;
+							  $values['marketplace_id'] = $item_id;
+							  $values['count'] = $item_count;
+							  $values['summ'] = $marketplace->price + $product_shipping_fee - $coupon_discount;
+							  $values['date'] = date('Y-m-d H:i:s');
+						
+							  $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+							  $notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
+							  $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+							  $notifyApi->addNotification($buyer, $owner, $marketplace, 'marketplace_transaction_to_buyer');
+							
+							  $table = Engine_Api::_()->getDbtable('orders', 'marketplace');
+							  $table->insert($values);
+							  if(Engine_Api::_()->marketplace()->cartIsActive()){
+								  $cartTable->delete(array(
+									  'user_id = ?' => $myAuthorize_order['x_user_id'],
+									  'marketplace_id = ?' => $marketplace->getIdentity(),
+								  ));
+							  }
+							  if(Engine_Api::_()->marketplace()->couponIsActive()){
+								  $couponcartTable->delete(array(
+									  'user_id = ?' => $myAuthorize_order['x_user_id']
+								  ));
+							  }
+						  }
+					  }
+				  } elseif(!empty($order['x_product_id'])){//one item
+					  $marketplace = Engine_Api::_()->getItem('marketplace', $order['x_product_id']);
 
-  			    //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $user_id);						
+					  if(empty($marketplace))
+						  return $this->_helper->redirector->gotoRoute(array('action' => 'manage', 'result' => 'error'), 'marketplace_paymentreturn', true);
+					  ////////////////////////////////////////////////////////////discount
+					  $coupon_discount = Engine_Api::_()->marketplace()->getDiscount($cartitem->marketplace_id, $order[1]);
+					  //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $order[1]);
             $product_shipping_fee = $marketplace->shipping;
+					  $final_amount = $marketplace->price + $product_shipping_fee - $coupon_discount;
+					  ////////////////////////////////////////////////////////////discount
 
-            if( $user_id ) {
-						    ////////////////////////////////////////////////////////////discount
-						    $coupon_discount = Engine_Api::_()->marketplace()->getDiscount($marketplace->marketplace_id,  $user_id);
-						    ////////////////////////////////////////////////////////////discount
-            }
-            $final_amount += ($marketplace->price + $product_shipping_fee + $inspection_fee - $coupon_discount) * $item_count;
-					}
+					  $values['user_id'] = $order['x_user_id'];
+					  $values['owner_id'] = $marketplace->getOwner()->getIdentity();
+					  $values['marketplace_id'] = $order['x_product_id'];
+					  $values['count'] = 1;
+					  $values['summ'] = $order['x_amount'];
+					  $values['date'] = date('Y-m-d H:i:s');
+					  $table = Engine_Api::_()->getDbtable('orders', 'marketplace');
+					  if ($final_amount == $order['x_amount'])
+						  $table->insert($values);
+						
+					  $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+					  $buyer = Engine_Api::_()->getItem('user', $order['x_user_id']);
+					
+					  $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+					  $notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
+					  $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+					  $notifyApi->addNotification($buyer, $owner, $marketplace, 'marketplace_transaction_to_buyer');
+					  if(Engine_Api::_()->marketplace()->couponIsActive()){
+						  $couponcartTable->delete(array(
+							  'user_id = ?' => $order['x_user_id']
+						  ));
+					  }
+				  }
+			  }
+			  else
+			  {
+				  ob_start();
+				  print_r($myAuthorize->ipnData);
+				  $c = 'FAILURE' . "\n" . ob_get_clean();
+				  file_put_contents(APPLICATION_PATH . '/temporary/log/authorize.log', $c);
+			  }
+			  return $this->_helper->redirector->gotoRoute(array('action' => 'manage'), 'marketplace_paymentreturn', true);
+		  } 
+      else // paypal
+      {
+			  $paypal = new Marketplace_Api_Payment(true);
+			  $arrPost = $this->getRequest()->getPost();
 
-/*ob_start();
-print_r($arrPost);
-print_r($final_amount . " - " . $arrPost['mc_gross']);
-$c = ob_get_clean();
-file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/fashbay/temporary/log/pplog.txt', $c );
-chmod($_SERVER['DOCUMENT_ROOT'] . '/fashbay/temporary/log/pplog.txt', 0777);
-*/
+			  if ($paypal->validateNotify($arrPost)) {
 
+				  $order = explode(':', $arrPost['item_number']);
+				  $user_id = (int)$order[1];
+				  if(strstr($order[0], '-')){//few items
+					  $final_amount = 0;
+					  $item_ids = explode('|', $order[0]);
 
-					if ((string)$final_amount == (string)$arrPost['mc_gross']){
+					  $values = array();
+					  $title_arr = array();
+					  $ids_arr = array();
+					  foreach($item_ids as $key => $item_count_id){
+						
+						  $item_id_info = explode('-', $item_count_id);
+						  $item_id = $item_id_info[0];
+              $item_count = $item_id_info[1];
 
-            $shippinginfoTable = Engine_Api::_()->getDbtable('shippinginfo', 'marketplace');
-            $shippingInfo = $shippinginfoTable->select()->where("user_id = {$user_id} and paid = 0 ")->query()->fetchColumn();
-            if( $shippingInfo ) $shippinginfoTable->update(array('paid' => '1'), "user_id = {$user_id}");
-
-						foreach($item_ids as $key => $item_count_id){
-							
-							$item_id_info = explode('-', $item_count_id);
-							$item_id = $item_id_info[0];
-							$item_count = $item_id_info[1];
-
-							$marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
+						  $marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
+						  if(empty($marketplace) or (!$user_id and empty($arrPost['payer_email']) ))
+							  return $this->_helper->redirector->gotoRoute(array('action' => 'manage', 'result' => 'error'), 'marketplace_paymentreturn', true);
 
               /*if( preg_match("/\d(?=\+)/i", $item_count, $m) ) {
-						     $item_count = $m[0];
-                 $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
-              } else {
-                 $inspection_fee = 0;
+						       $item_count = $m[0];
+                   $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
               }*/
               $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
 
-							$owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+						  $title_arr[] = $marketplace->title;
+						  $ids_arr[] = $item_id;
 							
-              //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $user_id);
+						  $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+
+    			    //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $user_id);						
               $product_shipping_fee = $marketplace->shipping;
 
               if( $user_id ) {
-							  ////////////////////////////////////////////////////////////discount
-							  $coupon_discount = Engine_Api::_()->marketplace()->getDiscount($marketplace->marketplace_id,  $user_id);
-							  ////////////////////////////////////////////////////////////discount
+						      ////////////////////////////////////////////////////////////discount
+						      $coupon_discount = Engine_Api::_()->marketplace()->getDiscount($marketplace->marketplace_id,  $user_id);
+						      ////////////////////////////////////////////////////////////discount
               }
-							
-							$values['user_id'] = $user_id;
-							$values['owner_id'] = $marketplace->owner_id;
-							$values['marketplace_id'] = $item_id;
-							$values['count'] = $item_count;
-							$values['summ'] = $marketplace->price + $product_shipping_fee + $inspection_fee - $coupon_discount;
-              $values['price'] = $marketplace->price;
-              $values['shipping'] = $product_shipping_fee;
-              $values['inspection'] = $inspection_fee;
-							$values['date'] = date('Y-m-d H:i:s');
-              $values['contact_email'] = $arrPost['payer_email'];
-              $values['shipping_info'] = $shippingInfo;
+              $final_amount += ($marketplace->price + $product_shipping_fee + $inspection_fee - $coupon_discount) * $item_count;
+					  }
 
-              $table = Engine_Api::_()->getDbtable('orders', 'marketplace');
- 					    $table->insert($values);
+            // log transation /////
+            ob_start();
+            print_r($arrPost);
+            print_r($final_amount . " - " . $arrPost['mc_gross']);
+            $c = ob_get_clean();
+            file_put_contents($_SERVER['DOCUMENT_ROOT'] . $this->view->baseUrl() . '/temporary/log/paypal.log', $c, FILE_APPEND);
+            chmod($_SERVER['DOCUMENT_ROOT'] . $this->view->baseUrl() . '/temporary/log/paypal.log', 0777);
+            // end log ////////////
+
+					  if ((string)$final_amount == (string)$arrPost['mc_gross']){
+
+              $shippinginfoTable = Engine_Api::_()->getDbtable('shippinginfo', 'marketplace');
+              $shippingInfo = $shippinginfoTable->select()->where("user_id = {$user_id} and paid = 0 ")->query()->fetchColumn();
+              if( $shippingInfo ) $shippinginfoTable->update(array('paid' => '1'), "user_id = {$user_id}");
+
+						  foreach($item_ids as $key => $item_count_id){
+							
+							  $item_id_info = explode('-', $item_count_id);
+							  $item_id = $item_id_info[0];
+							  $item_count = $item_id_info[1];
+
+							  $marketplace = Engine_Api::_()->getItem('marketplace', $item_id);
+
+                /*if( preg_match("/\d(?=\+)/i", $item_count, $m) ) {
+						       $item_count = $m[0];
+                   $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
+                } else {
+                   $inspection_fee = 0;
+                }*/
+                $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
+
+							  $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+							
+                //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $user_id);
+                $product_shipping_fee = $marketplace->shipping;
+
+                if( $user_id ) {
+							    ////////////////////////////////////////////////////////////discount
+							    $coupon_discount = Engine_Api::_()->marketplace()->getDiscount($marketplace->marketplace_id,  $user_id);
+							    ////////////////////////////////////////////////////////////discount
+                }
+							
+							  $values['user_id'] = $user_id;
+							  $values['owner_id'] = $marketplace->owner_id;
+							  $values['marketplace_id'] = $item_id;
+							  $values['count'] = $item_count;
+							  $values['summ'] = $marketplace->price + $product_shipping_fee + $inspection_fee - $coupon_discount;
+                $values['price'] = $marketplace->price;
+                $values['shipping'] = $product_shipping_fee;
+                $values['inspection'] = $inspection_fee;
+							  $values['date'] = date('Y-m-d H:i:s');
+                $values['contact_email'] = $arrPost['payer_email'];
+                $values['shipping_info'] = $shippingInfo;
+
+                $table = Engine_Api::_()->getDbtable('orders', 'marketplace');
+   					    $table->insert($values);
 
 						
-              if( $user_id ) {
-                  $buyer = Engine_Api::_()->getItem('user', $user_id);
-							    $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-							    $notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
-							    $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-							    $notifyApi->addNotification($buyer, $owner, $marketplace, 'marketplace_transaction_to_buyer');
+                if( $user_id ) {
+                    $buyer = Engine_Api::_()->getItem('user', $user_id);
+							      $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+							      $notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
+							      $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+							      $notifyApi->addNotification($buyer, $owner, $marketplace, 'marketplace_transaction_to_buyer');
 							
-							    if(Engine_Api::_()->marketplace()->cartIsActive()){
-								    $cartTable->delete(array(
-									    'user_id = ?' => $user_id,
-									    'marketplace_id = ?' => $marketplace->getIdentity(),
-								    ));
-							    }
-							    if(Engine_Api::_()->marketplace()->couponIsActive()){
-								    $couponcartTable->delete(array(
-									    'user_id = ?' => $user_id
-								    ));
-							    }
-              } else { //mailing
-                  if( $owner->getIdentity() and $marketplace->getIdentity() ) {
-                     $this->_paymentMailing($values['contact_email'], $owner, $marketplace, $values['count']);
-                  }
-              }
-						}
-					}
+							      if(Engine_Api::_()->marketplace()->cartIsActive()){
+								      $cartTable->delete(array(
+									      'user_id = ?' => $user_id,
+									      'marketplace_id = ?' => $marketplace->getIdentity(),
+								      ));
+							      }
+							      if(Engine_Api::_()->marketplace()->couponIsActive()){
+								      $couponcartTable->delete(array(
+									      'user_id = ?' => $user_id
+								      ));
+							      }
+                } else { //mailing
+                    if( $owner->getIdentity() and $marketplace->getIdentity() ) {
+                       $this->_paymentMailing($values['contact_email'], $owner, $marketplace, $values['count']);
+                    }
+                }
+						  }
+					  }
 					
-				} else { //one item
-          //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $user_id);
-          $product_shipping_fee = $marketplace->shipping;
+				  } else { //one item
+            //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $user_id);
+            $product_shipping_fee = $marketplace->shipping;
 
-          if( $user_id ) {
-  					////////////////////////////////////////////////////////////discount
-	  				$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($cartitem->marketplace_id, $user_id);
-	  				////////////////////////////////////////////////////////////discount
-          }
+            if( $user_id ) {
+    					////////////////////////////////////////////////////////////discount
+	    				$coupon_discount = Engine_Api::_()->marketplace()->getDiscount($cartitem->marketplace_id, $user_id);
+	    				////////////////////////////////////////////////////////////discount
+            }
 
-					$marketplace = Engine_Api::_()->getItem('marketplace', $order[0]);
-					if(empty($marketplace) or (!$user_id and empty($arrPost['payer_email']) ))
-						return $this->_helper->redirector->gotoRoute(array('action' => 'manage', 'result' => 'error'), 'marketplace_paymentreturn', true);
+					  $marketplace = Engine_Api::_()->getItem('marketplace', $order[0]);
+					  if(empty($marketplace) or (!$user_id and empty($arrPost['payer_email']) ))
+						  return $this->_helper->redirector->gotoRoute(array('action' => 'manage', 'result' => 'error'), 'marketplace_paymentreturn', true);
 
-          //if( preg_match("/\d(?=\+)/i", $item_count, $m) ) {
-				     $item_count = $m[0];
-             $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
-          //} else {
-          //   $inspection_fee = 0;
-          //}
+            //if( preg_match("/\d(?=\+)/i", $item_count, $m) ) {
+				       $item_count = $m[0];
+               $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
+            //} else {
+            //   $inspection_fee = 0;
+            //}
 
-					$values['user_id'] = $user_id;
-					$values['owner_id'] = $marketplace->owner_id;
-					$values['marketplace_id'] = $order[0];
-					$values['count'] = 1;
-					$values['summ'] = $arrPost['mc_gross'];
-          $values['price'] = $marketplace->price;
-          $values['shipping'] = $product_shipping_fee;
-          $values['inspection'] = $inspection_fee;
-					$values['date'] = date('Y-m-d H:i:s');
-          $values['contact_email'] = $arrPost['payer_email'];
-					$table = Engine_Api::_()->getDbtable('orders', 'marketplace');
-					$final_amount = $marketplace->price + $product_shipping_fee + $inspection_fee - $coupon_discount;
+					  $values['user_id'] = $user_id;
+					  $values['owner_id'] = $marketplace->owner_id;
+					  $values['marketplace_id'] = $order[0];
+					  $values['count'] = 1;
+					  $values['summ'] = $arrPost['mc_gross'];
+            $values['price'] = $marketplace->price;
+            $values['shipping'] = $product_shipping_fee;
+            $values['inspection'] = $inspection_fee;
+					  $values['date'] = date('Y-m-d H:i:s');
+            $values['contact_email'] = $arrPost['payer_email'];
+					  $table = Engine_Api::_()->getDbtable('orders', 'marketplace');
+					  $final_amount = $marketplace->price + $product_shipping_fee + $inspection_fee - $coupon_discount;
 
-					if ($final_amount == $arrPost['mc_gross'])
-						$table->insert($values);
+					  if ($final_amount == $arrPost['mc_gross'])
+						  $table->insert($values);
 						
-          $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
+            $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
 
-          if( $user_id != 0) { 
-    					$buyer = Engine_Api::_()->getItem('user', $user_id);
-          
-					    $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-					    $notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
-					    $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-					    $notifyApi->addNotification($buyer, $owner, $marketplace, 'marketplace_transaction_to_buyer');
-					    if(Engine_Api::_()->marketplace()->couponIsActive()){
-						    $couponcartTable->delete(array(
-							    'user_id = ?' => $user_id
-						    ));
-					    }
-          } else { //mailing
-              if( $owner->getIdentity() and $marketplace->getIdentity() ) {
-                  $this->_paymentMailing($values['contact_email'], $owner, $marketplace, $values['count']);
-              }
-          } // user_id != 0
-				}
-			}
-		}
+            if( $user_id != 0) { 
+      					$buyer = Engine_Api::_()->getItem('user', $user_id);
+            
+					      $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+					      $notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
+					      $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+					      $notifyApi->addNotification($buyer, $owner, $marketplace, 'marketplace_transaction_to_buyer');
+					      if(Engine_Api::_()->marketplace()->couponIsActive()){
+						      $couponcartTable->delete(array(
+							      'user_id = ?' => $user_id
+						      ));
+					      }
+            } else { //mailing
+                if( $owner->getIdentity() and $marketplace->getIdentity() ) {
+                    $this->_paymentMailing($values['contact_email'], $owner, $marketplace, $values['count']);
+                }
+            } // user_id != 0
+				  }
+			  }
+		  }
     }
 
     private function _paymentMailing($buyerEmail, $owner, $marketplace, $count) {
