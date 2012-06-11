@@ -20,7 +20,8 @@ class User_Widget_ProfileFieldsController extends Engine_Content_Widget_Abstract
 
     $this->view->level_id = $viewer->level_id;
 
-    if( $viewer->level_id <= 2 )  {
+    if( $viewer->level_id <= 2 and !$viewer->isSelf($subject) )  {
+        $this->view->canBan = true;
         $notBanned = ( $subject->enabled and $subject->approved );
         $request = Zend_Controller_Front::getInstance()->getRequest()->getPost();
 
@@ -37,7 +38,7 @@ class User_Widget_ProfileFieldsController extends Engine_Content_Widget_Abstract
             $subject->save();
         }
         $this->view->notBanned = $notBanned;
-    }
+    } else $this->view->canBan = false;
 
     $this->view->aliasValues = Engine_Api::_()->fields()->getFieldsValuesByAlias($subject); 
     $this->view->average_rating = Engine_Api::_()->review()->getUserAverageRating($subject);

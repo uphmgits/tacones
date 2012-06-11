@@ -3,7 +3,7 @@
   <?=$this->itemPhoto($this->subject(), 'thumb_profile')?>
 </div>
 <div id='profile_fields_details'>
-  <?php if($this->level_id <= 2) : ?>
+  <?php if( $this->canBan ) : ?>
     <form action="" method="post">
       <button type="submit" name="ban_option">
         <?php if( $this->notBanned ) echo $this->translate('Ban'); else echo $this->translate('Unban');?>
