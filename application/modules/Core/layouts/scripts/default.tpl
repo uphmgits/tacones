@@ -127,6 +127,7 @@
   <script type="text/javascript" src="<?=$this->baseUrl()?>/externals/jqscroll/aplweb.scrollbars.js"></script>
   <script type="text/javascript">
     jQuery.noConflict();
+    isMobile = false;
     <?php echo $this->headScript()->captureStart(Zend_View_Helper_Placeholder_Container_Abstract::PREPEND) ?>
 
     Date.setServerOffset('<?php echo date('D, j M Y G:i:s O', time()) ?>');

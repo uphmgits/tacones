@@ -1,7 +1,7 @@
 <?php $viewer = $this->viewer(); ?>
 <?php foreach( $this->paginator as $item ): ?>
   <?php $marketplaceId = $item->getIdentity(); ?>
-  <li>
+  <li class="marketplaces_browse_item">
     <div class='marketplaces_browse_photo'>
       <?php echo $this->htmlLink($item->getHref(), $this->itemPhoto($item, 'normal')) ?>
     </div>
@@ -51,7 +51,9 @@
             <?=$this->user($item->owner_id)->getTitle()?><br/>
             <?=$this->htmlLink(array('route' => 'marketplace_view', 'user_id' => $item->owner_id), $this->translate('see all seller items'))?>
           </div>
+        </div>
       </div>
+
     </div>
   </li>
 <?php endforeach; ?>

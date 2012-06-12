@@ -2961,7 +2961,7 @@ a.button {
 ul.marketplace-browse-options {
   float: right;
 }
-ul.marketplace-browse-options > li {
+ul.marketplace-browse-options li {
   display: inline-block;
   *display: inline;
   *zoom: 1;
@@ -2985,7 +2985,7 @@ ul.brand-list {
 li.brand-container:hover ul.brand-list {
   display: block;
 }
-.marketplace-browse-options-container .filter-options > span {
+.marketplace-browse-options-container .filter-options span {
   color: #d1cfcf;
   font-weight: bold;
   padding-right: 20px;

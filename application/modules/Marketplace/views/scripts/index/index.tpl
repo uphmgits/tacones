@@ -4,13 +4,13 @@
     #marketplace-content .hscroller { display: none !important; }
     #global_page_marketplace-index-index .login-popup { left: 0; }
     #global_page_marketplace-index-index ul.marketplaces_browse { position: relative; width: 100% !important; }
-    #global_page_marketplace-index-index ul.marketplaces_browse > li { position: absolute; display: none; }
+    #global_page_marketplace-index-index li.marketplaces_browse_item { position: absolute; display: none; }
     #global_page_marketplace-index-index #global_content { max-width: 940px; overflow: visible; width: auto; padding: 0 10px; }
     #global_page_marketplace-index-index .header_img_sd_home { text-align: center; }
-    #global_page_marketplace-index-index .marketplaces_browse_photo > a { display: block; }
-    #global_page_marketplace-index-index .marketplaces_browse_info_title > a { font-family: arial; letter-spacing: -2px }
-    #global_page_marketplace-index-index ul.marketplaces_browse > li.correct_font { display: block; }
-    #global_page_marketplace-index-index .correct_font .marketplaces_browse_info_title > a{ font-family: Univers LT Std; letter-spacing: 0; }
+    #global_page_marketplace-index-index .marketplaces_browse_photo a { display: block; }
+    #global_page_marketplace-index-index .marketplaces_browse_info_title a { font-family: arial; letter-spacing: -2px }
+    #global_page_marketplace-index-index li.correct_font { position: absolute; display: block; }
+    #global_page_marketplace-index-index .correct_font .marketplaces_browse_info_title a { font-family: Univers LT Std; letter-spacing: 0; }
     #global_page_marketplace-index-index .last-column-login-popup { right: 0; left: auto }
 </style>
 
@@ -92,7 +92,7 @@
             var columnsHeight = new Array(columns);
             for (i = 0; i < columns; i++) { columnsHeight[i] = 0; }
             
-            list = jQuery("ul.marketplaces_browse > li");
+            list = jQuery("li.marketplaces_browse_item");
             list.find('div.login-popup').removeClass('last-column-login-popup'); 
 
             list.each(function(i){
@@ -110,7 +110,6 @@
                         element.css('top', columnsHeight[colNum] + 'px');
                         element.css('left', colNum * columnsWidth + 'px');
                         columnsHeight[colNum] += (h + 30);
-                        
                         heightBlock = Math.max.apply( Math, columnsHeight );
                         jQuery('ul.marketplaces_browse').height(heightBlock);
                     });
@@ -131,12 +130,39 @@
 
     jQuery(document).ready(function () {
         refreshMarketplaceList();
-        jQuery("#marketplace-content").marketplaceScrollbars("<?=$this->baseUrl()?>", <?=$this->category?>, <?=$this->brand_id?>, <?=$this->never_worn?>);
+        if( isMobile ) {
+          btn = "<button type='button' onclick='viewMoreMarketplaces();'><?=$this->translate('View More')?></button>";
+          jQuery('#marketplace-content').append(btn);
+        } else {
+          jQuery("#marketplace-content").marketplaceScrollbars("<?=$this->baseUrl()?>", <?=$this->category?>, <?=$this->brand_id?>, <?=$this->never_worn?>);
+        }
     });
 
     jQuery(window).bind('resize', function() { 
         refreshMarketplaceList();
     });
+
+    function viewMoreMarketplaces() {
+      if( !parseInt(jQuery('#update-wait').attr('params')) ) {
+        pageEl = jQuery('#next-page');
+        nextPage = parseInt(pageEl.attr('params'));
+        jQuery('#update-wait').attr('params', 1);
+        jQuery.ajax({
+            url: '<?=$this->baseUrl()?>' + '/marketplaces/ajaxlist',
+            type: 'post',
+            dataType: "html",
+            data: { 'page':nextPage, 'category_id':<?=$this->category?>, 'brand_id':<?=$this->brand_id?>, 'neverworn':<?=$this->never_worn?> },
+            success: function(data) {
+                if( data ) {
+                  jQuery('#marketplace-content .marketplaces_browse').append(data);
+                  refreshMarketplaceList(true);
+                  pageEl.attr('params', nextPage + 1);  
+                }
+                jQuery('#update-wait').attr('params', 0);
+            }
+        });
+      }
+    }
 </script>
 
 
@@ -238,11 +264,12 @@ span.like:hover{
       <ul class="marketplaces_browse">
         <?php foreach( $this->paginator as $item ): ?>
           <?php $marketplaceId = $item->getIdentity(); ?>
-          <li>
+          <li class="marketplaces_browse_item">
             <div class='marketplaces_browse_photo'>
               <?php echo $this->htmlLink($item->getHref(), $this->itemPhoto($item, 'normal')) ?>
             </div>
             <div class='marketplaces_browse_info'>
+
               <div class='marketplaces_browse_info_title'>
                 <div class="love-info">
                     <?php if( $viewer->getIdentity() ) : ?>
@@ -264,7 +291,9 @@ span.like:hover{
                       </div>
 
                     <?php else : ?>
-                      <span class="like" onclick="$$('.login-popup').hide(); $('login-popup-<?=$marketplaceId?>').show();"><?=$item->getLikeCount()?></span>
+                      <span class="like" onclick="$$('.login-popup').hide(); $('login-popup-<?=$marketplaceId?>').show();">
+                        <?=$item->getLikeCount()?>
+                      </span>
                       <span class="comment" id="comment-lips-<?=$marketplaceId?>" onclick="$$('.login-popup').hide(); $('login-popup-<?=$marketplaceId?>').show();">
                           <?=$item->comment_count?>
                       </span>
@@ -336,8 +365,9 @@ span.like:hover{
                     <?=$this->user($item->owner_id)->getTitle()?><br/>
                     <?=$this->htmlLink(array('route' => 'marketplace_view', 'user_id' => $item->owner_id), $this->translate('see all seller items'))?>
                   </div>
-              </div>
-            </div>
+                </div> <!-- more-seller-items -->
+              </div> <!-- marketplaces_browse_info_blurb -->
+            </div> <!-- marketplaces_browse_info -->
           </li>
         <?php endforeach; ?>
       </ul>
