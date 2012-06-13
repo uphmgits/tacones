@@ -35,7 +35,7 @@
   <hr/>
 
   <?php if(!empty($this->cartitems) && count($this->cartitems)): ?>
-    <?php $i = 0; $colInRow = 5; $shipping_fee = 0; $total_amount = 0; ?> 
+    <?php $i = 0; $colInRow = 5; $shipping_fee = 0; $inspection_fee = 0; $total_amount = 0; ?> 
     <?php $this->addHelperPath(APPLICATION_PATH . '/application/modules/Fields/View/Helper', 'Fields_View_Helper'); ?>
 
     <?php foreach($this->cartitems as $cartitem): ?>
@@ -53,12 +53,13 @@
 	      <?php if( $i++ % $colInRow == $colInRow - 1 ) echo "</ul>"; ?> 
 
         <?php $shipping_fee += $marketplace->shipping * $cartitem['count']; ?>
+        <?php $inspection_fee += Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price); ?>
         <?php $total_amount += $marketplace->price * $cartitem['count']; ?>
 
     <?php endforeach; ?>
 
     <?php if( $i % $colInRow != 0 ) echo "</ul>"; ?>
-    <?php $total_amount_full = $total_amount + $shipping_fee; ?>
+    <?php $total_amount_full = $total_amount + $shipping_fee + $inspection_fee; ?>
 
     <hr/>
     <div class="cart-total-container"> 
@@ -68,6 +69,10 @@
     <div class="cart-total-container"> 
       <span><?=$this->translate('SHIPPING')?></span>
       <span>$<?=number_format($shipping_fee)?></span>
+    </div>
+    <div class="cart-total-container"> 
+      <span><?=$this->translate('INSPECTION')?></span>
+      <span>$<?=number_format($inspection_fee)?></span>
     </div>
     <hr/>
     <div class="cart-total-container"> 

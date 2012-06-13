@@ -1889,8 +1889,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       $this->view->cartitems = $cartitems;
 
 	    $this->view->flat_shipping_rate = $flat_shipping_rate = floatval(Engine_Api::_()->getApi('settings', 'core')->getSetting('flat.shipping.rate', 0));
-      $this->view->inspection_fee = $inspection_fee = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.inspection', 0);
-	/*
+   /*   $this->view->inspection_fee = $inspection_fee = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.inspection', 0);
+	
 	    if(Engine_Api::_()->marketplace()->couponIsActive()){
 		    $couponTable = Engine_Api::_()->getDbTable('coupons', 'marketplace');
 		    $couponTableName = $couponTable->info('name');

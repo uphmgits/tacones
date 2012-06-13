@@ -39,6 +39,7 @@ class Marketplace_Api_Payment {//extends Core_Api_Abstract {
         $this->addFormField("payer_email", $this->paypalData['payer_email']);
         $this->addFormField("payer_id", $this->paypalData['payer_id']);
         $this->addFormField("amount", $this->paypalData['amount']);
+
 		if(isset($this->paypalData['custom']))
 			$this->addFormField("custom", $this->paypalData['custom']);
         $this->addFormField("currency_code", $this->currencyCode);
