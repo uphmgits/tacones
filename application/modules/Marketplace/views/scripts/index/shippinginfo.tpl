@@ -15,7 +15,7 @@
     <?php foreach($this->cartitems as $cartitem): ?>
         <?php $marketplace = Engine_Api::_()->getItem('marketplace', $cartitem['marketplace_id']); ?>
         <?php $shipping_fee += $marketplace->shipping * $cartitem['count']; ?>
-        <?php $inspection_fee += Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price); ?>
+        <?php $inspection_fee += Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price) * $cartitem['count']; ?>
         <?php $total_amount += $marketplace->price * $cartitem['count']; ?>
     <?php endforeach; ?>
     <?php $total_amount_full = $total_amount + $shipping_fee + $inspection_fee; ?>

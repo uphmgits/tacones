@@ -46,14 +46,17 @@
             <table class="product-title-right">
               <tbody><tr>
                 <td><?=$marketplace->getTitle()?></td>
-                <td width="20">$<?=number_format($marketplace->price, 2)?></td>
+                <td width="20">
+                  $<?=number_format($marketplace->price, 2)?>
+                  <div style="color:#93C;text-transform:none;">x<?=$cartitem['count']?></div>
+                </td>
               </tr></tbody>
             </table>
         </li>
 	      <?php if( $i++ % $colInRow == $colInRow - 1 ) echo "</ul>"; ?> 
 
         <?php $shipping_fee += $marketplace->shipping * $cartitem['count']; ?>
-        <?php $inspection_fee += Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price); ?>
+        <?php $inspection_fee += Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price) * $cartitem['count']; ?>
         <?php $total_amount += $marketplace->price * $cartitem['count']; ?>
 
     <?php endforeach; ?>
@@ -79,7 +82,6 @@
       <span><?=$this->translate('TOTAL')?></span>
       <span>$<?=number_format($total_amount_full, 2);?></span>
     </div>
-
     <hr/>
     <div style="float: right;">
   	  <?=$this->paymentForm; ?>

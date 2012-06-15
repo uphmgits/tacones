@@ -123,18 +123,17 @@ function createInvoice(value) {
 <?php if( count($this->paginator) ): ?>
 <div class="admin_table_form">
 <form id='multimodify_form' method="post" action="" onSubmit="multiModify()">
-  <table class='admin_table'>
+  <table class='admin_table' width="100%" style="table-layout: fixed;">
     <thead>
       <tr>
-        <th style='width: 1%;'><input onclick="selectAll()" type='checkbox' class='checkbox'></th>
-        <th style='width: 1%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('order_id', 'DESC');"><?php echo $this->translate("ID") ?></a></th>
-        <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('marketplace_id', 'DESC');"><?php echo $this->translate("Marketplace") ?></a></th>
-        <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('user_id', 'DESC');"><?php echo $this->translate("Seller") ?></a></th>
-        <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('owner_id', 'DESC');"><?php echo $this->translate("Who buy?") ?></a></th>
-        <th><a href="javascript:void(0);" onclick="javascript:changeOrder('summ', 'DESC');"><?php echo $this->translate("Summ") ?></a></th>
-        <th style='width: 30%;'><?php echo $this->translate("Status") ?></th>
-        <th style='width: 1%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('count', 'DESC');"><?php echo $this->translate("Cnt") ?></a></th>
-        <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('date', 'DESC');"><?php echo $this->translate("Date") ?></a></th>
+        <th style='width: 3%;'><input onclick="selectAll()" type='checkbox' class='checkbox'></th>
+        <th style='width: 4%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('order_id', 'DESC');"><?php echo $this->translate("ID") ?></a></th>
+        <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('marketplace_id', 'DESC');"><?php echo $this->translate("Marketplace") ?></a></th>
+        <th class="wrap"><a href="javascript:void(0);" onclick="javascript:changeOrder('user_id', 'DESC');"><?php echo $this->translate("Seller") ?></a></th>
+        <th class="wrap"><a href="javascript:void(0);" onclick="javascript:changeOrder('owner_id', 'DESC');"><?php echo $this->translate("Who buy?") ?></a></th>
+        <th style='width: 140px'><a href="javascript:void(0);" onclick="javascript:changeOrder('summ', 'DESC');"><?php echo $this->translate("Summ") ?></a></th>
+        <th style='width: 230px'><?php echo $this->translate("Status") ?></th>
+        <th style='width: 12%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('date', 'DESC');"><?php echo $this->translate("Date purchased") ?></a></th>
 
       </tr>
     </thead>
@@ -155,17 +154,19 @@ function createInvoice(value) {
                 <?=$this->translate('Deleted');?>
               <?php endif; ?>
             </td>
-            <td class='admin_table_bold'>
+            <td class='admin_table_bold wrap'>
               <?php
-                  $display_name = $this->item('user', $item->owner_id)->getTitle();
-                  echo $this->htmlLink($this->item('user', $item->owner_id)->getHref(), $display_name, array('target' => '_blank'));
+                  $owner = $this->item('user', $item->owner_id);
+                  echo $this->htmlLink($owner->getHref(), $owner->getTitle(), array('target' => '_blank'));
+                  echo "<div>{$owner->email}</div>";
               ?>
             </td>
-            <td class='admin_table_bold'>
+            <td class='admin_table_bold wrap'>
               <?php
                 if( $item->user_id ) {
-                  $display_name = $this->item('user', $item->user_id)->getTitle();
-                  echo $this->htmlLink($this->item('user', $item->user_id)->getHref(), $display_name, array('target' => '_blank'));
+                  $buyer = $this->item('user', $item->user_id);
+                  echo $this->htmlLink($buyer->getHref(), $buyer->getTitle(), array('target' => '_blank'));
+                  echo "<div>{$buyer->email}</div>";
                 } else {
                   echo $this->translate('Unregistered user');
                   if( $item->contact_email ) echo "<div style='font-weight: normal; font-size: 10px;'>".$this->translate('Contact Email:')." ".$item->contact_email."</div>";
@@ -175,16 +176,20 @@ function createInvoice(value) {
             
             <td>
               <table>
-                <tr><td><?=$this->translate("Total: ")?></td><td><?=$item->summ?></td>
-                <tr><td><?=$this->translate("Price: ")?></td><td><?=$item->price?></td>
-                <tr><td><?=$this->translate("Inspection: ")?></td><td><?=$item->inspection?></td>
-                <tr><td><?=$this->translate("Shipping: ")?></td><td><?=$item->shipping?></td>
+                <tr><td style="font-weight:bold;"><?=$this->translate("Total: ")?></td>
+                    <td style="font-weight:bold;"><?=$item->summ * $item->count?></td></tr>
+                <tr><td><?=$this->translate("Count: ")?></td><td><?=$item->count?></td></tr>
+                <tr><td><?=$this->translate("Item Total: ")?></td><td><?=$item->summ?></td></tr>
+                <tr><td><?=$this->translate("Price: ")?></td><td><?=$item->price?></td></tr>
+                <tr><td><?=$this->translate("Inspection: ")?></td><td><?=$item->inspection?></td></tr>
+                <tr><td><?=$this->translate("Shipping: ")?></td><td><?=$item->shipping?></td></tr>
+
               </table>
             </td>
             <td>
                 <?php if( $item->to_file_transfer == 0) : ?>
                   <?php if( $item->status != 9) : ?>
-                  <table>
+                  <table width="100%">
                     <tr>
                       <td>
                         <input <?php if ( $item->status == 0 ) echo 'checked';?> name="status_modify_<?=$itemId?>" value="0" type="radio" class="radio" />
@@ -241,7 +246,6 @@ function createInvoice(value) {
                   <?php endif; ?>
                 <?php endif; ?>
             </td>
-            <td><?php echo $item->count; ?></td>
             <td><?=str_replace(' ', '<br/>', $item->date)?></td>
           </tr>
         <?php endforeach; ?>
