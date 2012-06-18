@@ -103,7 +103,7 @@ function selectAll()
         <?php foreach( $this->paginator as $item ): ?>
           <tr>
             <td>
-              <input <?php if ( $item->to_file_transfer > 0 or $item->status != 1 ) echo 'disabled';?> name="modify_<?=$item->getIdentity()?>" value="<?=$item->getIdentity()?>" type="checkbox" class="checkbox" />
+              <input <?php if ( $item->to_file_transfer > 0 or $item->status != 'sold' ) echo 'disabled';?> name="modify_<?=$item->getIdentity()?>" value="<?=$item->getIdentity()?>" type="checkbox" class="checkbox" />
             </td>
             <td><?php echo $item->order_id ?></td>
             <td class='admin_table_user'>
@@ -136,10 +136,13 @@ function selectAll()
             <td><?php if( $item->to_file_transfer == 0) : ?>
                     <?php switch( $item->status ) {
                           //case 0 : echo $this->translate('In Progress'); break;
-                          case 1 : echo '<span style="color:green">'.$this->translate('Sold')."</span>"; break;
-                          case 2 : echo '<span style="color:orange">'.$this->translate('Return')."</span>"; break;
-                          case 3 : echo '<span style="color:red">'.$this->translate('Not Legitimate')."</span>"; break;
-                          case 9 : echo '<span style="color:red; font-weight: bold;">'.$this->translate('Punished')."</span>"; break;
+                          case 'wait' : echo '<span style="color:lightgray">'.$this->translate('Wait')."</span>"; break;
+                          case 'inprogress' : echo '<span style="color:gold">'.$this->translate('In Progress')."</span>"; break;
+                          case 'sold' : echo '<span style="color:green">'.$this->translate('Sold')."</span>"; break;
+                          case 'return' : echo '<span style="color:orange">'.$this->translate('Return')."</span>"; break;
+                          case 'approved' : echo '<span style="color:#33FF99">'.$this->translate('Approved')."</span>"; break;
+                          case 'failed' : echo '<span style="color:#FF0066">'.$this->translate('Failed')."</span>"; break;
+                          case 'punished' : echo '<span style="color:red; font-weight: bold;">'.$this->translate('Punished')."</span>"; break;
                     } ?>
                 <?php else : ?>
                     <?php if( $item->to_file_transfer == 1) : ?>

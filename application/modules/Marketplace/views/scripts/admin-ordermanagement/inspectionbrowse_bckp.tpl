@@ -71,12 +71,26 @@ function selectAll()
     }
   }
 }
+function startInspectionNotify(value) {
+    $('notifyStart').value = value;
+    $('frmNotifyStart').submit();
+}
+function finishInspectionNotify(value) {
+    $('notifyFinish').value = value;
+    $('frmNotifyFinish').submit();
+}
 function createInvoice(value) {
     $('createInvoice').value = value;
     $('frmCreateInvoice').submit();
 }
 </script>
 
+<form action="" method="post" id="frmNotifyStart">
+  <input type="hidden" id="notifyStart" name="notifyStart" value="" />
+</form>
+<form action="" method="post" id="frmNotifyFinish">
+  <input type="hidden" id="notifyFinish" name="notifyFinish" value="" />
+</form>
 <form action="" method="post" id="frmCreateInvoice">
   <input type="hidden" id="createInvoice" name="createInvoice" value="" />
 </form>
@@ -87,12 +101,10 @@ function createInvoice(value) {
 <form method='post' action=''>
   <select name='status_filter'>
     <option value='all'      <?php if( $this->status_filter == 'all' )      echo "selected"?>><?=$this->translate("All")?></option>
-    <option value='wait'     <?php if( $this->status_filter == 'wait' )     echo "selected"?>><?=$this->translate("Wait product")?></option>
-    <option value='inprogress' <?php if( $this->status_filter == 'inprogress' )  echo "selected"?>><?=$this->translate("In Progress")?></option>
-    <option value='approved' <?php if( $this->status_filter == 'approved' ) echo "selected"?>><?=$this->translate("Approved")?></option>
-    <option value='failed'   <?php if( $this->status_filter == 'failed' )   echo "selected"?>><?=$this->translate("Failed")?></option>
+    <option value='pending'  <?php if( $this->status_filter == 'pending' )  echo "selected"?>><?=$this->translate("In Progress")?></option>
     <option value='sold'     <?php if( $this->status_filter == 'sold' )     echo "selected"?>><?=$this->translate("Sold")?></option>
     <option value='return'   <?php if( $this->status_filter == 'return' )   echo "selected"?>><?=$this->translate("Return")?></option>
+    <option value='notlegit' <?php if( $this->status_filter == 'notlegit' ) echo "selected"?>><?=$this->translate("Not Legitimate")?></option>
     <option value='punished' <?php if( $this->status_filter == 'punished' ) echo "selected"?>><?=$this->translate("Punished")?></option>
   </select>  
   <button type='submit' name="submit_button" value="change_status_filter"><?php echo $this->translate("Filter") ?></button>
@@ -126,13 +138,12 @@ function createInvoice(value) {
       </tr>
     </thead>
     <tbody>
-        <?php $disableCheckbox = in_array($this->status_filter, array('sold', 'return', 'failed')) ? false : true; ?>
+      
         <?php foreach( $this->paginator as $item ): ?>
           <?php $itemId = $item->getIdentity(); ?>
           <tr>
             <td>
-              <input type="checkbox" <?php if ( $disableCheckbox or $item->to_file_transfer > 0) echo 'disabled';?> 
-                     name="modify_<?=$itemId?>" value="<?=$itemId?>" class="checkbox" />
+              <input <?php if ( $item->to_file_transfer > 0 or $this->status_filter == 'all' or $this->status_filter == 'pending') echo 'disabled';?> name="modify_<?=$itemId?>" value="<?=$itemId?>" type="checkbox" class="checkbox" />
             </td>
             <td><?php echo $item->order_id ?></td>
             <td class='admin_table_user'>
@@ -151,23 +162,16 @@ function createInvoice(value) {
               ?>
             </td>
             <td class='admin_table_bold wrap'>
-              <?php if( $item->user_id ) : ?>
-                  <?php $buyer = $this->item('user', $item->user_id); ?>
-                  <?=$this->htmlLink($buyer->getHref(), $buyer->getTitle(), array('target' => '_blank'));?>
-                  <?php if( $item->shipping_info ) :	?>
-                    <br/>                  
-                    (<a class='smoothbox' href="<?=$this->url(array('action' => 'view-shipping-info', 'siid' => $item->shipping_info	));?>">
-                      <?=$this->translate("shipping info")?>
-                    </a>)
-                  <?php endif;?>
-              <?php else : ?>
-                  <?=$this->translate('Unregistered user');?>
-                  <?php if( $item->contact_email ) : ?>
-                    <div style='font-weight: normal; font-size: 10px;'>
-                      <?=$this->translate('Contact Email:')." ".$item->contact_email?>
-                    </div>
-                  <?php endif;?>
-              <?php endif;?>
+              <?php
+                if( $item->user_id ) {
+                  $buyer = $this->item('user', $item->user_id);
+                  echo $this->htmlLink($buyer->getHref(), $buyer->getTitle(), array('target' => '_blank'));
+                  echo "<div>{$buyer->email}</div>";
+                } else {
+                  echo $this->translate('Unregistered user');
+                  if( $item->contact_email ) echo "<div style='font-weight: normal; font-size: 10px;'>".$this->translate('Contact Email:')." ".$item->contact_email."</div>";
+                }
+              ?>
             </td>
             
             <td>
@@ -182,80 +186,66 @@ function createInvoice(value) {
 
               </table>
             </td>
-
             <td>
-              <?php if( $item->to_file_transfer == 0) : ?>
+                <?php if( $item->to_file_transfer == 0) : ?>
+                  <?php if( $item->status != 9) : ?>
+                  <table width="100%">
+                    <tr>
+                      <td>
+                        <input <?php if ( $item->status == 0 ) echo 'checked';?> name="status_modify_<?=$itemId?>" value="0" type="radio" class="radio" />
+                        <span style='font-size: 11px;'><?=$this->translate('In Progress')?></span>
+                      </td>
+                      <td>
+                        <input <?php if ( $item->status == 1 ) echo 'checked';?> name="status_modify_<?=$itemId?>" value="1" type="radio" class="radio" />
+                        <span style='font-size: 11px;'><?=$this->translate('Sold')?></span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input <?php if ( $item->status == 2 ) echo 'checked';?> name="status_modify_<?=$itemId?>" value="2" type="radio" class="radio" />
+                        <span style='font-size: 11px;'><?=$this->translate('Return')?></span>
+                      </td>
+                      <td>
+                        <input <?php if ( $item->status == 3 ) echo 'checked';?> name="status_modify_<?=$itemId?>" value="3" type="radio" class="radio" />
+                        <span style='font-size: 11px;'><?=$this->translate('Not Legitimate')?></span>
+                      </td>
+                    </tr>
+                  </table>
 
-                <?php if( $item->status != 'punished') : ?>
-                <table width="100%">
-                  <tr>
-                    <td>
-                      <input type="radio" <?=($item->status == 'wait') ? 'checked' : 'disabled';?> name="smod_<?=$itemId?>" value="wait"/>
-                      <span style='font-size: 11px;'><?=$this->translate('Wait product')?></span>
-                    </td>
-                    <td>
-                      <input type="radio" <?php if ( $item->status == 'inprogress' ) echo 'checked';?> 
-                             name="smod_<?=$itemId?>" <?php if ( $item->status != 'wait' ) echo 'disabled';?> 
-                             value="inprogress"/>
-                      <span style='font-size: 11px;'><?=$this->translate('In progress')?></span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="radio" <?php if ( $item->status == 'approved' ) echo 'checked';?> 
-                             name="smod_<?=$itemId?>"  <?php if ( $item->status != 'inprogress' ) echo 'disabled';?> 
-                             value="approved"/>
-                      <span style='font-size: 11px;'><?=$this->translate('Approved')?></span>
-                    </td>
-                    <td>
-                      <input type="radio" <?php if ( $item->status == 'failed' ) echo 'checked';?> 
-                             name="smod_<?=$itemId?>" <?php if ( $item->status != 'inprogress' ) echo 'disabled';?> 
-                             value="failed"/>
-                      <span style='font-size: 11px;'><?=$this->translate('Failed')?></span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="radio" <?php if ( $item->status == 'sold' ) echo 'checked';?> 
-                             name="smod_<?=$itemId?>" <?php if ( $item->status != 'approved' ) echo 'disabled';?> 
-                             value="sold"/>
-                      <span style='font-size: 11px;'><?=$this->translate('Sold')?></span>
-                    </td>
-                    <td>
-                      <input type="radio" <?php if ( $item->status == 'return' ) echo 'checked';?> 
-                             name="smod_<?=$itemId?>" <?php if ( $item->status != 'approved' ) echo 'disabled';?> 
-                             value="return"/>
-                      <span style='font-size: 11px;'><?=$this->translate('Return')?></span>
-                    </td>
-                  </tr>
-                </table>
-
-                <div>
-                  <button type='submit' name="submit_button" value="change_status" style="font-size:10px; margin-top: 8px;">
-                    <?=$this->translate("Update Status")?>
-                  </button>
-                  <?php if( file_exists( $this->pdfMainPath . $itemId . ".pdf" ) ) : ?>
-                    <?=$this->htmlLink($this->pdfMainUrl . $itemId . ".pdf", $this->translate('Download Invoice'))?>
-                  <?php else: ?>
-                    <button type="button" onclick="createInvoice(<?=$itemId?>)" style="font-size:10px; margin-top: 8px;">
-                      <?=$this->translate('Create Invoice')?>
+                  <div>
+                    <button type='submit' name="submit_button" value="change_status" style="font-size:10px; margin-top: 8px;">
+                      <?=$this->translate("Update Status")?>
                     </button>
+                    <?php if( file_exists( $this->pdfMainPath . $itemId . ".pdf" ) ) : ?>
+                      <?=$this->htmlLink($this->pdfMainUrl . $itemId . ".pdf", $this->translate('Download Invoice'))?>
+                    <?php else: ?>
+                      <button type="button" onclick="createInvoice(<?=$itemId?>)" style="font-size:10px; margin-top: 8px;">
+                        <?=$this->translate('Create Invoice')?>
+                      </button>
+                    <?php endif; ?>
+                  </div>
+
+                  <div>
+                    <button type="button" onclick="startInspectionNotify(<?=$itemId?>)" style="font-size:10px; margin-top: 8px;">
+                      <?=$this->translate('Notify about<br/>start Inspection')?>
+                    </button>
+                    <button type="button" onclick="finishInspectionNotify(<?=$itemId?>)" style="font-size:10px; margin-top: 8px;">
+                      <?=$this->translate('Notify about<br/>approving item')?>
+                    </button>
+                  </div>
+ 
+                  <?php else : ?>    
+                      <?='<span style="color:red; font-weight: bold;">'.$this->translate('Punished')."</span>"?>
                   <?php endif; ?>
-                </div>
-
-                <?php else : ?>    
-                    <?='<span style="color:red; font-weight: bold;">'.$this->translate('Punished')."</span>"?>
+                <?php else : ?>
+                  <?php if( $item->to_file_transfer == 1) : ?>
+                    <?='<span style="color:gray">'.$this->translate('In Sold File')."</span>"?>
+                  <?php endif; ?>
+                  <?php if( $item->to_file_transfer == 2) : ?>
+                    <?='<span style="color:gray">'.$this->translate('In Return File')."</span>"?>
+                  <?php endif; ?>
                 <?php endif; ?>
-              <?php else : ?>
-                <?php if( $item->to_file_transfer == 1) : ?>
-                  <?='<span style="color:gray">'.$this->translate('In Sold File')."</span>"?>
-                <?php endif; ?>
-                <?php if( $item->to_file_transfer == 2) : ?>
-                  <?='<span style="color:gray">'.$this->translate('In Return File')."</span>"?>
-                <?php endif; ?>
-              <?php endif; ?>
             </td>
-
             <td><?=str_replace(' ', '<br/>', $item->date)?></td>
           </tr>
         <?php endforeach; ?>
@@ -264,14 +254,14 @@ function createInvoice(value) {
   </table>
   <br />
   <div class='buttons'>
-    <button type='submit' name="submit_button" value="change_status" style="float:right;"><?=$this->translate("Update Status")?></button>
+    <button type='submit' name="submit_button" value="change_status"><?=$this->translate("Update Status")?></button>
      <?php if( $this->status_filter == 'sold' ) : ?>
         <button type='submit' name="submit_button" value="add_to_sold_file"><?=$this->translate("Add to Sold File")?></button>
      <?php endif; ?>
      <?php if( $this->status_filter == 'return' ) : ?>
         <button type='submit' name="submit_button" value="add_to_return_file"><?=$this->translate("Add to Return File")?></button>
      <?php endif; ?>
-     <?php if( $this->status_filter == 'failed' ) : ?>
+     <?php if( $this->status_filter == 'notlegit' ) : ?>
         <button type='submit' name="submit_button" value="punish"><?=$this->translate("Punish")?></button>
      <?php endif; ?>
   </div>

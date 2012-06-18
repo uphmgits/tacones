@@ -108,7 +108,7 @@ class Marketplace_AdminManageController extends Core_Controller_Action_Admin
 
           $order = $ordersTable->select()->where('order_id = ?', (int) $value )->query()->fetch();
 
-          if( !empty($order) and $order['to_file_transfer'] == 0 ) {
+          if( !empty($order) and $order['status'] == 'sold' and $order['to_file_transfer'] == 0 ) {
 
               $owner = Engine_Api::_()->getItem('user', $order['owner_id']);
               $marketplace = Engine_Api::_()->getItem('marketplace', $order['marketplace_id']);
