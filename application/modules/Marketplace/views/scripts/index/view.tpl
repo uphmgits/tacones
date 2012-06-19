@@ -152,7 +152,7 @@ endif; ?>
 
     </div>
 
-    <?php if( $this->likeList->getTotalItemCount() ) : ?>
+    <?php if( $likeCount ) : ?>
     
       <ul class="likelist quicklinks">
         <li><h3><?=$this->translate('Item loved by')?></h3></li>

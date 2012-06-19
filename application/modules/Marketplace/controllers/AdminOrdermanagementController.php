@@ -141,7 +141,8 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
             $status = $order['status'];
 
             // the correct new status
-            if( ( $status == 'wait' and $value == 'inprogress' ) or
+            if( ( ($status == 'wait' or $status == 'cancelrequest') and $value == 'inprogress' ) or
+                ( $status == 'cancelrequest' and $value == 'canceled' ) or
                 ( $status == 'inprogress' and ($value == 'approved' or $value == 'failed') ) or
                 ( $status == 'approved' and ($value == 'sold' or $value == 'return') )
               ) {
@@ -177,6 +178,17 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
                 if( $owner and $buyer and $marketplace ) {
                     $notifyApi->addNotification($owner, $buyer, $marketplace, 'item_not_legitimate_to_owner');
                     $notifyApi->addNotification($buyer, $owner, $marketplace, 'item_not_legitimate_to_buyer');
+                }
+              }
+
+              // product canceled
+              if( $status == 'cancelrequest' and $value == 'canceled' ) {
+                $marketplace = Engine_Api::_()->getItem('marketplace', $order['marketplace_id']);
+                $owner = Engine_Api::_()->getItem('user', $order['owner_id']);
+                $buyer = Engine_Api::_()->getItem('user', $order['user_id']);
+                if( $owner and $buyer and $marketplace ) {
+                    $notifyApi->addNotification($owner, $buyer, $marketplace, 'order_canceled_to_owner');
+                    $notifyApi->addNotification($buyer, $owner, $marketplace, 'order_canceled_to_buyer');
                 }
               }
 
@@ -256,7 +268,9 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
       case 'return'     :
       case 'approved'   :
       case 'failed'     :
-      case 'punished'   : $select->where("status = '{$status_filter}'"); break;
+      case 'punished'   : 
+      case 'canceled'   :
+      case 'cancelrequest': $select->where("status = '{$status_filter}'"); break;
     }
 
     $select->order(( !empty($values['order']) ? $values['order'] : 'order_id' ) . ' ' . ( !empty($values['order_direction']) ? $values['order_direction'] : 'ASC' ));

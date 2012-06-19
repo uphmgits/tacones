@@ -7,6 +7,8 @@
  */
 ?>
 
+<style>div.admin-reason-popup { display: none; }</style>
+
 <h2><?php echo $this->translate("Inspection Orders") ?></h2>
 
 <?php if( count($this->navigation) ): ?>
@@ -93,6 +95,8 @@ function createInvoice(value) {
     <option value='failed'   <?php if( $this->status_filter == 'failed' )   echo "selected"?>><?=$this->translate("Failed")?></option>
     <option value='sold'     <?php if( $this->status_filter == 'sold' )     echo "selected"?>><?=$this->translate("Sold")?></option>
     <option value='return'   <?php if( $this->status_filter == 'return' )   echo "selected"?>><?=$this->translate("Return")?></option>
+    <option value='cancelrequest' <?php if( $this->status_filter == 'cancelrequest' ) echo "selected"?>><?=$this->translate("Cancel Request")?></option>
+    <option value='canceled' <?php if( $this->status_filter == 'canceled' ) echo "selected"?>><?=$this->translate("Canceled")?></option>
     <option value='punished' <?php if( $this->status_filter == 'punished' ) echo "selected"?>><?=$this->translate("Punished")?></option>
   </select>  
   <button type='submit' name="submit_button" value="change_status_filter"><?php echo $this->translate("Filter") ?></button>
@@ -186,20 +190,33 @@ function createInvoice(value) {
             <td>
               <?php if( $item->to_file_transfer == 0) : ?>
 
-                <?php if( $item->status != 'punished') : ?>
+                <?php if( $item->status != 'punished' and $item->status != 'canceled' ) : ?>
                 <table width="100%">
                   <tr>
                     <td>
-                      <input type="radio" <?=($item->status == 'wait') ? 'checked' : 'disabled';?> name="smod_<?=$itemId?>" value="wait"/>
+                      <input type="radio" <?=($item->status == 'wait') ? 'checked' : 'disabled';?> 
+                             name="smod_<?=$itemId?>" value="wait"/>
                       <span style='font-size: 11px;'><?=$this->translate('Wait product')?></span>
                     </td>
                     <td>
                       <input type="radio" <?php if ( $item->status == 'inprogress' ) echo 'checked';?> 
-                             name="smod_<?=$itemId?>" <?php if ( $item->status != 'wait' ) echo 'disabled';?> 
+                             name="smod_<?=$itemId?>" <?php if ( $item->status != 'wait' and $item->status != 'cancelrequest' ) echo 'disabled';?> 
                              value="inprogress"/>
                       <span style='font-size: 11px;'><?=$this->translate('In progress')?></span>
                     </td>
                   </tr>
+                  <?php if( $item->status == 'cancelrequest' ) : ?>
+                    <tr>
+                    <td>
+                      <input type="radio" checked name="smod_<?=$itemId?>" value="cancelrequest"/>
+                      <span style='font-size: 11px;'><?=$this->translate('Cancel request')?></span>
+                    </td>
+                    <td>
+                      <input type="radio" name="smod_<?=$itemId?>" value="canceled"/>
+                      <span style='font-size: 11px;'><?=$this->translate('Canceled')?></span>
+                    </td>
+                    </tr>
+                  <?php endif; ?>
                   <tr>
                     <td>
                       <input type="radio" <?php if ( $item->status == 'approved' ) echo 'checked';?> 
@@ -231,6 +248,17 @@ function createInvoice(value) {
                 </table>
 
                 <div>
+                  <?php if( $item->status == 'cancelrequest' ) : ?>
+                    <div style="text-align: center; padding-top: 5px;">
+                      <a href="javascript:void(0);" onclick="Smoothbox.open(document.getElementById('reason_<?=$item->order_id?>'));">
+                        <?=$this->translate("view canceling reason")?>
+                      </a>
+                    </div>
+                    <div id="reason_<?=$item->order_id?>" class="admin-reason-popup">
+                        <?=$item->cancel_reason?>
+                    </div>
+                  <?php endif;?>
+
                   <button type='submit' name="submit_button" value="change_status" style="font-size:10px; margin-top: 8px;">
                     <?=$this->translate("Update Status")?>
                   </button>
@@ -243,9 +271,16 @@ function createInvoice(value) {
                   <?php endif; ?>
                 </div>
 
-                <?php else : ?>    
-                    <?='<span style="color:red; font-weight: bold;">'.$this->translate('Punished')."</span>"?>
+                <?php else : ?>
+                    <div style="text-align:center">
+                    <?php if( $item->status == 'punished' ) : ?>  
+                        <?='<span style="color:red; font-weight: bold;">'.$this->translate('Punished')."</span>"?>
+                    <?php else : ?>
+                        <?='<span style="color:orange; font-weight: bold;">'.$this->translate('Canceled')."</span>"?>
+                    <?php endif; ?>
+                    </div>
                 <?php endif; ?>
+
               <?php else : ?>
                 <?php if( $item->to_file_transfer == 1) : ?>
                   <?='<span style="color:gray">'.$this->translate('In Sold File')."</span>"?>

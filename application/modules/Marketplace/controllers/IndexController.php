@@ -1612,13 +1612,44 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 
         $this->view->assign($values);
 		
-		$select = $select
+		    $select = $select
 					->where("owner_id = ? OR user_id = ?", $viewer->getIdentity())
 					->order(($values['order'] == 'summ'?'CAST('.$values['order'].' AS DECIMAL)':$values['order']).' '.$values['order_direction']);
 
         // Make paginator
         $this->view->paginator = $paginator = Zend_Paginator::factory($select);
         $this->view->paginator = $paginator->setCurrentPageNumber($page);
+    }
+
+    public function cancelingAction() {
+        $orderId = (int)$this->_getParam('order_id', 0);
+        $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+        $order = $orderTable->select()->where("order_id = {$orderId}")->query()->fetch();
+        $this->view->error = false;
+
+        if( $order ) {
+            $marketplace = Engine_Api::_()->getItem('marketplace', $order['marketplace_id']);
+            if( $marketplace ) {
+                $this->view->marketplace = $marketplace;
+                $this->view->order = $order;
+
+                $request = $this->getRequest()->getPost();
+                if( $request and isset($request['reason']) and $order['status'] == 'wait' ) {
+                  $reason = trim($request['reason']);
+                  if( empty($reason) ) {
+                    $this->view->error = true;
+                    return;
+                  }
+                  $orderTable->update(array('status' => 'cancelrequest', 'cancel_reason' => $reason), "order_id = $orderId");
+                } else return;
+            }
+        }
+
+        return $this->_forward('success', 'utility', 'core', array(
+          'smoothboxClose' => true,
+          'parentRefresh' => true,
+          'format'=> 'smoothbox',
+        ));
     }
 
     public function addtocartAction() {

@@ -47,7 +47,7 @@ function multiModify()
   var multimodify_form = $('multimodify_form');
   if (multimodify_form.submit_button.value == 'delete')
   {
-    return confirm('<?php echo $this->string()->escapeJavascript($this->translate("Are you sure you want to delete the selected user accounts?")) ?>');
+    return confirm('<?php echo $this->string()->escapeJavascript($this->translate("Are you sure you want to delete the selected orders?")) ?>');
   }
 }
 
@@ -104,20 +104,22 @@ function loginAsUser(id) {
 	<?php
        if($reportCount > 0 ):
 	?>
-  <table class='admin_table'>
+  <table class='admin_table' width="100%" style="table-layout: fixed;">
     <thead>
       <tr>
-        <th style='width: 1%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('order_id', '<?=(($this->order == 'order_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("ID") ?></a></th>
-        <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('marketplace_id', '<?=(($this->order == 'marketplace_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Marketplace") ?></a></th>
-        <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('owner_id', '<?=(($this->order == 'owner_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Seller") ?></a></th>
-        <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('user_id', '<?=(($this->order == 'user_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Who buy?") ?></a></th>
-        <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('summ', '<?=(($this->order == 'summ') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Price") ?></a></th>
-        <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('count', '<?=(($this->order == 'count') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Count") ?></a></th>
-        <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('date', '<?=(($this->order == 'date') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Date") ?></a></th>
+        <th style='width: 5%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('order_id', '<?=(($this->order == 'order_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("ID") ?></a></th>
+        <th style='width: 15%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('marketplace_id', '<?=(($this->order == 'marketplace_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Marketplace") ?></a></th>
+        <th style='width: 15%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('owner_id', '<?=(($this->order == 'owner_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Seller") ?></a></th>
+        <th style='width: 15%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('user_id', '<?=(($this->order == 'user_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Who buy?") ?></a></th>
+        <th><a href="javascript:void(0);" onclick="javascript:changeOrder('summ', '<?=(($this->order == 'summ') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Price") ?></a></th>
+        <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('date', '<?=(($this->order == 'date') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Date") ?></a></th>
+        <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('date', '<?=(($this->order == 'status') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Status") ?></a></th>
+        <th style='width: 10%;'><?php echo $this->translate("Options")?></th>
       </tr>
     </thead>
     <tbody>
     
+        <?php $viewerId = $this->viewer()->getIdentity(); ?>
         <?php foreach( $this->paginator as $item ): ?>
         <?php 
 			$marketplace = $this->item('marketplace', $item->marketplace_id); 	
@@ -156,9 +158,27 @@ function loginAsUser(id) {
                 }
               ?>
             </td>
-            <td><?php echo $item->summ; ?></td>
-            <td><?php echo $item->count; ?></td>
-            <td><?php echo $item->date; ?></td>
+            <td>
+              <table>
+                <tr><td style="font-weight:bold;"><?=$this->translate("Total: ")?></td>
+                    <td style="font-weight:bold;"><?=$item->summ * $item->count?></td></tr>
+                <tr><td><?=$this->translate("Count: ")?></td><td><?=$item->count?></td></tr>
+                <tr><td style="border: none;"><?=$this->translate("Item Total: ")?></td>
+                    <td style="border: none;"><?=$item->summ?></td></tr>
+              </table>  
+            </td>
+            <td><?=str_replace(' ', '<br/>', $item->date)?></td>
+            <td><?=$item->status?></td>
+            <td>
+                <?php if($item->user_id == $viewerId and $item->status == 'wait') : ?>
+                  <?=$this->htmlLink(array('route' => 'marketplace_general', 
+                                             'action' => 'canceling',
+                                             'order_id' => $item->order_id,
+                                             'format' => 'smoothbox' ), 
+                                      $this->translate('Cancel'),
+                                      array('class' => 'smoothbox'))?>
+                <?php endif; ?>
+            </td>
           </tr>
         <?php endforeach; ?>
      
@@ -167,3 +187,4 @@ function loginAsUser(id) {
   <br />
    <?php endif; ?>
 </div>
+
