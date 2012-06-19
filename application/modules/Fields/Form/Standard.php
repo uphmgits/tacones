@@ -202,7 +202,7 @@ class Fields_Form_Standard extends Engine_Form
     ));
   }
 
-  public function saveValues()
+  public function saveValues($fieldValues=null)
   {
     // An id must be set to save data (duh)
     if( is_null($this->getItem()) )
@@ -212,14 +212,17 @@ class Fields_Form_Standard extends Engine_Form
 
     // Iterate over values
     $values = Engine_Api::_()->fields()->getFieldsValues($this->getItem());
-
-    $fVals = $this->getValues();
-    if( $this->_elementsBelongTo ) {
-      if( isset($fVals[$this->_elementsBelongTo]) ) {
-        $fVals = $fVals[$this->_elementsBelongTo];
-      }
+    if($fieldValues == null) {
+	    $fVals = $this->getValues();
+	    if( $this->_elementsBelongTo ) {
+	      if( isset($fVals[$this->_elementsBelongTo]) ) {
+	        $fVals = $fVals[$this->_elementsBelongTo];
+	      }
+	    }
     }
-
+  	else {
+		$fVals = $fieldValues;
+	}
     foreach( $fVals as $key => $value )
     {
       $parts = explode('_', $key);

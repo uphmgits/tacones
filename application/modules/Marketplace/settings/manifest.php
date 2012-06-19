@@ -163,6 +163,18 @@ return array(
         'category' => '\d+',
       )
     ),
+    'marketplace_ebayimport' => array(
+      'route' => 'marketplaces/ebayimport/:category',
+      'defaults' => array(
+        'module' => 'marketplace',
+        'controller' => 'index',
+        'action' => 'ebayimport',
+        'category' => 0
+      ),
+      'reqs' => array(
+        'category' => '\d+',
+      )
+    ),
     'marketplace_itempreview' => array(
       'route' => 'marketplaces/itempreview/:marketplace_id',
       'defaults' => array(

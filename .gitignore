@@ -22,3 +22,7 @@
 temporary/
 
 
+/.gitignore
+/.project
+/.buildpath
+/.settings/

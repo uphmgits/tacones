@@ -1130,7 +1130,210 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         }
     }
     
+	public function ebayimportAction()
+    {    	
+    	
+        if (!$this->_helper->requireUser()->isValid())
+            return;
+        if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'create')->isValid())
+            return;
+        $viewer = Engine_Api::_()->user()->getViewer();
+        $this->view->navigation = $this->getNavigation();
+        $this->view->form = $form = new Marketplace_Form_Ebayimport();
+
+        $category_id = $this->_getParam('category', 0);    
+        Engine_Api::_()->marketplace()->tree_list($category_id);
+        $a_tree = Engine_Api::_()->marketplace()->tree_list_load_array(array($category_id));
+        $this->view->a_tree = $a_tree;
+        $this->view->urls = $this->_helper->url;
+        $this->view->category_id = $category_id;	
+
+        // set up data needed to check quota
+        $values['user_id'] = $viewer->getIdentity();
+        $paginator = $this->_helper->api()->getApi('core', 'marketplace')->getMarketplacesPaginator($values);
+
+        $this->view->quota = $quota = Engine_Api::_()->authorization()->getPermission($viewer->level_id, 'marketplace', 'max');
+        $this->view->current_count = $paginator->getTotalItemCount();
+
+        $marketplaceTable = Engine_Api::_()->getDbtable('marketplaces', 'marketplace');
+        $db = $marketplaceTable->getAdapter();
+        $db->beginTransaction();
+
+        try {
+
+            $mark = $marketplaceTable->getlastemail($viewer->getIdentity()); //sendInvites($viewer, $values['recipients'], @$values['message']);
+
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+            if (APPLICATION_ENV == 'development') {
+                throw $e;
+            }
+        }
+		/*
+		    if(Engine_Api::_()->marketplace()->authorizeIsActive()){
+			    $form->authorize_login->setValue($mark['authorize_login']);
+			    $form->authorize_key->setValue($mark['authorize_key']);
+		    }else{
+			    $form->business_email->setValue($mark['business_email']);
+		    }
+		*/
+        // If not post or form not valid, return
+        if (!$this->getRequest()->isPost()) {
+        	// grab ebay listing details for each listing for this seller on eBay
+        	$e = new Marketplace_Api_Ebay(false);
+        	
+        	/*$listings = array(300724558276,300726496554);
+        	$ld = $e->getItemDetails($listings);
+        	*/
+	    	
+        	//$e->getCats();
+	    	$e->setListingFrom('2012-05-30T21:59:59.005Z');
+	    	$e->setListinTo('2012-06-31T21:59:59.005Z');
+	    	
+	    	$m = new Marketplace_Api_Ebay_Mapper();
+	    	$m->setEbaydata($e->getItemDetails());
+	    	//$m->setEbaydata($ld);
+	    	
+	    	//$this->view->listingDetails = $e->getItemDetails();
+	    	$this->view->details = $m->map();
+            return;
+        }
+
+        /*if (!$form->isValid($this->getRequest()->getPost())) {
+            return;
+        }*/
+
+        $table = Engine_Api::_()->getItemTable('marketplace');
+
+        $db = $table->getAdapter();
+    foreach($_POST[Rows] as $row) {
+        $db->beginTransaction();
+        try {
+            // Create marketplace
+            $values = array_merge($row, array(
+                        'owner_type' => $viewer->getType(),
+                        'owner_id' => $viewer->getIdentity(),
+                    ));
+            
+            $values['business_email'] = $mark['business_email']/*'mrgadgil@yahoo.com'*/;
+            
+            if(isset($fVal)) {
+            	unset($fVal);
+            }
+            foreach($row[fields] as $optionID => $optionVal) {
+            	$fVal[$optionID] = $optionVal;
+            }
+           
+            $marketplace = $table->createRow();
+         
+            $marketplace->setFromArray($values);
+            $marketplace->save();
+
+            // Set photo
+            if (!empty($row[mainphoto])) {
+                $marketplace->setPhotoFromURL($row[mainphoto]);
+            }
+            
+            if( !empty($_FILES) ) {
+                $album = $marketplace->getSingletonAlbum();
+
+                $params = array(
+                  // We can set them now since only one album is allowed
+                  'collection_id' => $album->getIdentity(),
+                  'album_id' => $album->getIdentity(),
+                  'marketplace_id' => $marketplace->getIdentity(),
+                  'user_id' => $viewer->getIdentity(),
+                );
+                $noMainPhoto = $marketplace->photo_id ? false : true;
+                foreach( $_FILES as $key => $file ) {
+                    if( $key == 'photo' or !$file['tmp_name'] ) continue;
+                    $photo_id = Engine_Api::_()->marketplace()->createPhoto($params, $file)->photo_id;
+
+                    if( $noMainPhoto ){
+                      $marketplace->photo_id = $photo_id;
+                      $marketplace->save();
+                      $noMainPhoto = false;
+                    }
+                } 
+            }
+
+            // Save custom fields
+            if(isset($customFields)) {
+            	unset($customFields);
+            }
+        	if(isset($customfieldform)) {
+            	unset($customfieldform);
+            }
+        	if(isset($deletedElemets)) {
+            	unset($deletedElemets);
+            }
+            $customFields = new Marketplace_Form_Custom_Fields($marketplace);
+        // only category profile question
+	    $categoryTree = Engine_Api::_()->marketplace()->tree_list_load_path($values['category_id']); 
+	    $mainParentCategory = !empty($categoryTree) ? $categoryTree[0]['k_item'] : $values['category_id'];
+	    //$deletedElemets = array();
+	    foreach($customFields as $field) {
+	        if( $field->category_id != $mainParentCategory) {
+	          $deletedElemets[] = $field->getName();
+	        }
+	    }
+	    foreach($deletedElemets as $name) {
+	        $customFields->removeElement($name);
+	    }
     
+            //$customfieldform = $form->getSubForm('fields');
+            $customfieldform = $customFields;
+            $customfieldform->setItem($marketplace);
+            $customfieldform->saveValues($fVal);
+
+            // Set privacy
+            $auth = Engine_Api::_()->authorization()->context;
+            $roles = array('owner', 'owner_member', 'owner_member_member', 'owner_network', 'everyone');
+
+            if (empty($values['auth_view'])) {
+                $values['auth_view'] = array("everyone");
+            }
+            if (empty($values['auth_comment'])) {
+                $values['auth_comment'] = array("everyone");
+            }
+
+            $viewMax = array_search($values['auth_view'], $roles);
+            $commentMax = array_search($values['auth_comment'], $roles);
+
+            foreach ($roles as $i => $role) {
+                $auth->setAllowed($marketplace, $role, 'view', ($i <= $viewMax));
+                $auth->setAllowed($marketplace, $role, 'comment', ($i <= $commentMax));
+            }
+
+            // Commit
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+            throw $e;
+        }
+
+        $db->beginTransaction();
+        try {
+            $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($viewer, $marketplace, 'marketplace_new');
+            if ($action != null) {
+                Engine_Api::_()->getDbtable('actions', 'activity')->attachActivity($action, $marketplace);
+            }
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+            throw $e;
+        }
+    }
+        // Redirect
+        $allowed_upload = Engine_Api::_()->authorization()->getPermission($viewer->level_id, 'marketplace', 'photo');
+        if ($allowed_upload) {
+            //return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id), 'marketplace_success', true);
+            return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id), 'marketplace_itempreview', true);
+        } else {
+            return $this->_helper->redirector->gotoUrl($marketplace->getHref(), array('prependBase' => false));
+        }
+    }
     public function itempreviewAction() {
         $marketplace_id = (int)$this->_getParam('marketplace_id', 0);
         $marketplace = Engine_Api::_()->getItem('marketplace', $marketplace_id);

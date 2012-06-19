@@ -62,8 +62,10 @@ class Marketplace_Model_Marketplace extends Core_Model_Item_Abstract
 
     return join($separator, $keywords);
   }
-
-  public function setPhoto($photo)
+  public function setPhotoFromURL($photopath) {
+  	$this->setPhoto($photopath, true);
+  }
+  public function setPhoto($photo, $url=false)
   {
     if( $photo instanceof Zend_Form_Element_File ) {
       $file = $photo->getFileName();
@@ -71,11 +73,23 @@ class Marketplace_Model_Marketplace extends Core_Model_Item_Abstract
       $file = $photo['tmp_name'];
     } else if( is_string($photo) && file_exists($photo) ) {
       $file = $photo;
-    } else {
+    } else if(is_string($photo) && $url == true) {
+    	$file = $photo;
+    } 
+    else {
       throw new Marketplace_Model_Exception('invalid argument passed to setPhoto');
     }
-
-    $name = basename($file);
+    if($url == false) {
+    	$name = basename($file);
+    }
+   else {
+    	// create a random file name for image being pulled from outside url such as eBay
+    	$l = 10;
+    	$c = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxwz0123456789";
+	    for(;$l > 0;$l--) $s .= $c{rand(0,strlen($c))};
+	    $name = str_shuffle($s). ".jpg";
+    }
+    
     $path = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'temporary';
     $params = array(
       'parent_type' => 'marketplace',
