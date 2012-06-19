@@ -302,7 +302,7 @@ endif; ?>
               <?=$this->htmlLink('javascript:void(0);', 'purchase ', array('class' => 'add_to_cart', 'id' => 'add_to_cart', 'onclick' => '$("login-popup").show();'))?>
             <?php endif;?>
 				
-            &nbsp;<a href="#" class="wishlist"><?=$this->translate('wishlist')?></a>&nbsp;&nbsp;
+            &nbsp;<a href="javascript:void(0);" class="wishlist"><?=$this->translate('wishlist')?></a>&nbsp;&nbsp;
             
             <div class="love-info">
                 <?php if( $this->viewer()->getIdentity() ) : ?>
@@ -348,7 +348,23 @@ endif; ?>
             <?php else : ?>
               <span><?=$this->htmlLink(array('route' => 'user_login'), "<span class='like'>{$likeCount}</span>")?></span>
             <?php endif;?>
-            <span class="comment" style="cursor: default"><?=$this->marketplace->comment_count?></span>
+            
+            
+            <span>
+            	
+                
+               <?php $comm_count = $this->marketplace->comment_count; ?>
+               <?php if( !$this->viewer()->getIdentity() ) : ?>
+               <?=$this->htmlLink(array('route' => 'user_login'), "<span class='comment'>{$comm_count}</span>")?></span>
+               <?php else : ?>
+               <?=$this->htmlLink(array('route' => 'marketplace_comments', 'marketplace_id' => $this->marketplace->getIdentity() ), "<span class='comment'>{$comm_count}</span>")?></span>
+               <?php endif;?>
+           
+            </span>
+          
+          
+          
+          
           </div>
             
           <?php /*
@@ -483,6 +499,17 @@ endif; ?>
                            $this->translate("all comments")
                           )?>
         </span>
+        
+        <?php if( $this->viewer()->getIdentity() ) : ?>
+       
+        <span><?=$this->htmlLink('javascript:void(0);', $this->translate('add comment'), array(
+              "onclick" => "$('comments-form-container').show();"
+            )) ?>
+        </span>
+        
+        <?php endif; ?>
+        
+        
       </div>
       <h3 class="comments-desc"><?=$this->translate("Comments")?></h3>
     </div>
