@@ -177,13 +177,13 @@
             </div>
             <div class="comments_date">
               <?php echo $this->timestamp($comment->creation_date); ?>
-              <?php /*if( $canDelete ): ?>
+              <?php if( $canDelete ): ?>
                 -
                 <a href="javascript:void(0);" onclick="en4.core.comments.deleteComment('<?php echo $subject->getType()?>', '<?php echo $subject->getIdentity() ?>', '<?php echo $comment->comment_id ?>')">
                   <?php echo $this->translate('delete') ?>
                 </a>
               <?php endif; ?>
-              <?php if( $this->canComment ):
+              <?php /*if( $this->canComment ):
                 $isLiked = $comment->likes()->isLike($this->viewer());
                 ?>
                 -
