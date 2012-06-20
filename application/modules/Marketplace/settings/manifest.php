@@ -102,7 +102,7 @@ return array(
         'action' => 'index',
       ),
       'reqs' => array(
-        'action' => '(index|ajaxlist|addtocart|deletefromcart|cart|checkout|shippinginfo|canceling)',
+        'action' => '(index|ajaxlist|addtocart|deletefromcart|cart|checkout|shippinginfo|canceling|client-shipping-service)',
       )
     ),
     // Public

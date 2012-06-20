@@ -551,7 +551,7 @@ function tree_print_category( &$a_tree, $model, $category_id, $specRoute = null,
     }
     if ($a_tree[$i]['k_item'] == $category_id)
       echo "<li>".$cat_title;
-    $this->tree_print_category($a_tree[$i]['a_tree'],$model, $category_id, $specRoute, $specParam);
+    $this->tree_print_category($a_tree[$i]['a_tree'],$model, $category_id, $specRoute, $specParams);
     echo "</li>";
   }
   echo "</ul>";

@@ -149,7 +149,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
   public function ajaxlistAction() {
       $viewer = $this->_helper->api()->user()->getViewer();
 
-      if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'view')->isValid()) eturn;
+      if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'view')->isValid()) return;
 
       $this->view->form = $form = new Marketplace_Form_Search();
       // Process form
@@ -682,13 +682,22 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
                 $table = Engine_Api::_()->getDbtable('orders', 'marketplace');
    					    $table->insert($values);
 
-						
                 if( $user_id ) {
                     $buyer = Engine_Api::_()->getItem('user', $user_id);
 							      $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
 							      $notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
 							      $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
 							      $notifyApi->addNotification($buyer, $owner, $marketplace, 'marketplace_transaction_to_buyer');
+
+                    $orderId = $table->select()
+                                     ->where("owner_id = {$marketplace->owner_id}")
+                                     ->where("user_id = {$user_id}")
+                                     ->where("marketplace_id = {$marketplace->marketplace_id}")
+                                     ->order("order_id DESC")
+                                     ->query()
+                                     ->fetchColumn()
+                    ; 
+                    if( $orderId ) $this->_ownerMailing($owner, $buyer, $marketplace, $item_count, $orderId);
 							
 							      if(Engine_Api::_()->marketplace()->cartIsActive()){
 								      $cartTable->delete(array(
@@ -770,8 +779,28 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 		  }
     }
 
-    private function _paymentMailing($buyerEmail, $owner, $marketplace, $count) {
+    private function _ownerMailing($owner, $buyer, $marketplace, $count, $orderId) 
+    {
+      $adminAddress = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.from', 'admin@' . $_SERVER['HTTP_HOST']);
+      $adminName = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.name', 'Site Admin');
+      $toOwnerAddress = $owner->email;
+      $toOwnerName = $owner->getTitle();
 
+      $subjectTemplate = Zend_Registry::get('Zend_Translate')->_("New Order");
+      $bodyOwner = $this->view->translate('<strong>%1$s</strong> bought the "%2$s". Count: %3$s. <br/>Please click on the link to fill in the form of delivery: <a href=\'%4$s\'>delivery form</a>', $buyer->getTitle(), $marketplace->getTitle(), $count, "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getRouter()->assemble(array('action' => 'client-shipping-service', 'order_id' => $orderId), 'marketplace_general', true) );
+
+      // mail to owner
+      $mail = Engine_Api::_()->getApi('mail', 'core')->create()
+              ->addTo($toOwnerAddress, $toOwnerName)
+              ->setFrom($adminAddress, $adminName)
+              ->setSubject($subjectTemplate)
+              ->setBodyHtml($bodyOwner)
+      ;
+      Engine_Api::_()->getApi('mail', 'core')->sendRaw($mail);
+    }
+
+    private function _paymentMailing($buyerEmail, $owner, $marketplace, $count) 
+    {
       $adminAddress = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.from', 'admin@' . $_SERVER['HTTP_HOST']);
       $adminName = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.name', 'Site Admin');
 
@@ -2074,7 +2103,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       $midsStr = implode('_', $mids);
       
       //$paypal->setBusinessEmail($first_marketplace->business_email);
-      $paypal->setBusinessEmail( Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.mainpaypal', $first_marketplace->business_email) );
+      $paypal->setBusinessEmail( Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.mainpaypal', '') );
 
       if( $viewer_id ) $paypal->setPayer($viewer->email, $viewer_id);
       else $paypal->setPayer('', $viewer_id);
@@ -2113,6 +2142,21 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $this->view->likeList = $likesTable->getLikePaginator($marketplace, 5);
 
         $this->view->marketplace = $marketplace;
+    }
+
+    public function clientShippingServiceAction() {
+        $viewer = Engine_Api::_()->user()->getViewer();
+        if( !$viewer->getIdentity() ) 
+          return $this->_helper->redirector->gotoRoute(array('return_url' => '64-' . base64_encode($_SERVER['REQUEST_URI'])), 'user_login');
+
+        if( !($orderId = $this->_getParam('order_id', 0)) ) 
+          return $this->_helper->redirector->gotoRoute(array(), 'marketplace_browse');
+
+        $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+        $order = $orderTable->select()->where("order_id = {$orderId} AND owner_id = {$viewer->getIdentity()}")->query()->fetch();
+
+        if( empty($order) ) 
+          return $this->_helper->redirector->gotoRoute(array(), 'marketplace_browse');
     }
 }
 

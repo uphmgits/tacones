@@ -61,7 +61,19 @@
       }
     });
   });
+
+  function refreshCommentCount() {
+    comcount = document.getElementById('comments-count');
+    if( comcount && !isNaN(parseInt(comcount.innerHTML)) ) { 
+      comcount.innerHTML = (parseInt(comcount.innerHTML) + 1) + ' <?=$this->translate("comments")?>';
+    }
+    vcomcount = document.getElementById('view-comments-count');
+    if( vcomcount && !isNaN(parseInt(vcomcount.innerHTML)) ) { 
+      vcomcount.innerHTML = parseInt(vcomcount.innerHTML) + 1;
+    }
+  }
 </script>
+
 
 <?php $this->headTranslate(array(
   'Are you sure you want to delete this?',
@@ -95,8 +107,8 @@
 
     <?php if( $this->viewer()->getIdentity() and $this->canComment and isset($this->form) ): ?>
         <?php $this->form->addElement('Dummy', 'clear', array('content' => "<a href='javascript:void(0);' onclick=\"$$('#comment-form #body').set('value', '');\">{$this->translate('clear')}</a>") ); ?>
-        <?php $this->form->submit->setLabel('send'); ?>
-        <?=$this->form->setAttribs(array('id' => 'comment-form'))->render()?>
+        <?php $this->form->submit->setLabel('post '); ?>
+        <?=$this->form->setAttribs(array('id' => 'comment-form', 'onsubmit' => 'refreshCommentCount();'))->render()?>
         <hr/>
     <?php endif; ?>  
   </div>

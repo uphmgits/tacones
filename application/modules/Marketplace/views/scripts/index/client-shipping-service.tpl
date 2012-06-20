@@ -1,0 +1,17 @@
+<script type="text/javascript">
+    en4.core.runonce.add(function() {
+      document.FedExShippingForm.submit();
+    });
+</script>
+
+<form name="FedExShippingForm" method="post" target="content_frame" action="https://www.fedex.com/FWIW/Client/Shipping_v5/ClientReturnShippingFloatingFrameInit">
+        <input type="hidden" name="q" value="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"/>
+</form>
+
+<iframe frameborder="0" name="content_frame" width="750px" height="820px" src="https://www.fedex.com/FWIW/Merchant/Images/Common/blank.html">
+  Go to <a href="http://www.fedex.com/ratefinder/home?cc=US&language=en&locId=plugin">FedExRateFinder</a><br />
+  This application uses technology that may be incompatible with yourbrowser.<br />
+  To use this application, we suggest you download 
+  <a href="http://cgi.netscape.com/cgi-bin/pdms_download_path.cgi?USE_NSDA=NO&BITPATH=/netscape6/english/6.01/windows/win32/N6Setup.exe">Netscape 6.0</a> or newer.<br/>
+  Please click on the link provided to download <a href="http://cgi.netscape.com/cgi-bin/pdms_download_path.cgi?USE_NSDA=NO&BITPATH=/netscape6/english/6.01/windows/win32/N6Setup.exe">Netscape 6.0</a> now.<br />
+</iframe>

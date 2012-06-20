@@ -349,22 +349,14 @@ endif; ?>
               <span><?=$this->htmlLink(array('route' => 'user_login'), "<span class='like'>{$likeCount}</span>")?></span>
             <?php endif;?>
             
-            
             <span>
-            	
-                
                <?php $comm_count = $this->marketplace->comment_count; ?>
                <?php if( !$this->viewer()->getIdentity() ) : ?>
-               <?=$this->htmlLink(array('route' => 'user_login'), "<span class='comment'>{$comm_count}</span>")?></span>
+                  <?=$this->htmlLink(array('route' => 'user_login'), "<span class='comment'>{$comm_count}</span>")?></span>
                <?php else : ?>
-               <?=$this->htmlLink(array('route' => 'marketplace_comments', 'marketplace_id' => $this->marketplace->getIdentity() ), "<span class='comment'>{$comm_count}</span>")?></span>
+                  <?=$this->htmlLink(array('route' => 'marketplace_comments', 'marketplace_id' => $this->marketplace->getIdentity() ), "<span class='comment' id='view-comments-count'>{$comm_count}</span>")?></span>
                <?php endif;?>
-           
             </span>
-          
-          
-          
-          
           </div>
             
           <?php /*
@@ -493,7 +485,7 @@ endif; ?>
 
     <div class="comments-header">
       <div class="comments-stats">
-        <span><?=$this->translate("%s comments", $this->marketplace->comment_count)?></span>
+        <span id="comments-count"><?=$this->marketplace->comment_count?> <?=$this->translate("comments")?></span>
 
         <span><?=$this->htmlLink(array('route' => 'marketplace_comments', 'marketplace_id' => $this->marketplace->getIdentity() ), 
                            $this->translate("all comments")

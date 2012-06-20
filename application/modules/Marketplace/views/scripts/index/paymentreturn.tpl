@@ -1,6 +1,6 @@
 <div class="headline">
   <h2>
-    <?php echo $this->translate('Result of payment');?>
+    <?php echo $this->translate('Thank you for your payment');?>
   </h2>
   <div class="tabs">
     <?php
