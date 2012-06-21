@@ -269,6 +269,33 @@ function createInvoice(value) {
                       <?=$this->translate('Create Invoice')?>
                     </button>
                   <?php endif; ?>
+
+                  <?php // set tracking ?>
+                  <?php if( $item->status == 'approved' or 
+                             ( $item->status == 'wait' and $item->owner_id == $this->viewer()->getIdentity())
+                           ) : ?>
+                    <div style="text-align: center; padding-top: 5px;">
+                      <?=$this->htmlLink(array('route' => 'marketplace_general', 
+                                                 'action' => 'set-tracking-number',
+                                                 'order_id' => $item->order_id,
+                                                 'refresh' => 1,
+                                                 'format' => 'smoothbox' ), 
+                                          $this->translate('Set Tracking'),
+                                          array('class' => 'smoothbox'))?>
+                    </div>
+                  <?php endif; ?>
+
+                  <?php // view tracking ?>
+                  <?php if( $item->tracking_fedex or $item->tracking_ups ) : ?>
+                    <div style="text-align: center; padding-top: 5px;">
+                      <?=$this->htmlLink(array('route' => 'marketplace_general', 
+                                             'action' => 'view-tracking-info',
+                                             'order_id' => $item->order_id,
+                                             'format' => 'smoothbox' ), 
+                                          $this->translate('View Tracking'),
+                                          array('class' => 'smoothbox'))?>
+                    </div>
+                  <?php endif;?>
                 </div>
 
                 <?php else : ?>

@@ -1650,10 +1650,21 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $this->view->paginator = $paginator->setCurrentPageNumber($page);
     }
 
-    public function cancelingAction() {
+    public function cancelingAction() 
+    {
+        $viewer = Engine_Api::_()->user()->getViewer();
+        if( !$viewer->getIdentity() ) 
+          return $this->_forward('requireauth', 'error', 'core');
+
         $orderId = (int)$this->_getParam('order_id', 0);
         $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
-        $order = $orderTable->select()->where("order_id = {$orderId}")->query()->fetch();
+        $order = $orderTable->select()
+                            ->where("order_id = {$orderId}")
+                            ->where("user_id = {$viewer->getIdentity()}")
+                            ->where("status = 'wait'")
+                            ->query()
+                            ->fetch()
+        ;
         $this->view->error = false;
 
         if( $order ) {
@@ -1663,7 +1674,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
                 $this->view->order = $order;
 
                 $request = $this->getRequest()->getPost();
-                if( $request and isset($request['reason']) and $order['status'] == 'wait' ) {
+                if( $request and isset($request['reason']) ) {
                   $reason = trim($request['reason']);
                   if( empty($reason) ) {
                     $this->view->error = true;
@@ -1680,6 +1691,83 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
           'format'=> 'smoothbox',
         ));
     }
+
+    public function setTrackingNumberAction() 
+    {
+        $viewer = Engine_Api::_()->user()->getViewer();
+        if( !$viewer->getIdentity() ) 
+          return $this->_forward('requireauth', 'error', 'core');
+
+        $orderId = (int)$this->_getParam('order_id', 0);
+        $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+
+        $select = $orderTable->select()->where("order_id = {$orderId}");
+
+        if( $viewer->isAdmin() ) {
+          $select->where("status = 'approved' OR ( owner_id = {$viewer->getIdentity()} AND status = 'wait' ) ");
+        } else {
+          $select->where("owner_id = {$viewer->getIdentity()}")
+                 ->where("status = 'wait'");
+        }
+
+        $order = $select->query()->fetch();
+
+        if( $order ) {
+          $this->view->form = $form = new Marketplace_Form_Settracking();
+          $request = $this->getRequest()->getPost();
+
+          if( !$request ) {
+            $form->populate($order);
+            return;
+          }
+
+          if( !$form->isValid($request) ) return;
+          
+          $values = $form->getValues();
+          $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+
+          $orderTable->update(array('tracking_fedex' => $values['tracking_fedex'], 
+                                     'tracking_ups' => $values['tracking_ups']), "order_id = $orderId");
+        }
+
+        $refresh = (bool)$this->_getParam('refresh', 0);
+        return $this->_forward('success', 'utility', 'core', array(
+          'smoothboxClose' => true,
+          'parentRefresh' => $refresh,
+          'format'=> 'smoothbox',
+        ));
+    }
+
+    public function viewTrackingInfoAction() 
+    {
+        $viewer = Engine_Api::_()->user()->getViewer();
+        if( !$viewer->getIdentity() ) 
+          return $this->_forward('requireauth', 'error', 'core');
+
+        $orderId = (int)$this->_getParam('order_id', 0);
+        $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+        $select = $orderTable->select()->where("order_id = {$orderId}");
+
+        if( !$viewer->isAdmin() ) $select->where("user_id = {$viewer->getIdentity()}");
+
+        $order = $select->query()->fetch();
+
+        if( $order and (!empty($order['tracking_fedex']) or !empty($order['tracking_ups'])) ) {
+            if( !empty($order['tracking_fedex']) ) {
+              $this->view->fedex_xml = Engine_Api::_()->marketplace()->fedexTracking($order['tracking_fedex']);
+              if( $this->view->fedex_xml ) return;                  
+            } else {
+              $this->view->ups_xml = Engine_Api::_()->marketplace()->upsTracking($order['tracking_ups']);
+              if( $this->view->ups_xml ) return;
+            }
+        }
+        return $this->_forward('success', 'utility', 'core', array(
+          'smoothboxClose' => true,
+          'parentRefresh' => false,
+          'format'=> 'smoothbox',
+        ));
+    }
+
 
     public function addtocartAction() {
 		if( /*!$this->_helper->requireUser()->isValid() || */ !Engine_Api::_()->marketplace()->cartIsActive() )
@@ -2147,7 +2235,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
     public function clientShippingServiceAction() {
         $viewer = Engine_Api::_()->user()->getViewer();
         if( !$viewer->getIdentity() ) 
-          return $this->_helper->redirector->gotoRoute(array('return_url' => '64-' . base64_encode($_SERVER['REQUEST_URI'])), 'user_login');
+          return $this->_forward('requireauth', 'error', 'core');
 
         if( !($orderId = $this->_getParam('order_id', 0)) ) 
           return $this->_helper->redirector->gotoRoute(array(), 'marketplace_browse');

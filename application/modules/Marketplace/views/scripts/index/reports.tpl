@@ -169,13 +169,34 @@ function loginAsUser(id) {
             </td>
             <td><?=str_replace(' ', '<br/>', $item->date)?></td>
             <td><?=$item->status?></td>
-            <td>
+            <td style="font-size: 0.9em">
                 <?php if($item->user_id == $viewerId and $item->status == 'wait') : ?>
                   <?=$this->htmlLink(array('route' => 'marketplace_general', 
                                              'action' => 'canceling',
                                              'order_id' => $item->order_id,
                                              'format' => 'smoothbox' ), 
                                       $this->translate('Cancel'),
+                                      array('class' => 'smoothbox'))?>
+                <?php endif; ?>
+
+                <?php if($item->owner_id == $viewerId and $item->status == 'wait') : ?>
+                  <br/>
+                  <?=$this->htmlLink(array('route' => 'marketplace_general', 
+                                             'action' => 'set-tracking-number',
+                                             'order_id' => $item->order_id,
+                                             'format' => 'smoothbox' ), 
+                                      $this->translate('Set Tracking'),
+                                      array('class' => 'smoothbox'))?>
+                <?php endif; ?>
+
+                <?php if( ($item->user_id == $viewerId or $item->owner_id == $viewerId) and 
+                           ( $item->tracking_fedex or $item->tracking_ups ) ) : ?>
+                  <br/>
+                  <?=$this->htmlLink(array('route' => 'marketplace_general', 
+                                             'action' => 'view-tracking-info',
+                                             'order_id' => $item->order_id,
+                                             'format' => 'smoothbox' ), 
+                                      $this->translate('View Tracking'),
                                       array('class' => 'smoothbox'))?>
                 <?php endif; ?>
             </td>

@@ -57,6 +57,37 @@ class Marketplace_Form_Admin_Global extends Engine_Form
 		  'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('flat.shipping.rate', 0),
 		));
 	}
+    // UPS
+    $this->addElement('Text', 'marketplace_ups_access', array(
+      'label' => 'UPS Access',
+      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.ups.access'),
+    ));
+    $this->addElement('Text', 'marketplace_ups_userid', array(
+      'label' => 'UPS User ID',
+      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.ups.userid'),
+    ));
+    $this->addElement('Text', 'marketplace_ups_password', array(
+      'label' => 'UPS Password',
+      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.ups.password'),
+    ));
+
+    // FedEx
+    $this->addElement('Text', 'marketplace_fedex_acckey', array(
+      'label' => 'FedEx Acckey',
+      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.fedex.acckey'),
+    ));
+    $this->addElement('Text', 'marketplace_fedex_accpass', array(
+      'label' => 'FedEx Accpass',
+      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.fedex.accpass'),
+    ));
+    $this->addElement('Text', 'marketplace_fedex_accnum', array(
+      'label' => 'FedEx Accnum',
+      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.fedex.accnum'),
+    ));
+    $this->addElement('Text', 'marketplace_fedex_accmeter', array(
+      'label' => 'FedEx Accmeter',
+      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.fedex.accmeter'),
+    ));
 
     // Add submit button
     $this->addElement('Button', 'submit', array(
