@@ -32,13 +32,59 @@
 
 <?php if( !empty($this->marketplaceList) ) : ?>
   <div>
-      <h3><?=$this->translate('You can post a review for these users:')?></h3>
+      <h3><?=$this->translate('You can post a review for these users:')?></h3><br/>
       <?php foreach( $this->marketplaceList as $item) : ?>
           <?php $owner = $item->getOwner(); ?>
           <?=$this->htmlLink(array('route' => 'review_user', 'id' => $owner->getIdentity()), $owner->getTitle())?><br/>
       <?php endforeach; ?>
   </div>
   <br/>    
+
+  <?php $i = 0; $colInRow = 5; $shipping_fee = 0; $inspection_fee = 0; $total_amount = 0; ?> 
+  <?php $this->addHelperPath(APPLICATION_PATH . '/application/modules/Fields/View/Helper', 'Fields_View_Helper'); ?>
+
+  <div>
+    <h3><?=$this->translate('You just bought these items:')?></h3><br/>
+    <?php foreach($this->marketplaceList as $marketplace): ?>
+
+      	<?php if( $i % $colInRow == 0 ) echo '<ul class="cart-item-row">'; ?>
+	      <li>
+            <div class="cart-item-photo">
+              <?=$this->htmlLink($marketplace->getHref(), $this->itemPhoto($marketplace, 'normal'))?>
+            </div>
+            <table class="product-title-right">
+              <tbody><tr>
+                <td><?=$marketplace->getTitle()?></td>
+                <td width="20">
+                  $<?=number_format($marketplace->price, 2)?>
+                  <div style="color:#93C;text-transform:none;">x<?=$cartitem['count']?></div>
+                </td>
+              </tr></tbody>
+            </table>
+            <div class="cart-item-fields">
+                <?php $fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($marketplace); ?>
+                <?=$this->fieldValueLoop($marketplace, $fieldStructure)?>
+            </div>
+            <div class="cart-item-options">
+                <?=$this->htmlLink( array('route' => 'marketplace_general', 'action' => 'deletefromcart', 'marketplace_id' => $cartitem['marketplace_id']), 
+                                    $this->translate('delete'), 
+                                    array('class' => 'smoothbox')
+                                  )?>
+                <?=$this->htmlLink( 'javascript:void(0);', 
+                                    $this->translate('move to wishlist'),
+                                    array('class' => 'cart-item-wishlist')
+                                  )?>
+            </div>
+        </li>
+	      <?php if( $i++ % $colInRow == $colInRow - 1 ) echo "</ul>"; ?> 
+
+        <?php $shipping_fee += $marketplace->shipping * $cartitem['count']; ?>
+        <?php $inspection_fee += Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price) * $cartitem['count']; ?>
+        <?php $total_amount += $marketplace->price * $cartitem['count']; ?>
+    <?php endforeach; ?>
+  </div>
+  <br/><br/>
+
 <?php endif; ?>
 	
 <?php	if(!empty($this->cartContent)) : ?>
