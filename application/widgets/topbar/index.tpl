@@ -10,7 +10,7 @@
         <?=$this->translate('Welcome %s!', $this->viewer()->getTitle()); ?>
       </li>
 
-      <li style="position: relative;">
+      <li style="position: relative; padding-right: 0;">
         <a class="item9" id="psettings" href="javascript:togglesett();">
           <?=$this->translate("your account")?><span class='menu-arrow'>&nbsp;&nbsp;&nbsp;</span>
         </a>

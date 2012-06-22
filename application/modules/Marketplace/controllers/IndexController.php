@@ -1755,10 +1755,10 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         if( $order and (!empty($order['tracking_fedex']) or !empty($order['tracking_ups'])) ) {
             if( !empty($order['tracking_fedex']) ) {
               $this->view->fedex_xml = Engine_Api::_()->marketplace()->fedexTracking($order['tracking_fedex']);
-              if( $this->view->fedex_xml ) return;                  
+              return;                  
             } else {
               $this->view->ups_xml = Engine_Api::_()->marketplace()->upsTracking($order['tracking_ups']);
-              if( $this->view->ups_xml ) return;
+              return;
             }
         }
         return $this->_forward('success', 'utility', 'core', array(

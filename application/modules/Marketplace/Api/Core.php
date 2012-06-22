@@ -857,7 +857,7 @@ public function getUserCategories($user_id)
 
   public function fedexTracking( $trackingNumber )
   {
-      $endpointurl = "https://gatewaybeta.fedex.com:443/xml";
+      $endpointurl = "https://gateway.fedex.com:443/xml";
       $acckey   = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.fedex.acckey');
       $accpass  = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.fedex.accpass');
       $accnum   = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.fedex.accnum');
@@ -910,6 +910,7 @@ public function getUserCategories($user_id)
 
       if($response == false) return false; // "Bad data."
 
+      $response = preg_replace("/v3:/i", "", $response);
       return new SimpleXMLElement($response);
 
   }
