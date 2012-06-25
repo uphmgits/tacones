@@ -64,8 +64,19 @@ where m.field_id=o.field_id order by m.category_id asc;*/
 					$mappeddata[$itemID]['specs'][] = $mapping;
 				}
 			}
-			// main picture from eBay listing
-			$mappeddata[$itemID]['picture'] = $ebaydata[Pictures][0];
+			// pictures from eBay listing
+			$piccount = 0;
+			foreach($ebaydata[Pictures] as $picurl) {
+				$picindex = 'photo'.$piccount;
+				if($piccount==0) {
+					$mappeddata[$itemID]['pictures']['photo'] = $picurl;
+				}
+				else {
+					
+					$mappeddata[$itemID]['pictures'][$picindex] = $picurl;
+				}
+				$piccount++;
+			}
 		}
 		/*print "MAPPED SPECS: <pre>"; print_r($mappeddata);exit;
 		exit;*/

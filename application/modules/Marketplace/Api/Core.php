@@ -788,7 +788,10 @@ public function getUserCategories($user_id)
     return $table->fetchAll($select);
   }
 
-  public function createPhoto($params, $file)
+  public function createPhotoFromURL($params, $file) {
+  	$this->createPhoto($params, $file, true);
+  }
+  public function createPhoto($params, $file, $url=false)
   {
     if( $file instanceof Storage_Model_File )
     {
@@ -797,22 +800,36 @@ public function getUserCategories($user_id)
 
     else
     {
-      // Get image info and resize
-      $name = basename($file['tmp_name']);
-      $path = dirname($file['tmp_name']);
-      $extension = ltrim(strrchr($file['name'], '.'), '.');
-
+      if($url) {
+      	// set things up from a URL passed
+      	// create a random file name for image being pulled from outside url such as eBay
+    	$l = 10;
+    	$c = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxwz0123456789";
+	    for(;$l > 0;$l--) $s .= $c{rand(0,strlen($c))};
+	    $tmpname = str_shuffle($s). ".jpg";
+	    $tmpfullname = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'temporary/' . $tmpname;
+	    
+	    $name = basename($tmpfullname);
+	    $path = dirname($tmpfullname);
+	    $extension = ltrim(strrchr($tmpfullname, '.'), '.');
+      }
+      else {
+	      // Get image info and resize
+	      $name = basename($file['tmp_name']);
+	      $path = dirname($file['tmp_name']);
+	      $extension = ltrim(strrchr($file['name'], '.'), '.');
+      }
       $mainName = $path.'/m_'.$name . '.' . $extension;
       $thumbName = $path.'/t_'.$name . '.' . $extension;
 
       $image = Engine_Image::factory();
-      $image->open($file['tmp_name'])
+      $image->open(!$url?$file['tmp_name']:$file)
           ->resize(self::IMAGE_WIDTH, self::IMAGE_HEIGHT)
           ->write($mainName)
           ->destroy();
 
       $image = Engine_Image::factory();
-      $image->open($file['tmp_name'])
+      $image->open(!$url?$file['tmp_name']:$file)
           ->resize(self::THUMB_WIDTH, self::THUMB_HEIGHT)
           ->write($thumbName)
           ->destroy();

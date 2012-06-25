@@ -16,7 +16,7 @@
 					 'apiCallGetCategorySpecifics' => 'GetCategorySpecifics'),
   'ebayProd'       => array('uri'=> 'https://api.ebay.com/ws/api.dll',
                      'usertoken' => 'AgAAAA**AQAAAA**aAAAAA**op7GTw**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6wDlYqiAZKHoQSdj6x9nY+seQ**rnwBAA**AAMAAA**4fF2sKDiqQxYJNcJu8ZXSPgzsa+RXI8yDWU+3OBx/d9DTZ3sCbtGPJgaDijuRXzw2keFOD4yuytXQSdROI8b6JA6MLk/DWRvLYkGG2TMxX26zErDDPh4f7x8ElpnbnR5LftE/KkktqxgQPQ9RK/XoKBUH2hL5mh0xFBYI3w5edWFcXMisrT2T5xOy4ozEC0Q5iNFsbBlmXTiue1REZ7f3zZj6zZO5zLGLKI+fNvyGWPH7A7q3Tdn4XCLa+kdtMj/PKolSu0PIgLrILJ2+8nyjH4DPaKhJZVkDzWLDLiaG/wQHOxXd0P5Y4I5VxNQLQOqPKcOKnZwg73uuuYqbLrO3iMqXjWQ/ig/LXdqr8iHK0vuePqjkXqHM8/uZviPxcP81s11kFwvL5IkP/nBg+mdGQDmhDz/nLVSvJyqPmVDootF+eFbI1R/7zs56PJxn3oDv+L7ut5l15MUf+jxE97mvDoaOpmmjmPH174kfEbrJ6S6P/E/4Jv8eLOGUo3OTGNVKc3ovrYQmVSwd8UDcTBRGYKipfKxqg8CnWd/lJd2XHW82imSht+xl7gSw6yN9xZLz7Yn5P8h1upLezjOnEBYfSe9x/ijrfvn1M62fFpHU1VfgbJ1Q80qQzyIC/gpMmZVgrZpw3Nt/mx8F131kbgTvCAORKVIHWUaRoabzVe8Sj4+UdsLft116YLZUJ2pBMbS1VHSSzVt5xJk2z7126NtmA8EzAxe0YNNHeQUP7Upxwc4U9PuqP6KJ+LBUkcfa5U1',
-                     'seller'    => /*'dreamydesigns4u'*/ /*'hopperking210'*/'coolfashionista',
+                     'seller'    => 'adreamboutique'/*'dreamydesigns4u'*/ /*'hopperking210'*//*'coolfashionista'*/,
                      'connectorClass' => 'Marketplace_Api_Ebay',
                      'namespace'      => 'urn:ebay:apis:eBLBaseComponents',
                      'timeout' => 30,

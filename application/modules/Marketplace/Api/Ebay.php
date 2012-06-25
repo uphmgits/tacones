@@ -188,6 +188,8 @@ class Marketplace_Api_Ebay {
 	 */
 	public function getItemDetails($listinIDs=null) {
 		// first grab all itemIDs listed by seller
+		// following importing could take a while. increase max_request_timeout to 5 minutes
+        set_time_limit(300);
 		if($listinIDs == null) {
 			$itemIds = $this->_fetchList();
 		}
@@ -196,6 +198,8 @@ class Marketplace_Api_Ebay {
 		}
 		// start building DOM for output XML
 		$dom = new DOMDocument('1.0', 'utf-8');
+		
+		/*
 		$elmSeller = $dom->createElement('seller');
 		$rootNode = $dom->appendChild($elmSeller);
 		
@@ -207,17 +211,21 @@ class Marketplace_Api_Ebay {
 		
 		$elmItems = $dom->createElement('Items');
 		$itemsNode = $rootNode->appendChild($elmItems);
-		
+		*/
 		$arrayIDs = array();
 		$i=0;		
 		// grab details for each itemID now
 		foreach($itemIds as $itemID) {
-			//if($i++ > 1) break;
+			if($i++ > 50) break;
 			// keep building DOM
+			
+			/*
 			$elmItemDetails = $dom->createElement('Item');
 			$itmdetailsNode = $itemsNode->appendChild($elmItemDetails);
 			$elmItemID = $dom->createElement('ItemID', $itemID);
 			$itmdetailsNode->appendChild($elmItemID);
+			*/
+			
 			$getItemDetailsReqDetails = '<ItemID>'.$itemID.'</ItemID><IncludeItemSpecifics>true</IncludeItemSpecifics><DetailLevel>ReturnAll</DetailLevel></GetItemRequest>';
 			$getitmdtlxml = $this->_xpable . $this->_getItemDetailsReqRoot . $this->_reqAuth . $getItemDetailsReqDetails; // XML POST for getting item details for a given itemID
 			
@@ -298,6 +306,9 @@ class Marketplace_Api_Ebay {
 				$arrayIDs[$itemID]['CurrentPrice'] = (string)$CurrentPrice;
 				
 				// Start building item details in dom
+				// ... on second thought, we dont need the DOM. everything is built into $arrayIDs  arrau
+				//     so commenting out DOM part below
+				/*
 				$itmTitleElm = $dom->createElement('Title', $itmTitle);
 				$itmdetailsNode->appendChild($itmTitleElm);
 				
@@ -325,11 +336,11 @@ class Marketplace_Api_Ebay {
 				
 				$itmCurrentPrice = $dom->createElement('CurrentPrice', $CurrentPrice);
 				$itmdetailsNode->appendChild($itmCurrentPrice);
-				
+				*/
 				// Item Specifics
 				
-				$itmSpecs = $dom->createElement('ItemSpecs');
-				$itemSpecsNode = $itmdetailsNode->appendChild($itmSpecs);
+				/*$itmSpecs = $dom->createElement('ItemSpecs');
+				$itemSpecsNode = $itmdetailsNode->appendChild($itmSpecs);*/
 				foreach($itmcallItmDetNode->ItemSpecifics->NameValueList as $specific) {
 					//print "<br> Name: " . $specific->Name . "  VAL: " . $specific->Value;
 					$arrayIDs[$itemID]['itemSpecifics'][(string)$specific->Name] = (string)$specific->Value;

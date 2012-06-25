@@ -12,7 +12,9 @@
 */
 
 (function($) {
+	
 	$.fn.marketplaceScrollbars = function( urlBase, categoryId, brandId, newerWorn ) {
+		//alert("in aplweb fun");
 		return $(this).each(function() {
 			//transform the selected dom elements
 			var $scrollable = $(this);
@@ -176,7 +178,10 @@
 				
 				//same but with the horizontal bar
 				var amountWidth = $scrollcontent.innerWidth() / $scrollwrap.outerWidth();
-					
+				//alert("Inner Width: " + $scrollcontent.innerWidth() + "   Outer Width: " + $scrollwrap.outerWidth());
+				//console.log($scrollcontent);
+				//console.log("Amount Width: " + amountWidth);
+				//console.log($scrollcontent.height());	
 				if (amountWidth >= 1) {
 					//if we do not need some scrollbars, then we simply set the class of the scrollable element and let css remove them
 					$scrollable.addClass("no_scroll_h");

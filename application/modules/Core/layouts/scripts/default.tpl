@@ -111,6 +111,9 @@
     }
     $this->headLink()->prependStylesheet("{$this->baseUrl()}/externals/jqscroll/css/scrollbars.css");
     $this->headLink()->prependStylesheet("{$this->baseUrl()}/externals/jqscroll/css/scrollbars-black.css");
+    $this->headLink()->prependStylesheet("{$this->baseUrl()}/externals/jqUI/css/ui-lightness/jquery-ui-1.8.21.custom.css");
+    
+    
   ?>
   <?php echo $this->headLink()->toString()."\n" ?>
   <?php echo $this->headStyle()->toString()."\n" ?>
@@ -125,6 +128,9 @@
   <script type="text/javascript" src="<?=$this->baseUrl()?>/externals/jqscroll/jq.mousehold.js"></script>
   <script type="text/javascript" src="<?=$this->baseUrl()?>/externals/jqscroll/jq.mousewheel.js"></script>
   <script type="text/javascript" src="<?=$this->baseUrl()?>/externals/jqscroll/aplweb.scrollbars.js"></script>
+  <script type="text/javascript" src="<?=$this->baseUrl()?>/externals/blockUI/jquery.blockUI.js"></script>
+  <script type="text/javascript" src="<?=$this->baseUrl()?>/externals/jquery-validation-1.9.0/jquery.validate.min.js"></script>
+  <script type="text/javascript" src="<?=$this->baseUrl()?>/externals/jqUI/js/jquery-ui-1.8.21.custom.min.js"></script>
   <script type="text/javascript">
     jQuery.noConflict();
     isMobile = false;

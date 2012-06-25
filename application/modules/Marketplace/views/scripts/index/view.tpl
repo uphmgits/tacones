@@ -1,3 +1,30 @@
+<?php 
+
+$q = '( function($) {
+		$(document).ready(function () {
+			scrollbars();
+		
+			
+		})
+		
+		scrollbars = function() {
+			//alert("in fun");
+			var $scrollable = $("#itemdesc");
+			//var $scrollable = $(this);
+			$scrollable.addClass("scrollable");
+			
+			var $scrollcontent = $(\'<div class="scrollcontent"></div>\');
+			var $scrollwrap = $(\'<div class="scrollwrap"></div>\');
+			//$scrollable.wrapInner($scrollwrap).wrapInner($scrollcontent);
+			
+			/*$scrollable.wrapInner($scrollwrap);
+			$scrollable.wrapInner($scrollcontent.innerHtml);*/
+		}
+	})( jQuery )';
+	$this->headScript()->prependScript($q);
+
+?>
+
 <?php if( !$this->marketplace): ?>
   <?php echo $this->translate('The marketplace you are looking for does not exist or has been deleted.');?>
   <?php return; // Do no render the rest of the script in this mode
@@ -10,6 +37,24 @@ endif; ?>
 <link rel="stylesheet" href="application/modules/Marketplace/externals/milkbox/css/milkbox/milkbox.css" type="text/css" media="screen" />
 <script type="text/javascript" src="application/modules/Marketplace/externals/milkbox/js/mootools-1.2.5.1-more.js"></script>
 <script type="text/javascript" src="application/modules/Marketplace/externals/milkbox/js/milkbox.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script type="text/javascript">
   var categoryAction =function(category){
@@ -455,7 +500,7 @@ endif; ?>
 			<br/>
     <?php endif; ?>
     <h3 class="product-desc"><?=$this->translate('Product Description')?></h3>
-		<div class="marketplace_entrylist_entry_date">
+		<div id = "itemdesc" class="marketplace_entrylist_entry_date">
       <div class="marketplace_thumb_icon">
 			  <?=$this->htmlLink($this->owner->getHref(), $this->itemPhoto($this->owner,'thumb.profile'))?>
         <?=$this->htmlLink($this->marketplace->getParent(), $this->marketplace->getParent()->getTitle())?>
@@ -481,7 +526,7 @@ endif; ?>
       </div>
 
       <div class="marketplace_product_desc">
-        <h2><?=$this->marketplace->getTitle()?></h2>
+        <h2>**<?=$this->marketplace->getTitle()?></h2>
         <div class="marketplace_entrylist_entry_body">
           <?=nl2br($this->marketplace->body)?>
         </div>

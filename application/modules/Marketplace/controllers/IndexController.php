@@ -1170,43 +1170,61 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
                 throw $e;
             }
         }
-		/*
-		    if(Engine_Api::_()->marketplace()->authorizeIsActive()){
-			    $form->authorize_login->setValue($mark['authorize_login']);
-			    $form->authorize_key->setValue($mark['authorize_key']);
-		    }else{
-			    $form->business_email->setValue($mark['business_email']);
-		    }
-		*/
+		
         // If not post or form not valid, return
         if (!$this->getRequest()->isPost()) {
-        	// grab ebay listing details for each listing for this seller on eBay
-        	$e = new Marketplace_Api_Ebay(false);
+        	// Not a POST request. Display initial eBay input form
+        	$this->view->ebay_initialinput = true;
+        	return;
+        }
+        // POST request
+        // which POST is it? ebay initial i/p form or actual import POST?
+        if($_POST['ebay_initialinput']==1) {
+        	if (!$form->isValid($this->getRequest()->getPost())) {
+        		$this->view->errorEbayInitialInput = true;
+            	return;
+        	}
         	
-        	/*$listings = array(300724558276,300726496554);
-        	$ld = $e->getItemDetails($listings);
-        	*/
-	    	
-        	//$e->getCats();
-	    	$e->setListingFrom('2012-05-30T21:59:59.005Z');
-	    	$e->setListinTo('2012-06-31T21:59:59.005Z');
-	    	
-	    	$m = new Marketplace_Api_Ebay_Mapper();
+        	// grab sellerID and dates and fire-up the retrieval
+        	$e = new Marketplace_Api_Ebay(false);  // true=>ebay sandbox    false=>ebay production
+        	$oneday = 60*60*24;
+        	$e->setSeller($_POST[ebaysellerid]); // ebay seller id is set now
+        	$upheels_timestamp = strtotime( $_POST[postfrom]);
+        	$upheels_timestamp -= $oneday;
+			$ebay_date = date('Y-m-d', $upheels_timestamp); 
+			//print $ebay_date;
+			$e->setListingFrom($ebay_date/*.'T00:00:00.000Z'*/);  // listings posted date range, start date
+			
+			$upheels_timestamp = strtotime( $_POST[postthru]);
+			$upheels_timestamp += $oneday;
+			$ebay_date = date('Y-m-d', $upheels_timestamp); 
+			//print "<br> $ebay_date";
+			$e->setListinTo($ebay_date/*.'T00:00:00.000Z'*/);  //// listings posted date range, end date
+			
+			/*print "<pre>";
+			print_r($e->getItemDetails());exit;*/
+			
+			$m = new Marketplace_Api_Ebay_Mapper();
 	    	$m->setEbaydata($e->getItemDetails());
 	    	//$m->setEbaydata($ld);
 	    	
 	    	//$this->view->listingDetails = $e->getItemDetails();
-	    	$this->view->details = $m->map();
-            return;
+	    	$this->view->details = $m->map();  // build a mapping between ebay item details and upheels
+            return;   // retrieval and mapping done, show it to user (upheels seller)
         }
-
-        /*if (!$form->isValid($this->getRequest()->getPost())) {
-            return;
-        }*/
-
+        
+		// This is POST request for actual import to begin
+		// Iterate over each item and create an upheels listing
+		// At the end redirect user (seller) to "manage" page
+		/*print "<pre>";
+		print_r($_POST);exit;*/
         $table = Engine_Api::_()->getItemTable('marketplace');
 
         $db = $table->getAdapter();
+        
+        // following importing could take a while. increase max_request_timeout to 5 minutes
+        set_time_limit(600);
+        
     foreach($_POST[Rows] as $row) {
         $db->beginTransaction();
         try {
@@ -1231,11 +1249,11 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
             $marketplace->save();
 
             // Set photo
-            if (!empty($row[mainphoto])) {
-                $marketplace->setPhotoFromURL($row[mainphoto]);
+            if (!empty($row[pictures][photo])) {
+                $marketplace->setPhotoFromURL($row[pictures][photo]);
             }
             
-            if( !empty($_FILES) ) {
+            if( sizeof($row[pictures]) >1 ) {
                 $album = $marketplace->getSingletonAlbum();
 
                 $params = array(
@@ -1246,9 +1264,9 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
                   'user_id' => $viewer->getIdentity(),
                 );
                 $noMainPhoto = $marketplace->photo_id ? false : true;
-                foreach( $_FILES as $key => $file ) {
-                    if( $key == 'photo' or !$file['tmp_name'] ) continue;
-                    $photo_id = Engine_Api::_()->marketplace()->createPhoto($params, $file)->photo_id;
+                foreach( $row[pictures] as $key => $file ) {
+                    if( $key == 'photo'  ) continue;
+                    $photo_id = Engine_Api::_()->marketplace()->createPhotoFromURL($params, $file)->photo_id;
 
                     if( $noMainPhoto ){
                       $marketplace->photo_id = $photo_id;
@@ -1325,14 +1343,15 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
             throw $e;
         }
     }
-        // Redirect
-        $allowed_upload = Engine_Api::_()->authorization()->getPermission($viewer->level_id, 'marketplace', 'photo');
+        // Redirect to "manage page" so seller can review what just happened!
+        return $this->_helper->redirector->gotoRoute(array('page' => ''), 'marketplace_manage', true);
+        /*$allowed_upload = Engine_Api::_()->authorization()->getPermission($viewer->level_id, 'marketplace', 'photo');
         if ($allowed_upload) {
             //return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id), 'marketplace_success', true);
             return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id), 'marketplace_itempreview', true);
         } else {
             return $this->_helper->redirector->gotoUrl($marketplace->getHref(), array('prependBase' => false));
-        }
+        }*/
     }
     public function itempreviewAction() {
         $marketplace_id = (int)$this->_getParam('marketplace_id', 0);
