@@ -31,7 +31,7 @@ endif; ?>
 
             </li>
           <?php endforeach; ?>
-          <li class="see-more-likes"><?=$this->translate('%s see all', $likeCount)?></li>
+          <li class="see-more-likes"><?=$this->translate('%s see all', $this->likeList->getTotalItemCount())?></li>
         </ul>
       <?php endif; ?>
 
@@ -42,7 +42,7 @@ endif; ?>
     <style>div.comments-form-container { display: block; }</style>
     <div class="comments-header">
       <div class="comments-stats">
-        <span><?=$this->translate("%s comments", $this->marketplace->comment_count)?></span>
+        <span id="comments-count"><?=$this->marketplace->comment_count?> <?=$this->translate("comments")?></span>
 
         <span><?=$this->htmlLink(array('route' => 'marketplace_entry_view', 
                                        'user_id' => $this->marketplace->owner_id, 

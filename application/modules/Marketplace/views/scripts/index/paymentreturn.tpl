@@ -1,6 +1,6 @@
 <div class="headline">
   <h2>
-    <?php echo $this->translate('Result of payment');?>
+    <?php echo $this->translate('Thank you for your payment');?>
   </h2>
   <div class="tabs">
     <?php
@@ -32,13 +32,46 @@
 
 <?php if( !empty($this->marketplaceList) ) : ?>
   <div>
-      <h3><?=$this->translate('You can post a review for these users:')?></h3>
+      <h3><?=$this->translate('You can post a review for these users:')?></h3><br/>
       <?php foreach( $this->marketplaceList as $item) : ?>
           <?php $owner = $item->getOwner(); ?>
           <?=$this->htmlLink(array('route' => 'review_user', 'id' => $owner->getIdentity()), $owner->getTitle())?><br/>
       <?php endforeach; ?>
   </div>
   <br/>    
+
+  <?php $i = 0; $colInRow = 5; ?> 
+  <?php $this->addHelperPath(APPLICATION_PATH . '/application/modules/Fields/View/Helper', 'Fields_View_Helper'); ?>
+
+  <div>
+    <h3><?=$this->translate('You just bought these items:')?></h3><br/>
+    <?php foreach($this->marketplaceList as $marketplace): ?>
+
+      	<?php if( $i % $colInRow == 0 ) echo '<ul class="cart-item-row">'; ?>
+	      <li>
+            <div class="cart-item-photo">
+              <?=$this->htmlLink($marketplace->getHref(), $this->itemPhoto($marketplace, 'normal'))?>
+            </div>
+            <table class="product-title-right">
+              <tbody><tr>
+                <td><?=$marketplace->getTitle()?></td>
+                <td width="20">
+                  $<?=number_format($marketplace->price, 2)?>
+                  <div style="color:#93C;text-transform:none;"></div>
+                </td>
+              </tr></tbody>
+            </table>
+            <div class="cart-item-fields">
+                <?php $fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($marketplace); ?>
+                <?=$this->fieldValueLoop($marketplace, $fieldStructure)?>
+            </div>
+        </li>
+	      <?php if( $i++ % $colInRow == $colInRow - 1 ) echo "</ul>"; ?> 
+    <?php endforeach; ?>
+  </div>
+  <br/>
+  <br/>
+
 <?php endif; ?>
 	
 <?php	if(!empty($this->cartContent)) : ?>

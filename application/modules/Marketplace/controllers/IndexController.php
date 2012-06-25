@@ -21,8 +21,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 {
   protected $_navigation;
   // true - sandbox, false - paypal original
-  protected $_sandbox = true;
-  //protected $_sandbox = false;
+  //protected $_sandbox = true;
+  protected $_sandbox = false;
 
   public function init() {
       if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'view')->isValid())
@@ -149,7 +149,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
   public function ajaxlistAction() {
       $viewer = $this->_helper->api()->user()->getViewer();
 
-      if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'view')->isValid()) eturn;
+      if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'view')->isValid()) return;
 
       $this->view->form = $form = new Marketplace_Form_Search();
       // Process form
@@ -384,7 +384,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $this->view->owner = $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
     }
     //$paypal->setBusinessEmail($marketplace->business_email);
-    $paypal->setBusinessEmail( Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.mainpaypal', $marketplace->business_email) );
+    $paypal->setBusinessEmail( Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.mainpaypal') );
 
     if( !$anonymous_purchase ) {
       $userID = $viewer->getIdentity();
@@ -682,13 +682,22 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
                 $table = Engine_Api::_()->getDbtable('orders', 'marketplace');
    					    $table->insert($values);
 
-						
                 if( $user_id ) {
                     $buyer = Engine_Api::_()->getItem('user', $user_id);
 							      $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
 							      $notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
 							      $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
 							      $notifyApi->addNotification($buyer, $owner, $marketplace, 'marketplace_transaction_to_buyer');
+
+                    $orderId = $table->select()
+                                     ->where("owner_id = {$marketplace->owner_id}")
+                                     ->where("user_id = {$user_id}")
+                                     ->where("marketplace_id = {$marketplace->marketplace_id}")
+                                     ->order("order_id DESC")
+                                     ->query()
+                                     ->fetchColumn()
+                    ; 
+                    if( $orderId ) $this->_ownerMailing($owner, $buyer, $marketplace, $item_count, $orderId);
 							
 							      if(Engine_Api::_()->marketplace()->cartIsActive()){
 								      $cartTable->delete(array(
@@ -770,8 +779,28 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 		  }
     }
 
-    private function _paymentMailing($buyerEmail, $owner, $marketplace, $count) {
+    private function _ownerMailing($owner, $buyer, $marketplace, $count, $orderId) 
+    {
+      $adminAddress = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.from', 'admin@' . $_SERVER['HTTP_HOST']);
+      $adminName = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.name', 'Site Admin');
+      $toOwnerAddress = $owner->email;
+      $toOwnerName = $owner->getTitle();
 
+      $subjectTemplate = Zend_Registry::get('Zend_Translate')->_("New Order");
+      $bodyOwner = $this->view->translate('<strong>%1$s</strong> bought the "%2$s". Count: %3$s. <br/>Please click on the link to fill in the form of delivery: <a href=\'%4$s\'>delivery form</a>', $buyer->getTitle(), $marketplace->getTitle(), $count, "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getRouter()->assemble(array('action' => 'client-shipping-service', 'order_id' => $orderId), 'marketplace_general', true) );
+
+      // mail to owner
+      $mail = Engine_Api::_()->getApi('mail', 'core')->create()
+              ->addTo($toOwnerAddress, $toOwnerName)
+              ->setFrom($adminAddress, $adminName)
+              ->setSubject($subjectTemplate)
+              ->setBodyHtml($bodyOwner)
+      ;
+      Engine_Api::_()->getApi('mail', 'core')->sendRaw($mail);
+    }
+
+    private function _paymentMailing($buyerEmail, $owner, $marketplace, $count) 
+    {
       $adminAddress = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.from', 'admin@' . $_SERVER['HTTP_HOST']);
       $adminName = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.name', 'Site Admin');
 
@@ -1815,9 +1844,75 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $table = $this->_helper->api()->getDbtable('orders', 'marketplace');
         $select = $table->select();
 
+        $params = $this->_getAllParams();
+        if( isset($params['get_order_pdf']) ) {
+
+            $orderId = (int)$params['get_order_pdf'];
+            $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+            $order = $orderTable->select()
+                                ->where("order_id = {$orderId}")
+                                ->where("user_id = {$viewer->getIdentity()}")
+                                ->query()
+                                ->fetch()
+            ;
+            if( $order ) :
+                $marketplace = Engine_Api::_()->getItem('marketplace', $order['marketplace_id']);
+                if( $marketplace ) {
+
+                    // CREATE PDF
+                    $mpdfClass = APPLICATION_PATH . '/externals/mpdf/mpdf.php'; 
+                    include $mpdfClass;
+                    
+                    $pdfPath = APPLICATION_PATH . "/public/orders_pdf/order_" . $order['order_id'] . ".pdf";
+                    $pdfUrl  = $this->view->baseUrl() . "/public/orders_pdf/order_" . $order['order_id'] . ".pdf";
+
+                    $html_body = "<html>"; 
+                    $html_body .= "<head>"; 
+                    $html_body .= "</head>"; 
+                    $html_body .= "<body>"; 
+                    $html_body .= "<h1>ORDER #{$order['order_id']}</h1>";
+                    $html_body .= "<h2>Item: {$marketplace->getTitle()}</h2>";
+                    $html_body .= "<h3>Owner: {$marketplace->getOwner()->getTitle()}</h3>";
+                    $html_body .= "<h3>Buyer: {$viewer->getTitle()}</h3>";
+                    $html_body .= "<h3>Pay date: {$order['date']}</h3>";
+                    $html_body .= "</body>"; 
+                    $html_body .= "</html>"; 
+                    $mpdf = new mPDF('c','A4','','',10, 10, 7, 7, 10, 10); 
+                    $mpdf->SetDisplayMode('fullpage'); 
+                    $mpdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list 
+                    $mpdf->WriteHTML($html_body); 
+                    $mpdf->Output( $pdfPath ); 
+
+                    // SEND TO BUYER
+                    $adminAddress = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.from', 'admin@' . $_SERVER['HTTP_HOST']);
+                    $adminName = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.name', 'Site Admin');
+
+                    $subjectTemplate = $this->view->translate("Order #%s", $order['order_id']);
+                    $bodyTemplate = $this->view->translate("Order #%s info", $order['order_id']);
+                    $mail = Engine_Api::_()->getApi('mail', 'core')->create()
+	                    ->addTo($viewer->email, $viewer->getTitle())
+	                    ->setFrom($adminAddress, $adminName)
+	                    ->setSubject($subjectTemplate)
+	                    ->setBodyHtml($bodyTemplate)
+                    ;
+                    // add attachment 
+                    if( file_exists( $pdfPath ) ) {
+	                    $at = $mail->createAttachment(file_get_contents($pdfPath)); 
+	                    $at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT; 
+	                    $at->encoding = Zend_Mime::ENCODING_BASE64; 
+	                    $at->filename = "order_{$order['order_id']}.pdf";
+                      Engine_Api::_()->getApi('mail', 'core')->sendRaw($mail);
+
+                      header('Location: ' . $pdfUrl); die();
+                    }
+                    // end send mail
+                }
+            endif;
+        }
+
         // Process form
         $values = array();
-        if ($formFilter->isValid($this->_getAllParams())) {
+        if ($formFilter->isValid($params)) {
             $values = $formFilter->getValues();
         }
 
@@ -1843,10 +1938,21 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $this->view->paginator = $paginator->setCurrentPageNumber($page);
     }
 
-    public function cancelingAction() {
+    public function cancelingAction() 
+    {
+        $viewer = Engine_Api::_()->user()->getViewer();
+        if( !$viewer->getIdentity() ) 
+          return $this->_forward('requireauth', 'error', 'core');
+
         $orderId = (int)$this->_getParam('order_id', 0);
         $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
-        $order = $orderTable->select()->where("order_id = {$orderId}")->query()->fetch();
+        $order = $orderTable->select()
+                            ->where("order_id = {$orderId}")
+                            ->where("user_id = {$viewer->getIdentity()}")
+                            ->where("status = 'wait'")
+                            ->query()
+                            ->fetch()
+        ;
         $this->view->error = false;
 
         if( $order ) {
@@ -1856,7 +1962,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
                 $this->view->order = $order;
 
                 $request = $this->getRequest()->getPost();
-                if( $request and isset($request['reason']) and $order['status'] == 'wait' ) {
+                if( $request and isset($request['reason']) ) {
                   $reason = trim($request['reason']);
                   if( empty($reason) ) {
                     $this->view->error = true;
@@ -1873,6 +1979,83 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
           'format'=> 'smoothbox',
         ));
     }
+
+    public function setTrackingNumberAction() 
+    {
+        $viewer = Engine_Api::_()->user()->getViewer();
+        if( !$viewer->getIdentity() ) 
+          return $this->_forward('requireauth', 'error', 'core');
+
+        $orderId = (int)$this->_getParam('order_id', 0);
+        $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+
+        $select = $orderTable->select()->where("order_id = {$orderId}");
+
+        if( $viewer->isAdmin() ) {
+          $select->where("status = 'approved' OR ( owner_id = {$viewer->getIdentity()} AND status = 'wait' ) ");
+        } else {
+          $select->where("owner_id = {$viewer->getIdentity()}")
+                 ->where("status = 'wait'");
+        }
+
+        $order = $select->query()->fetch();
+
+        if( $order ) {
+          $this->view->form = $form = new Marketplace_Form_Settracking();
+          $request = $this->getRequest()->getPost();
+
+          if( !$request ) {
+            $form->populate($order);
+            return;
+          }
+
+          if( !$form->isValid($request) ) return;
+          
+          $values = $form->getValues();
+          $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+
+          $orderTable->update(array('tracking_fedex' => $values['tracking_fedex'], 
+                                     'tracking_ups' => $values['tracking_ups']), "order_id = $orderId");
+        }
+
+        $refresh = (bool)$this->_getParam('refresh', 0);
+        return $this->_forward('success', 'utility', 'core', array(
+          'smoothboxClose' => true,
+          'parentRefresh' => $refresh,
+          'format'=> 'smoothbox',
+        ));
+    }
+
+    public function viewTrackingInfoAction() 
+    {
+        $viewer = Engine_Api::_()->user()->getViewer();
+        if( !$viewer->getIdentity() ) 
+          return $this->_forward('requireauth', 'error', 'core');
+
+        $orderId = (int)$this->_getParam('order_id', 0);
+        $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+        $select = $orderTable->select()->where("order_id = {$orderId}");
+
+        if( !$viewer->isAdmin() ) $select->where("user_id = {$viewer->getIdentity()}");
+
+        $order = $select->query()->fetch();
+
+        if( $order and (!empty($order['tracking_fedex']) or !empty($order['tracking_ups'])) ) {
+            if( !empty($order['tracking_fedex']) ) {
+              $this->view->fedex_xml = Engine_Api::_()->marketplace()->fedexTracking($order['tracking_fedex']);
+              return;                  
+            } else {
+              $this->view->ups_xml = Engine_Api::_()->marketplace()->upsTracking($order['tracking_ups']);
+              return;
+            }
+        }
+        return $this->_forward('success', 'utility', 'core', array(
+          'smoothboxClose' => true,
+          'parentRefresh' => false,
+          'format'=> 'smoothbox',
+        ));
+    }
+
 
     public function addtocartAction() {
 		if( /*!$this->_helper->requireUser()->isValid() || */ !Engine_Api::_()->marketplace()->cartIsActive() )
@@ -2296,7 +2479,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       $midsStr = implode('_', $mids);
       
       //$paypal->setBusinessEmail($first_marketplace->business_email);
-      $paypal->setBusinessEmail( Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.mainpaypal', $first_marketplace->business_email) );
+      $paypal->setBusinessEmail( Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.mainpaypal', '') );
 
       if( $viewer_id ) $paypal->setPayer($viewer->email, $viewer_id);
       else $paypal->setPayer('', $viewer_id);
@@ -2335,6 +2518,21 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $this->view->likeList = $likesTable->getLikePaginator($marketplace, 5);
 
         $this->view->marketplace = $marketplace;
+    }
+
+    public function clientShippingServiceAction() {
+        $viewer = Engine_Api::_()->user()->getViewer();
+        if( !$viewer->getIdentity() ) 
+          return $this->_forward('requireauth', 'error', 'core');
+
+        if( !($orderId = $this->_getParam('order_id', 0)) ) 
+          return $this->_helper->redirector->gotoRoute(array(), 'marketplace_browse');
+
+        $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+        $order = $orderTable->select()->where("order_id = {$orderId} AND owner_id = {$viewer->getIdentity()}")->query()->fetch();
+
+        if( empty($order) ) 
+          return $this->_helper->redirector->gotoRoute(array(), 'marketplace_browse');
     }
 }
 

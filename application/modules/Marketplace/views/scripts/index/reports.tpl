@@ -169,7 +169,7 @@ function loginAsUser(id) {
             </td>
             <td><?=str_replace(' ', '<br/>', $item->date)?></td>
             <td><?=$item->status?></td>
-            <td>
+            <td style="font-size: 0.9em">
                 <?php if($item->user_id == $viewerId and $item->status == 'wait') : ?>
                   <?=$this->htmlLink(array('route' => 'marketplace_general', 
                                              'action' => 'canceling',
@@ -177,6 +177,36 @@ function loginAsUser(id) {
                                              'format' => 'smoothbox' ), 
                                       $this->translate('Cancel'),
                                       array('class' => 'smoothbox'))?>
+                <?php endif; ?>
+
+                <?php if($item->owner_id == $viewerId and $item->status == 'wait') : ?>
+                  <br/>
+                  <?=$this->htmlLink(array('route' => 'marketplace_general', 
+                                             'action' => 'set-tracking-number',
+                                             'order_id' => $item->order_id,
+                                             'format' => 'smoothbox' ), 
+                                      $this->translate('Set Tracking'),
+                                      array('class' => 'smoothbox'))?>
+                <?php endif; ?>
+
+                <?php if( ($item->user_id == $viewerId or $item->owner_id == $viewerId) and 
+                           ( $item->tracking_fedex or $item->tracking_ups ) ) : ?>
+                  <br/>
+                  <?=$this->htmlLink(array('route' => 'marketplace_general', 
+                                             'action' => 'view-tracking-info',
+                                             'order_id' => $item->order_id,
+                                             'format' => 'smoothbox' ), 
+                                      $this->translate('View Tracking'),
+                                      array('class' => 'smoothbox'))?>
+                <?php endif; ?>
+
+                <?php if($item->user_id == $viewerId ) : ?>
+                    <form method="post" action="" id="frmOrderPdf<?=$item->order_id?>">
+                      <input type="hidden" name="get_order_pdf" value="<?=$item->order_id?>" />
+                      <a href="javascript:void(0);" onclick="$('frmOrderPdf<?=$item->order_id?>').submit()">
+                        <?=$this->translate('Get order PDF')?>
+                      </a>
+                    </form>
                 <?php endif; ?>
             </td>
           </tr>

@@ -551,7 +551,7 @@ function tree_print_category( &$a_tree, $model, $category_id, $specRoute = null,
     }
     if ($a_tree[$i]['k_item'] == $category_id)
       echo "<li>".$cat_title;
-    $this->tree_print_category($a_tree[$i]['a_tree'],$model, $category_id, $specRoute, $specParam);
+    $this->tree_print_category($a_tree[$i]['a_tree'],$model, $category_id, $specRoute, $specParams);
     echo "</li>";
   }
   echo "</ul>";
@@ -870,6 +870,115 @@ public function getUserCategories($user_id)
                   ->query()  
                   ->fetchAll(Zend_Db::FETCH_COLUMN, 'marketplace_id')
       ;
+  }
+
+  public function fedexTracking( $trackingNumber )
+  {
+      $endpointurl = "https://gateway.fedex.com:443/xml";
+      $acckey   = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.fedex.acckey');
+      $accpass  = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.fedex.accpass');
+      $accnum   = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.fedex.accnum');
+      $accmeter = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.fedex.accmeter');
+
+      if( !$acckey or !$accpass or !$accnum or !$accmeter ) return false;
+
+      $request = "<TrackRequest xmlns='http://fedex.com/ws/track/v3'>
+                    <WebAuthenticationDetail>
+                    <UserCredential>
+                      <Key>{$acckey}</Key>
+                      <Password>{$accpass}</Password>
+                    </UserCredential>
+                    </WebAuthenticationDetail>
+                      <ClientDetail>
+                        <AccountNumber>{$accnum}</AccountNumber>
+                        <MeterNumber>{$accmeter}</MeterNumber>
+                      </ClientDetail>
+                      <TransactionDetail>
+                        <CustomerTransactionId>ActiveShipping</CustomerTransactionId>
+                      </TransactionDetail>
+                      <Version>
+                        <ServiceId>trck</ServiceId>
+                        <Major>3</Major>
+                        <Intermediate>0</Intermediate>
+                        <Minor>0</Minor>
+                      </Version>
+                      <PackageIdentifier>
+                        <Value>{$trackingNumber}</Value>
+                        <Type>TRACKING_NUMBER_OR_DOORTAG</Type>
+                      </PackageIdentifier>
+                      <IncludeDetailedScans>1</IncludeDetailedScans>
+                  </TrackRequest>";
+
+      $form = array('http' => array(
+                           'method' => 'POST',
+                           'header' => 'Content-type: application/x-www-form-urlencoded',
+                           'content' => $request
+                        )
+                    );
+
+      $request = stream_context_create($form);
+      $browser = fopen($endpointurl , 'rb' , false , $request);
+
+      if(!$browser) return false; // "Connection failed."
+
+      //get response
+      $response = stream_get_contents($browser);
+      fclose($browser);
+
+      if($response == false) return false; // "Bad data."
+
+      $response = preg_replace("/v3:/i", "", $response);
+      return new SimpleXMLElement($response);
+
+  }
+
+  public function upsTracking( $trackingNumber )
+  {
+      $endpointurl = 'https://www.ups.com/ups.app/xml/Track';
+      $access = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.ups.access');
+      $userId = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.ups.userid');
+      $passwd = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.ups.password');
+
+      if( !$access or !$userId or !$passwd ) return false;
+
+      $request = "<?xml version='1.0'?>
+                  <AccessRequest xml:lang='en-US'>
+                    <AccessLicenseNumber>{$access}</AccessLicenseNumber>
+                    <UserId>{$userId}</UserId>
+                    <Password>{$passwd}</Password>
+                  </AccessRequest>
+                  <?xml version='1.0'?>
+                  <TrackRequest xml:lang='en-US'>
+                    <Request>
+                      <TransactionReference>
+                        <CustomerContext>Your Test Case Summary Description</CustomerContext>
+                        <XpciVersion>1.0</XpciVersion>
+                      </TransactionReference>
+                      <RequestAction>Track</RequestAction>
+                      <RequestOption>activity</RequestOption>
+                    </Request>
+                    <TrackingNumber>{$trackingNumber}</TrackingNumber>
+                  </TrackRequest>";
+
+      $form = array('http' => array(
+                           'method' => 'POST',
+                           'header' => 'Content-type: application/x-www-form-urlencoded',
+                           'content' => $request
+                        )
+                    );
+
+      $request = stream_context_create($form);
+      $browser = fopen($endpointurl , 'rb' , false , $request);
+
+      if(!$browser) return false; // "Connection failed."
+
+      //get response
+      $response = stream_get_contents($browser);
+      fclose($browser);
+
+      if($response == false) return false; // "Bad data."
+
+      return new SimpleXMLElement($response);
   }
 
 }

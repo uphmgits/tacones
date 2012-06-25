@@ -27,11 +27,11 @@
     </div>
     <div class="cart-total-container"> 
       <span><?=$this->translate('SHIPPING')?></span>
-      <span>$<?=number_format($shipping_fee)?></span>
+      <span>$<?=number_format($shipping_fee, 2)?></span>
     </div>
     <div class="cart-total-container"> 
       <span><?=$this->translate('INSPECTION')?></span>
-      <span>$<?=number_format($inspection_fee)?></span>
+      <span>$<?=number_format($inspection_fee, 2)?></span>
     </div>
     <hr/>
     <div class="cart-total-container"> 
