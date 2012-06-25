@@ -526,7 +526,7 @@ endif; ?>
       </div>
 
       <div class="marketplace_product_desc">
-        <h2>**<?=$this->marketplace->getTitle()?></h2>
+        <h2><?=$this->marketplace->getTitle()?></h2>
         <div class="marketplace_entrylist_entry_body">
           <?=nl2br($this->marketplace->body)?>
         </div>
