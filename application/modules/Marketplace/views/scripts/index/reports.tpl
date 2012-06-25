@@ -199,6 +199,15 @@ function loginAsUser(id) {
                                       $this->translate('View Tracking'),
                                       array('class' => 'smoothbox'))?>
                 <?php endif; ?>
+
+                <?php if($item->user_id == $viewerId ) : ?>
+                    <form method="post" action="" id="frmOrderPdf<?=$item->order_id?>">
+                      <input type="hidden" name="get_order_pdf" value="<?=$item->order_id?>" />
+                      <a href="javascript:void(0);" onclick="$('frmOrderPdf<?=$item->order_id?>').submit()">
+                        <?=$this->translate('Get order PDF')?>
+                      </a>
+                    </form>
+                <?php endif; ?>
             </td>
           </tr>
         <?php endforeach; ?>

@@ -21,8 +21,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 {
   protected $_navigation;
   // true - sandbox, false - paypal original
-  protected $_sandbox = true;
-  //protected $_sandbox = false;
+  //protected $_sandbox = true;
+  protected $_sandbox = false;
 
   public function init() {
       if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'view')->isValid())
@@ -384,7 +384,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $this->view->owner = $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
     }
     //$paypal->setBusinessEmail($marketplace->business_email);
-    $paypal->setBusinessEmail( Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.mainpaypal', $marketplace->business_email) );
+    $paypal->setBusinessEmail( Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.mainpaypal') );
 
     if( !$anonymous_purchase ) {
       $userID = $viewer->getIdentity();
@@ -1622,9 +1622,75 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $table = $this->_helper->api()->getDbtable('orders', 'marketplace');
         $select = $table->select();
 
+        $params = $this->_getAllParams();
+        if( isset($params['get_order_pdf']) ) {
+
+            $orderId = (int)$params['get_order_pdf'];
+            $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+            $order = $orderTable->select()
+                                ->where("order_id = {$orderId}")
+                                ->where("user_id = {$viewer->getIdentity()}")
+                                ->query()
+                                ->fetch()
+            ;
+            if( $order ) :
+                $marketplace = Engine_Api::_()->getItem('marketplace', $order['marketplace_id']);
+                if( $marketplace ) {
+
+                    // CREATE PDF
+                    $mpdfClass = APPLICATION_PATH . '/externals/mpdf/mpdf.php'; 
+                    include $mpdfClass;
+                    
+                    $pdfPath = APPLICATION_PATH . "/public/orders_pdf/order_" . $order['order_id'] . ".pdf";
+                    $pdfUrl  = $this->view->baseUrl() . "/public/orders_pdf/order_" . $order['order_id'] . ".pdf";
+
+                    $html_body = "<html>"; 
+                    $html_body .= "<head>"; 
+                    $html_body .= "</head>"; 
+                    $html_body .= "<body>"; 
+                    $html_body .= "<h1>ORDER #{$order['order_id']}</h1>";
+                    $html_body .= "<h2>Item: {$marketplace->getTitle()}</h2>";
+                    $html_body .= "<h3>Owner: {$marketplace->getOwner()->getTitle()}</h3>";
+                    $html_body .= "<h3>Buyer: {$viewer->getTitle()}</h3>";
+                    $html_body .= "<h3>Pay date: {$order['date']}</h3>";
+                    $html_body .= "</body>"; 
+                    $html_body .= "</html>"; 
+                    $mpdf = new mPDF('c','A4','','',10, 10, 7, 7, 10, 10); 
+                    $mpdf->SetDisplayMode('fullpage'); 
+                    $mpdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list 
+                    $mpdf->WriteHTML($html_body); 
+                    $mpdf->Output( $pdfPath ); 
+
+                    // SEND TO BUYER
+                    $adminAddress = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.from', 'admin@' . $_SERVER['HTTP_HOST']);
+                    $adminName = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.name', 'Site Admin');
+
+                    $subjectTemplate = $this->view->translate("Order #%s", $order['order_id']);
+                    $bodyTemplate = $this->view->translate("Order #%s info", $order['order_id']);
+                    $mail = Engine_Api::_()->getApi('mail', 'core')->create()
+	                    ->addTo($viewer->email, $viewer->getTitle())
+	                    ->setFrom($adminAddress, $adminName)
+	                    ->setSubject($subjectTemplate)
+	                    ->setBodyHtml($bodyTemplate)
+                    ;
+                    // add attachment 
+                    if( file_exists( $pdfPath ) ) {
+	                    $at = $mail->createAttachment(file_get_contents($pdfPath)); 
+	                    $at->disposition = Zend_Mime::DISPOSITION_ATTACHMENT; 
+	                    $at->encoding = Zend_Mime::ENCODING_BASE64; 
+	                    $at->filename = "order_{$order['order_id']}.pdf";
+                      Engine_Api::_()->getApi('mail', 'core')->sendRaw($mail);
+
+                      header('Location: ' . $pdfUrl); die();
+                    }
+                    // end send mail
+                }
+            endif;
+        }
+
         // Process form
         $values = array();
-        if ($formFilter->isValid($this->_getAllParams())) {
+        if ($formFilter->isValid($params)) {
             $values = $formFilter->getValues();
         }
 

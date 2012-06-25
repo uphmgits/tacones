@@ -142,9 +142,10 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
 
             // the correct new status
             if( ( ($status == 'wait' or $status == 'cancelrequest') and $value == 'inprogress' ) or
-                ( $status == 'cancelrequest' and $value == 'canceled' ) or
+                ( $value == 'canceled' ) or
+                ( $status == 'approved' and $value == 'admin_sent' ) or
                 ( $status == 'inprogress' and ($value == 'approved' or $value == 'failed') ) or
-                ( $status == 'approved' and ($value == 'sold' or $value == 'return') )
+                ( $status == 'admin_sent' and ($value == 'sold' or $value == 'return') )
               ) {
 
               $ordersTable->update( array('status' => $value), 'order_id = '.$matches[1]);
@@ -268,6 +269,7 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
       case 'return'     :
       case 'approved'   :
       case 'failed'     :
+      case 'admin_sent' :
       case 'punished'   : 
       case 'canceled'   :
       case 'cancelrequest': $select->where("status = '{$status_filter}'"); break;
