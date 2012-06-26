@@ -8,6 +8,7 @@ class Marketplace_Api_Payment {//extends Core_Api_Abstract {
     var $cmd = "_xclick";
     var $sandbox = false;
     var $paypalData = array();
+    var $target = null;
 
     public function __construct($sandbox=false) {
         $this->sandbox = $sandbox;
@@ -28,6 +29,10 @@ class Marketplace_Api_Payment {//extends Core_Api_Abstract {
             throw new Exception('Please specify amount ');
         $this->frm = new Zend_Form();
         $this->frm->setAttrib("id", "frmPaypal");
+        if( $this->target ) {
+          $this->frm->setAttrib("target", $this->target);
+          $this->frm->setAttrib("title", "opened in new window");
+        }
         $this->frm->setAction($this->paypalData['url']);
         //$this->addFormField("rm", 2);
         $this->addFormField("cmd", $this->cmd);
@@ -39,8 +44,8 @@ class Marketplace_Api_Payment {//extends Core_Api_Abstract {
         $this->addFormField("payer_email", $this->paypalData['payer_email']);
         $this->addFormField("payer_id", $this->paypalData['payer_id']);
         $this->addFormField("amount", $this->paypalData['amount']);
-		if(isset($this->paypalData['custom']))
-			$this->addFormField("custom", $this->paypalData['custom']);
+		    if(isset($this->paypalData['custom']))
+			    $this->addFormField("custom", $this->paypalData['custom']);
         $this->addFormField("currency_code", $this->currencyCode);
         $this->addFormField("item_number", $this->paypalData['item_number']);
         foreach ($this->arrItem as $k => $v) {
@@ -122,6 +127,9 @@ class Marketplace_Api_Payment {//extends Core_Api_Abstract {
 
     public function setCustom($custom) {
         $this->paypalData['custom'] = $custom;
+    }
+    public function setTarget($target) {
+        $this->target = $target;
     }
 
     public function setControllerUrl($controllerUrl) {

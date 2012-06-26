@@ -1,4 +1,4 @@
-<h2><?php echo $this->translate("Complete transactions management") ?></h2>
+<h2><?php echo $this->translate("Returns Management") ?></h2>
 
 <?php if( count($this->navigation) ): ?>
   <div class='tabs'>
@@ -94,8 +94,7 @@
           <?php $paypal->setAmount( $item->summ ); ?>
           <?php $paypal->setNumber( $item->order_id ); ?>
           <?php $paypal->addItem(array('item_name' => $owner->getTitle() . "({$marketplace->getTitle()})")); ?>
-          <?php $paypal->setControllerUrl("http://" . $_SERVER['HTTP_HOST'] . $this->url(array(), 'marketplace_extended', true) . '/paymentcomplete'); ?>
-          <?php $paypal->setTarget("_blank"); ?>
+          <?php $paypal->setControllerUrl("http://" . $_SERVER['HTTP_HOST'] . $this->url(array(), 'marketplace_extended', true) . '/payment'); ?>
           <?php $isPPButton = true; ?>
         <?php endif; ?>
 

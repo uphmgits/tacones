@@ -88,14 +88,14 @@ function createInvoice(value) {
 </div>
 <form method='post' action=''>
   <select name='status_filter'>
-    <option value='all'      <?php if( $this->status_filter == 'all' )      echo "selected"?>><?=$this->translate("All")?></option>
-    <option value='wait'     <?php if( $this->status_filter == 'wait' )     echo "selected"?>><?=$this->translate("Bought")?></option>
+    <option value='all'        <?php if( $this->status_filter == 'all' )      echo "selected"?>><?=$this->translate("All")?></option>
+    <option value='wait'       <?php if( $this->status_filter == 'wait' )     echo "selected"?>><?=$this->translate("Bought")?></option>
     <option value='inprogress' <?php if( $this->status_filter == 'inprogress' )  echo "selected"?>><?=$this->translate("Received")?></option>
-    <option value='approved' <?php if( $this->status_filter == 'approved' ) echo "selected"?>><?=$this->translate("Passed")?></option>
+    <option value='approved'   <?php if( $this->status_filter == 'approved' ) echo "selected"?>><?=$this->translate("Passed")?></option>
     <option value='admin_sent' <?php if( $this->status_filter == 'approved' ) echo "selected"?>><?=$this->translate("Sent to Buyer")?></option>
-    <option value='failed'   <?php if( $this->status_filter == 'failed' )   echo "selected"?>><?=$this->translate("Failed")?></option>
-    <option value='sold'     <?php if( $this->status_filter == 'sold' )     echo "selected"?>><?=$this->translate("Complete")?></option>
-    <option value='return'   <?php if( $this->status_filter == 'return' )   echo "selected"?>><?=$this->translate("Return")?></option>
+    <option value='failed'     <?php if( $this->status_filter == 'failed' )   echo "selected"?>><?=$this->translate("Failed")?></option>
+    <?php /*<option value='sold' <?php if( $this->status_filter == 'sold' ) echo "selected"?>><?=$this->translate("Complete")?></option>*/?>
+    <option value='return'     <?php if( $this->status_filter == 'return' )   echo "selected"?>><?=$this->translate("Return")?></option>
     <option value='cancelrequest' <?php if( $this->status_filter == 'cancelrequest' ) echo "selected"?>><?=$this->translate("Cancel Request")?></option>
     <option value='canceled' <?php if( $this->status_filter == 'canceled' ) echo "selected"?>><?=$this->translate("Canceled")?></option>
     <option value='punished' <?php if( $this->status_filter == 'punished' ) echo "selected"?>><?=$this->translate("Punished")?></option>
