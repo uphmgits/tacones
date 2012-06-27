@@ -1,4 +1,8 @@
 <?php
+define('IMPORT_FETCHING_INPROCESS', 1);
+define('IMPORT_FETCHING_COMPLETED', 2);
+define('IMPORT_IMPORTING_INPROCESS', 3);
+define('IMPORT_IMPORTING_COMPLETED', 4);
 
 class Marketplace_Api_Ebay_Mapper {
 	
@@ -10,14 +14,28 @@ where m.field_id=o.field_id order by m.category_id asc;*/
 	private $_categoryspecs;
 	private $_ebaydataretrieved;
 	private $_upheelsSpecs;
+	private $_sellerid;
+	private $_jobstatus;
+	private $_listingsRetrieved;
+	private $_listingsMapped;
+	private $_impOptions;
+	private $_listingsPostedFrom;
+	private $_listingsPostedThru;
+	private $_upheelsUserID;
+	private $_importSource;
+	private $_importSellerID;
+	private $_alreadyin;
 	
 	public function __construct() {
-		//$this->setFieldsMeta();
+		/*$file = APPLICATION_PATH . '/application/settings/import_general.php';
+    	$this->_impOptions = include $file;*/
+    	
+		$this->setListingsRetrieved(0);
+		$this->setListingsMapped(0);
+		
 		$file = APPLICATION_PATH . '/application/settings/database.php';
 	    $options = include $file;
-	
 	    $this->_db = Zend_Db::factory($options['adapter'], $options['params']);
-	    //$this->_upheelsSpecs = array('')
 	}
 	
 	private function setFieldsMeta() {
@@ -44,12 +62,64 @@ where m.field_id=o.field_id order by m.category_id asc;*/
 		}
 	}
 	
+	public function createImportjobRecord($jobstate) {
+		$currtime = date('Y-m-d H:i:s');
+		//print "<br>$currtime"; exit;
+		$values = array('importjobs_id' => null,
+						'import_source' => $this->_importSource,
+						'upheels_sellerid' => $this->_upheelsUserID,
+						'import_source_sellerid' => $this->_importSellerID,
+						'import_source_datefrom' => $this->_listingsPostedFrom,
+						'import_source_dateto' => $this->_listingsPostedThru,
+						'listings_retrieved' => $this->getListingsRetrieved(),
+						'listings_imported' => $this->getListingsMapped(),
+						'job_status' => $jobstate,
+						'job_createtime' => $currtime,
+						'job_lastupdatetime' => $currtime);
+		$table = Engine_Api::_()->getDbtable('importjobs', 'marketplace');
+		$job = $table->createRow();
+        $job->setFromArray($values);
+        return $job->save();
+	}
+	
+	public function importjobRecordFetchCompleted($jobid, $jobstate, $count) {
+		$currtime = date('Y-m-d H:i:s');
+		$updatedFields = array( 'job_status' => $jobstate,
+								'listings_retrieved' => $count,
+								'job_lastupdatetime' => $currtime);
+		$this->_updateJobRecord($jobid, $updatedFields);
+	}
+	
+	public function importjobRecordStartImport($jobid, $jobstate) {
+		$currtime = date('Y-m-d H:i:s');
+		$updatedFields = array( 'job_status' => $jobstate,
+								'job_lastupdatetime' => $currtime);
+		$this->_updateJobRecord($jobid, $updatedFields);
+	}
+	
+	public function importjobRecordImportCompleted($jobid, $jobstate, $count) {
+		$currtime = date('Y-m-d H:i:s');
+		$updatedFields = array( 'job_status' => $jobstate,
+								'listings_imported' => $count,
+								'job_lastupdatetime' => $currtime);
+		$this->_updateJobRecord($jobid, $updatedFields);
+	}
+	
+	private function _updateJobRecord($jobid, $values) {
+		$table = Engine_Api::_()->getDbtable('importjobs', 'marketplace');
+		$where = $table->getAdapter()->quoteInto('importjobs_id = ?', $jobid); 
+		$table->update($values, $where);
+	}
+	
+	
 	public function map() {
 		$mappeddata = array();
 		$this->setFullCategorySpecs();
 		$this->_updateEbaySpecLabelToUpheelsLabel();
-		/*print "<pre>";
-		print_r($this->_ebaydataretrieved);exit;*/
+		
+		// Build listingIDs that already have been imported into marketplace table for this seller
+		//$this->_alreadyImported();  // moved this logic to API class
+		
 		foreach($this->_ebaydataretrieved as $itemID => $ebaydata) {
 			$mappeddata[$itemID] = $ebaydata;
 			$upheelsCat = $this->_mapCat($ebaydata['Category']);
@@ -81,6 +151,15 @@ where m.field_id=o.field_id order by m.category_id asc;*/
 		/*print "MAPPED SPECS: <pre>"; print_r($mappeddata);exit;
 		exit;*/
 		return $mappeddata;
+	}
+	
+	private function _alreadyImported() {
+		
+		$select = $this->_db->select()
+			->from(array('m' => 'zapato_social.engine4_marketplace_marketplaces'),array('entry_source_ref'))
+			->where('m.owner_id='.$this->_upheelsUserID . ' and entry_source_ref is not null');
+
+		$this->_alreadyin = $this->_db->fetchAll($select);
 	}
 	
 	private function _mapSpecLabelValue($catID, $speclabel, $specvalue) {
@@ -160,11 +239,50 @@ where m.field_id=o.field_id order by m.category_id asc;*/
     	return $upheelsCat;
 	}
 	
+	public function setListingDateRange($start, $end) {
+		$this->_listingsPostedFrom = date('Y-m-d', strtotime($start));
+		$this->_listingsPostedThru = date('Y-m-d', strtotime($end));;
+	}
+	
+	public function setImportSource($source) {
+		$this->_importSource = $source;
+	}
+	public function setUpheelsUser($upheelsuserid) {
+		$this->_upheelsUserID = $upheelsuserid;
+	}
+	public function setImportSellerId($sellerid) {
+		$this->_importSellerID = $sellerid;
+	}
+	
 	public function setEbaydata($ebaydata) {
 		$this->_ebaydataretrieved = $ebaydata;
 	}
 	public function getEbaydata() {
 		return $this->_ebaydataretrieved;
+	}
+	public function _setSellerId($seller) {
+		$this->_sellerid = $seller;
+	}
+	public function getSellerId() {
+		return $this->_sellerid;
+	}
+	public function getJobStatus() {
+		return $this->_jobstatus;
+	}
+	public function setJobStatus($status) {
+		$this->_jobstatus = $status;
+	}
+	public function setListingsRetrieved($count) {
+		$this->_listingsRetrieved = $count;
+	}
+	public function getListingsRetrieved() {
+		return $this->_listingsRetrieved;
+	}
+	public function getListingsMapped() {
+		return $this->_listingsMapped;
+	}
+	public function setListingsMapped($count) {
+		$this->_listingsMapped = $count;
 	}
 }
 ?>

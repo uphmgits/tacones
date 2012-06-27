@@ -3178,15 +3178,23 @@ li.brand-container:hover ul.brand-list {
 	style: inline-block;
 	border: 1px solid #333333;
 	width: 300px;
-	height: 300px;
+	height: 340px;
 	float:right;
 	margin-right: 160px;
 	text-align: center;
 	vertical-align: middle;
-	padding-top:60px;
+	padding-top:30px;
 	/*margin-right: 20px;
 	margin-top: 30px;*/
 	
+}
+div.ebayimport-info-notice {
+	color: #f08080;
+	margin-top: 24px;
+	float: bottom;
+	text-align: center;
+	vertical-align: middle;
+	//border: 1px solid #333333;
 }
 .ebayimport-inputform-buttons {
 	float: right;
@@ -3199,8 +3207,9 @@ li.brand-container:hover ul.brand-list {
 .ebayinput-jqerrors-label {
 	color: #BB1166;
 }
-.ebayimport-review {
-	background: transparent;
+div.ebayimport-review {
+	//background: transparent;
+	background-color: #EE82EE;
 }
 .ebayreview-rowheader {
 	float: left;
@@ -3208,6 +3217,15 @@ li.brand-container:hover ul.brand-list {
 	margin:0px auto;
 	text-align:left;
 	padding:15px;
+}
+
+.ebayreview-row-yesimport {
+	float: left;
+	width: 52px;
+	height: 21px;
+	border: 1px solid #333333;
+	text-align: center;
+	//padding-right: 5px;
 }
 
 .ebayreview-row-lid {
@@ -3262,7 +3280,7 @@ li.brand-container:hover ul.brand-list {
 	clear: both;
 	float: left;
 	margin-top: 10px;
-	width:480px;
+	width:630px;
 	/*height: 160px;*/
 	//border: 1px solid #333333;
 	//text-align: center;
@@ -3280,7 +3298,7 @@ li.brand-container:hover ul.brand-list {
 	//padding-right: 5px;
 }
 
-ebayreview-row-specs {
+.ebayreview-row-specs {
 	float: left;
 	margin-top: 10px;
 	width:130px;
@@ -3297,6 +3315,17 @@ ebayreview-row-specs {
 #ebayimport input {
 	background: transparent;
 	border: none;
+}
+
+.ebayimport-nodata {
+	background: transaparent;
+	width: 570px;
+	height: 200px;
+	border: 1.5px solid #ff1493;
+	margin-top: 100px;
+	margin-left: 120px;
+	padding-top: 40px;;
+	text-align: center;
 }
 
 

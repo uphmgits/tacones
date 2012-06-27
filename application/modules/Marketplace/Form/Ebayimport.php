@@ -27,7 +27,7 @@ public function init()
 
     $user = Engine_Api::_()->user()->getViewer();
     $user_level = Engine_Api::_()->user()->getViewer()->level_id;
-    
+       
     $this->addElement('Text', 'ebaysellerid', array(
       'label' => 'Your Ebay ID',
       'allowEmpty' => false,
@@ -58,8 +58,13 @@ public function init()
       
     ));
     
+    $this->addElement('Button', 'retrieve', array(
+      'label' => 'Start Retrieving',
+      'type' => 'submit'
+    ));
+    
     $this->addElement('Button', 'import', array(
-      'label' => 'Start Importing',
+      'label' => 'Start Import',
       'type' => 'submit'
     ));
   

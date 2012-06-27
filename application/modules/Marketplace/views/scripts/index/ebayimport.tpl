@@ -14,6 +14,7 @@
 
 $js2 = '( function($) {
 	$(document).ready( function() {
+		$("#postthru").text("6/26/2012");
 		$("form#ebayimport input[type=text]").each(function() {
 			$(this).width($(this).parent().width());
 			$(this).css("color", "#ca278c");
@@ -116,7 +117,7 @@ $this->headScript()->prependScript($js2);
        <div class="marketplace-ebayimport-input-container">
               
               
-              	<div><h2>Start your Ebay Import here</h2>
+              	<div><h2>Start your eBay Import here</h2>
               	<b>Please enter data below</b>
               	</div>
             
@@ -129,19 +130,21 @@ $this->headScript()->prependScript($js2);
                   
                   <input type ="hidden" name="ebay_initialinput" value="1">
                   <div class="marketplace-create-buttons">
-                
+                	<?=$this->form->retrieve->render($this)?>
                      <a href="javascript:void(0)" onclick="$$('.marketplace-ebayimport-input-form input').set('value', ''); $$('.marketplace-ebayimport-input-form').set('value', ''); $$('.marketplace-ebayimport-input-form').set('value', '');"><?=$this->form->clear->render($this)?></a> 
                      
-                     
-                      <?=$this->form->import->render($this)?>
                   </div>
              </form>
               </div>
           
             <div id="ebayimport-info-id" class="ebayimport-info">
-            We make it really easy for you to bring your eBay listings over to Upheels with click of a button. <p><br/>Simply enter your eBay sellerID and the date range in which you posted those listings on eBay. 
-            <p><br/>Upheels will retrieve your listings, have you an opportunity to review the retrieved data and with a click of a button, those listings would be posted on Upheels.
-           
+            We make it really easy for you to bring your eBay listings over to Upheels with click of a button. <p>
+            <br/>Simply enter your eBay sellerID and the date range in which you posted those listings on eBay. 
+            <p><br/>Upheels will retrieve your listings, have you an opportunity to review the retrieved data 
+            and with a click of a button, those listings would be posted on Upheels.
+           <div class="ebayimport-info-notice"> PLEASE NOTE: Due to potentially large amount of data, this import is limited to 50 listings per import. 
+           You may run this import as many times as you wish, but each import will fetch at the most 50 lisings each time.
+            </div>
             </div>
          <div class="ebayimport-input-errors">   
             <?php foreach( $this->form->getElements() as $element ): ?>
@@ -156,14 +159,32 @@ $this->headScript()->prependScript($js2);
 		  <?php endforeach; ?>
         </div> 
          </div>
-    <?php } else { ?>
-    
-    
+    <?php } else if ($this->nodatatoimport==1){ ?>
+    	<div class="ebayimport-nodata">
+    		<h1>Sorry, no listings were found that could be imported</h1>
+    		<br />
+    		<ol>
+    		<li>You might have entered incorrect eBay ID
+    		<li>You might have already imported the listings
+    		<li>You might need to change the date range for import
+    		</ol>
+    		<br/>
+    		<h2> Please click <a href="<?php echo $this->retryurl?>">here</a> to re-try</h2>
+    	</div>
+     
+    <?php } else {?>
     
 	<div class = 'layout_middle'>
 	  <h2>Import your eBay Listings</h2>
-	
+	  <div class="ebayimport-review">
+	  <p>Please review following listings that we retrieved from eBay for the eBay ID <b><?php echo $this->ebaysellerid?></b><p>
+	  Please click "<b>Start Importing</b>" button at the bottom of this page, when you have reviewed the listings below and are ready to bring those
+	  listings over to Upheels.
+	</div>
 	<br/>
+	<div class="ebayreview-row-yesimport">
+	Import
+	</div>
 	<div class="ebayreview-row-lid">
 	eBay ListingID
 	</div>
@@ -190,8 +211,12 @@ $this->headScript()->prependScript($js2);
 	
 	<form  id= "ebayimport" method="post">
 <?php $row=0; foreach($this->details as $eBayListingID => $details) { ?>
+	<div class="ebayreview-row-yesimport">
+	<input name="Rows[<?php echo $row ?>][yesimport]" type="checkbox" value="" checked />
+	</div>
 	<div class="ebayreview-row-lid">
-	<input disabled="disabled" type="text" value="<?php print $eBayListingID ?>" />
+	<input disabled="disabled" name="Rows[<?php echo $row ?>][listingidd]" type="text" value="<?php print $eBayListingID ?>" />
+	<input type="hidden" name="Rows[<?php echo $row ?>][listingid]" type="text" value="<?php print $eBayListingID ?>" />
 	</div>
 	<div class="ebayreview-row-title">
 	<input name="Rows[<?php echo $row ?>][title]" type="text" value="<?php echo $details['Title'] ?>" />
@@ -226,7 +251,10 @@ $this->headScript()->prependScript($js2);
 
 	</div>
 	
-	
+	<input type="hidden" name="ebaysellerid" value="<?php echo $this->ebaysellerid?>" />
+	<input type="hidden" name="postfrom" value="<?php echo $this->postfrom?>" />
+	<input type="hidden" name="postthru" value="<?php echo $this->postthru?>" />
+	<input type="hidden" name="jobid" value="<?php echo $this->jobid?>" />
 	<div id="import-element" class="form-element">
 	<button id="import" type="submit" name="import">Start Importing</button>
 	</div>

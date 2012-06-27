@@ -32,9 +32,11 @@ class Marketplace_Api_Ebay {
 	private $_getCategorySpecificsReqRoot = '<GetCategorySpecificsRequest  xmlns="urn:ebay:apis:eBLBaseComponents">';
 	private $_topCats;
 	private $_fullCatList;
+	private $_upheelsUserId;
+	private $_alreadyImported;
 	
 	public function __construct($sandbox=false) {
-		$file = APPLICATION_PATH . '/application/settings/imports.php';
+		$file = APPLICATION_PATH . '/application/settings/import_auth.php';
     	$options = include $file;
 		$this->setSandbox(APPLICATION_ENV=='development'&&$sandbox===true?true:false);
 		if($this->getSandbox()===true) {
@@ -371,6 +373,7 @@ class Marketplace_Api_Ebay {
 	 * @return array(ItemIDs)
 	 */
 	private function _fetchList() {
+		$this->_getAlreadyImported();
 		$itemIDs = array();
 		$this->_httpclient->setHeaders(array('X-EBAY-API-CALL-NAME:'.$this->_apiCallSellerList));
 		$getitmlistxml = $this->_xpable . $this->_getListReqRoot . $this->_reqAuth . $this->_buildSellerListReqXml(); // XML POST for getting seller's list
@@ -388,11 +391,30 @@ class Marketplace_Api_Ebay {
 				
 				for($i=0;$i<$itemCount;$i++) {
 					$itm = simplexml_import_dom($itemsListedNode->item($i));
-					$itemIDs[] = (string)$itm->ItemID;;
+					if(!in_array((string)$itm->ItemID, $this->_alreadyImported)) {
+						$itemIDs[] = (string)$itm->ItemID;;
+					}
 				}
 			}
 		}
 		return $itemIDs;
+	}
+	
+	/**
+	 * 
+	 * Builds a list of listing IDs that already have been imported
+	 */
+	private function _getAlreadyImported() {
+		$file = APPLICATION_PATH . '/application/settings/database.php';
+	    $options = include $file;
+	    $db = Zend_Db::factory($options['adapter'], $options['params']);
+		$select = $db->select()
+			->from(array('m' => 'zapato_social.engine4_marketplace_marketplaces'),array('entry_source_ref'))
+			->where('m.owner_id='.$this->_upheelsUserId . ' and entry_source_ref is not null');
+		$listings = $db->fetchAll($select);
+		foreach($listings as  $listingid) {
+			$this->_alreadyImported[] = $listingid[entry_source_ref];
+		}
 	}
 	
 	private function _buildSellerListReqXml($starttime, $endtime) {
@@ -442,6 +464,9 @@ class Marketplace_Api_Ebay {
 	}
 	public function getListinTo() {
 		return $this->_endtime;
+	}
+	public function setUpheelsSellerId($id) {
+		$this->_upheelsUserId = $id;
 	}
 	
 	private function _isAckSuccess($dom) {

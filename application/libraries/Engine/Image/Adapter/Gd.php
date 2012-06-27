@@ -152,7 +152,7 @@ class Engine_Image_Adapter_Gd extends Engine_Image
     // Open
     $this->_resource = $function($file);
     if( !$this->_checkOpenImage(false) ) {
-      throw new Engine_Image_Adapter_Exception("Unable to open image");
+      throw new Engine_Image_Adapter_Exception("Unable to open image " . $file);
     }
 
     // Set information

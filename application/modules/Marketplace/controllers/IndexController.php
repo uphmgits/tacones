@@ -21,8 +21,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 {
   protected $_navigation;
   // true - sandbox, false - paypal original
-  //protected $_sandbox = true;
-  protected $_sandbox = false;
+  protected $_sandbox = true;
+  //protected $_sandbox = false;
 
   public function init() {
       if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'view')->isValid())
@@ -1160,8 +1160,10 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
     }
     
 	public function ebayimportAction()
-    {    	
-    	
+    {   
+    	$file = APPLICATION_PATH . '/application/settings/import_general.php';
+    	$impOptions = include $file; 
+    		
         if (!$this->_helper->requireUser()->isValid())
             return;
         if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'create')->isValid())
@@ -1218,6 +1220,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         	$e = new Marketplace_Api_Ebay(false);  // true=>ebay sandbox    false=>ebay production
         	$oneday = 60*60*24;
         	$e->setSeller($_POST[ebaysellerid]); // ebay seller id is set now
+        	$e->setUpheelsSellerId($viewer->getIdentity());
         	$upheels_timestamp = strtotime( $_POST[postfrom]);
         	$upheels_timestamp -= $oneday;
 			$ebay_date = date('Y-m-d', $upheels_timestamp); 
@@ -1227,18 +1230,36 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 			$upheels_timestamp = strtotime( $_POST[postthru]);
 			$upheels_timestamp += $oneday;
 			$ebay_date = date('Y-m-d', $upheels_timestamp); 
-			//print "<br> $ebay_date";
+			
 			$e->setListinTo($ebay_date/*.'T00:00:00.000Z'*/);  //// listings posted date range, end date
 			
-			/*print "<pre>";
-			print_r($e->getItemDetails());exit;*/
 			
 			$m = new Marketplace_Api_Ebay_Mapper();
-	    	$m->setEbaydata($e->getItemDetails());
+			$m->setListingDateRange($_POST[postfrom], $_POST[postthru]);
+			$m->setUpheelsUser($viewer->getIdentity());
+			$m->setImportSellerId($_POST['ebaysellerid']);
+			$m->setImportSource($impOptions['source']['EBAY_IMPORT']);
+			$this->view->jobid = $m->createImportjobRecord($impOptions['jobStates']['IMPORT_FETCHING_INPROCESS']);
+			
+	    	$this->view->ebaysellerid = $_POST[ebaysellerid];
+	    	$this->view->postfrom = $_POST[postfrom];
+	    	$this->view->postthru = $_POST[postthru];
+			
+	    	$mappedData = $e->getItemDetails();
+	    	$fetchcount = sizeof($mappedData);
+	    	
+	    	$m->importjobRecordFetchCompleted($this->view->jobid, $impOptions['jobStates']['IMPORT_FETCHING_COMPLETED'], $fetchcount);
+	    	$m->setEbaydata($mappedData);
 	    	//$m->setEbaydata($ld);
 	    	
 	    	//$this->view->listingDetails = $e->getItemDetails();
+	    	
+        	
 	    	$this->view->details = $m->map();  // build a mapping between ebay item details and upheels
+	    	if(empty($this->view->details)) {
+	    		$this->view->nodatatoimport = 1;
+	    		$this->view->retryurl = 'http://' . $_SERVER['HTTP_HOST'] . '/marketplaces/ebayimport';
+	    	}
             return;   // retrieval and mapping done, show it to user (upheels seller)
         }
         
@@ -1247,14 +1268,26 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 		// At the end redirect user (seller) to "manage" page
 		/*print "<pre>";
 		print_r($_POST);exit;*/
+        $ebayid = $_POST['ebaysellerid'];
+        
+        
+        // create an import job record with "in process" state marked on that record
+        $m = new Marketplace_Api_Ebay_Mapper();
+        
+        $maketplace_source_jobID = $_POST['jobid']; /* real time import, no background job is doing this */
         $table = Engine_Api::_()->getItemTable('marketplace');
 
         $db = $table->getAdapter();
         
-        // following importing could take a while. increase max_request_timeout to 5 minutes
+        // following importing could take a while. increase max_request_timeout to 10 minutes
         set_time_limit(600);
         
+        $m->importjobRecordStartImport($maketplace_source_jobID, $impOptions['jobStates']['IMPORT_IMPORTING_INPROCESS']);
+        $importCount = 0;
     foreach($_POST[Rows] as $row) {
+    	if(!isset($row[yesimport])) {
+    		continue;
+    	}
         $db->beginTransaction();
         try {
             // Create marketplace
@@ -1264,6 +1297,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
                     ));
             
             $values['business_email'] = $mark['business_email']/*'mrgadgil@yahoo.com'*/;
+            $values['entry_source_ref'] = $row[listingid];
+            $values['entry_source_job_id'] = $maketplace_source_jobID;
             
             if(isset($fVal)) {
             	unset($fVal);
@@ -1357,7 +1392,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
             $db->commit();
         } catch (Exception $e) {
             $db->rollBack();
-            throw $e;
+            continue;
+            throw $e;  // TODO: log this exception into log file?
         }
 
         $db->beginTransaction();
@@ -1371,7 +1407,9 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
             $db->rollBack();
             throw $e;
         }
+        $importCount++;
     }
+    $m->importjobRecordImportCompleted($maketplace_source_jobID, $impOptions['jobStates']['IMPORT_IMPORTING_COMPLETED'], $importCount);
         // Redirect to "manage page" so seller can review what just happened!
         return $this->_helper->redirector->gotoRoute(array('page' => ''), 'marketplace_manage', true);
         /*$allowed_upload = Engine_Api::_()->authorization()->getPermission($viewer->level_id, 'marketplace', 'photo');
