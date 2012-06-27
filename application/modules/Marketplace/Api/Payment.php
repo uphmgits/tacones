@@ -9,6 +9,7 @@ class Marketplace_Api_Payment {//extends Core_Api_Abstract {
     var $sandbox = false;
     var $paypalData = array();
     var $target = null;
+    var $buttonLabel = "Buy";
 
     public function __construct($sandbox=false) {
         $this->sandbox = $sandbox;
@@ -58,7 +59,7 @@ class Marketplace_Api_Payment {//extends Core_Api_Abstract {
                 $this->addFormField("quantity" . $i, $v['quantity']);
             }
         }
-        $elt = $this->frm->createElement('button', 'submitButton', array('label' => 'Buy', 'type' => 'submit'));
+        $elt = $this->frm->createElement('button', 'submitButton', array('label' => $this->buttonLabel, 'type' => 'submit'));
         $this->frm->addElement($elt);
         return $this->frm;
     }
@@ -123,6 +124,10 @@ class Marketplace_Api_Payment {//extends Core_Api_Abstract {
 
     public function setAmount($amount) {
         $this->paypalData['amount'] = $amount;
+    }
+
+    public function setButtonLabel($label) {
+        $this->buttonLabel = $label;
     }
 
     public function setCustom($custom) {

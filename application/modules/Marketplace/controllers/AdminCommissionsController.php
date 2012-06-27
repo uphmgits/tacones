@@ -21,7 +21,7 @@ class Marketplace_AdminCommissionsController extends Core_Controller_Action_Admi
       $values = $form->getValues();
 
       $commissionTable = Engine_Api::_()->getDbtable('commissions', 'marketplace');
-      foreach ($values as $key => $value){
+      foreach ($values as $key => $value) {
         if( preg_match('/^marketplace_commission_(\d)$/i', $key, $matches) ) {
           $level_id = $matches[1];
           $check = $commissionTable->select()->where('level_id = '.$level_id)->query()->fetch();
@@ -29,6 +29,15 @@ class Marketplace_AdminCommissionsController extends Core_Controller_Action_Admi
             $commissionTable->update( array('commission' => $value), 'level_id = '.$level_id );
           } else {
             $commissionTable->insert( array('level_id' => $level_id, 'commission' => $value));      
+          }
+        }
+        if( preg_match('/^marketplace_commission_vip_(\d)$/i', $key, $matches) ) {
+          $level_id = $matches[1];
+          $check = $commissionTable->select()->where('level_id = '.$level_id)->query()->fetch();
+          if( !empty($check) ) {
+            $commissionTable->update( array('commission_vip' => $value), 'level_id = '.$level_id );
+          } else {
+            $commissionTable->insert( array('level_id' => $level_id, 'commission_vip' => $value));      
           }
         }
       }

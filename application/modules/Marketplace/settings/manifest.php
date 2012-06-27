@@ -62,6 +62,7 @@ return array(
   // Items ---------------------------------------------------------------------
   'items' => array(
     'marketplace',
+    'marketplace_order',
     'marketplace_category',
     'marketplace_album',
     'marketplace_photo',
@@ -237,7 +238,7 @@ return array(
       )
     ),
 
-      'marketplace_payment' => array(
+    'marketplace_payment' => array(
       'route' => 'marketplaces/payment/:page',//marketplace_id',
       'defaults' => array(
         'module' => 'marketplace',
@@ -247,7 +248,7 @@ return array(
       )
     ),
 
-      'marketplace_paymentnotify' => array(
+    'marketplace_paymentnotify' => array(
       'route' => 'marketplaces/paymentnotify/*',//marketplace_id',
       'defaults' => array(
         'module' => 'marketplace',
@@ -255,7 +256,7 @@ return array(
         'action' => 'paymentnotify',
       )
     ),
-      'marketplace_paymentreturn' => array(
+    'marketplace_paymentreturn' => array(
       'route' => 'marketplaces/paymentreturn/*',//marketplace_id',
       'defaults' => array(
         'module' => 'marketplace',
@@ -263,6 +264,24 @@ return array(
         'action' => 'paymentreturn',
       )
     ),
+    'marketplace_paymentcompletenotify' => array(
+      'route' => 'marketplaces/paymentcompletenotify/*',
+      'defaults' => array(
+        'module' => 'marketplace',
+        'controller' => 'index',
+        'action' => 'paymentcompletenotify',
+      )
+    ),
+    'marketplace_paymentcompletereturn' => array(
+      'route' => 'marketplaces/paymentcompletereturn/*',
+      'defaults' => array(
+        'module' => 'marketplace',
+        'controller' => 'index',
+        'action' => 'paymentcompletereturn',
+      )
+    ),
+
+
     'marketplace_style' => array(
       'route' => 'marketplaces/marketplacestyle',
       'defaults' => array(

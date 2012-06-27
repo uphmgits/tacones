@@ -94,10 +94,10 @@ function createInvoice(value) {
     <option value='approved'   <?php if( $this->status_filter == 'approved' ) echo "selected"?>><?=$this->translate("Passed")?></option>
     <option value='admin_sent' <?php if( $this->status_filter == 'approved' ) echo "selected"?>><?=$this->translate("Sent to Buyer")?></option>
     <option value='failed'     <?php if( $this->status_filter == 'failed' )   echo "selected"?>><?=$this->translate("Failed")?></option>
-    <?php /*<option value='sold' <?php if( $this->status_filter == 'sold' ) echo "selected"?>><?=$this->translate("Complete")?></option>*/?>
+    <?php /*<option value='sold' <?php if( $this->status_filter == 'sold' ) echo "selected"?>><?=$this->translate("Complete")?></option>
     <option value='return'     <?php if( $this->status_filter == 'return' )   echo "selected"?>><?=$this->translate("Return")?></option>
+    <option value='canceled' <?php if( $this->status_filter == 'canceled' ) echo "selected"?>><?=$this->translate("Canceled")?></option>*/?>
     <option value='cancelrequest' <?php if( $this->status_filter == 'cancelrequest' ) echo "selected"?>><?=$this->translate("Cancel Request")?></option>
-    <option value='canceled' <?php if( $this->status_filter == 'canceled' ) echo "selected"?>><?=$this->translate("Canceled")?></option>
     <option value='punished' <?php if( $this->status_filter == 'punished' ) echo "selected"?>><?=$this->translate("Punished")?></option>
   </select>  
   <button type='submit' name="submit_button" value="change_status_filter"><?php echo $this->translate("Filter") ?></button>
@@ -182,9 +182,7 @@ function createInvoice(value) {
                 <tr><td><?=$this->translate("Count: ")?></td><td><?=$item->count?></td></tr>
                 <tr><td><?=$this->translate("Item Total: ")?></td><td><?=$item->summ?></td></tr>
                 <tr><td><?=$this->translate("Price: ")?></td><td><?=$item->price?></td></tr>
-                <tr><td><?=$this->translate("Inspection: ")?></td><td><?=$item->inspection?></td></tr>
-                <tr><td><?=$this->translate("Shipping: ")?></td><td><?=$item->shipping?></td></tr>
-
+                <tr><td><?=$this->translate("SH: ")?></td><td><?=$item->inspection?></td></tr>
               </table>
             </td>
 
@@ -238,7 +236,7 @@ function createInvoice(value) {
                     </td>
                     <td>
                       <input type="radio" <?php if ( $item->status == 'admin_sent' ) echo 'checked';?> 
-                             name="smod_<?=$itemId?>" <?php if ( $item->status != 'approved' ) echo 'disabled';?>
+                             name="smod_<?=$itemId?>" <?php if ( $item->status != 'approved' and $item->status != 'admin_sent' ) echo 'disabled';?>
                              value="admin_sent"/>
                       <span style='font-size: 11px;'><?=$this->translate('Sent to buyer')?></span>
                     </td>
@@ -339,12 +337,12 @@ function createInvoice(value) {
   <br />
   <div class='buttons'>
     <button type='submit' name="submit_button" value="change_status" style="float:right;"><?=$this->translate("Update Status")?></button>
-     <?php if( $this->status_filter == 'sold' ) : ?>
+     <?php /*if( $this->status_filter == 'sold' ) : ?>
         <button type='submit' name="submit_button" value="add_to_sold_file"><?=$this->translate("Add to Sold File")?></button>
      <?php endif; ?>
      <?php if( $this->status_filter == 'return' ) : ?>
         <button type='submit' name="submit_button" value="add_to_return_file"><?=$this->translate("Add to Return File")?></button>
-     <?php endif; ?>
+     <?php endif;*/ ?>
      <?php if( $this->status_filter == 'failed' ) : ?>
         <button type='submit' name="submit_button" value="punish"><?=$this->translate("Punish")?></button>
      <?php endif; ?>

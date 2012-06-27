@@ -168,19 +168,15 @@ class Marketplace_Api_Core extends Core_Api_Abstract
   }
   */
 
-  public function getCommissionFee( $user ) {
+  public function getCommissionFee( $user, $price ) {
       if( !($user instanceof User_Model_User) and !$user->getIdentity() ) return 0;
 
       $commissionTable = Engine_Api::_()->getDbtable('commissions', 'marketplace');
       $res = $commissionTable->select()->where('level_id = ?', $user->level_id)->query()->fetch();
-      return ( !empty($res) ) ? $res['commission'] : 0;
+      return ( !empty($res) ) ? round($price * $res['commission'] / 100, 2) : 0;
   }
 
-  public function isInspectionEnable() {
-      return Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.inspectionenable', 0);
-  }
   public function getInspectionFee($price) {
-      if( !$this->isInspectionEnable() ) return 0;
       $inspection = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.inspection', 0);
       if( !$price or !$inspection ) return 0;
       return round( $inspection * $price / 100, 2 );

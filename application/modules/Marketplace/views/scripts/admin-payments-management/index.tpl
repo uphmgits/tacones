@@ -86,13 +86,16 @@
         <?php $buyer = $this->item('user', $item->user_id);?>
         <?php $isPPButton = false; ?>
 
+        <?php $commission = Engine_Api::_()->marketplace()->getCommissionFee( $owner, $item->price ); ?>
+
         <?php $paypal = new Marketplace_Api_Payment(true); ?>
         <?php if( $owner and $marketplace and !empty( $marketplace->business_email ) ) : ?>
           <?php $adminAddress = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.from', 'admin@' . $_SERVER['HTTP_HOST']); ?>
           <?php $paypal->setBusinessEmail( $marketplace->business_email ); ?>
           <?php $paypal->setPayer($adminAddress, 0); ?>
-          <?php $paypal->setAmount( $item->summ ); ?>
+          <?php $paypal->setAmount( ( $item->price - $commission ) * $item->count ); ?>
           <?php $paypal->setNumber( $item->order_id ); ?>
+          <?php $paypal->setButtonLabel( 'Pay' ); ?>
           <?php $paypal->addItem(array('item_name' => $owner->getTitle() . "({$marketplace->getTitle()})")); ?>
           <?php $paypal->setControllerUrl("http://" . $_SERVER['HTTP_HOST'] . $this->url(array(), 'marketplace_extended', true) . '/paymentcomplete'); ?>
           <?php $paypal->setTarget("_blank"); ?>
@@ -111,7 +114,7 @@
           </td>
           <td><?=$this->htmlLink($owner->getHref(), $owner->getTitle(), array('target' => '_blank'))?></td>
           <td><?=$this->htmlLink($buyer->getHref(), $buyer->getTitle(), array('target' => '_blank'))?></td>
-          <td><?=$item->summ * $item->count?></td>
+          <td><?=$item->price * $item->count?></td>
           <td><?=$item->date?></td>
           <td>  
             <?php if( $isPPButton ) echo $paypal->form(); ?>

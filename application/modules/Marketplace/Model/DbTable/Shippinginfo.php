@@ -42,6 +42,9 @@ class Marketplace_Model_DbTable_Shippinginfo extends Engine_Db_Table {
 
       $paidValue = $paid ? 1 : 0;
       $res = $this->select()->where("user_id = {$viewer->getIdentity()} and paid = {$paidValue}")->order('shippinginfo_id DESC')->query()->fetch();
+      if( !$paidValue and !$res ) {
+          $res = $this->select()->where("user_id = {$viewer->getIdentity()}")->order('shippinginfo_id DESC')->query()->fetch();
+      }
       return $res; 
   }
 

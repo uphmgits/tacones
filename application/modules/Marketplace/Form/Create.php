@@ -75,15 +75,6 @@ class Marketplace_Form_Create extends Engine_Form
       ),
     ));
 
-    $this->addElement('Text', 'shipping', array(
-      'label' => 'Shipping',
-      'required' => true,
-      'value' => 0,
-      'validators' => array(
-    		array('Float', true),
-      ),
-    ));
-
     $this->addElement('Textarea', 'body', array(
       'label' => 'Description',
       'filters' => array(

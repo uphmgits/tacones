@@ -76,8 +76,7 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
                                    "|buyerID:" . $order['user_id'] .
                                    "|sellerID:" . $owner->getIdentity() . 
                                    "|sellerName:" . $owner->getTitle() . 
-                                   "|inspection:" . $order['inspection'] . 
-                                   "|shipping:" . $order['shipping'] . 
+                                   "|sh:" . $order['inspection'] . 
                                    "|commission:" . $commission . 
                                    "|count:" . $order['count']
                   ; 
@@ -236,7 +235,8 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
 
 
     $table = $this->_helper->api()->getDbtable('orders', 'marketplace');
-    $select = $table->select()->where('inspection > 0');
+    //$select = $table->select()->where('inspection > 0');
+    $select = $table->select()->where("status <> 'done' AND status <> 'sold' AND status <> 'return' AND status <> 'canceled'");
 
     $formFilter = new Marketplace_Form_Filter();//User_Form_Admin_Manage_Filter();
     $formFilter->addElement('hidden', 'status_filter', array('value' => $status_filter ) );
@@ -265,13 +265,13 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
     switch( $status_filter ) {
       case 'wait'       :
       case 'inprogress' :
-      case 'sold'       :
-      case 'return'     :
+      //case 'sold'       :
+      //case 'return'     :
       case 'approved'   :
       case 'failed'     :
       case 'admin_sent' :
       case 'punished'   : 
-      case 'canceled'   :
+      //case 'canceled'   :
       case 'cancelrequest': $select->where("status = '{$status_filter}'"); break;
     }
 
@@ -301,7 +301,7 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
 
 
 
-  public function uninspectionbrowseAction()
+  /*public function uninspectionbrowseAction()
   {
     $this->view->navigation = $navigation = Engine_Api::_()->getApi('menus', 'core')->getNavigation('marketplace_admin_main', array(), 'marketplace_admin_main_ordermanagement');
     $this->view->subNavigation = $subNavigation = Engine_Api::_()->getApi('menus', 'core')->getNavigation('marketplace_admin_main_ordermanagement', array(), 'marketplace_admin_main_ordermanagement_uninspectionbrowse');
@@ -451,7 +451,7 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
     $paginator->setItemCountPerPage(20);
     $this->view->paginator = $paginator->setCurrentPageNumber( $page );
 
-  }
+  }*/
 
 
 }
