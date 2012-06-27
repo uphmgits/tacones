@@ -312,13 +312,13 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       $this->view->userCategories = Engine_Api::_()->marketplace()->getUserCategories($this->view->marketplace->owner_id);
 
 	    //$this->view->product_shipping_fee = $product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $viewer->getIdentity());
-      $this->view->product_shipping_fee = $product_shipping_fee = $marketplace->shipping;
-      $this->view->inspection_fee = $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
-	    $this->view->total_amount = $total_amount = floatval($marketplace->price - $discount_sum + $product_shipping_fee);
+      //$this->view->product_shipping_fee = $product_shipping_fee = 0;
+      //$this->view->inspection_fee = $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price);
+	    //$this->view->total_amount = $total_amount = floatval($marketplace->price - $discount_sum + $product_shipping_fee);
 	
       //$this->view->prepay = false;
 
-	    if(Engine_Api::_()->marketplace()->authorizeIsActive()) {
+	    /*if(Engine_Api::_()->marketplace()->authorizeIsActive()) {
 		    $authorize_login = ($marketplace->authorize_login?$marketplace->authorize_login:'7sBYqTp344eh');
 		    $authorize_key = ($marketplace->authorize_key?$marketplace->authorize_key:'8sY8eUVj47M46dxA');
 		    $testmode = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.authorize.testmode', '0');
@@ -347,8 +347,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
             $this->view->prepay = true;
           }
         }
-        */
-      }
+        
+      }*/
 
       $likesTable = Engine_Api::_()->getDbtable('likes', 'core');
       $this->view->likeList = $likesTable->getLikePaginator($marketplace, 5);
@@ -372,7 +372,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
   public function authorize($params = array()) {
 	}
 	
-  public function paypal($params = array()) {
+  public function paypal($params = array()) 
+  {
 		$discount_sum = floatval(($params['discount_sum']?$params['discount_sum']:0));
     $anonymous_purchase = (isset($params['anonymous_purchase']) and !empty($params['anonymous_purchase']) )? $params['anonymous_purchase'] : null;
 
@@ -397,17 +398,18 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
     }
 
 		//$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $viewer->getIdentity());
-    $product_shipping_fee = $marketplace->shipping;
+    $product_shipping_fee = 0;
 		$final_amount = floatval($marketplace->price - $discount_sum + $product_shipping_fee);
 		if($final_amount < 0){
 			$final_amount = 0;
 		}
-        $paypal->setAmount($final_amount); //"50");
-        $paypal->setNumber($this->_getParam('marketplace_id') . ':' . $userID);
-        $paypal->addItem(array('item_name' => $marketplace->title . '(' . $marketplace->body . ')'));
-        $paypal->setControllerUrl("http://" . $this->getRequest()->getHttpHost() . $this->view->url(array(), 'marketplace_extended', true) . '/payment'); //->url());
-        return $paypal;
-    }
+
+    $paypal->setAmount($final_amount);
+    $paypal->setNumber($this->_getParam('marketplace_id') . ':' . $userID);
+    $paypal->addItem(array('item_name' => $marketplace->title . '(' . $marketplace->body . ')'));
+    $paypal->setControllerUrl("http://" . $this->getRequest()->getHttpHost() . $this->view->url(array(), 'marketplace_extended', true) . '/payment'); //->url());
+    return $paypal;
+  }
 
     public function paymentAction() {
         $this->view->paypalForm = $this->paypal()->form();
@@ -485,7 +487,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 						  ////////////////////////////////////////////////////////////discount
 						  $coupon_discount = Engine_Api::_()->marketplace()->getDiscount($marketplace->marketplace_id,  $myAuthorize_order['x_user_id']);
 						  //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $myAuthorize_order['x_user_id']);
-              $product_shipping_fee = $marketplace->shipping;
+              $product_shipping_fee = 0;
 						  $final_amount += ($marketplace->price + $product_shipping_fee - $coupon_discount) * $item_count;
 						  ////////////////////////////////////////////////////////////discount
 					  }
@@ -502,7 +504,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 							  ////////////////////////////////////////////////////////////discount
 							  $coupon_discount = Engine_Api::_()->marketplace()->getDiscount($marketplace->marketplace_id,  $myAuthorize_order['x_user_id']);
 							  //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $myAuthorize_order['x_user_id']);
-                $product_shipping_fee = $marketplace->shipping;
+                $product_shipping_fee = 0;
 							  ////////////////////////////////////////////////////////////discount
 							
 							  $values['user_id'] = $myAuthorize_order['x_user_id'];
@@ -540,7 +542,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 					  ////////////////////////////////////////////////////////////discount
 					  $coupon_discount = Engine_Api::_()->marketplace()->getDiscount($cartitem->marketplace_id, $order[1]);
 					  //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $order[1]);
-            $product_shipping_fee = $marketplace->shipping;
+            $product_shipping_fee = 0;
 					  $final_amount = $marketplace->price + $product_shipping_fee - $coupon_discount;
 					  ////////////////////////////////////////////////////////////discount
 
@@ -615,7 +617,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 						  $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
 
     			    //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $user_id);						
-              $product_shipping_fee = $marketplace->shipping;
+              $product_shipping_fee = 0;
 
               if( $user_id ) {
 						      ////////////////////////////////////////////////////////////discount
@@ -659,7 +661,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 							  $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
 							
                 //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $user_id);
-                $product_shipping_fee = $marketplace->shipping;
+                $product_shipping_fee = 0;
 
                 if( $user_id ) {
 							    ////////////////////////////////////////////////////////////discount
@@ -673,7 +675,6 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 							  $values['count'] = $item_count;
 							  $values['summ'] = $marketplace->price + $product_shipping_fee + $inspection_fee - $coupon_discount;
                 $values['price'] = $marketplace->price;
-                $values['shipping'] = $product_shipping_fee;
                 $values['inspection'] = $inspection_fee;
 							  $values['date'] = date('Y-m-d H:i:s');
                 $values['contact_email'] = $arrPost['payer_email'];
@@ -720,7 +721,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 					
 				  } else { //one item
             //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($marketplace->getIdentity(), $user_id);
-            $product_shipping_fee = $marketplace->shipping;
+            $product_shipping_fee = 0;
 
             if( $user_id ) {
     					////////////////////////////////////////////////////////////discount
@@ -745,7 +746,6 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 					  $values['count'] = 1;
 					  $values['summ'] = $arrPost['mc_gross'];
             $values['price'] = $marketplace->price;
-            $values['shipping'] = $product_shipping_fee;
             $values['inspection'] = $inspection_fee;
 					  $values['date'] = date('Y-m-d H:i:s');
             $values['contact_email'] = $arrPost['payer_email'];
@@ -1987,13 +1987,13 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $order = $orderTable->select()
                             ->where("order_id = {$orderId}")
                             ->where("user_id = {$viewer->getIdentity()}")
-                            ->where("status = 'wait'")
                             ->query()
                             ->fetch()
         ;
         $this->view->error = false;
+        $threeDays = 60 * 60 * 24 * 3; 
 
-        if( $order ) {
+        if( $order and ( time() - strtotime($order['date']) < $threeDays ) ) {
             $marketplace = Engine_Api::_()->getItem('marketplace', $order['marketplace_id']);
             if( $marketplace ) {
                 $this->view->marketplace = $marketplace;
@@ -2418,9 +2418,9 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 					  //  continue;
 
 				    //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($cartitem->marketplace_id, $viewer_id);
-            $product_shipping_fee = $marketplace->shipping;
+            $product_shipping_fee = 0;
 
-				    $shipping_fee += ($product_shipping_fee?$product_shipping_fee:$flat_shipping_rate) * $cartitem->count;
+				    //$shipping_fee += ($product_shipping_fee?$product_shipping_fee:$flat_shipping_rate) * $cartitem->count;
 				    $total_amount += $current_marketplace->price * $cartitem['count'];
 						
 				    $coupon_discount = Engine_Api::_()->marketplace()->getDiscount($cartitem['marketplace_id'], $viewer_id);
@@ -2480,7 +2480,6 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 		  $total_amount = 0;
 		  $total_inspection = 0;
 		  $discount_amount = 0;
-      $inspectionEnable = Engine_Api::_()->marketplace()->isInspectionEnable();
 
 		  foreach($cartitems as $cartitem){
 			  $current_marketplace = Engine_Api::_()->getItem('marketplace', $cartitem['marketplace_id']);
@@ -2488,15 +2487,13 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 			  //if($first_stage_owner != $current_marketplace->getOwner()->getIdentity())
 				//  continue;
 			  //$product_shipping_fee = Engine_Api::_()->marketplace()->getShipingFee($cartitem['marketplace_id'], $viewer_id);
-        $product_shipping_fee = $current_marketplace->shipping;
+        $product_shipping_fee = 0;
 
-			  $shipping_fee += ($product_shipping_fee?$product_shipping_fee:$flat_shipping_rate) * $cartitem['count'];
+			  //$shipping_fee += ($product_shipping_fee?$product_shipping_fee:$flat_shipping_rate) * $cartitem['count'];
 			  $total_amount += $current_marketplace->price * $cartitem['count'];
         
-        if( $inspectionEnable ) {
-          $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($current_marketplace->price);
-          $total_inspection += $cartitem['inspection'] ? $inspection_fee * $cartitem['count'] : 0;
-        }
+        $inspection_fee = Engine_Api::_()->marketplace()->getInspectionFee($current_marketplace->price);
+        $total_inspection += $cartitem['inspection'] ? $inspection_fee * $cartitem['count'] : 0;
 	
 			  $coupon_discount = Engine_Api::_()->marketplace()->getDiscount($cartitem['marketplace_id'], $viewer_id);
 			  $discount_amount += $coupon_discount * $cartitem['count'];
@@ -2510,10 +2507,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $mids[] = $current_marketplace->marketplace_id;
 		  }
 		  $total_amount_full = $total_amount + $shipping_fee + $total_inspection - $discount_amount;
-		
-      //if ($first_marketplace) {
-      //  $this->view->owner = $owner = Engine_Api::_()->getItem('user', $first_marketplace->owner_id);
-      //}
+	
       $midsStr = implode('_', $mids);
       
       //$paypal->setBusinessEmail($first_marketplace->business_email);
@@ -2531,7 +2525,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       return $paypal;
    }
 
-    public function ajaxlikeAction() {
+    public function ajaxlikeAction() 
+    {
         $marketplace_id = (int)$this->_getParam('marketplace_id', 0);
         $marketplace = Engine_Api::_()->getItem('marketplace', $marketplace_id);
         if( $marketplace ) {
@@ -2540,7 +2535,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         die();
     }
 
-    public function commentsAction() {
+    public function commentsAction() 
+    {
         $marketplace_id = (int)$this->_getParam('marketplace_id', 0);
         $marketplace = Engine_Api::_()->getItem('marketplace', $marketplace_id);
         if( !$marketplace ) {
@@ -2558,7 +2554,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $this->view->marketplace = $marketplace;
     }
 
-    public function clientShippingServiceAction() {
+    public function clientShippingServiceAction() 
+    {
         $viewer = Engine_Api::_()->user()->getViewer();
         if( !$viewer->getIdentity() ) 
           return $this->_forward('requireauth', 'error', 'core');
@@ -2571,6 +2568,69 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 
         if( empty($order) ) 
           return $this->_helper->redirector->gotoRoute(array(), 'marketplace_browse');
+    }
+
+    public function paymentcompletenotifyAction() 
+    {
+        $paypal = new Marketplace_Api_Payment(true);
+			  $arrPost = $this->getRequest()->getPost();
+
+			  if ($paypal->validateNotify($arrPost)) {
+
+				  $orderId = (int)$arrPost['item_number'];
+          $order = Engine_Api::_()->getItem('marketplace_order', $orderId);
+          if( !$order ) die();
+
+          $owner = Engine_Api::_()->getItem('user', $order->owner_id);
+          if( !$owner ) die();
+
+          $commission = Engine_Api::_()->marketplace()->getCommissionFee( $owner, $order->price );
+          $final_amount = ($order->price - $commission) * $order->count;
+
+          // log transation /////
+          ob_start();
+          print_r($arrPost);
+          print_r($final_amount . " - " . $arrPost['mc_gross']);
+          $c = ob_get_clean();
+          file_put_contents($_SERVER['DOCUMENT_ROOT'] . $this->view->baseUrl() . '/temporary/log/paypal_complete.log', $c, FILE_APPEND);
+          chmod($_SERVER['DOCUMENT_ROOT'] . $this->view->baseUrl() . '/temporary/log/paypal_complete.log', 0777);
+          // end log ////////////
+
+					if( $final_amount == $arrPost['mc_gross']) {
+
+					  $values['order_id'] = $orderId;
+ 					  $values['user_id'] = $order->owner_id;
+ 					  $values['type'] = 'complete';
+ 					  $values['summ'] = $final_amount;
+ 					  $values['price'] = $order->price;
+ 					  $values['commission'] = $commission;
+            $values['count'] = $order->count;
+					  $values['payment_date'] = date("Y-m-d H:i:s");
+
+            $table = Engine_Api::_()->getDbtable('admintransactions', 'marketplace');
+   					$table->insert($values);
+
+            $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+            $orderTable->update(array('status' => 'done'), "order_id = {$orderId}");
+
+						//$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+						//$notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
+  			  }
+        }
+        die();
+    }
+
+    public function paymentcompletereturnAction() 
+    {
+      return $this->_forward('success', 'utility', 'core', array(
+			  'messages' => array(Zend_Registry::get('Zend_Translate')->_('Payment Complete')),
+			  'layout' => 'default-simple',
+			  'parentRedirect' => Zend_Controller_Front::getInstance()->getRouter()->assemble(array(
+                    'module' => 'marketplace',
+                    "controller" => "payments-management",
+                    "action" => "index"
+								  ), 'admin_default', true),
+		  ));
     }
 }
 

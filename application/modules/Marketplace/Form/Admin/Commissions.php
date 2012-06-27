@@ -26,7 +26,7 @@ class Marketplace_Form_Admin_Commissions extends Engine_Form
     $commissions = $levelsTable->getAdapter()
                                ->select()
                                ->from($levelsTableName, '*')
-                               ->joinleft($commissionTableName, "{$commissionTableName}.level_id = {$levelsTableName}.level_id", "commission")
+                               ->joinleft($commissionTableName, "{$commissionTableName}.level_id = {$levelsTableName}.level_id", array("commission", "commission_vip"))
                                ->query()
                                ->fetchAll()
     ;  
@@ -35,6 +35,14 @@ class Marketplace_Form_Admin_Commissions extends Engine_Form
       $this->addElement('Text', 'marketplace_commission_'.$commission['level_id'], array(
 		    'label' => $commission['title'],
 		    'value' => $commission['commission'] ? $commission['commission'] : 0,
+		    'required' => true,
+        'validators' => array(
+          'float',
+        )
+		  ));
+      $this->addElement('Text', 'marketplace_commission_vip_'.$commission['level_id'], array(
+		    'label' => Zend_Registry::get('Zend_Translate')->_($commission['title']) . " (VIP)",
+		    'value' => $commission['commission_vip'] ? $commission['commission_vip'] : 0,
 		    'required' => true,
         'validators' => array(
           'float',

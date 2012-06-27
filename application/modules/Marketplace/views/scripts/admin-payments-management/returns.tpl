@@ -1,4 +1,4 @@
-<h2><?php echo $this->translate("Refunds Management") ?></h2>
+<h2><?php echo $this->translate("Returns Management") ?></h2>
 
 <?php if( count($this->navigation) ): ?>
   <div class='tabs'>

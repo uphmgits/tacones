@@ -123,7 +123,6 @@
                   <?=$this->form->title->setLabel('headline')->render($this)?>
                   <?=$this->form->body->render($this)?>
                   <?=$this->form->business_email->render($this)?>
-                  <?=$this->form->shipping->render($this)?>
                   <div class="marketplace-create-buttons">
                       <a href="javascript:void(0)" onclick="$$('.marketplace-create-details input').set('value', ''); $$('.marketplace-create-details select').set('value', ''); $$('.marketplace-create-details textarea').set('value', '');"><?=$this->translate('clear')?></a>
                       <button name="submit" id="submit" type="submit"><?=$this->translate('save')?></button>

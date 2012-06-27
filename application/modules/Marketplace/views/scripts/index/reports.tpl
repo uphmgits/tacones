@@ -120,6 +120,9 @@ function loginAsUser(id) {
     <tbody>
     
         <?php $viewerId = $this->viewer()->getIdentity(); ?>
+        <?php $now = time(); ?>
+        <?php $threeDays = 60 * 60 * 24 * 3; ?>
+
         <?php foreach( $this->paginator as $item ): ?>
         <?php 
 			$marketplace = $this->item('marketplace', $item->marketplace_id); 	
@@ -170,7 +173,7 @@ function loginAsUser(id) {
             <td><?=str_replace(' ', '<br/>', $item->date)?></td>
             <td><?=$item->status?></td>
             <td style="font-size: 0.9em">
-                <?php if($item->user_id == $viewerId and $item->status == 'wait') : ?>
+                <?php if($item->user_id == $viewerId and ( $now - strtotime($item->date) < $threeDays ) ) : ?>
                   <?=$this->htmlLink(array('route' => 'marketplace_general', 
                                              'action' => 'canceling',
                                              'order_id' => $item->order_id,
