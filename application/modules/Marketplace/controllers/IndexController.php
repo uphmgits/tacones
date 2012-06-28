@@ -1215,7 +1215,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         		$this->view->errorEbayInitialInput = true;
             	return;
         	}
-        	
+        	try {
         	// grab sellerID and dates and fire-up the retrieval
         	$e = new Marketplace_Api_Ebay(false);  // true=>ebay sandbox    false=>ebay production
         	$oneday = 60*60*24;
@@ -1261,6 +1261,11 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 	    		$this->view->retryurl = 'http://' . $_SERVER['HTTP_HOST'] . '/marketplaces/ebayimport';
 	    	}
             return;   // retrieval and mapping done, show it to user (upheels seller)
+        	} catch (Exception $e) {
+        		$this->view->nodatatoimport = 1;
+	    		$this->view->retryurl = 'http://' . $_SERVER['HTTP_HOST'] . '/marketplaces/ebayimport';
+	    		return;
+        	}
         }
         
 		// This is POST request for actual import to begin
