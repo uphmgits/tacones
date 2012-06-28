@@ -26,3 +26,9 @@ temporary/
 /.project
 /.buildpath
 /.settings/
+cameraready/
+public/marketplace/
+.git/
+orders_pdf/
+invoices/
+user/
