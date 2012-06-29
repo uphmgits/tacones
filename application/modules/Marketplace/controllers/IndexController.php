@@ -1217,7 +1217,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         	}
         	try {
         	// grab sellerID and dates and fire-up the retrieval
-        	$e = new Marketplace_Api_Ebay(false);  // true=>ebay sandbox    false=>ebay production
+        	$e = new Marketplace_Api_Ebay(true);  // true=>ebay sandbox    false=>ebay production
         	$oneday = 60*60*24;
         	$e->setSeller($_POST[ebaysellerid]); // ebay seller id is set now
         	$e->setUpheelsSellerId($viewer->getIdentity());
@@ -1262,6 +1262,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 	    	}
             return;   // retrieval and mapping done, show it to user (upheels seller)
         	} catch (Exception $e) {
+        		/*throw $e;
+        		return;*/
         		$this->view->nodatatoimport = 1;
 	    		$this->view->retryurl = 'http://' . $_SERVER['HTTP_HOST'] . '/marketplaces/ebayimport';
 	    		return;

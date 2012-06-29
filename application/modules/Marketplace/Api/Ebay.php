@@ -409,7 +409,7 @@ class Marketplace_Api_Ebay {
 	    $options = include $file;
 	    $db = Zend_Db::factory($options['adapter'], $options['params']);
 		$select = $db->select()
-			->from(array('m' => 'zapato_social.engine4_marketplace_marketplaces'),array('entry_source_ref'))
+			->from(array('m' => $options['dbname'].'.engine4_marketplace_marketplaces'),array('entry_source_ref'))
 			->where('m.owner_id='.$this->_upheelsUserId . ' and entry_source_ref is not null');
 		$listings = $db->fetchAll($select);
 		foreach($listings as  $listingid) {
