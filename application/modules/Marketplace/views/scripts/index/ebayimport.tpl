@@ -14,7 +14,8 @@
 
 $js2 = '( function($) {
 	$(document).ready( function() {
-		$("#postthru").text("6/26/2012");
+		$("#postthru").datepicker().datepicker("setDate", new Date());
+		$("#postfrom").datepicker({minDate: -100});
 		$("form#ebayimport input[type=text]").each(function() {
 			$(this).width($(this).parent().width());
 			$(this).css("color", "#ca278c");
@@ -63,6 +64,7 @@ $js2 = '( function($) {
         });
         $(function() {
 			$("#postfrom").datepicker();
+			//$("#postfrom").datepicker("minDate" : "-10");
 		});
 		$(function() {
 			$("#postthru").datepicker();
