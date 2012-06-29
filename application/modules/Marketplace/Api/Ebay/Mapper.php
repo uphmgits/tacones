@@ -25,6 +25,7 @@ where m.field_id=o.field_id order by m.category_id asc;*/
 	private $_importSource;
 	private $_importSellerID;
 	private $_alreadyin;
+	private $_schema;
 	
 	public function __construct() {
 		/*$file = APPLICATION_PATH . '/application/settings/import_general.php';
@@ -36,6 +37,7 @@ where m.field_id=o.field_id order by m.category_id asc;*/
 		$file = APPLICATION_PATH . '/application/settings/database.php';
 	    $options = include $file;
 	    $this->_db = Zend_Db::factory($options['adapter'], $options['params']);
+	    $this->_schema = $options['params']['dbname'];
 	}
 	
 	private function setFieldsMeta() {
@@ -49,8 +51,8 @@ where m.field_id=o.field_id order by m.category_id asc;*/
 	private function setFullCategorySpecs() {
 		$this->_categoryspecs = array();
 		$select = $this->_db->select()
-			->from(array('m' => 'zapato_social.engine4_marketplace_fields_meta'), array('m.category_id', 'm.label as spec', 'm.field_id'))
-			->join(array('o' =>'zapato_social.engine4_marketplace_fields_options'), 'm.field_id=o.field_id', 
+			->from(array('m' => $this->_schema.'.engine4_marketplace_fields_meta'), array('m.category_id', 'm.label as spec', 'm.field_id'))
+			->join(array('o' =>$this->_schema.'.engine4_marketplace_fields_options'), 'm.field_id=o.field_id', 
 					array('o.option_id as specvalue_id', 'o.label as spec_value'))
 			->order('m.category_id asc');
 
@@ -156,7 +158,7 @@ where m.field_id=o.field_id order by m.category_id asc;*/
 	private function _alreadyImported() {
 		
 		$select = $this->_db->select()
-			->from(array('m' => 'zapato_social.engine4_marketplace_marketplaces'),array('entry_source_ref'))
+			->from(array('m' => $this->_schema.'.engine4_marketplace_marketplaces'),array('entry_source_ref'))
 			->where('m.owner_id='.$this->_upheelsUserID . ' and entry_source_ref is not null');
 
 		$this->_alreadyin = $this->_db->fetchAll($select);

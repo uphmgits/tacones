@@ -20,15 +20,21 @@
 
 
 temporary/
-
-
-/.gitignore
-/.project
-/.buildpath
-/.settings/
+.project
+.buildpath
+.settings/
 cameraready/
 public/marketplace/
 .git/
 orders_pdf/
 invoices/
 user/
+
+.externalToolBuilders/
+application/settings/import_auth_mukund.php
+     
+igpull.cmd
+      
+       
+      
+      
