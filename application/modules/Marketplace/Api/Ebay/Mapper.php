@@ -150,8 +150,8 @@ where m.field_id=o.field_id order by m.category_id asc;*/
 				$piccount++;
 			}
 		}
-		/*print "MAPPED SPECS: <pre>"; print_r($mappeddata);exit;
-		exit;*/
+		//print "MAPPED SPECS: <pre>"; print_r($mappeddata);exit;
+		
 		return $mappeddata;
 	}
 	
@@ -188,6 +188,10 @@ where m.field_id=o.field_id order by m.category_id asc;*/
 						$mappedSpec[$uphlabel] = array('field_id' => $specoptions['field_id'], 'option_id' => $specoptions['option_id'], 'option_value' => $specoptions['spec_value']);
 						break;
 					}
+					// special mapping logic for "Condition"
+					/*if(stristr($specoptions['spec_value'], "Condition") !== false) {
+						
+					}*/
 				}
 				if($valueMatched == false) {
 					// label matched, but not the value

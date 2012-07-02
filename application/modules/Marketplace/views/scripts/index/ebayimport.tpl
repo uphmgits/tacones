@@ -228,6 +228,7 @@ $this->headScript()->prependScript($js2);
 	</div>
 	<div class="ebayreview-row-cat">
 	<input name="Rows[<?php echo $row ?>][uph_category]" disabled="disabled" type="text" value="<?php echo $details['uph_category'] ?>" />
+	<input name="Rows[<?php echo $row ?>][category_id]"  type="hidden" value="<?php echo $details['uph_category_id'] ?>" />
 	</div>
 	
 	
@@ -235,14 +236,31 @@ $this->headScript()->prependScript($js2);
 	
 	<div class="ebayreview-row-picture-container">
 	
+	<!--  Pictures logic -->
 	<?php $piccnt=0; foreach($details['pictures'] as $picindex => $picurl) { ?>
 		<div class="ebayreview-row-picture">
 			<img src="<?php echo $details['pictures'][$picindex] ?>" height="132" width="120" />
 	  	</div>
 	  	<input type="hidden" name="Rows[<?php echo $row ?>][pictures][<?php echo $picindex ?>]" value="<?php echo $picurl ?>" />
 	<?php }?>
-	<?php $row++;  ?>
 	</div>
+	<div class = "ebayreview-row-specs-container">
+	<!--  Specs logic -->
+	<?php foreach($details['specs'] as $specitem) { ?>
+	   <?php foreach($specitem as $specname => $specvalue) { ?>
+	   		<div class="ebayreview-row-specs-label">
+	    	<input disabled="disabled" type="text" value="<?php echo $specname ?>" /> 
+	    	</div>
+	    	<div class="ebayreview-row-specs-value">
+	    	<input disabled="disabled" type="text" value="<?php echo $specvalue['option_value'] ?>" />
+	    	</div>
+	    	<input name="Rows[<?php echo $row ?>][fields][0_0_<?php echo $specvalue['field_id'] ?>]" type="hidden" value="<?php echo $specvalue['option_id'] ?>" /> 
+	   <?php } ?>
+    <?php } ?>
+	</div>
+	
+	<?php $row++;  ?>
+	
 	
 	
 	<div class="ebayreview-newrow">	</div>

@@ -237,7 +237,8 @@ class Marketplace_Api_Ebay {
 			$res = $this->_httpclient->request(Zend_Http_Client::POST);
 			if($res->isSuccessful()) {
 				//got HTTP 200. Check the response body further
-				
+				//print "<pre>"; print_r($res->getBody());exit;
+				$body = $res->getBody();
 				$itemDom = new DOMDocument();                
 				$itemDom->loadXML( $res->getBody() );    
 				$ack = $this->_isAckSuccess($itemDom);
@@ -349,6 +350,8 @@ class Marketplace_Api_Ebay {
 					//$ispec = $dom->createElement(preg_replace( '/\s+/', '', $specific->Name), $specific->Value);
 					//$itemSpecsNode->appendChild($ispec);
 				}
+				// Condition code: pre-owned etc
+				$arrayIDs[$itemID]['itemSpecifics']['Condition'] = (string)$itmcallItmDetNode->ConditionDisplayName;
 				//exit;		
 			}
 			else {
