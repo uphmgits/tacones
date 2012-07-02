@@ -200,13 +200,13 @@ $this->headScript()->prependScript($js2);
 	<div class="ebayreview-row-cat">
 	Category
 	</div>
-	
+	<!--  
 	
 	<div class="ebayreview-row-desc">
 	Description
 	</div>
 	
-	
+	-->
 	<div class="ebayreview-newrow">
 	
 	</div>
@@ -231,12 +231,9 @@ $this->headScript()->prependScript($js2);
 	</div>
 	
 	
-	<div class="ebayreview-row-desc">
-	<input name="Rows[<?php echo $row ?>][body]" type="text" value="<?php echo $details['Description'] ?>" />
-	</div>
+	<input name="Rows[<?php echo $row ?>][body]" type="hidden" value="<?php echo $details['Description'] ?>" />
 	
 	<div class="ebayreview-row-picture-container">
-	
 	
 	<?php $piccnt=0; foreach($details['pictures'] as $picindex => $picurl) { ?>
 		<div class="ebayreview-row-picture">

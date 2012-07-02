@@ -3232,14 +3232,14 @@ div.ebayimport-review {
 
 .ebayreview-row-lid {
 	float: left;
-	width:100px;
+	width:120px;
 	border: 1px solid #333333;
 	text-align: center;
 	//padding-right: 5px;
 }
 .ebayreview-row-title {
 	float: left;
-	width:300px;
+	width:550px;
 	border: 1px solid #333333;
 	text-align: center;
 	font-weight: strong;
