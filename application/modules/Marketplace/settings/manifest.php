@@ -264,6 +264,7 @@ return array(
         'action' => 'paymentreturn',
       )
     ),
+    /// IPNs ///
     'marketplace_paymentcompletenotify' => array(
       'route' => 'marketplaces/paymentcompletenotify/*',
       'defaults' => array(
@@ -281,6 +282,57 @@ return array(
       )
     ),
 
+    'marketplace_paymentrefundnotify' => array(
+      'route' => 'marketplaces/paymentrefundnotify/*',
+      'defaults' => array(
+        'module' => 'marketplace',
+        'controller' => 'index',
+        'action' => 'paymentrefundnotify',
+      )
+    ),
+    'marketplace_paymentrefundreturn' => array(
+      'route' => 'marketplaces/paymentrefundreturn/*',
+      'defaults' => array(
+        'module' => 'marketplace',
+        'controller' => 'index',
+        'action' => 'paymentrefundreturn',
+      )
+    ),
+
+    'marketplace_paymentfailednotify' => array(
+      'route' => 'marketplaces/paymentfailednotify/*',
+      'defaults' => array(
+        'module' => 'marketplace',
+        'controller' => 'index',
+        'action' => 'paymentfailednotify',
+      )
+    ),
+    'marketplace_paymentfailedreturn' => array(
+      'route' => 'marketplaces/paymentfailedreturn/*',
+      'defaults' => array(
+        'module' => 'marketplace',
+        'controller' => 'index',
+        'action' => 'paymentfailedreturn',
+      )
+    ),
+
+    'marketplace_paymentreturnnotify' => array(
+      'route' => 'marketplaces/paymentreturnnotify/*',
+      'defaults' => array(
+        'module' => 'marketplace',
+        'controller' => 'index',
+        'action' => 'paymentreturnnotify',
+      )
+    ),
+    'marketplace_paymentreturnreturn' => array(
+      'route' => 'marketplaces/paymentreturnreturn/*',
+      'defaults' => array(
+        'module' => 'marketplace',
+        'controller' => 'index',
+        'action' => 'paymentreturnreturn',
+      )
+    ),
+    /// end of IPNs ///
 
     'marketplace_style' => array(
       'route' => 'marketplaces/marketplacestyle',

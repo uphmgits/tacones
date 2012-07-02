@@ -236,7 +236,7 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
 
     $table = $this->_helper->api()->getDbtable('orders', 'marketplace');
     //$select = $table->select()->where('inspection > 0');
-    $select = $table->select()->where("status <> 'done' AND status <> 'sold' AND status <> 'return' AND status <> 'canceled'");
+    $select = $table->select();
 
     $formFilter = new Marketplace_Form_Filter();//User_Form_Admin_Manage_Filter();
     $formFilter->addElement('hidden', 'status_filter', array('value' => $status_filter ) );
@@ -268,11 +268,12 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
       //case 'sold'       :
       //case 'return'     :
       case 'approved'   :
-      case 'failed'     :
+      case 'done_failed':
       case 'admin_sent' :
       case 'punished'   : 
       //case 'canceled'   :
       case 'cancelrequest': $select->where("status = '{$status_filter}'"); break;
+      default: $select->where("status NOT LIKE '%done%' AND status <> 'sold' AND status <> 'return' AND status <> 'canceled'");
     }
 
     $select->order(( !empty($values['order']) ? $values['order'] : 'order_id' ) . ' ' . ( !empty($values['order_direction']) ? $values['order_direction'] : 'ASC' ));

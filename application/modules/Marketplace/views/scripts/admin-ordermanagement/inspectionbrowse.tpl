@@ -93,11 +93,12 @@ function createInvoice(value) {
     <option value='inprogress' <?php if( $this->status_filter == 'inprogress' )  echo "selected"?>><?=$this->translate("Received")?></option>
     <option value='approved'   <?php if( $this->status_filter == 'approved' ) echo "selected"?>><?=$this->translate("Passed")?></option>
     <option value='admin_sent' <?php if( $this->status_filter == 'approved' ) echo "selected"?>><?=$this->translate("Sent to Buyer")?></option>
-    <option value='failed'     <?php if( $this->status_filter == 'failed' )   echo "selected"?>><?=$this->translate("Failed")?></option>
+    <option value='failed'     <?php if( $this->status_filter == 'done_failed' )   echo "selected"?>><?=$this->translate("For punish")?></option>
     <?php /*<option value='sold' <?php if( $this->status_filter == 'sold' ) echo "selected"?>><?=$this->translate("Complete")?></option>
     <option value='return'     <?php if( $this->status_filter == 'return' )   echo "selected"?>><?=$this->translate("Return")?></option>
     <option value='canceled' <?php if( $this->status_filter == 'canceled' ) echo "selected"?>><?=$this->translate("Canceled")?></option>*/?>
     <option value='cancelrequest' <?php if( $this->status_filter == 'cancelrequest' ) echo "selected"?>><?=$this->translate("Cancel Request")?></option>
+    <option value='done_failed' <?php if( $this->status_filter == 'done_failed' ) echo "selected"?>><?=$this->translate("For punish")?></option>
     <option value='punished' <?php if( $this->status_filter == 'punished' ) echo "selected"?>><?=$this->translate("Punished")?></option>
   </select>  
   <button type='submit' name="submit_button" value="change_status_filter"><?php echo $this->translate("Filter") ?></button>
@@ -343,7 +344,7 @@ function createInvoice(value) {
      <?php if( $this->status_filter == 'return' ) : ?>
         <button type='submit' name="submit_button" value="add_to_return_file"><?=$this->translate("Add to Return File")?></button>
      <?php endif;*/ ?>
-     <?php if( $this->status_filter == 'failed' ) : ?>
+     <?php if( $this->status_filter == 'done_failed' ) : ?>
         <button type='submit' name="submit_button" value="punish"><?=$this->translate("Punish")?></button>
      <?php endif; ?>
   </div>
