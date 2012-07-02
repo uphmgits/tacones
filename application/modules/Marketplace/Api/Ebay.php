@@ -218,7 +218,7 @@ class Marketplace_Api_Ebay {
 		$i=0;		
 		// grab details for each itemID now
 		foreach($itemIds as $itemID) {
-			if($i++ > 50) break;
+			if($i++ > 29) break;
 			// keep building DOM
 			
 			/*

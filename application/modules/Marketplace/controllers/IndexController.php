@@ -1338,6 +1338,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
                   'album_id' => $album->getIdentity(),
                   'marketplace_id' => $marketplace->getIdentity(),
                   'user_id' => $viewer->getIdentity(),
+                  'approved_photo' => 1
                 );
                 $noMainPhoto = $marketplace->photo_id ? false : true;
                 foreach( $row[pictures] as $key => $file ) {

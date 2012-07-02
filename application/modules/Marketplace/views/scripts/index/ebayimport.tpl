@@ -144,7 +144,7 @@ $this->headScript()->prependScript($js2);
             <br/>Simply enter your eBay sellerID and the date range in which you posted those listings on eBay. 
             <p><br/>Upheels will retrieve your listings, have you an opportunity to review the retrieved data 
             and with a click of a button, those listings would be posted on Upheels.
-           <div class="ebayimport-info-notice"> PLEASE NOTE: Due to potentially large amount of data, this import is limited to 50 listings per import. 
+           <div class="ebayimport-info-notice"> PLEASE NOTE: Due to potentially large amount of data, this import is limited to 30 listings per import. 
            You may run this import as many times as you wish, but each import will fetch at the most 50 lisings each time.
             </div>
             </div>
