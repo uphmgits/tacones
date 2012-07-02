@@ -413,11 +413,11 @@ class Marketplace_Api_Ebay {
 			->where('m.owner_id='.$this->_upheelsUserId . ' and entry_source_ref is not null');
 		$listings = $db->fetchAll($select);
 		foreach($listings as  $listingid) {
-			$this->_alreadyImported[] = $listingid[entry_source_ref];
+			$this->_alreadyImported[] = $listingid['entry_source_ref'];
 		}
 	}
 	
-	private function _buildSellerListReqXml($starttime, $endtime) {
+	private function _buildSellerListReqXml() {
 		return '<StartTimeFrom>' . $this->_starttime . '</StartTimeFrom><StartTimeTo>' . $this->_endtime . '</StartTimeTo><UserID>'.$this->_seller.'</UserID></GetSellerListRequest>';
 	}
 	

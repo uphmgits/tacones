@@ -86,6 +86,7 @@ class Marketplace_Model_Marketplace extends Core_Model_Item_Abstract
     	// create a random file name for image being pulled from outside url such as eBay
     	$l = 10;
     	$c = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxwz0123456789";
+    	$s = '';
 	    for(;$l > 0;$l--) $s .= $c{rand(0,strlen($c))};
 	    $name = str_shuffle($s). ".jpg";
     }
@@ -154,13 +155,26 @@ class Marketplace_Model_Marketplace extends Core_Model_Item_Abstract
     $photoTable = Engine_Api::_()->getItemTable('marketplace_photo');
     $marketplaceAlbum = $this->getSingletonAlbum();
     $photoItem = $photoTable->createRow();
-    $photoItem->setFromArray(array(
-      'marketplace_id' => $this->getIdentity(),
-      'album_id' => $marketplaceAlbum->getIdentity(),
-      'user_id' => $viewer->getIdentity(),
-      'file_id' => $iMain->getIdentity(),
-      'collection_id' => $marketplaceAlbum->getIdentity(),
-    ));
+    if(!$url) {
+	    $photoItem->setFromArray(array(
+	      'marketplace_id' => $this->getIdentity(),
+	      'album_id' => $marketplaceAlbum->getIdentity(),
+	      'user_id' => $viewer->getIdentity(),
+	      'file_id' => $iMain->getIdentity(),
+	      'collection_id' => $marketplaceAlbum->getIdentity(),
+	    ));
+    }
+    else {
+    	// this is one from eBay, auto-approve it
+    	$photoItem->setFromArray(array(
+	      'marketplace_id' => $this->getIdentity(),
+	      'album_id' => $marketplaceAlbum->getIdentity(),
+	      'user_id' => $viewer->getIdentity(),
+	      'file_id' => $iMain->getIdentity(),
+	      'collection_id' => $marketplaceAlbum->getIdentity(),
+    	  'approved_photo' => 1
+	    ));
+    }
     $photoItem->save();
 
     // Update row

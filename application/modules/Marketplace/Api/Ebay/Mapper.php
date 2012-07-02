@@ -138,7 +138,7 @@ where m.field_id=o.field_id order by m.category_id asc;*/
 			}
 			// pictures from eBay listing
 			$piccount = 0;
-			foreach($ebaydata[Pictures] as $picurl) {
+			foreach($ebaydata['Pictures'] as $picurl) {
 				$picindex = 'photo'.$piccount;
 				if($piccount==0) {
 					$mappeddata[$itemID]['pictures']['photo'] = $picurl;

@@ -1169,6 +1169,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'create')->isValid())
             return;
         $viewer = Engine_Api::_()->user()->getViewer();
+        
         $this->view->navigation = $this->getNavigation();
         $this->view->form = $form = new Marketplace_Form_Ebayimport();
 
@@ -1193,7 +1194,9 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         try {
 
             $mark = $marketplaceTable->getlastemail($viewer->getIdentity()); //sendInvites($viewer, $values['recipients'], @$values['message']);
-
+			if(!isset($mark)) {
+				$mark['business_email'] = $viewer->getUserEmail();
+			}
             $db->commit();
         } catch (Exception $e) {
             $db->rollBack();
@@ -1210,7 +1213,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         }
         // POST request
         // which POST is it? ebay initial i/p form or actual import POST?
-        if($_POST['ebay_initialinput']==1) {
+        if($_POST[ebay_initialinput]==1) {
         	if (!$form->isValid($this->getRequest()->getPost())) {
         		$this->view->errorEbayInitialInput = true;
             	return;
@@ -1219,15 +1222,15 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         	// grab sellerID and dates and fire-up the retrieval
         	$e = new Marketplace_Api_Ebay(false);  // true=>ebay sandbox    false=>ebay production
         	$oneday = 60*60*24;
-        	$e->setSeller($_POST[ebaysellerid]); // ebay seller id is set now
+        	$e->setSeller($_POST['ebaysellerid']); // ebay seller id is set now
         	$e->setUpheelsSellerId($viewer->getIdentity());
-        	$upheels_timestamp = strtotime( $_POST[postfrom]);
+        	$upheels_timestamp = strtotime( $_POST['postfrom']);
         	$upheels_timestamp -= $oneday;
 			$ebay_date = date('Y-m-d', $upheels_timestamp); 
 			//print $ebay_date;
 			$e->setListingFrom($ebay_date/*.'T00:00:00.000Z'*/);  // listings posted date range, start date
 			
-			$upheels_timestamp = strtotime( $_POST[postthru]);
+			$upheels_timestamp = strtotime( $_POST['postthru']);
 			$upheels_timestamp += $oneday;
 			$ebay_date = date('Y-m-d', $upheels_timestamp); 
 			
@@ -1235,15 +1238,15 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 			
 			
 			$m = new Marketplace_Api_Ebay_Mapper();
-			$m->setListingDateRange($_POST[postfrom], $_POST[postthru]);
+			$m->setListingDateRange($_POST['postfrom'], $_POST['postthru']);
 			$m->setUpheelsUser($viewer->getIdentity());
 			$m->setImportSellerId($_POST['ebaysellerid']);
 			$m->setImportSource($impOptions['source']['EBAY_IMPORT']);
 			$this->view->jobid = $m->createImportjobRecord($impOptions['jobStates']['IMPORT_FETCHING_INPROCESS']);
 			
-	    	$this->view->ebaysellerid = $_POST[ebaysellerid];
-	    	$this->view->postfrom = $_POST[postfrom];
-	    	$this->view->postthru = $_POST[postthru];
+	    	$this->view->ebaysellerid = $_POST['ebaysellerid'];
+	    	$this->view->postfrom = $_POST['postfrom'];
+	    	$this->view->postthru = $_POST['postthru'];
 			
 	    	$mappedData = $e->getItemDetails();
 	    	$fetchcount = sizeof($mappedData);
@@ -1262,6 +1265,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 	    	}
             return;   // retrieval and mapping done, show it to user (upheels seller)
         	} catch (Exception $e) {
+        		$log = Zend_Registry::get('Zend_Log');
+        		$log->log($e->__toString(), Zend_Log::ERR);
         		/*throw $e;
         		return;*/
         		$this->view->nodatatoimport = 1;
@@ -1291,8 +1296,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         
         $m->importjobRecordStartImport($maketplace_source_jobID, $impOptions['jobStates']['IMPORT_IMPORTING_INPROCESS']);
         $importCount = 0;
-    foreach($_POST[Rows] as $row) {
-    	if(!isset($row[yesimport])) {
+    foreach($_POST['Rows'] as $row) {
+    	if(!isset($row['yesimport'])) {
     		continue;
     	}
         $db->beginTransaction();
@@ -1304,13 +1309,13 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
                     ));
             
             $values['business_email'] = $mark['business_email']/*'mrgadgil@yahoo.com'*/;
-            $values['entry_source_ref'] = $row[listingid];
+            $values['entry_source_ref'] = $row['listingid'];
             $values['entry_source_job_id'] = $maketplace_source_jobID;
             
             if(isset($fVal)) {
             	unset($fVal);
             }
-            foreach($row[fields] as $optionID => $optionVal) {
+            foreach($row['fields'] as $optionID => $optionVal) {
             	$fVal[$optionID] = $optionVal;
             }
            
@@ -1320,11 +1325,11 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
             $marketplace->save();
 
             // Set photo
-            if (!empty($row[pictures][photo])) {
-                $marketplace->setPhotoFromURL($row[pictures][photo]);
+            if (!empty($row['pictures']['photo'])) {
+                $marketplace->setPhotoFromURL($row['pictures']['photo']);
             }
             
-            if( sizeof($row[pictures]) >1 ) {
+            if( sizeof($row['pictures']) >1 ) {
                 $album = $marketplace->getSingletonAlbum();
 
                 $params = array(
@@ -1399,8 +1404,10 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
             $db->commit();
         } catch (Exception $e) {
             $db->rollBack();
+            $log = Zend_Registry::get('Zend_Log');
+        	$log->log($e->__toString(), Zend_Log::ERR);
             continue;
-            throw $e;  // TODO: log this exception into log file?
+            //throw $e;
         }
 
         $db->beginTransaction();

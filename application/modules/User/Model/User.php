@@ -74,6 +74,9 @@ class User_Model_User extends Core_Model_Item_Abstract
       ->assemble($params, $route, $reset);
   }
 
+  public function getUserEmail() {
+  	return $this->email;
+  }
 
   public function setDisplayName($displayName)
   {
