@@ -95,7 +95,7 @@
           <?php $paypal->setPayer($adminAddress, 0); ?>
           <?php $paypal->setAmount( ( $item->price - $commission ) * $item->count ); ?>
           <?php $paypal->setNumber( $item->order_id ); ?>
-          <?php $paypal->setButtonLabel( 'Pay' ); ?>
+          <?php $paypal->setButtonLabel( 'Pay to seller' ); ?>
           <?php $paypal->addItem(array('item_name' => $owner->getTitle() . "({$marketplace->getTitle()})")); ?>
           <?php $paypal->setControllerUrl("http://" . $_SERVER['HTTP_HOST'] . $this->url(array(), 'marketplace_extended', true) . '/paymentcomplete'); ?>
           <?php $paypal->setTarget("_blank"); ?>

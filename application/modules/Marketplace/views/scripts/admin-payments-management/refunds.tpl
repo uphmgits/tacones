@@ -87,15 +87,15 @@
         <?php $isPPButton = false; ?>
 
         <?php $paypal = new Marketplace_Api_Payment(true); ?>
-        <?php if( $owner and $marketplace and !empty( $marketplace->business_email ) ) : ?>
+        <?php if( $buyer and $marketplace and !empty( $marketplace->business_email ) ) : ?>
           <?php $adminAddress = Engine_Api::_()->getApi('settings', 'core')->getSetting('core.mail.from', 'admin@' . $_SERVER['HTTP_HOST']); ?>
-          <?php $paypal->setBusinessEmail( $marketplace->business_email ); ?>
+          <?php $paypal->setBusinessEmail( $item->contact_email ); ?>
           <?php $paypal->setPayer($adminAddress, 0); ?>
-          <?php $paypal->setAmount( $item->summ ); ?>
+          <?php $paypal->setAmount( ( $item->summ ) * $item->count ); ?>
           <?php $paypal->setNumber( $item->order_id ); ?>
-          <?php $paypal->setButtonLabel( 'Pay' ); ?>
-          <?php $paypal->addItem(array('item_name' => $owner->getTitle() . "({$marketplace->getTitle()})")); ?>
-          <?php $paypal->setControllerUrl("http://" . $_SERVER['HTTP_HOST'] . $this->url(array(), 'marketplace_extended', true) . '/payment'); ?>
+          <?php $paypal->setButtonLabel( 'Return to buyer' ); ?>
+          <?php $paypal->addItem(array('item_name' => $buyer->getTitle() . "({$marketplace->getTitle()})")); ?>
+          <?php $paypal->setControllerUrl("http://" . $_SERVER['HTTP_HOST'] . $this->url(array(), 'marketplace_extended', true) . '/paymentrefund'); ?>
           <?php $isPPButton = true; ?>
         <?php endif; ?>
 

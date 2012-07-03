@@ -2574,7 +2574,6 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $viewer = Engine_Api::_()->user()->getViewer();
         if( !$viewer->getIdentity() ) 
           return $this->_forward('requireauth', 'error', 'core');
-
         if( !($orderId = $this->_getParam('order_id', 0)) ) 
           return $this->_helper->redirector->gotoRoute(array(), 'marketplace_browse');
 
@@ -2584,6 +2583,9 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         if( empty($order) ) 
           return $this->_helper->redirector->gotoRoute(array(), 'marketplace_browse');
     }
+
+
+    ////// Admin panel IPN-s //////////
 
     public function paymentcompletenotifyAction() 
     {
@@ -2626,7 +2628,154 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
    					$table->insert($values);
 
             $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
-            $orderTable->update(array('status' => 'done'), "order_id = {$orderId}");
+            $orderTable->update(array('status' => 'done_sold'), "order_id = {$orderId}");
+
+						//$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+						//$notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
+  			  }
+        }
+        die();
+    }
+
+    public function paymentrefundnotifyAction() 
+    {
+        $paypal = new Marketplace_Api_Payment(true);
+			  $arrPost = $this->getRequest()->getPost();
+
+			  if ($paypal->validateNotify($arrPost)) {
+
+				  $orderId = (int)$arrPost['item_number'];
+          $order = Engine_Api::_()->getItem('marketplace_order', $orderId);
+          if( !$order ) die();
+
+          $owner = Engine_Api::_()->getItem('user', $order->owner_id);
+          if( !$owner ) die();
+
+          $final_amount = $order->summ * $order->count;
+
+          // log transation /////
+          ob_start();
+          print_r($arrPost);
+          print_r($final_amount . " - " . $arrPost['mc_gross']);
+          $c = ob_get_clean();
+          file_put_contents($_SERVER['DOCUMENT_ROOT'] . $this->view->baseUrl() . '/temporary/log/paypal_refund.log', $c, FILE_APPEND);
+          chmod($_SERVER['DOCUMENT_ROOT'] . $this->view->baseUrl() . '/temporary/log/paypal_refund.log', 0777);
+          // end log ////////////
+
+					if( $final_amount == $arrPost['mc_gross']) {
+
+					  $values['order_id'] = $orderId;
+ 					  $values['user_id'] = $order->user_id;
+ 					  $values['type'] = 'refund';
+ 					  $values['summ'] = $final_amount;
+ 					  $values['price'] = $order->price;
+ 					  $values['commission'] = 0;
+            $values['count'] = $order->count;
+					  $values['payment_date'] = date("Y-m-d H:i:s");
+
+            $table = Engine_Api::_()->getDbtable('admintransactions', 'marketplace');
+   					$table->insert($values);
+
+            $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+            $orderTable->update(array('status' => 'done_canceled'), "order_id = {$orderId}");
+
+						//$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+						//$notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
+  			  }
+        }
+        die();
+    }
+
+    public function paymentfailednotifyAction() 
+    {
+        $paypal = new Marketplace_Api_Payment(true);
+			  $arrPost = $this->getRequest()->getPost();
+
+			  if ($paypal->validateNotify($arrPost)) {
+
+				  $orderId = (int)$arrPost['item_number'];
+          $order = Engine_Api::_()->getItem('marketplace_order', $orderId);
+          if( !$order ) die();
+
+          $owner = Engine_Api::_()->getItem('user', $order->owner_id);
+          if( !$owner ) die();
+
+          $final_amount = $order->summ * $order->count;
+
+          // log transation /////
+          ob_start();
+          print_r($arrPost);
+          print_r($final_amount . " - " . $arrPost['mc_gross']);
+          $c = ob_get_clean();
+          file_put_contents($_SERVER['DOCUMENT_ROOT'] . $this->view->baseUrl() . '/temporary/log/paypal_failed.log', $c, FILE_APPEND);
+          chmod($_SERVER['DOCUMENT_ROOT'] . $this->view->baseUrl() . '/temporary/log/paypal_failed.log', 0777);
+          // end log ////////////
+
+					if( $final_amount == $arrPost['mc_gross']) {
+
+					  $values['order_id'] = $orderId;
+ 					  $values['user_id'] = $order->user_id;
+ 					  $values['type'] = 'failed';
+ 					  $values['summ'] = $final_amount;
+ 					  $values['price'] = $order->price;
+ 					  $values['commission'] = 0;
+            $values['count'] = $order->count;
+					  $values['payment_date'] = date("Y-m-d H:i:s");
+
+            $table = Engine_Api::_()->getDbtable('admintransactions', 'marketplace');
+   					$table->insert($values);
+
+            $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+            $orderTable->update(array('status' => 'done_failed'), "order_id = {$orderId}");
+
+						//$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
+						//$notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
+  			  }
+        }
+        die();
+    }
+
+    public function paymentreturnnotifyAction() 
+    {
+        $paypal = new Marketplace_Api_Payment(true);
+			  $arrPost = $this->getRequest()->getPost();
+
+			  if ($paypal->validateNotify($arrPost)) {
+
+				  $orderId = (int)$arrPost['item_number'];
+          $order = Engine_Api::_()->getItem('marketplace_order', $orderId);
+          if( !$order ) die();
+
+          $owner = Engine_Api::_()->getItem('user', $order->owner_id);
+          if( !$owner ) die();
+
+          $final_amount = $order->summ * $order->count;
+
+          // log transation /////
+          ob_start();
+          print_r($arrPost);
+          print_r($final_amount . " - " . $arrPost['mc_gross']);
+          $c = ob_get_clean();
+          file_put_contents($_SERVER['DOCUMENT_ROOT'] . $this->view->baseUrl() . '/temporary/log/paypal_failed.log', $c, FILE_APPEND);
+          chmod($_SERVER['DOCUMENT_ROOT'] . $this->view->baseUrl() . '/temporary/log/paypal_failed.log', 0777);
+          // end log ////////////
+
+					if( $final_amount == $arrPost['mc_gross']) {
+
+					  $values['order_id'] = $orderId;
+ 					  $values['user_id'] = $order->user_id;
+ 					  $values['type'] = 'failed';
+ 					  $values['summ'] = $final_amount;
+ 					  $values['price'] = $order->price;
+ 					  $values['commission'] = 0;
+            $values['count'] = $order->count;
+					  $values['payment_date'] = date("Y-m-d H:i:s");
+
+            $table = Engine_Api::_()->getDbtable('admintransactions', 'marketplace');
+   					$table->insert($values);
+
+            $orderTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+            $orderTable->update(array('status' => 'done_return'), "order_id = {$orderId}");
 
 						//$notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
 						//$notifyApi->addNotification($owner, $buyer, $marketplace, 'marketplace_transaction_to_owner');
@@ -2644,6 +2793,42 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
                     'module' => 'marketplace',
                     "controller" => "payments-management",
                     "action" => "index"
+								  ), 'admin_default', true),
+		  ));
+    }
+    public function paymentrefundreturnAction() 
+    {
+      return $this->_forward('success', 'utility', 'core', array(
+			  'messages' => array(Zend_Registry::get('Zend_Translate')->_('Payment Complete')),
+			  'layout' => 'default-simple',
+			  'parentRedirect' => Zend_Controller_Front::getInstance()->getRouter()->assemble(array(
+                    'module' => 'marketplace',
+                    "controller" => "payments-management",
+                    "action" => "refunds"
+								  ), 'admin_default', true),
+		  ));
+    }
+    public function paymentfailedreturnAction() 
+    {
+      return $this->_forward('success', 'utility', 'core', array(
+			  'messages' => array(Zend_Registry::get('Zend_Translate')->_('Payment Complete')),
+			  'layout' => 'default-simple',
+			  'parentRedirect' => Zend_Controller_Front::getInstance()->getRouter()->assemble(array(
+                    'module' => 'marketplace',
+                    "controller" => "payments-management",
+                    "action" => "failed"
+								  ), 'admin_default', true),
+		  ));
+    }
+    public function paymentreturnreturnAction() 
+    {
+      return $this->_forward('success', 'utility', 'core', array(
+			  'messages' => array(Zend_Registry::get('Zend_Translate')->_('Payment Complete')),
+			  'layout' => 'default-simple',
+			  'parentRedirect' => Zend_Controller_Front::getInstance()->getRouter()->assemble(array(
+                    'module' => 'marketplace',
+                    "controller" => "payments-management",
+                    "action" => "returns"
 								  ), 'admin_default', true),
 		  ));
     }

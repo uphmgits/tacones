@@ -104,6 +104,7 @@ function loginAsUser(id) {
 	<?php
        if($reportCount > 0 ):
 	?>
+  <style>table.admin_table td { white-space: normal !important; }</style>
   <table class='admin_table' width="100%" style="table-layout: fixed;">
     <thead>
       <tr>
