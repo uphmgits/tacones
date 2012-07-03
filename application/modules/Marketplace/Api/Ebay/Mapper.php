@@ -220,6 +220,46 @@ where m.field_id=o.field_id order by m.category_id asc;*/
 	
 	private function _mapCat($ebaycategoryname) {
 		$upheelsCat = array();
+		$catParts = explode(':', $ebaycategoryname,20);
+		if(empty($catParts)) {
+			$catParts = explode('>', $ebaycategoryname,20);
+		}
+		if(empty($catParts)) {
+			// cant figure out ebay to upheels category mapping
+			$upheelsCat['category_id_hidden'] = 0; // "ALL"
+    		$upheelsCat['category'] = '';
+		}
+		else {
+			// start traversing the exploded array in reverse order
+			$catParts = array_reverse($catParts, true);
+			foreach($catParts as $catLabel) {
+				if(stripos($catLabel, 'Bag') !== false) {
+					$upheelsCat['category_id_hidden'] = 5; // Bags
+    				$upheelsCat['category'] = 'Bags';
+    				break;
+				}
+				else if(stripos($catLabel, 'Shoe') !== false) {
+					$upheelsCat['category_id_hidden'] = 1; // Shoes
+    				$upheelsCat['category'] = 'Shoes';
+    				break;
+				}
+				else if(stripos($catLabel, 'Cloth') !== false) {
+					$upheelsCat['category_id_hidden'] = 3; // Clothes
+    				$upheelsCat['category'] = 'Clothes';
+    				break;
+				}
+				else if(stripos($catLabel, 'Accessor') !== false) {
+					$upheelsCat['category_id_hidden'] = 8; // Accessories
+    				$upheelsCat['category'] = 'Accessories';
+    				break;
+				}
+			}
+			if(!isset($upheelsCat['category_id_hidden'])) {
+				$upheelsCat['category_id_hidden'] = 0; // "ALL"
+    			$upheelsCat['category'] = '';
+			}
+		}
+		/*
 		// Strip the first part of eBay's category name: Clothing, Shoes & Accessories:
 		$ebaycategoryname = stristr($ebaycategoryname, ':');
 		if(stristr($ebaycategoryname, 'Bag') !== false) {
@@ -241,7 +281,7 @@ where m.field_id=o.field_id order by m.category_id asc;*/
     	else {
     		$upheelsCat['category_id_hidden'] = 0; // "ALL"
     		$upheelsCat['category'] = '';
-    	}
+    	}*/
     	return $upheelsCat;
 	}
 	
