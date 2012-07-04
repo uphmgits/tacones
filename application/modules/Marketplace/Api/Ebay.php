@@ -244,9 +244,9 @@ class Marketplace_Api_Ebay {
 				$ack = $this->_isAckSuccess($itemDom);
 				
 				if($ack == false) {
-					print "\n**** ERROR in GetItem API Call *****";
-					//TODO: Error logging?
-					exit;
+					$log = Zend_Registry::get('Zend_Log');
+        			$log->log('**** ERROR in GetItem API Call for Seller ' . $this->getSeller() . '    ItemID ' . $itemID, Zend_Log::ERR);
+					continue;
 				}
 				
 				/*
@@ -264,8 +264,7 @@ class Marketplace_Api_Ebay {
 				print_r($itmcallItmDetNode);exit;*/
 				$itmDescription = $itmcallItmDetNode->Description;
 				//$arrayIDs[$itemID]['Description'] = preg_replace ( "'<[^>]+>'U", "",(string)$itmDescription);
-				$arrayIDs[$itemID]['Description'] = htmlentities((string)$itmDescription);
-				//$arrayIDs[$itemID]['Description'] = (string)$itmDescription;
+				$arrayIDs[$itemID]['Description'] = preg_replace('~[\r\n]+~', '', htmlentities((string)$itmDescription, ENT_COMPAT | ENT_HTML401, 'UTF-8'));
 				$itmTitle = $itmcallItmDetNode->Title;
 				$arrayIDs[$itemID]['Title'] = (string)$itmTitle;
 				$listingtype = $itmcallItmDetNode->ListingType;
