@@ -258,6 +258,15 @@ class Marketplace_Model_Marketplace extends Core_Model_Item_Abstract
       
   }
 
+  public function inWishlist($viewer) {
+      $id = (int)$this->getIdentity();
+      $viewerId = $viewer->getIdentity();
+      if( !$id or !$viewerId ) return false;
+
+      $wishesTable = Engine_Api::_()->getDbtable('wishes', 'marketplace');
+      $wish = $wishesTable->select()->where("user_id = {$viewerId} AND marketplace_id = {$id}")->query()->fetch();
+      return empty($wish) ? false : true;
+  }
 
 
 
