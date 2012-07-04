@@ -108,7 +108,7 @@ function tree(id, url) {
           totalsumm = totalsumm + parseFloat(row.summ);
         }
         table.appendChild(tbody);
-        divTotal.innerHTML = "Total: $" + totalsumm;
+        divTotal.innerHTML = "Total: $" + totalsumm.toFixed(2);
         div.appendChild(divTotal);
         div.appendChild(table);
       } 
