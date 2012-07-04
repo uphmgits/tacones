@@ -35,4 +35,16 @@ class Marketplace_Plugin_Menus
     }
     return false;
   }
+
+  public function onMenuInitialize_CoreMiniMarketplaceWishes($row)
+  {
+    // @todo check perms
+    $viewer = Engine_Api::_()->user()->getViewer();
+    if( $viewer->getIdentity() ) {
+      return array(
+        'route' => 'marketplace_wishes',
+      );
+    }
+    return false;
+  }
 }

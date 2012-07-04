@@ -1242,9 +1242,10 @@ ul.brand-list {
   position: absolute;
   z-index: 1010;
   left: -15px;
-  max-height: 196px;
+  /*max-height: 196px;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: scroll;*/
+  overflow: hidden;
   padding: 5px 15px 5px;
   background: #232323;
 }
@@ -1255,4 +1256,117 @@ li.brand-container:hover ul.brand-list {
   color: #d1cfcf;
   font-weight: bold;
   padding-right: 20px;
+}
+
+
+.marketplace-create-container {
+  overflow: hidden;
+  margin: 0;
+}
+.marketplace-create-photos {
+  float: left;
+  width: 300px;
+}
+.marketplace-create-info {
+  overflow: hidden;
+}
+.marketplace-create-mainphoto {
+  overflow: hidden;
+}
+.marketplace-create-mainphoto > a {
+  float: right;
+}
+.marketplace-create-miniphoto_item_container {
+  float: left;
+  margin: 0 20px 20px 0px;
+  text-align: right;
+}
+.marketplace-create-mainphoto-container {
+  margin-bottom: 20px;
+  text-align: right;
+}
+.marketplace-create-mainphoto-container {
+  width: 262px;
+}
+.marketplace-create-mainphoto,
+.marketplace-create-miniphoto_item {
+  border: 1px solid #333;
+  padding: 20px;
+  width: 222px;
+}
+.marketplace-create-miniphoto_item {
+  width: 80px;
+  height: 80px;
+}
+.marketplace-create-miniphoto_item input {
+  width: 100%;
+}
+.marketplace-create-details {
+  overflow: hidden;
+}
+.marketplace-create-details > div {
+  margin-bottom: 10px;
+}
+.marketplace-create-fields {
+  overflow: hidden; 
+}
+.marketplace-create-fields > div {
+  float: left;
+  width: 130px;
+}
+.marketplace-create-details select,
+.marketplace-create-details input,
+.marketplace-create-details textarea {
+  width: 130px;
+}
+.marketplace-create-fields > div select,
+.marketplace-create-fields > div input[type=text],
+.marketplace-create-fields > div textarea {
+  width: 110px;
+}
+.marketplace-create-fields > div input[type=radio],
+.marketplace-create-fields > div input[type=checkbox] {
+  width: 14px;
+}
+.marketplace-create-container select,
+.marketplace-create-container input,
+.marketplace-create-container textarea {
+  background: transparent;
+  border: 1px solid #333;
+}
+
+.marketplace-create-buttons {
+  float: right;
+}
+.marketplace-create-buttons > a,
+.marketplace-create-buttons > button,
+.marketplace-create-miniphoto_item_container > a,
+.marketplace-create-mainphoto-container > a{
+  background: none;
+  border: none;
+  color: #4499bb;
+  text-decoration: none;
+}
+.marketplace-create-photofake {
+  overflow: hidden;
+}
+.marketplace-create-photofake > div {
+  display: none;
+}
+.marketplace-create-photofake > input {
+  border: none;
+}
+.marketplace-create-photos .marketplace-create-buttons {
+  margin-right: 36px;
+}
+.marketplace-create-mainphoto img,
+.marketplace-create-miniphoto_item img {
+    width:100%;
+}
+.marketplace-create-miniphoto-holder {
+    height: 50px;
+    overflow: hidden;
+}
+.error_message {
+    color: #b16;
 }

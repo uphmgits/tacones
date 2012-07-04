@@ -86,8 +86,8 @@ endif; ?>
       insp.innerHTML = "$0.00";
       total_price.innerHTML = "$<?=number_format($this->total_amount, 2)?>";
     }
-    <?php endif; ?>
   }
+  <?php endif; ?>
 </script>
 
 
@@ -135,6 +135,31 @@ endif; ?>
       });
       request.send();
   }
+
+  function addToWishlist(el) {
+      var url = "<?=$this->url(array('action' => 'add', 'item' => $this->marketplace->getIdentity()), 'marketplace_wishes', true) ?>";
+      var request = new Request.HTML({
+        url : url,
+        data : { format : 'html' },
+        onSuccess : function(responseTree, responseElements, responseHTML, responseJavaScript) {
+            el.innerHTML = '<?=$this->translate("dont wish")?>';
+            el.setAttribute( "onClick", "javascript: removeFromWishlist(this);" );
+        }
+      });
+      request.send();
+  }
+  function removeFromWishlist(el) {
+      var url = "<?=$this->url(array('action' => 'remove', 'item' => $this->marketplace->getIdentity()), 'marketplace_wishes', true) ?>";
+      var request = new Request.HTML({
+        url : url,
+        data : { format : 'html' },
+        onSuccess : function(responseTree, responseElements, responseHTML, responseJavaScript) {
+            el.innerHTML = '<?=$this->translate("wishlist")?>';
+            el.setAttribute( "onClick", "javascript: addToWishlist(this);" );
+        }
+      });
+      request.send();
+  }
 </script>
 
 <style>
@@ -150,6 +175,7 @@ endif; ?>
 <?=$this->content()->renderWidget('marketplace.topbanner', array('pageName' => 'marketplace', 'categoryId' => $this->marketplace->category_id))?>
 <br/>
 
+<?php $viewer = $this->viewer(); ?>
 <div class='layout_common'>
 	<div class='layout_left'>
 	  <div class='marketplaces_gutter'>
@@ -302,7 +328,7 @@ endif; ?>
            
           <div class="cart-like-wishlist">
            
-            <?php if( $this->viewer()->getIdentity() ) : ?>
+            <?php if( $viewer->getIdentity() ) : ?>
 					      <?=$this->htmlLink(array('route' => 'marketplace_general', 'action' => 'addtocart', 'marketplace_id' => $this->marketplace->getIdentity()), 'purchase ', array('class' => 'add_to_cart smoothbox', 'id' => 'add_to_cart'))?>
             <?php else : ?>
               <div id='login-popup' class="login-popup">
@@ -347,13 +373,24 @@ endif; ?>
               <?=$this->htmlLink('javascript:void(0);', 'purchase ', array('class' => 'add_to_cart', 'id' => 'add_to_cart', 'onclick' => '$("login-popup").show();'))?>
             <?php endif;?>
 				
-            &nbsp;<a href="javascript:void(0);" class="wishlist"><?=$this->translate('wishlist')?></a>&nbsp;&nbsp;
+            <?php if( $viewer->getIdentity()  ) : ?>
+              &nbsp;
+              <?php if( $this->marketplace->inWishlist($viewer) ) : ?>
+                <a href="javascript:void(0);" onclick="removeFromWishlist(this);" class="wishlist">
+                  <?=$this->translate("dont wish")?>
+                </a>&nbsp;&nbsp;
+              <?php else : ?>
+                <a href="javascript:void(0);" onclick="addToWishlist(this);" class="wishlist">
+                  <?=$this->translate('wishlist')?>
+                </a>&nbsp;&nbsp;
+              <?php endif;?>
+            <?php endif;?>
             
             <div class="love-info">
-                <?php if( $this->viewer()->getIdentity() ) : ?>
+                <?php if( $viewer->getIdentity() ) : ?>
                   <span class="like" id="2marketplacelike_<?=$this->marketplace->getIdentity()?>" 
                                      onclick="marketplaceLike(<?=$this->marketplace->getIdentity()?>)" 
-                                     param="<?=$this->marketplace->isLike($this->viewer()) ? '-1' : '1'?>"
+                                     param="<?=$this->marketplace->isLike($viewer) ? '-1' : '1'?>"
                   >
                       <?//=$likeCount?>
                       <?=$this->translate('item')?>
@@ -383,10 +420,10 @@ endif; ?>
           <br />
             
           <div class="love-info">
-            <?php if( $this->viewer()->getIdentity() ) : ?>
+            <?php if( $viewer->getIdentity() ) : ?>
               <span class="like" id="marketplacelike_<?=$this->marketplace->getIdentity()?>" 
                                  onclick="marketplaceLike(<?=$this->marketplace->getIdentity()?>)" 
-                                 param="<?=$this->marketplace->isLike($this->viewer()) ? '-1' : '1'?>"
+                                 param="<?=$this->marketplace->isLike($viewer) ? '-1' : '1'?>"
               >
                   <?=$likeCount?>
               </span>
@@ -396,7 +433,7 @@ endif; ?>
             
             <span>
                <?php $comm_count = $this->marketplace->comment_count; ?>
-               <?php if( !$this->viewer()->getIdentity() ) : ?>
+               <?php if( !$viewer->getIdentity() ) : ?>
                   <?=$this->htmlLink(array('route' => 'user_login'), "<span class='comment'>{$comm_count}</span>")?></span>
                <?php else : ?>
                   <?=$this->htmlLink(array('route' => 'marketplace_comments', 'marketplace_id' => $this->marketplace->getIdentity() ), "<span class='comment' id='view-comments-count'>{$comm_count}</span>")?></span>
@@ -537,7 +574,7 @@ endif; ?>
                           )?>
         </span>
         
-        <?php if( $this->viewer()->getIdentity() ) : ?>
+        <?php if( $viewer->getIdentity() ) : ?>
        
         <span><?=$this->htmlLink('javascript:void(0);', $this->translate('add comment'), array(
               "onclick" => "$('comments-form-container').show();"

@@ -14,7 +14,7 @@
 
 <div class="cart-container">
 
-  <h2><?=$this->translate('RECEIPT')?></h2>
+  <h2><?=$this->translate('ORDER REVIEW')?></h2>
 
   <table class="checkout-info-table" width="100%">
     <tr>

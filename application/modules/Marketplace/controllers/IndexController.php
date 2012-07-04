@@ -21,8 +21,8 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 {
   protected $_navigation;
   // true - sandbox, false - paypal original
-  protected $_sandbox = true;
-  //protected $_sandbox = false;
+  //protected $_sandbox = true;
+  protected $_sandbox = false;
 
   public function init() {
       if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'view')->isValid())
@@ -757,7 +757,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 						
             $owner = Engine_Api::_()->getItem('user', $marketplace->owner_id);
 
-            if( $user_id != 0) { 
+            if( $user_id ) { 
       					$buyer = Engine_Api::_()->getItem('user', $user_id);
             
 					      $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
@@ -769,11 +769,11 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 							      'user_id = ?' => $user_id
 						      ));
 					      }
-            } else { //mailing
+            } /*else { //mailing
                 if( $owner->getIdentity() and $marketplace->getIdentity() ) {
                     $this->_paymentMailing($values['contact_email'], $owner, $marketplace, $values['count']);
                 }
-            } // user_id != 0
+            } // user_id */
 				  }
 			  }
 		  }
@@ -2249,7 +2249,6 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 		$cartTable = Engine_Api::_()->getDbtable('cart', 'marketplace');
 
     if( $viewer and $viewer->getIdentity()) {
-		    $db = $cartTable->getAdapter();
 		
 		    if( $this->getRequest()->isPost() )
 		    {
@@ -2288,7 +2287,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 		    ;
         $cartitems = $select->query()->fetchAll();
     }
-    else {
+    /*else {
         $cartitems = $cartTable->getCookieCart(false);
         if( $this->getRequest()->isPost() ){
 			      $values = $this->getRequest()->getPost();
@@ -2306,7 +2305,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
               }
 			      }
         }
-    }
+    }*/
     $this->view->cartitems = $cartitems;		
 		$this->view->flat_shipping_rate = $flat_shipping_rate = floatval(Engine_Api::_()->getApi('settings', 'core')->getSetting('flat.shipping.rate', 0)); 
 	}

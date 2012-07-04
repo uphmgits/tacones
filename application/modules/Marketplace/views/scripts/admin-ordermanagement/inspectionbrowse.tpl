@@ -100,7 +100,17 @@ function createInvoice(value) {
     <option value='cancelrequest' <?php if( $this->status_filter == 'cancelrequest' ) echo "selected"?>><?=$this->translate("Cancel Request")?></option>
     <option value='done_failed' <?php if( $this->status_filter == 'done_failed' ) echo "selected"?>><?=$this->translate("For punish")?></option>
     <option value='punished' <?php if( $this->status_filter == 'punished' ) echo "selected"?>><?=$this->translate("Punished")?></option>
-  </select>  
+  </select> 
+
+  <select name='period_filter'>
+    <option value='all'   <?php if( $this->period_filter == 'all' )   echo "selected"?>><?=$this->translate("All Time")?></option>
+    <option value='day'   <?php if( $this->period_filter == 'day' )   echo "selected"?>><?=$this->translate("Day")?></option>
+    <option value='week'  <?php if( $this->period_filter == 'week' )  echo "selected"?>><?=$this->translate("Week")?></option>
+    <option value='mount' <?php if( $this->period_filter == 'mount' ) echo "selected"?>><?=$this->translate("Mount")?></option>
+    <option value='quarter' <?php if( $this->period_filter == 'quarter' ) echo "selected"?>><?=$this->translate("Quarter")?></option>
+    <option value='year'  <?php if( $this->period_filter == 'year' )  echo "selected"?>><?=$this->translate("Year")?></option>
+  </select>
+  
   <button type='submit' name="submit_button" value="change_status_filter"><?php echo $this->translate("Filter") ?></button>
 </form>
 
@@ -109,7 +119,7 @@ function createInvoice(value) {
 
 <div class='admin_results'>
   <div>
-    <?php echo $this->paginationControl($this->paginator, null, null, array('query' => array('status_filter' => $this->status_filter))); ?>
+    <?php echo $this->paginationControl($this->paginator, null, null, array('query' => array('status_filter' => $this->status_filter, 'period_filter' => $this->period_filter ))); ?>
   </div>
 </div>
 
@@ -348,6 +358,8 @@ function createInvoice(value) {
         <button type='submit' name="submit_button" value="punish"><?=$this->translate("Punish")?></button>
      <?php endif; ?>
   </div>
+  <input type="hidden" name="period_filter" value="<?=$this->period_filter?>" />
+  <input type="hidden" name="status_filter" value="<?=$this->status_filter?>" />
 </form>
 </div>
 <?php else:?>

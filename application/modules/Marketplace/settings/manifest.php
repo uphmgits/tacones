@@ -365,7 +365,7 @@ return array(
       )
     ),
 
-        'marketplace_category' => array(
+    'marketplace_category' => array(
       'route' => 'admin/marketplace/settings/categories/:category_id',
       'defaults' => array(
         'module' => 'marketplace',
@@ -375,7 +375,6 @@ return array(
       )
     ),
 
-
     'marketplace_admin_manage_level' => array(
       'route' => 'admin/marketplace/level/:level_id',
       'defaults' => array(
@@ -383,6 +382,18 @@ return array(
         'controller' => 'admin-level',
         'action' => 'index',
         'level_id' => 1
+      )
+    ),
+
+    'marketplace_wishes' => array(
+      'route' => 'marketplaces/wishes/:action/*',
+      'defaults' => array(
+        'module' => 'marketplace',
+        'controller' => 'wishes',
+        'action' => 'index'
+      ),
+      'reqs' => array(
+        'action' => '\D+',
       )
     ),
 

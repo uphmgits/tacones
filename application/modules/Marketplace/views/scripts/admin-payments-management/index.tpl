@@ -25,7 +25,7 @@
 </div>
 <form method='post' action=''>
   <select name='status_filter'>
-    <option value='all'   <?php if( $this->status_filter == 'all' )   echo "selected"?>><?=$this->translate("All")?></option>
+    <option value='all'   <?php if( $this->status_filter == 'all' )   echo "selected"?>><?=$this->translate("All Time")?></option>
     <option value='day'   <?php if( $this->status_filter == 'day' )   echo "selected"?>><?=$this->translate("Day")?></option>
     <option value='week'  <?php if( $this->status_filter == 'week' )  echo "selected"?>><?=$this->translate("Week")?></option>
     <option value='mount' <?php if( $this->status_filter == 'mount' ) echo "selected"?>><?=$this->translate("Mount")?></option>

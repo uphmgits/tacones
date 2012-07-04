@@ -35,6 +35,11 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
 
     $page = $this->_getParam('page', 1);
     $status_filter = $this->_getParam('status_filter', 'all');
+    $period_filter = $this->_getParam('period_filter', 'all');
+  
+    $ordersTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+    $ordersTableName = $ordersTable->info('name');
+
     $this->view->pdfMainPath = $pdfMainPath = APPLICATION_PATH . "/public/invoices/invoice_";
     $this->view->pdfMainUrl = $pdfMainUrl = $this->view->baseUrl() . "/public/invoices/invoice_";
 
@@ -48,8 +53,6 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
       $values = $this->getRequest()->getPost();
 
       $notifyApi = Engine_Api::_()->getDbtable('notifications', 'activity');
-      $ordersTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
-      $ordersTableName = $ordersTable->info('name');
       $file_content = '';
 
       foreach ($values as $key=>$value) :
@@ -233,10 +236,8 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
       }
     }
 
-
-    $table = $this->_helper->api()->getDbtable('orders', 'marketplace');
-    //$select = $table->select()->where('inspection > 0');
-    $select = $table->select();
+    $select = $ordersTable->select();
+    //$select = $ordersTable->select()->where('inspection > 0');
 
     $formFilter = new Marketplace_Form_Filter();//User_Form_Admin_Manage_Filter();
     $formFilter->addElement('hidden', 'status_filter', array('value' => $status_filter ) );
@@ -276,6 +277,15 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
       default: $select->where("status NOT LIKE '%done%' AND status <> 'sold' AND status <> 'return' AND status <> 'canceled'");
     }
 
+    $this->view->period_filter = $period_filter;
+    switch( $period_filter ) {
+      case 'day'     : $select->where("YEAR(date) = YEAR(NOW()) AND MONTH(date) = MONTH(NOW()) AND DAY(date) = DAY(NOW())"); break;
+      case 'week'    : $select->where("YEAR(date) = YEAR(NOW()) AND WEEK(date, 1) = WEEK(NOW(), 1)"); break;
+      case 'mount'   : $select->where("YEAR(date) = YEAR(NOW()) AND MONTH(date) = MONTH(NOW())"); break;
+      case 'quarter' : $select->where("YEAR(date) = YEAR(NOW()) AND QUARTER(date) = QUARTER(NOW())"); break;
+      case 'year'    : $select->where("YEAR(date) = YEAR(NOW())"); break;
+    }
+
     $select->order(( !empty($values['order']) ? $values['order'] : 'order_id' ) . ' ' . ( !empty($values['order_direction']) ? $values['order_direction'] : 'ASC' ));
 
     // Make paginator
@@ -300,6 +310,165 @@ class Marketplace_AdminOrdermanagementController extends Core_Controller_Action_
     ));
   }
 
+  public function orderstreeAction() {
+    $this->view->navigation = $navigation = Engine_Api::_()->getApi('menus', 'core')->getNavigation('marketplace_admin_main', array(), 'marketplace_admin_main_ordermanagement');
+    $this->view->subNavigation = $subNavigation = Engine_Api::_()->getApi('menus', 'core')->getNavigation('marketplace_admin_main_ordermanagement', array(), 'marketplace_admin_main_ordermanagement_orderstree');
+  }
+
+  public function ajaxOrderstreeItemAction() {
+
+    // year_quarter_month_week_day
+    $period = $this->_getParam('id', '');
+    $node = array();
+
+    $ordersTable = Engine_Api::_()->getDbtable('orders', 'marketplace');
+    $ordersTableName = $ordersTable->info('name');
+
+    if( empty($period) ) {
+        $name = "2012";
+        $node[] = null;  
+        $node[] = '{"id" : "' . $name . '", "title": "' . $name . '", "isFolder": 1}';
+    } else {
+        $periodsParts = explode('_', $period);
+        $year = (int)$periodsParts[0];
+        // get quarter list
+        if( count($periodsParts) == 1 ) {
+            $name = $year . "_";
+
+            $res = $ordersTable->select()->where("YEAR(date) = {$year}")->order('order_id DESC')->query()->fetchAll();
+            $node[] = $this->_prepareData($res);
+
+            $node[] = '{"id" : "' . $name . '1", "title": "1 quarter", "isFolder": 1}';
+            $node[] = '{"id" : "' . $name . '2", "title": "2 quarter", "isFolder": 1}';
+            $node[] = '{"id" : "' . $name . '3", "title": "3 quarter", "isFolder": 1}';
+            $node[] = '{"id" : "' . $name . '4", "title": "4 quarter", "isFolder": 1}';
+        }
+        // get months list
+        if( count($periodsParts) == 2 ) {
+            $quarter = $periodsParts[1];
+            $name = $year . "_" . $quarter . "_";
+            $res = $ordersTable->select()
+                               ->where("YEAR(date) = {$year} AND QUARTER(date) = $quarter")
+                               ->order('order_id DESC')
+                               ->query()
+                               ->fetchAll();
+            $node[] = $this->_prepareData($res);
+
+            $finish = 3 * $quarter;
+            for($i = $finish - 2; $i <= $finish; $i++) {
+                $node[] = '{"id" : "' . $name . $i . '", "title": "' . date("F",mktime(0,0,0,$i,1)) . '", "isFolder": 1}';
+            }
+        }
+        if( count($periodsParts) == 3 ) {
+            $quarter = (int)$periodsParts[1];
+            $month = (int)$periodsParts[2];
+            $name = $year . "_" . $quarter . "_" . $month . "_";
+
+            $res = $ordersTable->select()
+                               ->where("YEAR(date) = {$year} AND QUARTER(date) = $quarter AND MONTH(date) = $month")
+                               ->order('order_id DESC')
+                               ->query()
+                               ->fetchAll();
+            $node[] = $this->_prepareData($res);
+
+            $dayPerMonth = date('t', mktime(0,0,0,$month,1));
+            $start  = $firstWeek = (int)date('W',mktime(0,0,0,$month,1));
+            $finish = $lastWeek = (int)date('W',mktime(0,0,0,$month,$dayPerMonth));
+
+            if( $month == 1  and $firstWeek > 50) $start  = 0;
+            if( $month == 12 and $lastWeek  < 5 ) $finish = 52;
+
+            for($i = $start; $i <= $finish ; $i++) {
+                if( $i == $start ) {
+                  $node[] = '{"id" : "' . $name . $firstWeek . '", "title": "week #1", "isFolder": 1}';
+                  continue;
+                }
+                if( $i == $finish ) {
+                  $node[] = '{"id" : "' . $name . $lastWeek . '", "title": "week #' . ($finish - $start + 1) . '", "isFolder": 1}';
+                  continue;
+                }
+                $node[] = '{"id" : "' . $name . $i . '", "title": "week #' . ($i - $start + 1) . '", "isFolder": 1}';
+            }
+        }
+        if( count($periodsParts) == 4 ) {
+            $quarter = (int)$periodsParts[1];
+            $month = (int)$periodsParts[2];
+            $week = (int)$periodsParts[3];
+            $name = $year . "_" . $quarter . "_" . $month . "_" . $week . "_";
+
+            $res = $ordersTable->select()
+                               ->where("YEAR(date) = {$year} AND QUARTER(date) = $quarter AND MONTH(date) = $month AND WEEK(date) = $week")
+                               ->order('order_id DESC')
+                               ->query()
+                               ->fetchAll();
+            $node[] = $this->_prepareData($res);
+
+            $dayPerMonth = date('t', mktime(0,0,0,$month,1));
+            for($i = 1; $i <= $dayPerMonth ; $i++) {
+                $dayWeek = (int)date('W',mktime(0,0,0,$month,$i));
+                if( $week == $dayWeek) {
+                  $node[] = '{"id" : "' . $name . $i . '", "title": "' . $i . ' (' . date('l',mktime(0,0,0,$month,$i)) . ')", "isFolder": 1}';
+                }
+            }
+        }
+        if( count($periodsParts) == 5 ) {
+            $quarter = (int)$periodsParts[1];
+            $month = (int)$periodsParts[2];
+            $week = (int)$periodsParts[3];
+            $day = (int)$periodsParts[4];
+            $name = $year . "_" . $quarter . "_" . $month . "_" . $week . "_" . $day . "_";
+
+            $res = $ordersTable->select()
+                               ->where("YEAR(date) = {$year} AND 
+                                        QUARTER(date) = {$quarter} AND 
+                                        MONTH(date) = {$month} AND 
+                                        WEEK(date) = {$week} AND
+                                        DAY(date) = {$day}")
+                               ->order('order_id DESC')
+                               ->query()
+                               ->fetchAll();
+            $node[] = $this->_prepareData($res);
+            $node[] = '{"id" : "' . $name . '0", "title": "day info", "isFolder": 0}';
+        }
+    }
+    //usleep(500000);
+    echo '['.implode(',',$node).']';
+    die();
+  }
+
+  private function _prepareData($orders) {
+      $res = array();
+      foreach($orders as $order) {
+          $marketplace = Engine_Api::_()->getItem('marketplace', $order['marketplace_id']);
+          $owner = Engine_Api::_()->getItem('user', $order['owner_id']);
+          $buyer = Engine_Api::_()->getItem('user', $order['user_id']);
+  
+          $order['owner_id'] = $owner->getTitle();
+          $order['user_id'] = $buyer->getTitle();
+          $order['marketplace_id'] = $marketplace ? $marketplace->getTitle() : "Deleted";
+          switch( $order['status'] ) {
+            case 'wait'       : $order['status'] = "Bougnt"; break;
+            case 'inprogress' : $order['status'] = "Upheels received"; break;
+            case 'sold'       : $order['status'] = "Complete"; break;
+            case 'done_sold'  : $order['status'] = "Complete (done)"; break;
+            case 'done_return_s' :
+            case 'done_return_b' :
+            case 'return'     : $order['status'] = "Return"; break;
+            case 'done_return': $order['status'] = "Return (done)"; break;
+
+            case 'approved'   : $order['status'] = "Passed"; break;
+            case 'failed'     : $order['status'] = "Failed"; break;
+            case 'done_failed': $order['status'] = "Failed (done)"; break;
+            case 'admin_sent' : $order['status'] = "Upheels sent"; break;
+            case 'punished'   : $order['status'] = "Punished"; break;
+            case 'canceled'   : $order['status'] = "Canceled"; break;
+            case 'done_canceled' : $order['status'] = "Canceled (done)"; break;
+            case 'cancelrequest': $order['status'] = "Cancel Request"; break;
+          }
+          $res[] = $order;
+      }
+      return json_encode($res);
+  }
 
 
   /*public function uninspectionbrowseAction()
