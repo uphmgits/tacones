@@ -1,5 +1,5 @@
 
-<?php $this->headLink()->prependStylesheet($this->baseUrl().'/externals/tree/tree.css'); ?>
+<?php $this->headLink()->prependStylesheet($this->baseUrl().'/externals/orderstree/tree.css'); ?>
 <script src="<?=$this->baseUrl()?>/externals/jquery/jquery-1.7.1.min.js"></script>
 <script type="text/javascript">
   jQuery.noConflict()
@@ -7,7 +7,7 @@
      tree("tree", "<?=$this->url(array('module' => 'marketplace', 'controller' => 'ordermanagement', action => 'ajax-orderstree-item'), 'admin_default')?>");
   });
 </script>
-<script src="<?=$this->baseUrl()?>/externals/tree/tree.js"></script>
+<script src="<?=$this->baseUrl()?>/externals/orderstree/tree.js"></script>
 <style>
     #global_content {
       overflow-y: scroll;
@@ -52,7 +52,7 @@
   </div>
 <?php endif; ?>
 
-Periods:
+<h3 style="margin: 0;"><?=$this->translate('Periods')?></h3>
 <ul class="Container" id="tree">
   <?php for($i = date('Y'); $i >= 2010; $i-- ) : ?>
   <li class="Node IsRoot IsLast ExpandClosed" id="<?=$i?>">
