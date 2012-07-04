@@ -4,7 +4,8 @@
 <script type="text/javascript">
   jQuery.noConflict()
   en4.core.runonce.add(function() { 
-     tree("tree", "/fashbay/admin/marketplace/ordermanagement/ajax-orderstree-item");
+     //tree("tree", "/fashbay/admin/marketplace/ordermanagement/ajax-orderstree-item");
+     tree("tree", "<?=$this->url(array('module' => 'marketplace', 'controller' => 'ordermanagement', action => 'ajax-orderstree-item'), 'admin_default')?>");
   });
 </script>
 <script src="<?=$this->baseUrl()?>/externals/tree/tree.js"></script>
