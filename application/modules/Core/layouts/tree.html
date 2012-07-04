@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><TITLE>Tree Example</TITLE>
+<style type="text/css">
+@import "tree.css";
+</style>
+<script src="jquery-1.7.2.min.js"></script>
+<script src="tree.js"></script>
+<script>
+onload = function() { tree("tree", "data.php") }
+</script>
+</head>
+<body>
+
+Наше дерево:
+<ul class="Container" id="tree">
+  <li class="Node IsRoot IsLast ExpandClosed" id="2012">
+    <div class="Expand"></div>
+    <div class="Content" >2012</div>
+    <ul class="Container">
+    </ul>
+  </li>
+</ul>
+
+
+
+</body>
+</html>

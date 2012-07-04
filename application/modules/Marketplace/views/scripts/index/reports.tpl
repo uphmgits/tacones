@@ -15,6 +15,7 @@
   <h2>
     <?php echo $this->translate('Marketplace Reports');?>
   </h2>
+  <?php /*
   <div class="tabs">
     <?php
       // Render the menu
@@ -24,9 +25,8 @@
         ->render();
     ?>
   </div>
+  */ ?>
 </div>
-
-<br />
 
 <script type="text/javascript">
   var currentOrder = '<?php echo $this->order ?>';
@@ -82,16 +82,10 @@ function loginAsUser(id) {
 }
 </script>
 
-<div class='admin_search'>
-  <?php echo $this->formFilter->render($this) ?>
-</div>
-
-<br />
-
 <div class='admin_results'>
   <div>
     <?php $reportCount = $this->paginator->getTotalItemCount() ?>
-    <?php echo $this->translate(array("%s reports found", "%s reports found", $reportCount), ($reportCount)) ?>
+    <?php echo $this->translate(array("%s report", "%s reports", $reportCount), ($reportCount)) ?>
   </div>
   <div>
     <?php echo $this->paginationControl($this->paginator); ?>
@@ -99,7 +93,7 @@ function loginAsUser(id) {
 </div>
 
 <br />
-
+<style>td.order-status > div { padding: 0 3px; text-align: center; }</style>
 <div class="admin_table_form">
 	<?php
        if($reportCount > 0 ):
@@ -172,7 +166,27 @@ function loginAsUser(id) {
               </table>  
             </td>
             <td><?=str_replace(' ', '<br/>', $item->date)?></td>
-            <td><?=$item->status?></td>
+            <td class="order-status">
+              <?php switch($item->status) { 
+                case "wait"        : if( $item->tracking_fedex or $item->tracking_ups )
+                                        echo "<div style='color: Khaki;'>{$this->translate('I paid')} (1/6)</div>"; 
+                                      else
+                                        echo "<div style='color: PaleGoldenRod;'>{$this->translate('Seller sent')} (2/6)</div>";
+                                      break;
+                case "inprogress"  : echo "<div style='color: PaleGreen;'>{$this->translate('Upheels received')} (3/6)</div>";
+                                      break;
+                case "approved"    : echo "<div style='color: LightGreen;'>{$this->translate('Upheels passed')} (4/6)</div>"; 
+                                      break;
+                case "admin_sent"  : echo "<div style='color: LimeGreen;'>{$this->translate('Upheels sent')} (5/6)</div>"; 
+                                      break;
+                case "failed"      : echo "<div style='color: lightCoral;'>{$this->translate('Failed')} (6/6)</div>"; 
+                                      break;
+                case "sold"        : echo "<div style='color: Green;'>{$this->translate('Complete')} (6/6)</div>"; 
+                                      break;
+                case "return"      : echo "<div style='color: orange;'>{$this->translate('Return')} (6/6)</div>"; 
+                                      break;
+              } ?>
+            </td>
             <td style="font-size: 0.9em">
                 <?php if($item->user_id == $viewerId and ( $now - strtotime($item->date) < $threeDays ) ) : ?>
                   <?=$this->htmlLink(array('route' => 'marketplace_general', 

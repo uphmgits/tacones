@@ -44,7 +44,7 @@ class Marketplace_Widget_TopbannerController extends Engine_Content_Widget_Abstr
                   case 3:  $this->view->prevBanner    = 'marketplace_home_header.jpg';   
                            $this->view->currentBanner = 'marketplace_cloth_header.jpg';
                            $this->view->nextBanner    = 'marketplace_shoes_header.jpg'; 
-                           $this->view->prevUrl = $this->view->url(array(), 'marketplace_browse');
+                           $this->view->prevUrl = $this->view->url(array('category' => '0'), 'marketplace_browse');
                            $this->view->nextUrl = $this->view->url(array('category' => '1'), 'marketplace_browse');
                            break;
                   // shoes
