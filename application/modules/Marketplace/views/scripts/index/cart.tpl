@@ -85,10 +85,6 @@
                       <option value="<?=$i?>" <?php if( $i == $cartitem['count']) echo "selected"?>><?=$i?></option>
                     <?php endfor;?>
                   </select>
-                  <?php/*<input type="text" id="cart-count-<?=$cartitem['marketplace_id']?>" 
-                                      <?php /*onChange="changeQuantity(this, <?=$cartitem['marketplace_id']?>);" ?>
-                                      onkeyup="changeQuantity(this, <?=$cartitem['marketplace_id']?>);"
-                                      value="<?=$cartitem['count']?>" />*/?>
                 </div>
               </td>
             </tr></tbody>

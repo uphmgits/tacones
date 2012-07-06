@@ -192,7 +192,11 @@ function loginAsUser(id) {
             <td style="font-size: 0.9em">
                 <?php if($item->user_id == $viewerId and 
                           ( $now - strtotime($item->date) < $threeDays ) and 
-                          ( $item->status != 'canceled' and $item->status != 'cancelrequest' and strripos($item->status, 'done') === false )
+                          ( $item->status != 'canceled' and 
+                            $item->status != 'failed' and 
+                            $item->status != 'cancelrequest' and
+                            strripos($item->status, 'done') === false 
+                          )
                          ) : ?>
                   <?=$this->htmlLink(array('route' => 'marketplace_general', 
                                              'action' => 'canceling',

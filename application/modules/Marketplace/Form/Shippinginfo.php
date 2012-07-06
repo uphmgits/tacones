@@ -77,12 +77,12 @@ class Marketplace_Form_Shippinginfo extends Engine_Form
     ));
   
     // Init submit
-    $this->addElement('Button', 'submit', array(
+    /*$this->addElement('Button', 'submit', array(
       'label' => 'Next',
       'type' => 'submit',
       'ignore' => true,
       'tabindex' => 8,
-    ));
+    ));*/
   }
 
 }
