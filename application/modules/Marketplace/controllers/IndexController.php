@@ -1724,9 +1724,11 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $order = $orderTable->select()
                             ->where("order_id = {$orderId}")
                             ->where("user_id = {$viewer->getIdentity()}")
+                            ->where("status <> 'canceled' AND status <> 'cancelrequest' AND status NOT LIKE ?", "%done%")
                             ->query()
                             ->fetch()
         ;
+
         $this->view->error = false;
         $threeDays = 60 * 60 * 24 * 3; 
 
@@ -2268,6 +2270,49 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         if( $marketplace ) {
             $marketplace->updateLikes();
         }
+        die();
+    }
+
+    public function ajaxCountUpdateAction() 
+    {
+        $cartId = (int)$this->_getParam('id', 0);
+        $count = (int)$this->_getParam('count', 0);
+        $viewerId = Engine_Api::_()->user()->getViewer()->getIdentity();
+
+        if( !$cartId or !$count or !$viewerId) die();
+
+        $cartTable = Engine_Api::_()->getDbTable('cart', 'marketplace');
+        $cartTableName = $cartTable->info('name');
+        $item = $cartTable->select()->where("cart_id = {$cartId} AND user_id = {$viewerId}")->query()->fetch();
+
+        if( !$item ) die();
+    
+        $db = $cartTable->getAdapter();
+        $db->beginTransaction();
+        try {
+            $cartTable->update(array('count' => $count), "cart_id = {$cartId}");
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+        }
+
+        $marketplacesTable = Engine_Api::_()->getDbTable('marketplaces', 'marketplace');
+        $marketplacesTableName = $marketplacesTable->info('name');
+        $sum = $cartTable->select()
+                          ->from($cartTableName, "SUM({$marketplacesTableName}.price * {$cartTableName}.count) as total")
+                          ->setIntegrityCheck(false)
+                          ->join($marketplacesTableName, "{$cartTableName}.marketplace_id = {$marketplacesTableName}.marketplace_id", null)
+                          ->where("{$cartTableName}.user_id = {$viewerId}")
+                          ->query()
+                          ->fetchColumn()
+        ;
+        $sh = Engine_Api::_()->marketplace()->getInspectionFee($sum);
+        $result = array('count' => "{$count}", 
+                         'subtotal' => "$" . number_format($sum, 2),
+                         'sh' => "$" . number_format($sh, 2), 
+                         'total' => "$" . number_format($sum + $sh, 2)
+                        );
+        echo json_encode($result);
         die();
     }
 
