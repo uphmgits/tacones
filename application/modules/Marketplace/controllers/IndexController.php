@@ -844,10 +844,11 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       Engine_Api::_()->getApi('mail', 'core')->sendRaw($mail);
     }
 
-    public function paymentreturnAction() {
-
+    public function paymentreturnAction() 
+    {
         $viewer = $this->_helper->api()->user()->getViewer();
 		    $this->view->result = $this->_getParam('result', 'success');
+        if( !$viewer->getIdentity()) return $this->_helper->redirector->gotoRoute(array(), 'marketplace_browse');
 		
         $mids = $this->_getParam('mids');
         $mids_ids = explode('_', $mids);
@@ -856,66 +857,62 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 
 		    if(Engine_Api::_()->marketplace()->cartIsActive()){
 			    $cartTable  = Engine_Api::_()->getDbTable('cart', 'marketplace');
-
-          if( $viewer and $viewer->getIdentity()) {
-			        $select = $cartTable->select()
-				        ->where('user_id = ?', $viewer->getIdentity())
-				        ->limit(1);
-			        $this->view->cartContent = $cartTable->fetchRow($select);
-
-          } else {
-              $cartTable->deleteCookieCartItemArray( $mids_ids );
-              $this->view->cartContent = $cartTable->getCookieCart();
-          }
+	        $select = $cartTable->select()
+		        ->where('user_id = ?', $viewer->getIdentity())
+		        ->limit(1);
+	        $this->view->cartContent = $cartTable->fetchRow($select);
 		    } 
         else $this->view->cartContent = array();
 
-        $facebookTable = Engine_Api::_()->getDbtable('facebook', 'user');
-        $facebook = $facebookApi = $facebookTable->getApi();
+        if( $viewer->post_to_fb ) :
+            $facebookTable = Engine_Api::_()->getDbtable('facebook', 'user');
+            $facebook = $facebookApi = $facebookTable->getApi();
 
-        $this->view->fbconnect = $fbconnect = ($facebookApi and $facebookApi->getUser()) ? true : false;
+            $this->view->fbconnect = $fbconnect = ($facebookApi and $facebookApi->getUser()) ? true : false;
 
-        if( $request = $this->getRequest()->getPost() ) {
-
-          if( isset($request['fbconnect']) ) header("Location:{$facebook->getLoginUrl(array('req_perms' => 'email,offline_access', 'scope' => 'publish_stream'))}");
-          if( isset($request['fbpost']) ) :
-              if( empty($mids_ids) ) return $this->_helper->redirector->gotoRoute(array(), 'marketplace_extended');
+            if( !$fbconnect ) header("Location:{$facebook->getLoginUrl(array('req_perms' => 'email,offline_access', 'scope' => 'publish_stream'))}");
+            else {
+              if( empty($mids_ids) ) return $this->_helper->redirector->gotoRoute(array(), 'marketplace_browse');
               $marketplace = Engine_Api::_()->getItem('marketplace', (int)$mids_ids[0]);
-              if( !$marketplace ) return $this->_helper->redirector->gotoRoute(array(), 'marketplace_extended');
+              if( !$marketplace ) return $this->_helper->redirector->gotoRoute(array(), 'marketplace_browse');
 
+              $ordersTable = Engine_Api::_()->getDbTable('orders', 'marketplace');
+              $lastOrder = $ordersTable->select()
+                                    ->where("marketplace_id = {$marketplace->getIdentity()}")
+                                    ->where("user_id = {$viewer->getIdentity()}")
+                                    ->where("posted_to_fb = 0")
+                                    ->order('order_id DESC')
+                                    ->query()
+                                    ->fetch()
+              ;
+              if( !empty($lastOrder) ) {
+                  try {
+                    $url    = 'http://' . $_SERVER['HTTP_HOST'] . $marketplace->getHref();
+                    $picUrl = 'http://' . $_SERVER['HTTP_HOST'] . $marketplace->getPhotoUrl('thumb.icon');
+                    $name   = $marketplace->getTitle();
+                    $desc   = $marketplace->getDescription();
 
-              try {
-                //$fb_uid = $facebookTable->find($viewer->getIdentity())->current();
-                if( $fbconnect ) {
-                    //$fb_uid and $fb_uid->facebook_uid and $fbconnect and $facebookApi->getUser() == $fb_uid->facebook_uid ) {
+                    // include the site name with the post:
+                    $name = Engine_Api::_()->getApi('settings', 'core')->core_general_site_title . ": $name";
 
-                      $url    = 'http://' . $_SERVER['HTTP_HOST'] . $marketplace->getHref();
-                      $picUrl = 'http://' . $_SERVER['HTTP_HOST'] . $marketplace->getPhotoUrl('thumb.icon');
-                      $name   = $marketplace->getTitle();
-                      $desc   = $marketplace->getDescription();
+                    $fb_data = array(
+                      'message' => $this->view->translate('I just made ​​a purchase on the %s', $_SERVER['HTTP_HOST']),
+                      'link' => $url,
+                      'name' => $name,
+                      'description' => $desc,
+                    );
 
-                      // include the site name with the post:
-                      $name = Engine_Api::_()->getApi('settings', 'core')->core_general_site_title . ": $name";
+                    if( $picUrl ) $fb_data['picture'] = $picUrl;
 
-                      $fb_data = array(
-                        'message' => $this->view->translate('I just made ​​a purchase on the %s', $_SERVER['HTTP_HOST']),
-                        'link' => $url,
-                        'name' => $name,
-                        'description' => $desc,
-                      );
-
-                      if( $picUrl ) $fb_data['picture'] = $picUrl;
-
-                      $res = $facebookApi->api('/me/feed', 'POST', $fb_data);
-                      return $this->_helper->redirector->gotoRoute(array(), 'marketplace_extended');
+                    $res = $facebookApi->api('/me/feed', 'POST', $fb_data);
+                    $ordersTable->update(array('posted_to_fb' => 1), "user_id = {$viewer->getIdentity()}");
+                  
+                  } catch( Exception $e ) {
+                    // Silence
+                  }
                 }
-              
-              } catch( Exception $e ) {
-                // Silence
-              }
-          endif;
-        }
-  
+            }
+        endif;
     }
 
     // USER SPECIFIC METHODS
