@@ -35,6 +35,20 @@
       });
       request.send();
   }
+  function changeQuantity(el, id) {
+      var url = "<?=$this->url(array('action' => 'ajax-count-update'), 'marketplace_general', true)?>";
+      var request = new Request.JSON({
+        url : url,
+        data : { 'id' : id, 'count': el.get('value')},
+        onSuccess : function(responseJSON, responseText) {
+          el.set('value', responseJSON.count);
+          $("cart-subtotal").innerHTML = responseJSON.subtotal;
+          $("cart-sh").innerHTML = responseJSON.sh;
+          $("cart-total").innerHTML = responseJSON.total;
+        }
+      });
+      request.send();
+  }
 </script>
 
 <?=$this->content()->renderWidget('marketplace.topbanner', array('pageName' => 'cart'))?>
@@ -63,7 +77,15 @@
               <td><?=$marketplace->getTitle()?></td>
               <td width="20">
                 $<?=number_format($marketplace->price, 2)?>
-                <div style="color:#93C;text-transform:none;">x<?=$cartitem['count']?></div>
+                <div style="color:#93C;text-transform:none;">
+                  x
+                  <select id="cart-count-<?=$cartitem['marketplace_id']?>" onChange="changeQuantity(this, <?=$cartitem['cart_id']?>);">
+                    <?php $maxCount = ($cartitem['count'] > 20) ? $cartitem['count'] : 20; ?>
+                    <?php for($i = 1; $i <= $maxCount; $i++) : ?>
+                      <option value="<?=$i?>" <?php if( $i == $cartitem['count']) echo "selected"?>><?=$i?></option>
+                    <?php endfor;?>
+                  </select>
+                </div>
               </td>
             </tr></tbody>
           </table>
@@ -103,16 +125,16 @@
   <hr/>
   <div class="cart-total-container"> 
     <span><?=$this->translate('SUBTOTAL')?></span>
-    <span>$<?=number_format($total_amount, 2);?></span>
+    <span id="cart-subtotal">$<?=number_format($total_amount, 2);?></span>
   </div>
   <div class="cart-total-container"> 
     <span><?=$this->translate('SHIPPING AND HANDLING')?></span>
-    <span>$<?=number_format($inspection_fee, 2)?></span>
+    <span id="cart-sh">$<?=number_format($inspection_fee, 2)?></span>
   </div>
   <hr/>
-  <div class="cart-total-container"> 
+  <div class="cart-total-container" > 
     <span><?=$this->translate('TOTAL')?></span>
-    <span>$<?=number_format($total_amount_full, 2);?></span>
+    <span id="cart-total">$<?=number_format($total_amount_full, 2);?></span>
     <?=$this->htmlLink(array('route' => 'marketplace_general', 'action' => 'shippinginfo'), $this->translate('checkout'), array('class' => 'button'))?>
   </div>
 

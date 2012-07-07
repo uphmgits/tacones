@@ -17,7 +17,7 @@
 		<?=$this->translate('Error due payment.')?>
 <?php else : ?>
 		<?=$this->translate('Success. Thank you for your order.')?>
-    <?php if( $this->fbconnect ) : ?>
+    <?php /*if( $this->fbconnect ) : ?>
       <form action="" method="post">
         <button type="submit" name="fbpost"><?=$this->translate('Add this purchase on facebook.')?></button>
       </form>
@@ -26,7 +26,7 @@
       <form action="" method="post">
         <button type="submit" name="fbconnect"><?=$this->translate('Connect to Facebook.')?></button>
       </form>
-    <?php endif; ?>
+    <?php endif;*/ ?>
 <?php endif; ?>
 <br/>    
 

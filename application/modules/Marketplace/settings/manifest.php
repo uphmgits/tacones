@@ -103,7 +103,7 @@ return array(
         'action' => 'index',
       ),
       'reqs' => array(
-        'action' => '(index|ajaxlist|addtocart|deletefromcart|cart|checkout|shippinginfo|canceling|client-shipping-service|set-tracking-number|view-tracking-info)',
+        'action' => '(index|ajaxlist|addtocart|deletefromcart|cart|checkout|shippinginfo|canceling|client-shipping-service|set-tracking-number|view-tracking-info|ajax-count-update)',
       )
     ),
     // Public
@@ -219,7 +219,7 @@ return array(
         'module' => 'marketplace',
         'controller' => 'index',
         'action' => 'edit',
-        'category' => 0
+        'category' => null
       ),
       'reqs' => array(
         'category' => '\d+',

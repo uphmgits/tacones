@@ -181,6 +181,8 @@ function loginAsUser(id) {
                                       break;
                 case "failed"      : echo "<div style='color: lightCoral;'>{$this->translate('Failed')} (6/6)</div>"; 
                                       break;
+                case "canceled"    : echo "<div style='color: lightCoral;'>{$this->translate('Canceled')} (6/6)</div>"; 
+                                        break;
                 case "sold"        : echo "<div style='color: Green;'>{$this->translate('Complete')} (6/6)</div>"; 
                                       break;
                 case "return"      : echo "<div style='color: orange;'>{$this->translate('Return')} (6/6)</div>"; 
@@ -188,7 +190,14 @@ function loginAsUser(id) {
               } ?>
             </td>
             <td style="font-size: 0.9em">
-                <?php if($item->user_id == $viewerId and ( $now - strtotime($item->date) < $threeDays ) ) : ?>
+                <?php if($item->user_id == $viewerId and 
+                          ( $now - strtotime($item->date) < $threeDays ) and 
+                          ( $item->status != 'canceled' and 
+                            $item->status != 'failed' and 
+                            $item->status != 'cancelrequest' and
+                            strripos($item->status, 'done') === false 
+                          )
+                         ) : ?>
                   <?=$this->htmlLink(array('route' => 'marketplace_general', 
                                              'action' => 'canceling',
                                              'order_id' => $item->order_id,

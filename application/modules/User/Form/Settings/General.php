@@ -103,6 +103,11 @@ class User_Form_Settings_General extends Engine_Form
       ));
     }
 
+    $this->addElement('Checkbox', 'post_to_fb', array(
+      'label' => 'Post your purchase to FB',
+      'value' => $this->_item->post_to_fb,
+    ));
+
     
     // Init Twitter
     $twitter_enable = Engine_Api::_()->getApi('settings', 'core')
