@@ -34,7 +34,7 @@
 			 <label class="label" for="email_signin">Email Address</label> 
 			
 			<input type="text" value="email address" onfocus="if(this.value == 'email address') { this.value = ''; }" name="email">
-			<br/>
+			<br/><br/>
 			<label class="label" for="password_signin">Password</label>
 			
 			<input type="password" name="password">

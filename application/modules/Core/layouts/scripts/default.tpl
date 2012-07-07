@@ -188,6 +188,12 @@
   
 </head>
 <body id="global_page_<?php echo $identity ?>">
+<?php 
+    	if($this->isWelcome){
+    		echo $this->layout()->content;
+    		exit; 
+    	}
+   ?>
   <div id="global_header">
     <?php echo $this->content('header') ?>
   </div>

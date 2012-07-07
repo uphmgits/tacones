@@ -105,7 +105,7 @@ return array(
         'action' => 'browse'
       ),
       'reqs' => array(
-        'action' => '(home|browse)',
+        'action' => '(home|browse|welcome)',
       )
     ),
 

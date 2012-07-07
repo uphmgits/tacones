@@ -41,6 +41,11 @@ class User_IndexController extends Core_Controller_Action_Standard
         ->setEnabled()
         ;
   }
+  
+  public function welcomeAction() {
+  	$this->view->isWelcome = true;
+  	return true;
+  }
 
   public function browseAction()
   {

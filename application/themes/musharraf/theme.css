@@ -3352,3 +3352,149 @@ div.ebayimport-review {
 }
 
 
+#welcome_container
+{
+	
+	background: url("/imgs/bg-2.png") no-repeat scroll 100% 0 #000000;
+  //width: $theme_content_width;
+  margin: 0 auto;
+    width: 1172px;
+    color: #000000;
+    font-family: condense,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+}
+/*
+#welcome_container div
+{
+	
+	
+    //color: #000000;
+    font-family: condense,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+}
+*/
+#welcome_wrapper {
+	height: 1120px;
+    margin: 0 auto;
+    width: 1000px;
+}
+#welcome_header-wrapper {
+    padding: 1px;
+    width: 100%;
+}
+#welcome_logo {
+    background: url("/imgs/logo.png") no-repeat scroll 0 0 transparent;
+    height: 116px;
+    margin: 30px 0 0;
+    text-indent: -9999px;
+    width: 193px;
+}
+
+
+#welcome_header-wrapper #welcome-note {
+    float: left;
+    margin: -7px 0 0 55px;
+    width: 400px;
+}
+.welcome-note {
+	float: left;
+    margin: -7px 0 0 55px;
+    width: 400px;
+}
+#welcome-note #email {
+    padding: 1px;
+    position: relative;
+}
+.welcome_invite_email {
+	padding: 1px;
+    position: relative;
+}
+#welcome-note form input[type="text"] {
+    background-color: #000000;
+    border: 1px solid #383838;
+    color: #868686;
+    font-family: condense,Arial;
+    height: 23px;
+    margin: 0 0 0 8px;
+    padding-left: 3px;
+    width: 160px;
+}
+.welcome-note form input[type="text"] {
+    background-color: #000000;
+    border: 1px solid #383838;
+    color: #868686;
+    font-family: condense,Arial;
+    height: 23px;
+    margin: 0 0 0 8px;
+    padding-left: 3px;
+    width: 160px;
+}
+.welcome-note form input[type="password"] {
+    //background-color: #000000;
+    border: 1px solid #383838;
+    color: #868686;
+    font-family: condense,Arial;
+    height: 23px;
+    margin: 0 0 0 8px;
+    padding-left: 3px;
+    width: 160px;
+}
+#welcome-note .label {
+    color: #FEFAFA;
+    font-family: condense;
+    font-size: 18px;
+}
+.welcome-note .label {
+    color: #FEFAFA;
+    font-family: condense;
+    font-size: 18px;
+    width: 140px;
+    border-width: 1px;
+    display: block;
+   float: left;
+    
+}
+#welcome-note .label-thanks {
+    color: #FEFAFA;
+    font-family: condense;
+    font-size: 16px;
+}
+#welcome-note form input[type="image"] {
+    cursor: pointer;
+    height: 17px;
+    position: absolute;
+    right: 82px;
+    text-indent: -9999px;
+    top: 4px;
+    width: 8px;
+}
+.welcome-note form input[type="image"] {
+    cursor: pointer;
+    height: 17px;
+    //position: absolute;
+    right: 82px;
+    text-indent: -9999px;
+    top: 4px;
+    width: 8px;
+}
+#welcome-note .welcome-para {
+    color: #868686;
+    font-family: condense-light,Arial;
+    font-size: 15px;
+    line-height: 1.6em;
+    margin: 13px 0 0;
+    width: 370px;
+}
+.welcome-note .welcome-para {
+    color: #868686;
+    font-family: condense-light,Arial;
+    font-size: 15px;
+    line-height: 1.6em;
+    margin: 13px 0 0;
+    width: 370px;
+}
+
+.welcome_signin_label {
+	width: 116px;
+	border-width: 1px;
+}
