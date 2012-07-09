@@ -97,7 +97,7 @@
           </div>
 
           <div class='marketplaces_browse_options'>
-            <a href='<?php echo $this->url(array('marketplace_id' => $item->marketplace_id), 'marketplace_edit', true) ?>' class='buttonlink icon_marketplace_edit'><?php echo $this->translate('Edit Listing');?></a>
+            <a href="<?=$this->url(array('marketplace_id' => $item->marketplace_id, 'category' => $item->category_id), 'marketplace_edit', true) ?>" class='buttonlink icon_marketplace_edit'><?php echo $this->translate('Edit Listing');?></a>
             <?php if( $this->allowed_upload ): ?>
               <?php echo $this->htmlLink(array(
                   'route' => 'marketplace_extended',
