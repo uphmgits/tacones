@@ -85,10 +85,12 @@ function loginAsUser(id) {
 <div class='admin_results'>
   <div>
     <?php $reportCount = $this->paginator->getTotalItemCount() ?>
-    <?php echo $this->translate(array("%s report", "%s reports", $reportCount), ($reportCount)) ?>
+    <?=$this->translate(array("%s report.", "%s reports.", $reportCount), ($reportCount)) ?>
+    <?=$this->translate("All prices a specified taking into shipping and handling cost (%s%%)", 
+                         Engine_Api::_()->marketplace()->getInspectionFee(100));?>
   </div>
   <div>
-    <?php echo $this->paginationControl($this->paginator); ?>
+    <?=$this->paginationControl($this->paginator); ?>
   </div>
 </div>
 

@@ -39,7 +39,8 @@
       <div class='marketplaces_browse_info_date'></div>
 
       <div class='marketplaces_browse_info_blurb' style="font-size: 11px; color: #999;">
-        <span><?=$this->translate('Price')?>:</span> <span>$<?php echo $item->price; ?></span>
+        <span><?=$this->translate('Price')?>:</span>&nbsp;
+        <span>$<?=$item->price + Engine_Api::_()->marketplace()->getInspectionFee($item->price)?></span>
         &nbsp;&nbsp;
         <br />
         <div class="more-seller-items">

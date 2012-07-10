@@ -16,12 +16,12 @@
  * @copyright  Copyright 2010 
  * * 
  */
-class Marketplace_AdminManageController extends Core_Controller_Action_Admin
+class Marketplace_AdminCustomListController extends Core_Controller_Action_Admin
 {
   public function indexAction()
   {
     $this->view->navigation = $navigation = Engine_Api::_()->getApi('menus', 'core')
-      ->getNavigation('marketplace_admin_main', array(), 'marketplace_admin_main_manage');
+      ->getNavigation('marketplace_admin_main', array(), 'marketplace_admin_main_customlist');
 
     $page=$this->_getParam('page',1);
     $this->view->paginator = Engine_Api::_()->marketplace()->getMarketplacesPaginator(array(
@@ -66,7 +66,7 @@ class Marketplace_AdminManageController extends Core_Controller_Action_Admin
     }
 
     // Output
-    $this->renderScript('admin-manage/delete.tpl');
+    $this->renderScript('admin-custom-list/delete.tpl');
   }
 
   public function deleteselectedAction()
@@ -88,7 +88,7 @@ class Marketplace_AdminManageController extends Core_Controller_Action_Admin
     }
 
   }
-  /*public function reportsAction() {
+  public function reportsAction() {
 
 	  if( !$this->_helper->requireUser()->isValid() ) return;
 	  $this->view->navigation = $navigation = Engine_Api::_()->getApi('menus', 'core')
@@ -166,7 +166,7 @@ class Marketplace_AdminManageController extends Core_Controller_Action_Admin
     // Make paginator
     $this->view->paginator = $paginator = Zend_Paginator::factory($select);
     $this->view->paginator = $paginator->setCurrentPageNumber( $page );
-  }*/
+  }
 
 
 }

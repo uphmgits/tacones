@@ -76,7 +76,7 @@
             <tbody><tr>
               <td><?=$marketplace->getTitle()?></td>
               <td width="20">
-                $<?=number_format($marketplace->price, 2)?>
+                $<?=number_format($marketplace->price + Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price), 2)?>
                 <div style="color:#93C;text-transform:none;">
                   x
                   <select id="cart-count-<?=$cartitem['marketplace_id']?>" onChange="changeQuantity(this, <?=$cartitem['cart_id']?>);">
