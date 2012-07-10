@@ -65,15 +65,18 @@ class Marketplace_Form_Create extends Engine_Form
       ),
     ));
 
+    $sh = Engine_Api::_()->marketplace()->getInspectionFee(100);
     $this->addElement('Text', 'price', array(
       'label' => 'Price',
       'allowEmpty' => false,
+      'description' => "Considering the cost of shipping and handling the final price will be increased for {$sh}%",
       'required' => true,
       'validators' => array(
         array('NotEmpty', true),
     		array('Float', true),
       ),
     ));
+    $this->price->getDecorator('Description')->setOptions(array('placement' => 'APPEND'));
 
     $this->addElement('Textarea', 'body', array(
       'label' => 'Description',

@@ -106,7 +106,8 @@
                             $this->translate('Post New Item')
                           )?>
         <?=$this->htmlLink( array('route' => 'marketplace_edit', 
-                                 'marketplace_id' => $this->marketplace->getIdentity()),
+                                    'marketplace_id' => $this->marketplace->getIdentity(),
+                                    'category' => 0),
                             $this->translate('Edit')
                           )?>
 

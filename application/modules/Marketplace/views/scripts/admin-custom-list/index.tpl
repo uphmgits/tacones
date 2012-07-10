@@ -78,6 +78,11 @@
             array('route' => 'default', 'module' => 'marketplace', 'controller' => 'admin-manage', 'action' => 'delete', 'id' => $item->marketplace_id),
             $this->translate("delete"),
             array('class' => 'smoothbox')) ?>
+          | 
+          <?php echo $this->htmlLink(
+            array('route' => 'default', 'module' => 'marketplace', 'controller' => 'admin-manage', 'action' => 'delete', 'id' => $item->marketplace_id),
+            $this->translate("hide"),
+            array('class' => 'smoothbox')) ?>
         </td>
       </tr>
     <?php endforeach; ?>

@@ -277,7 +277,9 @@ endif; ?>
           <table class="product-title-right">
             <tbody><tr>
               <td><?=$this->marketplace->getTitle()?></td>
-              <td width="70">$<?=number_format( (($this->marketplace->price - $this->discount_sum) >= 0?$this->marketplace->price - $this->discount_sum:0), 2)?></td>
+              <td width="70">
+                $<?=number_format($this->marketplace->price + Engine_Api::_()->marketplace()->getInspectionFee($this->marketplace->price), 2)?>
+              </td>
             </tr></tbody>
           </table>
            

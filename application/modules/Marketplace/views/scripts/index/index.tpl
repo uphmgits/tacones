@@ -350,7 +350,8 @@ span.like:hover{
               <div class='marketplaces_browse_info_date'></div>
 
               <div class='marketplaces_browse_info_blurb' style="font-size: 11px; color: #999;">
-                <span><?=$this->translate('Price')?>:</span> <span>$<?php echo $item->price; ?></span>
+                <span><?=$this->translate('Price')?>:</span>&nbsp;
+                <span>$<?=$item->price + Engine_Api::_()->marketplace()->getInspectionFee($item->price)?></span>
                 &nbsp;&nbsp;
                
                 <?php // echo substr(strip_tags($item->body), 0, 90); if (strlen($item->body)>89) echo "..."; ?>              

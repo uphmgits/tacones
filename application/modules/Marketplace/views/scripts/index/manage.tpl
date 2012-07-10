@@ -86,8 +86,9 @@
                 <?php endif;?>
               </h3>
             </div>
-            <div class='marketplaces_browse_info_blurb'>
-              <span style="font-weight:bold;font-size:12px;">Price:</span> <span style="font-size:12px;">$<?php echo $item->price; ?></span>
+            <div class='marketplaces_browse_info_blurb' style="font-size: 11px; color: #999;">
+              <span><?=$this->translate('Price')?>:</span>&nbsp;
+              <span>$<?=$item->price?> ($<?=$item->price + Engine_Api::_()->marketplace()->getInspectionFee($item->price)?>)</span>
               <br />
               <?php
                 // Not mbstring compat
@@ -97,7 +98,7 @@
           </div>
 
           <div class='marketplaces_browse_options'>
-            <a href="<?=$this->url(array('marketplace_id' => $item->marketplace_id, 'category' => $item->category_id), 'marketplace_edit', true) ?>" class='buttonlink icon_marketplace_edit'><?php echo $this->translate('Edit Listing');?></a>
+            <a href="<?=$this->url(array('marketplace_id' => $item->marketplace_id, 'category' => $item->category_id), 'marketplace_edit', true) ?>" class='buttonlink icon_marketplace_edit'><?=$this->translate('Edit Listing')?></a>
             <?php if( $this->allowed_upload ): ?>
               <?php echo $this->htmlLink(array(
                   'route' => 'marketplace_extended',

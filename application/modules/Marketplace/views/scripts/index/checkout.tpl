@@ -47,7 +47,7 @@
               <tbody><tr>
                 <td><?=$marketplace->getTitle()?></td>
                 <td width="20">
-                  $<?=number_format($marketplace->price, 2)?>
+                  $<?=number_format($marketplace->price + Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price), 2)?>
                   <div style="color:#93C;text-transform:none;">x<?=$cartitem['count']?></div>
                 </td>
               </tr></tbody>
