@@ -1,4 +1,31 @@
+<?php 
 
+$js2 = '( function($) {
+
+	$(document).ready( function() {
+	//alert("ready");
+		$("#signin").validate({
+			rules: {	
+				email: {
+					required: true,
+					email: true
+				}
+			},
+			messages: {
+				email: {
+					email:    "valid email needed",
+					required: "valid email needed"
+				}
+			},
+			errorClass: "signin_error",
+			
+		});
+    } ) })( jQuery )';
+
+
+$this->headScript()->prependScript($js2);
+ 
+?>
 <div id="welcome_container">
 	<div id="welcome_wrapper">
 		<div id="welcome_header-wrapper">
@@ -6,7 +33,7 @@
 		<div id="header">
 			<div class="welcome-note">
 				<div class="email">
-					<form action="go.php" method="post">
+					<form name="request" action="go.php" method="post">
 					<label class="label" for="email">Request invitation</label>
 					<input type="text" value="email address" onfocus="if(this.value == 'email address') { this.value = ''; }" name="email">
 					<input type="image" border="0" src="/imgs/submit-bg.png" name="submit-invite">
@@ -30,12 +57,13 @@
 		<div class="email">
 		<h2>Already an Upheeler?</h2><h2>Simply Sign-In to begin your Upheeling!</h2>
 		<br/>
-			<form name="welcome_signin" action="/login" method="post">
-			 <label class="label" for="email_signin">Email Address</label> 
+			<form id = "signin" name="signin" action="/login" method="post">
+			 <label id="email_label" class="label" for="email">Email Address</label> 
 			
 			<input type="text" value="email address" onfocus="if(this.value == 'email address') { this.value = ''; }" name="email">
+			<!-- <label for="email" class="error" generated="true"></label>   -->
 			<br/><br/>
-			<label class="label" for="password_signin">Password</label>
+			<label class="label" for="password">Password</label>
 			
 			<input type="password" name="password">
 			

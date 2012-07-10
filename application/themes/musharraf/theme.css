@@ -3498,3 +3498,9 @@ div.ebayimport-review {
 	width: 116px;
 	border-width: 1px;
 }
+.signin_error {
+	dosplay: block;
+	color: red;
+	float: left;
+    //margin-left: 116px;
+}
