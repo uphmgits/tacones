@@ -23,6 +23,15 @@ class Marketplace_AdminManageController extends Core_Controller_Action_Admin
     $this->view->navigation = $navigation = Engine_Api::_()->getApi('menus', 'core')
       ->getNavigation('marketplace_admin_main', array(), 'marketplace_admin_main_manage');
 
+    $viewerId = Engine_Api::_()->user()->getViewer()->getIdentity();
+    $customlistTable = Engine_Api::_()->getDbTable('customlist', 'marketplace');
+    $this->view->mylist = $customlistTable->select()
+                              ->from($customlistTable->info('name'), "marketplace_id")
+                              ->where("user_id = {$viewerId}")
+                              ->query()
+                              ->fetchAll(Zend_Db::FETCH_COLUMN)
+    ;
+
     $page=$this->_getParam('page',1);
     $this->view->paginator = Engine_Api::_()->marketplace()->getMarketplacesPaginator(array(
       'orderby' => 'marketplace_id',
