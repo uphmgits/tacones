@@ -16,6 +16,14 @@
 
   <h2><?=$this->translate('ORDER REVIEW')?></h2>
 
+  <style>
+    table.checkout-info-table th,
+    table.checkout-info-table td {
+        width: 20%;
+        word-wrap: break-word;
+        overflow: hidden;
+    }
+  </style>
   <table class="checkout-info-table" width="100%">
     <tr>
       <th><?=$this->translate('Name')?></th>

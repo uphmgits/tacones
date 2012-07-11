@@ -16,7 +16,11 @@ class Marketplace_Form_Shippinginfo extends Engine_Form
       'allowEmpty' => false,
       'label' => '*Name',
       'filters' => array(
+        'StripTags',
         'StringTrim',
+        new Engine_Filter_HtmlSpecialChars(),
+        new Engine_Filter_EnableLinks(),
+        new Engine_Filter_Censor(),
       ),
       'tabindex' => 1,
       'autofocus' => 'autofocus',
@@ -40,7 +44,11 @@ class Marketplace_Form_Shippinginfo extends Engine_Form
       'allowEmpty' => false,
       'label' => '*Billing Info',
       'filters' => array(
+        'StripTags',
         'StringTrim',
+        new Engine_Filter_HtmlSpecialChars(),
+        new Engine_Filter_EnableLinks(),
+        new Engine_Filter_Censor(),
       ),
       'tabindex' => 3,
     ));
@@ -50,7 +58,11 @@ class Marketplace_Form_Shippinginfo extends Engine_Form
       'allowEmpty' => false,
       'label' => '*Shipping Info',
       'filters' => array(
+        'StripTags',
         'StringTrim',
+        new Engine_Filter_HtmlSpecialChars(),
+        new Engine_Filter_EnableLinks(),
+        new Engine_Filter_Censor(),
       ),
       'tabindex' => 4,
     ));
@@ -64,14 +76,22 @@ class Marketplace_Form_Shippinginfo extends Engine_Form
     $this->addElement('Text', 'phone', array(
       'label' => 'Home Phone',
       'filters' => array(
+        'StripTags',
         'StringTrim',
+        new Engine_Filter_HtmlSpecialChars(),
+        new Engine_Filter_EnableLinks(),
+        new Engine_Filter_Censor(),
       ),
       'tabindex' => 6,
     ));
     $this->addElement('Text', 'business_phone', array(
       'label' => 'Business Phone',
       'filters' => array(
+        'StripTags',
         'StringTrim',
+        new Engine_Filter_HtmlSpecialChars(),
+        new Engine_Filter_EnableLinks(),
+        new Engine_Filter_Censor(),
       ),
       'tabindex' => 7,
     ));

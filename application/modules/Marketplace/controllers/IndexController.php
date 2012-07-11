@@ -1745,7 +1745,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
                     $this->view->error = true;
                     return;
                   }
-                  $orderTable->update(array('status' => 'cancelrequest', 'cancel_reason' => $reason), "order_id = $orderId");
+                  $orderTable->update(array('status' => 'cancelrequest', 'cancel_reason' => strip_tags($reason)), "order_id = $orderId");
                 } else return;
             }
         }

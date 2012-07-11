@@ -15,7 +15,11 @@ class Marketplace_Form_Settracking extends Engine_Form
       'tabindex' => 1,
       'autofocus' => 'autofocus',
       'filters' => array(
+        'StripTags',
         'StringTrim',
+        new Engine_Filter_HtmlSpecialChars(),
+        new Engine_Filter_EnableLinks(),
+        new Engine_Filter_Censor(),
       ),
       'validators' => array(
           array('StringLength', false, array(0, 64)),
@@ -26,7 +30,11 @@ class Marketplace_Form_Settracking extends Engine_Form
       'label' => 'UPS tracking number',
       'tabindex' => 2,
       'filters' => array(
+        'StripTags',
         'StringTrim',
+        new Engine_Filter_HtmlSpecialChars(),
+        new Engine_Filter_EnableLinks(),
+        new Engine_Filter_Censor(),
       ),
       'validators' => array(
           array('StringLength', false, array(6, 64)),
