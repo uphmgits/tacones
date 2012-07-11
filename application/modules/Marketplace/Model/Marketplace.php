@@ -350,5 +350,13 @@ class Marketplace_Model_Marketplace extends Core_Model_Item_Abstract
     parent::_delete();
   }
 
+  public function isImported() {
+  	if(!empty($this->entry_source_job_id)) {
+  		return true;
+  	}
+  	else {
+  		return false;
+  	}
+  }
     
 }

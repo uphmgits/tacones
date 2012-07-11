@@ -75,6 +75,17 @@
 <?php endif; ?>
 
  <?php if( !$this->viewer->getIdentity()) :?> 
+   <div id="mini-nav-container">
+     <ul id="mini-nav-ul" >
+    <?php foreach( $this->navigation_mini as $item ): ?>
+      <li><?php echo $this->htmlLink($item->getHref(), $this->translate($item->getLabel()), array_filter(array(
+        'class' => ( !empty($item->class) ? $item->class : null ),
+        'alt' => ( !empty($item->alt) ? $item->alt : null ),
+        'target' => ( !empty($item->target) ? $item->target : null ),
+      ))) ?></li>
+    <?php endforeach; ?>
+     </ul>
+   </div> 
   
  <?php endif; ?>
  
@@ -84,6 +95,7 @@
     <div class="main-nav-cart">
       <?=$this->htmlLink(array('route' => 'marketplace_general', 'action' => 'cart'), $this->translate('cart ( %s )', $this->cartitems['cnt']))?>
     </div>
+    <?php endif; ?>
     <div class="main-nav-search">
     <form action="/search" method="get">
     <input type="text" name="query" class="text" onFocus="if(this.value == 'search') { this.value = ''; }" value="search" />
@@ -105,10 +117,7 @@
                 ->setUlClass('main-nav-ul')
                 ->render();
     ?>
-  </div>
-  <?php endif; ?>
-
-  
+  </div>  
 </div>
 
 <div class="clear"></div>

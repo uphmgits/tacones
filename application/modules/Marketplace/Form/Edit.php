@@ -35,6 +35,10 @@ class Marketplace_Form_Edit extends Marketplace_Form_Create
   public function init()
   {
     parent::init();
+    //print "<pre>";print_r($this->_item);exit;
+    if($this->_item->isImported()) {
+    	$this->_setFieldBody();
+    }
     $this->setTitle('Edit Marketplace Listing')
          ->setDescription('Edit your listing below, then click \"Save Changes\" to save your listing.');
 
@@ -52,5 +56,18 @@ class Marketplace_Form_Edit extends Marketplace_Form_Create
       'content' => $content,
     ));
     $this->submit->setLabel('Save Changes');
+  }
+  
+private function _setFieldBody() {
+	$this->removeElement('body');
+  	$this->addElement('Textarea', 'body', array(
+      'label' => 'Description',
+      'filters' => array(
+        /*'StripTags',
+        new Engine_Filter_HtmlSpecialChars(),
+        new Engine_Filter_EnableLinks(),*/
+        new Engine_Filter_Censor(),
+      )
+    ));
   }
 }
