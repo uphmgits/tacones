@@ -69,7 +69,7 @@ class Marketplace_Form_Create extends Engine_Form
     $this->addElement('Text', 'price', array(
       'label' => 'Price',
       'allowEmpty' => false,
-      'description' => "Considering the cost of shipping and handling the final price will be increased for {$sh}%",
+      'description' => "Price does not include additional shipping and handling",
       'required' => true,
       'validators' => array(
         array('NotEmpty', true),

@@ -105,7 +105,7 @@
     
     <div class="marketplace-preview-options">
         <?=$this->htmlLink( array('route' => 'marketplace_create'), 
-                            $this->translate('Post New Item')
+                            $this->translate('Post Item')
                           )?>
         <?=$this->htmlLink( array('route' => 'marketplace_edit', 
                                     'marketplace_id' => $this->marketplace->getIdentity(),

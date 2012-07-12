@@ -10,6 +10,7 @@
  * 
  */
 ?>
+
 <script type="text/javascript">
   function addToWishlist(el, id) {
       var url = "<?=$this->url(array('action' => 'add'), 'marketplace_wishes', true)?>" + "/item/" + id;
@@ -35,11 +36,15 @@
       });
       request.send();
   }
-  function changeQuantity(el, id) {
+  function changeQuantity(el, cid, mid) {
+      if( el.value == '0' ) {
+        var delurl = "<?=$this->url(array('action' => 'deletefromcart'), 'marketplace_general')?>" + "/marketplace_id/" + mid;
+        location = delurl;
+      }
       var url = "<?=$this->url(array('action' => 'ajax-count-update'), 'marketplace_general', true)?>";
       var request = new Request.JSON({
         url : url,
-        data : { 'id' : id, 'count': el.get('value')},
+        data : { 'id' : cid, 'count': el.get('value')},
         onSuccess : function(responseJSON, responseText) {
           el.set('value', responseJSON.count);
           $("cart-subtotal").innerHTML = responseJSON.subtotal;
@@ -79,9 +84,10 @@
                 $<?=number_format($marketplace->price + Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price), 2)?>
                 <div style="color:#93C;text-transform:none;">
                   x
-                  <select id="cart-count-<?=$cartitem['marketplace_id']?>" onChange="changeQuantity(this, <?=$cartitem['cart_id']?>);">
+                  <select id="cart-count-<?=$cartitem['marketplace_id']?>" 
+                          onChange="changeQuantity(this, <?=$cartitem['cart_id']?>, <?=$cartitem['marketplace_id']?>);">
                     <?php $maxCount = ($cartitem['count'] > 20) ? $cartitem['count'] : 20; ?>
-                    <?php for($i = 1; $i <= $maxCount; $i++) : ?>
+                    <?php for($i = 0; $i <= $maxCount; $i++) : ?>
                       <option value="<?=$i?>" <?php if( $i == $cartitem['count']) echo "selected"?>><?=$i?></option>
                     <?php endfor;?>
                   </select>

@@ -2387,7 +2387,7 @@ div.comments-form-container {
   color: #a51c4b;
 }
 table.product-title-right {
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 table.product-title-right td {
   font-size:16px;
