@@ -22,7 +22,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
   protected $_navigation;
   // true - sandbox, false - paypal original
   //protected $_sandbox = true;
-  protected $_sandbox = false;
+  protected $_sandbox = true;
 
   public function init() {
       if (!$this->_helper->requireAuth()->setAuthParams('marketplace', null, 'view')->isValid())
