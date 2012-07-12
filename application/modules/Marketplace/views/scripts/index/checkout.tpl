@@ -16,6 +16,14 @@
 
   <h2><?=$this->translate('ORDER REVIEW')?></h2>
 
+  <style>
+    table.checkout-info-table th,
+    table.checkout-info-table td {
+        width: 20%;
+        word-wrap: break-word;
+        overflow: hidden;
+    }
+  </style>
   <table class="checkout-info-table" width="100%">
     <tr>
       <th><?=$this->translate('Name')?></th>
@@ -44,13 +52,18 @@
 	      <li>
             <?php $marketplace = Engine_Api::_()->getItem('marketplace', $cartitem['marketplace_id']); ?>
             <table class="product-title-right">
-              <tbody><tr>
+              <tbody>
+              <tr>
                 <td><?=$marketplace->getTitle()?></td>
                 <td width="20">
                   $<?=number_format($marketplace->price + Engine_Api::_()->marketplace()->getInspectionFee($marketplace->price), 2)?>
-                  <div style="color:#93C;text-transform:none;">x<?=$cartitem['count']?></div>
                 </td>
-              </tr></tbody>
+              </tr>
+              <tr>
+                <td style="color:#93C;text-transform:none;"><?=$this->translate('Quantity:')?></td>
+                <td style="color:#93C;text-transform:none;"><?=$cartitem['count']?></td>
+              </tr>
+              </tbody>
             </table>
         </li>
 	      <?php if( $i++ % $colInRow == $colInRow - 1 ) echo "</ul>"; ?> 

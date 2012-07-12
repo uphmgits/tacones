@@ -78,6 +78,13 @@
             array('route' => 'default', 'module' => 'marketplace', 'controller' => 'admin-manage', 'action' => 'delete', 'id' => $item->marketplace_id),
             $this->translate("delete"),
             array('class' => 'smoothbox')) ?>
+          <?php if( in_array($item->marketplace_id, $this->mylist )) : ?>
+          |
+          <?=$this->htmlLink(
+            array('route' => 'default', 'module' => 'marketplace', 'controller' => 'admin-custom-list', 'action' => 'unhide', 'id' => $item->marketplace_id),
+            $this->translate("unhide"),
+            array('class' => 'smoothbox')) ?>
+          <?php endif; ?>
         </td>
       </tr>
     <?php endforeach; ?>

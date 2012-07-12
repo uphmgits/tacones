@@ -30,6 +30,9 @@
     .marketplace-preview-mainphoto img {
         width: 160px;
     }
+    .marketplace-create-container > table {
+        table-layout: fixed;
+    }
     .marketplace-preview-content td {
         vertical-align: top;
         padding: 0 20px 20px 0;
@@ -63,12 +66,11 @@
   </div>
 
 	<div class='layout_middle'>
-
     <div class="marketplace-create-container">
       <h2><?=$this->translate('Upload Complete')?></h2>
-      <table class="marketplace-preview-content">
+      <table class="marketplace-preview-content" width="100%">
           <tr>
-              <td>
+              <td style="width: 180px">
                 <div class="marketplace-preview-mainphoto">
                   <?=$this->itemPhoto($this->marketplace, 'normal')?></td>
                 </div>
@@ -89,11 +91,11 @@
           </tr>
           <tr>
               <td>
-                <h2><?=$this->marketplace->getTitle()?> $<?=$this->marketplace->price?></h2>
+                <h2 style="word-wrap:break-word;"><?=$this->marketplace->getTitle()?> $<?=$this->marketplace->price?></h2>
                 <?=$this->fieldValueLoop($this->marketplace, $this->fieldStructure)?>
               </td>
               <td>                
-                <div>
+                <div style="word-wrap:break-word;">
                     <?=$this->marketplace->body?>
                 <div>
               </td>
@@ -103,7 +105,7 @@
     
     <div class="marketplace-preview-options">
         <?=$this->htmlLink( array('route' => 'marketplace_create'), 
-                            $this->translate('Post New Item')
+                            $this->translate('Post Item')
                           )?>
         <?=$this->htmlLink( array('route' => 'marketplace_edit', 
                                     'marketplace_id' => $this->marketplace->getIdentity(),

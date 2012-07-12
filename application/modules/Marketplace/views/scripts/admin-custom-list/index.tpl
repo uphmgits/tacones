@@ -13,7 +13,7 @@
 <script type="text/javascript">
   en4.core.runonce.add(function(){$$('th.admin_table_short input[type=checkbox]').addEvent('click', function(){ $$('input[type=checkbox]').set('checked', $(this).get('checked', false)); })});
 
-  var delectSelected =function(){
+  var delectSelected = function(action){
     var checkboxes = $$('input[type=checkbox]');
     var selecteditems = [];
 
@@ -25,8 +25,13 @@
       }
     });
 
-    $('ids').value = selecteditems;
-    $('delete_selected').submit();
+    if( action == 'hide' ) {
+      $('hide_ids').value = selecteditems;
+      $('hide_selected').submit();
+    } else {
+      $('ids').value = selecteditems;
+      $('delete_selected').submit();  
+    }
   }
 </script>
 
@@ -80,7 +85,7 @@
             array('class' => 'smoothbox')) ?>
           | 
           <?php echo $this->htmlLink(
-            array('route' => 'default', 'module' => 'marketplace', 'controller' => 'admin-manage', 'action' => 'delete', 'id' => $item->marketplace_id),
+            array('route' => 'default', 'module' => 'marketplace', 'controller' => 'admin-custom-list', 'action' => 'hide', 'id' => $item->marketplace_id),
             $this->translate("hide"),
             array('class' => 'smoothbox')) ?>
         </td>
@@ -95,10 +100,16 @@
   <button onclick="javascript:delectSelected();" type='submit'>
     <?php echo $this->translate("Delete Selected") ?>
   </button>
+  <button onclick="javascript:delectSelected('hide');" type='submit'>
+    <?php echo $this->translate("Hide Selected") ?>
+  </button>
 </div>
 
-<form id='delete_selected' method='post' action='<?php echo $this->url(array('action' =>'deleteselected')) ?>'>
+<form id='delete_selected' method='post' action='<?php echo $this->url(array('controller' => 'manage', 'action' =>'deleteselected')) ?>'>
   <input type="hidden" id="ids" name="ids" value=""/>
+</form>
+<form id='hide_selected' method='post' action='<?php echo $this->url(array('action' =>'hideselected')) ?>'>
+  <input type="hidden" id="hide_ids" name="ids" value=""/>
 </form>
 <br/>
 <div>
