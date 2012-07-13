@@ -104,15 +104,19 @@
     </div>
     
     <div class="marketplace-preview-options">
+        <?=$this->htmlLink( array('route' => 'marketplace_entry_view', 
+                                    'marketplace_id' => $this->marketplace->getIdentity(),
+                                    'user_id' => $this->marketplace->owner_id),
+                            $this->translate('Back to Marketplace')
+                          )?>
         <?=$this->htmlLink( array('route' => 'marketplace_create'), 
-                            $this->translate('Post Item')
+                            $this->translate('Post Another Item')
                           )?>
         <?=$this->htmlLink( array('route' => 'marketplace_edit', 
                                     'marketplace_id' => $this->marketplace->getIdentity(),
                                     'category' => 0),
                             $this->translate('Edit')
                           )?>
-
     </div>
 
   </div>

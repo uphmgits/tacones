@@ -1150,8 +1150,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         $allowed_upload = Engine_Api::_()->authorization()->getPermission($viewer->level_id, 'marketplace', 'photo');
         if ($allowed_upload) {
             //return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id), 'marketplace_success', true);
-            //return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id), 'marketplace_itempreview', true);
-            return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id, 'user_id' => $viewer->getIdentity()), 'marketplace_entry_view', true);
+            return $this->_helper->redirector->gotoRoute(array('marketplace_id' => $marketplace->marketplace_id), 'marketplace_itempreview', true);
         } else {
             return $this->_helper->redirector->gotoUrl($marketplace->getHref(), array('prependBase' => false));
         }
