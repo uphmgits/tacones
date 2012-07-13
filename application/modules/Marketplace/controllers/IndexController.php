@@ -787,7 +787,16 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
       $toOwnerName = $owner->getTitle();
 
       $subjectTemplate = Zend_Registry::get('Zend_Translate')->_("New Order");
-      $bodyOwner = $this->view->translate('<strong>%1$s</strong> bought the "%2$s". Count: %3$s. <br/>Please click on the link to fill in the form of delivery: <a href=\'%4$s\'>delivery form</a>', $buyer->getTitle(), $marketplace->getTitle(), $count, "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getRouter()->assemble(array('action' => 'client-shipping-service', 'order_id' => $orderId), 'marketplace_general', true) );
+      /*$bodyOwner = $this->view->translate('<strong>%1$s</strong> bought the "%2$s". Count: %3$s. <br/>Please click on the link to fill in the form of delivery: <a href=\'%4$s\'>delivery form</a>', $buyer->getTitle(), $marketplace->getTitle(), $count, "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getRouter()->assemble(array('action' => 'client-shipping-service', 'order_id' => $orderId), 'marketplace_general', true) );*/
+      $bodyOwner = $this->view->translate('
+        Congratulations, your <strong>%1$s</strong> was just sold!<br/><br/>
+        Please click on the link below to mail your item to the Upheels inspection team.  Please send your item as soon as possible and no later than 3 business days.<br/><br/>
+        Congratulations again!<br/><br/>
+        If you have any questions, please send us an email to info@upheels.com<br/><br/>
+        <a href=\'%2$s\'>Pre-paid Upheels delivery label</a>',
+        $marketplace->getTitle(),
+        "http://" . $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getRouter()->assemble(array('action' => 'client-shipping-service', 'order_id' => $orderId), 'marketplace_general', true)
+      );
 
       // mail to owner
       $mail = Engine_Api::_()->getApi('mail', 'core')->create()
