@@ -39,6 +39,13 @@ class Marketplace_Form_Shippinginfo extends Engine_Form
       'tabindex' => 2,
     ));
 
+    $this->addElement('Checkbox', 'copy_address', array(
+      'required' => false,
+      'label' => 'Copy Address',
+      'attribs' => array('onchange' => "if(this.checked) $('shipping_address').value = $('billing_address').value"),
+      'tabindex' => 4,
+    ));
+
     $this->addElement('Textarea', 'billing_address', array(
       'required' => true,
       'allowEmpty' => false,
@@ -64,12 +71,6 @@ class Marketplace_Form_Shippinginfo extends Engine_Form
         new Engine_Filter_EnableLinks(),
         new Engine_Filter_Censor(),
       ),
-      'tabindex' => 4,
-    ));
-    $this->addElement('Checkbox', 'copy_address', array(
-      'required' => false,
-      'label' => 'Copy Address',
-      'attribs' => array('onchange' => "if(this.checked) $('shipping_address').value = $('billing_address').value"),
       'tabindex' => 5,
     ));
 

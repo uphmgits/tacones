@@ -369,7 +369,7 @@ endif; ?>
           <table class="product-details" width="100%">
             <tbody><tr>
               <td width="50%" style="padding-right: 5px;"><?=$this->fieldValueLoop($this->marketplace, $this->fieldStructure)?></td>
-              <td width="50%"><?=$this->fieldValueLoop($this->marketplace, $this->fieldStructure)?></td>
+              <td width="50%"><?//=$this->fieldValueLoop($this->marketplace, $this->fieldStructure)?></td>
             </tr></tbody>
           </table>   
           <?//=$this->fieldValueLoop($this->marketplace, $this->fieldStructure)?>

@@ -1259,7 +1259,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
             $form->populate($marketplace->toArray());
             $form->category_id->setValue((int)$this->_getParam('category', 0));
 
-            $auth = Engine_Api::_()->authorization()->context;
+            /*$auth = Engine_Api::_()->authorization()->context;
             $roles = array('owner', 'owner_member', 'owner_member_member', 'owner_network', 'everyone');
             foreach ($roles as $role) {
                 if (1 === $auth->isAllowed($marketplace, $role, 'view')) {
@@ -1268,7 +1268,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
                 if (1 === $auth->isAllowed($marketplace, $role, 'comment')) {
                     $form->auth_comment->setValue($role);
                 }
-            }
+            }*/
 
             return;
         }
@@ -1902,9 +1902,16 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 		    }
     }
     else {
-        $cartTable->addToCookieCart($marketplace_id, $inspection);
+        //$cartTable->addToCookieCart($marketplace_id, $inspection);
     }
 
+    if( $this->_getParam('gotowl') ) {
+		    return $this->_forward('success', 'utility', 'core', array(
+			    'messages' => array(Zend_Registry::get('Zend_Translate')->_('Listing has been added to cart')),
+			    'layout' => 'default-simple',
+			    'parentRedirect' => Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'marketplace_wishes', true),
+		    ));
+    }
 		return $this->_forward('success', 'utility', 'core', array(
 			'messages' => array(Zend_Registry::get('Zend_Translate')->_('Listing has been added to cart')),
 			'layout' => 'default-simple',

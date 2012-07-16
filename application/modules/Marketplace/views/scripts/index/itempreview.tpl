@@ -67,7 +67,7 @@
 
 	<div class='layout_middle'>
     <div class="marketplace-create-container">
-      <h2><?=$this->translate('Upload Complete')?></h2>
+      <h2><?=$this->translate('Under review by Upheels')?></h2>
       <table class="marketplace-preview-content" width="100%">
           <tr>
               <td style="width: 180px">
@@ -107,6 +107,9 @@
         <?=$this->htmlLink( array('route' => 'marketplace_entry_view', 
                                     'marketplace_id' => $this->marketplace->getIdentity(),
                                     'user_id' => $this->marketplace->owner_id),
+                            $this->translate('View Listing')
+                          )?>
+        <?=$this->htmlLink( array('route' => 'marketplace_browse'),
                             $this->translate('Back to Marketplace')
                           )?>
         <?=$this->htmlLink( array('route' => 'marketplace_create'), 

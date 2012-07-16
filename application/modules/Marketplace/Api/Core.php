@@ -180,7 +180,7 @@ class Marketplace_Api_Core extends Core_Api_Abstract
       $inspection = Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.inspection', 0);
       if( !$price or !$inspection ) return 0;
       $tax = round( $inspection * $price / 100, 2 );
-      if( $tax > 10) $tax = 10;
+      if( $tax < 10) $tax = 10;
       return $tax;
   }
 
