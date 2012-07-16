@@ -1254,6 +1254,7 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 	    	$this->view->postfrom = $_POST['postfrom'];
 	    	$this->view->postthru = $_POST['postthru'];
 			
+	    	$e->setJobId($this->view->jobid);
 	    	$mappedData = $e->getItemDetails();
 	    	$fetchcount = sizeof($mappedData);
 	    	

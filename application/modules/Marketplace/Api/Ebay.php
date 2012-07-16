@@ -1,9 +1,14 @@
 <?php
+
 define ('EBAYCATEGORY_FASHION', '92732');
 define ('EBAYCATEGORY_WOMEN_HANDBAGS', '63852');
 define ('EBAYCATEGORY_WOMENS_ACCESSORIES', 4251);
 define ('EBAYCATEGORY_WOMENS_CLOTHING', 15724);
 define ('EBAYCATEGORY_WOMENS_SHOES', 3034);
+
+define ('EBAY_API_RESPONSE_SUCCESS', 'Success');
+define('EBAY_LISTINGSTATUS_ACTIVE', 'Active');
+
 class Marketplace_Api_Ebay {
 	
 	private $_sandbox;
@@ -25,15 +30,18 @@ class Marketplace_Api_Ebay {
 	private $_reqAuth;
 	private $_starttime;	// listing from
 	private $_endtime;		// listing to
+	private $_topCats;
+	private $_fullCatList;
+	private $_upheelsUserId;
+	private $_alreadyImported;
+	private $_jobId;
+	private $_logTable;
 	private $_xpable                = '<?xml version="1.0" encoding="utf-8"?>';
 	private $_getListReqRoot        = '<GetSellerListRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
 	private $_getItemDetailsReqRoot = '<GetItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
 	private $_getCategoriesReqRoot  = '<GetCategoriesRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
 	private $_getCategorySpecificsReqRoot = '<GetCategorySpecificsRequest  xmlns="urn:ebay:apis:eBLBaseComponents">';
-	private $_topCats;
-	private $_fullCatList;
-	private $_upheelsUserId;
-	private $_alreadyImported;
+	
 	
 	public function __construct($sandbox=false) {
 		$file = APPLICATION_PATH . '/application/settings/import_auth.php';
@@ -86,6 +94,9 @@ class Marketplace_Api_Ebay {
 								array('ID'=>EBAYCATEGORY_WOMEN_HANDBAGS,'name'=>"Women's Handbags"), 
 								array('ID'=>EBAYCATEGORY_WOMENS_ACCESSORIES,'name'=>"Women's Accessories"), 
 								array('ID'=>EBAYCATEGORY_WOMENS_CLOTHING, 'name'=>"Women's Clothing"));
+		
+		// Log table object for logging import specific messages
+		$this->_logTable = Engine_Api::_()->getDbtable('importdetails', 'marketplace');
 	}
 	
 	public function getCats() {
@@ -106,14 +117,11 @@ class Marketplace_Api_Ebay {
 				else {
 					$this->_fullCatList[$parentname][$subname] = array('id'=>$subdata['categoryID']);
 					$this->_fullCatList[$parentname][$subname]['specifics'] = $this->_getSpecifics($subdata['categoryID']);
-					/*print "<pre>";
-					print_r($this->_fullCatList);exit;*/
 				}
 			}
 			
 		}
-		print "<pre>";
-		print_r($this->_fullCatList);exit;
+		return $this->_fullCatList;
 	}
 	
 	private function _getSpecifics($catID) {
@@ -215,10 +223,17 @@ class Marketplace_Api_Ebay {
 		$itemsNode = $rootNode->appendChild($elmItems);
 		*/
 		$arrayIDs = array();
-		$i=0;		
+		if(empty($itemIds)) {
+			$message = 'No listings found at all';
+			$this->_logMessage($message);
+			return $arrayIDs;
+		}
+		$listcnt=0;		
 		// grab details for each itemID now
 		foreach($itemIds as $itemID) {
-			if($i++ > 29) break;
+			if($listcnt > 29) {
+				break;
+			}
 			// keep building DOM
 			
 			/*
@@ -234,6 +249,7 @@ class Marketplace_Api_Ebay {
 			$this->_httpclient->resetParameters();
 			$this->_httpclient->setHeaders(array('X-EBAY-API-CALL-NAME:'.$this->_apiCallGetItem));
 			$this->_httpclient->setRawData($getitmdtlxml, 'text/xml');
+			try {
 			$res = $this->_httpclient->request(Zend_Http_Client::POST);
 			if($res->isSuccessful()) {
 				//got HTTP 200. Check the response body further
@@ -244,8 +260,8 @@ class Marketplace_Api_Ebay {
 				$ack = $this->_isAckSuccess($itemDom);
 				
 				if($ack == false) {
-					$log = Zend_Registry::get('Zend_Log');
-        			$log->log('**** ERROR in GetItem API Call for Seller ' . $this->getSeller() . '    ItemID ' . $itemID, Zend_Log::ERR);
+					$message = 'Response ERROR in GetItem API Call for ListingID ' . $itemID . '  Response received is: ' . $body;
+					$this->_logMessage($message);
 					continue;
 				}
 				
@@ -259,9 +275,16 @@ class Marketplace_Api_Ebay {
 				$itemdetailsDom->loadXML($res->getBody());
 				$itmcallItmDetNodeList = $itemdetailsDom->getElementsByTagNameNS($this->_namespace, 'Item');
 				
-				$itmcallItmDetNode = simplexml_import_dom($itmcallItmDetNodeList->item(0)); 
-				/*print "<pre>";
-				print_r($itmcallItmDetNode);exit;*/
+				$itmcallItmDetNode = simplexml_import_dom($itmcallItmDetNodeList->item(0));
+
+				// Is listing active?
+				$listingstate = (string)$itmcallItmDetNode->SellingStatus->ListingStatus;
+				if($listingstate !== EBAY_LISTINGSTATUS_ACTIVE) {
+					$msg = 'ListingID ' . $itemID . ' not active. Its ' . $listingstate;
+					$this->_logMessage($msg); 
+					continue;	// not active, move on
+				} 
+				$listcnt++;
 				$itmDescription = $itmcallItmDetNode->Description;
 				//$arrayIDs[$itemID]['Description'] = preg_replace ( "'<[^>]+>'U", "",(string)$itmDescription);
 				$arrayIDs[$itemID]['Description'] = preg_replace('~[\r\n]+~', '', htmlentities((string)$itmDescription, ENT_COMPAT | ENT_HTML401, 'UTF-8'));
@@ -308,7 +331,7 @@ class Marketplace_Api_Ebay {
 				$arrayIDs[$itemID]['CurrentPrice'] = (string)$CurrentPrice;
 				
 				// Start building item details in dom
-				// ... on second thought, we dont need the DOM. everything is built into $arrayIDs  arrau
+				// ... on second thought, we dont need the DOM. everything is built into $arrayIDs  array
 				//     so commenting out DOM part below
 				/*
 				$itmTitleElm = $dom->createElement('Title', $itmTitle);
@@ -354,21 +377,21 @@ class Marketplace_Api_Ebay {
 				//exit;		
 			}
 			else {
-				print "<br>ERROR in GetItem call";
+				$message = 'HTTP ERROR ' . $res->getStatus() . '  Error message: ' . $res->getMessage() . '  in GetItem call for ListingID ' . $itemID;
+				$this->_logMessage($message);
 			}
+		} catch(Exception $e) {
+			$message = 'Zend HTTP Client EXCEPTION in GetItem call: ' . $e->__toString();
+			$this->_logMessage($message);
 		}
-		
-		/*print '<pre>';
-		print_r($arrayIDs);exit;*/
-		
-		// spit out DOM
-		/*$dom->formatOutput = true;
-		$x = $dom->saveXML();*/
-		/*print "<pre>";
-		print htmlentities($x);
-		exit;*/
+		}
+		if(empty($arrayIDs)) {
+			$message = 'Listings found, but none were Active';
+			$this->_logMessage($message);
+		}
 		return $arrayIDs;
 	}
+	
 	
 	/**
 	 * Returns a list of items listed by seller
@@ -380,24 +403,39 @@ class Marketplace_Api_Ebay {
 		$this->_httpclient->setHeaders(array('X-EBAY-API-CALL-NAME:'.$this->_apiCallSellerList));
 		$getitmlistxml = $this->_xpable . $this->_getListReqRoot . $this->_reqAuth . $this->_buildSellerListReqXml(); // XML POST for getting seller's list
 		$this->_httpclient->setRawData($getitmlistxml, 'text/xml');
-		$res = $this->_httpclient->request(Zend_Http_Client::POST);
-		if($res->isSuccessful()) {
-			
-			// Got HTTP 200. Parse the response to see if things went really ok
-			$listDom = new DOMDocument();                
-			$listDom->loadXML( $res->getBody());
-			if($this->_isAckSuccess($listDom)) {
-				// go thru Item nodes to grab all ItemIDs
-				$itemsListedNode=$listDom->getElementsByTagNameNS($this->_namespace,'Item');
-				$itemCount = $itemsListedNode->length;
+		try {
+			$res = $this->_httpclient->request(Zend_Http_Client::POST);
+			if($res->isSuccessful()) {
 				
-				for($i=0;$i<$itemCount;$i++) {
-					$itm = simplexml_import_dom($itemsListedNode->item($i));
-					if(!in_array((string)$itm->ItemID, $this->_alreadyImported)) {
-						$itemIDs[] = (string)$itm->ItemID;;
+				// Got HTTP 200. Parse the response to see if things went really ok
+				$listDom = new DOMDocument();  
+				$body = $res->getBody();              
+				$listDom->loadXML($body);
+				if($this->_isAckSuccess($listDom)) {
+					// go thru Item nodes to grab all ItemIDs
+					$itemsListedNode=$listDom->getElementsByTagNameNS($this->_namespace,'Item');
+					$itemCount = $itemsListedNode->length;
+					
+					for($i=0;$i<$itemCount;$i++) {
+						$itm = simplexml_import_dom($itemsListedNode->item($i));
+						if(!in_array((string)$itm->ItemID, $this->_alreadyImported)) {
+							$itemIDs[] = (string)$itm->ItemID;;
+						}
 					}
 				}
+				else {
+					$message = 'Response ERROR in GetSellerList API Call.  Response received is: ' . $body;
+					$this->_logMessage($message);
+				}
 			}
+			else {
+				$message = 'HTTP ERROR ' . $res->getStatus() . ' in GetSellerList call. Error message: ' . $res->getMessage();
+				$this->_logMessage($message);
+		}
+		} catch (Exception $e) {
+			$message = 'Zend HTTP Client EXCEPTION in GetSellerList call: ' . $e->__toString();
+			$this->_logMessage($message);
+			
 		}
 		return $itemIDs;
 	}
@@ -420,7 +458,7 @@ class Marketplace_Api_Ebay {
 	}
 	
 	private function _buildSellerListReqXml() {
-		return '<StartTimeFrom>' . $this->_starttime . '</StartTimeFrom><StartTimeTo>' . $this->_endtime . '</StartTimeTo><UserID>'.$this->_seller.'</UserID></GetSellerListRequest>';
+		return '<Sort>1</Sort><StartTimeFrom>' . $this->_starttime . '</StartTimeFrom><StartTimeTo>' . $this->_endtime . '</StartTimeTo><UserID>'.$this->_seller.'</UserID></GetSellerListRequest>';
 	}
 	
 	private function _buildGetCategoriesReqXml($categoryID,$siteID=0) {
@@ -470,12 +508,33 @@ class Marketplace_Api_Ebay {
 	public function setUpheelsSellerId($id) {
 		$this->_upheelsUserId = $id;
 	}
+	public function setJobId($jobid) {
+		$this->_jobId = $jobid;
+	}
+	public function getJobId() {
+		return $this->_jobId;
+	}
 	
+	/**
+	 * Is reponse a scuccess response or failure response
+	 * @param DOM $dom
+	 * @return true => success response  false => failure response
+	 * 
+	 */
 	private function _isAckSuccess($dom) {
-		
 		$ackNode=$dom->getElementsByTagNameNS ($this->_namespace,'Ack');
-		simplexml_import_dom($ackNode->item(0))=='Success'?$ack=true:$ack=false;
+		simplexml_import_dom($ackNode->item(0))==EBAY_API_RESPONSE_SUCCESS?$ack=true:$ack=false;
 		return $ack;
+	}
+	
+	private function _logMessage($message) {
+		
+		$currtime = date('Y-m-d H:i:s');
+		$values = array('importdetails_id' => null, // auto-increment column
+						'import_jobid' => $this->_jobId,
+						'message' => $message,
+						'datetime' => $currtime);
+		return $this->_logTable->writeLogMessage($values);
 	}
 }
 ?>

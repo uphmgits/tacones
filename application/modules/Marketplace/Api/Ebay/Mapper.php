@@ -6,9 +6,6 @@ define('IMPORT_IMPORTING_COMPLETED', 4);
 
 class Marketplace_Api_Ebay_Mapper {
 	
-	/*select m.category_id, m.label, m.field_id, o.label from engine4_marketplace_fields_meta m, engine4_marketplace_fields_options o 
-where m.field_id=o.field_id order by m.category_id asc;*/
-	
 	private $_meta;
 	private $_db;
 	private $_categoryspecs;
@@ -28,8 +25,6 @@ where m.field_id=o.field_id order by m.category_id asc;*/
 	private $_schema;
 	
 	public function __construct() {
-		/*$file = APPLICATION_PATH . '/application/settings/import_general.php';
-    	$this->_impOptions = include $file;*/
     	
 		$this->setListingsRetrieved(0);
 		$this->setListingsMapped(0);
