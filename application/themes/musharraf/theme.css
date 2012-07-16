@@ -2773,14 +2773,24 @@ a.button {
   margin-right: 40px;
 }
 .cart-container #copy_address-wrapper {
-  width: 100%;
+  /*width: 100%;*/
+  height: 18px;
+  margin: 3px 0 -3px;
 }
 .cart-container #copy_address-label {
   display: none;
 }
 .cart-container #copy_address-element {
-  float: right;
-  margin-right: 270px;
+  /*float: right;
+  margin-right: 270px;*/
+  position: relative;
+  z-index: 100;
+  margin: 0px 170px 0 0;
+  line-height: 21px;
+  font-size: 10pt;
+}
+.cart-container #shipping_address-wrapper {
+  margin-top: -18px;
 }
 
 .cart-container #submit-element {
@@ -3503,4 +3513,8 @@ div.ebayimport-review {
 	color: red;
 	float: left;
     //margin-left: 116px;
+}
+
+#global_page_marketplace-index-reports table.admin_table * {
+    font-family: Univers Bd Std;
 }

@@ -38,24 +38,6 @@ endif; ?>
 <script type="text/javascript" src="application/modules/Marketplace/externals/milkbox/js/mootools-1.2.5.1-more.js"></script>
 <script type="text/javascript" src="application/modules/Marketplace/externals/milkbox/js/milkbox.js"></script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script type="text/javascript">
   var categoryAction =function(category){
     $('category').value = category;
@@ -414,7 +396,6 @@ endif; ?>
           <table class="product-details" width="100%">
             <tbody><tr>
               <td width="50%" style="padding-right: 5px;"><?=$this->fieldValueLoop($this->marketplace, $this->fieldStructure)?></td>
-              
             </tr></tbody>
           </table>   
           <?//=$this->fieldValueLoop($this->marketplace, $this->fieldStructure)?>

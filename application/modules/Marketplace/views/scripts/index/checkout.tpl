@@ -76,6 +76,7 @@
     <?php if( $i % $colInRow != 0 ) echo "</ul>"; ?>
     <?php $total_amount_full = $total_amount + $inspection_fee; ?>
 
+    <?php /*
     <hr/>
     <div class="cart-total-container"> 
       <span><?=$this->translate('SUBTOTAL')?></span>
@@ -84,7 +85,7 @@
     <div class="cart-total-container"> 
       <span><?=$this->translate('SHIPPING AND HANDLING')?></span>
       <span>$<?=number_format($inspection_fee, 2)?></span>
-    </div>
+    </div>*/?>
     <hr/>
     <div class="cart-total-container"> 
       <span><?=$this->translate('TOTAL')?></span>

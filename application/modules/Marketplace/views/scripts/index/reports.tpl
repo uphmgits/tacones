@@ -107,7 +107,7 @@ function loginAsUser(id) {
         <th style='width: 5%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('order_id', '<?=(($this->order == 'order_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("ID") ?></a></th>
         <th style='width: 15%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('marketplace_id', '<?=(($this->order == 'marketplace_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Marketplace") ?></a></th>
         <th style='width: 15%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('owner_id', '<?=(($this->order == 'owner_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Seller") ?></a></th>
-        <th style='width: 15%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('user_id', '<?=(($this->order == 'user_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Who buy?") ?></a></th>
+        <th style='width: 15%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('user_id', '<?=(($this->order == 'user_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Buyer?") ?></a></th>
         <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('summ', '<?=(($this->order == 'summ') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Price") ?></a></th>
         <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('date', '<?=(($this->order == 'date') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Date") ?></a></th>
         <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('date', '<?=(($this->order == 'status') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Status") ?></a></th>
@@ -233,7 +233,7 @@ function loginAsUser(id) {
                     <form method="post" action="" id="frmOrderPdf<?=$item->order_id?>">
                       <input type="hidden" name="get_order_pdf" value="<?=$item->order_id?>" />
                       <a href="javascript:void(0);" onclick="$('frmOrderPdf<?=$item->order_id?>').submit()">
-                        <?=$this->translate('Get order PDF')?>
+                        <?=$this->translate('Print Invoice')?>
                       </a>
                     </form>
                 <?php endif; ?>

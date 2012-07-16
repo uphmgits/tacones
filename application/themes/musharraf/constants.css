@@ -91,7 +91,7 @@ DEFAULT STYLES FOR THIS THEME
   These values style input fields and buttons that appear throughout the layout.
   */
   theme_input_background_color: #191919;
-  theme_input_font_color: #555;
+  theme_input_font_color: #888;
   theme_input_border_colors: #2b2b2b;
   theme_button_background_color: transparent;
   theme_button_background_color_hover: transparent;

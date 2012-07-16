@@ -55,6 +55,13 @@
               <?=$this->fieldValueLoop($marketplace, $fieldStructure)?>
           </div>
           <div class="cart-item-options">
+              <?=$this->htmlLink(array('route' => 'marketplace_general', 
+                                         'action' => 'addtocart', 
+                                         'marketplace_id' => $item['marketplace_id'],
+                                         'gotowl' => 1),
+                                 $this->translate('purchase '), 
+                                 array('class' => 'cart-item-wishlist smoothbox', 'id' => 'add_to_cart'))
+              ?>
               <?php if( $marketplace->inWishlist($viewer) ) : ?>
                 <?=$this->htmlLink( 'javascript:void(0);', 
                                   $this->translate('remove from wishlist'),
