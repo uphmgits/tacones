@@ -18,7 +18,7 @@
 #*.sql
 *.sqlite
 
-
+gitgui.cmd
 temporary/
 .project
 .buildpath
@@ -34,6 +34,7 @@ user/
 application/settings/import_auth_mukund.php
      
 igpull.cmd
+cancel\ request.camrec
       
        
       
