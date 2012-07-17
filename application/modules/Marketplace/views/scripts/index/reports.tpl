@@ -107,7 +107,7 @@ function loginAsUser(id) {
         <th style='width: 5%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('order_id', '<?=(($this->order == 'order_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("ID") ?></a></th>
         <th style='width: 15%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('marketplace_id', '<?=(($this->order == 'marketplace_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Marketplace") ?></a></th>
         <th style='width: 15%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('owner_id', '<?=(($this->order == 'owner_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Seller") ?></a></th>
-        <th style='width: 15%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('user_id', '<?=(($this->order == 'user_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Buyer?") ?></a></th>
+        <th style='width: 15%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('user_id', '<?=(($this->order == 'user_id') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Buyer") ?></a></th>
         <th style='width: 20%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('summ', '<?=(($this->order == 'summ') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Price") ?></a></th>
         <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('date', '<?=(($this->order == 'date') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Date") ?></a></th>
         <th style='width: 10%;'><a href="javascript:void(0);" onclick="javascript:changeOrder('date', '<?=(($this->order == 'status') && ($this->order_direction == 'ASC')?'DESC':'ASC')?>');"><?php echo $this->translate("Status") ?></a></th>
@@ -118,7 +118,7 @@ function loginAsUser(id) {
     
         <?php $viewerId = $this->viewer()->getIdentity(); ?>
         <?php $now = time(); ?>
-        <?php $threeDays = 60 * 60 * 24 * 3; ?>
+        <?php $canceltime = 3600 * Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.canceltime', 24); ?>
 
         <?php foreach( $this->paginator as $item ): ?>
         <?php 
@@ -170,30 +170,36 @@ function loginAsUser(id) {
             <td><?=str_replace(' ', '<br/>', $item->date)?></td>
             <td class="order-status">
               <?php switch($item->status) { 
-                case "wait"        : if( $item->tracking_fedex or $item->tracking_ups )
-                                        echo "<div style='color: Khaki;'>{$this->translate('I paid')} (1/6)</div>"; 
+                case "wait"         : if( $item->tracking_fedex or $item->tracking_ups )
+                                        echo "<div style='color: Khaki;'>{$this->translate('Item Sold')} (1/6)</div>"; 
                                       else
-                                        echo "<div style='color: PaleGoldenRod;'>{$this->translate('Seller sent')} (2/6)</div>";
+                                        echo "<div style='color: PaleGoldenRod;'>{$this->translate('Item sent to Upheels')} (2/6)</div>";
                                       break;
-                case "inprogress"  : echo "<div style='color: PaleGreen;'>{$this->translate('Upheels received')} (3/6)</div>";
+                case "approved"     :
+                case "inprogress"   : echo "<div style='color: PaleGreen;'>{$this->translate('Inspection in progress')} (3/6)</div>";
                                       break;
-                case "approved"    : echo "<div style='color: LightGreen;'>{$this->translate('Upheels passed')} (4/6)</div>"; 
+                /*case "approved"     : echo "<div style='color: LightGreen;'>{$this->translate('Upheels passed')} (4/6)</div>"; 
+                                      break;*/
+                case "admin_sent"   : echo "<div style='color: LimeGreen;'>{$this->translate('Item	sent to buyer')} (5/6)</div>"; 
                                       break;
-                case "admin_sent"  : echo "<div style='color: LimeGreen;'>{$this->translate('Upheels sent')} (5/6)</div>"; 
+                case "done_failed"  :
+                case "failed"       : echo "<div style='color: lightCoral;'>{$this->translate('Inspection Failed')} (6/6)</div>"; 
                                       break;
-                case "failed"      : echo "<div style='color: lightCoral;'>{$this->translate('Failed')} (6/6)</div>"; 
+                case "cancelrequest":
+                case "canceled"     :
+                case "done_canceled": echo "<div style='color: lightCoral;'>{$this->translate('Order cancelled')} (6/6)</div>"; 
                                       break;
-                case "canceled"    : echo "<div style='color: lightCoral;'>{$this->translate('Canceled')} (6/6)</div>"; 
-                                        break;
-                case "sold"        : echo "<div style='color: Green;'>{$this->translate('Complete')} (6/6)</div>"; 
+                case "done_sold"    :
+                case "sold"         : echo "<div style='color: Green;'>{$this->translate('Complete')} (6/6)</div>"; 
                                       break;
-                case "return"      : echo "<div style='color: orange;'>{$this->translate('Return')} (6/6)</div>"; 
+                case "done_return"  :
+                case "return"       : echo "<div style='color: orange;'>{$this->translate('Return')} (6/6)</div>"; 
                                       break;
               } ?>
             </td>
             <td style="font-size: 0.9em">
                 <?php if($item->user_id == $viewerId and 
-                          ( $now - strtotime($item->date) < $threeDays ) and 
+                          ( $now - strtotime($item->date) < $canceltime ) and 
                           ( $item->status != 'canceled' and 
                             $item->status != 'failed' and 
                             $item->status != 'cancelrequest' and

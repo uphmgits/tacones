@@ -89,6 +89,13 @@ class User_SettingsController extends Core_Controller_Action_User
     if( 'none' != $settings->getSetting('core.facebook.enable', 'none') ) {
       $facebookTable = Engine_Api::_()->getDbtable('facebook', 'user');
       $facebook = $facebookTable->getApi();
+
+      // Update facebook settings
+      if( $r = $this->getRequest()->getPost() and isset($r['facebook_id']) and empty($values['facebook_id']) ) {
+        $facebookTable->delete(array('user_id = ?' => $user->getIdentity()));
+        $facebook->clearAllPersistentData();
+      }
+
       if( $facebook && $facebook->getUser() ) {
         $form->removeElement('facebook');
         $form->getElement('facebook_id')->setAttrib('checked', true);
@@ -186,7 +193,7 @@ class User_SettingsController extends Core_Controller_Action_User
      */
 
     // Update facebook settings
-    if( isset($facebook) && $form->getElement('facebook_id') ) {
+    /*if( isset($facebook) && $form->getElement('facebook_id') ) {
       if( $facebook->getUser() ) {
         if( empty($values['facebook_id']) ) {
           // Remove integration
@@ -196,7 +203,8 @@ class User_SettingsController extends Core_Controller_Action_User
           $facebook->clearAllPersistentData();
         }
       }
-    }
+    }*/
+
 
     // Update twitter settings
     if( isset($twitter) && $form->getElement('twitter_id') ) {

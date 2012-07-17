@@ -1652,15 +1652,42 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
 
                     $html_body = "<html>"; 
                     $html_body .= "<head>"; 
-                    $html_body .= "</head>"; 
-                    $html_body .= "<body>"; 
-                    $html_body .= "<h1>ORDER #{$order['order_id']}</h1>";
-                    $html_body .= "<h2>Item: {$marketplace->getTitle()}</h2>";
-                    $html_body .= "<h3>Owner: {$marketplace->getOwner()->getTitle()}</h3>";
-                    $html_body .= "<h3>Buyer: {$viewer->getTitle()}</h3>";
-                    $html_body .= "<h3>Pay date: {$order['date']}</h3>";
-                    $html_body .= "</body>"; 
-                    $html_body .= "</html>"; 
+                    $html_body .= "<style>";
+                    $html_body .= "table {margin: 30px 0;}";
+                    $html_body .= "table th,table td {text-align:left; padding: 5px;}";
+                    $html_body .= "table th,table tr.line td {border-bottom: 1px solid black;}";
+                    $html_body .= "</style>";
+                    $html_body .= "</head>";
+                    $html_body .= "<body>";
+                    $html_body .= "<p>Order ID " . $order['order_id'] . " " . date("F d, Y", strtotime($order['date'])) . "</p>";
+                    $html_body .= "<table width='100%' cellspacing='0'>";
+                    $html_body .= "<tr>";
+                    $html_body .= "<th style='width:10%'>Qty</th>";
+                    $html_body .= "<th style='width:60%'>Item</th>";
+                    $html_body .= "<th style='width:15%'>Item Price</th>";
+                    $html_body .= "<th style='width:15%'>Total</th>";
+                    $html_body .= "</tr>";
+                    $html_body .= "<tr class='line'>";
+                    $html_body .= "<td>{$order['count']}</td>";
+                    $html_body .= "<td>{$marketplace->getTitle()}<br/><br/>{$order['marketplace_id']} (item #)</td>";
+                    $html_body .= "<td>$" . number_format($order['summ'], 2) . "</td>";
+                    $html_body .= "<td>$" . number_format($order['summ'] * $order['count'], 2) . "</td>";
+                    $html_body .= "</tr>";
+                    $html_body .= "<tr>";
+                    $html_body .= "<td></td><td></td>";
+                    $html_body .= "<td>Shipping</td>";
+                    $html_body .= "<td>$" . number_format(0, 2) . "</td>";
+                    $html_body .= "</tr>";
+                    $html_body .= "<tr>";
+                    $html_body .= "<td></td><td></td>";
+                    $html_body .= "<td>Total</td>";
+                    $html_body .= "<td>$" . number_format($order['summ'] * $order['count'], 2) . "</td>";
+                    $html_body .= "</tr>";
+                    $html_body .= "</table>";
+                    $html_body .= "<p>Your order is complete. Thank you for shopping on Upheels!</p>";
+                    $html_body .= "</body>";
+                    $html_body .= "</html>";
+
                     $mpdf = new mPDF('c','A4','','',10, 10, 7, 7, 10, 10); 
                     $mpdf->SetDisplayMode('fullpage'); 
                     $mpdf->list_indent_first_level = 0;	// 1 or 0 - whether to indent the first level of a list 
@@ -1739,9 +1766,9 @@ class Marketplace_IndexController extends Core_Controller_Action_Standard
         ;
 
         $this->view->error = false;
-        $threeDays = 60 * 60 * 24 * 3; 
+        $canceltime = 3600 * Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.canceltime', 24);
 
-        if( $order and ( time() - strtotime($order['date']) < $threeDays ) ) {
+        if( $order and ( time() - strtotime($order['date']) < $canceltime ) ) {
             $marketplace = Engine_Api::_()->getItem('marketplace', $order['marketplace_id']);
             if( $marketplace ) {
                 $this->view->marketplace = $marketplace;
