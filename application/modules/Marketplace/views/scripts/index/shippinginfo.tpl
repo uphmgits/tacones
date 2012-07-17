@@ -22,11 +22,11 @@
     <hr/>
     <div class="cart-total-container"> 
       <span><?=$this->translate('SUBTOTAL')?></span>
-      <span>$<?=number_format($total_amount, 2);?></span>
+      <span>$<?=number_format($total_amount_full, 2);?></span>
     </div>
     <div class="cart-total-container"> 
       <span><?=$this->translate('SHIPPING AND HANDLING')?></span>
-      <span>$<?=number_format($inspection_fee, 2)?></span>
+      <span>$<?=number_format(0, 2)?></span>
     </div>
     <hr/>
     <div class="cart-total-container"> 

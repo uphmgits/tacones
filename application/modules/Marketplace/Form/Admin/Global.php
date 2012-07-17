@@ -30,6 +30,12 @@ class Marketplace_Form_Admin_Global extends Engine_Form
       'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.mainpaypal', ''),
     ));
 
+    $this->addElement('Text', 'marketplace_canceltime', array(
+      'label' => 'Cancel Time',
+      'description' => 'The time(hours) during which the buyer may cancel the order',
+      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('marketplace.canceltime', 24),
+    ));
+
     $this->addElement('Text', 'marketplace_page', array(
       'label' => 'Listings Per Page',
       'description' => 'How many marketplace listings will be shown per page? (Enter a number between 1 and 999)',
