@@ -27,6 +27,7 @@ cameraready/
 public/marketplace/
 .git/
 orders_pdf/
+public/orders_pdf/
 invoices/
 user/
 
