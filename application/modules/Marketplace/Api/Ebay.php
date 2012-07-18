@@ -421,6 +421,10 @@ class Marketplace_Api_Ebay {
 						if(!in_array((string)$itm->ItemID, $this->_alreadyImported)) {
 							$itemIDs[] = (string)$itm->ItemID;;
 						}
+						else {
+							$message = 'ListingID ' . (string)$itm->ItemID . '  already imported';
+							$this->_logMessage($message);
+						}
 					}
 				}
 				else {
